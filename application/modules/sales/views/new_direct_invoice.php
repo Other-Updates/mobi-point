@@ -408,7 +408,7 @@ if (!empty($customers)) {
                 </td>
 
                 <td>
-
+                        
                     <input type="text" tabindex="-1" name='per_cost[]' style="width:70px;" class="selling_price percost " id="price" />
                     <input type="hidden" name="sp_with_gst[]" class="sp_with_gst">
                     <input type="hidden" name="sp_without_gst[]" class="sp_without_gst">
@@ -1065,15 +1065,18 @@ if (!empty($customers)) {
 
                             <td width="15%" class="first_td1">IMEI Code</td>
 
-                            <!--<td width="25%" class="first_td1">Model No</td>-->
+                            <!-- <td width="25%" class="first_td1">Model No</td>-->
 
                             <!--<td width="10%" class="first_td1">Brand</td>-->
 
-                            <!--<td width="5%" class="first_td1">Unit</td>-->
+                            <!--<td width="5%" class="first_td1">Unit</td> -->
 
                             <td width="10%" class="first_td1 action-btn-align">QTY <span style="color:#F00; font-style:oblique;">*</span></td>
+                            
+                            <td width="8%" class="first_td1 action-btn-align">Cost Price <span style="color:#F00; font-style:oblique;">*</span></td>
 
                             <td width="8%" class="first_td1 action-btn-align">Sales Price <span style="color:#F00; font-style:oblique;">*</span></td>
+                 
 
                             <!-- <td  width="6%" class="first_td1 action-btn-align">Total</td>-->
 
@@ -1246,9 +1249,20 @@ if (!empty($customers)) {
                                 <span class="error_msg"></span>
 
                             </td>
-
+                            
                             <td class="action-btn-align">
 
+
+
+                                 <input type="text" name="cost_price"  style="width:70px;" id="cost_price"/>
+                                 <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
+                                <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
+
+
+                            </td>
+
+                            <td class="action-btn-align">
+                                <!-- <input type="text" name="cost_price"  style="width:70px;" id="cost_price"/> -->
                                 <input type="text" tabindex="13" name='per_cost[]' style="width:70px;" class="selling_price percost required" />
                                 <input type="hidden" name="sp_with_gst[]" class="sp_with_gst">
                                 <input type="hidden" name="sp_without_gst[]" class="sp_without_gst">
