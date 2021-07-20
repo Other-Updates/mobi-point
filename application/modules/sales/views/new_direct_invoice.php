@@ -1453,9 +1453,9 @@ if (!empty($customers)) {
                         <tr>
 
                             <td colspan="5" style="width:70px; text-align:right;"></td>
-
+<!-- 
                             <td colspan="3" style="text-align:right;font-weight:bold;"><input type="text" tabindex="22"
-                                    name="quotation[tax_label]" class='tax_label text_right' style="width:100%;" /></td>
+                                    name="quotation[tax_label]" class='tax_label text_right' style="width:100%;" /></td> -->
 
                             <td>
 
@@ -1483,12 +1483,12 @@ if (!empty($customers)) {
                             <td><input type="hidden" name="quotation[labour]" value="" class="labour text_right"
                                     tabindex="-1" style="width:70px;" /></td>
 
-                            <td colspan="2" style="text-align:right;">Taxable Charge</td>
+                            <td colspan="2" style="text-align:right;" class="taxable_price">Taxable Charge</td>
 
                             <td><input type="text" name="quotation[taxable_price]" value="" readonly
                                     class="taxable_price text_right" tabindex="24" style="width:70px;" /></td>
 
-                            <td style="text-align:right;"> CGST </td>
+                            <td style="text-align:right;" class="cgst_td"> CGST </td>
 
                             <td><input type="text" tabindex="25" value="" name="quotation[cgst_price]" readonly
                                     class="add_cgst text_right cgst_price" style="width:100px;" /></td>
@@ -1587,14 +1587,18 @@ $('.gst-invoice').on('change', function() {
         $('#add_quotation').find('tr td.sgst_td').show();
         // $('#add_quotation').find('tr td.igst_td').show();
         $('#add_quotation').find('tr td.cgst_td').show();
-        $('#add_new_values').find('tr td.taxable_price text_right').show();
+        $('#add_new_values').find('.taxable_price').show();
+        $('#add_new_values').find('.add_cgst').show();
+        $('#add_new_values').find('.add_sgst').show();
     } else {
         $('#tin').attr('disabled', true);
         $('#add_quotation').find('tr td.cgst_td').hide();
         $('#add_quotation').find('tr td.sgst_td').hide();
         $('#add_quotation').find('tr td.igst_td').hide();
         $('#add_new_values').find('tr td.labour').hide();
-        $('#add_new_values').find('tr td.taxable_price text_right ').hide();
+        $('#add_new_values').find('.taxable_price').hide();
+        $('#add_new_values').find('.add_cgst').hide();
+        $('#add_new_values').find('.add_sgst').hide();
     }
 });
 </script>
