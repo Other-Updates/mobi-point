@@ -106,7 +106,7 @@ class User_section_model extends CI_Model {
 
         $this->db->where('tab_1.status', 1);
 
-         $key=["reference_groups","quotation","purchase_return","purchase_receipt","manage_sku","physical_report","delivery_challan","budget","cash_out_flow","quotation_report","hr_invoice_report","payment_receipt_report","outstanding_report_due_date","outstanding_report_firm","sales","sales_return","sales_receipt","pc_report","purchase_receipt_report"];
+         $key=["reference_groups","quotation","purchase_receipt","manage_sku","physical_report","delivery_challan","budget","cash_out_flow","quotation_report","hr_invoice_report","payment_receipt_report","outstanding_report_due_date","outstanding_report_firm","sales","sales_receipt","pc_report","purchase_receipt_report"];
         
         $this->db->where_not_in('tab_1.user_section_key',$key);
 
