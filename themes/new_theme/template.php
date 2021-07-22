@@ -485,6 +485,9 @@
                                         <li class="nav-item <?= ($cur_class == 'purchase_order' && $cur_method == 'accessories_purchase') ? 'active' : '' ?>" >
                                                 <a href="<?php echo $this->config->item('base_url') . 'purchase_order/accessories_purchase' ?>" class="nav-link"><i class="far fa-circle nav-icon"></i> Accessories Purchase</a>
                                         </li>
+                                        <li class="nav-item <?= ($cur_class == 'purchase_order' && $cur_method == 'purchase_return_list') ? 'active' : '' ?>" >
+                                                <a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>" class="nav-link"><i class="far fa-circle nav-icon"></i> Purchase Return List Purchase</a>
+                                        </li>
                                     </ul>
                                 </li>
                             <?php endif; ?>
@@ -524,6 +527,11 @@
                                             <li class="<?= ($cur_class == 'sales' && $cur_method == 'accesories_sale') ? 'active' : '' ?>">
                                                     <a class="nav-link" href="<?php echo $this->config->item('base_url') . 'sales/accessories_sale' ?>">
                                                         <i class="far fa-circle nav-icon"></i> Accessories Sale
+                                                    </a>
+                                            </li>
+                                            <li class="<?= ($cur_class == 'sales' && $cur_method == 'sales_return_list') ? 'active' : '' ?>">
+                                                    <a class="nav-link" href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">
+                                                        <i class="far fa-circle nav-icon"></i>Sales Return
                                                     </a>
                                             </li>
                                     </ul>
