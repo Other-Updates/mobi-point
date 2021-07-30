@@ -2129,6 +2129,8 @@ class Project_cost_model extends CI_Model {
 
         $this->db->select('min_qty,product_name');
 
+        $this->db->where('min_qty >',0);
+
         $this->db->where('erp_product.id', $p_id);
 
         $qty = $this->db->get('erp_product')->result_array();

@@ -36,6 +36,8 @@ class User_auth {
 
         $this->ci->load->model('masters/user_role_model');
 
+        $this->ci->load->model('expenses/expense_model');
+
         $this->app_name = $this->ci->config->item('application_name');
 
     }
@@ -413,6 +415,22 @@ class User_auth {
         if (isset($app_session[$key]))
 
             return $app_session[$key];
+
+        else
+
+            return NULL;
+
+    }
+
+    function get_login_client_id() {
+
+        $user_data = $this->ci->session->userdata($this->app_name);
+
+        $app_session = json_decode(json_encode($this->cryptography('decrypt', $user_data)), true);
+
+        if (isset($app_session['user_id']))
+
+            return $app_session['user_id'];
 
         else
 

@@ -11,6 +11,7 @@
         $this->load->model('admin/admin_model');
         $this->load->model('project_cost/project_cost_model');
         $this->load->model('purchase_order/purchase_order_model');
+        $this->load->model('expenses/expense_model');
         $data["admin"] = $this->admin_model->get_admin();
         ?>
         <title>
@@ -564,8 +565,18 @@
                                             </li>
                                         <?php endif; ?>
 										
-                                        
+                                        </li>   
                                     </ul>
+                                    <li class="nav-item has-treeview masters_tab3 reports_tab"><a class="nav-link" href="javascript: void(0)" ><i class="fa fa-fw fa-rupee"></i> Expenses <i class="right fas fa-angle-left"></i></a>
+                                    <ul class="nav nav-treeview report-menu">
+                                        <li><a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/index' ?>"><i class="far fa-circle nav-icon"></i> New expense</a><li>
+                                    </ul>     
+                                    <ul class="nav nav-treeview report-menu">
+                                        <il><a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/balance_list' ?>"><i class="far fa-circle nav-icon"></i> balance_list</a><li>
+                                    </ul>
+                                    <ul class="nav nav-treeview report-menu">
+                                        <li><a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/expenses_list' ?>"><i class="far fa-circle nav-icon"></i> expenses_list</a><li>
+                                    </ul>   
                                 </li>
                             <?php endif; ?>
                         </ul>

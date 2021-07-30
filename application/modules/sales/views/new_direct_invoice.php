@@ -945,7 +945,14 @@ if (!empty($customers)) {
 
                     <input type="hidden" name="sales_id" class="code form-control colournamedup  form-align" value="" id="sales_id">
                     <input type="hidden" name="invoice_id" class="code form-control colournamedup  form-align" value="" id="invoice_id">
-
+<div class="form-group col-sm-4">
+        
+        <label>GST</label>
+            <input type="checkbox" id="unchecked" class="radio" value="1" name="fooby[1][]" />
+        <label>NO GST
+            <input type="checkbox" id="checked" class="radio toggles" value="1" name="fooby[1][]" />
+       
+</div>
                     <div class="form-group">
 
                         <label class="col-sm-4 control-label">GSTIN NO </label>
@@ -1439,6 +1446,52 @@ if (!empty($customers)) {
 <script type='text/javascript' src='<?= $theme_path; ?>/js/toastr.min.js'></script>
 
 <script type="text/javascript">
+
+$("input:checkbox").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    // the name of the box is retrieved using the .attr() method
+    // as it is assumed and expected to be immutable
+    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    // the checked state of the group/box on the other hand will change
+    // and the current value is retrieved using .prop() method
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
+
+$('#checked').change(function(){
+    if ($('#checked').is(':checked') == true){
+        $('#tin').prop('disabled', true);
+        console.log('checked');
+    }else if ($('#unchecked').is(':checked') == false){
+        $('#tin').prop('disabled', false);
+        console.log('unchecked')
+    }
+});
+
+$(document).ready(function() {
+
+let $form = $('.toggles');
+
+function toggleColumn(event) {
+  let $checkbox = $(event.target);
+  let value = $checkbox.val();
+  let $target = $(`.${value}`);
+  if ($checkbox.is(':checked')) {
+    $target.addClass('show');
+  } else {
+    $target.removeClass('show');
+  }
+}
+
+$form.on('change', toggleColumn);
+
+});
+
     $('#customer_gstin').on('blur', function() {
         var gstinformat = new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');
         var gstin_val = $.trim($('#customer_gstin').val());

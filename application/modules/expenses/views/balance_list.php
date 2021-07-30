@@ -136,9 +136,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                 <h4 class="card-title">Balance List
 
-                    <a href="javascript:void(0);" id="advancesearchshow" class="btn btn-info clor" style="float:right;margin-top:-4px;" title="Advance Search">
+                    <!-- <a href="javascript:void(0);" id="advancesearchshow" class="btn btn-info clor" style="float:right;margin-top:-4px;" title="Advance Search">
 
-                        Advance Search</a>
+                        Advance Search</a> -->
 
                 </h4>
 
@@ -208,7 +208,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                             <label>From Date</label>
 
-                            <input type="text" id='from_date'  class="form-control datepicker" name="from_date" value="<?php echo date('01-01-Y') ?>" placeholder="dd-mm-yyyy" readonly="" style="background-color:white;">
+                            <input type="text" id='from_date'  class="form-control datepicker" name="from_date" value="<?php echo date('01-01-Y') ?>" placeholder="dd-mm-yyyy"  style="background-color:white;">
 
                         </div>
 
@@ -216,7 +216,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                             <label>To Date</label>
 
-                            <input type="text"  id='to_date' class="form-control datepicker" name="to_date" value="<?php echo date('31-03-Y', strtotime('+1 year')) ?>" placeholder="dd-mm-yyyy" readonly="" style="background-color:white;">
+                            <input type="text"  id='to_date' class="form-control datepicker" name="to_date" value="<?php echo date('31-03-Y', strtotime('+1 year')) ?>" placeholder="dd-mm-yyyy"  style="background-color:white;">
 
                             <span class="date_err" style="color:#F00;font-size: 12px "></span>
 

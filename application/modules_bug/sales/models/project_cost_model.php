@@ -2131,11 +2131,15 @@ class Project_cost_model extends CI_Model {
 
         $this->db->where('erp_product.id', $p_id);
 
+        $this->db->where('min_qty !=', 0);
+
         $qty = $this->db->get('erp_product')->result_array();
 
 
 
         $this->db->select('quantity');
+
+        $this->db-where('quantity !=',0);
 
         $this->db->where('erp_stock.category', $cat_id);
 
@@ -2147,7 +2151,7 @@ class Project_cost_model extends CI_Model {
 
 
 
-        if ($stock[0]['quantity'] <= $qty[0]['min_qty']) {
+        if ($stock[0]['quantity'] < $qty[0]['min_qty'] && $qty['min_qty'] != 0) {
 
             $notification = array();
 

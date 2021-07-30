@@ -122,9 +122,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
     <h4 class="card-title">Expenses List
 
-        <a href="javascript:void(0);" id="advancesearchshow" class="btn btn-info clor" style="float:right;margin-top:-4px;" title="Advance Search">
+        <!-- <a href="javascript:void(0);" id="advancesearchshow" class="btn btn-info clor" style="float:right;margin-top:-4px;" title="Advance Search">
 
-            Advance Search</a>
+            Advance Search</a> -->
 
         <?php
 
@@ -223,6 +223,16 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <select class="form-control" id="ex_subcat" >
 
                                 <option value="">Select</option>
+                                
+                                <?php
+                                            if (isset($sub_category_list) && !empty($sub_category_list)) {
+                                                foreach ($sub_category_list as $sub_cat_list) {
+                                                    ?>
+                                                    <option value="<?php echo $sub_cat_list['id']; ?>" <?php echo ($sub_cat_list['id'] == $get_category[0]['category_id']) ? 'selected' : ''; ?>> <?php echo $sub_cat_list['sub_category']; ?> </option>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
 
                             </select>
 

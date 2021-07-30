@@ -97,6 +97,15 @@
                                     <div class="col-sm-12">
                                         <select name="sub_cat_id"  class="form-control required" id="ex_subcat" tabindex="3">
                                             <option value="">Select</option>
+                                            <?php
+                                            if (isset($sub_category_list) && !empty($sub_category_list)) {
+                                                foreach ($sub_category_list as $sub_cat_list) {
+                                                    ?>
+                                                    <option value="<?php echo $sub_cat_list['id']; ?>" <?php echo ($sub_cat_list['id'] == $get_category[0]['category_id']) ? 'selected' : ''; ?>> <?php echo $sub_cat_list['sub_category']; ?> </option>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <span id="subcat_err" class="val" style="color:#F00; "></span>

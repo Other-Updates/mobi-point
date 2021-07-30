@@ -30,6 +30,7 @@ class Expenses extends MX_Controller {
             $this->user_auth->is_permission_allowed();
             redirect($this->config->item('base_url'));
         }
+        
         $this->load->model('expenses/expense_model');
         $this->load->model('masters/manage_firms_model');
         $this->load->model('masters/subcategory_model');
@@ -39,10 +40,10 @@ class Expenses extends MX_Controller {
     public function index() {
         $client_id = $this->user_auth->get_login_client_id();
         $data = array();
-
         $data["category_list"] = $this->subcategory_model->get_all_category_list($client_id);
         //$data['firms'] = $firms = $this->expense_model->get_all_firms();
         $data["firms"] = $firms = $this->manage_firms_model->get_all_firms($client_id);
+        $data['sub_category_list']=$this->subcategory_model->get_all_subcategory_list($client_id);
         $this->template->write_view('content', 'expenses/index', $data);
         $this->template->render();
     }
@@ -54,6 +55,7 @@ class Expenses extends MX_Controller {
         $data["firms"] = $firms = $this->manage_firms_model->get_all_firms($client_id);
         $data["category_list"] = $this->subcategory_model->get_all_category_list($client_id);
         $data['expense_details'] = $this->expense_model->get_all_expenses();
+        $data['sub_category_list']=$this->subcategory_model->get_all_subcategory_list($client_id);
         $this->template->write_view('content', 'expenses/expenses_list', $data);
         $this->template->render();
     }
