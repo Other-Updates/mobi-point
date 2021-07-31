@@ -477,7 +477,7 @@
                                                 <a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list' ?>" class="nav-link"><i class="far fa-circle nav-icon"></i> Purchase List</a>
                                             </li>
                                         <?php endif; ?> 
-                                        <!--<li class="nav-item <?= ($cur_class == 'purchase_order' && $cur_method == 'fresh_purchase') ? 'active' : '' ?>" >
+                                        <li class="nav-item <?= ($cur_class == 'purchase_order' && $cur_method == 'fresh_purchase') ? 'active' : '' ?>" >
                                                 <a href="<?php echo $this->config->item('base_url') . 'purchase_order/fresh_purchase' ?>" class="nav-link"><i class="far fa-circle nav-icon"></i> Add Fresh Purchase</a>
                                         </li>
                                         <li class="nav-item <?= ($cur_class == 'purchase_order' && $cur_method == 'used_purchase') ? 'active' : '' ?>" >
@@ -485,7 +485,10 @@
                                         </li>
                                         <li class="nav-item <?= ($cur_class == 'purchase_order' && $cur_method == 'accessories_purchase') ? 'active' : '' ?>" >
                                                 <a href="<?php echo $this->config->item('base_url') . 'purchase_order/accessories_purchase' ?>" class="nav-link"><i class="far fa-circle nav-icon"></i> Accessories Purchase</a>
-                                        </li>-->
+                                        </li>
+                                        <li class="nav-item <?= ($cur_class == 'purchase_order' && $cur_method == 'purchase_return_list') ? 'active' : '' ?>" >
+                                                <a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>" class="nav-link"><i class="far fa-circle nav-icon"></i> Purchase Return List Purchase</a>
+                                        </li>
                                     </ul>
                                 </li>
                             <?php endif; ?>
@@ -512,7 +515,7 @@
                                                 </a>
                                             </li>
                                         <?php endif; ?>
-                                           <!-- <li class="<?= ($cur_class == 'sales' && $cur_method == 'fresh_mobile_sale') ? 'active' : '' ?>">
+                                           <li class="<?= ($cur_class == 'sales' && $cur_method == 'fresh_mobile_sale') ? 'active' : '' ?>">
                                                     <a class="nav-link" href="<?php echo $this->config->item('base_url') . 'sales/fresh_mobile_sale' ?>">
                                                         <i class="far fa-circle nav-icon"></i> Fresh Mobiles Sale
                                                     </a>
@@ -526,7 +529,12 @@
                                                     <a class="nav-link" href="<?php echo $this->config->item('base_url') . 'sales/accessories_sale' ?>">
                                                         <i class="far fa-circle nav-icon"></i> Accessories Sale
                                                     </a>
-                                            </li>-->
+                                            </li>
+                                            <li class="<?= ($cur_class == 'sales' && $cur_method == 'sales_return_list') ? 'active' : '' ?>">
+                                                    <a class="nav-link" href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">
+                                                        <i class="far fa-circle nav-icon"></i>Sales Return
+                                                    </a>
+                                            </li>
                                     </ul>
                                 </li>
                             <?php endif; ?>

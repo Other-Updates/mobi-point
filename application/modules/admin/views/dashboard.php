@@ -78,22 +78,22 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 </div>
             </a>
         </div>
-       <!-- <div class="col-md-2">
-            <a href="<?php echo $this->config->item('base_url') . 'purchase_return/index' ?>">
+       <div class="col-md-2">
+            <a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>">
                 <div class="dashboard-icons blue-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/3.png" />
                     <div>Purchase Return</div>
                 </div>
             </a>
         </div>
-        <div class="col-md-2">
+        <!-- <div class="col-md-2">
             <a href="<?php echo $this->config->item('base_url') . 'purchase_receipt/receipt_list' ?>">
                 <div class="dashboard-icons pink-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/4.png" />
                     <div>Purchase Receipt</div>
                 </div>
             </a>
-        </div>-->
+        </div> -->
         <div class="col-md-4">
             <a href="<?php echo $this->config->item('base_url') . 'stock/' ?>">
                 <div class="dashboard-icons green-bg hvr-ripple-out">
@@ -119,7 +119,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 </div>
             </a>
         </div> -->
-        <!--  <div class="col-md-2">
+         <div class="col-md-2">
             <a href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">
                 <div class="dashboard-icons dark-blue-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/7.png" />
@@ -127,7 +127,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 </div>
             </a>
         </div>
-        <div class="col-md-2">
+        <!-- <div class="col-md-2">
             <a href="<?php echo $this->config->item('base_url') . 'sales_receipt/receipt_list' ?>">
                 <div class="dashboard-icons yellow-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/8.png" />
