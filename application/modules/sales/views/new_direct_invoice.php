@@ -409,8 +409,7 @@ if (!empty($customers)) {
                 </td>
 
                 <td class="action-btn-align">
-                    <p class ="gst">1</p>
-                    <p class = "nogst">2</p>
+                    <p  style="display: none;" class ="gstcost">1</p><p style="display: none;"  class = "nogstcost">2</p>
                     <input type="text" name="cost_price" style="width:70px;" id="cost_price"
                         class="costing_price perwhole" />
                     <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
@@ -419,8 +418,8 @@ if (!empty($customers)) {
                 </td>
 
                 <td>
-                     <p class ="gst">1</p>
-                            <p class = "nogst">2</p>
+                     <p style="display: none;" class ="gst">1</p>
+                            <p  style="display: none;" class = "nogst">2</p>
 
                     <input type="text" tabindex="-1" name='per_cost[]' style="width:70px;"
                         class="selling_price percost " id="price" />
@@ -1359,8 +1358,8 @@ if (!empty($customers)) {
                             </td>
 
                             <td class="action-btn-align">
-                            <p class ="gst">1</p>
-                            <p class = "nogst">2</p>
+                            <p  style="display: none;" class ="gstcost">1</p>
+                            <p  style="display: none;" class = "nogstcost">2</p>
 
 
 
@@ -1387,8 +1386,8 @@ if (!empty($customers)) {
                             
 
                             <td class="action-btn-align">
-                            <p class ="gst">1</p>
-                            <p class = "nogst">2</p>
+                            <p   style="display: none;" class ="gst">1</p>
+                            <p  style="display: none;" class = "nogst">2</p>
                                 <!-- <input type="text" name="cost_price"  style="width:70px;" id="cost_price"/> -->
                                 <input type="text" tabindex="13" name='per_cost[]' style="width:70px;"
                                     class="selling_price percost required" />
@@ -1620,6 +1619,28 @@ if (!empty($customers)) {
 
 </div>
 <script>
+
+
+    $('.gst-invoice').on('change',function(){
+        var gg = $(this).val();
+        $('.costing_price').each(function(){
+            if(gg == 1){
+                $(this).val($(this).parent().find('.gstcost').html());
+            }else{
+                $(this).val($(this).parent().find('.nogstcost').html());
+            }
+        })
+    })
+    $('.gst-invoice').on('change',function(){
+        var gg = $(this).val();
+        $('.selling_price').each(function(){
+            if(gg == 1){
+                $(this).val($(this).parent().find('.gst').html());
+            }else{
+                $(this).val($(this).parent().find('.nogst').html());
+            }
+        })
+    })
 $('.gst-invoice').on('change', function() {
     if ($('.gst-invoice:checked').val() == 1) {
         $('#tin').attr('disabled', false);
@@ -2828,7 +2849,7 @@ $('#add_group').click(function() {
 
         {
 
-            $('#add_quotation').find('tr td.sgst_td').hide();
+            // $('#add_quotation').find('tr td.sgst_td').hide();
 
             $('#add_quotation').find('tr td.igst_td').hide();
 
@@ -2836,7 +2857,7 @@ $('#add_group').click(function() {
 
             $('#add_quotation').find('tr td.igst_td').show();
 
-            $('#add_quotation').find('tr td.sgst_td').hide();
+            // $('#add_quotation').find('tr td.sgst_td').hide();
 
         }
 
@@ -3554,6 +3575,8 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                             this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
                             this_val.closest('tr').find('.cp_with_gst').val(result[0].cost_price);
                             this_val.closest('tr').find('.cp_without_gst').val(result[0].cost_price_without_gst);
+                            this_val.closest('tr').find('.gstcost').html(result[0].cost_price);
+                            this_val.closest('tr').find('.nogstcost').html(result[0].cost_price_without_gst);
                         } else {
                             this_val.closest('tr').find('.costing_price').val('0');
                         }
@@ -3570,6 +3593,8 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                             this_val.closest('tr').find('.selling_price').val(result[0].sales_price);
                             this_val.closest('tr').find('.sp_with_gst').val(result[0].sales_price);
                             this_val.closest('tr').find('.sp_without_gst').val(result[0].sales_price_without_gst);
+                            this_val.closest('tr').find('.gst').html(result[0].sales_price);
+                            this_val.closest('tr').find('.nogst').html(result[0].sales_price_without_gst);
                         } else {
                             this_val.closest('tr').find('.selling_price').val('0');
                         }

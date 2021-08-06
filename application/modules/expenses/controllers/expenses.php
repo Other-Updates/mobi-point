@@ -40,6 +40,7 @@ class Expenses extends MX_Controller {
     public function index() {
         $client_id = $this->user_auth->get_login_client_id();
         $data = array();
+        
         $data["category_list"] = $this->subcategory_model->get_all_category_list($client_id);
         //$data['firms'] = $firms = $this->expense_model->get_all_firms();
         $data["firms"] = $firms = $this->manage_firms_model->get_all_firms($client_id);
