@@ -333,7 +333,7 @@ if (!empty($customers)) {
 
                     </div>
 
-                    <input type="hidden" name='ime_code_val[]' style="width:70px;" class="ime_code_val required"
+                    <input type="text" name='ime_code_val[]' style="width:70px;" class="ime_code_val required"
                         id="ime_code_vals" />
 
                     <span class="error_msg ime_code_error"></span>
@@ -409,14 +409,18 @@ if (!empty($customers)) {
                 </td>
 
                 <td class="action-btn-align">
+                    <p class ="gst">1</p>
+                    <p class = "nogst">2</p>
                     <input type="text" name="cost_price" style="width:70px;" id="cost_price"
                         class="costing_price perwhole" />
-                    <!-- <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
-                                <input type="hidden" name="cp_without_gst[]" class="cp_without_gst"> -->
+                    <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
+                    <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
                     <span class="error_msg"></span>
                 </td>
 
                 <td>
+                     <p class ="gst">1</p>
+                            <p class = "nogst">2</p>
 
                     <input type="text" tabindex="-1" name='per_cost[]' style="width:70px;"
                         class="selling_price percost " id="price" />
@@ -449,16 +453,16 @@ if (!empty($customers)) {
 
                 </td>
 
-                <td class="action-btn-align cgst_td">
+                <td  style="display: none" class="action-btn-align cgst_td">
 
                     <input type="text" tabindex="-1" name='tax[]' style="width:70px;" class="pertax"
-                        readonly="readonly" />
+                        readonly="readonly" style="display: none"/>
 
                 </td>
 
-                <td class="action-btn-align sgst_td">
+                <td  style="display: none" class="action-btn-align sgst_td">
 
-                    <input type="text" tabindex="-1" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
+                    <input type="text"  style="display:none" tabindex="-1" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
 
                 </td>
 
@@ -1159,8 +1163,14 @@ if (!empty($customers)) {
                             <td width="8%" class="first_td1 action-btn-align">Cost Price <span
                                     style="color:#F00; font-style:oblique;">*</span></td>
 
+                            <!-- <td width="8%" class="first_td1 action-btn-align">Cost Price without gst <span
+                                    style="color:#F00; font-style:oblique;">*</span></td> -->
+
                             <td width="8%" class="first_td1 action-btn-align">Sales Price <span
                                     style="color:#F00; font-style:oblique;">*</span></td>
+
+                            <!-- <td width="8%" class="first_td1 action-btn-align">Sales Price without gst <span
+                                    style="color:#F00; font-style:oblique;">*</span></td> -->
 
 
                             <!-- <td  width="6%" class="first_td1 action-btn-align">Total</td>-->
@@ -1169,9 +1179,9 @@ if (!empty($customers)) {
 
                             <!--<td  width="7%" class="first_td1 action-btn-align">Discount %</td>-->
 
-                            <td width="5%" class="first_td1 action-btn-align cgst_td">CGST %</td>
+                            <td width="5%" class="first_td1 action-btn-align cgst_td" style="display: none">CGST %</td>
 
-                            <td width="5%" class="first_td1 action-btn-align sgst_td">SGST %</td>
+                            <td width="5%" class="first_td1 action-btn-align sgst_td" style="display: none">SGST %</td>
 
                             <!-- <td width="5%" class="first_td1 action-btn-align igst_td">IGST %</td> -->
 
@@ -1349,18 +1359,36 @@ if (!empty($customers)) {
                             </td>
 
                             <td class="action-btn-align">
+                            <p class ="gst">1</p>
+                            <p class = "nogst">2</p>
 
 
 
                                 <input type="text" name="cost_price" style="width:70px;" id="cost_price"
                                     class="costing_price perwhole required" />
-                                <!-- <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
-                                <input type="hidden" name="cp_without_gst[]" class="cp_without_gst"> -->
+                                <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
+                                <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
 
                                 <span class="error_msg"></span>
                             </td>
 
+
+                             <!-- <td class="action-btn-align">
+
+
+
+                                <input type="text" name="cost_price without gst" style="width:70px;" id="cost_price without gst"
+                                    class="costing_price without gst perwhole required" />
+                                <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
+                                <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
+
+                                <span class="error_msg"></span>
+                            </td> -->
+                            
+
                             <td class="action-btn-align">
+                            <p class ="gst">1</p>
+                            <p class = "nogst">2</p>
                                 <!-- <input type="text" name="cost_price"  style="width:70px;" id="cost_price"/> -->
                                 <input type="text" tabindex="13" name='per_cost[]' style="width:70px;"
                                     class="selling_price percost required" />
@@ -1370,6 +1398,17 @@ if (!empty($customers)) {
                                 <span class="error_msg"></span>
 
                             </td>
+<!-- 
+                            <td class="action-btn-align">
+                              
+                                <input type="text" tabindex="13" name='per_cost without gst[]' style="width:70px;"
+                                    class="selling_price without gst percost required" />
+                                <input type="hidden" name="sp_with_gst[]" class="sp_with_gst">
+                                <input type="hidden" name="sp_without_gst[]" class="sp_without_gst">
+
+                                <span class="error_msg"></span>
+
+                            </td> -->
 
 
                             <td class="action-btn-align">
@@ -1383,26 +1422,26 @@ if (!empty($customers)) {
 
                             </td>
 
-                            <td class="action-btn-align cgst_td">
+                            <td  style="display: none" class="action-btn-align cgst_td">
 
-                                <input type="text" name='tax[]' tabindex="15" style="width:70px;" class="pertax"
+                                <input type="text"  style="display: none" name='tax[]' tabindex="15" style="width:70px;" class="pertax"
                                     readonly="readonly" />
 
                             </td>
 
-                            <td class="action-btn-align sgst_td">
+                            <td  style="display: none" class="action-btn-align sgst_td">
 
-                                <input type="text" name='gst[]' tabindex="16" style="width:70px;" class="gst"
-                                    readonly="readonly" />
+                                <input type="text"  style="display: none"name='gst[]' tabindex="16" style="width:70px;" class="gst"
+                                    readonly="readonly"  />
 
                             </td>
-
+<!-- 
                             <td class="action-btn-align igst_td">
 
                                 <input type="text" name='igst[]' tabindex="17" style="width:70px;" class="igst wid50"
                                     readonly="readonly" />
 
-                            </td>
+                            </td> -->
 
                             <td>
 
@@ -1436,7 +1475,7 @@ if (!empty($customers)) {
                             <td class="action-btn-align"><input type="text" tabindex="20" name="quotation[total_qty]"
                                     readonly="readonly" class="total_qty" style="width:70%;" id="total" /></td>
 
-                            <td colspan="4" style="text-align:right;"><b>Sub Total</b></td>
+                            <td colspan="3" style="text-align:right;"><b>Sub Total</b></td>
 
                             <td class="action-btn-align"><input type="text" name="quotation[subtotal_qty]" tabindex="21"
                                     readonly="readonly" class="final_sub_total text_right" style="width:70px;" /></td>
@@ -1457,7 +1496,7 @@ if (!empty($customers)) {
                             <td colspan="3" style="text-align:right;font-weight:bold;"><input type="text" tabindex="22"
                                     name="quotation[tax_label]" class='tax_label text_right' style="width:100%;" /></td> -->
 
-                            <td>
+                            <td style="display: none">
 
                                 <input type="text" name="quotation[tax]" class='totaltax text_right' tabindex="23"
                                     style="width:70px;" />
@@ -1483,22 +1522,22 @@ if (!empty($customers)) {
                             <td><input type="hidden" name="quotation[labour]" value="" class="labour text_right"
                                     tabindex="-1" style="width:70px;" /></td>
 
-                            <td colspan="2" style="text-align:right;" class="taxable_price">Taxable Charge</td>
+                            <td style="display: none" colspan="2" style="text-align:right;" class="taxable_price">Taxable Charge</td>
 
                             <td><input type="text" name="quotation[taxable_price]" value="" readonly
-                                    class="taxable_price text_right" tabindex="24" style="width:70px;" /></td>
+                                    class="taxable_price text_right" tabindex="24" style="display: none" style="width:70px;" /></td>
 
-                            <td style="text-align:right;" class="cgst_td"> CGST </td>
+                            <td style="display: none" style="text-align:right;" class="cgst_td"> CGST </td>
 
                             <td><input type="text" tabindex="25" value="" name="quotation[cgst_price]" readonly
-                                    class="add_cgst text_right cgst_price" style="width:100px;" /></td>
+                                    class="add_cgst text_right cgst_price" style="display: none" style="width:100px;" /></td>
 
-                            <td style="text-align:right;" class="sgst_td"> SGST </td>
+                            <td style="display: none" style="text-align:right;" class="sgst_td" > SGST </td>
 
                             <!-- <td style="text-align:right;" class="igst_td"> IGST </td> -->
 
                             <td><input type="text" tabindex="26" value="" name="quotation[sgst_price]" readonly
-                                    class="add_sgst text_right sgst_price" style="width:70px;" /></td>
+                                    class="add_sgst text_right sgst_price" style="display: none" style="width:70px;" /></td>
 
 
 
@@ -1590,6 +1629,16 @@ $('.gst-invoice').on('change', function() {
         $('#add_new_values').find('.taxable_price').show();
         $('#add_new_values').find('.add_cgst').show();
         $('#add_new_values').find('.add_sgst').show();
+        
+        // if (result[0].cost_price != '') {
+        //                     this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
+        //                     this_val.closest('tr').find('.cp_with_gst').val(result[0].cost_price);
+        //                     this_val.closest('tr').find('.cp_without_gst').val(result[0].cost_price_without_gst);
+        //                 } else {
+        //                     this_val.closest('tr').find('.costing_price').val('0');
+        //                 }
+        
+      
     } else {
         $('#tin').attr('disabled', true);
         $('#add_quotation').find('tr td.cgst_td').hide();
@@ -1599,6 +1648,14 @@ $('.gst-invoice').on('change', function() {
         $('#add_new_values').find('.taxable_price').hide();
         $('#add_new_values').find('.add_cgst').hide();
         $('#add_new_values').find('.add_sgst').hide();
+        // if (result[0].cost_price_without_gst != '') {
+        //                     this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
+        //                     this_val.closest('tr').find('.cp_with_gst').val(result[0].cost_price);
+        //                     this_val.closest('tr').find('.cp_without_gst').val(result[0].cost_price_without_gst);
+        //                 } else {
+        //                     this_val.closest('tr').find('.costing_price').val('0');
+        //                 }
+     
     }
 });
 </script>
@@ -2745,7 +2802,7 @@ $('#add_group').click(function() {
 
     var tableBody = $(".static").find('tr').clone();
 
-    $(tableBody).closest('tr').find('.model_no,.percost,.perwhole,.qty').addClass('required');
+    $(tableBody).closest('tr').find('.model_no,.percost,.qty').addClass('required');
 
     var cus_name = $('#customer_name').val();
 
@@ -2771,7 +2828,7 @@ $('#add_group').click(function() {
 
         {
 
-            $('#add_quotation').find('tr td.sgst_td').show();
+            $('#add_quotation').find('tr td.sgst_td').hide();
 
             $('#add_quotation').find('tr td.igst_td').hide();
 
@@ -2819,7 +2876,7 @@ $('#add_group_service').click(function() {
 
     var tableBody = $(".static_ser").find('tr').clone();
 
-    $(tableBody).closest('tr').find('.model_no,.percost,.perwhole,.qty').addClass('required');
+    $(tableBody).closest('tr').find('.model_no,.percost,.qty').addClass('required');
 
     $('#app_table').append(tableBody);
 
@@ -2861,7 +2918,7 @@ $(".remove_comments").on('click', function() {
 
 });
 
-$(document).on('keyup', '.qty,.percost,.perwhole,.pertax,.totaltax,.gst,.igst,.discount,.transport,.labour',
+$(document).on('keyup', '.qty,.percost,.pertax,.totaltax,.gst,.igst,.discount,.transport,.labour',
     function() {
         calculate_function();
 
@@ -3473,24 +3530,41 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                         this_val.closest('tr').find('.catname').val(categoryname);
 
                         if (categoryname != 'Fresh Mobiles' && categoryname !=
-                            'Used Mobiles') {
+                            'Used Mobiles' && categoryname !=  "Smart Phone-Brand New" &&  categoryname !=  "Smart Phone-REFURBISHED" ) {
                             this_val.closest('tr').find('.qty').removeAttr("readonly");
                             this_val.closest('tr').find('td .ime_code_select').empty();
                             this_val.closest('tr').find('td .ime_code_val ').val('');
-                        } else {
+                        } 
+                        else if (categoryname == 'Online-Payment' && categoryname =='Recharge')
+                        {
+                            this_val.closest('tr').find('td .ime_code_error ').html('');
+
+                        }
+                        else {
                             this_val.closest('tr').find('.qty').attr("readonly",
                                 "readonly");
                         }
 
+                       
                         // this_val.closest('tr').find('.discount').val(result[0].discount);
 
 
 
                         if (result[0].cost_price != '') {
                             this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
+                            this_val.closest('tr').find('.cp_with_gst').val(result[0].cost_price);
+                            this_val.closest('tr').find('.cp_without_gst').val(result[0].cost_price_without_gst);
                         } else {
                             this_val.closest('tr').find('.costing_price').val('0');
                         }
+                        
+                        // if (result[0].cost_price_without_gst != '') {
+                        //     this_val.closest('tr').find('.costing_price without gst').val(result[0].cost_price_without_gst);
+                        //     this_val.closest('tr').find('.cp_with_gst').val(result[0].cost_price);
+                        //     this_val.closest('tr').find('.cp_without_gst').val(result[0].cost_price_without_gst);
+                        // } else {
+                        //     this_val.closest('tr').find('.costing_price without gst').val('0');
+                        // }
                         
                         if (result[0].selling_price != '') {
                             this_val.closest('tr').find('.selling_price').val(result[0].sales_price);
@@ -3499,6 +3573,13 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                         } else {
                             this_val.closest('tr').find('.selling_price').val('0');
                         }
+                        // if (result[0].selling_price  without gst != '') {
+                        //     this_val.closest('tr').find('.selling_price without gst').val(result[0].sales_price_without_gst);
+                        //     this_val.closest('tr').find('.sp_with_gst').val(result[0].sales_price);
+                        //     this_val.closest('tr').find('.sp_without_gst').val(result[0].sales_price_without_gst);
+                        // } else {
+                        //     this_val.closest('tr').find('.selling_price without gst').val('0');
+                        // }
 
                         //Profit 
                         if (result[0].sales_price != '' && result[0].cost_price != '') {
@@ -3506,6 +3587,11 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                         } else {
                             this_val.closest('tr').find('.profit').val('0');
                         }
+                        // if (result[0].sales_price != '' && result[0].cost_price != '') {
+                        //     this_val.closest('tr').find('.profit').val(result[0].sales_price_without_gst - result[0].cost_price_without_gst);
+                        // } else {
+                        //     this_val.closest('tr').find('.profit').val('0');
+                        // }
                         
                         this_val.closest('tr').addClass('tr_' + result[0]['id']);
 
@@ -5236,9 +5322,9 @@ function ime_code_scan() {
 
                                 $(tableBody).closest('tr').find('.product_id').val(result[0]['id']);
 
-                                $(tableBody).closest('tr').find('.costing_price').val(result[0][
-                                    'cost_price'
-                                ]);
+                                // $(tableBody).closest('tr').find('.costing_price').val(result[0][
+                                //     'cost_price'
+                                // ]);
 
 
                                 // $(tableBody).closest('tr').find('.selling_price').val(result[0]['sales_price_without_gst']);
