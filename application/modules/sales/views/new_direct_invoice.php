@@ -333,7 +333,7 @@ if (!empty($customers)) {
 
                     </div>
 
-                    <input type="text" name='ime_code_val[]' style="width:70px;" class="ime_code_val required"
+                    <input type="hidden" name='ime_code_val[]' style="width:70px;" class="ime_code_val required"
                         id="ime_code_vals" />
 
                     <span class="error_msg ime_code_error"></span>
@@ -461,7 +461,7 @@ if (!empty($customers)) {
 
                 <td  style="display: none" class="action-btn-align sgst_td">
 
-                    <input type="text"  style="display:none" tabindex="-1" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
+                    <input type="text" tabindex="-1" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
 
                 </td>
 
@@ -1423,14 +1423,14 @@ if (!empty($customers)) {
 
                             <td  style="display: none" class="action-btn-align cgst_td">
 
-                                <input type="text"  style="display: none" name='tax[]' tabindex="15" style="width:70px;" class="pertax"
+                                <input type="text"  name='tax[]' tabindex="15" style="width:70px;" class="pertax"
                                     readonly="readonly" />
 
                             </td>
 
                             <td  style="display: none" class="action-btn-align sgst_td">
 
-                                <input type="text"  style="display: none"name='gst[]' tabindex="16" style="width:70px;" class="gst"
+                                <input type="text"  name='gst[]' tabindex="16" style="width:70px;" class="gst"
                                     readonly="readonly"  />
 
                             </td>
@@ -1630,8 +1630,7 @@ if (!empty($customers)) {
                 $(this).val($(this).parent().find('.nogstcost').html());
             }
         })
-    })
-    $('.gst-invoice').on('change',function(){
+   
         var gg = $(this).val();
         $('.selling_price').each(function(){
             if(gg == 1){
@@ -1640,8 +1639,7 @@ if (!empty($customers)) {
                 $(this).val($(this).parent().find('.nogst').html());
             }
         })
-    })
-$('.gst-invoice').on('change', function() {
+
     if ($('.gst-invoice:checked').val() == 1) {
         $('#tin').attr('disabled', false);
         $('#add_quotation').find('tr td.sgst_td').show();
@@ -2848,16 +2846,24 @@ $('#add_group').click(function() {
         if ($('#gst_type').val() == 31)
 
         {
+            if ($('.gst-invoice:checked').val() == 1) {
 
-            // $('#add_quotation').find('tr td.sgst_td').hide();
+            $('#add_quotation').find('tr td.sgst_td').show();
+            $('#add_quotation').find('tr td.cgst_td').show();
 
             $('#add_quotation').find('tr td.igst_td').hide();
+        } else 
+        {
+            $('#add_quotation').find('tr td.sgst_td').hide();
+            $('#add_quotation').find('tr td.cgst_td').hide();
+
+        }
 
         } else {
 
             $('#add_quotation').find('tr td.igst_td').show();
 
-            // $('#add_quotation').find('tr td.sgst_td').hide();
+            $('#add_quotation').find('tr td.sgst_td').hide();
 
         }
 
@@ -3041,7 +3047,7 @@ function calculate_function() {
 
         if (Number(qty.val()) != 0) {
 
-
+            
             tot = Number(qty.val()) * Number(percost.val());
 
             $(this).closest('tr').find('.gross').val(tot);
@@ -3419,53 +3425,22 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                                 '<div  tabindex="0"><select id="ime_code_id" class="form-control multi_select ime_code_id" multiple="multiple" autocomplete="off" name="ime_code_id[]">';
                             option_text += '<option value="">Select</option>';
                             $.each(ime_result, function(key, value) {
-
-
-
-                                //console.log(value.ime_code);
-
-
-
                                 selected = '';
-
                                 if (key == 0)
                                     selected = 'selected';
-
-
-
                                 option_text += '<option  value="' + value
                                     .ime_code + '"  ' + selected + '>' + value
                                     .ime_code + '</option>';
-
-
-
                             });
 
 
 
                             option_text += '</select></div>';
+                            // this_val.closest('tr').find('td .ime_code_select').empty();
 
+                            // this_val.closest('tr').find('td .ime_code_select').append(option_text);
 
-
-                            this_val.closest('tr').find('td .ime_code_select').empty();
-
-
-
-                            this_val.closest('tr').find('td .ime_code_select').append(
-                                option_text);
-
-
-
-
-
-                            this_val.closest('tr').find('td .multi_select').fSelect();
-
-
-
-
-
-
-
+                            // this_val.closest('tr').find('td .multi_select').fSelect();
                             var datas = this_val.closest('tr').find('td .ime_code_id')
                                 .val();
 
@@ -3550,21 +3525,38 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
 
                         this_val.closest('tr').find('.catname').val(categoryname);
 
-                        if (categoryname != 'Fresh Mobiles' && categoryname !=
-                            'Used Mobiles' && categoryname !=  "Smart Phone-Brand New" &&  categoryname !=  "Smart Phone-REFURBISHED" ) {
-                            this_val.closest('tr').find('.qty').removeAttr("readonly");
+                        if (categoryname == 'Fresh Mobiles' || categoryname ==
+                            'Used Mobiles' || categoryname ==  "Smart Phone-Brand New" ||  categoryname ==  "Smart Phone-REFURBISHED" ) {
+                                this_val.closest('tr').find('td .ime_code_select').empty();
+                                this_val.closest('tr').find('td .ime_code_select').append(option_text);
+                                this_val.closest('tr').find('td .multi_select').fSelect();
+                        } else if (categoryname == 'Online-Payment' || categoryname =='Recharge'){
                             this_val.closest('tr').find('td .ime_code_select').empty();
-                            this_val.closest('tr').find('td .ime_code_val ').val('');
-                        } 
-                        else if (categoryname == 'Online-Payment' && categoryname =='Recharge')
-                        {
-                            this_val.closest('tr').find('td .ime_code_error ').html('');
+                            this_val.closest('tr').find('td .ime_code_select').append("<input type='text' />");
+                        }else {
+                            this_val.closest('tr').find('td .ime_code_select').empty();
+                        }
 
-                        }
-                        else {
-                            this_val.closest('tr').find('.qty').attr("readonly",
-                                "readonly");
-                        }
+
+
+
+
+
+                        // if (categoryname != 'Fresh Mobiles' && categoryname !=
+                        //     'Used Mobiles' && categoryname !=  "Smart Phone-Brand New" &&  categoryname !=  "Smart Phone-REFURBISHED" ) {
+                        //     this_val.closest('tr').find('.qty').removeAttr("readonly");
+                        //     this_val.closest('tr').find('td .ime_code_select').empty();
+                        //     this_val.closest('tr').find('td .ime_code_val ').val('');
+                        // } 
+                        // // else if (categoryname == 'Online-Payment' && categoryname =='Recharge')
+                        // // {
+                        // //     this_val.closest('tr').find('td .ime_code_error ').html('');
+
+                        // // }
+                        // else {
+                        //     this_val.closest('tr').find('.qty').attr("readonly",
+                        //         "readonly");
+                        // }
 
                        
                         // this_val.closest('tr').find('.discount').val(result[0].discount);
