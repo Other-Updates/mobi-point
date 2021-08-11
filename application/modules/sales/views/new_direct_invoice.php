@@ -1469,10 +1469,11 @@ if (!empty($customers)) {
 
                         <tr>
 
-                            <td colspan="3" style="width:100%; text-align:right;"><b>Total</b></td>
+                            <td colspan="3" class="total_table_tag" style="width:100%; text-align:right;"><b>Total</b></td>
 
                             <td class="action-btn-align"><input type="text" tabindex="20" name="quotation[total_qty]"
                                     readonly="readonly" class="total_qty" style="width:70%;" id="total" /></td>
+                                    
 
                             <td colspan="3" style="text-align:right;"><b>Sub Total</b></td>
 
@@ -1717,6 +1718,7 @@ if (!empty($customers)) {
         
 
     if ($('.gst-invoice:checked').val() == 1) {
+        $('.total_table_tag').attr('colspan',5);
         $('#tin').attr('disabled', false);
         $('#add_quotation').find('tr td.sgst_td').show();
         // $('#add_quotation').find('tr td.igst_td').show();
@@ -1736,6 +1738,7 @@ if (!empty($customers)) {
         
       
     } else {
+        $('.total_table_tag').attr('colspan',3);
         $('#tin').attr('disabled', true);
         $('#add_quotation').find('tr td.cgst_td').hide();
         $('#add_quotation').find('tr td.sgst_td').hide();

@@ -64,7 +64,7 @@ class Notification_model extends CI_Model {
 
         if ($this->user_auth->is_section_allowed('purchase', 'purchase_request')) {
 
-            $this->db->where('type', 'min_qty >',0);
+            $this->db->where('type', 'min_qty',5);
 
             $this->db->where('STATUS !=' , 1);
 
