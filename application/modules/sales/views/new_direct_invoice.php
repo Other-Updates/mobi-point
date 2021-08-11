@@ -1638,7 +1638,83 @@ if (!empty($customers)) {
             }else{
                 $(this).val($(this).parent().find('.nogst').html());
             }
-        })
+        }) 
+        
+       
+        $('.subtotal').each(function(){
+
+            var percost = $(this).closest('tr').find('.percost').val();
+            var qty = $(this).closest('tr').find('.qty').val();
+        
+
+            if(percost==1){
+                 tot = Number(qty) * Number(percost);
+              
+                 $(this).closest('tr').find('.gst').val(tot);
+                 $(this).closest('tr').find('.subtotal').val(tot.toFixed(2));
+
+                 }else{
+
+                tot = Number(qty) * Number(percost);
+              
+                 $(this).closest('tr').find('.nogst').val(tot);
+                 $(this).closest('tr').find('.subtotal').val(tot.toFixed(2));
+               
+                 }
+            })
+            //
+            var finaltotal =0;
+            $('.subtotal').each(function(){
+                finaltotal = finaltotal+Number($(this).val());
+            });
+            $('.final_sub_total').val(finaltotal);
+            $('.final_amt').val(finaltotal.toFixed(2));
+
+
+            $('.profit').each(function(){
+
+                    var percost = $(this).closest('tr').find('.percost').val();
+                    var qty = $(this).closest('tr').find('.qty').val();
+                    var costing_price = $(this).closest('tr').find('.costing_price').val();
+
+                    $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
+
+
+            });
+
+
+
+
+
+
+
+
+                // })
+
+
+
+                //  $('.profit').each(function(){
+                //     var percost = $(this).closest('tr').find('.percost').val();
+                //     var qty = $(this).closest('tr').find('.qty').val();
+                //     var 
+                //     if{
+                //         if (result[0].sales_price != '' && result[0].cost_price != '') {
+                //             this_val.closest('tr').find('.profit').val(result[0].sales_price - result[0].cost_price);
+                //         } else {
+                //             this_val.closest('tr').find('.profit').val('0');
+                //         }
+                        
+                //     }else{
+
+                //          if (result[0].sales_price != '' && result[0].cost_price != '') {
+                //             this_val.closest('tr').find('.profit').val(result[0].sales_price_without_gst - result[0].cost_price_without_gst);
+                //         } else {
+                //             this_val.closest('tr').find('.profit').val('0');
+                //         }
+                //     }
+
+                //     })
+        
 
     if ($('.gst-invoice:checked').val() == 1) {
         $('#tin').attr('disabled', false);
@@ -1648,6 +1724,7 @@ if (!empty($customers)) {
         $('#add_new_values').find('.taxable_price').show();
         $('#add_new_values').find('.add_cgst').show();
         $('#add_new_values').find('.add_sgst').show();
+      
         
         // if (result[0].cost_price != '') {
         //                     this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
@@ -3564,11 +3641,18 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
 
 
                         if (result[0].cost_price != '') {
-                            this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
+                            if($('.gst-invoice:checked').val() == 1){
+                                this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
+                            }else{
+                                this_val.closest('tr').find('.costing_price').val(result[0].cost_price_without_gst);
+                            }
                             this_val.closest('tr').find('.cp_with_gst').val(result[0].cost_price);
                             this_val.closest('tr').find('.cp_without_gst').val(result[0].cost_price_without_gst);
                             this_val.closest('tr').find('.gstcost').html(result[0].cost_price);
                             this_val.closest('tr').find('.nogstcost').html(result[0].cost_price_without_gst);
+
+
+
                         } else {
                             this_val.closest('tr').find('.costing_price').val('0');
                         }
@@ -3582,7 +3666,12 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                         // }
                         
                         if (result[0].selling_price != '') {
-                            this_val.closest('tr').find('.selling_price').val(result[0].sales_price);
+                            if($('.gst-invoice:checked').val() == 1){
+                                this_val.closest('tr').find('.selling_price').val(result[0].sales_price);
+                            }else{
+                                this_val.closest('tr').find('.selling_price').val(result[0].sales_price_without_gst);
+                            }
+                            // this_val.closest('tr').find('.selling_price').val(result[0].sales_price);
                             this_val.closest('tr').find('.sp_with_gst').val(result[0].sales_price);
                             this_val.closest('tr').find('.sp_without_gst').val(result[0].sales_price_without_gst);
                             this_val.closest('tr').find('.gst').html(result[0].sales_price);

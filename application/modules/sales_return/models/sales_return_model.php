@@ -709,7 +709,9 @@ class Sales_return_model extends CI_Model {
 
     public function get_all_inv_details_by_id($id) {
 
-        $this->db->select('erp_category.cat_id,erp_category.categoryName,erp_product.id,erp_product.product_name,erp_brand.id,erp_brand.brands,erp_product.model_no,erp_product.product_image,erp_product.type,erp_invoice_details.*');
+        $this->db->select('erp_category.cat_id,erp_category.categoryName,erp_product.id,
+        erp_product.product_name,erp_brand.id,erp_brand.brands,erp_product.model_no,
+        erp_product.product_image,erp_product.type,erp_invoice_details.*');
 
         $this->db->where('erp_invoice_details.in_id', $id);
 
@@ -724,6 +726,10 @@ class Sales_return_model extends CI_Model {
 
 
         $query = $this->db->get('erp_invoice_details')->result_array();
+        // echo $this->db->last_query();
+        // echo "<pre>";
+        // print_r($query);
+        // exit;
 
         $i = 0;
 

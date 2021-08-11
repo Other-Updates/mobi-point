@@ -735,6 +735,7 @@ class Purchase_order extends MX_Controller
     {
         $datas["po"] = $po = $this->purchase_order_model->get_all_po();
         $datas['company_details'] = $this->admin_model->get_company_details();
+        // $input['po']['supplier'] = $input['supplier']['id'];
         //echo "<pre>";
         //print_r($datas);
         //exit;
