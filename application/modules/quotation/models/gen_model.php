@@ -170,11 +170,10 @@ class Gen_model extends CI_Model {
             $this->db->select('ime.ime_code');
             $this->db->where('ime.product_id', $result_data['id']);
             $this->db->where('ime.status', 'open');
+            $this->db->where('ime.ime_code !=', '');
             $ime_data = $this->db->get('erp_po_ime_code_details as ime')->result_array();
-
             $query[$key]['ime_details'] = $ime_data;
         }
-
         return $query;
     }
 

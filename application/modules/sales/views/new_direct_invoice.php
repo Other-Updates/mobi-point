@@ -2333,7 +2333,7 @@ $('.save').on('click', function() {
 
 
 
-        }
+}
 
 
 
@@ -3505,12 +3505,15 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                                 '<div  tabindex="0"><select id="ime_code_id" class="form-control multi_select ime_code_id" multiple="multiple" autocomplete="off" name="ime_code_id[]">';
                             option_text += '<option value="">Select</option>';
                             $.each(ime_result, function(key, value) {
-                                selected = '';
-                                if (key == 0)
-                                    selected = 'selected';
-                                option_text += '<option  value="' + value
-                                    .ime_code + '"  ' + selected + '>' + value
-                                    .ime_code + '</option>';
+                                if(value.ime_code !=''){
+                                    selected = '';
+                                    if (key == 0)
+                                        selected = 'selected';
+                                    option_text += '<option  value="' + value
+                                        .ime_code + '"  ' + selected + '>' + value
+                                        .ime_code + '</option>';
+                                }
+                               
                             });
 
 
@@ -3526,13 +3529,11 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
 
 
 
-                            //alert(datas);
 
                             this_val.closest('tr').find('td .ime_code_val').val(datas);
+                            
 
-
-
-
+                               
 
                         } else {
 
@@ -3544,6 +3545,7 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
 
                             this_val.closest('tr').find('.ime_code_id').html(
                                 option_text);
+                                this_val.closest('tr').find('.ime_code_val').removeClass('required');
 
 
 
@@ -3604,17 +3606,19 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                             'option:selected').text();
 
                         this_val.closest('tr').find('.catname').val(categoryname);
-
-                        if (categoryname == 'Fresh Mobiles' || categoryname ==
-                            'Used Mobiles' || categoryname ==  "Smart Phone-Brand New" ||  categoryname ==  "Smart Phone-REFURBISHED" ) {
+                            424
+                        if (categoryname == 'Fresh Mobiles' || categoryname =='Used Mobiles' || categoryname ==  "Smart Phone-Brand New" ||  categoryname ==  "Smart Phone-REFURBISHED" ) {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
                                 this_val.closest('tr').find('td .ime_code_select').append(option_text);
                                 this_val.closest('tr').find('td .multi_select').fSelect();
+                                this_val.closest('tr').find('.ime_code_val').addClass('required');
                         } else if (categoryname == 'Online-Payment' || categoryname =='Recharge'){
                             this_val.closest('tr').find('td .ime_code_select').empty();
                             this_val.closest('tr').find('td .ime_code_select').append("<input type='text' />");
+                            this_val.closest('tr').find('.ime_code_val').addClass('required');
                         }else {
                             this_val.closest('tr').find('td .ime_code_select').empty();
+                            this_val.closest('tr').find('.ime_code_val').removeClass('required');
                         }
 
 
@@ -3690,12 +3694,16 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                         //     this_val.closest('tr').find('.selling_price without gst').val('0');
                         // }
 
-                        //Profit 
-                        if (result[0].sales_price != '' && result[0].cost_price != '') {
-                            this_val.closest('tr').find('.profit').val(result[0].sales_price - result[0].cost_price);
-                        } else {
-                            this_val.closest('tr').find('.profit').val('0');
-                        }
+
+                            // Profit calculation 
+                            var percost = this_val.closest('tr').find('.percost').val();
+                            var costing_price = this_val.closest('tr').find('.costing_price').val();
+                            var qty = this_val.closest('tr').find('.qty').val();
+                            this_val.closest('tr').find('.profit').val((percost - costing_price)*qty);
+
+
+
+
                         // if (result[0].sales_price != '' && result[0].cost_price != '') {
                         //     this_val.closest('tr').find('.profit').val(result[0].sales_price_without_gst - result[0].cost_price_without_gst);
                         // } else {
