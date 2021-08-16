@@ -3114,26 +3114,13 @@ if (!empty($customers)) {
 
                             this_val.closest('tr').find('.cat_id').val(result[0].category_id);
                             var categoryname = this_val.closest('tr').find('.cat_id').find('option:selected').text();
-                            // if(categoryname != 'Fresh Mobiles' && categoryname != 'Used Mobiles') {
-                            //     this_val.closest('tr').find('.qty').removeAttr("readonly");
-                            //     this_val.closest('tr').find('td .ime_code_select').empty();
-                            //     this_val.closest('tr').find('td .ime_code_val ').val('');
-                            // } else {
-                            //     this_val.closest('tr').find('.qty').attr("readonly", "readonly");
-                            // }
-                            if (categoryname == 'Fresh Mobiles' || categoryname =='Used Mobiles' || categoryname ==  "Smart Phone-Brand New" ||  categoryname ==  "Smart Phone-REFURBISHED" ) {
+                            if(categoryname != 'Fresh Mobiles' && categoryname != 'Used Mobiles') {
+                                this_val.closest('tr').find('.qty').removeAttr("readonly");
                                 this_val.closest('tr').find('td .ime_code_select').empty();
-                                this_val.closest('tr').find('td .ime_code_select').append(option_text);
-                                this_val.closest('tr').find('td .multi_select').fSelect();
-                                this_val.closest('tr').find('.ime_code_val').addClass('required');
-                        } else if (categoryname == 'Online-Payment' || categoryname =='Recharge'){
-                            this_val.closest('tr').find('td .ime_code_select').empty();
-                            this_val.closest('tr').find('td .ime_code_select').append("<input type='text' />");
-                            this_val.closest('tr').find('.ime_code_val').addClass('required');
-                        }else {
-                            this_val.closest('tr').find('td .ime_code_select').empty();
-                            this_val.closest('tr').find('.ime_code_val').removeClass('required');
-                        }
+                                this_val.closest('tr').find('td .ime_code_val ').val('');
+                            } else {
+                                this_val.closest('tr').find('.qty').attr("readonly", "readonly");
+                            }
 
 
 

@@ -596,11 +596,11 @@
 
                                     <td colspan="5" style="width:70px; text-align:right;"><b>Total</b></td>
 
-                                    <td align="center"><input type="text"   name="po[total_qty]"  tabindex="-1" readonly="readonly" value="<?php echo $delivery_qty_total; ?>" class="total_qty" style="width:70px; margin-left:-33px;" id="total" readonly="readonly"/></td>
+                                    <td align="center"><input type="text"   name="po[total_qty]"  tabindex="-1" readonly="readonly"  class="total_qty" style="width:70px; margin-left:-33px;" id="total" readonly="readonly"/></td>
 
                                     <td colspan="5" style="text-align:right;"><b>Sub Total</b></td>
 
-                                    <td><input type="text" name="po[subtotal_qty]"  tabindex="-1" readonly="readonly" value="<?php echo $over_all_net_total; ?>"  class="final_sub_total text_right" style="width:70px;" readonly="readonly"/></td>
+                                    <td><input type="text" name="po[subtotal_qty]"  tabindex="-1" readonly="readonly"   class="final_sub_total text_right" style="width:70px;" readonly="readonly"/></td>
 
 
 
@@ -628,7 +628,7 @@
 
                                     <td colspan="6"style="text-align:right;font-weight:bold;">Net Total</td>
 
-                                    <td><input type="text"  name="po[net_total]"  readonly="readonly"  tabindex="-1" class="final_amt text_right" style="width:70px;" value="<?php echo $over_all_net_total; ?>" readonly="readonly"/></td>
+                                    <td><input type="text"  name="po[net_total]"  readonly="readonly"  tabindex="-1" class="final_amt text_right" style="width:70px;"  readonly="readonly"/></td>
 
 
 

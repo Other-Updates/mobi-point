@@ -153,7 +153,7 @@ class Gen_model extends CI_Model {
             $this->db->where($this->erp_product . '.category_id', $atten_inputs['cat_it']);
 
         $this->db->where($this->erp_product . '.id', $atten_inputs['model_number_id']);
-
+        
         $this->db->join('erp_stock', 'erp_stock.product_id = erp_product.id', 'left');
 
         $this->db->where('erp_stock.quantity >', 0.00);

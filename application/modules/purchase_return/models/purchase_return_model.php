@@ -236,8 +236,13 @@ class Purchase_return_model extends CI_Model {
                 . 'erp_pr.net_total,erp_pr.delivery_schedule,erp_pr.mode_of_payment,erp_pr.remarks,erp_pr.subtotal_qty,erp_pr.estatus,erp_pr.firm_id,erp_pr.pr_no');
         //$this->db->where('erp_po.estatus',1);
         $this->db->where('erp_pr.id', $id);
-        $this->db->join('vendor', 'vendor.id=erp_pr.supplier','left');
+        $this->db->join('vendor', 'vendor.id=erp_pr.supplier');
         $query = $this->db->get('erp_pr');
+        // echo $this->db->last_query();
+        // echo "<pre>";
+        // print_r($query);
+        // exit;
+ 
         if ($query->num_rows() >= 0) {
             return $query->result_array();
         }
@@ -245,22 +250,28 @@ class Purchase_return_model extends CI_Model {
     }
 
     public function get_all_pr_details_by_id($id) {
-        $this->db->select('erp_pr_details.delivery_qty,erp_pr_details.quantity,erp_pr_details.id as erp_pr_id,
-         erp_category.cat_id,erp_category.categoryName,erp_product.id,erp_product.product_name,
-         erp_brand.id,erp_brand.brands,'
-                . 'erp_pr_details.category,erp_pr_details.product_id,erp_pr_details.brand,
-                erp_pr_details.return_quantity,erp_pr_details.unit,'
-                . 'erp_pr_details.per_cost,erp_pr_details.tax,erp_pr_details.return_quantity,
-                erp_pr_details.gst,erp_pr_details.sub_total,erp_product.model_no,erp_product.product_image,
-                erp_product.type,erp_pr_details.discount,erp_pr_details.igst,erp_pr_details.transport,
-                erp_pr_details.po_id,'
-                . 'erp_pr_details.product_description');
+        // $this->db->select('erp_pr_details.delivery_qty,erp_pr_details.quantity,erp_pr_details.id as erp_pr_id,
+        //  erp_category.cat_id,erp_category.categoryName,erp_product.id,erp_product.product_name,
+        //  erp_brand.id,erp_brand.brands,'
+        //         . 'erp_pr_details.category,erp_pr_details.product_id,erp_pr_details.brand,
+        //         erp_pr_details.return_quantity,erp_pr_details.unit,'
+        //         . 'erp_pr_details.per_cost,erp_pr_details.tax,erp_pr_details.return_quantity,
+        //         erp_pr_details.gst,erp_pr_details.sub_total,erp_product.model_no,erp_product.product_image,
+        //         erp_product.type,erp_pr_details.discount,erp_pr_details.igst,erp_pr_details.transport,
+        //         erp_pr_details.po_id,'
+        //         . 'erp_pr_details.product_description');
+        $this->db->select('erp_category.cat_id,erp_category.categoryName,erp_product.id,
+        erp_product.product_name,erp_brand.id,erp_brand.brands,erp_product.model_no,
+        erp_product.product_image,erp_product.type,erp_pr_details.*');
+
         $this->db->where('erp_pr_details.pr_id', $id);
 
         $this->db->join('erp_po', 'erp_po.id=erp_pr_details.po_id');
+        // $this->db->join('vendor', 'vendor.id=erp_pr.supplier');
         $this->db->join('erp_category', 'erp_category.cat_id=erp_pr_details.category');
         $this->db->join('erp_product', 'erp_product.id=erp_pr_details.product_id');
         $this->db->join('erp_brand', 'erp_brand.id=erp_pr_details.brand', 'LEFT');
+        // $this->db->join('erp_category','erp_category.cat_id=erp_po.po_cat_type','left');    
 
         $query = $this->db->get('erp_pr_details')->result_array();
     //    echo $this->db->last_query();

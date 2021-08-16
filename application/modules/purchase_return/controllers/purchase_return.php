@@ -292,7 +292,7 @@ class Purchase_return extends MX_Controller {
 
         $datas["po_details"] = $po_details = $this->purchase_return_model->get_all_pr_details_by_id($id);
 
-        // echo "<pre>";print_r($datas['po']);exit;
+        // echo "<pre>";print_r($datas['po_details']);exit;
 
         $datas["category"] = $category = $this->categories_model->get_all_category();
 

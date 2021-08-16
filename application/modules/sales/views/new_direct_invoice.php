@@ -3606,8 +3606,12 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                             'option:selected').text();
 
                         this_val.closest('tr').find('.catname').val(categoryname);
-                            424
-                        if (categoryname == 'Fresh Mobiles' || categoryname =='Used Mobiles' || categoryname ==  "Smart Phone-Brand New" ||  categoryname ==  "Smart Phone-REFURBISHED" ) {
+                        // console.log(categoryname);  console.log(option_text);
+                        if(option_text == ''){
+                            this_val.closest('tr').find('td .ime_code_select').empty();
+                            this_val.closest('tr').find('.ime_code_val').removeClass('required'); 
+                        }
+                        else if (categoryname == 'Fresh Mobiles' || categoryname =='Used Mobiles' || categoryname ==  "Smart Phone-Brand New" ||  categoryname ==  "Smart Phone-REFURBISHED" ) {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
                                 this_val.closest('tr').find('td .ime_code_select').append(option_text);
                                 this_val.closest('tr').find('td .multi_select').fSelect();
@@ -3695,7 +3699,7 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                         // }
 
 
-                            // Profit calculation 
+                            // Profit calculation
                             var percost = this_val.closest('tr').find('.percost').val();
                             var costing_price = this_val.closest('tr').find('.costing_price').val();
                             var qty = this_val.closest('tr').find('.qty').val();
