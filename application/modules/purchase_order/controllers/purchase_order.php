@@ -74,7 +74,7 @@ class Purchase_order extends MX_Controller
         $input = $this->input->post();
 
         if (!empty($input)) {
-
+            // echo "<pre>";            print_r($input);exit;
             if (isset($input['categoty']) && !empty($input['categoty'])) {
                 $insert_arr = array();
 
@@ -92,12 +92,14 @@ class Purchase_order extends MX_Controller
                 $input['po']['delivery_qty'] = $input['po']['total_qty'];
             }
         }
-            $insert_id = $this->purchase_order_model->insert_po($input['po']);
+            // $insert_id = $this->purchase_order_model->insert_po($input['po']);
     }
 
             if ($input['po']['pr_status'] == 'approved') {
+                $input['po']['po_id'] = $input['product_id'][0];
                 $insert_pr_id = $this->purchase_return_model->insert_pr($input['po']);
             }
+            // echo "<pre>";            print_r($input['po']);exit;
 
             //insert notification
             $notification = array();

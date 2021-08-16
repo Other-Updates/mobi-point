@@ -287,6 +287,7 @@ class Purchase_return extends MX_Controller {
 
 
     public function po_edit($id) {
+   
 
         $datas["po"] = $po = $this->purchase_return_model->get_all_pr_by_id($id);
 
