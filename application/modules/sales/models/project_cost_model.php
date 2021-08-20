@@ -1526,10 +1526,9 @@ class Project_cost_model extends CI_Model {
 
     public function get_all_invoice_by_id($id) {
 
-        $this->db->select('erp_user.nick_name,customer.id as customer,customer.store_name,customer.tin,customer.state_id,customer.advance, customer.name,customer.mobil_number,customer.email_id,customer.address1,customer.account_num, customer.ifsc,customer.bank_name,customer.customer_type,erp_invoice.id,erp_invoice.q_id,erp_invoice.inv_id,erp_quotation.q_no,erp_invoice.total_qty,erp_invoice.tax,erp_quotation.ref_name,erp_invoice.tax_label,'
+        $this->db->select('erp_invoice.bill_category,erp_user.nick_name,customer.id as customer,customer.store_name,customer.tin,customer.state_id,customer.advance, customer.name,customer.mobil_number,customer.email_id,customer.address1,customer.account_num, customer.ifsc,customer.bank_name,customer.customer_type,erp_invoice.id,erp_invoice.q_id,erp_invoice.inv_id,erp_quotation.q_no,erp_invoice.total_qty,erp_invoice.tax,erp_quotation.ref_name,erp_invoice.tax_label,'
                 . 'erp_invoice.net_total,erp_invoice.round_off,erp_invoice.transport,erp_invoice.labour,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_invoice.created_date,erp_invoice.firm_id,erp_invoice.sales_man,erp_invoice.invoice_status,erp_invoice.delivery_status,erp_manage_firms.firm_name,erp_sales_man.sales_man_name,erp_invoice.cgst_price,erp_invoice.sgst_price,erp_invoice.taxable_price,erp_invoice.bill_type');
 
-        //$this->db->where('erp_invoice.estatus',1);
 
         $this->db->where('erp_invoice.id', $id);
 
@@ -2054,7 +2053,8 @@ class Project_cost_model extends CI_Model {
 
         $available_stock = $this->db->get($this->erp_stock)->result_array();
 
-        //        echo $this->db->last_query();
+            //    echo $this->db->last_query();
+            //    exit;
 
 
 
@@ -2079,6 +2079,8 @@ class Project_cost_model extends CI_Model {
             $this->db->update($this->erp_stock, array('quantity' => $quantity));
 
             $this->check_min_qty($check_stock['category'], $check_stock['firm_id'], $check_stock['product_id'], $quantity);
+            echo $this->db->last_query();exit;
+            print_r( $check_stock['firm_id']);exit;
         } else {
 
             //Insert Stcok
@@ -2134,6 +2136,7 @@ class Project_cost_model extends CI_Model {
         $this->db->where('erp_product.id', $p_id);
 
         $qty = $this->db->get('erp_product')->result_array();
+        // print_r($cat_id);
 
 
 
@@ -2146,6 +2149,7 @@ class Project_cost_model extends CI_Model {
         $this->db->where('erp_stock.product_id', $p_id);
 
         $stock = $this->db->get('erp_stock')->result_array();
+        // print_r($stock); exit;
 
 
 

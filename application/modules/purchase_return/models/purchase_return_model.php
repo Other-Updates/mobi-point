@@ -81,7 +81,7 @@ class Purchase_return_model extends CI_Model {
 
         $insert_stock_his['product_id'] = $check_stock['product_id'];
         $insert_stock_his['brand'] = $check_stock['brand'];
-        $insert_stock_his['quantity'] = -$check_stock['return_quantity'];
+        $insert_stock_his['quantity'] = $check_stock['return_quantity'];
         $insert_stock_his['created_date'] = date('Y-m-d H:i');
         //echo"<pre>"; print_r($insert_stock_his); exit;
         $this->db->insert($this->erp_stock_history, $insert_stock_his);
@@ -236,15 +236,14 @@ class Purchase_return_model extends CI_Model {
                 . 'erp_pr.net_total,erp_pr.delivery_schedule,erp_pr.mode_of_payment,erp_pr.remarks,erp_pr.subtotal_qty,erp_pr.estatus,erp_pr.firm_id,erp_pr.pr_no');
         //$this->db->where('erp_po.estatus',1);
         $this->db->where('erp_pr.id', $id);
-        $this->db->join('vendor', 'vendor.id=erp_pr.supplier');
+        $this->db->join('vendor', 'vendor.id=erp_pr.supplier','left');
         $this->db->join('erp_po', 'erp_po.id=erp_pr.po_id','left');
         $query = $this->db->get('erp_pr');
         // echo $this->db->last_query();
         // echo "<pre>";
         // print_r($query->result_array());
         // exit;
- 
-        if ($query->num_rows() >= 0) {
+        if ($query->num_rows() > 0) {
             return $query->result_array();
         }
         return false;
@@ -268,7 +267,7 @@ class Purchase_return_model extends CI_Model {
 
         $this->db->where('erp_pr_details.pr_id', $id);
 
-        $this->db->join('erp_po', 'erp_po.id=erp_pr_details.po_id');
+        $this->db->join('erp_po', 'erp_po.id=erp_pr_details.po_id','left');
         // $this->db->join('vendor', 'vendor.id=erp_pr.supplier');
         $this->db->join('erp_category', 'erp_category.cat_id=erp_pr_details.category','left');
         $this->db->join('erp_product', 'erp_product.id=erp_pr_details.product_id','left');

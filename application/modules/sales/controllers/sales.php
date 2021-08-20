@@ -833,7 +833,6 @@ class Sales extends MX_Controller
     {
 
         $datas["quotation"] = $quotation = $this->project_cost_model->get_all_invoice_by_id($id);
-
         $datas["in_words"] = $this->convert_number($datas["quotation"][0]['net_total']);
 
         $datas["quotation_details"] = $quotation_details = $this->project_cost_model->get_all_invoice_details_by_id($id);
@@ -1771,6 +1770,8 @@ class Sales extends MX_Controller
 
             unset($input['quotation']['bill_type']);
 
+                
+
             $arr = $this->gen_model->get_prefix_by_frim_id($input['quotation']['firm_id']);
 
             $arr1 = $this->increment_model->get_increment_id($arr[0]['prefix'], 'TT');
@@ -1784,7 +1785,7 @@ class Sales extends MX_Controller
             $input['quotation']['q_no'] = $final_id;
 
             $insert_id = $this->gen_model->insert_quotation($input['quotation']);
-
+            unset($input['quotation']['bill_category']);
             $input = $this->input->post();
 
             $input['quotation']['q_id'] = $insert_id;
@@ -1814,6 +1815,8 @@ class Sales extends MX_Controller
             // new invoice
 
             $input['quotation']['invoice_status'] = 'approved';
+            
+            // $input['quotation']['bill_category'] = 'nogst';
 
             $data['company_details'] = $this->admin_model->get_company_details();
 
@@ -1907,6 +1910,8 @@ class Sales extends MX_Controller
 
             unset($input['quotation']['bill_type']);
 
+            unset($input['quotation']['bill_category']);
+
             $input['quotation']['invoice_id'] = $insert_id1;
 
             $input['quotation']['inv_id'] = $inv_id;
@@ -1953,11 +1958,16 @@ class Sales extends MX_Controller
                         }
 
                         $insert['per_cost'] = $input['per_cost'][$key];
+
                         $insert['sp_with_gst'] = $input['sp_with_gst'][$key];
+
                         $insert['sp_without_gst'] = $input['sp_without_gst'][$key];
+
                         $insert['tax'] = $input['tax'][$key];
 
                         $insert['gst'] = $input['gst'][$key];
+
+                        // $insert['bill_category']= $input['bill_category'][$key];
 
                         $insert['igst'] = $input['igst'][$key];
 
@@ -2193,6 +2203,13 @@ class Sales extends MX_Controller
             $ref_amount = $this->project_cost_model->get_reference_amount($input['quotation']['ref_name']);
 
             $input['quotation']['commission_rate'] = ($input['quotation']['net_total'] / 100) * $ref_amount;
+
+            // if ($input['quotation[bill_type]'] == 1) {
+
+            //     $input['quotation[bill_type]'] = 'GST';
+            // } else {
+            //         $input['quotation[bill_type]'] = 'NO GST';
+            // }
 
             if ($input['quotation']['credit_days'] == '') {
 

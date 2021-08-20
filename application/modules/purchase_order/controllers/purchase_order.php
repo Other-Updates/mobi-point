@@ -80,26 +80,31 @@ class Purchase_order extends MX_Controller
 
                 foreach ($input['categoty'] as $key => $val) {
 
-            $user_info = $this->user_auth->get_from_session('user_info');
-            $data['company_details'] = $this->admin_model->get_company_details();
-            $input['po']['po_no'] = $input['po']['pr_no'];
-            $input['po']['po_cat_type'] = $val;
-            $input['po']['delivery_schedule'] = date('Y-m-d', strtotime($input['po']['created_date']));
-            $input['po']['created_by'] = $user_info[0]['id'];
-            $input['po']['supplier'] = $input['supplier']['id'];
-            $input['po']['created_date'] = date('Y-m-d', strtotime($input['po']['created_date']));
-            if ($input['po']['delivery_status'] == 'delivered') {
-                $input['po']['delivery_qty'] = $input['po']['total_qty'];
+                    $user_info = $this->user_auth->get_from_session('user_info');
+                    $data['company_details'] = $this->admin_model->get_company_details();
+                    $input['po']['po_no'] = $input['po']['pr_no'];
+                    $input['po']['po_cat_type'] = $val;
+                    $input['po']['delivery_schedule'] = date('Y-m-d', strtotime($input['po']['created_date']));
+                    $input['po']['created_by'] = $user_info[0]['id'];
+                    $input['po']['supplier'] = $input['supplier']['id'];
+                    $input['po']['created_date'] = date('Y-m-d', strtotime($input['po']['created_date']));
+                    if ($input['po']['delivery_status'] == 'delivered') {
+                        $input['po']['delivery_qty'] = $input['po']['total_qty'];
+                    }
+                }
+                $insert_id = $this->purchase_order_model->insert_po($input['po']);
+                    // echo$this->db->last_query();exit;
             }
-        }
-            // $insert_id = $this->purchase_order_model->insert_po($input['po']);
-    }
 
             if ($input['po']['pr_status'] == 'approved') {
-                $input['po']['po_id'] = $input['product_id'][0];
+                $input['po']['po_id'] = $insert_id;
+                $input['po']['supplier'] = $input['supplier']['id'];
                 $insert_pr_id = $this->purchase_return_model->insert_pr($input['po']);
+                // echo $this->db->last_query();exit;
+                unset($input['po']['po_id']);
+                // unset($input['po']['supplier']);
             }
-            // echo "<pre>";            print_r($input['po']);exit;
+            // echo "<pre>";            print_r($input);exit;
 
             //insert notification
             $notification = array();
@@ -134,6 +139,7 @@ class Purchase_order extends MX_Controller
 
             if (isset($insert_id) && !empty($insert_id)) {
                 $input = $this->input->post();
+                // print_r($input);exit;
                 if (isset($input['categoty']) && !empty($input['categoty'])) {
                     $insert_arr = array();
 
@@ -175,7 +181,9 @@ class Purchase_order extends MX_Controller
                         }
                     }
                     $this->purchase_order_model->insert_po_details($insert_arr);
+                    // echo $this->db->last_query();
                 }
+                // exit;
 
                 if ($input['po']['pr_status'] = 'approved')
                     $sms = $this->sms_model->send_sms($insert_id, 'purchase');

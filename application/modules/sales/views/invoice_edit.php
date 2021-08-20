@@ -579,12 +579,23 @@ if (!empty($customers)) {
 
 
                 </td>
+<!--                 
+                <td class="action-btn-align">
+                    <p  style="display: none;" class ="gstcost">1</p><p style="display: none;"  class = "nogstcost">2</p>
+                    <input type="text" name="cost_price" style="width:70px;" id="cost_price"
+                        class="costing_price perwhole" />
+                    <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
+                    <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
+                    <span class="error_msg"></span>
+                </td> -->
 
 
 
                 <td>
 
 
+                <p style="display: none;" class ="gst">1</p>
+                            <p  style="display: none;" class = "nogst">2</p>
 
                     <input type="text" tabindex="8" name='per_cost[]' style="width:70px;" class="selling_price percost " id="price" />
                     <input type="hidden" name="sp_with_gst[]" class="sp_with_gst">
@@ -841,6 +852,19 @@ if (!empty($customers)) {
 
 
                             </td>
+                            
+                            <td width="25%"><input type="radio" tabindex="1" class="gst-invoice" value="1" name="quotation[bill_category]" <?php echo ($val['bill_category'] == '1') ? 'checked' : '' ?> disabled />GST
+
+
+                                <input type="radio" tabindex="1" class="gst-invoice" value="2" name="quotation[bill_category]" <?php echo ($val['bill_category'] == '2') ? 'checked' : '' ?> disabled />NO GST<br>
+
+
+
+                                <span id="type1" class="error_msg"></span>
+
+
+
+                            </td>
 
 
 
@@ -884,8 +908,7 @@ if (!empty($customers)) {
 
 
                             </td>
-
-
+                         
 
                             <td width="25%" class="first_td"><span class="tdhead">GSTIN NO :</span></td>
 
@@ -1004,10 +1027,16 @@ if (!empty($customers)) {
                                 <!-- <td width="4%" class="first_td1 action-btn-align">Total</td>-->
 
                                 <td width="6%" class="first_td1 action-btn-align">HSN Code</td>
+                                <?php if($gsttype == 1){ ?>
+                                <td width="5%" class="first_td1 action-btn-align cgst_td">CGST %</td>
+                              
+                                <td width="5%" class="first_td1 action-btn-align sgst_td">SGST %</td>
+                                <?php } ?>
 
-                                <td width="5%" class="first_td1 action-btn-align proimg-wid">CGST %</td>
 
+                                <!-- <td width="5%" class="first_td1 action-btn-align proimg-wid">CGST %</td> -->
 
+<!-- 
                                 <?php
                                 $gst_type = $quotation[0]['state_id'];
 
@@ -1041,14 +1070,14 @@ if (!empty($customers)) {
                                 <?php
                                     //    }
                                 }
-                                ?>
+                                ?> -->
 
 
 
                                 <td width="7%" class="first_td1 action-btn-align">Net Value</td>
 
 
-
+                                <?php if($gsttype == 1){ ?>
                                 <td width="2%" class="action-btn-align">
 
 
@@ -1058,6 +1087,8 @@ if (!empty($customers)) {
 
 
                                 </td>
+                                <?php } ?>
+
 
 
 
@@ -1266,7 +1297,7 @@ if (!empty($customers)) {
                                         <td>
 
                                             <div class="ime_code_select">
-                                            <?php if($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles') { ?>
+                                            <?php if($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles' || $vals['categoryName'] == 'Smart Phone-Brand New' ||  $vals['categoryName'] == 'Smart Phone-REFURBISHED'  ) { ?>
                                                 <div tabindex="0">
 
 
@@ -1447,6 +1478,7 @@ if (!empty($customers)) {
                                             <input type="text" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" value="<?php echo $vals['hsn_sac']; ?>" />
 
                                         </td>
+                                        <?php if($gsttype == 1){ ?>
                                         <td>
 
 
@@ -1456,8 +1488,9 @@ if (!empty($customers)) {
 
 
                                         </td>
+                                        <?php } ?>
 
-
+                                        <?php if($gsttype == 1){ ?>
 
                                         <?php
                                         $gst_type = $quotation[0]['state_id'];
@@ -1477,6 +1510,8 @@ if (!empty($customers)) {
 
 
                                         <?php } else { ?>
+                                            <?php } ?>
+
 
 
 
@@ -1539,7 +1574,7 @@ if (!empty($customers)) {
 
 
 
-                            <td colspan="3" style="width:70px; text-align:right !important;"><b>Total</b></td>
+                            <td colspan="3" class="total_table_tag" style="width:70px; text-align:right !important;"><b>Total</b></td>
 
 
 
@@ -1567,7 +1602,7 @@ if (!empty($customers)) {
 
                             <input type="hidden" name="advance" tabindex="-1" readonly="readonly" value="<?php echo (!empty($val['advance'])) ? $val['advance'] : 0; ?>" class="advance text_right" style="width:70px;" />
 
-
+                            <?php if($gsttype == 1){ ?>
                             <tr>
 
                                 <td colspan="5" style="width:70px; text-align:right;"></td>
@@ -1577,16 +1612,17 @@ if (!empty($customers)) {
                                 <td>
 
                                     <input type="text" name="quotation[tax]" value="<?php
-                                                                                    if ($val['tax'] != 0) {
-                                                                                        echo $val['tax'];
-                                                                                    }
-                                                                                    ?>" class='totaltax text_right' tabindex="-1" style="width:70px;" />
+                                                    if ($val['tax'] != 0) {
+                                                        echo $val['tax'];
+                                                    }
+                                                    ?>" class='totaltax text_right' tabindex="-1" style="width:70px;" />
 
                                 </td>
 
                                 <td></td>
 
                             </tr>
+                            <?php } ?>
 
 
                             <input type="hidden" name="quotation[round_off]" tabindex="-1" value="<?php echo $val['round_off']; ?>" class="round_off text_right" style="width:70px;" readonly />
@@ -1594,14 +1630,16 @@ if (!empty($customers)) {
                         </tbody>
 
                         <input type="hidden" name="quotation[transport]" value="0" class="transport text_right" tabindex="-1" style="width:70px;" />
-                        <tbody class="additional">
+                        <tbody class="additional" id="add_new_values">
 
 
                             <tr>
+                            <?php if($gsttype == 1){ ?>
 
                                 <input type="hidden" tabindex="-1" name="quotation[labour]" value="<?php echo $quotation[0]['labour']; ?>" class="labour text_right" style="width:70px;" />
 
                                 <td colspan="2" style="text-align:right;">Taxable Charge</td>
+
 
 
 
@@ -1636,6 +1674,7 @@ if (!empty($customers)) {
                                 ?>
 
                                 <td><input type="text" tabindex="-1" value="<?php echo $val['sgst_price']; ?>" name="quotation[sgst_price]" readonly class="add_sgst sgst_price text_right" style="width:70px;" /></td>
+                                <?php } ?>
 
 
 
@@ -1741,12 +1780,6 @@ if (!empty($customers)) {
 
 
 </div><!-- mainpanel -->
-
-
-
-
-
-
 
 <script type="text/javascript">
     $('.multi_select').fSelect();
@@ -4723,4 +4756,24 @@ if (!empty($customers)) {
         }
 
     });
+    // if ($('.gst-invoice:checked').val() == 1) {
+    //     $('.total_table_tag').attr('colspan',5);
+    //     $('#tin').attr('disabled', false);
+    //     $('#add_quotation').find('tr td.sgst_td').show();
+    //     // $('#add_quotation').find('tr td.igst_td').show();
+    //     $('#add_quotation').find('tr td.cgst_td').show();
+    //     $('#add_new_values').find('.taxable_price').show();
+    //     $('#add_new_values').find('.add_cgst').show();
+    //     $('#add_new_values').find('.add_sgst').show();
+    // }else{
+    //     $('.total_table_tag').attr('colspan',3);
+    //     $('#tin').attr('disabled', true);
+    //     $('#add_quotation').find('tr td.cgst_td').hide();
+    //     $('#add_quotation').find('tr td.sgst_td').hide();
+    //     $('#add_quotation').find('tr td.igst_td').hide();
+    //     $('#add_new_values').find('tr td.labour').hide();
+    //     $('#add_new_values').find('.taxable_price').hide();
+    //     $('#add_new_values').find('.add_cgst').hide();
+    //     $('#add_new_values').find('.add_sgst').hide();
+    // }
 </script>

@@ -1013,9 +1013,10 @@ if (!empty($customers)) {
 
                         <label>GST</label>&emsp;&nbsp;&nbsp;&nbsp;
 
-                        <input type="radio" id="unchecked" class="gst-invoice" value="1" name="fooby[1][]" /><br>
+                        <input type="radio" id="unchecked" class="gst-invoice" value="1" name="quotation[bill_category]" /><br>
+                        
                         <label>NO GST</label>&nbsp;
-                        <input type="radio" id="checked" class="gst-invoice" value="2" name="fooby[1][]"
+                        <input type="radio" id="checked" class="gst-invoice" value="2" name="quotation[bill_category]"
                             checked="checked" />
                     </div>
 
@@ -3606,8 +3607,10 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                             'option:selected').text();
 
                         this_val.closest('tr').find('.catname').val(categoryname);
+
                         // console.log(categoryname);  console.log(option_text);
-                        if(option_text == ''){
+                        
+                        if(categoryname == ''){
                             this_val.closest('tr').find('td .ime_code_select').empty();
                             this_val.closest('tr').find('.ime_code_val').removeClass('required'); 
                         }
@@ -3615,12 +3618,20 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
                                 this_val.closest('tr').find('td .ime_code_select').append(option_text);
                                 this_val.closest('tr').find('td .multi_select').fSelect();
-                                this_val.closest('tr').find('.ime_code_val').addClass('required');
-                        } else if (categoryname == 'Online-Payment' || categoryname =='Recharge'){
+                                this_val.closest('tr').find('.ime_code_val').removeClass('required'); 
+                        // } else if (categoryname != 'Fresh Mobiles' || categoryname !='Used Mobiles' 
+                        // || categoryname !=  "Smart Phone-Brand New" ||  categoryname !=  "Smart Phone-REFURBISHED" 
+                        // || categoryname != 'Online-Payment' || categoryname !='Recharge' ){
+
+                        //     this_val.closest('tr').find('td .ime_code_select').empty();
+
+
+                        }
+                        else if (categoryname == 'Online-Payment' || categoryname =='Recharge'){
                             this_val.closest('tr').find('td .ime_code_select').empty();
                             this_val.closest('tr').find('td .ime_code_select').append("<input type='text' />");
-                            this_val.closest('tr').find('.ime_code_val').addClass('required');
-                        }else {
+                            this_val.closest('tr').find('.ime_code_val').removeClass('required'); 
+                        } else {
                             this_val.closest('tr').find('td .ime_code_select').empty();
                             this_val.closest('tr').find('.ime_code_val').removeClass('required');
                         }

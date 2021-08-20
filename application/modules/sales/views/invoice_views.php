@@ -281,8 +281,22 @@
                         </td>
 
                         <td width="25%" align="center; vertical-align:middle;">
-                            <h1>CASH&nbsp;BILL</h1>
+                            <h1>CASH&nbsp;BILL </h1>
                         </td>
+                        <?php $gsttype = $val['bill_category']; ?>
+                        <!-- <div class="form-group col-sm-4">
+                            <label>GST</label>&emsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" id="unchecked" class="gst-invoice" value="1" name="quotation[bill_category]" /><br>
+                            <label>NO GST</label>&nbsp;
+                            <input type="radio" id="checked" class="gst-invoice" value="2" name="quotation[bill_category]"
+                            checked="checked" />
+                        </div> -->
+
+                        <!-- <td width="25%"><input type="radio" tabindex="1" class="gst-invoice" value="1" name="quotation[bill_category]" <?php echo ($val['bill_category'] == '1') ? 'checked' : '' ?> />GST
+                        <input type="radio" tabindex="1" class="gst-invoice" value="2" name="quotation[bill_category]" <?php echo ($val['bill_category'] == '2') ? 'checked' : '' ?> />NO GST<br>
+                        <span id="type1" class="error_msg"></span>
+                        </td> -->
+
 
                         <td width="30%" align="left" style="vertical-align:middle;">Invoice No : <?php echo '' . $val['inv_id']; ?><br />
                             <!--Reference No :  <?php echo $val['q_no']; ?>--><br /><br /> Date : <?php echo ($val['created_date'] != '1970-01-01') ? date('d-M-Y', strtotime($val['created_date'])) : ''; ?><br />
@@ -429,7 +443,7 @@
                         ?>
 
                     </tbody>
-
+                <?php if($gsttype == 1){ ?>
                     <tfoot>
 
 
@@ -445,11 +459,12 @@
 
 
                         <?php
+                        
                         $gst = number_format(($quotation[0]['cgst_price'] + $quotation[0]['sgst_price']), 2)
                         ?>
                         <tr>
-                            <td align="right" colspan="4">GST</td>
-                            <td align="center">12%</td>
+                            <td align="right" class ="gst"colspan="4">GST</td>
+                            <td align="center" class="gstvalue">12%</td>
                             <td align="right"><?php echo $gst; ?></td>
                         </tr>
                         <?php if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) { ?>
@@ -461,35 +476,44 @@
 
                         <?php } ?>
                     </tfoot>
-
+                <?php } ?>
                 </table>
 
 
 
 
-                <table width="100%" class="tfootbotom table table-bordered m-b-0">
+                <table width="100%" class="tfootbotom table table-bordered m-b-0" id="add_new">
 
                     <tr style="border-bottom:1px solid black; background: #f4f8fb;">
-                        <td width="11%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">Taxable Price : </td>
-
-                        <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td>
-
-                        <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">CGST : </td>
-
-                        <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td>
+                      <?php if($gsttype == 1){ ?>
+                        <td width="11%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading" class="taxi">Taxable Price : </td>
+                        <?php } ?>
+                        <?php if($gsttype == 1){ ?>
+                        <td width="10%" class ="taxiprice" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td>
+                        <?php } ?>
+                        <?php if($gsttype == 1){ ?>
+                        <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading" class="cgsttax">CGST : </td>
+                        <?php } ?>
+                        <?php if($gsttype == 1){ ?>
+                        <td width="10%"  class ="cgstprice"class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td>
+                        <?php } ?>
+                        <?php if($gsttype == 1){ ?>
                         <?php
                         $gst_type = $quotation[0]['state_id'];
 
                         if ($gst_type == 31) {
                         ?>
-                            <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">SGST : </td>
+                            <td width="10%" colspan="" style="text-align:center;" class ="sgsttax" class="bor-tb0 bold_heading">SGST : </td>
                         <?php } else { ?>
                             <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">IGST : </td>
 
                         <?php
                         }
                         ?>
-                        <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td>
+                          <?php } ?>
+                          <?php if($gsttype == 1){ ?>
+                        <td width="10%" class ="sgstprice" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td>
+                        <?php } ?>
 
 
                         <td width="10%" colspan="" style="text-align:center;font-weight:bold;" class="bor-tb0">Net Total : </td>
@@ -666,6 +690,34 @@ if (isset($quotation_details) && !empty($quotation_details)) {
 
 
 <script>
+    // if ($('.gst-invoice:checked').val() == 1) {
+    //     // $('.total_table_tag').attr('colspan',5);
+    //     // $('#tin').attr('disabled', false);
+    //     $('#add_new').find('.taxiprice').show();
+    //     $('#add_new').find('.cgstprice').show();
+    //     $('#add_new').find('.sgstprice').show();
+    //     $('#add_new').find('.taxi').show();
+    //     $('#add_new').find('.cgsttax').show();
+    //     $('#add_new').find('.sgsttax').show();
+    //     // $('#app_table').find('.gst').show();
+    //     // $('#app_table').find('.gstvalue').show();
+      
+
+    // }else{
+    //     //   $('.total_table_tag').attr('colspan',3);
+    //     $('#add_new').find('.bor-tb0 bold_heading').hide();
+    //     $('#add_new').find('.taxiprice').hide();
+    //     $('#add_new').find('.cgstprice').hide();
+    //     $('#add_new').find('.sgstprice').hide();
+    //     $('#add_new').find('.taxi').hide();
+    //     $('#add_new').find('.cgsttax').hide();
+    //     $('#add_new').find('.sgsttax').hide();
+    //     // $('#app_table').find('.gst').hide();
+    //     // $('#app_table').find('.gstvalue').hide();
+
+
+    // }
+ 
     function ime_modal_open(id, count) {
 
 

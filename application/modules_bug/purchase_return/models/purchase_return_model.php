@@ -261,7 +261,6 @@ class Purchase_return_model extends CI_Model {
 //        echo "<pre>";
 //        print_r($query);
  //       exit;
-
         $j = 0;
         foreach ($query as $val) {
             $this->db->select('erp_pr.total_qty,erp_pr.delivery_qty');
