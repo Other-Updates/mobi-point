@@ -164,6 +164,9 @@ class Gen_model extends CI_Model {
 
         $query = $this->db->get($this->erp_product)->result_array();
 
+        // echo $this->db->last_query();
+        // exit;
+
 
         foreach ($query as $key => $result_data) {
 
@@ -201,6 +204,10 @@ class Gen_model extends CI_Model {
         //$this->db->where($this->erp_product . '.id', $atten_inputs['model_number_id']);
         //$this->db->like($this->erp_product . '.product_name', $atten_inputs['q']);
         $query = $this->db->get($this->erp_product)->result_array();
+        // echo $this->db->last_query();
+        // echo "<pre>";
+        // print_r($query->result_array());
+        // exit;
         return $query;
     }
 

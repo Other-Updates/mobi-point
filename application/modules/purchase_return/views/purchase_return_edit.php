@@ -318,7 +318,7 @@
 
                                     <td width="10%" class="first_td1">Model</td>
 
-                                    <td width="8%" class="first_td1">Unit</td>
+                                    <!-- <td width="8%" class="first_td1">Unit</td> -->
 
                                     <td width="8%" class="first_td1">QTY</td>
 
@@ -326,7 +326,7 @@
 
                                     <td width="8%" class="first_td1">Unit Price</td>
 
-                                    <td width="7%" class="first_td1">Discount %</td>
+                                    <!-- <td width="7%" class="first_td1">Discount %</td> -->
 
                                     <td width="5%" class="first_td1">CGST %</td>
 
@@ -356,7 +356,7 @@
 
                                     ?>
 
-                                    <td width="5%" class="first_td1">Transport</td>
+                                    <!-- <td width="5%" class="first_td1">Transport</td> -->
 
                                     <td width="5%" class="first_td1">Net Value</td>
 
@@ -434,11 +434,11 @@
 
                                         </td>
 
-                                        <td>
+                                        <!-- <td>
 
                                             <input type="text"  name='unit[]' style="width:70px;" class="unit" value="<?php echo $vals['unit'] ?>" readonly="readonly"/>
 
-                                        </td>
+                                        </td> -->
 
 
 
@@ -512,11 +512,11 @@
 
                                         </td>
 
-                                        <td>
+                                        <!-- <td>
 
                                             <input type="text"   tabindex="-1"   name='discount[]' style="width:70px;" class="discount" value="<?php echo $vals['discount'] ?>" readonly="readonly" />
 
-                                        </td>
+                                        </td> -->
 
 
 
@@ -560,17 +560,17 @@
 
                                         ?>
 
-                                        <td>
+                                        <!-- <td>
 
                                             <input type="text"   tabindex="-1"   name='transport[]' style="width:70px;" class="transport" value="<?php echo $vals['transport'] ?>" readonly="readonly" />
 
-                                        </td>
+                                        </td> -->
 
 
 
                                         <td>
 
-                                            <input type="text"   tabindex="-1" style="width:70px;" name='sub_total[]' readonly="readonly" class="subtotal text_right" readonly="readonly" value="<?php echo $net_total; ?>"/>
+                                            <input type="text"   tabindex="-1" style="width:70px;" value="<?php echo $vals['sub_total'] ?>" name='sub_total[]' readonly="readonly" class="subtotal text_right" readonly="readonly" value="<?php echo $net_total; ?>"/>
 
                                         </td>
 
@@ -594,13 +594,13 @@
 
                                 <tr>
 
-                                    <td colspan="5" style="width:70px; text-align:right;"><b>Total</b></td>
+                                    <td colspan="4" style="width:70px; text-align:right;"><b>Total</b></td>
 
-                                    <td align="center"><input type="text"   name="po[total_qty]"  tabindex="-1" readonly="readonly"  class="total_qty" style="width:70px; margin-left:-33px;" id="total" readonly="readonly"/></td>
+                                    <td align="center"><input type="text"   name="po[total_qty]" value="<?php echo $val['total_qty']; ?>"  tabindex="-1" readonly="readonly"  class="total_qty" style="width:70px; margin-left:-33px;" id="total" readonly="readonly"/></td>
 
-                                    <td colspan="5" style="text-align:right;"><b>Sub Total</b></td>
+                                    <td colspan="3" style="text-align:right;"><b>Sub Total</b></td>
 
-                                    <td><input type="text" name="po[subtotal_qty]"  tabindex="-1" readonly="readonly"   class="final_sub_total text_right" style="width:70px;" readonly="readonly"/></td>
+                                    <td><input type="text" name="po[subtotal_qty]" value="<?php echo $val['subtotal_qty']; ?>" tabindex="-1" readonly="readonly"   class="final_sub_total text_right" style="width:70px;" readonly="readonly"/></td>
 
 
 
@@ -610,7 +610,7 @@
 
                                     <td colspan="5" style="width:70px; text-align:right;"></td>
 
-                                    <td colspan="6" style="text-align:right;font-weight:bold;"><input type="text"  name="po[tax_label]" class='tax_label text_right'    style="width:70px;" value="<?php echo $val['tax_label']; ?>" readonly="readonly"/></td>
+                                    <td colspan="3" style="text-align:right;font-weight:bold;"><input type="text"  name="po[tax_label]" class='tax_label text_right'    style="width:70px;" value="<?php echo $val['tax_label']; ?>" readonly="readonly"/></td>
 
                                     <td>
 
@@ -626,9 +626,9 @@
 
                                     <td colspan="5" style="width:70px; text-align:right;"></td>
 
-                                    <td colspan="6"style="text-align:right;font-weight:bold;">Net Total</td>
+                                    <td colspan="3"style="text-align:right;font-weight:bold;">Net Total</td>
 
-                                    <td><input type="text"  name="po[net_total]"  readonly="readonly"  tabindex="-1" class="final_amt text_right" style="width:70px;"  readonly="readonly"/></td>
+                                    <td><input type="text" value="<?php echo  $val['net_total']?>" name="po[net_total]"  readonly="readonly"  tabindex="-1" class="final_amt text_right" style="width:70px;"  readonly="readonly"/></td>
 
 
 

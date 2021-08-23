@@ -1857,6 +1857,10 @@ class Project_cost_model extends CI_Model {
         $this->db->join('erp_product', 'erp_product.id=erp_quotation_details.product_id');
 
         $query = $this->db->get('erp_quotation_details');
+        //  echo $this->db->last_query();
+    //    echo "<pre>";
+    //    print_r($query);
+    //    exit;
 
         if ($query->num_rows() >= 0) {
 
@@ -2078,9 +2082,9 @@ class Project_cost_model extends CI_Model {
 
             $this->db->update($this->erp_stock, array('quantity' => $quantity));
 
-            $this->check_min_qty($check_stock['category'], $check_stock['firm_id'], $check_stock['product_id'], $quantity);
-            echo $this->db->last_query();exit;
-            print_r( $check_stock['firm_id']);exit;
+            $this->check_min_qty($check_stock['category'], $check_stock['firm'], $check_stock['product_id'], $quantity);
+            // echo $this->db->last_query();exit;
+          
         } else {
 
             //Insert Stcok
@@ -2096,9 +2100,9 @@ class Project_cost_model extends CI_Model {
 
             $this->db->update($this->erp_stock, array('quantity' => $quantity));
 
-            //            echo $this->db->last_query();
+                    //    echo $this->db->last_query();
 
-            $this->check_min_qty($check_stock['category'], $check_stock['firm_id'], $check_stock['product_id'], $quantity);
+            $this->check_min_qty($check_stock['category'], $check_stock['firm'], $check_stock['product_id'], $quantity);
         }
 
         //Insert Stock History
@@ -2136,7 +2140,7 @@ class Project_cost_model extends CI_Model {
         $this->db->where('erp_product.id', $p_id);
 
         $qty = $this->db->get('erp_product')->result_array();
-        // print_r($cat_id);
+      
 
 
 
@@ -2150,8 +2154,7 @@ class Project_cost_model extends CI_Model {
 
         $stock = $this->db->get('erp_stock')->result_array();
         // print_r($stock); exit;
-
-
+     
 
         if ($stock[0]['quantity'] <= $qty[0]['min_qty']) {
 

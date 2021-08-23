@@ -1029,7 +1029,8 @@ if (!empty($customers)) {
                                 <td width="6%" class="first_td1 action-btn-align">HSN Code</td>
                                 <?php if($gsttype == 1){ ?>
                                 <td width="5%" class="first_td1 action-btn-align cgst_td">CGST %</td>
-                              
+                                <?php } ?>
+                                <?php if($gsttype == 1){ ?>
                                 <td width="5%" class="first_td1 action-btn-align sgst_td">SGST %</td>
                                 <?php } ?>
 
@@ -1077,17 +1078,17 @@ if (!empty($customers)) {
                                 <td width="7%" class="first_td1 action-btn-align">Net Value</td>
 
 
-                                <?php if($gsttype == 1){ ?>
+                              
                                 <td width="2%" class="action-btn-align">
 
 
-
+                                <?php if($gsttype == 1){ ?>
                                     <a id='add_group' tabindex="7" class="btn btn-success form-control pad10"><span class="glyphicon glyphicon-plus"></span></a>
 
 
-
+                                    <?php } ?>
                                 </td>
-                                <?php } ?>
+                               
 
 
 
@@ -1478,17 +1479,17 @@ if (!empty($customers)) {
                                             <input type="text" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" value="<?php echo $vals['hsn_sac']; ?>" />
 
                                         </td>
-                                        <?php if($gsttype == 1){ ?>
+                                     
                                         <td>
 
 
-
+                                        <?php if($gsttype == 1){ ?>
                                             <input maxlength="8" type="text" tabindex="-1" name='tax[]' readonly="readonly" style="width:70px;" class="pertax" value="<?php echo number_format($vals['tax'], 2); ?>" />
 
 
-
+                                            <?php } ?>
                                         </td>
-                                        <?php } ?>
+                                     
 
                                         <?php if($gsttype == 1){ ?>
 
@@ -1637,22 +1638,28 @@ if (!empty($customers)) {
                             <?php if($gsttype == 1){ ?>
 
                                 <input type="hidden" tabindex="-1" name="quotation[labour]" value="<?php echo $quotation[0]['labour']; ?>" class="labour text_right" style="width:70px;" />
+                                <?php } ?>
 
+                                <?php if($gsttype == 1){ ?>
                                 <td colspan="2" style="text-align:right;">Taxable Charge</td>
+                                <?php } ?>
 
 
 
-
+                                <?php if($gsttype == 1){ ?>
                                 <td><input type="text" tabindex="-1" name="quotation[taxable_price]" value="<?php echo $quotation[0]['taxable_price']; ?>" readonly="readonly" class=" text_right taxable_price" style="width:70px;" /></td>
+                                <?php } ?>
 
-
+                                <?php if($gsttype == 1){ ?>
                                 <td colspan="1" style="text-align:right !important;">CGST:</td>
+                                <?php } ?>
 
 
-
+                                <?php if($gsttype == 1){ ?>
                                 <td><input tabindex="-1" type="text" name="quotation[cgst_price]" value="<?php echo $val['cgst_price']; ?>" readonly class="add_cgst text_right cgst_price" style="width:70px;" /></td>
+                                <?php } ?>
 
-
+                                <?php if($gsttype == 1){ ?>
 
                                 <?php
                                 $gst_type = $quotation[0]['state_id'];
@@ -1672,7 +1679,8 @@ if (!empty($customers)) {
                                 <?php
                                 }
                                 ?>
-
+                                 <?php } ?>
+     <?php if($gsttype == 1){ ?>
                                 <td><input type="text" tabindex="-1" value="<?php echo $val['sgst_price']; ?>" name="quotation[sgst_price]" readonly class="add_sgst sgst_price text_right" style="width:70px;" /></td>
                                 <?php } ?>
 

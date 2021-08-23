@@ -99,9 +99,9 @@ class Purchase_order extends MX_Controller
             if ($input['po']['pr_status'] == 'approved') {
                 $input['po']['po_id'] = $insert_id;
                 $input['po']['supplier'] = $input['supplier']['id'];
+                
                 $insert_pr_id = $this->purchase_return_model->insert_pr($input['po']);
-                // echo $this->db->last_query();exit;
-                unset($input['po']['po_id']);
+                // unset($input['po']['po_id']);
                 // unset($input['po']['supplier']);
             }
             // echo "<pre>";            print_r($input);exit;
@@ -800,6 +800,7 @@ class Purchase_order extends MX_Controller
         if ($input['po']['pr_status'] == 'approved') {
             $input['po']['po_id'] = $id;
             $this->purchase_return_model->delete_pr($id);
+            $input['po']['supplier'] = $input['supplier']['id'];
             $pr_id = $this->purchase_return_model->insert_pr($input['po']);
         }
 

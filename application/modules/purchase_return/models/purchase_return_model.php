@@ -27,6 +27,10 @@ class Purchase_return_model extends CI_Model {
         if ($this->db->insert($this->erp_pr, $data)) {
             $insert_id = $this->db->insert_id();
             return $insert_id;
+            echo $this->db->last_query();
+        echo "<pre>";
+        print_r($query->result_array());
+        exit;
         }
         return false;
     }
