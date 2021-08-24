@@ -328,7 +328,7 @@
 
                                     <!-- <td width="7%" class="first_td1">Discount %</td> -->
 
-                                    <td width="5%" class="first_td1">CGST %</td>
+                                    <!-- <td width="5%" class="first_td1">CGST %</td>
 
                                     <?php
 
@@ -354,7 +354,7 @@
 
                                     }
 
-                                    ?>
+                                    ?> -->
 
                                     <!-- <td width="5%" class="first_td1">Transport</td> -->
 
@@ -519,14 +519,14 @@
                                         </td> -->
 
 
-
+<!-- 
                                         <td>
 
                                             <input type="text"   tabindex="-1"   name='tax[]' style="width:70px;" class="pertax" value="<?php echo $vals['tax'] ?>" readonly="readonly" />
 
-                                        </td>
+                                        </td> -->
 
-                                        <?php
+                                        <!-- <?php
 
                                         $gst_type = $po[0]['state_id'];
 
@@ -558,7 +558,7 @@
 
                                         }
 
-                                        ?>
+                                        ?> -->
 
                                         <!-- <td>
 
@@ -594,11 +594,11 @@
 
                                 <tr>
 
-                                    <td colspan="4" style="width:70px; text-align:right;"><b>Total</b></td>
+                                    <td colspan="3" style="width:70px; text-align:right;"><b>Total</b></td>
 
                                     <td align="center"><input type="text"   name="po[total_qty]" value="<?php echo $val['total_qty']; ?>"  tabindex="-1" readonly="readonly"  class="total_qty" style="width:70px; margin-left:-33px;" id="total" readonly="readonly"/></td>
 
-                                    <td colspan="3" style="text-align:right;"><b>Sub Total</b></td>
+                                    <td colspan="2" style="text-align:right;"><b>Sub Total</b></td>
 
                                     <td><input type="text" name="po[subtotal_qty]" value="<?php echo $val['subtotal_qty']; ?>" tabindex="-1" readonly="readonly"   class="final_sub_total text_right" style="width:70px;" readonly="readonly"/></td>
 
@@ -610,7 +610,7 @@
 
                                     <td colspan="5" style="width:70px; text-align:right;"></td>
 
-                                    <td colspan="3" style="text-align:right;font-weight:bold;"><input type="text"  name="po[tax_label]" class='tax_label text_right'    style="width:70px;" value="<?php echo $val['tax_label']; ?>" readonly="readonly"/></td>
+                                    <td colspan="1" style="text-align:right;font-weight:bold;"><input type="text"  name="po[tax_label]" class='tax_label text_right'    style="width:70px;" value="<?php echo $val['tax_label']; ?>" readonly="readonly"/></td>
 
                                     <td>
 
@@ -626,7 +626,7 @@
 
                                     <td colspan="5" style="width:70px; text-align:right;"></td>
 
-                                    <td colspan="3"style="text-align:right;font-weight:bold;">Net Total</td>
+                                    <td colspan="1"style="text-align:right;font-weight:bold;">Net Total</td>
 
                                     <td><input type="text" value="<?php echo  $val['net_total']?>" name="po[net_total]"  readonly="readonly"  tabindex="-1" class="final_amt text_right" style="width:70px;"  readonly="readonly"/></td>
 

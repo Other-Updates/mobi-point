@@ -639,7 +639,7 @@ if (!empty($customers)) {
 
                 </td>
 
-                <td class="action-btn-align cgst_td">
+                <!-- <td class="action-btn-align cgst_td">
 
 
 
@@ -671,7 +671,7 @@ if (!empty($customers)) {
 
 
 
-                </td>
+                </td> -->
 
 
 
@@ -1027,12 +1027,12 @@ if (!empty($customers)) {
                                 <!-- <td width="4%" class="first_td1 action-btn-align">Total</td>-->
 
                                 <td width="6%" class="first_td1 action-btn-align">HSN Code</td>
-                                <?php if($gsttype == 1){ ?>
+                                <!-- <?php if($gsttype == 1){ ?> -->
                                 <td width="5%" class="first_td1 action-btn-align cgst_td">CGST %</td>
-                                <?php } ?>
-                                <?php if($gsttype == 1){ ?>
+                                <!-- <?php } ?> -->
+                                <!-- <?php if($gsttype == 1){ ?> -->
                                 <td width="5%" class="first_td1 action-btn-align sgst_td">SGST %</td>
-                                <?php } ?>
+                                <!-- <?php } ?> -->
 
 
                                 <!-- <td width="5%" class="first_td1 action-btn-align proimg-wid">CGST %</td> -->
@@ -1082,11 +1082,11 @@ if (!empty($customers)) {
                                 <td width="2%" class="action-btn-align">
 
 
-                                <?php if($gsttype == 1){ ?>
+                                <!-- <?php if($gsttype == 1){ ?> -->
                                     <a id='add_group' tabindex="7" class="btn btn-success form-control pad10"><span class="glyphicon glyphicon-plus"></span></a>
 
 
-                                    <?php } ?>
+                                    <!-- <?php } ?> -->
                                 </td>
                                
 
@@ -1480,7 +1480,7 @@ if (!empty($customers)) {
 
                                         </td>
                                      
-                                        <td>
+                                        <!-- <td>
 
 
                                         <?php if($gsttype == 1){ ?>
@@ -1531,7 +1531,7 @@ if (!empty($customers)) {
                                         <?php
                                         }
                                         //   }
-                                        ?>
+                                        ?> -->
 
 
 
@@ -1583,7 +1583,7 @@ if (!empty($customers)) {
 
 
 
-                            <td colspan="4" style="text-align:right;"><b>Sub Total</b></td>
+                            <td colspan="2" style="text-align:right;"><b>Sub Total</b></td>
 
 
 
@@ -1680,9 +1680,9 @@ if (!empty($customers)) {
                                 }
                                 ?>
                                  <?php } ?>
-     <?php if($gsttype == 1){ ?>
+                            <!-- <?php if($gsttype == 1){ ?> -->
                                 <td><input type="text" tabindex="-1" value="<?php echo $val['sgst_price']; ?>" name="quotation[sgst_price]" readonly class="add_sgst sgst_price text_right" style="width:70px;" /></td>
-                                <?php } ?>
+                                <!-- <?php } ?> -->
 
 
 
@@ -1697,7 +1697,7 @@ if (!empty($customers)) {
 
 
 
-                                <td colspan="1" style="text-align:right;font-weight:bold;">Net Total</td>
+                                <td colspan="6" style="text-align:right;font-weight:bold;">Net Total</td>
 
                                 <td><input type="text" tabindex="-1" name="quotation[net_total]" readonly="readonly" class="final_amt text_right" style="width:70px;" value="<?php echo $quotation[0]['net_total']; ?>" /></td>
 

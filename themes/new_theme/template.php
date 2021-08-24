@@ -487,7 +487,7 @@
                                                 <a href="<?php echo $this->config->item('base_url') . 'purchase_order/accessories_purchase' ?>" class="nav-link"><i class="far fa-circle nav-icon"></i> Accessories Purchase</a>
                                         </li> -->
                                         <li class="nav-item <?= ($cur_class == 'purchase_order' && $cur_method == 'purchase_return_list') ? 'active' : '' ?>" >
-                                                <a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>" class="nav-link"><i class="far fa-circle nav-icon"></i> Purchase Return List Purchase</a>
+                                                <a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>" class="nav-link"><i class="far fa-circle nav-icon"></i> Purchase Return List</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -538,6 +538,7 @@
                                     </ul>
                                 </li>
                             <?php endif; ?>
+
                             <?php if ($this->user_auth->is_module_allowed('reports')): ?>
                                 <li class="nav-item has-treeview masters_tab9 reports_tab <?php echo (($cur_class == 'report' ) && $cur_method == 'purchase_report'  || $cur_method == 'customer_based_report' || $cur_method == 'stock_report' || $cur_method == 'stock_list_report' || $cur_method == 'invoice_report' ||  $cur_method == 'profit_list') ? ' menu-open' : '' ?>"><a class="nav-link" href="javascript: void(0)" ><i class="fa fa-fw fa-bar-chart-o"></i> Reports <i class="right fas fa-angle-left"></i></a>
                                     <ul class="nav nav-treeview report-menu">
@@ -575,19 +576,52 @@
 										
                                         </li>   
                                     </ul>
-                                    <li class="nav-item has-treeview masters_tab3 reports_tab"><a class="nav-link" href="javascript: void(0)" ><i class="fa fa-fw fa-rupee"></i> Expenses <i class="right fas fa-angle-left"></i></a>
-                                    <ul class="nav nav-treeview report-menu">
-                                        <li><a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/index' ?>"><i class="far fa-circle nav-icon"></i> New expense</a><li>
-                                    </ul>     
-                                    <ul class="nav nav-treeview report-menu">
-                                        <il><a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/balance_list' ?>"><i class="far fa-circle nav-icon"></i> balance_list</a><li>
-                                    </ul>
-                                    <ul class="nav nav-treeview report-menu">
-                                        <li><a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/expenses_list' ?>"><i class="far fa-circle nav-icon"></i> expenses_list</a><li>
-                                    </ul>   
+                                    <?php endif; ?>
+                                    <?php if ($this->user_auth->is_module_allowed('expenses')): ?>
+                                        <li class="nav-item has-treeview masters_tab5 expenses_tab <?php echo (($cur_class == 'expenses' )) ? ' menu-open' : '' ?>">
+                                    <a href="javascript: void(0)" class="nav-link" >
+                                        <i class="fa fa-fw fa-rupee" aria-hidden="true"></i>
+                                         Expenses <i class="right fas fa-angle-left"></i>
+                                    </a>
+                                    
+                                    <ul class="nav nav-treeview">
+                                        <?php if ($this->user_auth->is_module_allowed('expenses')): ?>
+                                            <li class="<?= ($cur_class == 'expenses' && $cur_method == 'New Expense') ? 'active' : '' ?>">
+                                                <a class="nav-link" href="<?php echo $this->config->item('base_url') .'expenses/' ?>">
+                                                    <i class="far fa-circle nav-icon"></i> New Expense
+                                                </a>
+                                            </li>
+                                            <?php endif; ?>
+                                     <!-- <ul class="nav nav-treeview"> -->
+                                             <?php if ($this->user_auth->is_module_allowed('expenses')): ?>
+                                                <li class="<?= ($cur_class == 'expenses' && $cur_method == 'Balance list') ? 'active' : '' ?>">
+                                                    <a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/balance_list' ?>">
+                                                        <i class="far fa-circle nav-icon"></i> Balance list
+                                                    </a>
+                                                 </li>
+                                                 <?php endif; ?>
+
+                                                 <!-- <ul class="nav nav-treeview"> -->
+                                             <?php if ($this->user_auth->is_module_allowed('expenses')): ?>
+                                                <li class="<?= ($cur_class == 'expenses' && $cur_method == 'Expenses list') ? 'active' : '' ?>">
+                                                    <a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/expenses_list' ?>">
+                                                        <i class="far fa-circle nav-icon"></i> Expenses list
+                                                 </li>
+                                            <?php endif; ?>
+
+                                                    <!-- <li class="nav-item has-treeview masters_tab5 expenses_tab"><a class="nav-link" href="javascript: void(0)" ><i class="fa fa-fw fa-rupee"></i> Expenses <i class="right fas fa-angle-left"></i></a>
+                                                    <ul class="nav nav-treeview report-menu">
+                                                        <li><a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/' ?>"><i class="far fa-circle nav-icon"></i> New expense</a><li>
+                                                    </ul>     
+                                                    <ul class="nav nav-treeview report-menu">
+                                                        <li><a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/balance_list' ?>"><i class="far fa-circle nav-icon"></i> Balance list</a><li>
+                                                    </ul>
+                                                    <ul class="nav nav-treeview report-menu">
+                                                        <li><a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/expenses_list' ?>"><i class="far fa-circle nav-icon"></i> Expenses list</a><li>
+                                                    </ul>    -->
                                 </li>
                             <?php endif; ?>
-                        </ul>
+                       
       </nav>
     </div>
   </aside>

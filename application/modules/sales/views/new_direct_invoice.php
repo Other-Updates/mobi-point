@@ -394,7 +394,7 @@ if (!empty($customers)) {
                     <div class="col-xs-8">
 
                         <input type="text" tabindex="-1" name='quantity[]' style="width:70px;" class="qty quantity"
-                            value="" id="qty" data-stock="0" readonly />
+                            value="" id="qty" data-stock="0"  />
 
                     </div>
 
@@ -1341,7 +1341,7 @@ if (!empty($customers)) {
                                 <div class="col-xs-8">
 
                                     <input type="text" tabindex="12" name='quantity[]' style="width:70px;"
-                                        class="qty required quantity" data-stock="0" readonly />
+                                        class="qty required quantity" data-stock="0" />
 
                                 </div>
 
@@ -1542,7 +1542,7 @@ if (!empty($customers)) {
 
 
 
-                            <td colspan="1" style="text-align:right;font-weight:bold;">Net Total</td>
+                            <td colspan="3" class="net_total_tag"  style="text-align:right;font-weight:bold;">Net Total</td>
 
 
 
@@ -1720,6 +1720,7 @@ if (!empty($customers)) {
 
     if ($('.gst-invoice:checked').val() == 1) {
         $('.total_table_tag').attr('colspan',5);
+        $('.net_total_tag').attr('colspan',1);
         $('#tin').attr('disabled', false);
         $('#add_quotation').find('tr td.sgst_td').show();
         // $('#add_quotation').find('tr td.igst_td').show();
@@ -1740,6 +1741,7 @@ if (!empty($customers)) {
       
     } else {
         $('.total_table_tag').attr('colspan',3);
+        $('.net_total_tag').attr('colspan',3);
         $('#tin').attr('disabled', true);
         $('#add_quotation').find('tr td.cgst_td').hide();
         $('#add_quotation').find('tr td.sgst_td').hide();

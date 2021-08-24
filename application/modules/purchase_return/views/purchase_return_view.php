@@ -224,7 +224,7 @@
 
                                 <!-- <td  width="7%" class="first_td1 action-btn-align proimg-wid">Discount %</td> -->
 
-                                <td  width="5%" class="first_td1 action-btn-align proimg-wid">CGST%</td>
+                                <!-- <td  width="5%" class="first_td1 action-btn-align proimg-wid">CGST%</td>
 
                                 <?php
 
@@ -250,7 +250,7 @@
 
                                 }
 
-                                ?>
+                                ?> -->
 
                                 <!-- <td  width="7%" class="first_td1 action-btn-align proimg-wid">Transport</td> -->
 
@@ -362,14 +362,14 @@
                                             <?php echo $vals['discount'] ?>
 
                                         </td> -->
-
+<!-- 
                                         <td class="action-btn-align">
 
                                             <?php echo $vals['tax'] ?>
 
-                                        </td>
+                                        </td> -->
 
-                                        <?php
+                                        <!-- <?php
 
                                         $gst_type = $po[0]['state_id'];
 
@@ -401,7 +401,7 @@
 
                                         }
 
-                                        ?>
+                                        ?> -->
 
                                         <!-- <td class="action-btn-align">
 
@@ -442,7 +442,7 @@
 
                                 <td class="action-btn-align"><?php echo $ret_qty; ?></td>
 
-                                <td colspan="3" style="text-align:right;"><b>Sub Total</b></td>
+                                <td colspan="1" style="text-align:right;"><b>Sub Total</b></td>
 
                                 <td class="text_right"><?php echo $val['subtotal_qty']; ?></td>
 
@@ -452,7 +452,7 @@
 
                                 <td colspan="3"  class="hide_class" style="width:70px; text-align:right;"></td>
 
-                                <td colspan="7" style="text-align:right;font-weight:bold;"><?php echo $val['tax_label']; ?> </td>
+                                <td colspan="5" style="text-align:right;font-weight:bold;"><?php echo $val['tax_label']; ?> </td>
 
                                 <td class="text_right">
 
@@ -468,7 +468,7 @@
 
                                 <td colspan="3"  class="hide_class" style="width:70px; text-align:right;"></td>
 
-                                <td colspan="7"style="text-align:right;font-weight:bold;">Net Total</td>
+                                <td colspan="5"style="text-align:right;font-weight:bold;">Net Total</td>
 
                                 <td class="text_right"><?php echo  $val['net_total']?></td>
 
