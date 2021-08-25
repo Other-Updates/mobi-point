@@ -638,8 +638,8 @@ if (!empty($customers)) {
                     <input type="text" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" />
 
                 </td>
-
-                <!-- <td class="action-btn-align cgst_td">
+                <?php if($gsttype == 1){ ?>
+                <td class="action-btn-align cgst_td">
 
 
 
@@ -648,8 +648,9 @@ if (!empty($customers)) {
 
 
                 </td>
+                <?php } ?>
 
-
+                <?php if($gsttype == 1){ ?>
 
                 <td class="action-btn-align sgst_td">
 
@@ -660,9 +661,10 @@ if (!empty($customers)) {
 
 
                 </td>
+                <?php } ?>
 
 
-
+<!-- 
                 <td class="action-btn-align igst_td">
 
 
@@ -865,6 +867,7 @@ if (!empty($customers)) {
 
 
                             </td>
+                            <?php $gsttype = $val['bill_category']; ?>
 
 
 
@@ -1027,12 +1030,12 @@ if (!empty($customers)) {
                                 <!-- <td width="4%" class="first_td1 action-btn-align">Total</td>-->
 
                                 <td width="6%" class="first_td1 action-btn-align">HSN Code</td>
-                                <!-- <?php if($gsttype == 1){ ?> -->
+                                <?php if($gsttype == 1){ ?>
                                 <td width="5%" class="first_td1 action-btn-align cgst_td">CGST %</td>
-                                <!-- <?php } ?> -->
-                                <!-- <?php if($gsttype == 1){ ?> -->
+                                <?php } ?>
+                                <?php if($gsttype == 1){ ?>
                                 <td width="5%" class="first_td1 action-btn-align sgst_td">SGST %</td>
-                                <!-- <?php } ?> -->
+                                <?php } ?>
 
 
                                 <!-- <td width="5%" class="first_td1 action-btn-align proimg-wid">CGST %</td> -->
@@ -1082,11 +1085,9 @@ if (!empty($customers)) {
                                 <td width="2%" class="action-btn-align">
 
 
-                                <!-- <?php if($gsttype == 1){ ?> -->
+                             
                                     <a id='add_group' tabindex="7" class="btn btn-success form-control pad10"><span class="glyphicon glyphicon-plus"></span></a>
 
-
-                                    <!-- <?php } ?> -->
                                 </td>
                                
 
@@ -1479,16 +1480,17 @@ if (!empty($customers)) {
                                             <input type="text" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" value="<?php echo $vals['hsn_sac']; ?>" />
 
                                         </td>
-                                     
-                                        <!-- <td>
-
-
                                         <?php if($gsttype == 1){ ?>
+                                        <td>
+
+
+                                      
                                             <input maxlength="8" type="text" tabindex="-1" name='tax[]' readonly="readonly" style="width:70px;" class="pertax" value="<?php echo number_format($vals['tax'], 2); ?>" />
 
 
-                                            <?php } ?>
+
                                         </td>
+                                        <?php } ?>
                                      
 
                                         <?php if($gsttype == 1){ ?>
@@ -1516,7 +1518,7 @@ if (!empty($customers)) {
 
 
 
-                                            <td>
+                                            <!-- <td>
 
 
 
@@ -1524,7 +1526,7 @@ if (!empty($customers)) {
 
 
 
-                                            </td>
+                                            </td> -->
 
 
 
@@ -1583,7 +1585,7 @@ if (!empty($customers)) {
 
 
 
-                            <td colspan="2" style="text-align:right;"><b>Sub Total</b></td>
+                            <td colspan="4" class="sub_tag" style="text-align:right;"><b>Sub Total</b></td>
 
 
 
@@ -1680,9 +1682,9 @@ if (!empty($customers)) {
                                 }
                                 ?>
                                  <?php } ?>
-                            <!-- <?php if($gsttype == 1){ ?> -->
+                            <?php if($gsttype == 1){ ?>
                                 <td><input type="text" tabindex="-1" value="<?php echo $val['sgst_price']; ?>" name="quotation[sgst_price]" readonly class="add_sgst sgst_price text_right" style="width:70px;" /></td>
-                                <!-- <?php } ?> -->
+                                <?php } ?>
 
 
 
@@ -1697,7 +1699,7 @@ if (!empty($customers)) {
 
 
 
-                                <td colspan="6" style="text-align:right;font-weight:bold;">Net Total</td>
+                                <td colspan="1" class="net_tag" style="text-align:right;font-weight:bold;">Net Total</td>
 
                                 <td><input type="text" tabindex="-1" name="quotation[net_total]" readonly="readonly" class="final_amt text_right" style="width:70px;" value="<?php echo $quotation[0]['net_total']; ?>" /></td>
 
@@ -1757,9 +1759,6 @@ if (!empty($customers)) {
 
 
                         <button class="btn btn-info " tabindex="9" id="save"> Update </button>
-
-
-
                         <a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list/' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
 
 
@@ -1811,6 +1810,22 @@ if (!empty($customers)) {
             $('#gstin_err').text('Enter valid GSTIN').css('display', 'inline-block');
         }
     });
+
+    if(<?php echo $gsttype ?> == 1)
+    {
+        $('.net_tag').attr('colspan',1);
+        $('.sub_tag').attr('colspan',4);
+
+        } else {
+
+         $('.net_tag').attr('colspan',6);
+        $('.sub_tag').attr('colspan',2);
+
+        }
+
+
+
+
 
 
     $('#save').on('click', function() {
@@ -2340,44 +2355,25 @@ if (!empty($customers)) {
 
             {
 
-
+                if($gsttype == 1) 
+                {
 
                 $('#add_quotation').find('tr td.sgst_td').show();
+                $('#add_quotation').find('tr td.cgst_td').show();
+                 $('#add_quotation').find('tr td.igst_td').hide();
+                 
+                 } else {
 
 
 
                 $('#add_quotation').find('tr td.igst_td').hide();
-
-
-
-
-
-
-
-            } else {
-
-
-
-                $('#add_quotation').find('tr td.igst_td').show();
-
-
-
                 $('#add_quotation').find('tr td.sgst_td').hide();
-
-
-
-            }
-
-
-
-        } else {
-
-
-
-            $('#add_quotation').find('tr td.igst_td').show();
-
-
-
+                 }
+                
+                
+           }} else {
+            
+             $('#add_quotation').find('tr td.igst_td').show();
             $('#add_quotation').find('tr td.sgst_td').hide();
 
 

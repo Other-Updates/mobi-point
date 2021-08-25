@@ -606,6 +606,7 @@
                                                 <li class="<?= ($cur_class == 'expenses' && $cur_method == 'Expenses list') ? 'active' : '' ?>">
                                                     <a class="nav-link" href="<?php echo $this->config->item('base_url') . 'expenses/expenses_list' ?>">
                                                         <i class="far fa-circle nav-icon"></i> Expenses list
+                                                        </a>
                                                  </li>
                                             <?php endif; ?>
 
