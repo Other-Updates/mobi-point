@@ -242,7 +242,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                             <label>From Date</label>
 
-                            <input type="text" id='from_date'  class="form-control datepicker" name="from_date" placeholder="dd-mm-yyyy" readonly="" style="background-color:white;">
+                            <input type="text" id='from_date' value="<?php echo date('d-m-Y') ?>"  class="form-control datepicker" name="from_date" placeholder="dd-mm-yyyy" style="background-color:white;">
 
                         </div>
 
@@ -256,7 +256,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                             <label>To Date</label>
 
-                            <input type="text"  id='to_date' class="form-control datepicker" name="to_date" placeholder="dd-mm-yyyy" readonly="" style="background-color:white;">
+                            <input type="text"  id='to_date'value="<?php echo date('d-m-Y', strtotime('+1 year')) ?>" class="form-control datepicker" name="to_date" placeholder="dd-mm-yyyy" style="background-color:white;">
 
                             <span class="date_err" style="color:#F00;font-size: 12px "></span>
 
@@ -266,9 +266,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                             <label class="control-label col-md-12 mnone">&nbsp;</label>
 
-                            <a id='search' class="btn btn-success  mtop4" title="Search"><span class=" icon-magnifier"></span></a>&nbsp;
+                            <a id='search' class="btn btn-success  mtop4" title="Search">SUBMIT<span class=" icon-magnifier"></span></a>&nbsp;
 
-                            <a class="btn btn-danger mtop4" id='clear' title="Clear"><span class="fa fa-close"></span></a>
+                            <a class="btn btn-danger mtop4" id='clear' title="Clear">CLEAR<span></span></a>
 
                         </div>
 
@@ -450,7 +450,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
     });
 
-
+    $('#search').click(function () { //button filter event click
 
     var table;
 
@@ -579,14 +579,14 @@ $data['company_details'] = $this->admin_model->get_company_details();
         ]
 
     });
+} else {
+
+swal("Please select Company");
+
+}
 
     new $.fn.dataTable.FixedHeader(table);
-
-    $('#search').click(function () { //button filter event click
-
-
-
-        table.ajax.reload();  //just reload table
+     table.ajax.reload();  //just reload table
 
 
 
@@ -600,9 +600,45 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
         table.ajax.reload();  //just reload table
 
-//        window.location.reload();
+    //        window.location.reload();
 
     });
+
+    $('#firm').change(function () {
+
+    var firm_id = $(this).val();
+
+$.ajax({
+
+    url: BASE_URL + "expenses/get_company_amount",
+
+    type: "post",
+
+    data: {firm_id: firm_id},
+
+    dataType: 'json',
+
+    success: function (result) {
+
+        if (result[0].opening_balance != null && result[0].opening_balance > 0) {
+
+            opening_amt = (result[0].opening_balance);
+
+            $("#firm_amt").val(opening_amt);
+
+        } else {
+
+            $("#firm_amt").val('0');
+
+        }
+
+    }
+
+
+
+});
+
+});
 
 
 

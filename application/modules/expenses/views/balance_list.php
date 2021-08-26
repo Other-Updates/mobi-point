@@ -226,9 +226,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                             <label class="control-label col-md-12 mnone">&nbsp;</label>
 
-                            <a id='search' class="btn btn-success  mtop4" title="Search"><span class=" icon-magnifier"></span></a>&nbsp;
+                            <a id='search' class="btn btn-success  mtop4" title="Search">SUBMIT<span class=" icon-magnifier"></span></a>&nbsp;
 
-                            <a class="btn btn-danger mtop4" id='clear' title="Clear"><span class="fa fa-close"></span></a>
+                            <a class="btn btn-danger mtop4" id='clear' title="Clear">CLEAR<span></span></a>
 
                         </div>
 
@@ -521,10 +521,10 @@ $data['company_details'] = $this->admin_model->get_company_details();
             swal("Please select Company");
 
         }
-
+        new $.fn.dataTable.FixedHeader(table);
         table.ajax.reload();  //just reload table
 
-        new $.fn.dataTable.FixedHeader(table);
+       
 
     });
 
