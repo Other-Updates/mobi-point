@@ -25,7 +25,7 @@
                                             if (isset($firms) && !empty($firms)) {
                                                 foreach ($firms as $firm) {
                                                     ?>
-                                                    <option value="<?php echo $firm['firm_id']; ?>"> <?php echo $firm['prefix']; ?> </option>
+                                                    <option value="<?php echo $firm['firm_id']; ?>"> <?php echo $firm['firm_name']; ?> </option>
                                                     <?php
                                                 }
                                             }

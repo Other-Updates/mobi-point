@@ -3466,17 +3466,20 @@ class Sales extends MX_Controller
                     $insert['quantity'] = $input['quantity'][$key];
 
                     $insert['per_cost'] = $input['per_cost'][$key];
-                    $insert['sp_with_gst'] = $input['sp_with_gst'][$key];
-                    $insert['sp_without_gst'] = $input['sp_without_gst'][$key];
-                    $insert['tax'] = $input['tax'][$key];
 
-                    $insert['gst'] = $input['gst'][$key];
+                    $insert['sp_with_gst'] = ($input['sp_with_gst'][$key] > 0 ) ? $input['sp_with_gst'][$key] : 0.00;
 
-                    $insert['igst'] = $input['igst'][$key];
+                    $insert['sp_without_gst'] = ($input['sp_without_gst'][$key] > 0 ) ? $input['sp_without_gst'][$key] : 0.00;
 
-                    $insert['discount'] = $input['discount'][$key];
+                    $insert['tax'] = ($input['tax'][$key] > 0 ) ? $input['tax'][$key] : 0.00;
+                    
+                    $insert['gst'] = ($input['gst'][$key] > 0 ) ? $input['gst'][$key] : 0.00;
 
-                    $insert['sub_total'] = $input['sub_total'][$key];
+                    $insert['igst'] = ($input['igst'][$key] > 0 ) ? $input['igst'][$key] : 0.00;
+
+                    $insert['discount'] = ($input['discount'][$key] > 0 ) ? $input['discount'][$key] : 0.00;
+
+                    $insert['sub_total'] = ($input['sub_total'][$key] > 0 ) ? $input['sub_total'][$key] : 0.00;
 
                     if ($input['quotation']['delivery_status'] == 'delivered') {
 

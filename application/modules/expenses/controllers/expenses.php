@@ -45,6 +45,7 @@ class Expenses extends MX_Controller {
         //$data['firms'] = $firms = $this->expense_model->get_all_firms();
         $data["firms"] = $firms = $this->manage_firms_model->get_all_firms($client_id);
         $data['sub_category_list']=$this->subcategory_model->get_all_subcategory_list($client_id);
+        // print_r($data); exit;
         $this->template->write_view('content', 'expenses/index', $data);
         $this->template->render();
     }
@@ -57,6 +58,9 @@ class Expenses extends MX_Controller {
         $data["category_list"] = $this->subcategory_model->get_all_category_list($client_id);
         $data['expense_details'] = $this->expense_model->get_all_expenses();
         $data['sub_category_list']=$this->subcategory_model->get_all_subcategory_list($client_id);
+        // echo'<pre>';  
+        // print_r($data); 
+        //    exit;
         $this->template->write_view('content', 'expenses/expenses_list', $data);
         $this->template->render();
     }

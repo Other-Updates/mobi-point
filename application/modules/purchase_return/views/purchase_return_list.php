@@ -62,7 +62,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
             <td width="15%" style="vertical-align:middle;">
 
-                <div class="print_header_logo" ><img src="<?= $theme_path; ?>/images/logo.png" /></div>
+                <div class="print_header_logo" ><img src="<?= $theme_path; ?>/images/logo-login2.png" /></div>
 
             </td>
 
@@ -70,7 +70,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                 <div class="print_header_tit" >
 
-                    <h3>The Total</h3>
+                    <h3><?= $data['company_details'][0]['company_name'] ?></h3>
 
                     <p>
 

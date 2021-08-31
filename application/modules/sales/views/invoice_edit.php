@@ -871,11 +871,11 @@ if (!empty($customers)) {
 
 
 
-                            <td width="25%" class="first_td1"><span class="tdhead">Reference NO :</span> </td>
+                            <td width="10%" class="first_td1"><span class="tdhead">Reference NO :</span> <?php echo $val['q_no']; ?></td>
 
 
 
-                            <td width="25%"><?php echo $val['q_no']; ?></td>
+                            <!-- <td width="25%"></td> -->
 
 
 
@@ -1533,7 +1533,7 @@ if (!empty($customers)) {
                                         <?php
                                         }
                                         //   }
-                                        ?> -->
+                                        ?>
 
 
 
@@ -1909,41 +1909,37 @@ if (!empty($customers)) {
             if (this_val == "") {
 
 
-                var is_accessories = $(this).closest('td').find('#ime_code_id').length;
+                // var is_accessories = $(this).closest('td').find('#ime_code_id').length;
                 if (this_id == "ime_code_vals") {
-                    if(is_accessories > 0) {
+                    // if(is_accessories > 0) {
                         this_class = $(this).closest('tr').attr('class');
 
-                        if (this_class != undefined) {
-                            $(this).closest('tr td').find('.error_msg').text('Please add IMEI code').css('display', 'inline-block');
-                            $(this).closest('div .form-group').find('.error_msg').text('Please add IMEI code').css('display', 'inline-block');
-                            m++;
-                        } else {
-                            $(this).closest('tr td').find('.error_msg').text('');
-                            $(this).closest('div .form-group').find('.error_msg').text('');
-                        }
-                    }
-
-                } else {
-
-                    $(this).closest('tr td').find('.error_msg').text('This field is required').css('display', 'inline-block');
-
-                    $(this).closest('div .form-group').find('.error_msg').text('This field is required').css('display', 'inline-block');
-
+                        // if (this_class != undefined) {
+                        //     $(this).closest('tr td').find('.error_msg').text('Please add IMEI code').css('display', 'inline-block');
+                        //     $(this).closest('div .form-group').find('.error_msg').text('Please add IMEI code').css('display', 'inline-block');
+                        //     m++;
+                            if (cat_name == "Fresh Mobiles" || cat_name == "Used Mobiles" || cat_name ==
+                    "Smart Phone-Brand New" || cat_name == "Smart Phone-REFURBISHED") {
+                    $(this).closest('td.ime_code_error').find('.error_msg').text('Please add imei code')
+                        .css('display', 'inline-block');
                     m++;
-                }
-
-
-
-            } else {
-
-                $(this).closest('tr td').find('.error_msg').text('');
-
-                $(this).closest('div .form-group').find('.error_msg').text('');
-
-            }
-
-        });
+                        } else {
+                            // $(this).closest('tr td').find('.error_msg').text('');
+                            // $(this).closest('div .form-group').find('.error_msg').text('');
+                            $(this).closest('td.ime_code_error').find('.error_msg').text('');
+                        }
+                    // }
+                     } else {
+                         $(this).closest('tr td').find('.error_msg').text('This field is required').css('display', 'inline-block');
+                         $(this).closest('div .form-group').find('.error_msg').text('This field is required').css('display', 'inline-block');
+                         m++;
+                         }
+                         } else {
+                             $(this).closest('tr td').find('.error_msg').text('');
+                             $(this).closest('div .form-group').find('.error_msg').text('');
+                             }
+                             
+                             });
 
 
 
@@ -3051,6 +3047,7 @@ if (!empty($customers)) {
                         model_number_id: model_number_id,
                         c_id: cust_id,
                         firm_id: $('#firm').val()
+                        // cat_it: cat_it
                     },
                     url: "<?php echo $this->config->item('base_url'); ?>" + "quotation/get_product/" + cat_id,
                     success: function(data) {
@@ -3092,12 +3089,12 @@ if (!empty($customers)) {
 
                                 option_text += '</select></div>';
 
-                                this_val.closest('tr').find('td .ime_code_select').empty();
+                                // this_val.closest('tr').find('td .ime_code_select').empty();
 
-                                this_val.closest('tr').find('td .ime_code_select').append(option_text);
+                                // this_val.closest('tr').find('td .ime_code_select').append(option_text);
 
 
-                                this_val.closest('tr').find('td .ime_code_id').fSelect();
+                                // this_val.closest('tr').find('td .ime_code_id').fSelect();
 
 
 
@@ -3112,6 +3109,7 @@ if (!empty($customers)) {
                                 // $('#sales_man').html('');
 
                                 this_val.closest('tr').find('.ime_code_id').html(option_text);
+                                this_val.closest('tr').find('.ime_code_val').removeClass('required');
 
                             }
 
@@ -3150,14 +3148,45 @@ if (!empty($customers)) {
 
 
                             this_val.closest('tr').find('.cat_id').val(result[0].category_id);
+
                             var categoryname = this_val.closest('tr').find('.cat_id').find('option:selected').text();
-                            if(categoryname != 'Fresh Mobiles' && categoryname != 'Used Mobiles') {
-                                this_val.closest('tr').find('.qty').removeAttr("readonly");
+
+                            this_val.closest('tr').find('.catname').val(categoryname);
+
+                            // if(categoryname != 'Fresh Mobiles' && categoryname != 'Used Mobiles') {
+                            //     this_val.closest('tr').find('.qty').removeAttr("readonly");
+                            //     this_val.closest('tr').find('td .ime_code_select').empty();
+                            //     this_val.closest('tr').find('td .ime_code_val ').val('');
+                            // } else {
+                            //     this_val.closest('tr').find('.qty').attr("readonly", "readonly");
+                            // }
+                            if(categoryname == ''){
+                            this_val.closest('tr').find('td .ime_code_select').empty();
+                            this_val.closest('tr').find('.ime_code_val').removeClass('required'); 
+                        }
+                        else if (categoryname == 'Fresh Mobiles' || categoryname =='Used Mobiles' || categoryname ==  "Smart Phone-Brand New" ||  categoryname ==  "Smart Phone-REFURBISHED" ) {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
-                                this_val.closest('tr').find('td .ime_code_val ').val('');
-                            } else {
-                                this_val.closest('tr').find('.qty').attr("readonly", "readonly");
-                            }
+                                this_val.closest('tr').find('td .ime_code_select').append(option_text);
+                                this_val.closest('tr').find('td .multi_select').fSelect();
+                                this_val.closest('tr').find('.ime_code_val').removeClass('required'); 
+                        // } else if (categoryname != 'Fresh Mobiles' || categoryname !='Used Mobiles' 
+                        // || categoryname !=  "Smart Phone-Brand New" ||  categoryname !=  "Smart Phone-REFURBISHED" 
+                        // || categoryname != 'Online-Payment' || categoryname !='Recharge' ){
+
+                        //     this_val.closest('tr').find('td .ime_code_select').empty();
+
+
+                        }
+                        else if (categoryname == 'Online-Payment' || categoryname =='Recharge'){
+                            this_val.closest('tr').find('td .ime_code_select').empty();
+                            this_val.closest('tr').find('td .ime_code_select').append("<input type='text' />");
+                            this_val.closest('tr').find('.ime_code_val').removeClass('required'); 
+                        } else {
+                            this_val.closest('tr').find('td .ime_code_select').empty();
+                            this_val.closest('tr').find('.ime_code_val').removeClass('required');
+                        }
+
+
 
 
 

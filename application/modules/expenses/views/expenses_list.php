@@ -1,26 +1,26 @@
 <?php $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template'); ?>
 
-<link rel="stylesheet" href="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" />
+<!-- <link rel="stylesheet" href="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" /> -->
 
 <link href="<?php echo $theme_path ?>/css/select2.css" rel="stylesheet" />
 
 <link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/fSelect.css"/>
 
-<script src="<?php echo $theme_path; ?>/node_modules/datatables.net/js/jquery.dataTables.js"></script>
+<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net/js/jquery.dataTables.js"></script> -->
 
-<script src="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script> -->
 
-<link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/fixedHeader.dataTables.min.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/fixedHeader.dataTables.min.css"/> -->
 
 <script src="<?php echo $theme_path ?>/js/select2.min.js"></script>
 
-<script type='text/javascript' src='<?php echo $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js'></script>
+<!-- <script type='text/javascript' src='<?php echo $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js'></script> -->
 
 <script type='text/javascript' src='<?php echo $theme_path; ?>/js/jquery.table2excel.min.js'></script>
 
-<script src="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- <script src="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script> -->
 
-<script src="<?php echo $theme_path ?>/js/tabs.js"></script>
+<!-- <script src="<?php echo $theme_path ?>/js/tabs.js"></script> -->
 
 <script type='text/javascript' src='<?= $theme_path; ?>/js/fSelect.js'></script>
 
@@ -72,7 +72,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
             <td width="15%" style="vertical-align:middle;">
 
-                <div class="print_header_logo" ><img src="<?= $theme_path; ?>/images/logo.png" /></div>
+                <div class="print_header_logo" ><img src="<?= $theme_path; ?>/images/logo-login2.png" /></div>
 
             </td>
 
@@ -80,7 +80,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                 <div class="print_header_tit" >
 
-                    <h3>Malliga Garments</h3>
+                    <h3><?= $data['company_details'][0]['company_name'] ?></h3>
 
                     <p>
 
@@ -172,7 +172,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                                         ?>
 
-                                        <option value='<?= $val['firm_id'] ?>'><?= $val['prefix'] ?></option>
+                                        <option value='<?= $val['firm_id'] ?>'><?php echo $val['firm_name'] ?></option>
 
                                         <?php
 
@@ -266,7 +266,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                             <label class="control-label col-md-12 mnone">&nbsp;</label>
 
-                            <a id='search' class="btn btn-success  mtop4" title="Search">SUBMIT<span class=" icon-magnifier"></span></a>&nbsp;
+                            <a id='search'  class="btn btn-success  mtop4" title="Search">SUBMIT<span class=" icon-magnifier"></span></a>&nbsp;
 
                             <a class="btn btn-danger mtop4" id='clear' title="Clear">CLEAR<span></span></a>
 
@@ -292,9 +292,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                     <div class="tabpad">
 
-                        <table id="basicTable_call_back" class="table table-striped responsive no-footer dtr-inline expense_right">
+                        <table id="basicTable_call_back"  class="table table-striped responsive no-footer dtr-inline expense_right">
 
-                            <thead>
+                            <thead style="display:none">
 
                                 <tr>
 
@@ -342,7 +342,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                                     <td></td>
 
-                                    <td class="total-bg" style="text-align: right !important;"></td>
+                                    <td ></td>
 
                                     <td ></td>
 
@@ -396,13 +396,20 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
 <script>
 
-    $('.datepicker').datepicker({
+    // $('.datepicker').datepicker({
 
-        format: 'dd-mm-yyyy',
+    //     format: 'dd-mm-yyyy',
 
-    });
+    // });
 
-    $('#firm').select2();
+    // if($(#search).click(function)){
+    //     $('#basicTable_call_back').show();
+    // } else {
+    //     $('#basicTable_call_back').hide();
+    // }
+    
+
+   
 
     $('.print_btn').click(function () {
 
@@ -450,9 +457,19 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
     });
 
-    $('#search').click(function () { //button filter event click
+ $('#search').click(function () { //button filter event click
+        // console.log(1); 
+
 
     var table;
+    var firm_id = $('#firm').val();
+
+    if (firm_id != '') 
+    {
+
+    $("#footer_id").show();
+
+    $(".excel_show").show();
 
     table = $('#basicTable_call_back').DataTable({
 
@@ -480,9 +497,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                 data.firm_id = $('#firm').val();
 
-                data.cat_id = $('#ex_category').val();
+                // data.cat_id = $('#ex_category').val();
 
-                data.sub_cat_id = $('#ex_subcat').val();
+                // data.sub_cat_id = $('#ex_subcat').val();
 
                 data.from_date = $('#from_date').val();
 
@@ -584,13 +601,15 @@ $data['company_details'] = $this->admin_model->get_company_details();
 swal("Please select Company");
 
 }
+ 
 
     new $.fn.dataTable.FixedHeader(table);
      table.ajax.reload();  //just reload table
+});
 
 
 
-    });
+
 
     $('#clear').click(function () { //button reset event click
 
@@ -608,7 +627,7 @@ swal("Please select Company");
 
     var firm_id = $(this).val();
 
-$.ajax({
+    $.ajax({
 
     url: BASE_URL + "expenses/get_company_amount",
 
@@ -751,4 +770,5 @@ $.ajax({
     });
 
 </script>
+<!-- <script src="<?= $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js"></script> -->
 

@@ -8,27 +8,27 @@
 
 <link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/js/auto_com/jquery.autocomplete.css" />
 
-<link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/fixedHeader.dataTables.min.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/fixedHeader.dataTables.min.css"/> -->
 
-<script src="<?php echo $theme_path; ?>/node_modules/datatables.net/js/jquery.dataTables.js"></script>
+<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net/js/jquery.dataTables.js"></script> -->
 
-<script src="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script> -->
 
-<link rel="stylesheet" href="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" />
+<!-- <link rel="stylesheet" href="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" /> -->
 
-<script src="<?php echo $theme_path; ?>/js/data-table.js"></script>
+<!-- <script src="<?php echo $theme_path; ?>/js/data-table.js"></script> -->
 
-<link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.css">
+<!-- <link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.css"> -->
 
-<script src="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.js"></script>
+<!-- <script src="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.js"></script> -->
 
-<script src="<?php echo $theme_path ?>/js/tabs.js"></script>
+<!-- <script src="<?php echo $theme_path ?>/js/tabs.js"></script> -->
 
-<script type='text/javascript' src='<?php echo $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js'></script>
+<!-- <script type='text/javascript' src='<?php echo $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js'></script> -->
 
-<link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" />
+<!-- <link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" /> -->
 
-<script src="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- <script src="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script> -->
 
 <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js/sweetalert.css">
 
@@ -80,7 +80,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
             <td width="15%" style="vertical-align:middle;">
 
-                <div class="print_header_logo" ><img src="<?= $theme_path; ?>/images/logo.png" /></div>
+                <div class="print_header_logo" ><img src="<?= $theme_path; ?>/images/logo-login2.png" /></div>
 
             </td>
 
@@ -88,7 +88,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                 <div class="print_header_tit" >
 
-                    <h3>Malliga Garments</h3>
+                    <h3><?= $data['company_details'][0]['company_name'] ?></h3>
 
                     <p>
 
@@ -182,7 +182,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                                         ?>
 
-                                        <option value='<?= $val['firm_id'] ?>'><?= $val['prefix'] ?></option>
+                                        <option value='<?= $val['firm_id'] ?>'><?= $val['firm_name'] ?></option>
 
                                         <?php
 
@@ -258,9 +258,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                     <div class="tabpad">
 
-                        <table id="basicTable_call_back" class="table table-striped responsive no-footer dtr-inline">
+                        <table id="basicTable_call_back"   class="table table-striped responsive no-footer dtr-inline">
 
-                            <thead>
+                            <thead style="display:none" >
 
                                 <tr>
 
@@ -288,11 +288,11 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                             <tbody id="result_data">
 
-                                <tr>
+                                <!-- <tr>
 
-                                    <td colspan="8" class="action-btn-align">Please Select Company</td>
+                                    <td colspan="8" class="action-btn-align">No Data Found</td>
 
-                                </tr>
+                                </tr> -->
 
                             </tbody>
 
@@ -690,4 +690,4 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
 </script>
 
-<script src="<?= $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js"></script>
+<!-- <script src="<?= $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js"></script> -->

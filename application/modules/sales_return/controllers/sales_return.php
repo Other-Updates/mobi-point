@@ -182,11 +182,11 @@ class Sales_return extends MX_Controller {
 
         $datas["return_details"] = $return_details = $this->sales_return_model->get_all_sr_by_id($id);
 
-//        echo "<pre>";
+    //    echo "<pre>";
 
-//        print_r($datas);
+    //    print_r($datas);
 
-//        exit;
+    //    exit;
 
 
 
@@ -950,6 +950,7 @@ class Sales_return extends MX_Controller {
             $quotation = $this->sales_return_model->get_all_invoice_by_id($val['id']);
 
             $quotation_details = $this->sales_return_model->get_all_sr_details_by_id($val['id']);
+            
 
             $cgst = 0;
 

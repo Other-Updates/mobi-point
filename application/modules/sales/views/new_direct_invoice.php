@@ -1476,7 +1476,7 @@ if (!empty($customers)) {
                                     readonly="readonly" class="total_qty" style="width:70%;" id="total" /></td>
                                     
 
-                            <td colspan="3" style="text-align:right;"><b>Sub Total</b></td>
+                            <td colspan="3" class="sub_tag" style="text-align:right;"><b>Sub Total</b></td>
 
                             <td class="action-btn-align"><input type="text" name="quotation[subtotal_qty]" tabindex="21"
                                     readonly="readonly" class="final_sub_total text_right" style="width:70px;" /></td>
@@ -1622,9 +1622,8 @@ if (!empty($customers)) {
 </div>
 <script>
 
-
-    $('.gst-invoice').on('change',function(){
-        var gg = $(this).val();
+ function calculate(){
+    var gg = $('.gst-invoice').val();
         $('.costing_price').each(function(){
             if(gg == 1){
                 $(this).val($(this).parent().find('.gstcost').html());
@@ -1633,17 +1632,16 @@ if (!empty($customers)) {
             }
         })
    
-        var gg = $(this).val();
+        var gg = $('.gst-invoice').val();
         $('.selling_price').each(function(){
             if(gg == 1){
                 $(this).val($(this).parent().find('.gst').html());
             }else{
                 $(this).val($(this).parent().find('.nogst').html());
             }
-        }) 
-        
-       
+        });
         $('.subtotal').each(function(){
+            
 
             var percost = $(this).closest('tr').find('.percost').val();
             var qty = $(this).closest('tr').find('.qty').val();
@@ -1683,6 +1681,7 @@ if (!empty($customers)) {
 
 
             });
+    
 
 
 
@@ -1719,7 +1718,8 @@ if (!empty($customers)) {
         
 
     if ($('.gst-invoice:checked').val() == 1) {
-        $('.total_table_tag').attr('colspan',5);
+        $('.total_table_tag').attr('colspan',3);
+        $('.sub_tag').attr('colspan',5);
         $('.net_total_tag').attr('colspan',1);
         $('#tin').attr('disabled', false);
         $('#add_quotation').find('tr td.sgst_td').show();
@@ -1742,6 +1742,7 @@ if (!empty($customers)) {
     } else {
         $('.total_table_tag').attr('colspan',3);
         $('.net_total_tag').attr('colspan',3);
+        $('.sub_tag').attr('colspan',3);
         $('#tin').attr('disabled', true);
         $('#add_quotation').find('tr td.cgst_td').hide();
         $('#add_quotation').find('tr td.sgst_td').hide();
@@ -1759,7 +1760,45 @@ if (!empty($customers)) {
         //                 }
      
     }
+ }
+
+    $('.gst-invoice').on('change',function(){
+        calculate();
+        
 });
+
+    $('body').on('keyup','.costing_price',function(){
+        $('.profit').each(function(){
+            var percost = $(this).closest('tr').find('.percost').val();
+            var qty = $(this).closest('tr').find('.qty').val();
+            var costing_price = $(this).closest('tr').find('.costing_price').val();
+
+            $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
+        });
+    });
+    $('body').on('keyup','.selling_price',function(){
+        $('.profit').each(function(){
+            var percost = $(this).closest('tr').find('.percost').val();
+            var qty = $(this).closest('tr').find('.qty').val();
+            var costing_price = $(this).closest('tr').find('.costing_price').val();
+
+            $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
+        });
+        
+    });
+$('.qty').on('keyup',function(){
+    $('.profit').each(function(){
+                    var percost = $(this).closest('tr').find('.percost').val();
+                    var qty = $(this).closest('tr').find('.qty').val();
+                    var costing_price = $(this).closest('tr').find('.costing_price').val();
+
+                    $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
+                      });
+
+      
+        
+});
+
 </script>
 
 <link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/toastr.min.css" />
@@ -2279,7 +2318,7 @@ $('.save').on('click', function() {
         this_class = $(this).attr("class");
 
         cat_name = $(this).closest('tr').find('.catname').val();
-        console.log(cat_name);
+        // console.log(cat_name);
 
 
         if (this_val == "") {
@@ -2316,27 +2355,12 @@ $('.save').on('click', function() {
 
                 m++;
 
-            }
-
-
-
-
-
-
-
-        } else {
-
-
-
-            $(this).closest('tr td').find('.error_msg').text('');
-
-
-
-            $(this).closest('div .form-group').find('.error_msg').text('');
-
-
-
-}
+            } 
+            } else {
+                $(this).closest('tr td').find('.error_msg').text('');
+                $(this).closest('div .form-group').find('.error_msg').text('');
+                
+                }
 
 
 

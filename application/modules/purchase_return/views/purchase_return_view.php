@@ -60,6 +60,14 @@
 
 </style>
 
+<?php
+
+$this->load->model('admin/admin_model');
+
+$data['company_details'] = $this->admin_model->get_company_details();
+
+?>
+
 <div class="print_header">
 
     <table width="100%">
@@ -68,7 +76,7 @@
 
             <td width="15%" style="vertical-align:middle;">
 
-                <div class="print_header_logo" ><img src="<?= $theme_path; ?>/images/logo.png" /></div>
+                <div class="print_header_logo" ><img src="<?= $theme_path; ?>/images/logo-login2.png" /></div>
 
             </td>
 
@@ -78,20 +86,33 @@
 
                 <div class="print_header_tit" >
 
-                    <h3> <?= $company_details[0]['firm_name'] ?></h3>
+                    <h3><?= $data['company_details'][0]['company_name'] ?></h3>
 
-                    <p></p>
+                    <p>
 
-                    <p class="pf">  <?= $company_details[0]['address'] ?>,
+                            <?= $data['company_details'][0]['address1'] ?>,
 
-                    </p>
+                            <?= $data['company_details'][0]['address2'] ?>,
 
-                    <p></p>
+                            </p>
 
-                    <p class="pf"> Pin Code : <?= $company_details[0]['pincode'] ?>,</p>
+                            <p></p>
 
-                    <p></p>
+                            <p><?= $data['company_details'][0]['city'] ?>-
 
+                            <?= $data['company_details'][0]['pin'] ?>,
+
+                            <?= $data['company_details'][0]['state'] ?></p>
+
+                            <p></p>
+
+                            <p>Ph:
+
+                            <?= $data['company_details'][0]['phone_no'] ?>, Email:
+
+                            <?= $data['company_details'][0]['email'] ?>
+
+                            </p>
                 </div>
 
             </td>
@@ -500,7 +521,7 @@
 
                         <a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>"class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
 
-                        <button class="btn btn-defaultprint6 print_btn"><span class="glyphicon glyphicon-print"></span> Print</button>
+                        <button type="button" class="btn btn-defaultprint6 print_btn"><span class="glyphicon glyphicon-print"></span> Print</button>
 
 
 
@@ -521,6 +542,13 @@
 </div><!-- mainpanel -->
 
 <script>
+     $(document).on('click', '.alerts', function () {
+
+        sweetAlert("Oops...", "This Access is blocked!", "error");
+
+        return false;
+
+    });
 
     $('.print_btn').click(function () {
 

@@ -470,6 +470,8 @@ class Sales_return_model extends CI_Model {
 
         foreach ($query as $val) {
 
+            $query[$i]['return'] = array();
+
             $this->db->select('total_qty,subtotal_qty,id,net_total');
 
             $this->db->where('invoice_id', $val['id']);
@@ -481,7 +483,10 @@ class Sales_return_model extends CI_Model {
 
             $this->db->limit(1);
 
-            $query[$i]['return'] = $this->db->get('erp_sales_return')->result_array();
+            $return1 = $this->db->get('erp_sales_return')->result_array();
+
+            array_push($query[$i]['return'],$return1[0]);
+
 
             $this->db->select('total_qty,subtotal_qty,id,net_total');
 
@@ -493,12 +498,15 @@ class Sales_return_model extends CI_Model {
 
             $this->db->limit(1);
 
-            $value = $this->db->get('erp_sales_return')->result_array();
+            $return2 = $this->db->get('erp_sales_return')->result_array();
 
-            array_push($query[$i]['return'], $value[0]);
+            array_push($query[$i]['return'],$return2[0]);
+
+            $query[$i]['return'] = (array_values($query[$i]['return']));
+
+
 
             $i++;
-
         }
 
 //        echo '<pre>';
