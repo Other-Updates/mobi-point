@@ -1769,6 +1769,7 @@ class Sales extends MX_Controller
             unset($input['quotation']['sales_man']);
 
             unset($input['quotation']['bill_type']);
+            
 
                 
 
@@ -1786,6 +1787,8 @@ class Sales extends MX_Controller
 
             $insert_id = $this->gen_model->insert_quotation($input['quotation']);
             unset($input['quotation']['bill_category']);
+            
+            unset($input['quotation']['profit_total']);
             $input = $this->input->post();
 
             $input['quotation']['q_id'] = $insert_id;
@@ -1911,6 +1914,7 @@ class Sales extends MX_Controller
             unset($input['quotation']['bill_type']);
 
             unset($input['quotation']['bill_category']);
+            unset($input['quotation']['profit_total']);
 
             $input['quotation']['invoice_id'] = $insert_id1;
 
@@ -4679,6 +4683,10 @@ class Sales extends MX_Controller
 
 
         $list = $this->project_cost_model->get_datatables();
+        // echo"<pre>";
+        // print_r($list);
+        
+        // exit;
 
 
         $data = array();
@@ -4698,6 +4706,9 @@ class Sales extends MX_Controller
             $row[] = $ass['shop_name'];
 
             $row[] = $ass['store_name'];
+
+          
+            
 
             //  $row[] = number_format($ass['net_total'], 2);
 
@@ -4750,6 +4761,7 @@ class Sales extends MX_Controller
                 $row[] = round($ass['delivery_qty']);
 
                 $row[] = number_format($ass['inv_amount'], 2);
+                // $row[] = $ass['profit_total'];
 
                 $row[] = '';
 
@@ -4774,6 +4786,7 @@ class Sales extends MX_Controller
                     $row[] = round($ass['delivery_qty']);
 
                     $row[] = number_format($ass['inv_amount'], 2);
+                    $row[] = $ass['invoice'][0]['profit_total'];
 
                     $row[] = ($ass['created_date'] != '') ? date('d-M-Y', strtotime($ass['created_date'])) : '-';
 

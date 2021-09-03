@@ -472,23 +472,8 @@ class Sales_return_model extends CI_Model {
 
             $query[$i]['return'] = array();
 
-            $this->db->select('total_qty,subtotal_qty,id,net_total');
 
-            $this->db->where('invoice_id', $val['id']);
-
-            $this->db->where("net_total >",0);
-
-            $this->db->order_by("id", "desc");
-            
-
-            $this->db->limit(1);
-
-            $return1 = $this->db->get('erp_sales_return')->result_array();
-
-            array_push($query[$i]['return'],$return1[0]);
-
-
-            $this->db->select('total_qty,subtotal_qty,id,net_total');
+            $this->db->select('id,total_qty,subtotal_qty,id,net_total');
 
             $this->db->where('invoice_id', $val['id']);
 
@@ -498,9 +483,27 @@ class Sales_return_model extends CI_Model {
 
             $this->db->limit(1);
 
-            $return2 = $this->db->get('erp_sales_return')->result_array();
+            $return1 = $this->db->get('erp_sales_return')->row_array();
 
-            array_push($query[$i]['return'],$return2[0]);
+            array_push($query[$i]['return'],$return1);
+
+            if(!empty($return1)){
+
+                $this->db->select('SUM(return_quantity) as total_qty,SUM(( tax / 100 ) * (per_cost * return_quantity) ) as cgst,SUM(( gst / 100 ) * (per_cost * return_quantity) ) as sgst, SUM(per_cost) as net_total');
+
+                $this->db->where('in_id', $val['id']);
+
+                $this->db->where("return_quantity >",0);
+
+                $this->db->order_by("id", "desc");
+
+                $this->db->limit(1);
+
+                $return2 = $this->db->get('erp_sales_return_details')->row_array();
+
+                array_push($query[$i]['return'],$return2);
+
+            }
 
             $query[$i]['return'] = (array_values($query[$i]['return']));
 

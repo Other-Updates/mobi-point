@@ -1649,7 +1649,8 @@ class Project_cost_model extends CI_Model {
 
     public function get_all_sales_id() {
 
-        $this->db->select('erp_project_cost.id,erp_project_cost.job_id ,erp_project_cost.firm_id,erp_project_cost.net_total,erp_project_cost.customer,customer.name');
+        $this->db->select('erp_project_cost.id,erp_project_cost.job_id ,erp_project_cost.firm_id,
+        erp_project_cost.net_total,erp_project_cost.customer,customer.name');
 
         $this->db->where('erp_project_cost.estatus =', 2);
 

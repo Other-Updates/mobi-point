@@ -1006,7 +1006,7 @@ class Sales_return extends MX_Controller {
 
 
 
-            if ($val['return'][0]['id'] != $val['return'][1]['id']) {
+            if ($val['return'][1]['total_qty'] > 0) {
 
                 if ($this->user_auth->is_action_allowed('sales', 'sales_return', 'view')) {
 
@@ -1028,9 +1028,9 @@ class Sales_return extends MX_Controller {
 
             }
 
+/*
 
-
-            if (($val['return'][0]['id'] != $val['return'][1]['id'])) {
+            if (count($val['return']) > 1) {
 
                 $total_qty = '<td class="action-btn-align">' . $val['return'][1]['total_qty'] . '</td><td class="action-btn-align">' . ($val['return'][1]['total_qty']) - ($val['return'][0]['total_qty']) . '</td>';
 
@@ -1038,7 +1038,7 @@ class Sales_return extends MX_Controller {
 
                 $total_qty = '<td class="action-btn-align">' . $val['total_qty'] . ' </td><td></td>';
 
-            }
+            } */
 
             if ($this->user_auth->is_action_allowed('sales', 'sales_return', 'edit')) {
 
@@ -1056,7 +1056,7 @@ class Sales_return extends MX_Controller {
 
 
 
-            if ($val['return'][0]['id'] != $val['return'][1]['id']) {
+            if ($val['return'][1]['total_qty'] > 0) {
 
                 if ($this->user_auth->is_action_allowed('sales', 'sales_return', 'view')) {
 
@@ -1083,7 +1083,7 @@ class Sales_return extends MX_Controller {
             $no++;
 
             $row = array();
-            if(number_format($val['return'][1]['net_total'], 2) > 0){
+            if(number_format($val['return'][0]['net_total'], 2) > 0){
             $row[] = $no;
 
             //$row[] = $ass->firm_name;
@@ -1092,15 +1092,22 @@ class Sales_return extends MX_Controller {
 
             $row[] = $val['store_name'];
 
-            if ($val['return'][0]['id'] != $val['return'][1]['id']) {
+            if ($val['return'][1]['total_qty'] > 0) {
 
                 $row[] = $val['delivery_qty'];
 
-                $row[] = number_format($val['return'][1]['net_total'], 2);
+                $row[] = number_format($val['return'][0]['net_total'], 2);
 
-                $row[] = ($val['return'][1]['total_qty']) - ($val['return'][0]['total_qty']);
+                $row[] = ($val['return'][1]['total_qty']);
 
-                $rtn_amt = number_format(($val['return'][1]['net_total'] - $val['return'][0]['net_total']), 2);
+                $cst_amount = $val['return'][1]['cgst'] + $val['return'][1]['sgst'];
+
+                if($val['taxable_price'] != '0.00'){
+                    
+                    $val['return'][1]['net_total'] = $val['return'][1]['net_total'] + $cst_amount;
+                }
+                    
+                $rtn_amt = number_format($val['return'][1]['net_total'], 2);
 
                 $row[] = str_replace("-", "", $rtn_amt);
 
@@ -1108,11 +1115,11 @@ class Sales_return extends MX_Controller {
 
                 $row[] = $val['delivery_qty'];
 
-                $row[] = number_format($val['return'][1]['net_total'], 2);
+                $row[] = number_format($val['return'][0]['net_total'], 2);
 
                 $row[] = '';
 
-                $row[] = number_format(($val['return'][1]['net_total'] - $val['return'][0]['net_total']), 2);
+                $row[] = '';
 
             }
 

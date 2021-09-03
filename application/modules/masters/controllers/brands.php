@@ -376,8 +376,15 @@ class Brands extends MX_Controller {
 
 
         $input = $this->input->post();
+        // print_r($input);
+        // echo"<pre>";
+        // exit;
 
         $validation = $this->brand_model->add_duplicate_brandname($input);
+        // print_r( $validation);
+        // echo"<pre>";
+        // exit;
+
 
         $i = 0;
 
@@ -497,6 +504,11 @@ class Brands extends MX_Controller {
              $row[] = $ass->cat_name;
 
             $row[] = $ass->brands;
+
+            // $row[] = $ass->hsn;
+            // $row[] = $ass->gst;
+
+
 
             // $row[] = $edit_row . '&nbsp;&nbsp;' . $delete_row .
 

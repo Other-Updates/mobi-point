@@ -126,6 +126,38 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">HSN NUMBER<span style="color:#F00; font-style:oblique;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <input type="text" placeholder=" Enter HSN"name="hsn" id="hsn" maxlength="40" />
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </div>
+                                                </div>
+                                                <span id="cnameerror" class="reset" style="color:#F00; font-style:italic;"></span>
+                                                <!-- <span id="dup" class="dup" style="color:#F00; font-style:italic;"></span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">GST<span style="color:#F00; font-style:oblique;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <input type="text"  name="gst" placeholder=" Enter GST" id="gst" maxlength="40" />
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-tag"></i>
+                                                    </div>
+                                                </div>
+                                                <span id="cnameerror" class="reset" style="color:#F00; font-style:italic;"></span>
+                                                <!-- <span id="dup" class="dup" style="color:#F00; font-style:italic;"></span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="frameset_table action-btn-align">
                                     <input type="submit" value="Save" class="submit btn btn-success" id="submit" />
                                     <input type="reset" value="Clear" class=" btn btn-danger1" id="cancel" />
@@ -316,6 +348,8 @@
             {
                 cname = $.trim($("#brandname").val());
                 var firm_id = $.trim($("#firm").val());
+                 hsn =$("#hsn").val();
+                gst = $("#gst").val();
                 if ($.trim(cname) != '')
                 {
                     $.ajax(
@@ -323,8 +357,10 @@
                                 url: BASE_URL + "masters/brands/add_duplicate_brandname",
                                 type: 'POST',
                                 async: false,
-                                data: {cname: cname, firm_id: firm_id},
+                                data: {cname: cname, firm_id: firm_id,hsn:hsn,gst:gst},
                                 success: function (result)
+                                // print_r(result);
+                                // exit;
                                 {
                                     $("#dup").html(result);
                                 }

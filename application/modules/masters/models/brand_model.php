@@ -109,6 +109,10 @@ class Brand_model extends CI_Model {
     }
 
     function add_duplicate_brandname($input) {
+        //  print_r($input);
+        // echo"<pre>";
+        // exit;
+
 
         $this->db->select('*');
 
@@ -116,9 +120,18 @@ class Brand_model extends CI_Model {
 
         $this->db->where('firm_id', $input['firm_id']);
 
+        $this->db->where('hsn', $input['hsn']);
+
+        $this->db->where('gst', $input['gst']);
+
         $this->db->where('status', 1);
 
-        $query = $this->db->get('erp_brand');
+        $query = $this->db->get('erp_brand')->result_array();
+        // $ss = $this->db->last_query();
+        // print_r($ss);
+        // print_r($query);
+        // echo"<pre>";
+        // exit;
 
 
 

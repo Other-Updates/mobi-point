@@ -244,6 +244,8 @@ if (!empty($sales)) {
 
                         <th class="">Invoice Amount</th>
 
+                        <th class="">Profit</th>
+
                         <th class="">Invoice Date</th>
 
                       <!--  <td class="action-btn-align">Invoice Status</td>
@@ -457,6 +459,10 @@ if (!empty($sales)) {
                 },
                 {
                     "class": "text_center", "targets": [0, 1, 2]
+
+                },
+                {
+                    "class": "text_right", "targets": [5,6]
 
                 },
                 {

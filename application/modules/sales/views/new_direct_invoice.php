@@ -481,7 +481,7 @@ if (!empty($customers)) {
 
                 <td class="action-btn-align">
 
-                    <input type="text" name="profit" style="width:70px;" id="profit" class="profit" />
+                    <input type="text"  style="width:70px;" id="profit" class="profit" />
                 </td>
 
                 <td class="action-btn-align"><a id='delete_group' class="btn btn-danger delete_group"><span
@@ -1452,7 +1452,7 @@ if (!empty($customers)) {
 
                             <td>
 
-                                <input type="text" name="profit" style="width:70px;" id="profit" class="profit" />
+                                <input type="text" style="width:70px;" id="profit" class="profit" />
                             </td>
 
 
@@ -1480,6 +1480,10 @@ if (!empty($customers)) {
 
                             <td class="action-btn-align"><input type="text" name="quotation[subtotal_qty]" tabindex="21"
                                     readonly="readonly" class="final_sub_total text_right" style="width:70px;" /></td>
+
+                            <td class="action-btn-align"><input type="text" name="quotation[profit_total]" tabindex="21"
+                                    readonly="readonly" class="profit_total" style="width:70px;" /></td>
+
 
                             <td></td>
 
@@ -1621,9 +1625,51 @@ if (!empty($customers)) {
 
 </div>
 <script>
+function calculatesubtotal(){
+    $('.subtotal').each(function(){
+            var percost = $(this).closest('tr').find('.percost').val();
+            var qty = $(this).closest('tr').find('.qty').val();
+            if(percost==1){
+                 tot = Number(qty) * Number(percost);
+                 $(this).closest('tr').find('.gst').val(tot);
+                 $(this).closest('tr').find('.subtotal').val(tot.toFixed(2));
+                 }else{
+                tot = Number(qty) * Number(percost);
+              
+                 $(this).closest('tr').find('.nogst').val(tot);
+                 $(this).closest('tr').find('.subtotal').val(tot.toFixed(2));
+               
+                 }
+            })
+}
 
+function profitcalculation(){
+            var fin_total =0;
+            $('.profit').each(function(){
+                
+                    var percost = $(this).closest('tr').find('.percost').val();
+                    var qty = $(this).closest('tr').find('.qty').val();
+                    var costing_price = $(this).closest('tr').find('.costing_price').val();
+              
+                $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
+                fin_total = fin_total+((percost - costing_price)*qty);
+
+
+            });
+            $('.profit_total').val(fin_total);
+    }
+
+ function finaltotal(){
+            var finaltotal =0;
+            $('.subtotal').each(function(){
+                finaltotal = finaltotal+Number($(this).val());
+            });
+            $('.final_sub_total').val(finaltotal);
+            $('.final_amt').val(finaltotal.toFixed(2));
+            }
+            
  function calculate(){
-    var gg = $('.gst-invoice').val();
+    var gg = $('.gst-invoice:checked').val();
         $('.costing_price').each(function(){
             if(gg == 1){
                 $(this).val($(this).parent().find('.gstcost').html());
@@ -1632,7 +1678,7 @@ if (!empty($customers)) {
             }
         })
    
-        var gg = $('.gst-invoice').val();
+        var gg = $('.gst-invoice:checked').val();
         $('.selling_price').each(function(){
             if(gg == 1){
                 $(this).val($(this).parent().find('.gst').html());
@@ -1640,81 +1686,7 @@ if (!empty($customers)) {
                 $(this).val($(this).parent().find('.nogst').html());
             }
         });
-        $('.subtotal').each(function(){
-            
-
-            var percost = $(this).closest('tr').find('.percost').val();
-            var qty = $(this).closest('tr').find('.qty').val();
-        
-
-            if(percost==1){
-                 tot = Number(qty) * Number(percost);
-              
-                 $(this).closest('tr').find('.gst').val(tot);
-                 $(this).closest('tr').find('.subtotal').val(tot.toFixed(2));
-
-                 }else{
-
-                tot = Number(qty) * Number(percost);
-              
-                 $(this).closest('tr').find('.nogst').val(tot);
-                 $(this).closest('tr').find('.subtotal').val(tot.toFixed(2));
-               
-                 }
-            })
-            //
-            var finaltotal =0;
-            $('.subtotal').each(function(){
-                finaltotal = finaltotal+Number($(this).val());
-            });
-            $('.final_sub_total').val(finaltotal);
-            $('.final_amt').val(finaltotal.toFixed(2));
-
-
-            $('.profit').each(function(){
-
-                    var percost = $(this).closest('tr').find('.percost').val();
-                    var qty = $(this).closest('tr').find('.qty').val();
-                    var costing_price = $(this).closest('tr').find('.costing_price').val();
-
-                    $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
-
-
-            });
-    
-
-
-
-
-
-
-
-
-                // })
-
-
-
-                //  $('.profit').each(function(){
-                //     var percost = $(this).closest('tr').find('.percost').val();
-                //     var qty = $(this).closest('tr').find('.qty').val();
-                //     var 
-                //     if{
-                //         if (result[0].sales_price != '' && result[0].cost_price != '') {
-                //             this_val.closest('tr').find('.profit').val(result[0].sales_price - result[0].cost_price);
-                //         } else {
-                //             this_val.closest('tr').find('.profit').val('0');
-                //         }
-                        
-                //     }else{
-
-                //          if (result[0].sales_price != '' && result[0].cost_price != '') {
-                //             this_val.closest('tr').find('.profit').val(result[0].sales_price_without_gst - result[0].cost_price_without_gst);
-                //         } else {
-                //             this_val.closest('tr').find('.profit').val('0');
-                //         }
-                //     }
-
-                //     })
+      
         
 
     if ($('.gst-invoice:checked').val() == 1) {
@@ -1729,16 +1701,6 @@ if (!empty($customers)) {
         $('#add_new_values').find('.add_cgst').show();
         $('#add_new_values').find('.add_sgst').show();
       
-        
-        // if (result[0].cost_price != '') {
-        //                     this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
-        //                     this_val.closest('tr').find('.cp_with_gst').val(result[0].cost_price);
-        //                     this_val.closest('tr').find('.cp_without_gst').val(result[0].cost_price_without_gst);
-        //                 } else {
-        //                     this_val.closest('tr').find('.costing_price').val('0');
-        //                 }
-        
-      
     } else {
         $('.total_table_tag').attr('colspan',3);
         $('.net_total_tag').attr('colspan',3);
@@ -1751,52 +1713,29 @@ if (!empty($customers)) {
         $('#add_new_values').find('.taxable_price').hide();
         $('#add_new_values').find('.add_cgst').hide();
         $('#add_new_values').find('.add_sgst').hide();
-        // if (result[0].cost_price_without_gst != '') {
-        //                     this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
-        //                     this_val.closest('tr').find('.cp_with_gst').val(result[0].cost_price);
-        //                     this_val.closest('tr').find('.cp_without_gst').val(result[0].cost_price_without_gst);
-        //                 } else {
-        //                     this_val.closest('tr').find('.costing_price').val('0');
-        //                 }
      
     }
  }
 
     $('.gst-invoice').on('change',function(){
-        calculate();
-        
-});
+        calculate();    
+        calculatesubtotal();
+        finaltotal();
+        profitcalculation();
+    });
 
     $('body').on('keyup','.costing_price',function(){
-        $('.profit').each(function(){
-            var percost = $(this).closest('tr').find('.percost').val();
-            var qty = $(this).closest('tr').find('.qty').val();
-            var costing_price = $(this).closest('tr').find('.costing_price').val();
-
-            $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
-        });
+        profitcalculation();
     });
     $('body').on('keyup','.selling_price',function(){
-        $('.profit').each(function(){
-            var percost = $(this).closest('tr').find('.percost').val();
-            var qty = $(this).closest('tr').find('.qty').val();
-            var costing_price = $(this).closest('tr').find('.costing_price').val();
-
-            $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
-        });
-        
+        profitcalculation();
+        calculatesubtotal();
+        finaltotal();
     });
 $('.qty').on('keyup',function(){
-    $('.profit').each(function(){
-                    var percost = $(this).closest('tr').find('.percost').val();
-                    var qty = $(this).closest('tr').find('.qty').val();
-                    var costing_price = $(this).closest('tr').find('.costing_price').val();
-
-                    $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
-                      });
-
-      
-        
+        profitcalculation();
+        calculatesubtotal();
+        finaltotal();
 });
 
 </script>
@@ -3737,10 +3676,21 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
 
 
                             // Profit calculation
-                            var percost = this_val.closest('tr').find('.percost').val();
-                            var costing_price = this_val.closest('tr').find('.costing_price').val();
-                            var qty = this_val.closest('tr').find('.qty').val();
-                            this_val.closest('tr').find('.profit').val((percost - costing_price)*qty);
+                            // var percost = this_val.closest('tr').find('.percost').val();
+                            // var costing_price = this_val.closest('tr').find('.costing_price').val();
+                            // var qty = this_val.closest('tr').find('.qty').val();
+                            // this_val.closest('tr').find('.profit').val((percost - costing_price)*qty);
+
+                            var fin_total =0;
+                     $('.profit').each(function(){
+                
+                            var percost = $(this).closest('tr').find('.percost').val();
+                            var qty = $(this).closest('tr').find('.qty').val();
+                            var costing_price = $(this).closest('tr').find('.costing_price').val();
+                             $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
+                             fin_total = fin_total+((percost - costing_price)*qty);
+                             });
+            $('.profit_total').val(fin_total);
 
 
 
@@ -4985,9 +4935,12 @@ function set_ime_code_from_pro_id(product_id, pro_qty, class_name) {
             async: false,
             url: '<?php echo base_url(); ?>sales/get_ime_code_from_productqty',
             success: function(data) {
+                // print_r(data);
+                // exit;
 
                 var data = JSON.parse(data);
-
+                //   print_r(data);
+                // exit;
 
 
                 if (data.length > 0) {
@@ -5050,11 +5003,11 @@ function set_ime_code_from_pro_id(product_id, pro_qty, class_name) {
 
                 } else {
 
-                    sweetAlert("Error...", "This Product is not available!", "error");
+                   // sweetAlert("Error...", "This Product is not available!", "error");
 
 
 
-                    return false;
+                   // return false;
 
                 }
 

@@ -138,7 +138,7 @@
                                     <label class="col-sm-12 col-form-label">Entry Date<span style="color:#F00; ">*</span></label>
                                     <div class="col-sm-12">
                                         <div class="input-group">
-                                            <input type="text" name="created_at" value="<?php echo date('d-m-Y'); ?>" class="datepicker form-control" id="entry_date" readonly="" style="background-color:white;" tabindex="4"/>
+                                            <input type="text" name="created_at" value="<?php echo date('d-m-Y'); ?>" class="datepicker form-control" id="entry_date"  style="background-color:white;" tabindex="4"/>
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
