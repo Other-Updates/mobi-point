@@ -125,7 +125,12 @@ class Brands extends MX_Controller {
 
     public function insert_brand() {
 
-        $input = array('brands' => $this->input->post('brands'),'cat_id' => $this->input->post('cat_id'), 'created_by' => $this->user_auth->get_user_id(), 'firm_id' => $this->input->POST('firm_id'));
+        $input = array('brands' => $this->input->post('brands'),'cat_id' => $this->input->post('cat_id'),
+         'created_by' => $this->user_auth->get_user_id(), 'firm_id' => $this->input->POST('firm_id'),
+         'hsn' => $this->input->POST('hsn'),'gst' => $this->input->POST('gst'));
+        //  print_r($input);
+        //  echo"<pre>";
+        //  exit;
 
         $this->brand_model->insert_brand($input);
 

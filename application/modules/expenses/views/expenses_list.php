@@ -1,26 +1,16 @@
 <?php $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template'); ?>
+<script src="<?= $theme_path; ?>/js/jquery-1.8.2.js"></script>
 
-<!-- <link rel="stylesheet" href="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" /> -->
+<script src="<?= $theme_path; ?>/js/jquery-ui-my-1.10.3.min.js"></script>
 
 <link href="<?php echo $theme_path ?>/css/select2.css" rel="stylesheet" />
 
 <link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/fSelect.css"/>
 
-<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net/js/jquery.dataTables.js"></script> -->
-
-<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script> -->
-
-<!-- <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/fixedHeader.dataTables.min.css"/> -->
-
 <script src="<?php echo $theme_path ?>/js/select2.min.js"></script>
-
-<!-- <script type='text/javascript' src='<?php echo $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js'></script> -->
 
 <script type='text/javascript' src='<?php echo $theme_path; ?>/js/jquery.table2excel.min.js'></script>
 
-<!-- <script src="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script> -->
-
-<!-- <script src="<?php echo $theme_path ?>/js/tabs.js"></script> -->
 
 <script type='text/javascript' src='<?= $theme_path; ?>/js/fSelect.js'></script>
 

@@ -366,11 +366,11 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
 <script>
 
-    $('.datepicker').datepicker({
+    // $('.datepicker').datepicker({
 
-        format: 'dd-mm-yyyy',
+    //     format: 'dd-mm-yyyy',
 
-    });
+    // });
 
     $('.print_btn').click(function () {
 

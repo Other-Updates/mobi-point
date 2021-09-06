@@ -588,7 +588,14 @@ if (!empty($customers)) {
                     <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
                     <span class="error_msg"></span>
                 </td> -->
-
+                <td class="action-btn-align">
+                    <p  style="display: none;" class ="gstcost">1</p><p style="display: none;"  class = "nogstcost">2</p>
+                    <input type="text" name="cost_price" style="width:70px;" id="cost_price"
+                        class="costing_price perwhole" />
+                    <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
+                    <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
+                    <span class="error_msg"></span>
+                </td>
 
 
                 <td>
@@ -686,6 +693,9 @@ if (!empty($customers)) {
 
 
                 </td>
+                <td class="action-btn-align">
+                                <input type="text"  style="width:70px;" id="profit" class="profit" />
+                    </td>
 
 
 
@@ -1024,8 +1034,10 @@ if (!empty($customers)) {
                                 <td width="15%" class="first_td1">IMEI Code</td>
 
                                 <td width="10%" class="first_td1 action-btn-align">QTY</td>
+                                <td width="8%" class="first_td1 action-btn-align">Cost Price <span
+                                    style="color:#F00; font-style:oblique;">*</span></td>
 
-                                <td width="8%" class="first_td1 action-btn-align">Unit Price</td>
+                                <td width="8%" class="first_td1 action-btn-align">Sale Price</td>
 
                                 <!-- <td width="4%" class="first_td1 action-btn-align">Total</td>-->
 
@@ -1079,6 +1091,8 @@ if (!empty($customers)) {
 
 
                                 <td width="7%" class="first_td1 action-btn-align">Net Value</td>
+
+                                   <td width="10%" class="action-btn-align">Profit</td>
 
 
                               
@@ -1458,7 +1472,19 @@ if (!empty($customers)) {
 
                                         <?php } ?>
 
+                                        <td class="action-btn-align">
+                            <p  style="display: none;" class ="gstcost">1</p>
+                            <p  style="display: none;" class = "nogstcost">2</p>
 
+
+
+                                <input type="text" name="cost_price" style="width:70px;" id="cost_price"
+                                    class="costing_price perwhole required" />
+                                <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
+                                <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
+
+                                <span class="error_msg"></span>
+                            </td>
 
                                         <td>
 
@@ -1546,6 +1572,11 @@ if (!empty($customers)) {
 
 
                                         </td>
+                                        
+                                         <td>
+
+                                         <input type="text" style="width:70px;" id="profit" class="profit" />
+                                         </td>
 
 
 
@@ -1585,11 +1616,14 @@ if (!empty($customers)) {
 
 
 
-                            <td colspan="4" class="sub_tag" style="text-align:right;"><b>Sub Total</b></td>
+                            <td colspan="3" class="sub_tag" style="text-align:right;"><b>Sub Total</b></td>
 
 
 
                             <td><input type="text" name="quotation[subtotal_qty]" tabindex="-1" readonly="readonly" value="<?php echo $val['subtotal_qty']; ?>" class="final_sub_total text_right" style="width:70px;" /><input type="hidden" class="temp_sub_total" value="" /></td>
+
+                            <td class="action-btn-align"><input type="text" name="quotation[profit_total]" tabindex="21"
+                                    readonly="readonly" class="profit_total" style="width:70px;" /></td>
 
 
 
@@ -1813,17 +1847,75 @@ if (!empty($customers)) {
 
     if(<?php echo $gsttype ?> == 1)
     {
-        $('.net_tag').attr('colspan',1);
-        $('.sub_tag').attr('colspan',4);
+        $('.net_tag').attr('colspan',2);
+        $('.sub_tag').attr('colspan',5);
 
         } else {
 
-         $('.net_tag').attr('colspan',6);
-        $('.sub_tag').attr('colspan',2);
+         $('.net_tag').attr('colspan',7);
+        $('.sub_tag').attr('colspan',3);
 
         }
+        function calculatesubtotal(){
+    $('.subtotal').each(function(){
+            var percost = $(this).closest('tr').find('.percost').val();
+            var qty = $(this).closest('tr').find('.qty').val();
+            if(percost==1){
+                 tot = Number(qty) * Number(percost);
+                 $(this).closest('tr').find('.gst').val(tot);
+                 $(this).closest('tr').find('.subtotal').val(tot.toFixed(2));
+                 }else{
+                tot = Number(qty) * Number(percost);
+              
+                 $(this).closest('tr').find('.nogst').val(tot);
+                 $(this).closest('tr').find('.subtotal').val(tot.toFixed(2));
+               
+                 }
+            })
+}           
+function finaltotal(){
+            var finaltotal =0;
+            $('.subtotal').each(function(){
+                finaltotal = finaltotal+Number($(this).val());
+            });
+            $('.final_sub_total').val(finaltotal);
+            $('.final_amt').val(finaltotal.toFixed(2));
+            }
+            
 
 
+
+        function profitcalculation(){
+            var fin_total =0;
+            $('.profit').each(function(){
+                
+                    var percost = $(this).closest('tr').find('.percost').val();
+                    var qty = $(this).closest('tr').find('.qty').val();
+                    var costing_price = $(this).closest('tr').find('.costing_price').val();
+              
+                $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
+                fin_total = fin_total+((percost - costing_price)*qty);
+
+
+            });
+            $('.profit_total').val(fin_total);
+    }
+    
+    $('body').on('keyup','.costing_price',function(){
+        profitcalculation();
+    });
+
+    $('body').on('keyup','.selling_price',function(){
+        profitcalculation();
+        calculatesubtotal();
+        finaltotal();
+    });
+
+    $('.qty').on('keyup',function(){
+            profitcalculation();
+            calculatesubtotal();
+            finaltotal();
+    });
 
 
 
@@ -3199,6 +3291,23 @@ if (!empty($customers)) {
 
 
                             // this_val.closest('tr').find('.discount').val(result[0].discount);
+                            
+                        if (result[0].cost_price != '') {
+                            if($gsttype == 1){ 
+                                this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
+                            } else {
+                                this_val.closest('tr').find('.costing_price').val(result[0].cost_price_without_gst);
+                            }
+                            this_val.closest('tr').find('.cp_with_gst').val(result[0].cost_price);
+                            this_val.closest('tr').find('.cp_without_gst').val(result[0].cost_price_without_gst);
+                            this_val.closest('tr').find('.gstcost').html(result[0].cost_price);
+                            this_val.closest('tr').find('.nogstcost').html(result[0].cost_price_without_gst);
+
+
+
+                        } else {
+                            this_val.closest('tr').find('.costing_price').val('0');
+                        }
 
 
 
@@ -3220,7 +3329,17 @@ if (!empty($customers)) {
 
 
                             }
-
+                            
+                            var fin_total =0;
+                     $('.profit').each(function(){
+                
+                            var percost = $(this).closest('tr').find('.percost').val();
+                            var qty = $(this).closest('tr').find('.qty').val();
+                            var costing_price = $(this).closest('tr').find('.costing_price').val();
+                             $(this).closest('tr').find('.profit').val((percost - costing_price)*qty);
+                             fin_total = fin_total+((percost - costing_price)*qty);
+                             });
+            $('.profit_total').val(fin_total);
 
                             this_val.closest('tr').addClass('tr_' + result[0]['id']);
 

@@ -742,7 +742,7 @@ if (!empty($sales)) {
 
         });
 
-        new $.fn.dataTable.FixedHeader(table);
+        // new $.fn.dataTable.FixedHeader(table);
 
 
 

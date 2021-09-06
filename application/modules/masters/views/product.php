@@ -244,15 +244,15 @@ if (!empty($brand)) {
 
                                         <div class="col-sm-8">
 
-                                            <select name="brand_id"  class="form-control form-align mandatory" id="brand" disabled="" >
+                                            <select name="brand_id"  class="form-control form-align mandatory" id="brand" >
 
                                                 <option value="">Select</option>
 
                                             </select>
 
-                                            <span id="branderr" class="val"  style="color:#F00; font-style:oblique;"></span>
+                                            <!-- <span id="branderr" class="val"  style="color:#F00; font-style:oblique;"></span> -->
 
-                                            <span class="error_msg"></span>
+                                            <!-- <span class="error_msg"></span> -->
 
                                         </div>
 
@@ -2413,9 +2413,18 @@ if (!empty($brand)) {
 
 
             $('#BrandId').val(this.value);
-
+            var hsn = $(this).find('option:selected').attr('hsn');
+            var gst = $(this).find('option:selected').attr('gst');
+            var cgst = (gst > 0) ? gst / 2 : 0.00;
+            // console.log(hsn);console.log(gst);console.log(cgst);
+            
+        $('#hsn_number').val(hsn);
+        $('#igst').val(gst);
+        $('#cgst').val(cgst);
+        $('#sgst').val(cgst);
+        
+      
         });
-
 
 
 
@@ -2740,7 +2749,7 @@ if (!empty($brand)) {
 
                         $.each(result, function (key, value) {
 
-                            option_text1 += '<option value="' + value.id + '">' + value.brands + '</option>';
+                            option_text1 += '<option hsn="' + value.hsn + '" gst ="' + value.gst + '" value="' + value.id + '">' + value.brands + '</option>';
 
                         });
 

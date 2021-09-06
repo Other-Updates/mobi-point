@@ -98,7 +98,7 @@
         float: left;
         width: 30%;
         height: 110px;
-        padding: 10px;
+        padding: 5px;
     }
 
     .goods-condi .gc2 {
@@ -106,7 +106,7 @@
         float: left;
         width: 50%;
         height: 110px;
-        padding: 10px;
+        padding: 5px;
     }
 
     .goods-condi .gc3 {
@@ -114,84 +114,7 @@
         float: left;
         width: 20%;
         height: 110px;
-        padding: 10px;
-    }
-
-
-    @media print {
-        .print_header {
-            min-height: 110px !important;
-        }
-
-        table tr td {
-            border: 1px solid black !important;
-        }
-
-        table tr {
-            border-right: 1px solid black !important;
-        }
-
-        body {
-            -webkit-print-color-adjust: exact;
-        }
-
-        .imeview {
-            border-top: 1px solid black !important;
-
-            table tr td {
-                border: 1px solid black !important;
-            }
-        }
-
-        .table-bordered>tfoot>tr>td {
-            border: 1px solid black !important;
-        }
-
-        .words {
-            display: block;
-            margin-top: -21px;
-        }
-
-        .print_bgclr.table>thead:first-child>tr:first-child>td {
-            background-color: #1E9FF2 !important;
-            -webkit-print-color-adjust;
-        }
-
-        .print_bgclr thead td {
-            color: #fff !important;
-            font-weight: bold;
-        }
-
-        .table-bordered>tfoot>tr> {
-            border-top: 1px solid black !important;
-            border-bottom: 1px solid black !important;
-        }
-
-        .tfootbotom {
-            margin-top: -5px !important;
-            border: 1ps solid black !important;
-        }
-
-        .table>thead>tr>th,
-        .table>tbody>tr>th,
-        .table>tfoot>tr>th,
-        .table>thead>tr>td,
-        .table>tbody>tr>td,
-        .table>tfoot>tr>td {
-            padding: 4px 4px 4px 4px !important;
-            line-height: 1.928571;
-            font-size: 14px !important;
-        }
-
-        .goods-condi {
-            display: block;
-        }
-    }
-
-    @page {
-        size: A4 portrait !important;
-        margin: 0.4cm;
-
+        padding: 5px;
     }
 
     .print_bgclr.table thead th {
@@ -200,8 +123,7 @@
 
     .print_header_tit {
         width: 100%;
-        float: right !important;
-        font-size: 10px;
+        text-align: right;
     }
 
     .m-b-0 {
@@ -215,36 +137,85 @@
     .m-0 {
         margin: 0px;
     }
+    .cashbill-tit {background: #003e94; padding: 6px 22px; border-radius:10px; color: #fff; text-align: center;font-size: 25px;display: table;margin: 0 auto; margin-bottom: 20px;}
+    @media print {
+        .cashbill-tit {background: #003e94 !important; padding: 6px 22px; border-radius:10px; color: #fff !important; text-align: center;font-size: 25px;display: table; margin-bottom: 20px;}
+        .print_header {
+            min-height: 110px !important;
+            font-size: 14px;
+        }
+        .tot-amount, .tot-text {font-size: 20px !important;}
+        .print_header table td {
+            padding: 5px !important;
+            border: 0 !important;
+        }
+        table tr td, .print_header table {
+            border: 1px solid black !important;
+        }
+        .print_header table {
+            border-bottom-color: #fff !important;
+        }
+        table tr {
+            border-right: 1px solid black !important;
+        }
+        body {
+            -webkit-print-color-adjust: exact;
+        }
+        .imeview {
+            border-top: 1px solid black !important;
+        }
+        table tr td {
+            border: 1px solid black !important;
+        }
+        .table-bordered>tfoot>tr>td {
+            border: 1px solid black !important;
+        }
+        .words {
+            display: block;
+            margin-top: -21px;
+        }
+        .print_bgclr.table>thead:first-child>tr:first-child>th {
+            background-color: #003e94 !important;
+            -webkit-print-color-adjust;
+            border-color:#003e94 !important;
+        }
+        .print_bgclr thead th {
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .table-bordered>tfoot>tr> {
+            border-top: 1px solid black !important;
+            border-bottom: 1px solid black !important;
+        }
+        .tfootbotom {
+            margin-top: -5px !important;
+            border: 1ps solid black !important;
+        }
+        .table>thead>tr>td,
+        .table>tbody>tr>td,
+        .table>tfoot>tr>td {
+            padding: 10px 10px 10px 10px !important;
+            line-height: 1.928571;
+            font-size: 14px !important;
+        }
+        .table>thead>tr>th{
+            padding: 5px 10px 5px 10px !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+        }
+        .goods-condi {
+            display: block;
+        }        
+    }
+
+    @page {
+        size: A4 portrait !important;
+        margin: 0.4cm;
+
+    }
 </style>
 
-<div class="print_header" style="background-color:#1E9FF2 !important; color:white !important;">
 
-    <table width="100%" style="background-color:#1E9FF2;">
-
-        <tr>
-
-            <td width="50%" style="vertical-align:middle;">
-
-                <div class="print_header_logo" style="width:350px !important;"><img src="<?= $theme_path; ?>/images/logo-login2.png" width="400px" /></div>
-
-            </td>
-
-            <td width="50%">
-                <div class="print_header_tit">
-                    <h5 style="color:white !important; margin-left:7px !important;">75A, SP Nagar, TVS Nagar Road, <br /><br />
-                    Kavundampalayam, Coimbatore-641- 002.<br /><br />
-                        E-Mail : sales@mobi-point.com<br /><br />
-                        Phone : 0422-4521100. Cell: 9566781098. <br /><br />
-                        <B>GSTIN : 33BABFFM2200A1ZA</B></h5>
-                </div>
-            </td>
-
-
-        </tr>
-
-    </table>
-
-</div>
 
 <div class="mainpanel">
 
@@ -254,52 +225,43 @@
 
     </div>
 
-    <div class="contentpanel enquiryview ptpb-10 viewquo mb-45 mt-top2">
+    <div class="contentpanel enquiryview viewquo mb-45 mt-top2">
 
         <?php
         if (isset($quotation) && !empty($quotation)) {
 
             foreach ($quotation as $val) {
         ?>
-
-                <table class="table ptable" cellpadding="0" cellspacing="0" style="margin-top:-5px;">
-
-
+                <div class="cashbill-tit">CASH&nbsp;BILL</div>
+                <div class="print_header">
+                    <table width="100%">
+                        <tr>
+                            <td width="50%" style="vertical-align:top;">
+                                <div class="print_header_logo" style="width:350px !important;"><img src="<?= $theme_path; ?>/images/logo-login2.png" width="400px" /></div>
+                            </td>
+                            <td width="50%" style="vertical-align:top; border-left: 0;" align="right">
+                                75A, SP Nagar, TVS Nagar Road,<br /> Kavundampalayam, Coimbatore-641002.<br /> <b>E-Mail :</b> sales@mobi-point.com<br /> <b>Phone :</b> 0422-4521100. <b>Cell :</b> 9566781098.<br /> <b>GSTIN :</b> 33BABFFM2200A1ZA
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <table class="table ptable" cellpadding="0" cellspacing="0">
                     <tr>
-
-
-
-                        <td width="45%" style="margin-left:20px !important;"><span class="tdhead">Customer Name & Address</span>
+                        <td width="50%" style="margin-left:20px !important; border-right: 0;"><span class="tdhead"><b>Customer Name & Address :</b></span>
 
                             <div><?php echo $val['store_name']; ?></div>
 
-                            <div><?php echo $val['address1']; ?> </div><br />
+                            <div><?php echo $val['address1']; ?> </div>
 
-                            <div>Mobile : <?php echo ($val['mobil_number']) ? $val['mobil_number'] : '-'; ?></div>
+                            <div><b>Mobile :</b> <?php echo ($val['mobil_number']) ? $val['mobil_number'] : '-'; ?></div>
 
 
                         </td>
 
-                        <td width="25%" align="center; vertical-align:middle;">
-                            <h1>CASH&nbsp;BILL </h1>
-                        </td>
-                        <?php $gsttype = $val['bill_category']; ?>
-                        <!-- <div class="form-group col-sm-4">
-                            <label>GST</label>&emsp;&nbsp;&nbsp;&nbsp;
-                            <input type="radio" id="unchecked" class="gst-invoice" value="1" name="quotation[bill_category]" /><br>
-                            <label>NO GST</label>&nbsp;
-                            <input type="radio" id="checked" class="gst-invoice" value="2" name="quotation[bill_category]"
-                            checked="checked" />
-                        </div> -->
+                       
 
-                        <!-- <td width="25%"><input type="radio" tabindex="1" class="gst-invoice" value="1" name="quotation[bill_category]" <?php echo ($val['bill_category'] == '1') ? 'checked' : '' ?> />GST
-                        <input type="radio" tabindex="1" class="gst-invoice" value="2" name="quotation[bill_category]" <?php echo ($val['bill_category'] == '2') ? 'checked' : '' ?> />NO GST<br>
-                        <span id="type1" class="error_msg"></span>
-                        </td> -->
-
-
-                        <td width="30%" align="left" style="vertical-align:middle;">Invoice No : <?php echo '' . $val['inv_id']; ?><br />
-                            <!--Reference No :  <?php echo $val['q_no']; ?>--><br /><br /> Date : <?php echo ($val['created_date'] != '1970-01-01') ? date('d-M-Y', strtotime($val['created_date'])) : ''; ?><br />
+                        <td width="50%" align="right" style="vertical-align:top; border-left: 0;"><b>Invoice No :</b> <?php echo '' . $val['inv_id']; ?><br />
+                            <!--Reference No :  <?php echo $val['q_no']; ?>--> <b>Date :</b> <?php echo ($val['created_date'] != '1970-01-01') ? date('d-M-Y', strtotime($val['created_date'])) : ''; ?><br />
                             <!--Sales Man : <?php
                                             $sales_man = (!empty($val['sales_man_name']) ? $val['sales_man_name'] : '-');
 
@@ -309,30 +271,19 @@
                         </td>
 
                     </tr>
-
-
-
                 </table>
-
+                <br>
                 <table class="table table-striped table-bordered responsive print_bgclr m-b-0" id="add_quotation" cellpadding="0" cellspacing="0">
 
                     <thead style="color:white !important;">
 
                         <tr style="text-align:center; color:white !important;">
-
-                            <td width="1%" class="first_td1 action-btn-align">S.No</td>
-                            <td width="59%" class="first_td1 pro-wid">Product&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td width="15%" class="first_td1">HSN Code</td>
-
-
-                            <td width="7%" class="first_td1 action-btn-align ser-wid">QTY</td>
-
-                            <td width="7%">Rate</td>
-
-
-                            <td width="15%" class="first_td1 action-btn-align qty-wid">Amount</td>
-
-
+                            <th width="1%" class="first_td1 action-btn-align">S.No</th>
+                            <th width="59%" class="first_td1 pro-wid">Product&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th width="15%" class="first_td1">HSN Code</th>
+                            <th width="7%" class="first_td1 action-btn-align ser-wid">QTY</th>
+                            <th width="7%" class="text_right">Rate</td>
+                            <th width="15%" class="first_td1 qty-wid text_right">Amount</th>
                         </tr>
 
                     </thead>
@@ -443,7 +394,7 @@
                         ?>
 
                     </tbody>
-                <?php if($gsttype == 1){ ?>
+
                     <tfoot>
 
 
@@ -459,76 +410,66 @@
 
 
                         <?php
-                        
                         $gst = number_format(($quotation[0]['cgst_price'] + $quotation[0]['sgst_price']), 2)
                         ?>
                         <tr>
-                            <td align="right" class ="gst"colspan="4">GST</td>
-                            <td align="center" class="gstvalue">12%</td>
+                            <td align="right" colspan="4"><b>GST</b></td>
+                            <td align="center">12%</td>
                             <td align="right"><?php echo $gst; ?></td>
                         </tr>
                         <?php if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) { ?>
                             <tr>
-                                <td align="right" colspan="4"><?php echo $quotation[0]['tax_label']; ?></td>
+                                <td align="right" colspan="4"><b><?php echo $quotation[0]['tax_label']; ?></b></td>
                                 <td align="center">-</td>
                                 <td align="right"><?php echo $quotation[0]['tax']; ?></td>
                             </tr>
 
                         <?php } ?>
                     </tfoot>
-                <?php } ?>
+
                 </table>
 
 
 
 
-                <table width="100%" class="tfootbotom table table-bordered m-b-0" id="add_new">
+                <table width="100%" class="tfootbotom table table-bordered m-b-0">
 
                     <tr style="border-bottom:1px solid black; background: #f4f8fb;">
-                      <?php if($gsttype == 1){ ?>
-                        <td width="11%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading" class="taxi">Taxable Price : </td>
-                        <?php } ?>
-                        <?php if($gsttype == 1){ ?>
-                        <td width="10%" class ="taxiprice" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td>
-                        <?php } ?>
-                        <?php if($gsttype == 1){ ?>
-                        <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading" class="cgsttax">CGST : </td>
-                        <?php } ?>
-                        <?php if($gsttype == 1){ ?>
-                        <td width="10%"  class ="cgstprice"class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td>
-                        <?php } ?>
-                        <?php if($gsttype == 1){ ?>
+                        <td width="15%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">Taxable Price : </td>
+
+                        <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td>
+
+                        <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">CGST : </td>
+
+                        <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td>
                         <?php
                         $gst_type = $quotation[0]['state_id'];
 
                         if ($gst_type == 31) {
                         ?>
-                            <td width="10%" colspan="" style="text-align:center;" class ="sgsttax" class="bor-tb0 bold_heading">SGST : </td>
+                            <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">SGST : </td>
                         <?php } else { ?>
                             <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">IGST : </td>
 
                         <?php
                         }
                         ?>
-                          <?php } ?>
-                          <?php if($gsttype == 1){ ?>
-                        <td width="10%" class ="sgstprice" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td>
-                        <?php } ?>
+                        <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td>
 
 
-                        <td width="10%" colspan="" style="text-align:center;font-weight:bold;" class="bor-tb0">Net Total : </td>
+                        <td width="12%" colspan="" style="text-align:center;font-weight:bold;" class="bor-tb0 tot-text">Net Total : </td>
 
                         <?php
                         $net_total = $quotation[0]['net_total'];
                         if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) {
                             //$net_total = $net_total + $quotation[0]['tax'];
                         } ?>
-                        <td width="10%" class="text_right bor-tb0"><?php echo number_format($net_total, 2); ?></td>
+                        <td width="10%" class="text_right bor-tb0 tot-amount"><b class="tot-amount"><?php echo number_format($net_total, 2); ?></b></td>
 
                     </tr>
                     <tr>
 
-                        <td colspan=""><span style="float:left; top:px;"><b>Rupees&nbsp;:&nbsp;</b></span> <?php echo $val['remarks']; ?>
+                        <td align="center"><b>Rupees : </b> <?php echo $val['remarks']; ?>
 
                         </td>
                         <td colspan="11" class="bor-tb0  ">
@@ -539,35 +480,35 @@
 
                     </tr>
 
-                </table>
+                </table><br>
                 <div class="goods-condi">
                     <div class="gc1" style="text-align:center;">
-                        Received the goods in<br /> goods condition <br /><br /><br />Customer's Signature
+                        Received the goods in<br /> goods condition <br /><br /><br /><b>Customer's Signature</b>
                     </div>
                     <div class="gc2">
                         Goods once sold will not be taken back or exchanged.<br />
                         Warranty as per terms& Conditions of the manufacyure.<br />
                         All disputes are subject to coimbatore jurisdiction.
                     </div>
-                    <div class="gc3" style="text-align:center;">FOR Mob-Point</div>
+                    <div class="gc3" style="text-align:center;">FOR <b>Mob-Point</b></div>
                 </div>
                 <div class="sign row col-md-12" style="margin-top:20px ; display: none;">
 
                     <div class="col-xs-6">
 
-                        <p style="text-align:center; color:#861381 !important;"><br>Thank You! Vist again!!</p>
+                        <p style="text-align:center; color:#003e94 !important;"><br>Thank You! Vist again!!</p>
 
                     </div>
                     <div class="col-xs-6">
 
-                        <p style="text-align:center; color:#861381 !important;"><br>Service with Satisfaction</p>
+                        <p style="text-align:center; color:#003e94 !important;"><br>Service with Satisfaction</p>
                     </div>
 
 
                 </div>
-                <div class="" style="text-align:center; margin-top:3px;">
+                <!-- <div class="" style="text-align:center; margin-top:3px;">
                     <p>This software developed by <b style="color:blue !important;">F2F Solutions</b> &nbsp;&nbsp;|&nbsp;&nbsp; Email:info@f2fsolutions.co.in &nbsp;&nbsp;|&nbsp;&nbsp; Phone: +91 95008 51999</p>
-                </div>
+                </div> -->
 
                 <div class="hide_class action-btn-align">
 
@@ -690,34 +631,6 @@ if (isset($quotation_details) && !empty($quotation_details)) {
 
 
 <script>
-    // if ($('.gst-invoice:checked').val() == 1) {
-    //     // $('.total_table_tag').attr('colspan',5);
-    //     // $('#tin').attr('disabled', false);
-    //     $('#add_new').find('.taxiprice').show();
-    //     $('#add_new').find('.cgstprice').show();
-    //     $('#add_new').find('.sgstprice').show();
-    //     $('#add_new').find('.taxi').show();
-    //     $('#add_new').find('.cgsttax').show();
-    //     $('#add_new').find('.sgsttax').show();
-    //     // $('#app_table').find('.gst').show();
-    //     // $('#app_table').find('.gstvalue').show();
-      
-
-    // }else{
-    //     //   $('.total_table_tag').attr('colspan',3);
-    //     $('#add_new').find('.bor-tb0 bold_heading').hide();
-    //     $('#add_new').find('.taxiprice').hide();
-    //     $('#add_new').find('.cgstprice').hide();
-    //     $('#add_new').find('.sgstprice').hide();
-    //     $('#add_new').find('.taxi').hide();
-    //     $('#add_new').find('.cgsttax').hide();
-    //     $('#add_new').find('.sgsttax').hide();
-    //     // $('#app_table').find('.gst').hide();
-    //     // $('#app_table').find('.gstvalue').hide();
-
-
-    // }
- 
     function ime_modal_open(id, count) {
 
 

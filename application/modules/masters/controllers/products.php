@@ -1196,6 +1196,14 @@ class Products extends MX_Controller
 
         exit;
     }
+    
+    // function get_hsn()
+    // {
+
+    //     $input = $this->input->post();
+    //     $arr = $this->product_model->get_hsn($input['hsn']);
+    //     echo json_encode($arr);exit;
+    // }
 
     public function generate_barcode($code)
     {

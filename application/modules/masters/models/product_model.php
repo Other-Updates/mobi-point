@@ -157,34 +157,15 @@ class Product_model extends CI_Model {
     }
 
     public function get_product() {
-
-
-
-        $firms = $this->user_auth->get_user_firms();
-
-        $frim_id = array();
-
-        foreach ($firms as $value) {
-
-            $frim_id[] = $value['firm_id'];
+         $firms = $this->user_auth->get_user_firms();
+         $frim_id = array();
+         foreach ($firms as $value) {
+              $frim_id[] = $value['firm_id'];
         }
-
         $this->db->where_in('firm_id', $frim_id);
-
-
-
-
-
-
-
+        
         $this->db->select($this->table_name . '.*');
-
-
-
         $query = $this->db->get($this->table_name)->result_array();
-
-
-
         return $query;
     }
 
@@ -324,6 +305,10 @@ class Product_model extends CI_Model {
 
 
         $this->db->where('firm_id', $input['firm_id']);
+
+        // $this->db->where('hsn_sac', $input['hsn_sac']);
+
+        // $this->db->where('gst', $input['gst']);
 
 
 
@@ -818,27 +803,24 @@ class Product_model extends CI_Model {
     }
 
     public function get_brand_by_frim_id($id) {
-
-
-
+        
         $this->db->select($this->erp_brand . '.*');
-
-
-
         $this->db->where($this->erp_brand . '.firm_id', $id);
-
-
-
         $this->db->where($this->erp_brand . '.status', 1);
-
-
-
         $query = $this->db->get($this->erp_brand)->result_array();
-
-
-
         return $query;
     }
+
+    // public function get_hsn($id) {
+        
+    //     $this->db->select($this->erp_product . '.*');
+    //     // $this->db->where($this->erp_brand . '.firm_id', $id);
+    //     // $this->db->where($this->erp_brand . '.hsn');
+    //     $this->db->join('erp_product', '.hsn_sac=erp_brand.hsn','left');
+    //     $this->db->where($this->erp_brand . '.status', 1);
+    //     $query = $this->db->get($this->erp_brand)->result_array();
+    //     return $query;
+    // }
 
     public function check_stock($check_stock) {
 
