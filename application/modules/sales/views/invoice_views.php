@@ -233,6 +233,7 @@
             foreach ($quotation as $val) {
         ?>
                 <div class="cashbill-tit">CASH&nbsp;BILL</div>
+                <?php $gsttype = $val['bill_category']; ?>
                 <div class="print_header">
                     <table width="100%">
                         <tr>
@@ -394,7 +395,7 @@
                         ?>
 
                     </tbody>
-
+                    <?php if($gsttype == 1){ ?>
                     <tfoot>
 
 
@@ -426,7 +427,7 @@
 
                         <?php } ?>
                     </tfoot>
-
+                    <?php } ?>
                 </table>
 
 
@@ -435,13 +436,19 @@
                 <table width="100%" class="tfootbotom table table-bordered m-b-0">
 
                     <tr style="border-bottom:1px solid black; background: #f4f8fb;">
+                    <?php if($gsttype == 1){ ?>
                         <td width="15%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">Taxable Price : </td>
-
+                        <?php } ?>
+                        <?php if($gsttype == 1){ ?>
                         <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td>
-
+                        <?php } ?>
+                        <?php if($gsttype == 1){ ?>
                         <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">CGST : </td>
-
+                        <?php } ?>
+                        <?php if($gsttype == 1){ ?>
                         <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td>
+                        <?php } ?>
+                        <?php if($gsttype == 1){ ?>
                         <?php
                         $gst_type = $quotation[0]['state_id'];
 
@@ -454,8 +461,10 @@
                         <?php
                         }
                         ?>
+                         <?php } ?>
+                         <?php if($gsttype == 1){ ?>
                         <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td>
-
+                        <?php } ?>
 
                         <td width="12%" colspan="" style="text-align:center;font-weight:bold;" class="bor-tb0 tot-text">Net Total : </td>
 
