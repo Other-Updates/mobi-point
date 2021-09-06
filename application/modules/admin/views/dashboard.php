@@ -24,7 +24,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
 </style>
 <div class="mainpanel">
     <div class="media">
-        <h4 class="com-left">Dashboard</h4>
+        <h4 class="com-left m-t-0">Dashboard</h4>
         <?php
         $user_info = $this->user_info = $this->session->userdata('user_info');
         if (($user_info[0]['role'] != 1)) {
@@ -70,14 +70,109 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 </div>
             </a>
         </div> -->
-        <div class="col-md-4">
+        <div class="col-md-2">
+            <div class="card-design">
+                <div class="card-design-inner">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list' ?>">Purchase order</a></div>
+                            <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_1.png" /></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card-design">
+                <div class="card-design-inner">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>">Purchase Return</a></div>
+                            <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_5.png" /></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card-design">
+                <div class="card-design-inner">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'stock/' ?>">Stock <br><br></a></div>
+                            <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_4.png" /></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'stock/' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card-design">
+                <div class="card-design-inner">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list' ?>">Sales Invoice</a></div>
+                            <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_2.png" /></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card-design">
+                <div class="card-design-inner">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">Sales Return</a></div>
+                            <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_6.png" /></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-4">
             <a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list' ?>">
                 <div class="dashboard-icons red-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/2.png" />
                     <div>Purchase order</div>
                 </div>
             </a>
-        </div>
+        </div> 
        <div class="col-md-2">
             <a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>">
                 <div class="dashboard-icons blue-bg hvr-ripple-out">
@@ -85,7 +180,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                     <div>Purchase Return</div>
                 </div>
             </a>
-        </div>
+        </div>-->
         <!-- <div class="col-md-2">
             <a href="<?php echo $this->config->item('base_url') . 'purchase_receipt/receipt_list' ?>">
                 <div class="dashboard-icons pink-bg hvr-ripple-out">
@@ -94,23 +189,23 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 </div>
             </a>
         </div> -->
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
             <a href="<?php echo $this->config->item('base_url') . 'stock/' ?>">
                 <div class="dashboard-icons green-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/5.png" />
                     <div>Stock</div>
                 </div>
             </a>
-        </div>
+        </div> -->
 
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
             <a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list' ?>">
                 <div class="dashboard-icons yellow-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/8.png" />
                     <div>Sales Invoice</div>
                 </div>
             </a>
-        </div>
+        </div> -->
         <!-- <div class="col-md-1">
             <a href="<?php echo $this->config->item('base_url') . 'stock/sku_management' ?>">
                 <div class="dashboard-icons gray-bg hvr-ripple-out">
@@ -119,14 +214,14 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 </div>
             </a>
         </div> -->
-         <div class="col-md-2">
+         <!-- <div class="col-md-2">
             <a href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">
                 <div class="dashboard-icons dark-blue-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/7.png" />
                     <div>Sales Return</div>
                 </div>
             </a>
-        </div>
+        </div> -->
         <!-- <div class="col-md-2">
             <a href="<?php echo $this->config->item('base_url') . 'sales_receipt/receipt_list' ?>">
                 <div class="dashboard-icons yellow-bg hvr-ripple-out">

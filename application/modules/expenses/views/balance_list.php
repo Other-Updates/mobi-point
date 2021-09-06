@@ -248,7 +248,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
     </div>
 
-    <div class="col-md-12 grid-margin stretch-card" >
+    <div class="col-md-12 grid-margin stretch-card" id="expense_list_table" style="display:none" >
 
         <div class="card">
 
@@ -260,7 +260,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                         <table id="basicTable_call_back"   class="table table-striped responsive no-footer dtr-inline">
 
-                            <thead style="display:none" >
+                            <thead  >
 
                                 <tr>
 
@@ -391,6 +391,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
             $("#footer_id").show();
 
             $(".excel_show").show();
+            $('#expense_list_table').show();
+            var table;
 
             table = $('#basicTable_call_back').DataTable({
 
@@ -515,14 +517,16 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 ]
 
             });
+            new $.fn.dataTable.FixedHeader(table);
 
         } else {
+            $('#expense_list_table').hide();
 
             swal("Please select Company");
 
         }
-        new $.fn.dataTable.FixedHeader(table);
-        table.ajax.reload();  //just reload table
+        // new $.fn.dataTable.FixedHeader(table);
+        // table.ajax.reload();  //just reload table
 
        
 
@@ -690,4 +694,4 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
 </script>
 
-<!-- <script src="<?= $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js"></script> -->
+<script src="<?= $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js"></script>

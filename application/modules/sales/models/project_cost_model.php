@@ -1567,7 +1567,7 @@ class Project_cost_model extends CI_Model {
 
     public function get_all_invoice_details_by_id($id) {
 
-        $this->db->select('erp_category.cat_id,erp_category.categoryName,erp_product.id,erp_product.product_name,erp_brand.id,erp_brand.brands,erp_product.hsn_sac_name,erp_invoice_details.category,erp_invoice_details.product_id,erp_invoice_details.brand,erp_invoice_details.quantity,erp_invoice_details.unit,'
+        $this->db->select('erp_product.cost_price,erp_category.cat_id,erp_category.categoryName,erp_product.id,erp_product.product_name,erp_brand.id,erp_brand.brands,erp_product.hsn_sac_name,erp_invoice_details.category,erp_invoice_details.product_id,erp_invoice_details.brand,erp_invoice_details.quantity,erp_invoice_details.unit,'
                 . 'erp_invoice_details.per_cost,erp_invoice_details.tax,erp_invoice_details.gst,erp_invoice_details.sub_total,erp_product.model_no,erp_product.product_image,erp_invoice_details.discount,erp_invoice_details.igst,'
                 . 'erp_invoice_details.product_description,erp_invoice_details.id,erp_product.hsn_sac,erp_product.sales_price_without_gst,,erp_invoice_details.sp_with_gst');
 

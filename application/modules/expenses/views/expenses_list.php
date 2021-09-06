@@ -272,7 +272,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
     </div>
 
-    <div class="col-md-12 grid-margin stretch-card" >
+    <div class="col-md-12 grid-margin stretch-card" id="expense_list_table" style="display:none" >
 
         <div class="card">
 
@@ -284,7 +284,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                         <table id="basicTable_call_back"  class="table table-striped responsive no-footer dtr-inline expense_right">
 
-                            <thead style="display:none">
+                            <thead>
 
                                 <tr>
 
@@ -344,7 +344,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                         </table>
 
-                        <div class="action-btn-align mb-10">
+                        <div class="action-btn-align mb-10"  style="display:none">
 
                             <button class="btn btn-primary print_btn"><span class="icon-printer"></span> Print</button>
 
@@ -392,10 +392,10 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
     // });
 
-    // if($(#search).click(function)){
-    //     $('#basicTable_call_back').show();
+    // if($('#search').click(function)){
+    //     $('#basicTable_call_back').find().show();
     // } else {
-    //     $('#basicTable_call_back').hide();
+    //     $('#basicTable_call_back').find().hide();
     // }
     
 
@@ -460,6 +460,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
     $("#footer_id").show();
 
     $(".excel_show").show();
+
+    $('#expense_list_table').show();
+var table;
 
     table = $('#basicTable_call_back').DataTable({
 
@@ -586,15 +589,19 @@ $data['company_details'] = $this->admin_model->get_company_details();
         ]
 
     });
+
+    new $.fn.dataTable.FixedHeader(table);
 } else {
 
 swal("Please select Company");
 
+$('#expense_list_table').hide();
+
 }
  
 
-    new $.fn.dataTable.FixedHeader(table);
-     table.ajax.reload();  //just reload table
+    
+    // table.ajax.reload();  //just reload table
 });
 
 
@@ -628,7 +635,7 @@ swal("Please select Company");
     dataType: 'json',
 
     success: function (result) {
-
+    if(result !=''){
         if (result[0].opening_balance != null && result[0].opening_balance > 0) {
 
             opening_amt = (result[0].opening_balance);
@@ -640,6 +647,12 @@ swal("Please select Company");
             $("#firm_amt").val('0');
 
         }
+        
+    } else {
+
+$("#firm_amt").val('0');
+
+}
 
     }
 
@@ -760,5 +773,5 @@ swal("Please select Company");
     });
 
 </script>
-<!-- <script src="<?= $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js"></script> -->
+<script src="<?= $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js"></script>
 

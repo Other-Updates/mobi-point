@@ -9438,4 +9438,54 @@ animation: blink 1s steps(2, start) infinite;
 .label.label-success {
 	background:#b0b0b0;
 }
-
+.card-design {
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    margin-bottom: 30px;
+    box-shadow: 0 0.46875rem 2.1875rem rgb(90 97 105 / 10%), 0 0.9375rem 1.40625rem rgb(90 97 105 / 10%), 0 0.25rem 0.53125rem rgb(90 97 105 / 12%), 0 0.125rem 0.1875rem rgb(90 97 105 / 10%);
+}
+.card-design-inner {
+    position: relative;
+    padding: 15px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.cd-tit {
+    font-weight: 600;
+    font-size: 16px;
+    padding: 5px 0;
+}
+.cd-value {
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+.cd-img {
+    text-align: center;
+}
+.cd-img img {
+    width: 100%;
+}
+.cd-link {
+    padding: 10px 0 0px 0;
+    border-top: 1px solid #ddd;
+}
+.cd-link a {
+    color: #06F;
+}
+.cd-link a .fa {
+    font-size: 15px;
+    position: relative;
+    top: 2px;
+    margin-left: 5px;
+}
+.dash-icons .col-md-2 {
+    width: 20%;
+}
+.card-design:hover {
+    box-shadow: none;
+}
+.m-t-0 {
+    margin-top: 0;
+}

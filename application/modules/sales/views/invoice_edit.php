@@ -1473,15 +1473,15 @@ if (!empty($customers)) {
                                         <?php } ?>
 
                                         <td class="action-btn-align">
-                            <p  style="display: none;" class ="gstcost">1</p>
-                            <p  style="display: none;" class = "nogstcost">2</p>
+                            <!-- <p  style="display: none;" class ="gstcost">1</p>
+                            <p  style="display: none;" class = "nogstcost">2</p> -->
 
 
 
                                 <input type="text" name="cost_price" style="width:70px;" id="cost_price"
-                                    class="costing_price perwhole required" />
-                                <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
-                                <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
+                                    class="costing_price perwhole required"  value="<?php echo $vals['cost_price'] ?>" />
+                                <input type="hidden" name="cp_with_gst[]" class="cp_with_gst"  value="<?php echo $vals['cp_with_gst'] ?>">
+                                <input type="hidden" name="cp_without_gst[]" class="cp_without_gst" value="<?php echo $vals['cp_without_gst'] ?>">
 
                                 <span class="error_msg"></span>
                             </td>
@@ -4421,7 +4421,7 @@ function finaltotal(){
 
 
 
-
+        profitcalculation();
 
 
         calculate_function();

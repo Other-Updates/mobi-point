@@ -427,7 +427,7 @@ class User_auth {
         $user_data = $this->ci->session->userdata($this->app_name);
 
         $app_session = json_decode(json_encode($this->cryptography('decrypt', $user_data)), true);
-
+        
         if (isset($app_session['user_id']))
 
             return $app_session['user_id'];
@@ -435,6 +435,11 @@ class User_auth {
         else
 
             return NULL;
+        //     echo'<pre>';
+        // print_r($app_session['user_id']); 
+       
+        // exit;
+
 
     }
 

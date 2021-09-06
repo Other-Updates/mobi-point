@@ -1022,10 +1022,11 @@ class Sales extends MX_Controller
     public function invoice_edit($id)
     {
 
+
         $datas["quotation"] = $quotation = $this->project_cost_model->get_all_invoice_by_id($id);
 
         $datas['quotation_details'] = $this->project_cost_model->get_all_invoice_details_by_id($id);
-
+       
         $datas['company_details'] = $this->admin_model->get_company_details();
 
         $datas["brand"] = $brand = $this->brand_model->get_brand();

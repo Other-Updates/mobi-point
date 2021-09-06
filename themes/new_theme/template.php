@@ -117,7 +117,12 @@
             display:none;
         }
     </style>
-    <body id="fullscreen" class="hold-transition sidebar-mini layout-fixed">
+    <?php
+        $collapse_menu='';
+        if($cur_class == 'report' || $cur_class == 'purchase_order' || $cur_class == 'sales')
+            $collapse_menu='sidebar-collapse';
+    ?>
+    <body id="fullscreen" class="hold-transition sidebar-mini layout-fixed <?php echo $collapse_menu;?>">
         <!--        <div class="print_header">
                     <table width="100%">
                         <tr>
@@ -163,7 +168,7 @@
                 <div class="container">
                     
                     <div class="header-table-today">
-                        <!--<a href="#" class="menu-collapse">
+                        <!--<a href="#" class="menu-$curapse">
                             <i class="fa fa-bars"></i>
                         </a>-->
                         <div class="header-table mar-left15">
@@ -921,14 +926,11 @@
         <script src="<?= $theme_path; ?>/js/jquery.dataTables.min.js"></script>
         <script src="<?= $theme_path; ?>/js/dataTables.bootstrap.js"></script>
         <script src="<?= $theme_path; ?>/js/dataTables.responsive.js"></script>
-        <script src="<?= $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js"></script>
+        <!-- <script src="<?= $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js"></script> -->
 
         <script src="<?= $theme_path; ?>/js/select2.min.js"></script>
         <script type="text/javascript">
-        var cur_class="<?php echo $cur_class;?>";
-        if(cur_class == 'report' || cur_class == 'purchase_order' || cur_class == 'sales'){
-            $('body').addClass('sidebar-collapse');
-        }
+       
             $('.dot_val').live('keypress', function (eve) {
                 if ((eve.which != 46 || $(this).val().indexOf('.') != -1) && (eve.which < 48 || eve.which > 57) || (eve.which == 46 && $(this).caret().start == 0)) {
                     if (eve.which != 8)
