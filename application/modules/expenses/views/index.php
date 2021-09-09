@@ -1,4 +1,22 @@
 <?php $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template'); ?>
+<script src="<?= $theme_path; ?>/js/jquery-1.8.2.js"></script>
+
+<script src="<?= $theme_path; ?>/js/jquery-ui-my-1.10.3.min.js"></script>
+
+<link href="<?php echo $theme_path ?>/css/select2.css" rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/fSelect.css"/>
+
+<script src="<?php echo $theme_path ?>/js/select2.min.js"></script>
+
+<script type='text/javascript' src='<?php echo $theme_path; ?>/js/jquery.table2excel.min.js'></script>
+
+
+<script type='text/javascript' src='<?= $theme_path; ?>/js/fSelect.js'></script>
+
+<link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js/sweetalert.css">
+
+<script src="<?php echo $theme_path; ?>/js/sweetalert.min.js" type="text/javascript"></script>
 
 <style>
     .form-check, .form-radio {
@@ -20,7 +38,7 @@
                                     <label class="col-sm-12 col-form-label">Company <span style="color:#F00; ">*</span></label>
                                     <div class="col-sm-12">
                                         <select name="firm_id" class="form-control required" id="firm" tabindex="1">
-                                            <option value="">Select</option>
+                                            <!-- <option value="">Select</option> -->
                                             <?php
                                             if (isset($firms) && !empty($firms)) {
                                                 foreach ($firms as $firm) {
@@ -167,13 +185,13 @@
     </div>
 
 </div>
-<link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" />
-<script src="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- <link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" /> -->
+<!-- <script src="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script> -->
 <script>
-    $('.datepicker').datepicker({
-        format: 'dd-mm-yyyy',
-        endDate: "today",
-    });
+    // $('.datepicker').datepicker({
+    //     format: 'dd-mm-yyyy',
+    //     endDate: "today",
+    // });
 
     $(document).ready(function () {
         // category change
@@ -186,7 +204,7 @@
                 dataType: 'json',
                 success: function (response) {
                     // Remove options
-                    $('#ex_subcat').find('option').not(':first').remove();
+                    // $('#ex_subcat').find('option').not(':first').remove();
                     // Add options
                     $.each(response, function (index, data) {
                         $('#ex_subcat').append('<option value="' + data['id'] + '">' + data['sub_category'] + '</option>');
@@ -274,6 +292,24 @@
             $("#ex_amt_err").text("");
         }
     });
+                $("#entry_date").datepicker({
+
+            format: 'dd-mm-yyyy',
+
+            autoclose: true,
+
+            }).on('changeDate', function (selected) {
+
+            var startDate = new Date(selected.date.valueOf());
+
+            $('#to_date').datepicker('setStartDate', startDate);
+
+            }).on('clearDate', function (selected) {
+
+            $('#to_date').datepicker('setStartDate', null);
+
+            });
+
 
 
     $('#submit').on('click', function () {

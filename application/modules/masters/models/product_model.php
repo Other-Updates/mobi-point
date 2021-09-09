@@ -202,8 +202,7 @@ class Product_model extends CI_Model {
         return $this->db->update('erp_product', ["product_image" => trim($image)]);
     }
 
-    public function update_product($data, $id) {
-
+    public function update_product($data, $id, $product_update_array) {
         unset($data['submit']);
 
         /*
@@ -261,14 +260,10 @@ class Product_model extends CI_Model {
         //  echo "<pre>";print_r($data);exit;
 
         $this->db->set($data);
-
         $this->db->where('id', $id);
-
         if ($this->db->update($this->table_name)) {
-
             return true;
         }
-
         return false;
     }
 

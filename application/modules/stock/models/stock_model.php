@@ -16,7 +16,7 @@ class Stock_model extends CI_Model {
     var $joinTable4 = 'erp_brand b';
     var $primaryTable = 'erp_stock u';
     //var $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,p.model_no,r.firm_name';
-    var $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,p.model_no,r.firm_name,p.cost_price,p.cgst,p.sgst,p.cost_price_without_gst';
+    var $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,p.model_no,r.firm_name,p.cost_price,p.cgst,p.sgst,p.cost_price_without_gst,p.min_qty';
     var $column_order = array(null, 'r.firm_name', 'c.categoryName', 'p.product_name', 'b.brands', 'u.quantity', null); //set column field database for datatable orderable
     var $column_search = array('r.firm_name', 'c.categoryName', 'p.product_name', 'b.brands', 'u.quantity', 'p.cost_price'); //set column field database for datatable searchable
     var $order = array('u.id' => 'ASC '); // default order

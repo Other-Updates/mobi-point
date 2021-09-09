@@ -239,6 +239,7 @@ class Brand_model extends CI_Model {
 
     function get_datatables() {
         $this->db->select($this->selectColumn);
+        $this->db->select('hsn,gst');
         $this->_get_datatables_query();
         $firms = $this->user_auth->get_user_firms();
         if ($_POST['length'] != -1)

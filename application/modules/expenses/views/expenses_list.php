@@ -47,6 +47,7 @@
 </style>
 
 <?php
+$this->config->item('firm_id');
 
 $this->load->model('admin/admin_model');
 
@@ -152,7 +153,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                             <select id='firm' class="form-control">
 
-                                <option value="">Select</option>
+                                <!-- <option value="">Select</option> -->
 
                                 <?php
 
@@ -490,9 +491,9 @@ var table;
 
                 data.firm_id = $('#firm').val();
 
-                // data.cat_id = $('#ex_category').val();
+                data.cat_id = $('#ex_category').val();
 
-                // data.sub_cat_id = $('#ex_subcat').val();
+                data.sub_cat_id = $('#ex_subcat').val();
 
                 data.from_date = $('#from_date').val();
 

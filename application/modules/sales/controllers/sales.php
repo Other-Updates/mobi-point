@@ -1636,7 +1636,7 @@ class Sales extends MX_Controller
                     $insert['unit'] = $input['unit'][$key];
 
                     $insert['quantity'] = $input['quantity'][$key];
-
+                    $insert['cost_price'] = $input['cost_price'][$key];
                     $insert['per_cost'] = $input['per_cost'][$key];
                     $insert['sp_with_gst'] = $input['sp_with_gst'][$key];
                     $insert['sp_without_gst'] = $input['sp_without_gst'][$key];
@@ -1661,6 +1661,20 @@ class Sales extends MX_Controller
                     $insert_arr[] = $insert;
 
                     $insert_details_id = $this->project_cost_model->insert_invoicedetails($insert);
+
+                    // if($insert['product_id'] > 0 && $insert['cost_price']){
+                    //     $cost_price = $insert['cost_price'];
+                    //     $cgst = $insert['tax'];
+                    //     $sgst = $insert['gst'];
+                    //     $cp_with_gst = $cost_price * (($cgst + $sgst) / 100);
+
+                    //     $cost_price_with_gst = $cost_price + $cp_with_gst;
+                        
+                    //     $product_data = array();
+                    //     $product_data['cost_price_without_gst'] = $insert['cost_price'];
+                    //     $product_data['cost_price'] = $cost_price_with_gst;
+                    //     $this->product_model->update_product($product_data, $insert['product_id']);
+                    // }
 
                     $update_data = [
                         "sales_id" => $input['pc_id'],
@@ -1742,7 +1756,10 @@ class Sales extends MX_Controller
         if ($this->input->post()) {
 
             $input = $this->input->post();
-
+            // echo '<pre>';
+            // print_r($input);
+            // exit;
+            $bill_type=$input['quotation']['bill_category'];
             $net_total = $input['quotation']['net_total'];
 
             $data['company_details'] = $this->admin_model->get_company_details();
@@ -1771,7 +1788,9 @@ class Sales extends MX_Controller
 
             unset($input['quotation']['bill_type']);
             
-
+            // foreach($input['product_id'] as $key=>$product_id){
+            //     $this->project_cost_model->update_product_from_invice($input['product_id'][$key],$input['cost_price'][$key],$input['per_cost'][$key]);
+            // }
                 
 
             $arr = $this->gen_model->get_prefix_by_frim_id($input['quotation']['firm_id']);
@@ -1961,7 +1980,7 @@ class Sales extends MX_Controller
 
                             $insert['delivery_quantity'] = $input['quantity'][$key];
                         }
-
+                        $insert['cost_price'] = $input['cost_price'][$key];
                         $insert['per_cost'] = $input['per_cost'][$key];
 
                         $insert['sp_with_gst'] = $input['sp_with_gst'][$key];
@@ -1991,8 +2010,13 @@ class Sales extends MX_Controller
                         $inv_id['inv_id'] = $input['quotation']['inv_id'];
 
                         $stock_arr[] = $inv_id;
-
                         $insert['firm'] = $input['quotation']['firm_id'];
+                        //Update product - cost and Sales Price
+                        if($bill_type==1){
+
+                            $updateData = array('cost_price'=>$insert['cost_price'],'sales_price'=>$insert['per_cost'],'submit'=>0);
+                            $this->product_model->update_product($updateData,$insert['product_id'],array());
+                        }
 
                         $this->stock_details($insert, $inv_id);
 
@@ -3404,7 +3428,6 @@ class Sales extends MX_Controller
     {
 
         if ($this->input->post()) {
-
             $input = $this->input->post();
 
             //Remove Old Product stock
@@ -3470,6 +3493,8 @@ class Sales extends MX_Controller
 
                     $insert['quantity'] = $input['quantity'][$key];
 
+                    $insert['cost_price'] = $input['cost_price'][$key];
+
                     $insert['per_cost'] = $input['per_cost'][$key];
 
                     $insert['sp_with_gst'] = ($input['sp_with_gst'][$key] > 0 ) ? $input['sp_with_gst'][$key] : 0.00;
@@ -3497,6 +3522,20 @@ class Sales extends MX_Controller
 
 
                     $insert_arr[] = $insert;
+                    
+
+                    if($insert['product_id'] > 0 && $insert['cost_price']){
+                        $cost_price = $insert['cost_price'];
+                        $cgst = $insert['tax'];
+                        $sgst = $insert['gst'];
+                        $taxes = ($cgst + $sgst);
+                        $cp_with_gst = $cost_price * (($taxes) / 100);
+                        $cost_price_with_gst = $cost_price + $cp_with_gst;
+                        $product_data = array();
+                        $product_data['cost_price_without_gst'] = $insert['cost_price'];
+                        $product_data['cost_price'] = $cost_price_with_gst;
+                        $this->product_model->update_product($product_data, $insert['product_id']);
+                    }
 
                     $customer['tin'] = $input['customer']['tin'];
 
@@ -4681,7 +4720,7 @@ class Sales extends MX_Controller
     function invoice_ajaxList()
     {
 
-
+        
 
         $list = $this->project_cost_model->get_datatables();
         // echo"<pre>";

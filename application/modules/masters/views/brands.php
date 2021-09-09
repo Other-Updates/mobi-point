@@ -36,7 +36,7 @@
 </script>
 <style>
 .text-center {
-    text-align: left;
+    text-align: center;
 }
 </style>
 <div class="mainpanel">
@@ -177,6 +177,8 @@
                                         <th style="text-align:center;">Shop Name</th>
                                         <th style="text-align:center;">Category Name</th>
                                         <th style="text-align:center;">Model Name</th>
+                                        <th style="text-align:center;">HSN Number</th>
+                                        <th style="text-align:center;">GST</th>
                                         <th class="action-btn-align" style="text-align:center;">Actions</th>
 										</tr>
                                         </thead>
@@ -570,6 +572,31 @@
                                         <span id="dupup" class="dupup" style="color:#F00; font-style:italic;"></span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td><strong>HSN Number</strong></td>
+                                    <td>
+                                        <div class="input-group">
+                                                    <input type="text" placeholder=" Enter HSN"name="hsn" id="model_hsn" maxlength="40" /><input type="hidden" id="root1_h" class="root1_h"  value=""  />
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-fa"></i>
+                                            </div>
+                                        </div>
+                                        <span id="cnameerrorup" class="cnameerrorup" style="color:#F00; font-style:italic;"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GST</strong></td>
+                                    <td>
+                                        <div class="input-group">
+                                                    <input type="text"  name="gst" placeholder=" Enter GST" id="model_gst" maxlength="40" /><input type="hidden" id="root1_h" class="root1_h"  value=""  />
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-fa"></i>
+                                            </div>
+                                        </div>
+                                        <span id="cnameerrorup" class="cnameerrorup" style="color:#F00; font-style:italic;"></span>
+                                    </td>
+                                </tr>
+                                
                             </table>
                     </div>
                     <div class="modal-footer action-btn-align">
@@ -681,12 +708,16 @@
             var model_firm = $(this).attr('firm_id');
             var model_cat = $(this).attr('cat_id');
             var model_name = $(this).attr('model_name');
+            var model_gst = $(this).attr('model_gst');
+            var model_hsn = $(this).attr('model_hsn');
             $("#modal_firm,#modal_category,#modal_model,#modal_id,#root1_h").val('');
             $("#firmerr,#caterr,#cnameerrorup,#dupup").text('');
             $("#modal_firm").val(model_firm);
             $("#modal_category").val(model_cat);
             $("#modal_model,#root1_h").val(model_name);
             $("#modal_id").val(modelid);
+            $("#model_gst").val(model_gst);
+            $("#model_hsn").val(model_hsn);
             $('#update_brand').modal('show');
         });
     });
@@ -695,6 +726,8 @@
             var cname = $('#modal_model').val();
             var cat_id = $('#modal_category').val();
             var firm = $('#modal_firm').val();
+            var hsn = $('#model_hsn').val();
+            var gst = $('#model_gst').val();
             //var message = $('.dupup').val();
             var message = $(this).offsetParent().find('.dupup');
             var id = $('.id_update').val();
@@ -703,7 +736,7 @@
                 url: BASE_URL + "masters/brands/update_duplicatebrandname",
                 type: 'POST',
                 async: false,
-                data: {value1: cname, value2: id, value3: cat_id, value4: firm},
+                data: {value1: cname, value2: id, value3: cat_id, value4: firm,hsn: hsn,gst: gst},
                 success: function (result)
                 {
 
@@ -759,8 +792,9 @@
                 $.ajax({
                     url: BASE_URL + "masters/brands/update_brand",
                     type: 'POST',
-                    data: {value1: id, value2: brand, firm: firm, cat_id: cat_id},
+                    data: {value1: id, value2: brand, firm: firm, cat_id: cat_id,hsn: hsn,gst: gst},
                     success: function (result)
+                    // console.log(1);
                     {
                         window.location.reload(BASE_URL + "index/");
                     }

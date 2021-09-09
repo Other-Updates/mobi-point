@@ -72,7 +72,7 @@ class Stock extends MX_Controller {
         }
         $list = $this->stock_model->get_datatables($search_arr);
 
-        // echo "<pre>";print_r($list);exit;
+        //  echo "<pre>";print_r($list);exit;
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $ass) {
@@ -85,11 +85,10 @@ class Stock extends MX_Controller {
             $row[] = $ass->product_name;
             $row[] = $ass->brands;
             $row[] = round($ass->quantity);
-            $user_info = $this->user_auth->get_from_session('user_info');
-            if ($user_info[0]['role'] == 1) {
-                // $row[] = '<a href="javascript:void(0)" stock_id="' . $ass->id . '" data-toggle="tooltip" class="tooltips btn btn-default btn-xs edit" title="" data-original-title="Edit"><span class="fa fa-edit "></span></a>';
-            } else {
-                // $row[] = '<a href="javascript:void(0)" stock_id="' . $ass->id . '" data-toggle="tooltip" class="tooltips btn btn-default btn-xs edit" title="" data-original-title="Edit"><span class="fa fa-ban alerts"></span></a>';
+            if($ass->min_qty > 0){
+                $row[] = $ass->min_qty - $ass->quanity;
+            }else{
+                $row[] = '-';
             }
             $data[] = $row;
         }

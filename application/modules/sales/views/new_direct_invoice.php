@@ -410,7 +410,7 @@ if (!empty($customers)) {
 
                 <td class="action-btn-align">
                     <p  style="display: none;" class ="gstcost">1</p><p style="display: none;"  class = "nogstcost">2</p>
-                    <input type="text" name="cost_price" style="width:70px;" id="cost_price"
+                    <input type="text" name="cost_price[]" style="width:70px;" id="cost_price"
                         class="costing_price perwhole" />
                     <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
                     <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
@@ -1253,30 +1253,11 @@ if (!empty($customers)) {
                                 <div class="ime_code_select">
 
                                     <div tabindex="11">
-
-
-
-
-
                                         <select id="ime_code_id" class="form-control multi_select ime_code_id " required
                                             multiple="multiple" autocomplete="off" name="ime_code_id[]">
-
-
-
                                             <option>Select</option>
-
-
-
-
-
                                         </select>
-
-
-
                                     </div>
-
-
-
                                 </div>
 
                                 <input type="hidden" name='ime_code_val[]' style="width:70px;"
@@ -1364,26 +1345,13 @@ if (!empty($customers)) {
 
 
 
-                                <input type="text" name="cost_price" style="width:70px;" id="cost_price"
+                                <input type="text" name="cost_price[]" style="width:70px;" id="cost_price"
                                     class="costing_price perwhole required" />
                                 <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
                                 <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
 
                                 <span class="error_msg"></span>
                             </td>
-
-
-                             <!-- <td class="action-btn-align">
-
-
-
-                                <input type="text" name="cost_price without gst" style="width:70px;" id="cost_price without gst"
-                                    class="costing_price without gst perwhole required" />
-                                <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
-                                <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
-
-                                <span class="error_msg"></span>
-                            </td> -->
                             
 
                             <td class="action-btn-align">
@@ -1398,17 +1366,6 @@ if (!empty($customers)) {
                                 <span class="error_msg"></span>
 
                             </td>
-<!-- 
-                            <td class="action-btn-align">
-                              
-                                <input type="text" tabindex="13" name='per_cost without gst[]' style="width:70px;"
-                                    class="selling_price without gst percost required" />
-                                <input type="hidden" name="sp_with_gst[]" class="sp_with_gst">
-                                <input type="hidden" name="sp_without_gst[]" class="sp_without_gst">
-
-                                <span class="error_msg"></span>
-
-                            </td> -->
 
 
                             <td class="action-btn-align">
@@ -3093,34 +3050,30 @@ function calculate_function() {
 
         if (Number(qty.val()) != 0) {
 
-            
             tot = Number(qty.val()) * Number(percost.val());
-
             $(this).closest('tr').find('.gross').val(tot);
-
             subtotal.val(tot.toFixed(2));
-
             var total_cgst_per = Number(pertax.val());
-
             var total_sgst_per = Number(gst.val());
-
             var total_igst_per = Number(igst.val());
 
 
 
-            if ($('#gst_type').val() == 31) {
+            // if ($('#gst_type').val() == 31) {
+            //     var total_taxgst_per = total_cgst_per + total_sgst_per;
+            //     var cgst_price = (Number(tot) * Number(total_cgst_per / 100)).toFixed(2);
+            //     var sgst_price = (Number(tot) * Number(total_sgst_per / 100)).toFixed(2);
+
+            // } else {
+            //     $('.igst_sgst').text('IGST');
+            //     var cgst_price = (Number(tot) * Number(total_cgst_per / 100)).toFixed(2);
+            //     var total_taxgst_per = total_cgst_per + total_igst_per;
+            //     var sgst_price = (Number(tot) * Number(total_igst_per / 100)).toFixed(2);
+            // }
+
                 var total_taxgst_per = total_cgst_per + total_sgst_per;
                 var cgst_price = (Number(tot) * Number(total_cgst_per / 100)).toFixed(2);
                 var sgst_price = (Number(tot) * Number(total_sgst_per / 100)).toFixed(2);
-
-            } else {
-                $('.igst_sgst').text('IGST');
-                var cgst_price = (Number(tot) * Number(total_cgst_per / 100)).toFixed(2);
-                var total_taxgst_per = total_cgst_per + total_igst_per;
-                var sgst_price = (Number(tot) * Number(total_igst_per / 100)).toFixed(2);
-            }
-
-
 
 
             var price_without_gst = $(this).closest('tr').find('.sp_without_gst');
@@ -3643,14 +3596,6 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                         } else {
                             this_val.closest('tr').find('.costing_price').val('0');
                         }
-                        
-                        // if (result[0].cost_price_without_gst != '') {
-                        //     this_val.closest('tr').find('.costing_price without gst').val(result[0].cost_price_without_gst);
-                        //     this_val.closest('tr').find('.cp_with_gst').val(result[0].cost_price);
-                        //     this_val.closest('tr').find('.cp_without_gst').val(result[0].cost_price_without_gst);
-                        // } else {
-                        //     this_val.closest('tr').find('.costing_price without gst').val('0');
-                        // }
                         
                         if (result[0].selling_price != '') {
                             if($('.gst-invoice:checked').val() == 1){

@@ -284,9 +284,9 @@ if (!empty($sales)) {
 
                         <td class=" total-bg"></td>
 
-                        <td class="total-bg""></td>
+                        <td class="total-bg"></td>
 
-                        <td class=""></td>
+                        <td class="total-bg"></td>
 
                         <!--<td class=""></td>
 
@@ -466,7 +466,7 @@ if (!empty($sales)) {
 
                 },
                 {
-                    "class": "action-btn-align", "targets": [3, 4, 5]
+                    "class": "action-btn-align", "targets": [3, 4, 5,7]
 
                 },
                 {
@@ -499,7 +499,7 @@ if (!empty($sales)) {
 
                 var numFormat = $.fn.dataTable.render.number('\,', '.', 2, symbol).display;
 
-                var cols = [4, 5];
+                var cols = [4,5,6];
 
                 for (x in cols) {
 

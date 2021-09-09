@@ -8,27 +8,6 @@
 
 <link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/js/auto_com/jquery.autocomplete.css" />
 
-<!-- <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/fixedHeader.dataTables.min.css"/> -->
-
-<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net/js/jquery.dataTables.js"></script> -->
-
-<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script> -->
-
-<!-- <link rel="stylesheet" href="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" /> -->
-
-<!-- <script src="<?php echo $theme_path; ?>/js/data-table.js"></script> -->
-
-<!-- <link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.css"> -->
-
-<!-- <script src="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.js"></script> -->
-
-<!-- <script src="<?php echo $theme_path ?>/js/tabs.js"></script> -->
-
-<!-- <script type='text/javascript' src='<?php echo $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js'></script> -->
-
-<!-- <link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" /> -->
-
-<!-- <script src="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script> -->
 
 <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js/sweetalert.css">
 
@@ -65,6 +44,7 @@
 </style>
 
 <?php
+$this->config->item('firm_id');
 
 $this->load->model('admin/admin_model');
 
@@ -172,7 +152,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                             <select id='firm' class="form-control">
 
-                                <option value="">Select</option>
+                                <!-- <option value="">Select</option> -->
 
                                 <?php
 

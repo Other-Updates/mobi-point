@@ -2420,8 +2420,8 @@ if (!empty($brand)) {
             
         $('#hsn_number').val(hsn);
         $('#igst').val(gst);
-        $('#cgst').val(cgst);
-        $('#sgst').val(cgst);
+        $('#cgst').val(gst);
+        $('#sgst').val(gst);
         
       
         });

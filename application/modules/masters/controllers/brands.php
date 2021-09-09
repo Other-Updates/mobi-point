@@ -146,7 +146,12 @@ class Brands extends MX_Controller {
 
         $id = $this->input->post('value1');
 
-        $input = array('brands' => $this->input->post('value2'),'cat_id' => $this->input->post('cat_id'), 'created_by' => $this->user_auth->get_user_id(), 'firm_id' => $this->input->POST('firm'));
+        $input = array('brands' => $this->input->post('value2'),'cat_id' => $this->input->post('cat_id'),
+         'created_by' => $this->user_auth->get_user_id(), 'firm_id' => $this->input->POST('firm'),
+         'hsn' => $this->input->POST('hsn'),'gst' => $this->input->POST('gst'));
+        //   print_r($input);
+        //  echo"<pre>";
+        //  exit;
 
         $this->brand_model->update_brand($input, $id);
 
@@ -491,6 +496,7 @@ class Brands extends MX_Controller {
         $no = $_POST['start'];
 
         foreach ($list as $ass) {
+            // print_r($ass);exit;
 
             //  $edit_access = ($edit_access == 0) ? 'blocked_access' : '';
 
@@ -510,8 +516,9 @@ class Brands extends MX_Controller {
 
             $row[] = $ass->brands;
 
-            // $row[] = $ass->hsn;
-            // $row[] = $ass->gst;
+            $row[] = $ass->hsn;
+
+            $row[] = $ass->gst;
 
 
 
@@ -519,7 +526,7 @@ class Brands extends MX_Controller {
 
             if ($this->user_auth->is_action_allowed('masters', 'brands', 'edit')) {
 
-                $rows = '<a href="#" data-toggle="modal" id="edit" model_id="'.$ass->id.'" firm_id="'.$ass->firm_id.'" cat_id="'.$ass->cat_id.'" model_name="'.$ass->brands.'" class="tooltips btn btn-default btn-xs" title="" ><span class="fa fa-log-out "> <span class="fa fa-edit" ></span></span></a>&nbsp;';
+                $rows = '<a href="#" data-toggle="modal" id="edit" model_hsn="'.$ass->hsn.'" model_gst="'.$ass->gst.'" model_id="'.$ass->id.'" firm_id="'.$ass->firm_id.'" cat_id="'.$ass->cat_id.'" model_name="'.$ass->brands.'" class="tooltips btn btn-default btn-xs" title="" ><span class="fa fa-log-out "> <span class="fa fa-edit" ></span></span></a>&nbsp;';
 
             } else {
 

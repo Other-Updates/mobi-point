@@ -478,7 +478,7 @@
 
                                             <span data-toggle="tooltip" class="tooltips btn btn-success btn-xs" style="margin-bottom:4px;margin-top:4px;" title="">Delivered Quantity</span> &nbsp;
 
-                                            <input type="text"   tabindex="-1"  name='delivery_quantity[]' style="width:70px;" class="delivery_qty" value="<?php echo $vals['delivery_qty'] ?>" readonly="readonly"/>
+                                            <input type="text"   tabindex="-1"  name='delivery_quantity[]' style="width:70px;" class="delivery_qty" value="<?php echo $vals['quantity'] ?>" readonly="readonly"/>
 
                                             <br>
 

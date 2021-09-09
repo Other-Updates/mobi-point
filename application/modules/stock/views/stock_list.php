@@ -256,6 +256,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                         <td width='10%' class="action-btn-align">Quantity</td>
 
+                        <td width='5%' class="action-btn-align">Shortage Quantity</td>
+
                         <!--<td width='10%' class="hide_class action-btn-align">Action</td>-->
 
                     </tr>

@@ -1312,33 +1312,35 @@ if (!empty($customers)) {
 
                                         <td>
 
-                                            <div class="ime_code_select">
-                                            <?php if($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles' || $vals['categoryName'] == 'Smart Phone-Brand New' ||  $vals['categoryName'] == 'Smart Phone-REFURBISHED'  ) { ?>
-                                                <div tabindex="0">
+                                <div class="ime_code_select">
+                            <?php if($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles' || $vals['categoryName'] == 'Smart Phone-Brand New' ||  $vals['categoryName'] == 'Smart Phone-REFURBISHED' || $vals['categoryName'] == 'Smart Phone-Brand New') { ?>
+                         <div tabindex="0">
 
 
-                                                    <select id="ime_code_id" class="form-control multi_select ime_code_id " multiple="multiple" autocomplete="off" name="ime_code_id[]">
+                 <select id="ime_code_id" class="form-control multi_select ime_code_id " multiple="multiple" autocomplete="off" name="ime_code_id[]">
 
-                                                        <option value="">Select</option>
-                                                        <?php
-                                                        if (isset($vals['ime_code_all_details']) && !empty($vals['ime_code_all_details'])) {
-                                                            foreach ($vals['ime_code_all_details'] as $val_imie) {
-                                                        ?>
-                                                                <option value='<?php echo $val_imie['ime_code'] ?>' <?php
-                                                                                                                    if (in_array($val_imie['ime_code'], $vals['ime_code_details'])) {
-                                                                                                                        echo "selected";
-                                                                                                                    }
-                                                                                                                    ?>><?php echo $val_imie['ime_code'] ?></option>
-                                                        <?php
-                                                            }
+                     <option value="">Select</option>
+                                 <?php
+                             if (isset($vals['ime_code_all_details']) && !empty($vals['ime_code_all_details'])) {
+                                      foreach ($vals['ime_code_all_details'] as $val_imie) {
+                                 ?>
+                                <option value='<?php echo $val_imie['ime_code'] ?>' <?php
+                                                                                                                                                if (in_array($val_imie['ime_code'], $vals['ime_code_details'])) {
+                                                                                                                                             echo "selected";
+                                                                                                                                                        }
+                                                                                                                                                    ?>><?php echo $val_imie['ime_code'] ?></option>
+                                                        <?php } 
                                                         }
                                                         ?>
-
-
-                                                    </select>
+                                                        </select>
 
                                                 </div>
+                                            <?php  } else if ($vals['categoryName']== 'Online-Payment' || $vals['categoryName'] =='Recharge'){ ?>
+                                                <input type="text" name='ime_code_val[]' style="width:70px;" class="ime_code_val required" value="<?php echo $vals['ime_code_select']; ?>" id="ime_code_vals" />
                                             <?php } ?>
+
+
+
 
                                             </div>
 
@@ -1473,11 +1475,10 @@ if (!empty($customers)) {
                                         <?php } ?>
 
                                         <td class="action-btn-align">
-                            <!-- <p  style="display: none;" class ="gstcost">1</p>
-                            <p  style="display: none;" class = "nogstcost">2</p> -->
+                            <p  style="display: none;" class ="gstcost">1</p>
+                            <p  style="display: none;" class = "nogstcost">2</p>
 
-
-
+                                            <!-- <?php print_r($val) ?> -->
                                 <input type="text" name="cost_price" style="width:70px;" id="cost_price"
                                     class="costing_price perwhole required"  value="<?php echo $vals['cost_price'] ?>" />
                                 <input type="hidden" name="cp_with_gst[]" class="cp_with_gst"  value="<?php echo $vals['cp_with_gst'] ?>">
@@ -1573,7 +1574,7 @@ if (!empty($customers)) {
 
                                         </td>
                                         
-                                         <td>
+                                         <td  class="action-btn-align">
 
                                          <input type="text" style="width:70px;" id="profit" class="profit" />
                                          </td>
@@ -3160,26 +3161,15 @@ function finaltotal(){
 
 
                             if (ime_result != null && ime_result.length > 0) {
-
-
                                 option_text += '<div  tabindex="0"><select id="ime_code_id" class="form-control multi_select ime_code_id" multiple="multiple" autocomplete="off" name="ime_code_id[]">';
-
                                 option_text += '<option value="">Select</option>';
-
-
                                 $.each(ime_result, function(key, value) {
-
-                                    //console.log(value.ime_code);
-
-                                    selected = '';
+                                     selected = '';
                                     if (key == 0)
                                         selected = 'selected';
-
-                                    option_text += '<option  value="' + value.ime_code + '"  ' + selected + '>' + value.ime_code + '</option>';
-
-                                });
-
-                                option_text += '</select></div>';
+                                        option_text += '<option  value="' + value.ime_code + '"  ' + selected + '>' + value.ime_code + '</option>';
+                                         });
+                                         option_text += '</select></div>';
 
                                 // this_val.closest('tr').find('td .ime_code_select').empty();
 
@@ -3187,23 +3177,14 @@ function finaltotal(){
 
 
                                 // this_val.closest('tr').find('td .ime_code_id').fSelect();
-
-
-
                                 var datas = this_val.closest('tr').find('td .ime_code_id').val();
-
-
                                 this_val.closest('tr').find('td .ime_code_val').val(datas);
-
-
-                            } else {
+                                } else {
 
                                 // $('#sales_man').html('');
-
-                                this_val.closest('tr').find('.ime_code_id').html(option_text);
-                                this_val.closest('tr').find('.ime_code_val').removeClass('required');
-
-                            }
+                                 this_val.closest('tr').find('.ime_code_id').html(option_text);
+                                 this_val.closest('tr').find('.ime_code_val').removeClass('required');
+                                 }
 
 
 
@@ -3292,8 +3273,45 @@ function finaltotal(){
 
                             // this_val.closest('tr').find('.discount').val(result[0].discount);
                             
-                        if (result[0].cost_price != '') {
-                            if($gsttype == 1){ 
+                        // if (result[0].cost_price != '') {
+                        //     if($gsttype == 1){ 
+                        //         this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
+                        //     } else {
+                        //         this_val.closest('tr').find('.costing_price').val(result[0].cost_price_without_gst);
+                        //     }
+                        //     this_val.closest('tr').find('.cp_with_gst').val(result[0].cost_price);
+                        //     this_val.closest('tr').find('.cp_without_gst').val(result[0].cost_price_without_gst);
+                        //     this_val.closest('tr').find('.gstcost').html(result[0].cost_price);
+                        //     this_val.closest('tr').find('.nogstcost').html(result[0].cost_price_without_gst);
+
+
+
+                        // } else {
+                        //     this_val.closest('tr').find('.costing_price').val('0');
+                        // }
+
+
+
+                            // if (result[0].cost_price != '') {
+                                
+                            //      this_val.closest('tr').find('.cost_price').val(result[0].cost_price);
+                            //     this_val.closest('tr').find('.sp_with_gst').val(result[0].cost_price);
+                            //     this_val.closest('tr').find('.sp_without_gst').val(result[0].cost_price_without_gst);
+                            //     } else {
+                            //     this_val.closest('tr').find('.cost_price').val('0');
+                            //     }
+
+                            //     if (result[0].selling_price != '') {
+                                
+                            //     this_val.closest('tr').find('.selling_price').val(result[0].sales_price);
+                            //    this_val.closest('tr').find('.cp_with_gst').val(result[0].sales_price);
+                            //    this_val.closest('tr').find('.cp_without_gst').val(result[0].sales_price_without_gst);
+                            //    } else {
+                            //    this_val.closest('tr').find('.selling_price').val('0');
+                            //    }
+
+                            if (result[0].cost_price != '') {
+                                if($gsttype == 1){ 
                                 this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
                             } else {
                                 this_val.closest('tr').find('.costing_price').val(result[0].cost_price_without_gst);
@@ -3308,27 +3326,34 @@ function finaltotal(){
                         } else {
                             this_val.closest('tr').find('.costing_price').val('0');
                         }
+                        
 
-
-
-                            if (result[0].selling_price != '') {
-
-
+                        if (result[0].selling_price != '') {
+                            if($gsttype == 1){ 
                                 this_val.closest('tr').find('.selling_price').val(result[0].sales_price);
-                                this_val.closest('tr').find('.sp_with_gst').val(result[0].sales_price);
-                                this_val.closest('tr').find('.sp_without_gst').val(result[0].sales_price_without_gst);
-
-
-
                             } else {
-
-
-
-                                this_val.closest('tr').find('.selling_price').val('0');
-
-
-
+                                this_val.closest('tr').find('.selling_price').val(result[0].sales_price_without_gst);
                             }
+                            // this_val.closest('tr').find('.selling_price').val(result[0].sales_price);
+                            this_val.closest('tr').find('.sp_with_gst').val(result[0].sales_price);
+                            this_val.closest('tr').find('.sp_without_gst').val(result[0].sales_price_without_gst);
+                            this_val.closest('tr').find('.gst').html(result[0].sales_price);
+                            this_val.closest('tr').find('.nogst').html(result[0].sales_price_without_gst);
+                        } else {
+                            this_val.closest('tr').find('.selling_price').val('0');
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
                             
                             var fin_total =0;
                      $('.profit').each(function(){

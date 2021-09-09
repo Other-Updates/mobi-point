@@ -29,7 +29,16 @@
         background-color:orange !important;
 
     }
-    /*table tr td:nth-child(5) {
+    table tr td:nth-child(5) {
+        text-align:center;
+    }
+    table tr td:nth-child(3) {
+        text-align:center;
+    }
+    table tr td:nth-child(2) {
+        text-align:center;
+    }
+    table tr td:nth-child(4) {
         text-align:center;
     }
     table tr td:nth-child(6) {
@@ -42,7 +51,7 @@
         table tr td:last-child {
             display:none;
         }
-    }*/
+    }
 
 
 </style>
