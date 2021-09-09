@@ -1755,9 +1755,9 @@ class Sales extends MX_Controller
 
         if ($this->input->post()) {
             $input = $this->input->post();
-            echo '<pre>';
-            print_r($input);
-            exit;
+            // echo '<pre>';
+            // print_r($input);
+            // exit;
             $bill_type=$input['quotation']['bill_category'];
             $net_total = $input['quotation']['net_total'];
 
