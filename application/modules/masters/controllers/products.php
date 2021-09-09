@@ -583,60 +583,23 @@ class Products extends MX_Controller
         }
     }
 
-    function import_products()
-    {
-
-
-
+    function import_products() {
         if ($this->input->post()) {
-
-
-
             $skip_rows = $this->input->post('skip_rows');
-
-
-
             if ($skip_rows == 0)
                 $skip_rows = 1;
 
             //            $skip_rows = 1;
 
             $is_success = 0;
-
-
-
             if (!empty($_FILES['product_data'])) {
-
-
-
                 $config['upload_path'] = './attachement/csv/';
-
-
-
                 $config['allowed_types'] = '*';
-
-
-
                 $config['max_size'] = '10000';
-
-
-
                 $this->load->library('upload', $config);
-
-
-
                 $random_hash = substr(str_shuffle(time()), 0, 3) . strrev(mt_rand(100000, 999999));
-
-
-
                 $extension = pathinfo($_FILES['product_data']['name'], PATHINFO_EXTENSION);
-
-
-
                 $new_file_name = 'product_' . $random_hash . '.' . $extension;
-
-
-
                 $_FILES['product_data'] = array(
                     'name' => $new_file_name,
                     'type' => $_FILES['product_data']['type'],
@@ -644,151 +607,49 @@ class Products extends MX_Controller
                     'error' => $_FILES['product_data']['error'],
                     'size' => $_FILES['product_data']['size']
                 );
-
-
-
                 $config['file_name'] = $new_file_name;
-
-
-
                 $this->upload->initialize($config);
-
-
-
                 $this->upload->do_upload('product_data');
-
-
-
                 $upload_data = $this->upload->data();
-
-
-
                 $file_name = $upload_data['file_name'];
-
-
-
                 $file = base_url() . 'attachement/csv/' . $file_name;
-
-
-
                 $handle = fopen($file, 'r');
-
-
-
                 if ($file != NULL && $skip_rows > 0) {
-
-
-
                     $skipLines = $skip_rows;
-
-
-
                     $lineNum = 1;
-
-
-
                     if ($skipLines > 0) {
-
-
-
                         while (fgetcsv($handle)) {
-
-
-
                             if ($lineNum == $skipLines) {
-
-
-
                                 break;
                             }
-
-
-
                             $lineNum++;
                         }
                     }
                 }
-
-
-
                 $count = 1;
-
                 if ($file != NULL) {
-
-
-
                     while ($row_data = fgetcsv($handle)) {
-
-
-
-
-
                         $product_name = $row_data[0];
-
-
-
                         $firm_name = $row_data[1];
-
-
-
                         $status = 'Active';
-
-
-
                         $category = $row_data[2];
-
-
-
                         $model = $row_data[3];
-
-
-
                         $model_num = $row_data[4];
-
-
-
                         $brand = $model;
-
-
-
                         if (!empty($model_num))
                             $brand = $model . " " . "-" . " " . $model_num;
-
-
-
-
-
                         $quantity = $row_data[5];
-
-
-
-
-
                         $cost_price = $row_data[6];
-
-
-
                         $sales_price = $row_data[7];
-
-
-
+                        $gst = $row_data[8];
+                        $hsn = $row_data[9];
                         $type = 'No';
-
-
-
                         // echo "<pre>";print_r($row_data);exit;
                         // $firm_details = $this->manage_firms_model->getfirm_id_based_on_firm_name($firm_name);
-
                         $firm_details = $this->getfirm_id_based_on_firm_name($firm_name);
-
-
-
                         if (!empty($firm_details)) {
-
                             $firm_id = $firm_details[0]['firm_id'];
-
                             if ($firm_id == 1) {
-
                                 $firm = array('2', '3', '4');
                             } else if ($firm_id == 2) {
 
@@ -803,158 +664,46 @@ class Products extends MX_Controller
 
                             //$frim = array('1', '4', '2');
 
-
-
                             $cat_id = $this->product_model->check_cat_exists($category, $firm_id);
-
-
-
                             if (empty($cat_id)) {
-
-
-
                                 $cat_data = array();
-
-
-
                                 $cat_data['categoryName'] = $category;
-
-
-
                                 $cat_data['firm_id'] = $firm_id;
-
-
-
                                 $cat_data['eStatus'] = 1;
-
-
-
                                 $user_info = $this->user_auth->get_from_session('user_info');
-
-
-
                                 $cat_data['created_by'] = $user_info[0]['id'];
-
-
-
                                 $cat_data['createdDate'] = date('Y-m-d H:i:s');
-
-
-
                                 $cat_id = $this->product_model->insert_category($cat_data);
                             }
-
-
-
-
-
                             $brand_id = $this->product_model->check_brand_exists($cat_id, $firm_id, $brand);
-
-
-
                             if (empty($brand_id)) {
-
-
-
                                 $brand_data = array();
-
-
-
                                 $brand_data['brands'] = $brand;
-
-
-
                                 $brand_data['firm_id'] = $firm_id;
-
                                 $brand_data['cat_id'] = $cat_id;
-
-
-
                                 $brand_data['status'] = 1;
-
-
-
                                 $user_info = $this->user_auth->get_from_session('user_info');
-
-
-
                                 $brand_data['created_by'] = $user_info[0]['id'];
-
-
-
                                 $brand_data['created_date'] = date('Y-m-d H:i:s');
-
-
-
                                 $brand_id = $this->product_model->insert_brand($brand_data);
                             }
-
-
-
                             //$frim = array('1', '4', '2');
-
-
-
                             if (!empty($cat_id && $brand_id)) {
-
                                 $product_name = str_replace('"', 'inch', $product_name);
-
-
-
                                 $pro_id = $this->product_model->check_product_exists($product_name, $firm_id, $cat_id, $brand_id);
-
-
-
                                 $product_data = array();
-
-
-
                                 $product_data['product_name'] = htmlentities($product_name);
-
-
-
-
-
                                 $product_data['barcode'] = htmlentities($product_name);
-
-
-
-                                $product_data['hsn_sac'] = "0";
-
-
-
-                                $product_data['cgst'] = "6.00";
-
-
-
-                                $product_data['sgst'] = "6.00";
-
-                                $product_data['igst'] = "6.00";
-
-
-
+                                $product_data['hsn_sac'] = $hsn;
+                                $product_data['cgst'] = $gst;
+                                $product_data['sgst'] = $gst;
+                                $product_data['igst'] = $gst;
                                 $product_data['firm_id'] = $firm_id;
-
-
-
                                 $product_data['category_id'] = $cat_id;
-
-
-
                                 $product_data['brand_id'] = $brand_id;
-
-
-
                                 $product_data['status'] = ($status == 'Active') ? 1 : 0;
-
-
-
                                 $product_data['type'] = ($type == 'No') ? 'product' : 'others';
-
-
-
                                 $product_data['cost_price'] = $cost_price;
-
                                 $product_data['sales_price'] = $sales_price;
                                 $cp_without_gst = '0.0';
                                 if ($cost_price) {
@@ -973,63 +722,26 @@ class Products extends MX_Controller
                                 $product_data['cost_price_without_gst'] = $cp_without_gst;
 
                                 $product_data['sales_price_without_gst'] = $sp_without_gst;
-
-
-
                                 $product_data['unit'] = 0;
-
-
-
                                 $product_data['qty'] = $quantity;
 
-
-
-
-
                                 // echo "<pre>";print_r($product_data);
-
-
-
                                 if (empty($pro_id)) {
-
                                     $product_data['created_date'] = date('Y-m-d');
-
                                     $pro_id = $this->product_model->insert_product($product_data);
-
                                     $this->stock_details($product_data, $pro_id);
                                 } else {
-
                                     $product_data['created_date'] = date('Y-m-d');
-
                                     $this->product_model->update_product($product_data, $pro_id);
-
                                     $this->stock_details($product_data, $pro_id);
                                 }
-
-
-
                                 $is_success = 1;
-
-
-
                                 $this->db->close();
-
-
-
                                 $this->db->initialize();
                             }
-
-
-
                             if ($count == 1000) {
-
-
-
                                 break;
                             }
-
-
-
                             $count++;
                         }
                     }
