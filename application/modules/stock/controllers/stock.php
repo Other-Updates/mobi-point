@@ -86,7 +86,7 @@ class Stock extends MX_Controller {
             $row[] = $ass->brands;
             $row[] = round($ass->quantity);
             if($ass->min_qty > 0){
-                $row[] = $ass->min_qty - $ass->quanity;
+                $row[] = $ass->quanity -  $ass->min_qty;
             }else{
                 $row[] = '-';
             }

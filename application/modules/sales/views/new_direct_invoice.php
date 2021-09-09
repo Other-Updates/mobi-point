@@ -358,14 +358,14 @@ if (!empty($customers)) {
                 </td>
 
                 <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="" />
-
-                <!-- <td class="action-btn-align">
+<!-- 
+                 <td class="action-btn-align">
 
                     <input type="hidden"  style="width:100%"  class='form-align tabwid model_no_extra' readonly="readonly"/>
 
-                    <input type="text"  tabindex="-1" name='unit[]' style="width:70px;" class="unit" />
+                    <input type="text"  tabindex="-1" name='money_transfer[]' style="width:70px;" class="money" />
 
-                </td>-->
+                </td>  -->
 
                 <td class="qty_text">
 
@@ -1287,13 +1287,13 @@ if (!empty($customers)) {
                             <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit"
                                 value="" />
 
-                            <!--<td class="action-btn-align">
+                            <!-- <td class="action-btn-align">
 
                                 <input type="hidden"  style="width:100%"  class='form-align tabwid model_no_extra' readonly="" />
 
-                                <input type="text" tabindex="-1" name='unit[]' style="width:70px;" class="unit" />
+                                <input type="text" tabindex="-1" name='money_transfer[]' style="width:70px;" class="money" />
 
-                            </td>-->
+                            </td> -->
 
                             <td class="action-btn-align">
 
@@ -3545,9 +3545,9 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
 
 
                         }
-                        else if (categoryname == 'Online-Payment' || categoryname =='Recharge'){
+                        else if (categoryname == 'Online-Payment' || categoryname =='Recharge' || categoryname == 'Money Transfer' ){
                             this_val.closest('tr').find('td .ime_code_select').empty();
-                            this_val.closest('tr').find('td .ime_code_select').append("<input type='text' />");
+                            this_val.closest('tr').find('td .ime_code_select').append("<input type='number' min='0' name='money_transfer[]' />");
                             this_val.closest('tr').find('.ime_code_val').removeClass('required'); 
                         } else {
                             this_val.closest('tr').find('td .ime_code_select').empty();
