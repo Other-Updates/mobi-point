@@ -2179,90 +2179,69 @@ $('.save').on('click', function() {
         m++;
     }
 
-    $('.required').each(function() {
+    /*$('.required').each(function () {
 
+            var tr = $('#app_table tr').length;
+            if (tr > 1)            {
+                test = $(this).closest('tr td').find('input.model_no').val();
 
+                if (test == '') {
 
-        var tr = $('#app_table tr').length;
-
-        if (tr > 1)
-
-        {
-
-            test = $(this).closest('tr td').find('input.model_no').val();
-
-            if (test == '') {
-
-                $(this).closest('tr').remove();
-
-            }
-
-        }
-
-
-
-    });
-
-    $('.required').each(function() {
-
-
-
-        this_val = $.trim($(this).val());
-
-        this_id = $(this).attr("id");
-
-        this_class = $(this).attr("class");
-
-        cat_name = $(this).closest('tr').find('.catname').val();
-        // console.log(cat_name);
-
-
-        if (this_val == "") {
-
-
-            if (this_id == "ime_code_vals") {
-
-                this_class = $(this).closest('div').attr('class');
-
-                if (cat_name == "Fresh Mobiles" || cat_name == "Used Mobiles" || cat_name ==
-                    "Smart Phone-Brand New" || cat_name == "Smart Phone-REFURBISHED") {
-                    $(this).closest('td.ime_code_error').find('.error_msg').text('Please add imei code')
-                        .css('display', 'inline-block');
-                    m++;
-                } else {
-                    $(this).closest('td.ime_code_error').find('.error_msg').text('');
+                    $(this).closest('tr').remove();
                 }
+            }
+        });
+
+        $('.required').each(function () {
+
+            this_val = $.trim($(this).val());
+
+            this_id = $(this).attr("id");
+
+            this_class = $(this).attr("class");
+
+            cat_name = $(this).closest('tr').find('.catname').val();
+            // console.log(cat_name);
+
+            if (this_val == "") {
+
+                if (this_id == "ime_code_vals") {
+
+                    this_class = $(this).closest('div').attr('class');
+
+                    if (cat_name == "Fresh Mobiles" || cat_name == "Used Mobiles" || cat_name ==
+                            "Smart Phone-Brand New" || cat_name == "Smart Phone-REFURBISHED" || cat_name == "FEAUTERE Phone" || cat_name == "Smart Phone") {
+                        $(this).closest('td.ime_code_error').find('.error_msg').text('Please add imei code')
+                                .css('display', 'inline-block');
+                        m++;
+                    } else {
+                        $(this).closest('td.ime_code_error').find('.error_msg').text('');
+                    }
 
 
 
-            } else {
+                } else {
 
+                    $(this).closest('tr td').find('.error_msg').text('This field is required').css(
+                            'display', 'inline-block');
 
+                    $(this).closest('div .form-group').find('.error_msg').text('This field is required')
+                            .css('display', 'inline-block');
 
-                $(this).closest('tr td').find('.error_msg').text('This field is required').css(
-                    'display', 'inline-block');
+                    m++;
 
-
-
-                $(this).closest('div .form-group').find('.error_msg').text('This field is required')
-                    .css('display', 'inline-block');
-
-
-
-                m++;
-
-            } 
+                }
             } else {
                 $(this).closest('tr td').find('.error_msg').text('');
                 $(this).closest('div .form-group').find('.error_msg').text('');
-                
-                }
+
+            }
 
 
 
-    });
+        }); */
 
-    if ($('.receiver:checked').length <= 0)
+    /*if ($('.receiver:checked').length <= 0)
 
     {
 
@@ -2276,11 +2255,11 @@ $('.save').on('click', function() {
 
         $("#type1").html("");
 
-    }
+    } */
 
 
 
-    $('.quantity').each(function() {
+    /*  $('.quantity').each(function() {
 
 
 
@@ -2327,7 +2306,7 @@ $('.save').on('click', function() {
 
 
 
-    });
+    }); */
 
 
 
@@ -2379,46 +2358,6 @@ $('.save').on('click', function() {
     }
 
 
-
-    //        else if ((Number(net_total) > Number(credit_limit)) && (Number(temp_credit_limit) == ''))
-
-    //        {
-
-    //            $.ajax({
-
-    //                type: "POST",
-
-    //                url: "<?php echo $this->config->item('base_url'); ?>" + "quotation/send_notification/",
-
-    //                data: 'exceed_total=' + $("#net_total").val() + '&credit_limit=' + $("#credit_limit").val() + ' &cust_id=' + $('#customer_id').val(),
-
-    //                success: function (response) {
-
-    //                    if (response == 'sent')
-
-    //                    {
-
-    //                        sweetAlert("Error...", "Credit Limit Exceeded Please Contact your Admin!", "error");
-
-    //
-
-    //                    }
-
-    //                }
-
-    //            });
-
-    //
-
-    //            $('html, body').animate({
-
-    //                scrollTop: ($('.error_msg:visible').offset().top - 60)
-
-    //            }, 500);
-
-    //            return false;
-
-    //        }
 
 });
 
@@ -2512,26 +2451,13 @@ $(document).ready(function() {
                         "sales/get_customer_by_firm/",
                     success: function(data) {
 
-
-
                         data = JSON.parse(data);
-
-
 
                         var c_data = data;
 
-
-
                         var outputArray = new Array();
 
-
-
                         for (var i = 0; i < c_data.length; i++) {
-
-
-
-
-
 
 
                             if (c_data[i].value.toLowerCase().match(request.term
@@ -3532,7 +3458,7 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
                             this_val.closest('tr').find('td .ime_code_select').empty();
                             this_val.closest('tr').find('.ime_code_val').removeClass('required'); 
                         }
-                        else if (categoryname == 'Fresh Mobiles' || categoryname =='Used Mobiles' || categoryname ==  "Smart Phone-Brand New" ||  categoryname ==  "Smart Phone-REFURBISHED" ) {
+                        else if (categoryname == 'Fresh Mobiles' || categoryname =='Used Mobiles' || categoryname ==  "Smart Phone-Brand New" ||  categoryname ==  "Smart Phone-REFURBISHED" ||  categoryname ==  "FEAUTERE Phone" ||  categoryname ==  "Smart Phone") {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
                                 this_val.closest('tr').find('td .ime_code_select').append(option_text);
                                 this_val.closest('tr').find('td .multi_select').fSelect();
@@ -3545,7 +3471,7 @@ $('body').on('keydown', '#add_quotation input.model_no', function(e) {
 
 
                         }
-                        else if (categoryname == 'Online-Payment' || categoryname =='Recharge' || categoryname == 'Money Transfer' ){
+                        else if (categoryname == 'Online-Payment' || categoryname =='Recharge' || categoryname == 'Money Transfer' || categoryname == 'Payments' || categoryname == 'Service'){
                             this_val.closest('tr').find('td .ime_code_select').empty();
                             this_val.closest('tr').find('td .ime_code_select').append("<input type='number' min='0' name='money_transfer[]' />");
                             this_val.closest('tr').find('.ime_code_val').removeClass('required'); 

@@ -268,7 +268,7 @@ if (!empty($brand)) {
 
                                             <div class="input-group">
 
-                                                <input type="text" name="product_name" class=" form-align required mandatory"  id="pname" maxlength="20" />
+                                                <input type="text" name="product_name" class=" form-align required mandatory"  id="pname" maxlength="100" />
 
                                                 <div class="input-group-addon">
 
@@ -2420,8 +2420,8 @@ if (!empty($brand)) {
             
         $('#hsn_number').val(hsn);
         $('#igst').val(gst);
-        $('#cgst').val(gst);
-        $('#sgst').val(gst);
+        $('#cgst').val(cgst);
+        $('#sgst').val(cgst);
         
       
         });

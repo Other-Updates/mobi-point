@@ -213,7 +213,7 @@
 
                                                     <div class="input-group">
 
-                                                        <input type="text" name="product_name" class=" form-align mandatory" id="name" maxlength="70" value="<?php echo $val['product_name']; ?>" tabindex="1"/>
+                                                        <input type="text" name="product_name" class=" form-align mandatory" id="name" maxlength="100" value="<?php echo $val['product_name']; ?>" tabindex="1"/>
 
                                                         <div class="input-group-addon">
 

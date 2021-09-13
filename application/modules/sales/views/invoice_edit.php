@@ -8,7 +8,7 @@
 <script type='text/javascript' src='<?= $theme_path; ?>/js/fSelect.js'></script>
 <link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/toastr.min.css" />
 <script type='text/javascript' src='<?= $theme_path; ?>/js/toastr.min.js'></script>
-
+<?php $gsttype = 0; ?>
 <style type="text/css">
     .text_right {
 
@@ -590,7 +590,7 @@ if (!empty($customers)) {
                 </td> -->
                 <td class="action-btn-align">
                     <p  style="display: none;" class ="gstcost">1</p><p style="display: none;"  class = "nogstcost">2</p>
-                    <input type="text" name="cost_price" style="width:70px;" id="cost_price"
+                    <input type="text" name="cost_price[]" tabindex="8" style="width:70px;" id="cost_price"
                         class="costing_price perwhole" />
                     <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
                     <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
@@ -1313,7 +1313,7 @@ if (!empty($customers)) {
                                         <td>
 
                                 <div class="ime_code_select">
-                            <?php if($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles' || $vals['categoryName'] == 'Smart Phone-Brand New' ||  $vals['categoryName'] == 'Smart Phone-REFURBISHED' || $vals['categoryName'] == 'Smart Phone-Brand New') { ?>
+                            <?php if($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles' || $vals['categoryName'] == 'Smart Phone-Brand New' ||  $vals['categoryName'] == 'Smart Phone-REFURBISHED' || $vals['categoryName'] == 'Smart Phone-Brand New' ||  $vals['categoryName'] ==  "FEAUTERE Phone" ||  $vals['categoryName'] ==  "Smart Phone") { ?>
                          <div tabindex="0">
 
 
@@ -1335,7 +1335,7 @@ if (!empty($customers)) {
                                                         </select>
 
                                                 </div>
-                                            <?php  } else if ($vals['categoryName']== 'Online-Payment' || $vals['categoryName'] =='Recharge'){ ?>
+                                            <?php  } else if ($vals['categoryName']== 'Online-Payment' || $vals['categoryName'] =='Recharge' || $vals['categoryName'] == 'Money Transfer' || $vals['categoryName'] == 'Payments' || $vals['categoryName'] == 'Service'){ ?>
                                                 <input type="text" name='ime_code_val[]' style="width:70px;" class="ime_code_val required" value="<?php echo $vals['ime_code_select']; ?>" id="ime_code_vals" />
                                             <?php } ?>
 
@@ -1479,8 +1479,8 @@ if (!empty($customers)) {
                             <p  style="display: none;" class = "nogstcost">2</p>
 
                                             <!-- <?php print_r($val) ?> -->
-                                <input type="text" name="cost_price" style="width:70px;" id="cost_price"
-                                    class="costing_price perwhole required"  value="<?php echo $vals['cost_price'] ?>" />
+                                <input type="text" name="cost_price[]" style="width:70px;" id="cost_price"
+                                    class="costing_price perwhole required" tabindex="6" value="<?php echo $vals['cost_price'] ?>" />
                                 <input type="hidden" name="cp_with_gst[]" class="cp_with_gst"  value="<?php echo $vals['cp_with_gst'] ?>">
                                 <input type="hidden" name="cp_without_gst[]" class="cp_without_gst" value="<?php echo $vals['cp_without_gst'] ?>">
 
@@ -1828,7 +1828,7 @@ if (!empty($customers)) {
 
     var formHasChanged = false;
 
-
+gsttype = 0;
 
     var submitted = false;
 
@@ -1846,7 +1846,7 @@ if (!empty($customers)) {
         }
     });
 
-    if(<?php echo $gsttype ?> == 1)
+    if(gsttype == 1)
     {
         $('.net_tag').attr('colspan',2);
         $('.sub_tag').attr('colspan',5);
@@ -1942,7 +1942,7 @@ function finaltotal(){
 
 
 
-        $('.required').each(function() {
+        /*$('.required').each(function() {
 
 
 
@@ -2103,7 +2103,7 @@ function finaltotal(){
 
 
 
-        });
+        }); */
 
 
         if (m > 0) {
@@ -2444,7 +2444,7 @@ function finaltotal(){
 
             {
 
-                if($gsttype == 1) 
+                if(gsttype == 1) 
                 {
 
                 $('#add_quotation').find('tr td.sgst_td').show();
@@ -3311,7 +3311,7 @@ function finaltotal(){
                             //    }
 
                             if (result[0].cost_price != '') {
-                                if($gsttype == 1){ 
+                                if(gsttype == 1){ 
                                 this_val.closest('tr').find('.costing_price').val(result[0].cost_price);
                             } else {
                                 this_val.closest('tr').find('.costing_price').val(result[0].cost_price_without_gst);
@@ -3329,7 +3329,7 @@ function finaltotal(){
                         
 
                         if (result[0].selling_price != '') {
-                            if($gsttype == 1){ 
+                            if(gsttype == 1){ 
                                 this_val.closest('tr').find('.selling_price').val(result[0].sales_price);
                             } else {
                                 this_val.closest('tr').find('.selling_price').val(result[0].sales_price_without_gst);
@@ -4722,7 +4722,7 @@ function finaltotal(){
 
 
 
-    $(window).bind('beforeunload', function() {
+    /*$(window).bind('beforeunload', function() {
 
 
 
@@ -4742,7 +4742,7 @@ function finaltotal(){
 
 
 
-    });
+    }); */
 
 
 

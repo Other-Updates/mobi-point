@@ -949,7 +949,6 @@
             var pertax = $(this).closest('tr').find('.pertax');
 
 
-
             if ($('#gst_type').val() != '')
 
             {
@@ -984,8 +983,6 @@
 
             {
 
-
-
                 pertax1 = Number(pertax.val() / 100) * Number(percost.val());
 
                 gst1 = Number(gst.val() / 100) * Number(percost.val());
@@ -1019,6 +1016,7 @@
 
 
         $('.total_qty').val(final_qty);
+        // console.log(final_sub_total);
 
         $('.final_sub_total').val(final_sub_total.toFixed(2));
 
