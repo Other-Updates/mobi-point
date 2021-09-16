@@ -5,34 +5,58 @@
 <script src="<?php echo $theme_path; ?>/js/jquery-ui-my-1.10.3.min.js"></script>
 
 <style type="text/css">
+    .btn-xs {
+        border-radius: 0px !important;
+        padding: 2px 5px 1px 5px;
+    }
 
-    .btn-xs { border-radius: 0px !important;padding: 2px 5px 1px 5px; }
+    .text_right {
 
-    .text_right
-
-    {
-
-        text-align:right;
+        text-align: right;
 
     }
 
-    .box, .box-body, .content { padding:0; margin:0;border-radius: 0;}
+    .box,
+    .box-body,
+    .content {
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+    }
 
-    #top_heading_fix h3 {top: -57px;left: 6px;}
+    #top_heading_fix h3 {
+        top: -57px;
+        left: 6px;
+    }
 
-    #TB_overlay { z-index:20000 !important; }
+    #TB_overlay {
+        z-index: 20000 !important;
+    }
 
-    #TB_window { z-index:25000 !important; }
+    #TB_window {
+        z-index: 25000 !important;
+    }
 
-    .dialog_black{ z-index:30000 !important; }
+    .dialog_black {
+        z-index: 30000 !important;
+    }
 
-    #boxscroll22 {max-height: 291px;overflow: auto;cursor: inherit !important;}
+    #boxscroll22 {
+        max-height: 291px;
+        overflow: auto;
+        cursor: inherit !important;
+    }
 
-    .error_msg, em{color: rgb(255, 0, 0); font-size: 12px;font-weight: normal;}
+    .error_msg,
+    em {
+        color: rgb(255, 0, 0);
+        font-size: 12px;
+        font-weight: normal;
+    }
 
     .ui-datepicker td.ui-datepicker-today a {
 
-        background:#999999;
+        background: #999999;
 
     }
 
@@ -82,7 +106,9 @@
 
     }
 
-    .ml-top4 { margin-top:4px; }
+    .ml-top4 {
+        margin-top: 4px;
+    }
 
     .form-control1 {
 
@@ -93,7 +119,6 @@
         opacity: 1;
 
     }
-
 </style>
 
 <div class="mainpanel">
@@ -116,9 +141,9 @@
 
             foreach ($po as $val) {
 
-                ?>
+        ?>
 
-                <form  action="<?php echo $this->config->item('base_url'); ?>purchase_return/update_po/<?php echo $val['id']; ?>" method="post" class=" panel-body">
+                <form action="<?php echo $this->config->item('base_url'); ?>purchase_return/update_po/<?php echo $val['id']; ?>" method="post" class=" panel-body">
 
 
 
@@ -134,7 +159,7 @@
 
                                 <div class="col-sm-8">
 
-                                    <select name="po[firm_id]"  class="form-control form-align" id="firm" disabled="">
+                                    <select name="po[firm_id]" class="form-control form-align" id="firm" disabled="">
 
                                         <option value="">Select</option>
 
@@ -146,14 +171,13 @@
 
                                                 $select = ($firm['firm_id'] == $val['firm_id']) ? 'selected' : '';
 
-                                                ?>
+                                        ?>
 
                                                 <option value="<?php echo $firm['firm_id']; ?>" <?php echo $select; ?>> <?php echo $firm['firm_name']; ?> </option>
 
-                                                <?php
+                                        <?php
 
                                             }
-
                                         }
 
                                         ?>
@@ -174,9 +198,9 @@
 
                                 <div class="col-sm-8">
 
-                                    <input type="text"  tabindex="-1" name="po[po_no]" class=" form-control colournamedup form-align " readonly="readonly" value="<?php echo $val['po_no']; ?>"  id="grn_no" >
+                                    <input type="text" tabindex="-1" name="po[po_no]" class=" form-control colournamedup form-align " readonly="readonly" value="<?php echo $val['po_no']; ?>" id="grn_no">
 
-                                    <input type="hidden"  name="po[pr_no]" readonly="readonly" value="<?php echo $val['pr_no']; ?>" >
+                                    <input type="hidden" name="po[pr_no]" readonly="readonly" value="<?php echo $val['pr_no']; ?>">
 
                                 </div>
 
@@ -190,11 +214,11 @@
 
                                 <div class="col-sm-8">
 
-                                    <input type="text"  name="supplier[store_name]" id="customer_name" class='  form-control auto_customer form-align required ' value="<?php echo $val['store_name']; ?>"  readonly="readonly"/>
+                                    <input type="text" name="supplier[store_name]" id="customer_name" class='  form-control auto_customer form-align required ' value="<?php echo $val['store_name']; ?>" readonly="readonly" />
 
 
 
-                                    <input type="hidden"  name="supplier[id]" id="customer_id" class=' form-control  id_customer form-align tabwid' value="<?php echo $val['id']; ?>" />
+                                    <input type="hidden" name="supplier[id]" id="customer_id" class=' form-control  id_customer form-align tabwid' value="<?php echo $val['id']; ?>" />
 
                                     <div id="suggesstion-box" class="auto-asset-search"></div>
 
@@ -216,7 +240,7 @@
 
                                 <div class="col-sm-8">
 
-                                    <input type="text"  name="supplier[mobil_number]" class="form-control form-align" id="customer_no" value="<?php echo $val['mobil_number']; ?>" readonly="readonly"/>
+                                    <input type="text" name="supplier[mobil_number]" class="form-control form-align" id="customer_no" value="<?php echo $val['mobil_number']; ?>" readonly="readonly" />
 
                                 </div>
 
@@ -230,7 +254,7 @@
 
                                 <div class="col-sm-8" id='customer_td'>
 
-                                    <input type="text"  name="supplier[email_id]" class=" form-control form-align " id="email_id" value="<?php echo $val['email_id']; ?>" readonly="readonly"/>
+                                    <input type="text" name="supplier[email_id]" class=" form-control form-align " id="email_id" value="<?php echo $val['email_id']; ?>" readonly="readonly" />
 
                                 </div>
 
@@ -280,7 +304,7 @@
 
                                     <div class="input-group">
 
-                                        <input type="text" tabindex="1"  class="form-align datepicker required" name="po[created_date]" placeholder="dd-mm-yyyy" >
+                                        <input type="text" tabindex="1" class="form-align datepicker required" name="po[created_date]" value="<?php echo date('d-m-Y') ?>" placeholder="dd-mm-yyyy">
 
                                         <div class="input-group-addon">
 
@@ -338,7 +362,7 @@
 
                                         if ($gst_type == 31) {
 
-                                            ?>
+                                    ?>
 
                                             <td  width="5%" class="first_td1 action-btn-align" >SGST %</td>
 
@@ -351,10 +375,9 @@
                                             <?php
 
                                         }
-
                                     }
 
-                                    ?> -->
+                                            ?> -->
 
                                     <!-- <td width="5%" class="first_td1">Transport</td> -->
 
@@ -368,15 +391,15 @@
 
                                 <?php
 
-                                if (isset($po_details) && !empty($po_details)) {                                   
-// echo "<pre>";
+                                if (isset($po_details) && !empty($po_details)) {
+                                    // echo "<pre>";
 
-                                   // print_r($po_details);
+                                    // print_r($po_details);
 
-                                   //exit;
+                                    //exit;
 
                                     $delivery_qty_total = $over_all_net_total = 0;
-                                   
+
 
                                     foreach ($po_details as $vals) {
 
@@ -398,43 +421,43 @@
 
                                         $over_all_net_total += $net_total;
 
-                                        $delivery_qty_total +=$vals['delivery_qty'];
+                                        $delivery_qty_total += $vals['delivery_qty'];
 
-                                        ?>
+                                ?>
 
-                                    <input type="hidden"  name='id[]'  value='<?php echo $vals['erp_pr_id'] ?>'>
+                                        <input type="hidden" name='id[]' value='<?php echo $vals['erp_pr_id'] ?>'>
 
-                                    <tr>
+                                        <tr>
 
-                                        <td>
+                                            <td>
 
-                                            <input type="hidden" class='cat_id static_style form-align' name='categoty[]' readonly="" value='<?php echo $vals['cat_id'] ?>'>
+                                                <input type="hidden" class='cat_id static_style form-align' name='categoty[]' readonly="" value='<?php echo $vals['cat_id'] ?>'>
 
-                                            <input type="text" class="form-align" readonly="" value='<?php echo $vals['categoryName'] ?>'>
+                                                <input type="text" class="form-align" readonly="" value='<?php echo $vals['categoryName'] ?>'>
 
-                                        </td>
+                                            </td>
 
-                                        <td>
+                                            <td>
 
-                                            <input type="text"  name="model_no[]" id="model_no" class='form-align auto_customer tabwid model_no required' value="<?php echo $vals['product_name']; ?>" readonly="readonly"/>
+                                                <input type="text" name="model_no[]" id="model_no" class='form-align auto_customer tabwid model_no required' value="<?php echo $vals['product_name']; ?>" readonly="readonly" />
 
-                                            <input type="hidden"  name="product_id[]" id="product_id" class='product_id tabwid form-align' value="<?php echo $vals['product_id']; ?>" />
+                                                <input type="hidden" name="product_id[]" id="product_id" class='product_id tabwid form-align' value="<?php echo $vals['product_id']; ?>" />
 
 
 
-                                            <!--<div id="suggesstion-box1" class="auto-asset-search suggesstion-box1"></div>-->
+                                                <!--<div id="suggesstion-box1" class="auto-asset-search suggesstion-box1"></div>-->
 
-                                        </td>
+                                            </td>
 
-                                        <td>
+                                            <td>
 
-                                            <input type="hidden"  name='brand[]' readonly="" value='<?php echo $vals['id'] ?>'>
+                                                <input type="hidden" name='brand[]' readonly="" value='<?php echo $vals['id'] ?>'>
 
-                                            <input type="text"  class=" form-align" readonly="" value='<?php echo!empty($vals['brands']) ? $vals['brands'] : '-'; ?>'>
+                                                <input type="text" class=" form-align" readonly="" value='<?php echo !empty($vals['brands']) ? $vals['brands'] : '-'; ?>'>
 
-                                        </td>
+                                            </td>
 
-                                        <!-- <td>
+                                            <!-- <td>
 
                                             <input type="text"  name='unit[]' style="width:70px;" class="unit" value="<?php echo $vals['unit'] ?>" readonly="readonly"/>
 
@@ -442,17 +465,18 @@
 
 
 
-                                        <?php //if (isset($vals['stock']) && !empty($vals['stock'])) {           ?>
+                                            <?php //if (isset($vals['stock']) && !empty($vals['stock'])) {           
+                                            ?>
 
-                                        <td align="center">
+                                            <td align="center">
 
-                                            <span data-toggle="tooltip" class="tooltips btn btn-primary btn-xs" title="">Purchase Order Quantity</span> &nbsp;
+                                                <span data-toggle="tooltip" class="tooltips btn btn-primary btn-xs" title="">Purchase Order Quantity</span> &nbsp;
 
-                                            <input type="text"   tabindex="-1"  name='quantity[]' style="width:70px;margin-top:4px;margin-bottom:4px; margin-right:6px;" class="qty" value="<?php echo $vals['quantity'] ?>" readonly="readonly" />
+                                                <input type="text" tabindex="-1" name='quantity[]' style="width:70px;margin-top:4px;margin-bottom:4px; margin-right:6px;" class="qty" value="<?php echo $vals['quantity'] ?>" readonly="readonly" />
 
-                                            <br>
+                                                <br>
 
-                <!--                                                <span data-toggle="tooltip" class="tooltips btn btn-success btn-xs ml-top4" style="margin-bottom:4px;margin-top:4px;" title="">Stock Quantity</span> &nbsp;
+                                                <!--                                                <span data-toggle="tooltip" class="tooltips btn btn-success btn-xs ml-top4" style="margin-bottom:4px;margin-top:4px;" title="">Stock Quantity</span> &nbsp;
 
                                             <input type="text"   tabindex="-1"  name='available_quantity[]' style="width:70px;margin-top:4px !important;" class="avl_qty qty " value="<?php echo $vals['stock'][0]['quantity'] ?>" readonly="readonly"/> <br>-->
 
@@ -460,9 +484,9 @@
 
 
 
-                                        </td>
+                                            </td>
 
-                                        <?php /* }  else { ?>
+                                            <?php /* }  else { ?>
 
                                           <td><div class="avl_qty"></div>
 
@@ -474,67 +498,67 @@
 
                                           <?php // } */ ?>
 
-                                        <td>
+                                            <td>
 
-                                            <span data-toggle="tooltip" class="tooltips btn btn-success btn-xs" style="margin-bottom:4px;margin-top:4px;" title="">Delivered Quantity</span> &nbsp;
+                                                <span data-toggle="tooltip" class="tooltips btn btn-success btn-xs" style="margin-bottom:4px;margin-top:4px;" title="">Delivered Quantity</span> &nbsp;
 
-                                            <input type="text"   tabindex="-1"  name='delivery_quantity[]' style="width:70px;" class="delivery_qty" value="<?php echo $vals['quantity'] ?>" readonly="readonly"/>
+                                                <input type="text" tabindex="-1" name='delivery_quantity[]' style="width:70px;" class="delivery_qty" value="<?php echo $vals['quantity'] ?>" readonly="readonly" />
 
-                                            <br>
+                                                <br>
 
-                                            <?php if ($vals['po'][0]['delivery_qty'] == 0) { ?>
+                                                <?php if ($vals['po'][0]['delivery_qty'] == 0) { ?>
 
-                                                <span data-toggle="tooltip" class="tooltips btn btn-success btn-xs" style="margin-bottom:4px;margin-top:4px;" title="">Return Quantity</span> &nbsp;
-
-
-
-                                                <input type="text"   tabindex="-1"  name='return_quantity[<?php echo $vals['erp_pr_id'] ?>][]' style="width:70px;margin-top:4px !important;" class="return_qty" readonly="readonly"/>
-
-                                                <span class="error_msg"></span>
-
-                                            <?php } else { ?>
-
-                                                <span data-toggle="tooltip" class="tooltips btn btn-success btn-xs" style="margin-bottom:4px;margin-top:4px;" title="">Return Quantity</span> &nbsp;
-
-                                                <input type="text"   tabindex="-1"  name='return_quantity[<?php echo $vals['erp_pr_id'] ?>][]' style="width:70px;margin-top:4px !important;" class="return_qty" />
-
-                                                <span class="error_msg"></span>
-
-                                            <?php } ?>
-
-                                        </td>
-
-                                        <td>
-
-                                            <input type="text"   tabindex="-1"  name='per_cost[]' style="width:70px;" class="percost required " value="<?php echo $vals['per_cost'] ?>" readonly="readonly"/>
+                                                    <span data-toggle="tooltip" class="tooltips btn btn-success btn-xs" style="margin-bottom:4px;margin-top:4px;" title="">Return Quantity</span> &nbsp;
 
 
 
-                                        </td>
+                                                    <input type="text" tabindex="-1" name='return_quantity[<?php echo $vals['erp_pr_id'] ?>][]' style="width:70px;margin-top:4px !important;" class="return_qty" readonly="readonly" />
 
-                                        <!-- <td>
+                                                    <span class="error_msg"></span>
+
+                                                <?php } else { ?>
+
+                                                    <span data-toggle="tooltip" class="tooltips btn btn-success btn-xs" style="margin-bottom:4px;margin-top:4px;" title="">Return Quantity</span> &nbsp;
+
+                                                    <input type="text" tabindex="-1" name='return_quantity[<?php echo $vals['erp_pr_id'] ?>][]' style="width:70px;margin-top:4px !important;" class="return_qty" />
+
+                                                    <span class="error_msg"></span>
+
+                                                <?php } ?>
+
+                                            </td>
+
+                                            <td>
+
+                                                <input type="text" tabindex="-1" name='per_cost[]' style="width:70px;" class="percost required " value="<?php echo $vals['per_cost'] ?>" readonly="readonly" />
+
+
+
+                                            </td>
+
+                                            <!-- <td>
 
                                             <input type="text"   tabindex="-1"   name='discount[]' style="width:70px;" class="discount" value="<?php echo $vals['discount'] ?>" readonly="readonly" />
 
                                         </td> -->
 
 
-<!-- 
+                                            <!--
                                         <td>
 
                                             <input type="text"   tabindex="-1"   name='tax[]' style="width:70px;" class="pertax" value="<?php echo $vals['tax'] ?>" readonly="readonly" />
 
                                         </td> -->
 
-                                        <!-- <?php
+                                            <!-- <?php
 
-                                        $gst_type = $po[0]['state_id'];
+                                                    $gst_type = $po[0]['state_id'];
 
-                                        if ($gst_type != '') {
+                                                    if ($gst_type != '') {
 
-                                            if ($gst_type == 31) {
+                                                        if ($gst_type == 31) {
 
-                                                ?>
+                                                    ?>
 
                                                 <td>
 
@@ -554,13 +578,12 @@
 
                                                 <?php
 
-                                            }
+                                                        }
+                                                    }
 
-                                        }
+                                                ?> -->
 
-                                        ?> -->
-
-                                        <!-- <td>
+                                            <!-- <td>
 
                                             <input type="text"   tabindex="-1"   name='transport[]' style="width:70px;" class="transport" value="<?php echo $vals['transport'] ?>" readonly="readonly" />
 
@@ -568,23 +591,22 @@
 
 
 
-                                        <td>
+                                            <td>
 
-                                            <input type="text"   tabindex="-1" style="width:70px;" value="<?php echo $vals['sub_total'] ?>" name='sub_total[]' readonly="readonly" class="subtotal text_right" readonly="readonly" value="<?php echo $net_total; ?>"/>
+                                                <input type="text" tabindex="-1" style="width:70px;" value="<?php echo $vals['sub_total'] ?>" name='sub_total[]' readonly="readonly" class="subtotal text_right" readonly="readonly" value="<?php echo $net_total; ?>" />
 
-                                        </td>
+                                            </td>
 
 
 
-                                    </tr>
+                                        </tr>
 
-                                    <?php
+                                <?php
 
+                                    }
                                 }
 
-                            }
-
-                            ?>
+                                ?>
 
                             </tbody>
 
@@ -596,11 +618,11 @@
 
                                     <td colspan="3" style="width:70px; text-align:right;"><b>Total</b></td>
 
-                                    <td align="center"><input type="text"   name="po[total_qty]" value="<?php echo $val['total_qty']; ?>"  tabindex="-1" readonly="readonly"  class="total_qty" style="width:70px; margin-left:-33px;" id="total" readonly="readonly"/></td>
+                                    <td align="center"><input type="text" name="po[total_qty]" value="<?php echo $val['total_qty']; ?>" tabindex="-1" readonly="readonly" class="total_qty" style="width:70px; margin-left:-33px;" id="total" readonly="readonly" /></td>
 
                                     <td colspan="2" style="text-align:right;"><b>Sub Total</b></td>
 
-                                    <td><input type="text" name="po[subtotal_qty]" value="<?php echo $val['subtotal_qty']; ?>" tabindex="-1" readonly="readonly"   class="final_sub_total text_right" style="width:70px;" readonly="readonly"/></td>
+                                    <td><input type="text" name="po[subtotal_qty]" value="<?php echo $val['subtotal_qty']; ?>" tabindex="-1" readonly="readonly" class="final_sub_total text_right" style="width:70px;" readonly="readonly" /></td>
 
 
 
@@ -610,11 +632,11 @@
 
                                     <td colspan="5" style="width:70px; text-align:right;"></td>
 
-                                    <td colspan="1" style="text-align:right;font-weight:bold;"><input type="text"  name="po[tax_label]" class='tax_label text_right'    style="width:70px;" value="<?php echo $val['tax_label']; ?>" readonly="readonly"/></td>
+                                    <td colspan="1" style="text-align:right;font-weight:bold;"><input type="text" name="po[tax_label]" class='tax_label text_right' style="width:70px;" value="<?php echo $val['tax_label']; ?>" readonly="readonly" /></td>
 
                                     <td>
 
-                                        <input type="text"  name="po[tax]" class='totaltax text_right'  value="<?php echo $val['tax']; ?>"  style="width:70px;" readonly="readonly"/>
+                                        <input type="text" name="po[tax]" class='totaltax text_right' value="<?php echo $val['tax']; ?>" style="width:70px;" readonly="readonly" />
 
                                     </td>
 
@@ -626,9 +648,9 @@
 
                                     <td colspan="5" style="width:70px; text-align:right;"></td>
 
-                                    <td colspan="1"style="text-align:right;font-weight:bold;">Net Total</td>
+                                    <td colspan="1" style="text-align:right;font-weight:bold;">Net Total</td>
 
-                                    <td><input type="text" value="<?php echo  $val['net_total']?>" name="po[net_total]"  readonly="readonly"  tabindex="-1" class="final_amt text_right" style="width:70px;"  readonly="readonly"/></td>
+                                    <td><input type="text" value="<?php echo  $val['net_total'] ?>" name="po[net_total]" readonly="readonly" tabindex="-1" class="final_amt text_right" style="width:70px;" readonly="readonly" /></td>
 
 
 
@@ -638,11 +660,11 @@
 
 
 
-                                    <td colspan="13" style="">
+                                    <td colspan="13">
 
                                         <span class="remark">Remarks&nbsp;&nbsp;&nbsp;</span>
 
-                                        <input name="po[remarks]" type="text" class="form-control remark" value="<?php echo $val['remarks']; ?>" readonly="readonly"/>
+                                        <input name="po[remarks]" type="text" class="form-control remark" value="<?php echo $val['remarks']; ?>" readonly="readonly" />
 
                                     </td>
 
@@ -670,7 +692,7 @@
 
                                         <input type="text" class="form-control datepicker class_req borderra0 terms" name="po[delivery_schedule]" value="<?php echo $val['delivery_schedule']; ?>" placeholder="dd-mm-yyyy" readonly="readonly">
 
-                                        <span id="colorpoerror" style="color:#F00;" ></span>
+                                        <span id="colorpoerror" style="color:#F00;"></span>
 
                                     </div>
 
@@ -688,7 +710,7 @@
 
                                     <div>
 
-                                        <input type="text" class="form-control class_req borderra0 terms" value="<?php echo $val['mode_of_payment']; ?>" name="po[mode_of_payment]" readonly="readonly"/>
+                                        <input type="text" class="form-control class_req borderra0 terms" value="<?php echo $val['mode_of_payment']; ?>" name="po[mode_of_payment]" readonly="readonly" />
 
                                     </div>
 
@@ -706,9 +728,9 @@
 
                     </div>
 
-                    <input type="hidden"  name="po[supplier]" id="customer_id" class='id_customer' value="<?php echo $val['id']; ?>"/>
+                    <input type="hidden" name="po[supplier]" id="customer_id" class='id_customer' value="<?php echo $val['id']; ?>" />
 
-                    <input type="hidden"  name="gst_type" id="gst_type" class="gst_type" value="<?php echo $val['state_id']; ?>"/>
+                    <input type="hidden" name="gst_type" id="gst_type" class="gst_type" value="<?php echo $val['state_id']; ?>" />
 
                     <div class="action-btn-align">
 
@@ -724,10 +746,9 @@
 
 
 
-                <?php
+        <?php
 
             }
-
         }
 
         ?>
@@ -739,16 +760,11 @@
 
 
 <script type="text/javascript">
+    $('#save').live('click', function() {
 
 
 
-
-
-    $('#save').live('click', function () {
-
-
-
-        $('.return_qty').each(function () {
+        $('.return_qty').each(function() {
 
             m = 0;
 
@@ -796,7 +812,7 @@
 
     });
 
-    $(document).on('blur', '.return_qty', function () {
+    $(document).on('blur', '.return_qty', function() {
 
         var qty = $(this).closest('tr').find('.delivery_qty').val();
 
@@ -820,13 +836,13 @@
 
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
 
-// var $elem = $('#scroll');
+        // var $elem = $('#scroll');
 
-//  window.csb = $elem.customScrollBar();
+        //  window.csb = $elem.customScrollBar();
 
-        $("#customer_name").keyup(function () {
+        $("#customer_name").keyup(function() {
 
             $.ajax({
 
@@ -836,7 +852,7 @@
 
                 data: 'q=' + $(this).val(),
 
-                success: function (data) {
+                success: function(data) {
 
                     $("#suggesstion-box").show();
 
@@ -850,7 +866,7 @@
 
         });
 
-        $('body').click(function () {
+        $('body').click(function() {
 
             $("#suggesstion-box").hide();
 
@@ -860,7 +876,7 @@
 
 
 
-    $('.cust_class').live('click', function () {
+    $('.cust_class').live('click', function() {
 
         $("#customer_id").val($(this).attr('cust_id'));
 
@@ -878,7 +894,7 @@
 
 
 
-    $('#add_group').click(function () {
+    $('#add_group').click(function() {
 
         var tableBody = $(".static").find('tr').clone();
 
@@ -890,7 +906,7 @@
 
 
 
-    $('#delete_group').live('click', function () {
+    $('#delete_group').live('click', function() {
 
         $(this).closest("tr").remove();
 
@@ -900,13 +916,13 @@
 
 
 
-    $(".remove_comments").live('click', function () {
+    $(".remove_comments").live('click', function() {
 
         $(this).closest("tr").remove();
 
         var full_total = 0;
 
-        $('.total_qty').each(function () {
+        $('.total_qty').each(function() {
 
             full_total = full_total + Number($(this).val());
 
@@ -922,7 +938,7 @@
 
 
 
-    $('.qty,.percost,.pertax,.totaltax,.return_qty').live('keyup', function () {
+    $('.qty,.percost,.pertax,.totaltax,.return_qty').live('keyup', function() {
 
         calculate_function();
 
@@ -936,7 +952,7 @@
 
         var final_sub_total = 0;
 
-        $('.return_qty').each(function () {
+        $('.return_qty').each(function() {
 
             var rq = $(this).closest('tr').find('.return_qty');
 
@@ -1026,13 +1042,13 @@
 
 
 
-    $(document).ready(function () {
+    $(document).ready(function() {
 
         jQuery('.datepicker').datepicker();
 
     });
 
-    $().ready(function () {
+    $().ready(function() {
 
         $("#po_no").autocomplete(BASE_URL + "gen/get_po_list", {
 
@@ -1048,7 +1064,7 @@
 
     });
 
-    $('#search').live('click', function () {
+    $('#search').live('click', function() {
 
         for_loading();
 
@@ -1074,7 +1090,7 @@
 
             },
 
-            success: function (result) {
+            success: function(result) {
 
                 for_response();
 
@@ -1085,14 +1101,10 @@
         });
 
     });
-
-
-
 </script>
 
 <script>
-
-    $(".model_no").live('keyup', function () {
+    $(".model_no").live('keyup', function() {
 
         var this_ = $(this)
 
@@ -1104,7 +1116,7 @@
 
             data: 'q=' + $(this).val(),
 
-            success: function (datas) {
+            success: function(datas) {
 
                 this_.closest('tr').find(".suggesstion-box1").show();
 
@@ -1118,9 +1130,9 @@
 
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
 
-        $('body').click(function () {
+        $('body').click(function() {
 
             $(this).closest('tr').find(".suggesstion-box1").hide();
 
@@ -1130,7 +1142,7 @@
 
     });
 
-    $('.pro_class').live('click', function () {
+    $('.pro_class').live('click', function() {
 
         $(this).closest('tr').find('.product_id').val($(this).attr('pro_id'));
 
@@ -1144,9 +1156,9 @@
 
 
 
-    $('.cat_id,.brand_id,.pro_class').live('change', function () {
+    $('.cat_id,.brand_id,.pro_class').live('change', function() {
 
-        $('.cat_id,.brand_id,.pro_class').live('click', function () {
+        $('.cat_id,.brand_id,.pro_class').live('click', function() {
 
             var cat_id = $(this).closest('tr').find('.cat_id').val();
 
@@ -1172,7 +1184,7 @@
 
                 },
 
-                success: function (result) {
+                success: function(result) {
 
                     this_.html(result);
 
@@ -1183,6 +1195,4 @@
         });
 
     });
-
 </script>
-

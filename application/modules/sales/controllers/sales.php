@@ -1026,7 +1026,7 @@ class Sales extends MX_Controller
         $datas["quotation"] = $quotation = $this->project_cost_model->get_all_invoice_by_id($id);
 
         $datas['quotation_details'] = $this->project_cost_model->get_all_invoice_details_by_id($id);
-       
+
         $datas['company_details'] = $this->admin_model->get_company_details();
 
         $datas["brand"] = $brand = $this->brand_model->get_brand();
@@ -1604,7 +1604,7 @@ class Sales extends MX_Controller
 
             $input['quotation']['inv_id'] = $inv_details[0]['inv_id'];
             $input['quotation']['q_id'] = $inv_details[0]['q_id'];
-            $input['quotation']['sale_cat_type']=$input['sale_cat_type'];
+            $input['quotation']['sale_cat_type'] = $input['sale_cat_type'];
 
             //unset($input['quotation']['inv_id']);
 
@@ -1669,7 +1669,7 @@ class Sales extends MX_Controller
                     //     $cp_with_gst = $cost_price * (($cgst + $sgst) / 100);
 
                     //     $cost_price_with_gst = $cost_price + $cp_with_gst;
-                        
+
                     //     $product_data = array();
                     //     $product_data['cost_price_without_gst'] = $insert['cost_price'];
                     //     $product_data['cost_price'] = $cost_price_with_gst;
@@ -1758,7 +1758,7 @@ class Sales extends MX_Controller
             // echo '<pre>';
             // print_r($input);
             // exit;
-            $bill_type=$input['quotation']['bill_category'];
+            $bill_type = $input['quotation']['bill_category'];
             $net_total = $input['quotation']['net_total'];
 
             $data['company_details'] = $this->admin_model->get_company_details();
@@ -1786,11 +1786,11 @@ class Sales extends MX_Controller
             unset($input['quotation']['sales_man']);
 
             unset($input['quotation']['bill_type']);
-            
+
             // foreach($input['product_id'] as $key=>$product_id){
             //     $this->project_cost_model->update_product_from_invice($input['product_id'][$key],$input['cost_price'][$key],$input['per_cost'][$key]);
             // }
-                
+
 
             $arr = $this->gen_model->get_prefix_by_frim_id($input['quotation']['firm_id']);
 
@@ -1806,7 +1806,7 @@ class Sales extends MX_Controller
 
             $insert_id = $this->gen_model->insert_quotation($input['quotation']);
             unset($input['quotation']['bill_category']);
-            
+
             unset($input['quotation']['profit_total']);
             $input = $this->input->post();
 
@@ -1837,7 +1837,7 @@ class Sales extends MX_Controller
             // new invoice
 
             $input['quotation']['invoice_status'] = 'approved';
-            
+
             // $input['quotation']['bill_category'] = 'nogst';
 
             $data['company_details'] = $this->admin_model->get_company_details();
@@ -1989,7 +1989,7 @@ class Sales extends MX_Controller
                         $insert['tax'] = $input['tax'][$key];
 
                         $insert['gst'] = $input['gst'][$key];
-                        
+
 
                         // $insert['bill_category']= $input['bill_category'][$key];
 
@@ -1997,7 +1997,7 @@ class Sales extends MX_Controller
 
                         $insert['product_description'] = @$input['money_transfer'][$key];
 
-                        
+
 
                         $insert['discount'] = (!empty($input['discount'][$key])) ? $input['discount'][$key] : '';
 
@@ -2014,16 +2014,16 @@ class Sales extends MX_Controller
                         $stock_arr[] = $inv_id;
                         $insert['firm'] = $input['quotation']['firm_id'];
                         //Update product - cost and Sales Price
-                        if($bill_type==1){
+                        if ($bill_type == 1) {
 
-                            $updateData = array('cost_price'=>$insert['cost_price'],'sales_price'=>$insert['per_cost'],'submit'=>0);
-                            $this->product_model->update_product($updateData,$insert['product_id'],array());
+                            $updateData = array('cost_price' => $insert['cost_price'], 'sales_price' => $insert['per_cost'], 'submit' => 0);
+                            $this->product_model->update_product($updateData, $insert['product_id'], array());
                         }
 
                         $this->stock_details($insert, $inv_id);
 
                         unset($insert['firm']);
-                    } 
+                    }
 
                     $this->project_cost_model->insert_invoice_details($insert_arr);
 
@@ -2185,7 +2185,7 @@ class Sales extends MX_Controller
 
             $input['quotation']['q_no'] = $final_id;
 
-            $input['quotation']['sale_cat_type']=$input['sale_cat_type'];
+            $input['quotation']['sale_cat_type'] = $input['sale_cat_type'];
 
             $insert_id = $this->gen_model->insert_quotation($input['quotation']);
 
@@ -2393,7 +2393,7 @@ class Sales extends MX_Controller
                         $this->stock_details($insert, $inv_id);
 
                         unset($insert['firm']);
-                    } 
+                    }
 
                     $this->project_cost_model->insert_invoice_details($insert_arr);
 
@@ -2556,7 +2556,7 @@ class Sales extends MX_Controller
 
             $input['quotation']['q_no'] = $final_id;
 
-            $input['quotation']['sale_cat_type']=$input['sale_cat_type'];
+            $input['quotation']['sale_cat_type'] = $input['sale_cat_type'];
 
             $insert_id = $this->gen_model->insert_quotation($input['quotation']);
 
@@ -2757,7 +2757,7 @@ class Sales extends MX_Controller
                         $this->stock_details($insert, $inv_id);
 
                         unset($insert['firm']);
-                    } 
+                    }
 
                     $this->project_cost_model->insert_invoice_details($insert_arr);
 
@@ -2920,7 +2920,7 @@ class Sales extends MX_Controller
 
             $input['quotation']['q_no'] = $final_id;
 
-            $input['quotation']['sale_cat_type']=$input['sale_cat_type'];
+            $input['quotation']['sale_cat_type'] = $input['sale_cat_type'];
 
             $insert_id = $this->gen_model->insert_quotation($input['quotation']);
 
@@ -3121,7 +3121,7 @@ class Sales extends MX_Controller
                         $this->stock_details($insert, $inv_id);
 
                         unset($insert['firm']);
-                    } 
+                    }
 
                     $this->project_cost_model->insert_invoice_details($insert_arr);
 
@@ -3466,7 +3466,7 @@ class Sales extends MX_Controller
             unset($input['quotation']['validity']);
 
             $input['quotation']['sale_cat_type'] = $input['sale_cat_type'];
-      
+
             $insert_id = $this->project_cost_model->update_invoice($input['quotation'], $input['pc_id']);
 
             $delete_id = $this->project_cost_model->delete_inv_by_id($input['pc_id']);
@@ -3481,7 +3481,7 @@ class Sales extends MX_Controller
 
                     $insert['in_id'] = $input['pc_id'];
 
-                    $insert['category'] = ($val != '' ? $val : $input['old_cat_id'][$key]);
+                    $insert['category'] = ($val == '' ? $val : $input['old_cat_id'][$key]);
 
                     $insert['product_id'] = $input['product_id'][$key];
 
@@ -3499,19 +3499,19 @@ class Sales extends MX_Controller
 
                     $insert['per_cost'] = $input['per_cost'][$key];
 
-                    $insert['sp_with_gst'] = ($input['sp_with_gst'][$key] > 0 ) ? $input['sp_with_gst'][$key] : 0.00;
+                    $insert['sp_with_gst'] = ($input['sp_with_gst'][$key] > 0) ? $input['sp_with_gst'][$key] : 0.00;
 
-                    $insert['sp_without_gst'] = ($input['sp_without_gst'][$key] > 0 ) ? $input['sp_without_gst'][$key] : 0.00;
+                    $insert['sp_without_gst'] = ($input['sp_without_gst'][$key] > 0) ? $input['sp_without_gst'][$key] : 0.00;
 
-                    $insert['tax'] = ($input['tax'][$key] > 0 ) ? $input['tax'][$key] : 0.00;
-                    
-                    $insert['gst'] = ($input['gst'][$key] > 0 ) ? $input['gst'][$key] : 0.00;
+                    $insert['tax'] = ($input['tax'][$key] > 0) ? $input['tax'][$key] : 0.00;
 
-                    $insert['igst'] = ($input['igst'][$key] > 0 ) ? $input['igst'][$key] : 0.00;
+                    $insert['gst'] = ($input['gst'][$key] > 0) ? $input['gst'][$key] : 0.00;
 
-                    $insert['discount'] = ($input['discount'][$key] > 0 ) ? $input['discount'][$key] : 0.00;
+                    $insert['igst'] = ($input['igst'][$key] > 0) ? $input['igst'][$key] : 0.00;
 
-                    $insert['sub_total'] = ($input['sub_total'][$key] > 0 ) ? $input['sub_total'][$key] : 0.00;
+                    $insert['discount'] = ($input['discount'][$key] > 0) ? $input['discount'][$key] : 0.00;
+
+                    $insert['sub_total'] = ($input['sub_total'][$key] > 0) ? $input['sub_total'][$key] : 0.00;
 
                     if ($input['quotation']['delivery_status'] == 'delivered') {
 
@@ -3524,9 +3524,9 @@ class Sales extends MX_Controller
 
 
                     $insert_arr[] = $insert;
-                    
 
-                    if($insert['product_id'] > 0 && $insert['cost_price']){
+
+                    if ($insert['product_id'] > 0 && $insert['cost_price']) {
                         $cost_price = $insert['cost_price'];
                         $cgst = $insert['tax'];
                         $sgst = $insert['gst'];
@@ -3690,7 +3690,7 @@ class Sales extends MX_Controller
             unset($input['quotation']['validity']);
 
             $input['quotation']['sale_cat_type'] = $input['sale_cat_type'];
-      
+
             $insert_id = $this->project_cost_model->update_invoice($input['quotation'], $input['pc_id']);
 
             $delete_id = $this->project_cost_model->delete_inv_by_id($input['pc_id']);
@@ -3895,7 +3895,7 @@ class Sales extends MX_Controller
             unset($input['quotation']['validity']);
 
             $input['quotation']['sale_cat_type'] = $input['sale_cat_type'];
-      
+
             $insert_id = $this->project_cost_model->update_invoice($input['quotation'], $input['pc_id']);
 
             $delete_id = $this->project_cost_model->delete_inv_by_id($input['pc_id']);
@@ -4100,7 +4100,7 @@ class Sales extends MX_Controller
             unset($input['quotation']['validity']);
 
             $input['quotation']['sale_cat_type'] = $input['sale_cat_type'];
-      
+
             $insert_id = $this->project_cost_model->update_invoice($input['quotation'], $input['pc_id']);
 
             $delete_id = $this->project_cost_model->delete_inv_by_id($input['pc_id']);
@@ -4497,7 +4497,7 @@ class Sales extends MX_Controller
         $input = $this->input->post();
 
         //  $arr = $this->project_cost_model->get_all_products($input['barcode']);
-        $arr = $this->project_cost_model->get_products_by_barcode($input['barcode'],$input['category_id']);
+        $arr = $this->project_cost_model->get_products_by_barcode($input['barcode'], $input['category_id']);
 
         if ($arr)
             $arr[0]['selling_price'] = $arr[0]['sales_price'];
@@ -4722,12 +4722,12 @@ class Sales extends MX_Controller
     function invoice_ajaxList()
     {
 
-        
+
 
         $list = $this->project_cost_model->get_datatables();
         // echo"<pre>";
         // print_r($list);
-        
+
         // exit;
 
 
@@ -4749,8 +4749,8 @@ class Sales extends MX_Controller
 
             $row[] = $ass['store_name'];
 
-          
-            
+
+
 
             //  $row[] = number_format($ass['net_total'], 2);
 
@@ -4836,12 +4836,12 @@ class Sales extends MX_Controller
                     // $row[] = $delivery_status;
                     //$row[] = $payment_status;
 
-                    if($ass['categoryName'] == 'Fresh Mobiles')
-                        $invoice_edit ='fresh_mobile_sale_edit';
-                    elseif($ass['categoryName'] == 'Used Mobiles')
+                    if ($ass['categoryName'] == 'Fresh Mobiles')
+                        $invoice_edit = 'fresh_mobile_sale_edit';
+                    elseif ($ass['categoryName'] == 'Used Mobiles')
                         $invoice_edit = 'used_mobile_sale_edit';
-                    elseif($ass['categoryName'] == 'Accessories')
-                        $invoice_edit='accessories_sale_edit';
+                    elseif ($ass['categoryName'] == 'Accessories')
+                        $invoice_edit = 'accessories_sale_edit';
                     else
                         $invoice_edit = 'invoice_edit';
 
@@ -4850,7 +4850,7 @@ class Sales extends MX_Controller
                         $rows = '';
                         //if ($ass['payment_status'] != "Completed" || $ass['delivery_status'] != "delivered" || $ass['invoice_status'] != "approved") {
 
-                        $rows = '<a href="' . $this->config->item('base_url') . 'sales/'.$invoice_edit.'/' . $ass['invoice'][0]['id'] . '" data-toggle="tooltip" class="tooltips btn btn-default btn-xs 2222" title="" ><span class="fa fa-log-out "> <span class="fa fa-edit"></span></span></a> &nbsp;';
+                        $rows = '<a href="' . $this->config->item('base_url') . 'sales/' . $invoice_edit . '/' . $ass['invoice'][0]['id'] . '" data-toggle="tooltip" class="tooltips btn btn-default btn-xs 2222" title="" ><span class="fa fa-log-out "> <span class="fa fa-edit"></span></span></a> &nbsp;';
                         //}
                     } else {
 

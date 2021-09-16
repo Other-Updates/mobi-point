@@ -170,6 +170,7 @@
 
 
 
+
                 </table>
 
                 <table class="table table-striped table-bordered responsive" id="add_quotation"  cellpadding="0" cellspacing="0">
@@ -177,6 +178,7 @@
                     <thead>
 
                         <tr>
+
 
                             <td width="1%" class="first_td1 action-btn-align">S.No</td>
 
@@ -315,6 +317,8 @@
                                         <?php echo $i; ?>
 
                                     </td>
+
+
 
                                     <td class="">
 
@@ -867,6 +871,3 @@
 
 
 </script>
-
-
-

@@ -8,7 +8,8 @@ if (!defined('BASEPATH'))
 
 
 
-class Report_model extends CI_Model {
+class Report_model extends CI_Model
+{
 
 
 
@@ -48,15 +49,16 @@ class Report_model extends CI_Model {
 
 
 
-    function __construct() {
+    function __construct()
+    {
 
         parent::__construct();
-
     }
 
 
 
-    function get_all_receipt() {
+    function get_all_receipt()
+    {
 
         if (isset($serch_data) && !empty($serch_data)) {
 
@@ -75,19 +77,16 @@ class Report_model extends CI_Model {
             if (!empty($serch_data['state']) && $serch_data['state'] != 'Select') {
 
                 $this->db->where($this->table_name1 . '.state', $serch_data['state']);
-
             }
 
             if (!empty($serch_data['supplier']) && $serch_data['supplier'] != 'Select') {
 
                 $this->db->where($this->table_name1 . '.customer', $serch_data['supplier']);
-
             }
 
             if (!empty($serch_data['po'])) {
 
                 $this->db->where($this->table_name1 . '.grn_no', $serch_data['po']);
-
             }
 
             if (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
@@ -95,23 +94,18 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(" . $this->table_name1 . ".inv_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->table_name1 . ".inv_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
                 $this->db->where("DATE_FORMAT(" . $this->table_name1 . ".inv_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
                 $this->db->where("DATE_FORMAT(" . $this->table_name1 . ".inv_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["style"]) && $serch_data["style"] != "Select") {
 
 
 
                 $this->db->where('master_style.id', $serch_data["style"]);
-
             }
-
         }
 
         $this->db->select($this->table_name1 . '.*');
@@ -145,16 +139,16 @@ class Report_model extends CI_Model {
         $query = $this->db->get('erp_invoice')->result_array();
 
         return $query;
-
     }
 
 
 
-    public function get_all_quotation_report($serch_data) {
+    public function get_all_quotation_report($serch_data)
+    {
 
         $this->db->select('erp_quotation.id,customer.id as customer, customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_quotation.q_no,erp_quotation.total_qty,erp_quotation.tax,erp_quotation.ref_name,erp_quotation.tax_label,'
 
-                . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.created_date');
+            . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.created_date');
 
         $this->db->where('erp_quotation.estatus !=', 0);
 
@@ -165,7 +159,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_quotation.firm_id', $frim_id);
@@ -197,17 +190,13 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(erp_quotation.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(erp_quotation.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
                 $this->db->where("DATE_FORMAT(erp_quotation.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
                 $this->db->where("DATE_FORMAT(erp_quotation.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             }
-
         }
 
         //$this->db->where("DATE_FORMAT(erp_quotation.created_date,'%m') ='" . date('m') . "'");
@@ -229,7 +218,6 @@ class Report_model extends CI_Model {
 
 
             $i++;
-
         }
 
         $c = 0;
@@ -253,48 +241,47 @@ class Report_model extends CI_Model {
         $query[$k]["pc_total"] = $this->db->get('erp_project_cost')->result_array();
 
         return $query;
-
     }
 
 
 
-    function get_all_profit_report($serch_data) {
+    function get_all_profit_report($serch_data)
+    {
 
 
 
 
 
-//        $this->db->select('erp_quotation.id,customer.id as customer, customer.name,customer.store_name,customer.mobil_number,customer.email_id,customer.address1,erp_quotation.q_no,erp_quotation.total_qty,erp_quotation.tax,erp_quotation.ref_name,erp_quotation.tax_label,'
+        //        $this->db->select('erp_quotation.id,customer.id as customer, customer.name,customer.store_name,customer.mobil_number,customer.email_id,customer.address1,erp_quotation.q_no,erp_quotation.total_qty,erp_quotation.tax,erp_quotation.ref_name,erp_quotation.tax_label,'
 
-//                . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus');
+        //                . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus');
 
-//        $this->db->where('erp_quotation.estatus !=', 0);
+        //        $this->db->where('erp_quotation.estatus !=', 0);
 
-       $firms = $this->user_auth->get_user_firms();
+        $firms = $this->user_auth->get_user_firms();
 
-       $frim_id = array();
+        $frim_id = array();
 
         foreach ($firms as $value) {
 
-          $frim_id[] = $value['firm_id'];
-
+            $frim_id[] = $value['firm_id'];
         }
 
-//        $this->db->where_in('erp_quotation.firm_id', $frim_id);
+        //        $this->db->where_in('erp_quotation.firm_id', $frim_id);
 
-//        $this->db->join('customer', 'customer.id=erp_quotation.customer');
+        //        $this->db->join('customer', 'customer.id=erp_quotation.customer');
 
-//        $query = $this->db->get('erp_quotation')->result_array();
+        //        $query = $this->db->get('erp_quotation')->result_array();
 
-//
+        //
 
-//        $i = 0;
+        //        $i = 0;
 
-//
+        //
 
-//        $j = 0;
+        //        $j = 0;
 
-//        foreach ($query as $val) {
+        //        foreach ($query as $val) {
 
 
         $this->db->select('customer.name,customer.store_name,customer.mobil_number,customer.email_id,customer.id AS cust_id,customer.state_id');
@@ -324,28 +311,24 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             }
-
         }
 
         // $this->db->where('q_id', intval($val['id']));
 
 
-        if(empty($serch_data['firm_id'])){
-           $this->db->where_in('erp_invoice.firm_id', $frim_id);
-        }else{
-           $this->db->where('erp_invoice.firm_id', $serch_data['firm_id']);
+        if (empty($serch_data['firm_id'])) {
+            $this->db->where_in('erp_invoice.firm_id', $frim_id);
+        } else {
+            $this->db->where('erp_invoice.firm_id', $serch_data['firm_id']);
         }
 
         //$this->db->where("erp_invoice.inv_id !=", 'Wings Invoice');
@@ -355,7 +338,7 @@ class Report_model extends CI_Model {
         $query = $this->db->get('erp_invoice')->result_array();
 
 
-       //  echo "<pre>"; print_r($query);exit;
+        //  echo "<pre>"; print_r($query);exit;
 
         $i = 0;
 
@@ -370,14 +353,13 @@ class Report_model extends CI_Model {
             $query[$i]['or_amount'] = $this->db->get('erp_invoice_details')->result_array();
 
             $i++;
-
         }
 
-//            if (empty($query[$j]['inv_amount']))
+        //            if (empty($query[$j]['inv_amount']))
 
-//                unset($query[$j]);
+        //                unset($query[$j]);
 
-//            $j++;
+        //            $j++;
 
         //echo "<pre>";
 
@@ -388,18 +370,18 @@ class Report_model extends CI_Model {
 
 
         return $query;
-
     }
 
 
 
-    function get_all_profit_report1($serch_data) {
+    function get_all_profit_report1($serch_data)
+    {
 
 
 
         $this->db->select('erp_quotation.id,customer.id as customer, customer.name,customer.store_name,customer.mobil_number,customer.email_id,customer.address1,erp_quotation.q_no,erp_quotation.total_qty,erp_quotation.tax,erp_quotation.ref_name,erp_quotation.tax_label,'
 
-                . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus');
+            . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus');
 
         $this->db->where('erp_quotation.estatus !=', 0);
 
@@ -410,7 +392,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_quotation.firm_id', $frim_id);
@@ -434,7 +415,6 @@ class Report_model extends CI_Model {
             $query[$i]['or_amount'] = $this->db->get('erp_quotation_details')->result_array();
 
             $i++;
-
         }
 
         $j = 0;
@@ -466,19 +446,15 @@ class Report_model extends CI_Model {
 
 
                     $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
                 } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
                     $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
                 } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
                     $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
                 }
-
             }
 
             $this->db->where('q_id', intval($val['id']));
@@ -490,64 +466,63 @@ class Report_model extends CI_Model {
                 unset($query[$j]);
 
             $j++;
-
         }
 
         return $query;
-
     }
 
 
 
-    function count_filtered($search_data) {
+    function count_filtered($search_data)
+    {
 
         $this->_get_datatables_query($search_data);
 
         $query = $this->db->get();
 
         return $query->num_rows();
-
     }
 
 
 
-    function count_filtered_profit() {
+    function count_filtered_profit()
+    {
 
         $this->_get_profit_datatables_query();
 
         $query = $this->db->get('erp_invoice');
 
         return $query->num_rows();
-
     }
 
 
 
-    function count_filtered_hr_invoice() {
+    function count_filtered_hr_invoice()
+    {
 
         $this->_get_hr_invoice_datatables_query();
 
         $query = $this->db->get('erp_invoice');
 
         return $query->num_rows();
-
     }
 
 
 
-    function count_all_hr_invoice() {
+    function count_all_hr_invoice()
+    {
 
         $this->_get_hr_invoice_datatables_query();
 
         $this->db->from('erp_invoice');
 
         return $this->db->count_all_results();
-
     }
 
 
 
-    function count_all() {
+    function count_all()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -556,7 +531,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->from($this->primaryTable);
@@ -564,22 +538,22 @@ class Report_model extends CI_Model {
         $this->db->where_in('firm_id', $frim_id);
 
         return $this->db->count_all_results();
-
     }
 
 
 
-    function count_all_profit() {
+    function count_all_profit()
+    {
 
         $this->db->from('erp_invoice');
 
         return $this->db->count_all_results();
-
     }
 
 
 
-    function _get_datatables_query($search_data = array()) {
+    function _get_datatables_query($search_data = array())
+    {
 
         //Join Table
 
@@ -600,10 +574,9 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
-      
+
 
         $this->db->from($this->primaryTable);
 
@@ -620,17 +593,13 @@ class Report_model extends CI_Model {
                 if ($i === 0) { // first loop
 
                     $this->db->like($item, $_POST['search']['value']);
-
                 } else {
 
                     $this->db->or_like($item, $_POST['search']['value']);
-
                 }
-
             }
 
             $i++;
-
         }
 
         //print_r($search_data);exit;
@@ -640,28 +609,23 @@ class Report_model extends CI_Model {
             if ($search_data['category'] != '' && $search_data['category'] != 'Select') { // first loop
 
                 $this->db->where('u.category', $search_data['category']);
-
-            } if ($search_data['product'] != '') {
+            }
+            if ($search_data['product'] != '') {
 
                 $this->db->where_in('u.product_id', $search_data['product']);
-
             }
             if ($search_data['brand'] != '' && $search_data['brand'] != 'Select') {
 
                 $this->db->where('u.brand', $search_data['brand']);
-
             }
             if ($search_data['firm_id'] != '' && $search_data['firm_id'] != 'Select') {
 
                 $this->db->where('u.firm_id', $search_data['firm_id']);
-
-            }else{
+            } else {
                 $this->db->where_in('u.firm_id', $frim_id);
             }
-
-
-        }else{
-              $this->db->where_in('u.firm_id', $frim_id);
+        } else {
+            $this->db->where_in('u.firm_id', $frim_id);
         }
 
         if (isset($this->group)) {
@@ -669,14 +633,13 @@ class Report_model extends CI_Model {
             $group = $this->group;
 
             $this->db->order_by($group);
-
         }
-
     }
 
 
 
-    function _get_profit_datatables_query($serch_data = array()) {
+    function _get_profit_datatables_query($serch_data = array())
+    {
 
         $this->db->select('customer.name,customer.store_name,customer.mobil_number,customer.email_id,customer.id AS cust_id,customer.state_id');
 
@@ -709,25 +672,21 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
-            }else{
-                $current_date=date('Y-m-d');
-                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $current_date. "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $current_date. "'");
+            } else {
+                $current_date = date('Y-m-d');
+                $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $current_date . "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $current_date . "'");
             }
-
         } else {
-            $current_date=date('Y-m-d');
-            $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $current_date. "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $current_date. "'");    
+            $current_date = date('Y-m-d');
+            $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $current_date . "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $current_date . "'");
         }
 
 
@@ -762,13 +721,10 @@ class Report_model extends CI_Model {
                     //$query = $this->db->or_like($item, $_POST['search']['value']);
 
                     $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'" . "";
-
                 }
-
             }
 
             $i++;
-
         }
 
         if ($like) {
@@ -776,26 +732,23 @@ class Report_model extends CI_Model {
             $where = "(" . $like . " )";
 
             $this->db->where($where);
-
         }
 
         if (isset($_POST['order']) && $column_order[$_POST['order']['0']['column']] != null) { // here order processing
 
             $this->db->order_by($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-
         } else if (isset($order)) {
 
             $order = $order;
 
             $this->db->order_by(key($order), $order[key($order)]);
-
         }
-
     }
 
 
 
-    function _get_outstanding_datatables_query($search_data = array()) {
+    function _get_outstanding_datatables_query($search_data = array())
+    {
 
         $this->db->select('erp_invoice.*');
 
@@ -804,25 +757,21 @@ class Report_model extends CI_Model {
         if (!empty($search_data['cust_type']) && $search_data['cust_type'] != 9) {
 
             $this->db->where_in($this->customer . ".customer_type", $search_data['cust_type']);
-
         }
 
         if (!empty($search_data['cust_reg']) && $search_data['cust_reg'] != 'both') {
 
             $this->db->where($this->customer . ".customer_region", $search_data['cust_reg']);
-
         }
 
         if (!empty($search_data['due_date']) && $search_data['due_date'] == 6) {
 
             $this->db->where("erp_invoice.inv_id", 'Wings Invoice');
-
         }
 
         if (!empty($search_data['due_date']) && $search_data['due_date'] != 6 && $search_data['due_date'] != 5) {
 
             $this->db->where("erp_invoice.inv_id !=", 'Wings Invoice');
-
         }
 
         //$this->db->order_by('erp_invoice.id', 'desc');
@@ -856,13 +805,10 @@ class Report_model extends CI_Model {
                     //$query = $this->db->or_like($item, $_POST['search']['value']);
 
                     $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'" . "";
-
                 }
-
             }
 
             $i++;
-
         }
 
         if ($like) {
@@ -870,26 +816,23 @@ class Report_model extends CI_Model {
             $where = "(" . $like . " )";
 
             $this->db->where($where);
-
         }
 
         if (isset($_POST['order']) && $column_order[$_POST['order']['0']['column']] != null) { // here order processing
 
             $this->db->order_by($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-
         } else if (isset($order)) {
 
             $order = $order;
 
             $this->db->order_by(key($order), $order[key($order)]);
-
         }
-
     }
 
 
 
-    function _get_outstanding_duedate_datatables_query($search_data = array()) {
+    function _get_outstanding_duedate_datatables_query($search_data = array())
+    {
 
 
 
@@ -900,7 +843,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
 
@@ -915,7 +857,7 @@ class Report_model extends CI_Model {
 
         $this->db->where("payment_report.balance >", 0.1);
 
-//        $this->db->where("payment_report.inv_id !=", 'Wings Invoice');
+        //        $this->db->where("payment_report.inv_id !=", 'Wings Invoice');
 
         $this->db->group_by("payment_report.customer");
 
@@ -942,13 +884,10 @@ class Report_model extends CI_Model {
                     //$query = $this->db->or_like($item, $_POST['search']['value']);
 
                     $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'" . "";
-
                 }
-
             }
 
             $i++;
-
         }
 
         if ($like) {
@@ -956,26 +895,23 @@ class Report_model extends CI_Model {
             $where = "(" . $like . " )";
 
             $this->db->where($where);
-
         }
 
         if (isset($_POST['order']) && $column_order[$_POST['order']['0']['column']] != null) { // here order processing
 
             $this->db->order_by($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-
         } else if (isset($order)) {
 
             $order = $order;
 
             $this->db->order_by(key($order), $order[key($order)]);
-
         }
-
     }
 
 
 
-    function _get_payment_datatables_query($search_data = array()) {
+    function _get_payment_datatables_query($search_data = array())
+    {
 
         if (isset($serch_data) && !empty($serch_data)) {
 
@@ -986,15 +922,12 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where($this->erp_invoice . '.firm_id', $serch_data['firm']);
-
             }
 
             if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
                 $this->db->where($this->erp_invoice . '.customer', $serch_data['customer']);
-
             }
-
         }
 
 
@@ -1018,7 +951,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.firm_id', $frim_id);
@@ -1048,13 +980,10 @@ class Report_model extends CI_Model {
                     //$query = $this->db->or_like($item, $_POST['search']['value']);
 
                     $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'" . "";
-
                 }
-
             }
 
             $i++;
-
         }
 
         if ($like) {
@@ -1062,26 +991,23 @@ class Report_model extends CI_Model {
             $where = "(" . $like . " )";
 
             $this->db->where($where);
-
         }
 
         if (isset($_POST['order']) && $column_order[$_POST['order']['0']['column']] != null) { // here order processing
 
             $this->db->order_by($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-
         } else if (isset($order)) {
 
             $order = $order;
 
             $this->db->order_by(key($order), $order[key($order)]);
-
         }
-
     }
 
 
 
-    function _get_hr_invoice_datatables_query($search_data = array()) {
+    function _get_hr_invoice_datatables_query($search_data = array())
+    {
 
         if (!empty($serch_data['from_date']))
 
@@ -1106,25 +1032,21 @@ class Report_model extends CI_Model {
 
 
             $this->db->where($this->erp_invoice . '.inv_id', $serch_data['inv_id']);
-
         }
 
         if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.customer', $serch_data['customer']);
-
         }
 
         if (!empty($serch_data['sales_man']) && $serch_data['sales_man'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.sales_man', $serch_data['sales_man']);
-
         }
 
         if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
 
             $this->db->where($this->erp_invoice_details . '.product_id', $serch_data['product']);
-
         }
 
 
@@ -1134,26 +1056,23 @@ class Report_model extends CI_Model {
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         }
 
 
 
         $this->db->select('customer.id as customer,customer.store_name,customer.tin, customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_invoice.id,erp_invoice.inv_id,erp_quotation.q_no,erp_invoice.total_qty,erp_invoice.tax,erp_quotation.ref_name,erp_invoice.tax_label,'
 
-                . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name');
+            . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name');
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -1164,7 +1083,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.firm_id', $frim_id);
@@ -1178,12 +1096,12 @@ class Report_model extends CI_Model {
         $this->db->join('erp_invoice_details', 'erp_invoice_details.in_id=erp_invoice.id');
 
         $this->db->where_in('customer.customer_type', $customer);
-
     }
 
 
 
-    function get_datatables($search_data) {
+    function get_datatables($search_data)
+    {
 
         $this->db->select($this->selectColumn);
 
@@ -1202,12 +1120,12 @@ class Report_model extends CI_Model {
 
 
         return $query->result();
-
     }
 
 
 
-    function get_profit_datatables($search_data) {
+    function get_profit_datatables($search_data)
+    {
 
         //$this->db->select($this->selectColumn);
 
@@ -1217,7 +1135,7 @@ class Report_model extends CI_Model {
 
             $this->db->limit($_POST['length'], $_POST['start']);
 
-         $firms = $this->user_auth->get_user_firms();
+        $firms = $this->user_auth->get_user_firms();
 
         $frim_id = array();
 
@@ -1226,10 +1144,10 @@ class Report_model extends CI_Model {
             $frim_id[] = $value['firm_id'];
         }
 
-        if($search_data['firm_id']!="" && $search_data['firm_id']!="Select")
+        if ($search_data['firm_id'] != "" && $search_data['firm_id'] != "Select")
             $this->db->where_in('erp_invoice.firm_id', $search_data['firm_id']);
         else
-             $this->db->where_in('erp_invoice.firm_id', $frim_id);
+            $this->db->where_in('erp_invoice.firm_id', $frim_id);
 
         $query = $this->db->get('erp_invoice')->result_array();
 
@@ -1246,16 +1164,15 @@ class Report_model extends CI_Model {
             $query[$i]['or_amount'] = $this->db->get('erp_invoice_details')->result_array();
 
             $i++;
-
         }
 
         return $query;
-
     }
 
 
 
-    function get_outstanding_datatables($search_data) {
+    function get_outstanding_datatables($search_data)
+    {
 
         //$this->db->select($this->selectColumn);
 
@@ -1300,7 +1217,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] == 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -1308,7 +1224,6 @@ class Report_model extends CI_Model {
                 $electricals = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['electricals'] = ($electricals[0]['total_bill_amount'] + $electricals[0]['receipt_discount']);
-
             }
 
             if ($duedate['firm_id'] == 2) {
@@ -1332,7 +1247,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] == 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -1340,7 +1254,6 @@ class Report_model extends CI_Model {
                 $paints = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['paints'] = ($paints[0]['total_bill_amount'] + $paints[0]['receipt_discount']);
-
             }
 
             if ($duedate['firm_id'] == 3) {
@@ -1364,7 +1277,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] == 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -1372,7 +1284,6 @@ class Report_model extends CI_Model {
                 $tiles = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['tiles'] = ($tiles[0]['total_bill_amount'] + $tiles[0]['receipt_discount']);
-
             }
 
             if ($duedate['firm_id'] == 4) {
@@ -1396,7 +1307,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] = 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -1404,7 +1314,6 @@ class Report_model extends CI_Model {
                 $hardware = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['hardware'] = ($hardware[0]['total_bill_amount'] + $hardware[0]['receipt_discount']);
-
             }
 
             $query[$i]['net_amount'] = $query[$i]['electricals'] + $query[$i]['paints'] + $query[$i]['tiles'] + $query[$i]['hardware'];
@@ -1412,7 +1321,6 @@ class Report_model extends CI_Model {
 
 
             $i++;
-
         }
 
 
@@ -1420,12 +1328,12 @@ class Report_model extends CI_Model {
 
 
         return $query;
-
     }
 
 
 
-    function get_outstanding_duedate_datatables($search_data) {
+    function get_outstanding_duedate_datatables($search_data)
+    {
 
         //$this->db->select($this->selectColumn);
 
@@ -1437,9 +1345,9 @@ class Report_model extends CI_Model {
 
         $query = $this->db->get('customer')->result_array();
 
-//        echo $this->db->last_query();
+        //        echo $this->db->last_query();
 
-//        die;
+        //        die;
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -1448,7 +1356,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $i = 0;
@@ -1589,23 +1496,22 @@ class Report_model extends CI_Model {
 
             $query[$i]['rec'] = $this->db->get('payment_report')->result_array();
 
-//            echo $this->db->last_query();
+            //            echo $this->db->last_query();
 
-//            exit;
+            //            exit;
 
             $i++;
-
         }
 
-//        echo '<pre>';print_r($query);exit;
+        //        echo '<pre>';print_r($query);exit;
 
         return $query;
-
     }
 
 
 
-    function get_payment_datatables($search_data) {
+    function get_payment_datatables($search_data)
+    {
 
         //$this->db->select($this->selectColumn);
 
@@ -1615,7 +1521,7 @@ class Report_model extends CI_Model {
 
             $this->db->limit($_POST['length'], $_POST['start']);
 
-//        $this->db->where('erp_invoice.customer',1087);
+        //        $this->db->where('erp_invoice.customer',1087);
 
         $result_arr = $this->db->get('erp_invoice')->result_array();
 
@@ -1630,7 +1536,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $i = $j = 0;
@@ -1664,9 +1569,7 @@ class Report_model extends CI_Model {
                     foreach ($sub_query as $total) {
 
                         $invoice_net_total += $total['net_total'];
-
                     }
-
                 }
 
                 //'$result_arr[$j]['invoice_net'][] = $invoice_net_total;
@@ -1680,9 +1583,7 @@ class Report_model extends CI_Model {
                     $result_arr[$j]['invoice_net_total'] = $invoice_net_total;
 
                 $j++;
-
             }
-
         }
 
         if (!empty($result_arr)) {
@@ -1710,20 +1611,18 @@ class Report_model extends CI_Model {
                 $result_arr[$i]['receipt_bill'] = $sub_query;
 
                 $i++;
-
             }
-
         }
 
-//        echo '<pre>';print_r($result_arr) ;exit;
+        //        echo '<pre>';print_r($result_arr) ;exit;
 
         return $result_arr;
-
     }
 
 
 
-    public function get_customer_based_datatables($serch_data = array()) {
+    public function get_customer_based_datatables($serch_data = array())
+    {
 
         $this->db->distinct();
 
@@ -1738,19 +1637,17 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.contract_customer', 0);
 
-        
+
 
         // $this->db->where('erp_invoice.net_total >', 0);
 
         if (!empty($serch_data['overdue']) && $serch_data['overdue'] != '' && $serch_data['overdue'] == 3) {
 
             $this->db->where('customer.advance >', 0);
-
         }
 
         //$this->db->order_by('erp_invoice.id', 'desc');
@@ -1763,7 +1660,7 @@ class Report_model extends CI_Model {
 
 
 
-     if (isset($serch_data) && !empty($serch_data)) {
+        if (isset($serch_data) && !empty($serch_data)) {
 
             if (!empty($serch_data['from_date']))
 
@@ -1787,14 +1684,11 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where('erp_invoice.firm_id', $serch_data['firm_id']);
-
-            }
-            else if (!empty($serch_data['firm_id']) && $serch_data['firm_id'] == 'Select') {
+            } else if (!empty($serch_data['firm_id']) && $serch_data['firm_id'] == 'Select') {
 
 
 
-              $this->db->where_in('erp_invoice.firm_id', $frim_id);
-
+                $this->db->where_in('erp_invoice.firm_id', $frim_id);
             }
 
 
@@ -1803,13 +1697,11 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where('erp_invoice.inv_id', $serch_data['inv_id']);
-
             }
 
             if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
                 $this->db->where('customer.id', $serch_data['customer']);
-
             }
 
 
@@ -1817,7 +1709,6 @@ class Report_model extends CI_Model {
             if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
 
                 $this->db->where('erp_invoice_details.product_id', $serch_data['product']);
-
             }
 
 
@@ -1827,36 +1718,27 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
+            } else {
 
-            }else{
+                $current_date = date('Y-m-d');
+                // $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $current_date. "'");
+                $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $current_date . "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $current_date . "'");
 
-            $current_date=date('Y-m-d');
-           // $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $current_date. "'");
-             $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $current_date. "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $current_date . "'");
-
-            $this->db->where('erp_invoice.firm_id', $frim_id[0]);
-               
+                $this->db->where('erp_invoice.firm_id', $frim_id[0]);
             }
-
-
-
-            
-
         }
 
-            
+
 
 
 
@@ -1883,13 +1765,10 @@ class Report_model extends CI_Model {
                     //$query = $this->db->or_like($item, $_POST['search']['value']);
 
                     $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'" . "";
-
                 }
-
             }
 
             $i++;
-
         }
 
         if ($like) {
@@ -1897,19 +1776,16 @@ class Report_model extends CI_Model {
             $where = "(" . $like . " )";
 
             $this->db->where($where);
-
         }
 
         if (isset($_POST['order']) && $column_order[$_POST['order']['0']['column']] != null) { // here order processing
 
             $this->db->order_by($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-
         } else if (isset($order)) {
 
             $order = $order;
 
             $this->db->order_by(key($order), $order[key($order)]);
-
         }
 
 
@@ -1926,7 +1802,7 @@ class Report_model extends CI_Model {
 
         $i = 0;
 
-          
+
 
 
         foreach ($query as $val) {
@@ -1976,12 +1852,12 @@ class Report_model extends CI_Model {
         // exit;
 
         return $query;
-
     }
 
 
 
-    public function get_invoice_datatables($serch_data) {
+    public function get_invoice_datatables($serch_data)
+    {
 
 
 
@@ -2007,7 +1883,7 @@ class Report_model extends CI_Model {
 
             $invoice_ids = array();
 
-           // $where_gst = '(erp_invoice_details.tax="' . $serch_data['gst'] . '" OR erp_invoice_details.gst = "' . $serch_data['gst'] . '")';
+            // $where_gst = '(erp_invoice_details.tax="' . $serch_data['gst'] . '" OR erp_invoice_details.gst = "' . $serch_data['gst'] . '")';
 
             $this->db->select('erp_invoice.id');
 
@@ -2015,30 +1891,26 @@ class Report_model extends CI_Model {
 
             $this->db->join('erp_invoice', 'erp_invoice_details.in_id=erp_invoice.id');
 
-          //  $this->db->where($where_gst);
+            //  $this->db->where($where_gst);
 
             if (!empty($serch_data['inv_id']) && $serch_data['inv_id'] != 'Select') {
 
                 $this->db->where($this->erp_invoice . '.inv_id', $serch_data['inv_id']);
-
             }
 
             if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
                 $this->db->where($this->erp_invoice . '.customer', $serch_data['customer']);
-
             }
 
             if (!empty($serch_data['sales_man']) && $serch_data['sales_man'] != 'Select') {
 
                 $this->db->where($this->erp_invoice . '.sales_man', $serch_data['sales_man']);
-
             }
 
             if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
 
                 $this->db->where($this->erp_invoice_details . '.product_id', $serch_data['product']);
-
             }
 
             if (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
@@ -2046,20 +1918,17 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
-               $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
-            } 
+                $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
+            }
 
 
 
@@ -2101,7 +1970,6 @@ class Report_model extends CI_Model {
                         $inv_all_details[$invoice_id]['cgst'] = $cgst;
 
                         $inv_all_details[$invoice_id]['sgst'] = $sgst;
-
                     } else {
 
                         $inv_all_details[$invoice_id]['quantity'] = $inv_all_details[$invoice_id]['quantity'] + $quantity;
@@ -2109,17 +1977,14 @@ class Report_model extends CI_Model {
                         $inv_all_details[$invoice_id]['cgst'] = $inv_all_details[$invoice_id]['cgst'] + ($cgst);
 
                         $inv_all_details[$invoice_id]['sgst'] = $inv_all_details[$invoice_id]['sgst'] + $sgst;
-
                     }
-
                 }
 
 
 
-                $invoiceIds = array_map(function($invoices) {
+                $invoiceIds = array_map(function ($invoices) {
 
                     return $invoices['in_id'];
-
                 }, $invoices);
 
 
@@ -2131,45 +1996,36 @@ class Report_model extends CI_Model {
                     $invoiceIds = array_unique($invoiceIds);
 
                     $this->db->where_in($this->erp_invoice . '.id', $invoiceIds);
-
                 } else {
 
                     $this->db->where($this->erp_invoice . '.id', -1);
-
                 }
-
             } else {
 
                 $this->db->where($this->erp_invoice . '.id', -1);
-
             }
-
         }
 
 
-        
+
         if (!empty($serch_data['inv_id']) && $serch_data['inv_id'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.inv_id', $serch_data['inv_id']);
-
         }
 
         if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.customer', $serch_data['customer']);
-
         }
 
         if (!empty($serch_data['sales_man']) && $serch_data['sales_man'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.sales_man', $serch_data['sales_man']);
-
         }
 
         if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
 
             $this->db->where($this->erp_invoice_details . '.product_id', $serch_data['product']);
-
         }
 
         if (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
@@ -2177,57 +2033,51 @@ class Report_model extends CI_Model {
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
-        }elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
-
+        } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
-            $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') = '" . date('Y-m-d'). "'");
 
+            $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') = '" . date('Y-m-d') . "'");
         }
 
         if (!empty($serch_data['firm_id']) && $serch_data['firm_id'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.firm_id', $serch_data['firm_id']);
-
-        }else{
-             $firms = $this->user_auth->get_user_firms();
+        } else {
+            $firms = $this->user_auth->get_user_firms();
 
             $frim_id = array();
 
             foreach ($firms as $value) {
 
                 $frim_id[] = $value['firm_id'];
-
             }
 
             $this->db->where_in('erp_invoice.firm_id', $frim_id);
         }
 
 
-        $this->db->where($this->erp_invoice . '.inv_id !=','');
+        $this->db->where($this->erp_invoice . '.inv_id !=', '');
 
 
 
         $this->db->select('customer.id as customer,customer.store_name,customer.tin,customer.state_id, customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_invoice.id,erp_invoice.inv_id,erp_quotation.q_no,erp_invoice.total_qty,erp_invoice.tax,erp_quotation.ref_name,erp_invoice.tax_label,'
 
-                . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name,erp_invoice.q_id');
+            . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name,erp_invoice.q_id');
 
 
 
-       
+
 
         $this->db->join('erp_quotation', 'erp_quotation.id=erp_invoice.q_id');
 
@@ -2264,13 +2114,10 @@ class Report_model extends CI_Model {
                     //$query = $this->db->or_like($item, $_POST['search']['value']);
 
                     $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'" . "";
-
                 }
-
             }
 
             $i++;
-
         }
 
         if ($like) {
@@ -2278,19 +2125,16 @@ class Report_model extends CI_Model {
             $where = "(" . $like . " )";
 
             $this->db->where($where);
-
         }
 
         if (isset($_POST['order']) && $column_order[$_POST['order']['0']['column']] != null) { // here order processing
 
             $this->db->order_by($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-
         } else if (isset($order)) {
 
             $order = $order;
 
             $this->db->order_by(key($order), $order[key($order)]);
-
         }
 
 
@@ -2316,7 +2160,6 @@ class Report_model extends CI_Model {
             $query[$i]['other_cost'] = $this->db->get('erp_other_cost')->result_array();
 
             $i++;
-
         }
 
         $i2 = 0;
@@ -2330,7 +2173,6 @@ class Report_model extends CI_Model {
             $query[$i2]['erp_invoice_details'] = $this->db->get('erp_invoice_details')->result_array();
 
             $i2++;
-
         }
 
         $j = 0;
@@ -2344,22 +2186,21 @@ class Report_model extends CI_Model {
             $query[$j]['receipt_bill'] = $this->db->get('receipt_bill')->result_array();
 
             $j++;
-
         }
 
         if (!empty($inv_all_details) && !empty($query)) {
 
-          //  $query['inv_all_details'] = $inv_all_details;
+            //  $query['inv_all_details'] = $inv_all_details;
 
         }
 
         return $query;
-
     }
 
 
 
-    public function get_gst_datatables($serch_data) {
+    public function get_gst_datatables($serch_data)
+    {
 
 
 
@@ -2400,7 +2241,6 @@ class Report_model extends CI_Model {
             if (!empty($serch_data['firm_id']) && $serch_data['firm_id'] != 'Select') {
 
                 $this->db->where($this->erp_invoice . '.firm_id', $serch_data['firm_id']);
-
             } else {
 
                 $firms = $this->user_auth->get_user_firms();
@@ -2410,17 +2250,14 @@ class Report_model extends CI_Model {
                 foreach ($firms as $value) {
 
                     $frim_id[] = $value['firm_id'];
-
                 }
 
                 $this->db->where_in('erp_invoice.firm_id', $frim_id);
-
             }
 
             if (!empty($serch_data['inv_id']) && $serch_data['inv_id'] != 'Select') {
 
                 $this->db->where_in($this->erp_invoice . '.id', implode(',', $serch_data['inv_id']));
-
             }
 
 
@@ -2430,13 +2267,10 @@ class Report_model extends CI_Model {
                 if ($serch_data['cust_type'] == 1) {
 
                     $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
-
                 } else if ($serch_data['cust_type'] == 2) {
 
                     $this->db->where($this->customer . '.tin IS NULL');
-
                 }
-
             }
 
 
@@ -2446,19 +2280,16 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             }
 
 
@@ -2510,7 +2341,6 @@ class Report_model extends CI_Model {
                         $inv_all_details[$invoice_id]['total_gst'] += $total_gst;
 
                         $inv_all_details[$invoice_id]['sub_total'] += ($per_cost * $quantity);
-
                     } else {
 
                         $inv_all_details[$invoice_id]['quantity'] = $inv_all_details[$invoice_id]['quantity'] + $quantity;
@@ -2522,17 +2352,14 @@ class Report_model extends CI_Model {
                         $inv_all_details[$invoice_id]['total_gst'] += $total_gst;
 
                         $inv_all_details[$invoice_id]['sub_total'] += ($per_cost * $quantity);
-
                     }
-
                 }
 
 
 
-                $invoiceIds = array_map(function($invoices) {
+                $invoiceIds = array_map(function ($invoices) {
 
                     return $invoices['in_id'];
-
                 }, $invoices);
 
 
@@ -2544,25 +2371,19 @@ class Report_model extends CI_Model {
                     $invoiceIds = array_unique($invoiceIds);
 
                     $this->db->where_in($this->erp_invoice . '.id', $invoiceIds);
-
                 } else {
 
                     $this->db->where($this->erp_invoice . '.id', -1);
-
                 }
-
             } else {
 
                 $this->db->where($this->erp_invoice . '.id', -1);
-
             }
-
         }
 
         if (!empty($serch_data['firm_id']) && $serch_data['firm_id'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.firm_id', $serch_data['firm_id']);
-
         } else {
 
             $firms = $this->user_auth->get_user_firms();
@@ -2572,11 +2393,9 @@ class Report_model extends CI_Model {
             foreach ($firms as $value) {
 
                 $frim_id[] = $value['firm_id'];
-
             }
 
             $this->db->where_in('erp_invoice.firm_id', $frim_id);
-
         }
 
         if (!empty($serch_data['cust_type']) && $serch_data['cust_type'] != 'Select') {
@@ -2585,16 +2404,15 @@ class Report_model extends CI_Model {
 
                 $this->db->where($this->customer . '.tin IS NULL');
 
-//                $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
+                //                $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
 
             } else if ($serch_data['cust_type'] == 2) {
 
                 $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
 
-//                $this->db->where($this->customer . '.tin IS NULL');
+                //                $this->db->where($this->customer . '.tin IS NULL');
 
             }
-
         }
 
         if (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
@@ -2602,30 +2420,27 @@ class Report_model extends CI_Model {
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         }
 
 
 
         $this->db->select('customer.id as customer,customer.store_name,customer.tin,customer.state_id, customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_invoice.id,erp_invoice.inv_id,erp_quotation.q_no,erp_invoice.total_qty,erp_invoice.tax,erp_quotation.ref_name,erp_invoice.tax_label,'
 
-                . 'erp_invoice.net_total,erp_invoice.created_date,'
+            . 'erp_invoice.net_total,erp_invoice.created_date,'
 
-                . 'erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,'
+            . 'erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,'
 
-                . 'erp_sales_man.sales_man_name,erp_invoice.q_id,erp_manage_firms.gstin,erp_manage_firms.firm_name');
+            . 'erp_sales_man.sales_man_name,erp_invoice.q_id,erp_manage_firms.gstin,erp_manage_firms.firm_name');
 
 
 
@@ -2668,13 +2483,10 @@ class Report_model extends CI_Model {
                     //$query = $this->db->or_like($item, $_POST['search']['value']);
 
                     $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'" . "";
-
                 }
-
             }
 
             $i++;
-
         }
 
         if ($like) {
@@ -2682,19 +2494,16 @@ class Report_model extends CI_Model {
             $where = "(" . $like . " )";
 
             $this->db->where($where);
-
         }
 
         if (isset($_POST['order']) && $column_order[$_POST['order']['0']['column']] != null) { // here order processing
 
             $this->db->order_by($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-
         } else if (isset($order)) {
 
             $order = $order;
 
             $this->db->order_by(key($order), $order[key($order)]);
-
         }
 
 
@@ -2720,7 +2529,6 @@ class Report_model extends CI_Model {
             $query[$i]['other_cost'] = $this->db->get('erp_other_cost')->result_array();
 
             $i++;
-
         }
 
         $i2 = 0;
@@ -2734,7 +2542,6 @@ class Report_model extends CI_Model {
             $query[$i2]['erp_invoice_details'] = $this->db->get('erp_invoice_details')->result_array();
 
             $i2++;
-
         }
 
         $j = 0;
@@ -2748,7 +2555,6 @@ class Report_model extends CI_Model {
             $query[$j]['receipt_bill'] = $this->db->get('receipt_bill')->result_array();
 
             $j++;
-
         }
 
         if (!empty($inv_all_details) && !empty($query)) {
@@ -2758,12 +2564,12 @@ class Report_model extends CI_Model {
         }
 
         return $query;
-
     }
 
 
 
-    function get_hr_invoice_datatables($search_data) {
+    function get_hr_invoice_datatables($search_data)
+    {
 
 
 
@@ -2788,18 +2594,17 @@ class Report_model extends CI_Model {
             $query[$i]['other_cost'] = $this->db->get('erp_other_cost')->result_array();
 
             $i++;
-
         }
 
 
 
         return $query;
-
     }
 
 
 
-    public function get_invoice($serch_data) {
+    public function get_invoice($serch_data)
+    {
 
         if (!empty($serch_data['from_date']))
 
@@ -2824,25 +2629,21 @@ class Report_model extends CI_Model {
 
 
             $this->db->where($this->erp_invoice . '.inv_id', $serch_data['inv_id']);
-
         }
 
         if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.customer', $serch_data['customer']);
-
         }
 
         if (!empty($serch_data['sales_man']) && $serch_data['sales_man'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.sales_man', $serch_data['sales_man']);
-
         }
 
         if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
 
             $this->db->where($this->erp_invoice_details . '.product_id', $serch_data['product']);
-
         }
 
 
@@ -2852,26 +2653,23 @@ class Report_model extends CI_Model {
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         }
 
 
 
         $this->db->select('customer.id as customer,customer.store_name,customer.tin, customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_invoice.id,erp_invoice.inv_id,erp_quotation.q_no,erp_invoice.total_qty,erp_invoice.tax,erp_quotation.ref_name,erp_invoice.tax_label,'
 
-                . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name');
+            . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name');
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -2882,7 +2680,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.firm_id', $frim_id);
@@ -2912,16 +2709,15 @@ class Report_model extends CI_Model {
             $query[$i]['other_cost'] = $this->db->get('erp_other_cost')->result_array();
 
             $i++;
-
         }
 
         return $query;
-
     }
 
 
 
-    public function get_all_hr_customer_invoice() {
+    public function get_all_hr_customer_invoice()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -2932,7 +2728,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->select('customer.store_name,customer.id');
@@ -2950,12 +2745,12 @@ class Report_model extends CI_Model {
         $query = $this->db->get($this->customer)->result_array();
 
         return $query;
-
     }
 
 
 
-    public function get_all_product_invoice() {
+    public function get_all_product_invoice()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -2964,7 +2759,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->select('erp_product.product_name,erp_product.id as product_id');
@@ -2982,18 +2776,17 @@ class Report_model extends CI_Model {
 
 
         return $query;
-
     }
 
-    public function get_all_firms(){
-         $firms = $this->user_auth->get_user_firms();
+    public function get_all_firms()
+    {
+        $firms = $this->user_auth->get_user_firms();
 
         $frim_id = array();
 
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->select('firm_id,firm_name');
@@ -3005,20 +2798,18 @@ class Report_model extends CI_Model {
         $query = $this->db->get('erp_manage_firms')->result_array();
 
         return $query;
-    
-
     }
 
-        public function get_all_customers(){
+    public function get_all_customers()
+    {
 
-         $firms = $this->user_auth->get_user_firms();
+        $firms = $this->user_auth->get_user_firms();
 
         $frim_id = array();
 
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->select('id,store_name as customer_name');
@@ -3030,20 +2821,18 @@ class Report_model extends CI_Model {
         $query = $this->db->get('customer')->result_array();
 
         return $query;
-    
-
     }
 
-    public function get_all_products(){
+    public function get_all_products()
+    {
 
-         $firms = $this->user_auth->get_user_firms();
+        $firms = $this->user_auth->get_user_firms();
 
         $frim_id = array();
 
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->select('id,product_name');
@@ -3055,13 +2844,12 @@ class Report_model extends CI_Model {
         $query = $this->db->get('erp_product')->result_array();
 
         return $query;
-    
-
     }
 
 
 
-    public function get_all_expired_product($serch_data = array()) {
+    public function get_all_expired_product($serch_data = array())
+    {
 
 
 
@@ -3088,19 +2876,16 @@ class Report_model extends CI_Model {
 
 
             $this->db->where($this->erp_product . '.firm_id', $serch_data['firm']);
-
         }
 
         if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
 
             $this->db->where($this->erp_product . '.id', $serch_data['product']);
-
         }
 
         if (!empty($serch_data['category']) && $serch_data['category'] != 'Select') {
 
             $this->db->where($this->erp_product . '.category_id', $serch_data['category']);
-
         }
 
 
@@ -3110,19 +2895,16 @@ class Report_model extends CI_Model {
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_product . ".expired_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_product . ".expired_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_product . ".expired_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_product . ".expired_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         }
 
         $date = date('Y-m-d');
@@ -3136,31 +2918,28 @@ class Report_model extends CI_Model {
         $query = $this->db->get($this->erp_product)->result_array();
 
         return $query;
-
     }
 
 
 
-    public function get_customer_details($search_data = array()) {
+    public function get_customer_details($search_data = array())
+    {
 
 
 
         if (!empty($search_data['firm'])) {
 
             $this->db->where($this->customer . ".firm_id", $search_data['firm']);
-
         }
 
         if (!empty($search_data['cust_type']) && $search_data['cust_type'] != 9) {
 
             $this->db->where_in($this->customer . ".customer_type", $search_data['cust_type']);
-
         }
 
         if (!empty($search_data['cust_reg']) && $search_data['cust_reg'] != 'both') {
 
             $this->db->where($this->customer . ".customer_region", $search_data['cust_reg']);
-
         }
 
 
@@ -3172,7 +2951,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
 
@@ -3370,7 +3148,6 @@ class Report_model extends CI_Model {
 
 
             $i++;
-
         }
 
 
@@ -3412,31 +3189,28 @@ class Report_model extends CI_Model {
           exit; */
 
         return $query;
-
     }
 
 
 
-    public function get_customer_details1($search_data = array()) {
+    public function get_customer_details1($search_data = array())
+    {
 
 
 
         if (!empty($search_data['firm'])) {
 
             $this->db->where($this->payment_report . ".firm_id", $search_data['firm']);
-
         }
 
         if (!empty($search_data['cust_type']) && $search_data['cust_type'] != 9) {
 
             $this->db->where_in($this->payment_report . ".customer_type", $search_data['cust_type']);
-
         }
 
         if (!empty($search_data['cust_reg']) && $search_data['cust_reg'] != 'both') {
 
             $this->db->where($this->payment_report . ".customer_region", $search_data['cust_reg']);
-
         }
 
 
@@ -3448,7 +3222,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
 
@@ -3600,16 +3373,15 @@ class Report_model extends CI_Model {
 
 
             $i++;
-
         }
 
         return $query;
-
     }
 
 
 
-    public function get_customer_details_firm_wise($search_data = array()) {
+    public function get_customer_details_firm_wise($search_data = array())
+    {
 
 
 
@@ -3620,25 +3392,21 @@ class Report_model extends CI_Model {
         if (!empty($search_data['cust_type']) && $search_data['cust_type'] != 9) {
 
             $this->db->where_in($this->customer . ".customer_type", $search_data['cust_type']);
-
         }
 
         if (!empty($search_data['cust_reg']) && $search_data['cust_reg'] != 'both') {
 
             $this->db->where($this->customer . ".customer_region", $search_data['cust_reg']);
-
         }
 
         if (!empty($search_data['due_date']) && $search_data['due_date'] == 6) {
 
             $this->db->where("erp_invoice.inv_id", 'Wings Invoice');
-
         }
 
         if (!empty($search_data['due_date']) && $search_data['due_date'] != 6 && $search_data['due_date'] != 5) {
 
             $this->db->where("erp_invoice.inv_id !=", 'Wings Invoice');
-
         }
 
         $this->db->order_by('erp_invoice.id', 'desc');
@@ -3688,7 +3456,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] == 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -3696,7 +3463,6 @@ class Report_model extends CI_Model {
                 $electricals = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['electricals'] = ($electricals[0]['total_bill_amount'] + $electricals[0]['receipt_discount']);
-
             }
 
             if ($duedate['firm_id'] == 2) {
@@ -3720,7 +3486,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] == 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -3728,7 +3493,6 @@ class Report_model extends CI_Model {
                 $paints = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['paints'] = ($paints[0]['total_bill_amount'] + $paints[0]['receipt_discount']);
-
             }
 
             if ($duedate['firm_id'] == 3) {
@@ -3752,7 +3516,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] == 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -3760,7 +3523,6 @@ class Report_model extends CI_Model {
                 $tiles = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['tiles'] = ($tiles[0]['total_bill_amount'] + $tiles[0]['receipt_discount']);
-
             }
 
             if ($duedate['firm_id'] == 4) {
@@ -3784,7 +3546,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] = 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -3792,7 +3553,6 @@ class Report_model extends CI_Model {
                 $hardware = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['hardware'] = ($hardware[0]['total_bill_amount'] + $hardware[0]['receipt_discount']);
-
             }
 
             $query[$i]['net_amount'] = $query[$i]['electricals'] + $query[$i]['paints'] + $query[$i]['tiles'] + $query[$i]['hardware'];
@@ -3807,7 +3567,7 @@ class Report_model extends CI_Model {
 
         }
 
-//        echo $this->db->last_query();
+        //        echo $this->db->last_query();
 
         //echo "<pre>";
 
@@ -3818,12 +3578,12 @@ class Report_model extends CI_Model {
 
 
         return $query;
-
     }
 
 
 
-    public function get_all_customer() {
+    public function get_all_customer()
+    {
 
 
 
@@ -3838,7 +3598,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.contract_customer', 0);
@@ -3858,12 +3617,12 @@ class Report_model extends CI_Model {
 
 
         return $query;
-
     }
 
 
 
-    public function outstanding_report($serch_data = NULL) {
+    public function outstanding_report($serch_data = NULL)
+    {
 
 
 
@@ -3876,15 +3635,12 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where($this->erp_invoice . '.firm_id', $serch_data['firm']);
-
             }
 
             if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
                 $this->db->where($this->erp_invoice . '.customer', $serch_data['customer']);
-
             }
-
         }
 
 
@@ -3908,7 +3664,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.firm_id', $frim_id);
@@ -3954,9 +3709,7 @@ class Report_model extends CI_Model {
                     foreach ($sub_query as $total) {
 
                         $invoice_net_total += $total['net_total'];
-
                     }
-
                 }
 
                 //'$result_arr[$j]['invoice_net'][] = $invoice_net_total;
@@ -3970,9 +3723,7 @@ class Report_model extends CI_Model {
                     $query[$j]['invoice_net_total'] = $invoice_net_total;
 
                 $j++;
-
             }
-
         }
 
         foreach ($query as $val) {
@@ -3998,24 +3749,23 @@ class Report_model extends CI_Model {
 
 
             $i++;
-
         }
 
 
 
-//        echo '<pre>';
+        //        echo '<pre>';
 
-//        print_r($query);
+        //        print_r($query);
 
-//        exit;
+        //        exit;
 
         return $query;
-
     }
 
 
 
-    public function get_all_supplier() {
+    public function get_all_supplier()
+    {
 
         $this->db->distinct('customer.id');
 
@@ -4038,7 +3788,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.firm_id', $frim_id);
@@ -4046,12 +3795,12 @@ class Report_model extends CI_Model {
         $query = $this->db->get()->result_array();
 
         return $query;
-
     }
 
 
 
-    function get_all_gstvalues() {
+    function get_all_gstvalues()
+    {
 
         $gst_values = array();
 
@@ -4070,19 +3819,15 @@ class Report_model extends CI_Model {
                 if (!in_array($value['tax'], $gst_values)) {
 
                     array_push($gst_values, $value['tax']);
-
                 }
 
                 if (!in_array($value['gst'], $gst_values)) {
 
                     array_push($gst_values, $value['gst']);
-
                 }
-
             }
 
             $gst_values = array_filter($gst_values);
-
         }
 
         // echo "<pre>";
@@ -4106,19 +3851,15 @@ class Report_model extends CI_Model {
                 if (!in_array($value['cgst'], $gst_values)) {
 
                     array_push($gst_values, $value['cgst']);
-
                 }
 
                 if (!in_array($value['sgst'], $gst_values)) {
 
                     array_push($gst_values, $value['sgst']);
-
                 }
-
             }
 
             $gst_values = array_filter($gst_values);
-
         }
 
         //echo "<pre>";
@@ -4128,12 +3869,12 @@ class Report_model extends CI_Model {
         //exit;
 
         return $gst_values;
-
     }
 
 
 
-    public function get_all_product() {
+    public function get_all_product()
+    {
 
         $productIds = array();
 
@@ -4144,7 +3885,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
 
@@ -4155,10 +3895,9 @@ class Report_model extends CI_Model {
 
 
 
-        $productIds = array_map(function($product_query) {
+        $productIds = array_map(function ($product_query) {
 
             return $product_query['product_id'];
-
         }, $product_query);
 
         if (!empty($productIds))
@@ -4174,16 +3913,16 @@ class Report_model extends CI_Model {
 
 
         return $query;
-
     }
 
 
 
-    public function get_all_invoice() {
+    public function get_all_invoice()
+    {
 
         $this->db->select('customer.id as customer,customer.store_name,customer.tin,customer.state_id, customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_invoice.id,erp_invoice.inv_id,erp_quotation.q_no,erp_invoice.total_qty,erp_invoice.tax,erp_quotation.ref_name,erp_invoice.tax_label,'
 
-                . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name,erp_invoice.q_id');
+            . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name,erp_invoice.q_id');
 
 
 
@@ -4194,7 +3933,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.firm_id', $frim_id);
@@ -4220,94 +3958,94 @@ class Report_model extends CI_Model {
         $query = $this->db->get('erp_invoice')->result_array();
 
         return $query;
-
     }
 
 
 
-    function count_all_pay_outstanding() {
+    function count_all_pay_outstanding()
+    {
 
         $this->_get_payment_datatables_query();
 
         $this->db->from('erp_invoice');
 
         return $this->db->count_all_results();
-
     }
 
 
 
-    function count_filtered_pay_outstanding() {
+    function count_filtered_pay_outstanding()
+    {
 
         $this->_get_payment_datatables_query();
 
         $query = $this->db->get('erp_invoice');
 
         return $query->num_rows();
-
     }
 
 
 
-    function count_all_outstanding_duedate() {
+    function count_all_outstanding_duedate()
+    {
 
         $this->_get_outstanding_duedate_datatables_query();
 
         $this->db->from('customer');
 
         return $this->db->count_all_results();
-
     }
 
 
 
-    function count_filtered_outstanding_duedate() {
+    function count_filtered_outstanding_duedate()
+    {
 
         $this->_get_outstanding_duedate_datatables_query();
 
         $query = $this->db->get('customer');
 
         return $query->num_rows();
-
     }
 
 
 
-    function count_all_outstanding_firmwise() {
+    function count_all_outstanding_firmwise()
+    {
 
         $this->_get_outstanding_datatables_query();
 
         $this->db->from('erp_invoice');
 
         return $this->db->count_all_results();
-
     }
 
 
 
-    function count_filtered_outstanding_firmwise() {
+    function count_filtered_outstanding_firmwise()
+    {
 
         $this->_get_outstanding_datatables_query();
 
         $query = $this->db->get('erp_invoice');
 
         return $query->num_rows();
-
     }
 
 
 
-    public function count_all_customer() {
+    public function count_all_customer()
+    {
 
         $this->db->from('erp_invoice');
 
         return $this->db->count_all_results();
-
     }
 
 
 
-    public function count_filtered_customer($serch_data) {
+    public function count_filtered_customer($serch_data)
+    {
 
         $this->db->distinct();
 
@@ -4322,7 +4060,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.contract_customer', 0);
@@ -4334,7 +4071,6 @@ class Report_model extends CI_Model {
         if (!empty($serch_data['overdue']) && $serch_data['overdue'] != '' && $serch_data['overdue'] == 3) {
 
             $this->db->where('customer.advance >', 0);
-
         }
 
         //$this->db->order_by('erp_invoice.id', 'desc');
@@ -4374,13 +4110,11 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where('erp_invoice.inv_id', $serch_data['inv_id']);
-
             }
 
             if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
                 $this->db->where('customer.id', $serch_data['customer']);
-
             }
 
 
@@ -4388,7 +4122,6 @@ class Report_model extends CI_Model {
             if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
 
                 $this->db->where('erp_invoice_details.product_id', $serch_data['product']);
-
             }
 
 
@@ -4398,42 +4131,38 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             }
-
         }
 
         $query = $this->db->get('erp_invoice');
 
         return $query->num_rows();
-
     }
 
 
 
-    public function count_all_invoice() {
+    public function count_all_invoice()
+    {
 
         $this->db->from('erp_invoice');
 
         return $this->db->count_all_results();
-
     }
 
 
 
-    public function count_filtered_invoice($serch_data) {
+    public function count_filtered_invoice($serch_data)
+    {
 
         if (!empty($serch_data['from_date']))
 
@@ -4470,25 +4199,21 @@ class Report_model extends CI_Model {
             if (!empty($serch_data['inv_id']) && $serch_data['inv_id'] != 'Select') {
 
                 $this->db->where($this->erp_invoice . '.inv_id', $serch_data['inv_id']);
-
             }
 
             if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
                 $this->db->where($this->erp_invoice . '.customer', $serch_data['customer']);
-
             }
 
             if (!empty($serch_data['sales_man']) && $serch_data['sales_man'] != 'Select') {
 
                 $this->db->where($this->erp_invoice . '.sales_man', $serch_data['sales_man']);
-
             }
 
             if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
 
                 $this->db->where($this->erp_invoice_details . '.product_id', $serch_data['product']);
-
             }
 
             if (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
@@ -4496,19 +4221,16 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             }
 
 
@@ -4550,7 +4272,6 @@ class Report_model extends CI_Model {
                         $inv_all_details[$invoice_id]['cgst'] = $cgst;
 
                         $inv_all_details[$invoice_id]['sgst'] = $sgst;
-
                     } else {
 
                         $inv_all_details[$invoice_id]['quantity'] = $inv_all_details[$invoice_id]['quantity'] + $quantity;
@@ -4558,17 +4279,14 @@ class Report_model extends CI_Model {
                         $inv_all_details[$invoice_id]['cgst'] = $inv_all_details[$invoice_id]['cgst'] + ($cgst);
 
                         $inv_all_details[$invoice_id]['sgst'] = $inv_all_details[$invoice_id]['sgst'] + $sgst;
-
                     }
-
                 }
 
 
 
-                $invoiceIds = array_map(function($invoices) {
+                $invoiceIds = array_map(function ($invoices) {
 
                     return $invoices['in_id'];
-
                 }, $invoices);
 
 
@@ -4580,19 +4298,14 @@ class Report_model extends CI_Model {
                     $invoiceIds = array_unique($invoiceIds);
 
                     $this->db->where_in($this->erp_invoice . '.id', $invoiceIds);
-
                 } else {
 
                     $this->db->where($this->erp_invoice . '.id', -1);
-
                 }
-
             } else {
 
                 $this->db->where($this->erp_invoice . '.id', -1);
-
             }
-
         }
 
 
@@ -4600,25 +4313,21 @@ class Report_model extends CI_Model {
         if (!empty($serch_data['inv_id']) && $serch_data['inv_id'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.inv_id', $serch_data['inv_id']);
-
         }
 
         if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.customer', $serch_data['customer']);
-
         }
 
         if (!empty($serch_data['sales_man']) && $serch_data['sales_man'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.sales_man', $serch_data['sales_man']);
-
         }
 
         if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
 
             $this->db->where($this->erp_invoice_details . '.product_id', $serch_data['product']);
-
         }
 
         if (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
@@ -4626,26 +4335,23 @@ class Report_model extends CI_Model {
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         }
 
 
 
         $this->db->select('customer.id as customer,customer.store_name,customer.tin,customer.state_id, customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_invoice.id,erp_invoice.inv_id,erp_quotation.q_no,erp_invoice.total_qty,erp_invoice.tax,erp_quotation.ref_name,erp_invoice.tax_label,'
 
-                . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name,erp_invoice.q_id');
+            . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name,erp_invoice.q_id');
 
 
 
@@ -4656,7 +4362,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.firm_id', $frim_id);
@@ -4674,22 +4379,22 @@ class Report_model extends CI_Model {
         $query = $this->db->get('erp_invoice');
 
         return $query->num_rows();
-
     }
 
 
 
-    public function count_all_gst() {
+    public function count_all_gst()
+    {
 
         $this->db->from('erp_invoice');
 
         return $this->db->count_all_results();
-
     }
 
 
 
-    public function count_filtered_gst() {
+    public function count_filtered_gst()
+    {
 
         if (!empty($serch_data['from_date']))
 
@@ -4728,7 +4433,6 @@ class Report_model extends CI_Model {
             if (!empty($serch_data['firm_id']) && $serch_data['firm_id'] != 'Select') {
 
                 $this->db->where($this->erp_invoice . '.firm_id', $serch_data['firm_id']);
-
             } else {
 
                 $firms = $this->user_auth->get_user_firms();
@@ -4738,17 +4442,14 @@ class Report_model extends CI_Model {
                 foreach ($firms as $value) {
 
                     $frim_id[] = $value['firm_id'];
-
                 }
 
                 $this->db->where_in('erp_invoice.firm_id', $frim_id);
-
             }
 
             if (!empty($serch_data['inv_id']) && $serch_data['inv_id'] != 'Select') {
 
                 $this->db->where_in($this->erp_invoice . '.id', implode(',', $serch_data['inv_id']));
-
             }
 
 
@@ -4758,13 +4459,10 @@ class Report_model extends CI_Model {
                 if ($serch_data['cust_type'] == 1) {
 
                     $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
-
                 } else if ($serch_data['cust_type'] == 2) {
 
                     $this->db->where($this->customer . '.tin IS NULL');
-
                 }
-
             }
 
 
@@ -4774,19 +4472,16 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             }
 
 
@@ -4838,7 +4533,6 @@ class Report_model extends CI_Model {
                         $inv_all_details[$invoice_id]['total_gst'] += $total_gst;
 
                         $inv_all_details[$invoice_id]['sub_total'] += ($per_cost * $quantity);
-
                     } else {
 
                         $inv_all_details[$invoice_id]['quantity'] = $inv_all_details[$invoice_id]['quantity'] + $quantity;
@@ -4850,17 +4544,14 @@ class Report_model extends CI_Model {
                         $inv_all_details[$invoice_id]['total_gst'] += $total_gst;
 
                         $inv_all_details[$invoice_id]['sub_total'] += ($per_cost * $quantity);
-
                     }
-
                 }
 
 
 
-                $invoiceIds = array_map(function($invoices) {
+                $invoiceIds = array_map(function ($invoices) {
 
                     return $invoices['in_id'];
-
                 }, $invoices);
 
 
@@ -4872,25 +4563,19 @@ class Report_model extends CI_Model {
                     $invoiceIds = array_unique($invoiceIds);
 
                     $this->db->where_in($this->erp_invoice . '.id', $invoiceIds);
-
                 } else {
 
                     $this->db->where($this->erp_invoice . '.id', -1);
-
                 }
-
             } else {
 
                 $this->db->where($this->erp_invoice . '.id', -1);
-
             }
-
         }
 
         if (!empty($serch_data['firm_id']) && $serch_data['firm_id'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.firm_id', $serch_data['firm_id']);
-
         } else {
 
             $firms = $this->user_auth->get_user_firms();
@@ -4900,11 +4585,9 @@ class Report_model extends CI_Model {
             foreach ($firms as $value) {
 
                 $frim_id[] = $value['firm_id'];
-
             }
 
             $this->db->where_in('erp_invoice.firm_id', $frim_id);
-
         }
 
         if (!empty($serch_data['cust_type']) && $serch_data['cust_type'] != 'Select') {
@@ -4912,13 +4595,10 @@ class Report_model extends CI_Model {
             if ($serch_data['cust_type'] == 1) {
 
                 $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
-
             } else if ($serch_data['cust_type'] == 2) {
 
                 $this->db->where($this->customer . '.tin IS NULL');
-
             }
-
         }
 
         if (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
@@ -4926,30 +4606,27 @@ class Report_model extends CI_Model {
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         }
 
 
 
         $this->db->select('customer.id as customer,customer.store_name,customer.tin,customer.state_id, customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_invoice.id,erp_invoice.inv_id,erp_quotation.q_no,erp_invoice.total_qty,erp_invoice.tax,erp_quotation.ref_name,erp_invoice.tax_label,'
 
-                . 'erp_invoice.net_total,erp_invoice.created_date,'
+            . 'erp_invoice.net_total,erp_invoice.created_date,'
 
-                . 'erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,'
+            . 'erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,'
 
-                . 'erp_sales_man.sales_man_name,erp_invoice.q_id,erp_manage_firms.gstin,erp_manage_firms.firm_name');
+            . 'erp_sales_man.sales_man_name,erp_invoice.q_id,erp_manage_firms.gstin,erp_manage_firms.firm_name');
 
 
 
@@ -4970,12 +4647,12 @@ class Report_model extends CI_Model {
         $query = $this->db->get('erp_invoice');
 
         return $query->num_rows();
-
     }
 
 
 
-    function get_all_customer_report($serch) {
+    function get_all_customer_report($serch)
+    {
 
         if ($serch != NULL && $serch != '') {
 
@@ -4990,7 +4667,6 @@ class Report_model extends CI_Model {
             $serch_data['to_date'] = $serch[4]->to;
 
             $serch_data['overdue'] = $serch[5]->overdue;
-
         }
 
         $this->db->distinct();
@@ -5006,7 +4682,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.contract_customer', 0);
@@ -5018,7 +4693,6 @@ class Report_model extends CI_Model {
         if (!empty($serch_data['overdue']) && $serch_data['overdue'] != '' && $serch_data['overdue'] == 3) {
 
             $this->db->where('customer.advance >', 0);
-
         }
 
         //$this->db->order_by('erp_invoice.id', 'desc');
@@ -5058,13 +4732,11 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where('erp_invoice.inv_id', $serch_data['inv_id']);
-
             }
 
             if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
                 $this->db->where('customer.id', $serch_data['customer']);
-
             }
 
 
@@ -5072,7 +4744,6 @@ class Report_model extends CI_Model {
             if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
 
                 $this->db->where('erp_invoice_details.product_id', $serch_data['product']);
-
             }
 
 
@@ -5082,21 +4753,17 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             }
-
         }
 
 
@@ -5147,19 +4814,19 @@ class Report_model extends CI_Model {
 
         }
 
-//        echo '<pre>';
+        //        echo '<pre>';
 
-//        print_r($query);
+        //        print_r($query);
 
-//        exit;
+        //        exit;
 
         return $query;
-
     }
 
 
 
-    public function get_invoice_hr_report($serch) {
+    public function get_invoice_hr_report($serch)
+    {
 
 
 
@@ -5174,7 +4841,6 @@ class Report_model extends CI_Model {
             $serch_data['from_date'] = $serch[3]->from;
 
             $serch_data['to_date'] = $serch[4]->to;
-
         }
 
 
@@ -5202,25 +4868,21 @@ class Report_model extends CI_Model {
 
 
             $this->db->where($this->erp_invoice . '.inv_id', $serch_data['inv_id']);
-
         }
 
         if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.customer', $serch_data['customer']);
-
         }
 
         if (!empty($serch_data['sales_man']) && $serch_data['sales_man'] != 'Select') {
 
             $this->db->where($this->erp_invoice . '.sales_man', $serch_data['sales_man']);
-
         }
 
         if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
 
             $this->db->where($this->erp_invoice_details . '.product_id', $serch_data['product']);
-
         }
 
 
@@ -5230,26 +4892,23 @@ class Report_model extends CI_Model {
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
         } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
 
 
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
         }
 
 
 
         $this->db->select('customer.id as customer,customer.store_name,customer.tin, customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_invoice.id,erp_invoice.inv_id,erp_quotation.q_no,erp_invoice.total_qty,erp_invoice.tax,erp_quotation.ref_name,erp_invoice.tax_label,'
 
-                . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name');
+            . 'erp_invoice.net_total,erp_invoice.created_date,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,erp_sales_man.sales_man_name');
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -5260,7 +4919,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.firm_id', $frim_id);
@@ -5290,23 +4948,21 @@ class Report_model extends CI_Model {
             $query[$i]['other_cost'] = $this->db->get('erp_other_cost')->result_array();
 
             $i++;
-
         }
 
         return $query;
-
     }
 
 
 
-    public function outstanding_report_excel($serch = NULL) {
+    public function outstanding_report_excel($serch = NULL)
+    {
 
         if ($serch != NULL && $serch != '') {
 
             $serch_data['firm'] = $serch[0]->firm;
 
             $serch_data['customer'] = $serch[1]->customer;
-
         }
 
         if (isset($serch_data) && !empty($serch_data)) {
@@ -5318,15 +4974,12 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where($this->erp_invoice . '.firm_id', $serch_data['firm']);
-
             }
 
             if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
 
                 $this->db->where($this->erp_invoice . '.customer', $serch_data['customer']);
-
             }
-
         }
 
 
@@ -5350,7 +5003,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
         $this->db->where_in('erp_invoice.firm_id', $frim_id);
@@ -5396,9 +5048,7 @@ class Report_model extends CI_Model {
                     foreach ($sub_query as $total) {
 
                         $invoice_net_total += $total['net_total'];
-
                     }
-
                 }
 
                 //'$result_arr[$j]['invoice_net'][] = $invoice_net_total;
@@ -5412,9 +5062,7 @@ class Report_model extends CI_Model {
                     $query[$j]['invoice_net_total'] = $invoice_net_total;
 
                 $j++;
-
             }
-
         }
 
         foreach ($query as $val) {
@@ -5440,24 +5088,23 @@ class Report_model extends CI_Model {
 
 
             $i++;
-
         }
 
 
 
-//        echo '<pre>';
+        //        echo '<pre>';
 
-//        print_r($query);
+        //        print_r($query);
 
-//        exit;
+        //        exit;
 
         return $query;
-
     }
 
 
 
-    public function get_customer_details_report($serch = array()) {
+    public function get_customer_details_report($serch = array())
+    {
 
         if ($serch != NULL && $serch != '') {
 
@@ -5466,25 +5113,21 @@ class Report_model extends CI_Model {
             $serch_data['cust_type'] = $serch[1]->cust_type;
 
             $serch_data['cust_reg'] = $serch[1]->cust_reg;
-
         }
 
         if (!empty($search_data['firm'])) {
 
             $this->db->where($this->customer . ".firm_id", $search_data['firm']);
-
         }
 
         if (!empty($search_data['cust_type']) && $search_data['cust_type'] != 9) {
 
             $this->db->where_in($this->customer . ".customer_type", $search_data['cust_type']);
-
         }
 
         if (!empty($search_data['cust_reg']) && $search_data['cust_reg'] != 'both') {
 
             $this->db->where($this->customer . ".customer_region", $search_data['cust_reg']);
-
         }
 
 
@@ -5496,7 +5139,6 @@ class Report_model extends CI_Model {
         foreach ($firms as $value) {
 
             $frim_id[] = $value['firm_id'];
-
         }
 
 
@@ -5694,18 +5336,17 @@ class Report_model extends CI_Model {
 
 
             $i++;
-
         }
 
 
 
         return $query;
-
     }
 
 
 
-    public function get_customer_details_firm_wise_report($serch = array()) {
+    public function get_customer_details_firm_wise_report($serch = array())
+    {
 
         if ($serch != NULL && $serch != '') {
 
@@ -5714,7 +5355,6 @@ class Report_model extends CI_Model {
             $serch_data['cust_type'] = $serch[1]->cust_type;
 
             $serch_data['cust_reg'] = $serch[2]->cust_reg;
-
         }
 
         $this->db->select('erp_invoice.*');
@@ -5724,25 +5364,21 @@ class Report_model extends CI_Model {
         if (!empty($search_data['cust_type']) && $search_data['cust_type'] != 9) {
 
             $this->db->where_in($this->customer . ".customer_type", $search_data['cust_type']);
-
         }
 
         if (!empty($search_data['cust_reg']) && $search_data['cust_reg'] != 'both') {
 
             $this->db->where($this->customer . ".customer_region", $search_data['cust_reg']);
-
         }
 
         if (!empty($search_data['due_date']) && $search_data['due_date'] == 6) {
 
             $this->db->where("erp_invoice.inv_id", 'Wings Invoice');
-
         }
 
         if (!empty($search_data['due_date']) && $search_data['due_date'] != 6 && $search_data['due_date'] != 5) {
 
             $this->db->where("erp_invoice.inv_id !=", 'Wings Invoice');
-
         }
 
         $this->db->order_by('erp_invoice.id', 'desc');
@@ -5792,7 +5428,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] == 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -5800,7 +5435,6 @@ class Report_model extends CI_Model {
                 $electricals = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['electricals'] = ($electricals[0]['total_bill_amount'] + $electricals[0]['receipt_discount']);
-
             }
 
             if ($duedate['firm_id'] == 2) {
@@ -5824,7 +5458,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] == 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -5832,7 +5465,6 @@ class Report_model extends CI_Model {
                 $paints = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['paints'] = ($paints[0]['total_bill_amount'] + $paints[0]['receipt_discount']);
-
             }
 
             if ($duedate['firm_id'] == 3) {
@@ -5856,7 +5488,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] == 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -5864,7 +5495,6 @@ class Report_model extends CI_Model {
                 $tiles = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['tiles'] = ($tiles[0]['total_bill_amount'] + $tiles[0]['receipt_discount']);
-
             }
 
             if ($duedate['firm_id'] == 4) {
@@ -5888,7 +5518,6 @@ class Report_model extends CI_Model {
                     else if ($search_data['due_date'] = 4)
 
                         $this->db->where('created_date >= "' . date('Y-m-d', strtotime($ninty_date)) . '"');
-
                 }
 
                 $this->db->where("receipt_id ", $duedate['id']);
@@ -5896,7 +5525,6 @@ class Report_model extends CI_Model {
                 $hardware = $this->db->get($this->receipt_bill)->result_array();
 
                 $query[$i]['hardware'] = ($hardware[0]['total_bill_amount'] + $hardware[0]['receipt_discount']);
-
             }
 
             $query[$i]['net_amount'] = $query[$i]['electricals'] + $query[$i]['paints'] + $query[$i]['tiles'] + $query[$i]['hardware'];
@@ -5911,7 +5539,7 @@ class Report_model extends CI_Model {
 
         }
 
-//        echo $this->db->last_query();
+        //        echo $this->db->last_query();
 
         //echo "<pre>";
 
@@ -5922,12 +5550,12 @@ class Report_model extends CI_Model {
 
 
         return $query;
-
     }
 
 
 
-    function get_all_profit_report_for_excel($serch) {
+    function get_all_profit_report_for_excel($serch)
+    {
 
 
 
@@ -5936,7 +5564,6 @@ class Report_model extends CI_Model {
             $serch_data['from_date'] = $serch[0]->from_date;
 
             $serch_data['to_date'] = $serch[1]->to_date;
-
         }
 
         $this->db->select('customer.name,customer.store_name,customer.mobil_number,customer.email_id,customer.id AS cust_id,customer.state_id');
@@ -5966,19 +5593,15 @@ class Report_model extends CI_Model {
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] == "") {
 
 
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "'");
-
             } elseif (isset($serch_data["from_date"]) && $serch_data["from_date"] == "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
 
                 $this->db->where("DATE_FORMAT(erp_invoice.created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
-
             }
-
         }
 
         // $this->db->where('q_id', intval($val['id']));
@@ -6002,14 +5625,13 @@ class Report_model extends CI_Model {
             $query[$i]['or_amount'] = $this->db->get('erp_invoice_details')->result_array();
 
             $i++;
-
         }
 
-//            if (empty($query[$j]['inv_amount']))
+        //            if (empty($query[$j]['inv_amount']))
 
-//                unset($query[$j]);
+        //                unset($query[$j]);
 
-//            $j++;
+        //            $j++;
 
         //echo "<pre>";
 
@@ -6020,10 +5642,5 @@ class Report_model extends CI_Model {
 
 
         return $query;
-
     }
-
-
-
 }
-

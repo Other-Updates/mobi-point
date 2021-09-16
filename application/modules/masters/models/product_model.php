@@ -13,9 +13,9 @@ class Product_model extends CI_Model {
     var $joinTable2 = 'erp_category c';
     var $primaryTable = 'erp_product u';
     var $selectColumn = 'u.id,u.product_name,c.categoryName,u.type,u.cost_price,u.qty,r.firm_name,u.product_image,u.barcode,u.sales_price,u.brand_id';
-    var $column_order = array(null, 'u.product_name', 'c.categoryName', 'r.firm_name', 'u.type', 'u.qty', 'u.cost_price', null); //set column field database for datatable orderable
+    var $column_order = array(null, 'r.firm_name', 'u.product_name', 'c.categoryName', 'u.brand_id', 'u.cost_price','u.sales_price', null); //set column field database for datatable orderable
     var $column_search = array('u.product_name', 'c.categoryName', 'r.firm_name', 'u.type', 'u.qty', 'u.cost_price'); //set column field database for datatable searchable
-    var $order = array('u.id' => 'DESC'); // default order
+    var $order = array('u.id' => 'ASC'); // default order
     private $erp_stock = 'erp_stock';
     private $erp_stock_history = 'erp_stock_history';
 

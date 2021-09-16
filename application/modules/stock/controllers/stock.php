@@ -3,9 +3,11 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Stock extends MX_Controller {
+class Stock extends MX_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         if (!$this->user_auth->is_logged_in()) {
             redirect($this->config->item('base_url') . 'admin');
@@ -35,7 +37,8 @@ class Stock extends MX_Controller {
             $this->notification_model->update_notification(array('status' => 1), $_GET['notification']);
     }
 
-    public function index() {
+    public function index()
+    {
         $data = array();
         //$datas["stock"] = $po = $this->stock_model->get_all_stock();
 
@@ -47,7 +50,7 @@ class Stock extends MX_Controller {
         }
 
         $data['firm_details'] = $this->stock_model->get_firm_name($frim_id);
-//echo "<pre>";print_r($data);exit;
+        //echo "<pre>";print_r($data);exit;
         $data['product'] = $this->product_model->get_product();
         $data['cat'] = $this->master_category_model->get_category_by_firm($frim_id);
 
@@ -57,7 +60,8 @@ class Stock extends MX_Controller {
         $this->template->render();
     }
 
-    function ajaxList() {
+    function ajaxList()
+    {
         $search_data = $this->input->post();
         $search_arr = array();
 
@@ -85,9 +89,9 @@ class Stock extends MX_Controller {
             $row[] = $ass->product_name;
             $row[] = $ass->brands;
             $row[] = round($ass->quantity);
-            if($ass->min_qty > 0){
-                $row[] = $ass->quanity -  $ass->min_qty;
-            }else{
+            if ($ass->min_qty > 0) {
+                $row[] = $ass->min_qty - $ass->quanity;
+            } else {
                 $row[] = '-';
             }
             $data[] = $row;
@@ -102,7 +106,8 @@ class Stock extends MX_Controller {
         exit;
     }
 
-    public function excel_report() {
+    public function excel_report()
+    {
         if (isset($_GET) && $_GET['search'] != '') {
             $search = $_GET['search'];
         } else {
@@ -124,14 +129,15 @@ class Stock extends MX_Controller {
         }
 
         // echo "<pre>";print_r($po);exit;
-//	echo '<pre>';
+        //	echo '<pre>';
         $this->export_csv($po);
-//	$report = $this->load->view('stock_report.php', $data, TRUE);
-//	echo $report;
-//	exit;
+        //	$report = $this->load->view('stock_report.php', $data, TRUE);
+        //	echo $report;
+        //	exit;
     }
 
-    function export_csv($query, $timezones = array()) {
+    function export_csv($query, $timezones = array())
+    {
 
         // output headers so that the file is downloaded rather than displayed
         header('Content-Type: text/csv; charset=utf-8');
@@ -154,7 +160,8 @@ class Stock extends MX_Controller {
         exit;
     }
 
-    public function stock_update() {
+    public function stock_update()
+    {
         $input = $this->input->post();
         $update = array('quantity' => $input['quantity']);
         $this->stock_model->update_stock($input['id'], $update);
@@ -162,7 +169,8 @@ class Stock extends MX_Controller {
         exit;
     }
 
-    public function stock_search_result() {
+    public function stock_search_result()
+    {
         $search_data = $this->input->get();
         $data['search_data'] = $search_data;
         if (isset($search_data['inventory']) && !empty($search_data['inventory'])) {
@@ -175,7 +183,8 @@ class Stock extends MX_Controller {
         }
     }
 
-    public function stock_list_report() {
+    public function stock_list_report()
+    {
 
         $this->load->model('report/report_model');
 
@@ -195,7 +204,8 @@ class Stock extends MX_Controller {
         $this->template->render();
     }
 
-    public function ajaxList_report() {
+    public function ajaxList_report()
+    {
         $search_data = $this->input->post();
         $search_arr = $custom_col = array();
 
@@ -209,9 +219,9 @@ class Stock extends MX_Controller {
             $search_arr = array();
         }
         $list = $this->stock_model->get_datatables($search_arr, $custom_col);
-//        echo "<pre>";
-//        print_r($list);
-//        exit;
+        //        echo "<pre>";
+        //        print_r($list);
+        //        exit;
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $ass) {
@@ -219,17 +229,17 @@ class Stock extends MX_Controller {
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $ass->firm_name;
+            // $row[] = $ass->firm_name;
             $row[] = $ass->categoryName;
             $row[] = $ass->brands;
             $row[] = $ass->product_name;
-            $row[] = number_format($ass->cost_price,2);
+            $row[] = number_format($ass->cost_price, 2);
             $row[] = round($ass->quantity);
-            $row[] = number_format($ass->quantity * $ass->cost_price_without_gst,2);
+            $row[] = number_format($ass->quantity * $ass->cost_price_without_gst, 2);
             $row[] = number_format(($ass->quantity * $ass->cost_price * $ass->cgst) / 100, 2);
             $row[] = number_format(($ass->quantity * $ass->cost_price * $ass->sgst) / 100, 2);
             //$net_total = $ass->quantity * $ass->cost_price;
-            $row[] = number_format($ass->quantity * $ass->cost_price,2);
+            $row[] = number_format($ass->quantity * $ass->cost_price, 2);
 
             $data[] = $row;
         }
@@ -243,14 +253,16 @@ class Stock extends MX_Controller {
         exit;
     }
 
-    public function stock_report_search_result() {
+    public function stock_report_search_result()
+    {
         $search_data = $this->input->get();
         $data['search_data'] = $search_data;
         $data['stock'] = $this->stock_model->get_all_stock($search_data);
         $this->load->view('stock/search_stock_report_list', $data);
     }
 
-    public function excel_stock_based_report() {
+    public function excel_stock_based_report()
+    {
         //echo "dsafsd";
         //exit;
 
@@ -275,12 +287,13 @@ class Stock extends MX_Controller {
         }
 
         $this->export_csv_stock_based_report($po);
-//	$report = $this->load->view('stock_report.php', $data, TRUE);
-//	echo $report;
-//	exit;
+        //	$report = $this->load->view('stock_report.php', $data, TRUE);
+        //	echo $report;
+        //	exit;
     }
 
-    function export_csv_stock_based_report($query, $timezones = array()) {
+    function export_csv_stock_based_report($query, $timezones = array())
+    {
 
         // output headers so that the file is downloaded rather than displayed
         header('Content-Type: text/csv; charset=utf-8');
@@ -293,7 +306,8 @@ class Stock extends MX_Controller {
         //Order has been changes
         //fputcsv($output, array('Firm Name', 'Category', 'Product Name', 'Brand', 'System Quantity', 'Physical Quantity'));
 
-        fputcsv($output, array('Sno', 'Firm Name', 'Category', 'Brand', 'Product Name', 'Quantity',
+        fputcsv($output, array(
+            'Sno', 'Firm Name', 'Category', 'Brand', 'Product Name', 'Quantity',
             'Cost Price', 'Total Price(Without GST)', 'CGST Amount', 'SGST Amount',
             'Total Price(With GST)'
         ));
@@ -317,15 +331,18 @@ class Stock extends MX_Controller {
             $net_total = $total_price_without_gst + $cgst_amount + $sgst_amount;
             $net_total = round($net_total, 2);
 
-            $row = array($no, $firm_name, $category_name, $brand_name, $product_name, $quantity, $cost_price,
-                $total_price_without_gst, $cgst_amount, $sgst_amount, $net_total);
+            $row = array(
+                $no, $firm_name, $category_name, $brand_name, $product_name, $quantity, $cost_price,
+                $total_price_without_gst, $cgst_amount, $sgst_amount, $net_total
+            );
             fputcsv($output, $row);
             $no++;
         }
         exit;
     }
 
-    public function invoice_test() {
+    public function invoice_test()
+    {
         $data = array();
         //$datas["stock"] = $po = $this->stock_model->get_all_stock();
 
@@ -334,7 +351,8 @@ class Stock extends MX_Controller {
         //$this->load->view('stock/invoice_test', $data);
     }
 
-    public function ajaxtestList() {
+    public function ajaxtestList()
+    {
         $search_data = $this->input->post();
         $search_arr = array();
         $search_arr['category'] = $search_data['category'];
@@ -375,5 +393,4 @@ class Stock extends MX_Controller {
         echo json_encode($output);
         exit;
     }
-
 }

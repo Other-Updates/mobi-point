@@ -2,7 +2,7 @@
 <script src="<?php echo $theme_path; ?>/js/jquery-1.8.2.js"></script>
 <script src="<?php echo $theme_path; ?>/js/jquery-ui-my-1.10.3.min.js"></script>
 <link href="<?php echo $theme_path; ?>/plugin/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/fSelect.css"/>
+<link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/fSelect.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js//sweetalert.css">
 <script src="<?php echo $theme_path; ?>/js/sweetalert.min.js" type="text/javascript"></script>
 <script type='text/javascript' src='<?= $theme_path; ?>/js/jquery.table2excel.min.js'></script>
@@ -10,14 +10,19 @@
     .bg-red {
         background-color: #dd4b39 !important;
     }
+
     .bg-green {
-        background-color:#09a20e !important;
+        background-color: #09a20e !important;
     }
-    .bg-yellow
-    {
-        background-color:orange !important;
+
+    .bg-yellow {
+        background-color: orange !important;
     }
-    .btn-group > .btn, .btn-group-vertical > .btn { border-width: 0px!important;}
+
+    .btn-group>.btn,
+    .btn-group-vertical>.btn {
+        border-width: 0px !important;
+    }
 </style>
 <?php
 $this->load->model('admin/admin_model');
@@ -27,11 +32,11 @@ $data['company_details'] = $this->admin_model->get_company_details();
     <table width="100%">
         <tr>
             <td width="15%" style="vertical-align:middle;">
-                <div class="print_header_logo" ><img src="<?= $theme_path; ?>/images/logo-login2.png" /></div>
+                <div class="print_header_logo"><img src="<?= $theme_path; ?>/images/logo-login2.png" /></div>
             </td>
             <td width="85%">
-                <div class="print_header_tit" >
-                     <h3><?= $data['company_details'][0]['company_name'] ?></h3>
+                <div class="print_header_tit">
+                    <h3><?= $data['company_details'][0]['company_name'] ?></h3>
                     <p>
                         <?= $data['company_details'][0]['address1'] ?>,
                         <?= $data['company_details'][0]['address2'] ?>,
@@ -57,7 +62,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
     <div class="panel-body pnone">
         <div class="row search_table_hide mb-0">
 
-             <div class="col-md-3">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Shop Name</label>
                     <div class="col-sm-8">
@@ -65,13 +70,13 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <option value="">Select</option>
                             <?php
                             if (isset($frim_list) && !empty($frim_list)) {
-                                foreach ($frim_list as $key=>$val) {
-                                   $select='';
-                                   if($key==0){
-                                    $select="selected=selected";
-                                   } ?>
-                                    <option <?php echo $select;?> value='<?= $val['firm_id'] ?>'><?= $val['firm_name'] ?></option>
-                                    <?php
+                                foreach ($frim_list as $key => $val) {
+                                    $select = '';
+                                    if ($key == 0) {
+                                        $select = "selected=selected";
+                                    } ?>
+                                    <option <?php echo $select; ?> value='<?= $val['firm_id'] ?>'><?= $val['firm_name'] ?></option>
+                            <?php
                                 }
                             }
                             ?>
@@ -88,9 +93,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <?php
                             if (isset($cat) && !empty($cat)) {
                                 foreach ($cat as $val) {
-                                    ?>
+                            ?>
                                     <option value='<?= $val['cat_id'] ?>'><?= $val['categoryName'] ?></option>
-                                    <?php
+                            <?php
                                 }
                             }
                             ?>
@@ -102,14 +107,14 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Product</label>
                     <div class="col-sm-8 wid100-div">
-                        <select id='product' name="product[]" class="form-control multi_select wid100" multiple="multiple">
+                        <select id='product' name="product[]" class="form-control multi_select wid100">
                             <option>Select</option>
                             <?php
                             if (isset($product) && !empty($product)) {
                                 foreach ($product as $val) {
-                                    ?>
+                            ?>
                                     <option value='<?= $val['id'] ?>'><?= $val['product_name'] ?></option>
-                                    <?php
+                            <?php
                                 }
                             }
                             ?>
@@ -121,13 +126,13 @@ $data['company_details'] = $this->admin_model->get_company_details();
         </div>
     </div>
     <div class="contentpanel mb-50">
-        <div  class="panel-body mt-top5">
+        <div class="panel-body mt-top5">
             <table id="example1" class="display dataTable table table-striped table-bordered responsive dataTable dtr-inline no-footer
                    costprice-right quantity1-cntr tprice-right cgstam-right sgstamt-right totalpricewith-right" cellspacing="0" width="100%">
                 <thead>
-                      <tr style="text-align:center;">
-                        <td >S.No</td>
-                        <td width=''>Shop</td>
+                    <tr style="text-align:center;">
+                        <td>S.No</td>
+                        <!-- <td width=''>Shop</td> -->
                         <td width=''>Category</td>
                         <td width=''>Brand</td>
                         <td width=''>Product</td>
@@ -137,7 +142,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         <td width='' class="action-btn-align" style="text-align:center !important;">CGST</td>
                         <td width='' class="action-btn-align" style="text-align:center !important;">SGST</td>
                         <td width='' class="action-btn-align" style="text-align:center !important;">Total Price (With GST)</td>
-<!--                        <td width='5%' class="hide_class action-btn-align">Action</td>-->
+                        <!--                        <td width='5%' class="hide_class action-btn-align">Action</td>-->
                     </tr>
                 </thead>
                 <tbody id="result_div">
@@ -146,7 +151,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 <tfoot class="hide_class">
                     <tr>
                         <td width=''></td>
-                        <td width=''></td>
+                        <!-- <td width=''></td> -->
                         <td width=''></td>
                         <td width=''></td>
                         <td width=''></td>
@@ -155,7 +160,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         <td width=''></td>
                         <td width=''></td>
                         <td width=''></td>
-<!--                        <td width='10%' class="hide_class"></td>-->
+                        <!--                        <td width='10%' class="hide_class"></td>-->
                     </tr>
                 </tfoot>
             </table>
@@ -190,13 +195,16 @@ $data['company_details'] = $this->admin_model->get_company_details();
 <script type='text/javascript' src='<?= $theme_path; ?>/js/jquery.table2excel.min.js'></script>
 <script type="text/javascript">
     var table;
-    jQuery(document).ready(function () {
+    jQuery(document).ready(function() {
         //datatables
         var product = $('#product').val();
         var category = $('#category').val();
         var inventory = 1;
         table = jQuery('#example1').DataTable({
-            "lengthMenu": [[50, 100, 150, -1], [50, 100, 150, "All"]],
+            "lengthMenu": [
+                [50, 100, 150, -1],
+                [50, 100, 150, "All"]
+            ],
             "pageLength": 50,
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -210,86 +218,87 @@ $data['company_details'] = $this->admin_model->get_company_details();
             },
             //Set column definition initialisation properties.
 
-            "columnDefs": [
-                {
-                    "targets": [0, 5, 6], //first column / numbering column
-                    "orderable": false, //set not orderable
-                },
-            ],
-            "footerCallback": function (row, data, start, end, display) {
-                var api = this.api(), data;
+            "columnDefs": [{
+                "targets": [0, 5, 6], //first column / numbering column
+                "orderable": false, //set not orderable
+            }, ],
+            "footerCallback": function(row, data, start, end, display) {
+                var api = this.api(),
+                    data;
                 // Remove the formatting to get integer data for summation
-                var intVal = function (i) {
+                var intVal = function(i) {
                     return typeof i === 'string' ?
-                            i.replace(/[\$,]/g, '') * 1 :
-                            typeof i === 'number' ?
-                            i : 0;
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                        i : 0;
                 };
                 // Total over all pages
                 var cols = [5];
 
                 symbol = " ";
 
-               var numFormat = $.fn.dataTable.render.number('\,', '.', 2, symbol).display;
+                var numFormat = $.fn.dataTable.render.number('\,', '.', 2, symbol).display;
 
 
                 for (x in cols) {
-                    total = api.column(cols[x]).data().reduce(function (a, b) {
+                    total = api.column(cols[x]).data().reduce(function(a, b) {
                         return intVal(a) + intVal(b);
                     }, 0);
                     // Total over this page
-                    pageTotal = api.column(cols[x], {page: 'current'}).data().reduce(function (a, b) {
+                    pageTotal = api.column(cols[x], {
+                        page: 'current'
+                    }).data().reduce(function(a, b) {
                         return intVal(a) + intVal(b);
                     }, 0);
                     if (Math.floor(pageTotal) == pageTotal && $.isNumeric(pageTotal)) {
                         pageTotal = pageTotal;
 
                     } else {
-                        pageTotal = pageTotal.toFixed(2);/* float */
+                        pageTotal = pageTotal.toFixed(2); /* float */
 
                     }
                     // Update footer
-                   // $(api.column(cols[x]).footer()).html(pageTotal);
+                    // $(api.column(cols[x]).footer()).html(pageTotal);
                     $(api.column(cols[x]).footer()).html(numFormat(parseFloat(pageTotal).toFixed(2)));
                 }
 
             },
         });
 
-        new $.fn.dataTable.FixedHeader(table);
+        // new $.fn.dataTable.FixedHeader(table);
     });
-
-
-
 </script>
 <script>
-    $(document).ready(function ()
-    {
+    $(document).ready(function() {
         //$('.purchase_link').text('');
         $('.multi_select').fSelect();
         var arr = [];
-        $('#excel-prt').on('click', function ()
-        {
+        $('#excel-prt').on('click', function() {
             var arr = [];
 
-            arr.push({'category': $('#category').val()});
-            arr.push({'product': $('#product').val()});
+            arr.push({
+                'category': $('#category').val()
+            });
+            arr.push({
+                'product': $('#product').val()
+            });
             var arrStr = JSON.stringify(arr);
             window.location.replace('<?php echo $this->config->item('base_url') . 'stock/excel_stock_based_report?search=' ?>' + arrStr);
         });
-          $('.fs-label-wrap').find('.fs-label').text();
+        $('.fs-label-wrap').find('.fs-label').text();
         $('.fs-label-wrap').find('.fs-label').text('Select Product');
-    });</script>
+    });
+</script>
 <script>
-    $(document).on('click', '.alerts', function () {
+    $(document).on('click', '.alerts', function() {
         sweetAlert("Oops...", "This Access is blocked!", "error");
         return false;
     });
 
-    $('.print_btn').click(function () {
+    $('.print_btn').click(function() {
         window.print();
     });
-    $('#search').on('click', function () {
+    $('#search').on('click', function() {
         // alert(1);
         for_loading();
         $.ajax({
@@ -299,10 +308,10 @@ $data['company_details'] = $this->admin_model->get_company_details();
             data: {
                 product: $('#product').val(),
                 category: $('#category').val(),
-                 firm_id: $('#firm_id').val(),
+                firm_id: $('#firm_id').val(),
                 inventory: 1,
             },
-            success: function (result) {
+            success: function(result) {
                 for_response();
                 var table = $('#example1').DataTable();
                 table.destroy();
@@ -319,7 +328,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
         this_val = $(this_ele).val();
         evt = (evt) ? evt : window.event;
         var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (evt.which == 13) {//Enter key pressed
+        if (evt.which == 13) { //Enter key pressed
             $(".thVal").blur();
             return false;
         }
@@ -331,38 +340,40 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
     }
 
-    function datatable()
-    {
+    function datatable() {
 
         $('#example1').DataTable({
             "pageLength": 50,
-            "footerCallback": function (row, data, start, end, display) {
-                var api = this.api(), data;
+            "footerCallback": function(row, data, start, end, display) {
+                var api = this.api(),
+                    data;
 
                 // Remove the formatting to get integer data for summation
-                var intVal = function (i) {
+                var intVal = function(i) {
                     return typeof i === 'string' ?
-                            i.replace(/[\$,]/g, '') * 1 :
-                            typeof i === 'number' ?
-                            i : 0;
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                        i : 0;
                 };
-                
+
                 // Total over all pages
-                var total='';
-                var pageTotal='';
+                var total = '';
+                var pageTotal = '';
                 var cols = [5];
 
                 symbol = " ";
 
-               var numFormat = $.fn.dataTable.render.number('\,', '.', 2, symbol).display;
+                var numFormat = $.fn.dataTable.render.number('\,', '.', 2, symbol).display;
 
                 for (x in cols) {
-                    total = api.column(cols[x]).data().reduce(function (a, b) {
+                    total = api.column(cols[x]).data().reduce(function(a, b) {
                         return intVal(a) + intVal(b);
                     }, 0);
 
                     // Total over this page
-                    pageTotal = api.column(cols[x], {page: 'current'}).data().reduce(function (a, b) {
+                    pageTotal = api.column(cols[x], {
+                        page: 'current'
+                    }).data().reduce(function(a, b) {
                         return intVal(a) + intVal(b);
                     }, 0);
 
@@ -371,7 +382,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         pageTotal = pageTotal;
 
                     } else {
-                        pageTotal = pageTotal.toFixed(2);/* float */
+                        pageTotal = pageTotal.toFixed(2); /* float */
 
                     }
 
@@ -382,24 +393,27 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
             },
             responsive: true,
-            columnDefs: [
-                {responsivePriority: 1, targets: 0},
-                {responsivePriority: 2, targets: -2}
+            columnDefs: [{
+                    responsivePriority: 1,
+                    targets: 0
+                },
+                {
+                    responsivePriority: 2,
+                    targets: -2
+                }
             ]
         });
-        new $.fn.dataTable.FixedHeader(table);
+        // new $.fn.dataTable.FixedHeader(table);
     }
-
-
 </script>
 <script>
-    $('.excel_btn1').on('click', function () {
+    $('.excel_btn1').on('click', function() {
 
         fnExcelReport2();
-    });</script>
+    });
+</script>
 <script>
-    function fnExcelReport2()
-    {
+    function fnExcelReport2() {
 
         /*var tab_text = "<table border='5px'><tr width='100px' bgcolor='#87AFC6'>";
          var textRange;
@@ -432,8 +446,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
         var textRange;
         var j = 0;
         tab = document.getElementById('example1'); // id of table
-        for (j = 0; j < tab.rows.length; j++)
-        {
+        for (j = 0; j < tab.rows.length; j++) {
             tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
             //tab_text=tab_text+"</tr>";
         }
@@ -477,7 +490,5 @@ $data['company_details'] = $this->admin_model->get_company_details();
      });
 
      */
-
-
 </script>
 <script src="<?= $theme_path; ?>/js/fixedheader/jquery.dataTables.min.js"></script>

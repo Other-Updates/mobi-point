@@ -3,9 +3,11 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Manage_category extends MX_Controller {
+class Manage_category extends MX_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         if (!$this->user_auth->is_logged_in()) {
             redirect($this->config->item('base_url') . 'admin');
@@ -34,7 +36,8 @@ class Manage_category extends MX_Controller {
         $this->template->write_view('session_msg', 'masters/session_msg', $language_data);
     }
 
-    public function index() {
+    public function index()
+    {
         $data = array();
         $data['language'] = $language = $this->language;
         //$client_id = $this->user_auth->get_login_client_id();
@@ -43,7 +46,8 @@ class Manage_category extends MX_Controller {
         $this->template->render();
     }
 
-    public function add() {
+    public function add()
+    {
         $data['language'] = $language = $this->language;
         $client_id = $this->user_auth->get_login_client_id();
         if ($this->input->post()) {
@@ -60,7 +64,8 @@ class Manage_category extends MX_Controller {
         }
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $data = array();
         $client_id = $this->user_auth->get_login_client_id();
         $data['language'] = $language = $this->language;
@@ -70,7 +75,8 @@ class Manage_category extends MX_Controller {
         $this->template->render();
     }
 
-    public function update_category($id) {
+    public function update_category($id)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $data['language'] = $language = $this->language;
         if ($this->input->post()) {
@@ -88,12 +94,14 @@ class Manage_category extends MX_Controller {
         }
     }
 
-    public function delete() {
+    public function delete()
+    {
         $id = $this->input->POST('value1');
         $this->category_model->delete_category($id);
     }
 
-    public function add_duplicate_category() {
+    public function add_duplicate_category()
+    {
         $data['language'] = $language = $this->language;
         $client_id = $this->user_auth->get_login_client_id();
         $input = $this->input->post();
@@ -103,7 +111,8 @@ class Manage_category extends MX_Controller {
         }
     }
 
-    public function update_duplicate_category() {
+    public function update_duplicate_category()
+    {
         $data['language'] = $language = $this->language;
         $client_id = $this->user_auth->get_login_client_id();
         $cat_name = $this->input->get('value1');
@@ -114,5 +123,4 @@ class Manage_category extends MX_Controller {
             echo $language['category_already_exists'];
         }
     }
-
 }

@@ -107,7 +107,7 @@ class User_section_model extends CI_Model {
         $this->db->where('tab_1.status', 1);
 
          $key=["reference_groups","quotation","purchase_receipt","manage_sku","physical_report","delivery_challan","budget","cash_out_flow","quotation_report","hr_invoice_report","payment_receipt_report","outstanding_report_due_date","outstanding_report_firm","sales","sales_receipt","pc_report","purchase_receipt_report"];
-        
+
         $this->db->where_not_in('tab_1.user_section_key',$key);
 
 
@@ -428,6 +428,41 @@ class User_section_model extends CI_Model {
                 'acc_delete' => 1
 
             ),
+            array(
+
+                'module_id' => 2,
+
+                'user_section_name' => 'Manage Category',
+
+                'user_section_key' => 'manage_category',
+
+                'acc_view' => 1,
+
+                'acc_add' => 1,
+
+                'acc_edit' => 1,
+
+                'acc_delete' => 1
+
+            ),
+            array(
+
+                'module_id' => 2,
+
+                'user_section_name' => 'Manage sub-Category',
+
+                'user_section_key' => 'manage_sub_category',
+
+                'acc_view' => 1,
+
+                'acc_add' => 1,
+
+                'acc_edit' => 1,
+
+                'acc_delete' => 1
+
+            ),
+
 
             array(
 
@@ -716,7 +751,7 @@ class User_section_model extends CI_Model {
                 'acc_delete' => 1
 
             ),
-			
+
 			array(
 
                 'module_id' => 10,
@@ -1058,4 +1093,3 @@ class User_section_model extends CI_Model {
 
 
 }
-
