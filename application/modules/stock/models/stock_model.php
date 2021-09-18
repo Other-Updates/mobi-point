@@ -148,6 +148,10 @@ class Stock_model extends CI_Model
                 $this->db->where_in('u.product_id', $search_data['product']);
             }
         }
+        if ($search_data['brand'] != '' && $search_data['brand'] != 'Select') {
+
+            $this->db->where('u.brand', $search_data['brand']);
+        }
 
 
         if (isset($_POST['order']) && $this->column_order[$_POST['order']['0']['column']] != null) { // here order processing

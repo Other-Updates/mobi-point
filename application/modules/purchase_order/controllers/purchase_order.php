@@ -1,11 +1,8 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 class Purchase_order extends MX_Controller
 {
-
     function __construct()
     {
         parent::__construct();
@@ -67,19 +64,14 @@ class Purchase_order extends MX_Controller
         if (isset($_GET['notification']))
             $this->notification_model->update_notification(array('status' => 1), $_GET['notification']);
     }
-
     public function index($type)
     {
-
         $input = $this->input->post();
-
         if (!empty($input)) {
             // echo "<pre>";            print_r($input);exit;
             if (isset($input['categoty']) && !empty($input['categoty'])) {
                 $insert_arr = array();
-
                 foreach ($input['categoty'] as $key => $val) {
-
                     $user_info = $this->user_auth->get_from_session('user_info');
                     $data['company_details'] = $this->admin_model->get_company_details();
                     $input['po']['po_no'] = $input['po']['pr_no'];
@@ -93,19 +85,16 @@ class Purchase_order extends MX_Controller
                     }
                 }
                 $insert_id = $this->purchase_order_model->insert_po($input['po']);
-                    // echo$this->db->last_query();exit;
+                // echo$this->db->last_query();exit;
             }
-
             if ($input['po']['pr_status'] == 'approved') {
                 $input['po']['po_id'] = $insert_id;
                 $input['po']['supplier'] = $input['supplier']['id'];
-                
                 $insert_pr_id = $this->purchase_return_model->insert_pr($input['po']);
                 // unset($input['po']['po_id']);
                 // unset($input['po']['supplier']);
             }
             // echo "<pre>";            print_r($input);exit;
-
             //insert notification
             $notification = array();
             if ($input['credit_days'] > 0 && isset($input['po']['created_date']) && !empty($input['po']['created_date'])) {
@@ -122,7 +111,6 @@ class Purchase_order extends MX_Controller
                 $notification['Message'] = date('d-M-Y', strtotime($due_date)) . '-We have to pay amount for Supplier';
                 $this->notification_model->insert_notification($notification);
             }
-
             $notifications = array();
             if ($input['po']['pr_status'] == 'waiting') {
                 $created_date = date('Y-m-d', strtotime($input['po']['created_date']));
@@ -136,13 +124,11 @@ class Purchase_order extends MX_Controller
                 $notifications['Message'] = $input['po']['pr_no'] . '- Waiting for purchase manager approval';
                 $this->notification_model->insert_notification($notifications);
             }
-
             if (isset($insert_id) && !empty($insert_id)) {
                 $input = $this->input->post();
                 // print_r($input);exit;
                 if (isset($input['categoty']) && !empty($input['categoty'])) {
                     $insert_arr = array();
-
                     foreach ($input['categoty'] as $key => $val) {
                         $insert['po_id'] = $insert_id;
                         $input['po']['po_no'] = $input['po']['pr_no'];
@@ -157,7 +143,7 @@ class Purchase_order extends MX_Controller
                             $insert['delivery_quantity'] = $input['quantity'][$key];
                         }
                         $insert['per_cost'] = $input['per_cost'][$key];
-						$insert['sale_cost'] = $input['sale_cost'][$key];
+                        $insert['sale_cost'] = $input['sale_cost'][$key];
                         $insert['price_with_gst'] = $input['price_with_gst'][$key];
                         $insert['price_without_gst'] = $input['price_without_gst'][$key];
                         $insert['tax'] = $input['tax'][$key];
@@ -168,11 +154,11 @@ class Purchase_order extends MX_Controller
                         $insert['sub_total'] = $input['sub_total'][$key];
                         $insert['created_date'] = date('Y-m-d H:i');
                         $insert_arr[] = $insert;
-						$update_prod_data = array();
-						$update_prod_data['cost_price'] = $input['per_cost'][$key];
-						$update_prod_data['sales_price'] = $input['sale_cost'][$key];
-						$productid = $input['product_id'][$key];
-						$this->purchase_order_model->update_product($update_prod_data,$productid);
+                        $update_prod_data = array();
+                        $update_prod_data['cost_price'] = $input['per_cost'][$key];
+                        $update_prod_data['sales_price'] = $input['sale_cost'][$key];
+                        $productid = $input['product_id'][$key];
+                        $this->purchase_order_model->update_product($update_prod_data, $productid);
                         if ($input['po']['pr_status'] == 'approved' && $input['po']['delivery_status'] == 'delivered') {
                             $stock_arr = array();
                             $po_id['po_id'] = $input['po']['pr_no'];
@@ -184,24 +170,14 @@ class Purchase_order extends MX_Controller
                     // echo $this->db->last_query();
                 }
                 // exit;
-
                 if ($input['po']['pr_status'] = 'approved')
                     $sms = $this->sms_model->send_sms($insert_id, 'purchase');
             }
-
-
             $update_po_details = $this->update_po_data($input, $insert_id);
-
-
             $this->load->model('purchase_receipt/receipt_model');
-
             $receipt_status = 'Completed';
-
             $this->receipt_model->update_invoice(array('payment_status' => $receipt_status), $insert_id);
-
             $this->receipt_model->update_pr_invoice(array('payment_status' => $receipt_status), $insert_id);
-
-
             $bill_data = [
                 "recevier" => 'company',
                 "receipt_id" => $insert_id,
@@ -210,9 +186,7 @@ class Purchase_order extends MX_Controller
                 "due_date" => date('Y-m-d', strtotime($input['po']['created_date'])),
                 "created_date" => date('Y-m-d', strtotime($input['po']['created_date'])),
             ];
-
             $this->receipt_model->insert_receipt_bill($bill_data);
-
             if ($input['print'] == 'yes') {
                 $file_name = base_url() . 'purchase_order/po_view/' . $insert_id;
                 echo "<script>window.location.href = '$file_name';</script>";
@@ -222,9 +196,7 @@ class Purchase_order extends MX_Controller
                 echo "<script>window.location.href = '$redirect_url';</script>";
                 exit;
             }
-
         }
-
         $data["po"] = $details = $this->purchase_order_model->get_all_po();
         $data["category"] = $details = $this->categories_model->get_all_category();
         $data["brand"] = $this->brand_model->get_brand();
@@ -235,13 +207,10 @@ class Purchase_order extends MX_Controller
         $this->template->write_view('content', 'purchase_order/index', $data);
         $this->template->render();
     }
-
-   /* public function fresh_purchase()
+    /* public function fresh_purchase()
     {
-
         $input = $this->input->post();
         if (!empty($input)) {
-            
             $user_info = $this->user_auth->get_from_session('user_info');
             $data['company_details'] = $this->admin_model->get_company_details();
             $input['po']['po_no'] = $input['po']['pr_no'];
@@ -253,13 +222,10 @@ class Purchase_order extends MX_Controller
                 $input['po']['delivery_qty'] = $input['po']['total_qty'];
             }
             $input['po']['po_cat_type']=$input['po_cat_type'];
-
             $insert_id = $this->purchase_order_model->insert_po($input['po']);
-
             if ($input['po']['pr_status'] == 'approved') {
                 $insert_pr_id = $this->purchase_return_model->insert_pr($input['po']);
             }
-
             //insert notification
             $notification = array();
             if ($input['credit_days'] > 0 && isset($input['po']['created_date']) && !empty($input['po']['created_date'])) {
@@ -276,7 +242,6 @@ class Purchase_order extends MX_Controller
                 $notification['Message'] = date('d-M-Y', strtotime($due_date)) . '-We have to pay amount for Supplier';
                 $this->notification_model->insert_notification($notification);
             }
-
             $notifications = array();
             if ($input['po']['pr_status'] == 'waiting') {
                 $created_date = date('Y-m-d', strtotime($input['po']['created_date']));
@@ -290,13 +255,10 @@ class Purchase_order extends MX_Controller
                 $notifications['Message'] = $input['po']['pr_no'] . '- Waiting for purchase manager approval';
                 $this->notification_model->insert_notification($notifications);
             }
-
             if (isset($insert_id) && !empty($insert_id)) {
                 $input = $this->input->post();
-               
                 if (isset($input['categoty']) && !empty($input['categoty'])) {
                     $insert_arr = array();
-
                     foreach ($input['categoty'] as $key => $val) {
                         $insert['po_id'] = $insert_id;
                         $input['po']['po_no'] = $input['po']['pr_no'];
@@ -336,24 +298,14 @@ class Purchase_order extends MX_Controller
                     }
                     $this->purchase_order_model->insert_po_details($insert_arr);
                 }
-
                 if ($input['po']['pr_status'] = 'approved')
                     $sms = $this->sms_model->send_sms($insert_id, 'purchase');
             }
-
-
             $update_po_details = $this->update_po_data($input, $insert_id);
-
-
             $this->load->model('purchase_receipt/receipt_model');
-
             $receipt_status = 'Completed';
-
             $this->receipt_model->update_invoice(array('payment_status' => $receipt_status), $insert_id);
-
             $this->receipt_model->update_pr_invoice(array('payment_status' => $receipt_status), $insert_id);
-
-
             $bill_data = [
                 "recevier" => 'company',
                 "receipt_id" => $insert_id,
@@ -362,9 +314,7 @@ class Purchase_order extends MX_Controller
                 "due_date" => date('Y-m-d', strtotime($input['po']['created_date'])),
                 "created_date" => date('Y-m-d', strtotime($input['po']['created_date'])),
             ];
-
             $this->receipt_model->insert_receipt_bill($bill_data);
-
             if ($input['print'] == 'yes') {
                 $file_name = base_url() . 'purchase_order/po_view/' . $insert_id;
                 echo "<script>window.location.href = '$file_name';</script>";
@@ -374,9 +324,7 @@ class Purchase_order extends MX_Controller
                 echo "<script>window.location.href = '$redirect_url';</script>";
                 exit;
             }
-
         }
-
         $data["po"] = $details = $this->purchase_order_model->get_all_po();
         $data["category"] = $details = $this->categories_model->get_all_category();
         $data["brand"] = $this->brand_model->get_brand();
@@ -387,14 +335,10 @@ class Purchase_order extends MX_Controller
         $this->template->write_view('content', 'purchase_order/add_po_new_mobile', $data);
         $this->template->render();
     }
-
     public function used_purchase()
     {
-
         $input = $this->input->post();
-
         if (!empty($input)) {
-
             $user_info = $this->user_auth->get_from_session('user_info');
             $data['company_details'] = $this->admin_model->get_company_details();
             $input['po']['po_no'] = $input['po']['pr_no'];
@@ -407,11 +351,9 @@ class Purchase_order extends MX_Controller
             }
             $input['po']['po_cat_type']=$input['po_cat_type'];
             $insert_id = $this->purchase_order_model->insert_po($input['po']);
-
             if ($input['po']['pr_status'] == 'approved') {
                 $insert_pr_id = $this->purchase_return_model->insert_pr($input['po']);
             }
-
             //insert notification
             $notification = array();
             if ($input['credit_days'] > 0 && isset($input['po']['created_date']) && !empty($input['po']['created_date'])) {
@@ -428,7 +370,6 @@ class Purchase_order extends MX_Controller
                 $notification['Message'] = date('d-M-Y', strtotime($due_date)) . '-We have to pay amount for Supplier';
                 $this->notification_model->insert_notification($notification);
             }
-
             $notifications = array();
             if ($input['po']['pr_status'] == 'waiting') {
                 $created_date = date('Y-m-d', strtotime($input['po']['created_date']));
@@ -442,12 +383,10 @@ class Purchase_order extends MX_Controller
                 $notifications['Message'] = $input['po']['pr_no'] . '- Waiting for purchase manager approval';
                 $this->notification_model->insert_notification($notifications);
             }
-
             if (isset($insert_id) && !empty($insert_id)) {
                 $input = $this->input->post();
                 if (isset($input['categoty']) && !empty($input['categoty'])) {
                     $insert_arr = array();
-
                     foreach ($input['categoty'] as $key => $val) {
                         $insert['po_id'] = $insert_id;
                         $input['po']['po_no'] = $input['po']['pr_no'];
@@ -487,24 +426,14 @@ class Purchase_order extends MX_Controller
                     }
                     $this->purchase_order_model->insert_po_details($insert_arr);
                 }
-
                 if ($input['po']['pr_status'] = 'approved')
                     $sms = $this->sms_model->send_sms($insert_id, 'purchase');
             }
-
-
             $update_po_details = $this->update_po_data($input, $insert_id);
-
-
             $this->load->model('purchase_receipt/receipt_model');
-
             $receipt_status = 'Completed';
-
             $this->receipt_model->update_invoice(array('payment_status' => $receipt_status), $insert_id);
-
             $this->receipt_model->update_pr_invoice(array('payment_status' => $receipt_status), $insert_id);
-
-
             $bill_data = [
                 "recevier" => 'company',
                 "receipt_id" => $insert_id,
@@ -513,9 +442,7 @@ class Purchase_order extends MX_Controller
                 "due_date" => date('Y-m-d', strtotime($input['po']['created_date'])),
                 "created_date" => date('Y-m-d', strtotime($input['po']['created_date'])),
             ];
-
             $this->receipt_model->insert_receipt_bill($bill_data);
-
             if ($input['print'] == 'yes') {
                 $file_name = base_url() . 'purchase_order/po_view/' . $insert_id;
                 echo "<script>window.location.href = '$file_name';</script>";
@@ -525,9 +452,7 @@ class Purchase_order extends MX_Controller
                 echo "<script>window.location.href = '$redirect_url';</script>";
                 exit;
             }
-
         }
-
         $data["po"] = $details = $this->purchase_order_model->get_all_po();
         $data["category"] = $details = $this->categories_model->get_all_category();
         $data["brand"] = $this->brand_model->get_brand();
@@ -538,15 +463,10 @@ class Purchase_order extends MX_Controller
         $this->template->write_view('content', 'purchase_order/add_po_old_mobile', $data);
         $this->template->render();
     }
-
-
     public function accessories_purchase()
     {
-
         $input = $this->input->post();
-
         if (!empty($input)) {
-
             $user_info = $this->user_auth->get_from_session('user_info');
             $data['company_details'] = $this->admin_model->get_company_details();
             $input['po']['po_no'] = $input['po']['pr_no'];
@@ -559,11 +479,9 @@ class Purchase_order extends MX_Controller
             }
             $input['po']['po_cat_type']=$input['po_cat_type'];
             $insert_id = $this->purchase_order_model->insert_po($input['po']);
-
             if ($input['po']['pr_status'] == 'approved') {
                 $insert_pr_id = $this->purchase_return_model->insert_pr($input['po']);
             }
-
             //insert notification
             $notification = array();
             if ($input['credit_days'] > 0 && isset($input['po']['created_date']) && !empty($input['po']['created_date'])) {
@@ -580,7 +498,6 @@ class Purchase_order extends MX_Controller
                 $notification['Message'] = date('d-M-Y', strtotime($due_date)) . '-We have to pay amount for Supplier';
                 $this->notification_model->insert_notification($notification);
             }
-
             $notifications = array();
             if ($input['po']['pr_status'] == 'waiting') {
                 $created_date = date('Y-m-d', strtotime($input['po']['created_date']));
@@ -594,12 +511,10 @@ class Purchase_order extends MX_Controller
                 $notifications['Message'] = $input['po']['pr_no'] . '- Waiting for purchase manager approval';
                 $this->notification_model->insert_notification($notifications);
             }
-
             if (isset($insert_id) && !empty($insert_id)) {
                 $input = $this->input->post();
                 if (isset($input['categoty']) && !empty($input['categoty'])) {
                     $insert_arr = array();
-
                     foreach ($input['categoty'] as $key => $val) {
                         $insert['po_id'] = $insert_id;
                         $input['po']['po_no'] = $input['po']['pr_no'];
@@ -639,24 +554,14 @@ class Purchase_order extends MX_Controller
                     }
                     $this->purchase_order_model->insert_po_details($insert_arr);
                 }
-
                 if ($input['po']['pr_status'] = 'approved')
                     $sms = $this->sms_model->send_sms($insert_id, 'purchase');
             }
-
-
             $update_po_details = $this->update_po_data($input, $insert_id);
-
-
             $this->load->model('purchase_receipt/receipt_model');
-
             $receipt_status = 'Completed';
-
             $this->receipt_model->update_invoice(array('payment_status' => $receipt_status), $insert_id);
-
             $this->receipt_model->update_pr_invoice(array('payment_status' => $receipt_status), $insert_id);
-
-
             $bill_data = [
                 "recevier" => 'company',
                 "receipt_id" => $insert_id,
@@ -665,9 +570,7 @@ class Purchase_order extends MX_Controller
                 "due_date" => date('Y-m-d', strtotime($input['po']['created_date'])),
                 "created_date" => date('Y-m-d', strtotime($input['po']['created_date'])),
             ];
-
             $this->receipt_model->insert_receipt_bill($bill_data);
-
             if ($input['print'] == 'yes') {
                 $file_name = base_url() . 'purchase_order/po_view/' . $insert_id;
                 echo "<script>window.location.href = '$file_name';</script>";
@@ -677,9 +580,7 @@ class Purchase_order extends MX_Controller
                 echo "<script>window.location.href = '$redirect_url';</script>";
                 exit;
             }
-
         }
-
         $data["po"] = $details = $this->purchase_order_model->get_all_po();
         $data["category"] = $details = $this->categories_model->get_all_category();
         $data["brand"] = $this->brand_model->get_brand();
@@ -690,25 +591,19 @@ class Purchase_order extends MX_Controller
         $this->template->write_view('content', 'purchase_order/add_po_accessories', $data);
         $this->template->render();
     }*/
-
     function stock_details($stock_info, $po_id)
     {
-
         $this->purchase_order_model->check_stock($stock_info, $po_id);
     }
-
     public function get_supplier_by_firm()
     {
         $firm_id = $this->input->post('firm_id');
-
         $data = $this->purchase_order_model->get_supplier_by_firmid($firm_id);
         echo json_encode($data);
         exit;
     }
-
     public function po_view($id)
     {
-
         $datas["po"] = $po = $this->purchase_order_model->get_all_po_by_id($id);
         $datas["po_details"] = $po_details = $this->purchase_order_model->get_all_po_details_by_id($id);
         $datas["category"] = $category = $this->categories_model->get_all_category();
@@ -721,7 +616,6 @@ class Purchase_order extends MX_Controller
         $this->template->write_view('content', 'purchase_order_view', $datas);
         $this->template->render();
     }
-
     public function pr_view($id)
     {
         $datas["po"] = $po = $this->purchase_order_model->get_all_po_by_id($id);
@@ -733,14 +627,12 @@ class Purchase_order extends MX_Controller
         $this->template->write_view('content', 'purchase_request_view', $datas);
         $this->template->render();
     }
-
     public function change_status($id, $status)
     {
         //echo $id; echo $status; exit;
         $this->purchase_order_model->change_po_status($id, $status);
         redirect($this->config->item('base_url') . 'purchase_order/purchase_order_list');
     }
-
     public function purchase_order_list()
     {
         $datas["po"] = $po = $this->purchase_order_model->get_all_po();
@@ -752,7 +644,6 @@ class Purchase_order extends MX_Controller
         $this->template->write_view('content', 'purchase_order/purchase_order_list', $datas);
         $this->template->render();
     }
-
     public function get_customer($id)
     {
         $atten_inputs = $this->input->post();
@@ -760,7 +651,6 @@ class Purchase_order extends MX_Controller
         echo json_encode($data);
         exit;
     }
-
     public function get_customer_by_id()
     {
         $input = $this->input->post();
@@ -768,7 +658,6 @@ class Purchase_order extends MX_Controller
         echo json_encode($data_customer);
         exit;
     }
-
     public function get_product()
     {
         $atten_inputs = $this->input->post();
@@ -776,7 +665,6 @@ class Purchase_order extends MX_Controller
         echo json_encode($product_data);
         exit;
     }
-
     public function get_product_by_id()
     {
         $input = $this->input->post();
@@ -784,31 +672,25 @@ class Purchase_order extends MX_Controller
         echo json_encode($data_customer);
         exit;
     }
-
     public function update_po_data($input, $id)
     {
         // $input = $this->input->post();
-
         if ($input['po']['delivery_status'] == 'delivered') {
             $input['po']['delivery_qty'] = $input['po']['total_qty'];
         }
         $input['po']['created_date'] = date('Y-m-d', strtotime($input['po']['created_date']));
-
         $this->purchase_order_model->update_po($input['po'], $id);
         $this->purchase_order_model->delete_po_deteils_by_id($id);
-
         if ($input['po']['pr_status'] == 'approved') {
             $input['po']['po_id'] = $id;
             $this->purchase_return_model->delete_pr($id);
             $input['po']['supplier'] = $input['supplier']['id'];
             $pr_id = $this->purchase_return_model->insert_pr($input['po']);
         }
-
         //if (isset($update_id) && !empty($update_id)) {
         $input = $this->input->post();
         if (isset($input['categoty']) && !empty($input['categoty'])) {
             $insert_arr = array();
-
             foreach ($input['categoty'] as $key => $val) {
                 $insert['po_id'] = $id;
                 $insert['category'] = $val;
@@ -822,7 +704,7 @@ class Purchase_order extends MX_Controller
                     $insert['delivery_quantity'] = $input['quantity'][$key];
                 }
                 $insert['per_cost'] = $input['per_cost'][$key];
-				$insert['sale_cost'] = $input['sale_cost'][$key];
+                $insert['sale_cost'] = $input['sale_cost'][$key];
                 $insert['price_with_gst'] = $input['price_with_gst'][$key];
                 $insert['price_without_gst'] = $input['price_without_gst'][$key];
                 $insert['tax'] = $input['tax'][$key];
@@ -833,7 +715,6 @@ class Purchase_order extends MX_Controller
                 $insert['sub_total'] = $input['sub_total'][$key];
                 $insert['created_date'] = date('Y-m-d H:i');
                 $insert_arr[] = $insert;
-				
                 if ($input['po']['pr_status'] == 'approved' && $input['po']['delivery_status'] == 'delivered') {
                     $stock_arr = array();
                     $po_id['po_id'] = $input['po']['pr_no'];
@@ -841,7 +722,6 @@ class Purchase_order extends MX_Controller
                     $this->stock_details($insert, $po_id);
                 }
                 $insert_id = $this->purchase_order_model->insertpo_details($insert);
-
                 $ime_data = [
                     "po_id" => $id,
                     "po_details_id" => $insert_id,
@@ -854,7 +734,6 @@ class Purchase_order extends MX_Controller
                 $this->purchase_order_model->insert_ime_code($ime_data);
             }
             //  $this->purchase_order_model->insert_po_details($insert_arr);
-
             if ($input['po']['pr_status'] == 'approved') {
                 $this->purchase_return_model->delete_pr_details($id);
                 foreach ($input['categoty'] as $key => $val) {
@@ -884,17 +763,13 @@ class Purchase_order extends MX_Controller
                 }
             }
         }
-
         return 1;
     }
-
     public function po_edit($id)
     {
         $input = $this->input->post();
-
         if (!empty($input)) {
             $input = $this->input->post();
-
             //Remove Old Product stock
             foreach ($input['old_product_id'] as $key => $results) {
                 $qty = $input['old_product_qty'][$key];
@@ -902,22 +777,18 @@ class Purchase_order extends MX_Controller
                 $cat_id = $input['old_cat_id'][$key];
                 $this->purchase_order_model->remove_stocks_by_poedit($results, $qty, $firm_id, $cat_id);
             }
-
             if ($input['po']['delivery_status'] == 'delivered') {
                 $input['po']['delivery_qty'] = $input['po']['total_qty'];
             }
             $input['po']['created_date'] = date('Y-m-d', strtotime($input['po']['created_date']));
             $input['po']['po_no'] = $input['po']['pr_no'];
-
             $this->purchase_order_model->update_po($input['po'], $id);
             $this->purchase_order_model->delete_po_deteils_by_id($id);
-
             if ($input['po']['pr_status'] == 'approved') {
                 $input['po']['po_id'] = $id;
                 $this->purchase_return_model->delete_pr($id);
                 $pr_id = $this->purchase_return_model->insert_pr($input['po']);
             }
-
             $input = $this->input->post();
             if (isset($input['categoty']) && !empty($input['categoty'])) {
                 $insert_arr = array();
@@ -935,7 +806,7 @@ class Purchase_order extends MX_Controller
                         $insert['delivery_quantity'] = $input['quantity'][$key];
                     }
                     $insert['per_cost'] = $input['per_cost'][$key];
-					$insert['sale_cost'] = $input['sale_cost'][$key];
+                    $insert['sale_cost'] = $input['sale_cost'][$key];
                     $insert['price_with_gst'] = $input['price_with_gst'][$key];
                     $insert['price_without_gst'] = $input['price_without_gst'][$key];
                     $insert['tax'] = $input['tax'][$key];
@@ -950,13 +821,9 @@ class Purchase_order extends MX_Controller
                         $stock_arr = array();
                         $po_id['po_id'] = $input['po']['pr_no'];
                         $stock_arr[] = $po_id;
-
-
                         $this->stock_details($insert, $po_id);
                     }
-
                     $insert_id = $this->purchase_order_model->insertpo_details($insert);
-
                     $ime_data = [
                         "po_id" => $id,
                         "po_details_id" => $insert_id,
@@ -966,12 +833,8 @@ class Purchase_order extends MX_Controller
                         "status" => "open",
                         "open_date" => date('Y-m-d'),
                     ];
-
-
-
                     $this->purchase_order_model->insert_ime_code($ime_data);
                 }
-
                 if ($input['po']['pr_status'] == 'approved') {
                     $this->purchase_return_model->delete_pr_details($id);
                     foreach ($input['categoty'] as $key => $val) {
@@ -987,7 +850,7 @@ class Purchase_order extends MX_Controller
                         $pr_details['quantity'] = $input['quantity'][$key];
                         $pr_details['return_quantity'] = 0;
                         $pr_details['per_cost'] = $input['per_cost'][$key];
-						$insert['sale_cost'] = $input['sale_cost'][$key];
+                        $insert['sale_cost'] = $input['sale_cost'][$key];
                         $pr_details['tax'] = $input['tax'][$key];
                         $pr_details['gst'] = $input['gst'][$key];
                         $pr_details['igst'] = $input['igst'][$key];
@@ -1001,7 +864,6 @@ class Purchase_order extends MX_Controller
             }
             if ($input['po']['pr_status'] == 'approved')
                 $sms = $this->sms_model->send_sms($insert_id, 'purchase');
-
             redirect($this->config->item('base_url') . 'purchase_order/purchase_order_list');
         }
         $datas["po"] = $po = $this->purchase_order_model->get_all_po_by_id($id);
@@ -1011,18 +873,14 @@ class Purchase_order extends MX_Controller
         $datas['firms'] = $firms = $this->user_auth->get_user_firms();
         $datas["products"] = $this->purchase_order_model->get_all_product();
         $datas["customers"] = $this->purchase_order_model->get_all_customers();
-        
-
         $this->template->write_view('content', 'purchase_order_edit', $datas);
         $this->template->render();
     }
-  /*  public function fresh_po_edit($id)
+    /*  public function fresh_po_edit($id)
     {
         $input = $this->input->post();
         if (!empty($input)) {
-            
             $input = $this->input->post();
-
             //Remove Old Product stock
             foreach ($input['old_product_id'] as $key => $results) {
                 $qty = $input['old_product_qty'][$key];
@@ -1030,7 +888,6 @@ class Purchase_order extends MX_Controller
                 $cat_id = $input['old_cat_id'][$key];
                 $this->purchase_order_model->remove_stocks_by_poedit($results, $qty, $firm_id, $cat_id);
             }
-
             if ($input['po']['delivery_status'] == 'delivered') {
                 $input['po']['delivery_qty'] = $input['po']['total_qty'];
             }
@@ -1039,13 +896,11 @@ class Purchase_order extends MX_Controller
             $input['po']['po_cat_type']=$input['po_cat_type'];
             $this->purchase_order_model->update_po($input['po'], $id);
             $this->purchase_order_model->delete_po_deteils_by_id($id);
-
             if ($input['po']['pr_status'] == 'approved') {
                 $input['po']['po_id'] = $id;
                 $this->purchase_return_model->delete_pr($id);
                 $pr_id = $this->purchase_return_model->insert_pr($input['po']);
             }
-
             $input = $this->input->post();
             if (isset($input['categoty']) && !empty($input['categoty'])) {
                 $insert_arr = array();
@@ -1078,13 +933,9 @@ class Purchase_order extends MX_Controller
                         $stock_arr = array();
                         $po_id['po_id'] = $input['po']['pr_no'];
                         $stock_arr[] = $po_id;
-
-
                         $this->stock_details($insert, $po_id);
                     }
-
                     $insert_id = $this->purchase_order_model->insertpo_details($insert);
-
                     $ime_data = [
                         "po_id" => $id,
                         "po_details_id" => $insert_id,
@@ -1094,12 +945,8 @@ class Purchase_order extends MX_Controller
                         "status" => "open",
                         "open_date" => date('Y-m-d'),
                     ];
-
-
-
                     $this->purchase_order_model->insert_ime_code($ime_data);
                 }
-
                 if ($input['po']['pr_status'] == 'approved') {
                     $this->purchase_return_model->delete_pr_details($id);
                     foreach ($input['categoty'] as $key => $val) {
@@ -1123,7 +970,6 @@ class Purchase_order extends MX_Controller
                         $pr_details['transport'] = $input['transport'][$key];
                         $pr_details['sub_total'] = $input['sub_total'][$key];
                         $pr_details['created_date'] = date('Y-m-d H:i');
-						
                         $this->purchase_return_model->insert_pr_details($pr_details);
 						$update_prod_data = array();
 						$update_prod_data['cost_price'] = $input['per_cost'][$key];
@@ -1135,7 +981,6 @@ class Purchase_order extends MX_Controller
             }
             if ($input['po']['pr_status'] == 'approved')
                 $sms = $this->sms_model->send_sms($insert_id, 'purchase');
-
             redirect($this->config->item('base_url') . 'purchase_order/purchase_order_list');
         }
         $datas["po"] = $po = $this->purchase_order_model->get_all_po_by_id($id);
@@ -1145,18 +990,14 @@ class Purchase_order extends MX_Controller
         $datas['firms'] = $firms = $this->user_auth->get_user_firms();
         $datas["products"] = $this->purchase_order_model->get_all_product();
         $datas["customers"] = $this->purchase_order_model->get_all_customers();
-
         $this->template->write_view('content', 'edit_po_new_mobile', $datas);
         $this->template->render();
     }
-
     public function used_po_edit($id)
     {
         $input = $this->input->post();
-
         if (!empty($input)) {
             $input = $this->input->post();
-
             //Remove Old Product stock
             foreach ($input['old_product_id'] as $key => $results) {
                 $qty = $input['old_product_qty'][$key];
@@ -1164,23 +1005,19 @@ class Purchase_order extends MX_Controller
                 $cat_id = $input['old_cat_id'][$key];
                 $this->purchase_order_model->remove_stocks_by_poedit($results, $qty, $firm_id, $cat_id);
             }
-
             if ($input['po']['delivery_status'] == 'delivered') {
                 $input['po']['delivery_qty'] = $input['po']['total_qty'];
             }
             $input['po']['created_date'] = date('Y-m-d', strtotime($input['po']['created_date']));
             $input['po']['po_no'] = $input['po']['pr_no'];
             $input['po']['po_cat_type']=$input['po_cat_type'];
-
             $this->purchase_order_model->update_po($input['po'], $id);
             $this->purchase_order_model->delete_po_deteils_by_id($id);
-
             if ($input['po']['pr_status'] == 'approved') {
                 $input['po']['po_id'] = $id;
                 $this->purchase_return_model->delete_pr($id);
                 $pr_id = $this->purchase_return_model->insert_pr($input['po']);
             }
-
             $input = $this->input->post();
             if (isset($input['categoty']) && !empty($input['categoty'])) {
                 $insert_arr = array();
@@ -1218,13 +1055,9 @@ class Purchase_order extends MX_Controller
                         $stock_arr = array();
                         $po_id['po_id'] = $input['po']['pr_no'];
                         $stock_arr[] = $po_id;
-
-
                         $this->stock_details($insert, $po_id);
                     }
-
                     $insert_id = $this->purchase_order_model->insertpo_details($insert);
-
                     $ime_data = [
                         "po_id" => $id,
                         "po_details_id" => $insert_id,
@@ -1234,12 +1067,8 @@ class Purchase_order extends MX_Controller
                         "status" => "open",
                         "open_date" => date('Y-m-d'),
                     ];
-
-
-
                     $this->purchase_order_model->insert_ime_code($ime_data);
                 }
-
                 if ($input['po']['pr_status'] == 'approved') {
                     $this->purchase_return_model->delete_pr_details($id);
                     foreach ($input['categoty'] as $key => $val) {
@@ -1269,7 +1098,6 @@ class Purchase_order extends MX_Controller
             }
             if ($input['po']['pr_status'] == 'approved')
                 $sms = $this->sms_model->send_sms($insert_id, 'purchase');
-
             redirect($this->config->item('base_url') . 'purchase_order/purchase_order_list');
         }
         $datas["po"] = $po = $this->purchase_order_model->get_all_po_by_id($id);
@@ -1279,18 +1107,14 @@ class Purchase_order extends MX_Controller
         $datas['firms'] = $firms = $this->user_auth->get_user_firms();
         $datas["products"] = $this->purchase_order_model->get_all_product();
         $datas["customers"] = $this->purchase_order_model->get_all_customers();
-
         $this->template->write_view('content', 'edit_po_old_mobile', $datas);
         $this->template->render();
     }
-
     public function accessories_po_edit($id)
     {
         $input = $this->input->post();
-
         if (!empty($input)) {
             $input = $this->input->post();
-
             //Remove Old Product stock
             foreach ($input['old_product_id'] as $key => $results) {
                 $qty = $input['old_product_qty'][$key];
@@ -1298,23 +1122,19 @@ class Purchase_order extends MX_Controller
                 $cat_id = $input['old_cat_id'][$key];
                 $this->purchase_order_model->remove_stocks_by_poedit($results, $qty, $firm_id, $cat_id);
             }
-
             if ($input['po']['delivery_status'] == 'delivered') {
                 $input['po']['delivery_qty'] = $input['po']['total_qty'];
             }
             $input['po']['created_date'] = date('Y-m-d', strtotime($input['po']['created_date']));
             $input['po']['po_no'] = $input['po']['pr_no'];
             $input['po']['po_cat_type']=$input['po_cat_type'];
-
             $this->purchase_order_model->update_po($input['po'], $id);
             $this->purchase_order_model->delete_po_deteils_by_id($id);
-
             if ($input['po']['pr_status'] == 'approved') {
                 $input['po']['po_id'] = $id;
                 $this->purchase_return_model->delete_pr($id);
                 $pr_id = $this->purchase_return_model->insert_pr($input['po']);
             }
-
             $input = $this->input->post();
             if (isset($input['categoty']) && !empty($input['categoty'])) {
                 $insert_arr = array();
@@ -1352,13 +1172,9 @@ class Purchase_order extends MX_Controller
                         $stock_arr = array();
                         $po_id['po_id'] = $input['po']['pr_no'];
                         $stock_arr[] = $po_id;
-
-
                         $this->stock_details($insert, $po_id);
                     }
-
                     $insert_id = $this->purchase_order_model->insertpo_details($insert);
-
                     $ime_data = [
                         "po_id" => $id,
                         "po_details_id" => $insert_id,
@@ -1368,12 +1184,8 @@ class Purchase_order extends MX_Controller
                         "status" => "open",
                         "open_date" => date('Y-m-d'),
                     ];
-
-
-
                     $this->purchase_order_model->insert_ime_code($ime_data);
                 }
-
                 if ($input['po']['pr_status'] == 'approved') {
                     $this->purchase_return_model->delete_pr_details($id);
                     foreach ($input['categoty'] as $key => $val) {
@@ -1403,7 +1215,6 @@ class Purchase_order extends MX_Controller
             }
             if ($input['po']['pr_status'] == 'approved')
                 $sms = $this->sms_model->send_sms($insert_id, 'purchase');
-
             redirect($this->config->item('base_url') . 'purchase_order/purchase_order_list');
         }
         $datas["po"] = $po = $this->purchase_order_model->get_all_po_by_id($id);
@@ -1413,11 +1224,9 @@ class Purchase_order extends MX_Controller
         $datas['firms'] = $firms = $this->user_auth->get_user_firms();
         $datas["products"] = $this->purchase_order_model->get_all_product();
         $datas["customers"] = $this->purchase_order_model->get_all_customers();
-
         $this->template->write_view('content', 'edit_po_accessories', $datas);
         $this->template->render();
     }*/
-
     public function dc_edit($id)
     {
         $input = $this->input->post();
@@ -1451,7 +1260,6 @@ class Purchase_order extends MX_Controller
                 $this->purchase_order_model->update_dc_details($insert, $val);
             }
         }
-
         $get_all_purchase_order_details = $this->purchase_order_model->get_all_purchase_order_details($purchase_order_id);
         if (!empty($get_all_purchase_order_details)) {
             $d_qty = $get_all_purchase_order_details[0]['delivery_quantity'];
@@ -1466,26 +1274,20 @@ class Purchase_order extends MX_Controller
             $inputs = array('delivery_status' => 'pending', 'delivery_qty' => $d_qty);
             $this->purchase_order_model->update_dc($inputs, $id);
         }
-
         foreach ($input['id'] as $key => $val) {
             $trim_val = trim($val);
             if (!empty($input['delivery_quantity'][$trim_val])) {
                 $category = $input['po']['cat_id'][$key];
                 $product_id = $input['po']['pro_id'][$key];
-
                 $update_pr_details = $this->purchase_return_model->update_pr_details_basedon_po_id($category, $product_id, $purchase_order_id, $input['delivery_quantity'][$trim_val][0]);
             }
             $erp_pr = $this->purchase_return_model->get_erp_pr_based_on_erp_po($purchase_order_id);
         }
-
         $this->purchase_return_model->update_pr($purchase_order_id, $del_qty);
-
         $get_all_purchase_return_details = $this->purchase_return_model->get_all_purchase_return_details($purchase_order_id);
-
         if (!empty($get_all_purchase_return_details)) {
             $del_qty = $get_all_purchase_return_details[0]['delivery_qty'];
         }
-
         if ($del_qty == $erp_pr[0]['total_qty']) {
             $pr_inputs = array('delivery_status' => 'delivered', 'delivery_qty' => $del_qty);
             $this->purchase_return_model->update_dc($pr_inputs, $purchase_order_id);
@@ -1496,10 +1298,8 @@ class Purchase_order extends MX_Controller
             $pr_inputs = array('delivery_status' => 'pending', 'delivery_qty' => $del_qty);
             $this->purchase_return_model->update_dc($pr_inputs, $purchase_order_id);
         }
-
         redirect($this->config->item('base_url') . 'purchase_order/purchase_order_list');
     }
-
     public function po_delete()
     {
         $id = $this->input->POST('value1');
@@ -1507,14 +1307,12 @@ class Purchase_order extends MX_Controller
         $del_id = $this->purchase_order_model->delete_po($id);
         redirect($this->config->item('base_url') . 'purchase_order/purchase_order_list', $datas);
     }
-
     public function history_view($id)
     {
         $datas["his_quo"] = $his_quo = $this->purchase_order_model->all_history_quotations($id);
         $this->template->write_view('content', 'history_view', $datas);
         $this->template->render();
     }
-
     function excel_report()
     {
         if (isset($_GET) && $_GET['search'] != '') {
@@ -1522,27 +1320,20 @@ class Purchase_order extends MX_Controller
         } else {
             $search = '';
         }
-
         $json = json_decode($search);
-
         $po = $this->purchase_order_model->get_all_po_for_report($search);
         $this->export_csv($po);
     }
-
     function export_csv($query, $timezones = array())
     {
-
         // output headers so that the file is downloaded rather than displayed
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=Purchase Order Report.csv');
-
         // create a file pointer connected to the output stream
         $output = fopen('php://output', 'w');
-
         // output the column headings
         //Order has been changes
         fputcsv($output, array('Po No', 'Company Name', 'Total Quantity', 'Total Amount', 'Delivery Schedule', 'Created Date'));
-
         // fetch the data
         //$rows = mysql_query($query);
         // loop over the rows, outputting them
@@ -1562,23 +1353,17 @@ class Purchase_order extends MX_Controller
         }
         exit;
     }
-
     function clear_cache()
     {
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
         $this->output->set_header("Pragma: no-cache");
     }
-
     function purchase_order_ajaxList()
     {
-
         $list = $this->purchase_order_model->get_datatables();
-
         $data = array();
-
         $no = $_POST['start'];
         foreach ($list as $ass) {
-
             /* if ($this->user_auth->is_action_allowed('purchase', 'purchase_request', 'edit')) {
               $edit = '<a href="' . $this->config->item('base_url') . 'purchase_order/po_edit/' . $ass['id'] . '" data-toggle="tooltip" class="tooltips btn btn-default btn-xs" title="" ><span class="fa fa-log-out "> <span class="fa fa-edit"></span></span></a>';
               } else {
@@ -1589,7 +1374,6 @@ class Purchase_order extends MX_Controller
               } else {
               $view = $edit . '<a href="#" data-toggle="tooltip" class="tooltips btn btn-default btn-xs alerts" title="" ><span class="fa fa-log-out "> <span class="fa fa-eye"></span>  </span></a>';
               } */
-
             $no++;
             $row = array();
             $row[] = $no;
@@ -1607,9 +1391,7 @@ class Purchase_order extends MX_Controller
             } else if ($ass['pr_status'] == 'approved') {
                 $pr_status = '<span class=" badge bg-green">Approved</span>';
             }
-
             // $row[] = $pr_status;
-
             if ($ass['delivery_status'] == 'partially_delivered') {
                 $delivery_status = '<span class="badge bg-red">Partially Delivered</span>';
             } else if ($ass['delivery_status'] == 'pending') {
@@ -1617,26 +1399,18 @@ class Purchase_order extends MX_Controller
             } else if ($ass['delivery_status'] == 'delivered') {
                 $delivery_status = '<span class = "badge bg-green">Delivered</span>';
             }
-
             // $row[] = $delivery_status;
-
             $po_edit = 'po_edit';
-            
-            $edit = '<a href="' . $this->config->item('base_url') . 'purchase_order/'.$po_edit.'/' . $ass['po_id'] . '" data-toggle="tooltip" class="tooltips btn btn-default btn-xs" title="" ><span class="fa fa-log-out "> <span class="fa fa-edit"></span></span></a>&nbsp;';
-
+            $edit = '<a href="' . $this->config->item('base_url') . 'purchase_order/' . $po_edit . '/' . $ass['po_id'] . '" data-toggle="tooltip" class="tooltips btn btn-default btn-xs" title="" ><span class="fa fa-log-out "> <span class="fa fa-edit"></span></span></a>&nbsp;';
             $row[] = $edit . '<a href="' . $this->config->item('base_url') . 'purchase_order/po_view/' . $ass['po_id'] . '" data-toggle="tooltip" class="tooltips btn btn-default btn-xs" title="" ><span class="fa fa-log-out "> <span class="fa fa-eye"></span>  </span></a>';
-
             /*  if ($ass['pr_status'] == 'waiting') {
               $row[] = $view;
               }
               if ($ass['pr_status'] == 'approved') {
               $row = '<a href="' . $this->config->item('base_url') . 'purchase_order/po_view/' . $ass['id'] . '" data-toggle="tooltip" class="tooltips btn btn-default btn-xs" title="" ><span class="fa fa-log-out "> <span class="fa fa-eye"></span>  </span></a>';
               } */
-
             $data[] = $row;
         }
-
-
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->purchase_order_model->count_all(),
@@ -1646,40 +1420,30 @@ class Purchase_order extends MX_Controller
         echo json_encode($output);
         exit;
     }
-
     public function check_exists_ime_code()
     {
         $ime_code = $this->input->POST('ime_code');
-
         $data = $this->purchase_order_model->check_duplicate_ime_code($ime_code);
         if ($data == 0)
             echo 0;
         else
             echo json_encode($data);
-
         exit;
     }
-
     public function check_duplicate_ime_code_edit()
     {
         $ime_code = $this->input->POST('ime_code');
-
-
         $data = $this->purchase_order_model->check_duplicate_ime_code_edit($ime_code);
-
         if ($data == 0)
             echo 0;
         else
             echo json_encode($data);
         exit;
     }
-
     public function check_duplicate_pr_id()
     {
         $input = $this->input->post();
-
         $validation = $this->purchase_order_model->check_duplicate_pr_id($input);
-
         $i = 0;
         if ($validation) {
             $i = 1;
@@ -1688,7 +1452,6 @@ class Purchase_order extends MX_Controller
             echo "PO NO already Exist";
         }
     }
-
     public function check_duplicate_pr_id_edit()
     {
         $input = $this->input->post('value1');

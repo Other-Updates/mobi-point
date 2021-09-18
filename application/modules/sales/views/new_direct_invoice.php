@@ -291,11 +291,11 @@ if (!empty($customers)) {
                 <!-- <td class="action-btn-align">
                     <input type="text" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" />
                 </td> -->
-                <td class="action-btn-align cgst_td">
-                    <input type="text" tabindex="-1" name='tax[]' style="width:70px;" class="pertax" readonly="readonly" />
+                <td class="action-btn-align cgst_td" style="display: none;">
+                    <input type="text" style="display: none;" tabindex="-1" name='tax[]' style="width:70px;" class="pertax" readonly="readonly" />
                 </td>
-                <td class="action-btn-align sgst_td">
-                    <input type="text" tabindex="-1" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
+                <td class="action-btn-align sgst_td" style="display: none;">
+                    <input type="text" tabindex="-1" style="display: none;" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
                 </td>
                 <!-- <td class="action-btn-align igst_td">
                     <input type="text" tabindex="-1" name='igst[]' style="width:70px;" class="igst wid50"
@@ -524,9 +524,9 @@ if (!empty($customers)) {
                 <div class="col-md-4">
                     <input type="hidden" name="sales_id" class="code form-control colournamedup  form-align" value="" id="sales_id">
                     <input type="hidden" name="invoice_id" class="code form-control colournamedup  form-align" value="" id="invoice_id">
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-4" style="display:none">
                         <label>GST</label>&emsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" id="unchecked" class="gst-invoice" value="1" name="quotation[bill_category]" /><br>
+                        <input type="radio" id="unchecked" class="gst-invoice" value="1" name="quotation[bill_category]" checked /><br>
                         <label>NO GST</label>&nbsp;
                         <input type="radio" id="checked" class="gst-invoice" value="2" name="quotation[bill_category]" />
                     </div>
@@ -592,8 +592,8 @@ if (!empty($customers)) {
                             <!-- <td  width="6%" class="first_td1 action-btn-align">Total</td>-->
                             <!-- <td width="6%" class="first_td1 action-btn-align">HSN Code</td> -->
                             <!--<td  width="7%" class="first_td1 action-btn-align">Discount %</td>-->
-                            <td width="5%" class="first_td1 action-btn-align cgst_td">CGST %</td>
-                            <td width="5%" class="first_td1 action-btn-align sgst_td">SGST %</td>
+                            <!-- <td width="5%" class="first_td1 action-btn-align cgst_td">CGST %</td> -->
+                            <!-- <td width="5%" class="first_td1 action-btn-align sgst_td">SGST %</td> -->
                             <!-- <td width="5%" class="first_td1 action-btn-align igst_td">IGST %</td> -->
                             <td width="8%" class="first_td1">Net Value</td>
                             <td width="10%" class="first_td1">Profit</td>
@@ -684,11 +684,11 @@ if (!empty($customers)) {
                             <!-- <td class="action-btn-align">
                                 <input type="text" tabindex="14" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" />
                             </td> -->
-                            <td class="action-btn-align cgst_td">
-                                <input type="text" name='tax[]' tabindex="15" style="width:70px;" class="pertax" readonly="readonly" />
+                            <td class="action-btn-align cgst_td" style="display: none;">
+                                <input type="text" style="display: none;" name='tax[]' tabindex="15" style="width:70px;" class="pertax" readonly="readonly" />
                             </td>
-                            <td class="action-btn-align sgst_td">
-                                <input type="text" name='gst[]' tabindex="16" style="width:70px;" class="gst" readonly="readonly" />
+                            <td class="action-btn-align sgst_td" style="display: none;">
+                                <input type="text" name='gst[]' style="display: none;" tabindex="16" style="width:70px;" class="gst" readonly="readonly" />
                             </td>
                             <!--
                             <td class="action-btn-align igst_td">
@@ -708,7 +708,7 @@ if (!empty($customers)) {
                         <tr>
                             <td colspan="3" class="total_table_tag" style="width:100%; text-align:right;"><b>Total</b></td>
                             <td class="action-btn-align"><input type="text" tabindex="20" name="quotation[total_qty]" readonly="readonly" class="total_qty" style="width:70%;" id="total" /></td>
-                            <td colspan="4" class="sub_tag" style="text-align:right;"><b>Sub Total</b></td>
+                            <td colspan="2" class="sub_tag" style="text-align:right;"><b>Sub Total</b></td>
                             <td class="action-btn-align"><input type="text" name="quotation[subtotal_qty]" tabindex="21" readonly="readonly" class="final_sub_total text_right" style="width:70px;" /></td>
                             <td class="action-btn-align"><input type="text" name="quotation[profit_total]" tabindex="21" readonly="readonly" class="profit_total" style="width:70px;" /></td>
                             <td></td>
@@ -728,19 +728,18 @@ if (!empty($customers)) {
                     </tbody>
                     <input type="hidden" name="quotation[transport]" value="0" class="transport text_right" tabindex="-1" style="width:70px;" />
                     <tbody class="additional" id="add_new_values">
-                        <tr>
+                        <tr style="display: none;">
                             <td><input type="hidden" name="quotation[labour]" value="" class="labour text_right" tabindex="-1" style="width:70px;" /></td>
-                            <td colspan="1" style="text-align:right;" class="taxable_price">Taxable Charge</td>
-                            <td><input type="text" name="quotation[taxable_price]" value="" readonly class="taxable_price text_right" tabindex="24" style="width:70px;" /></td>
+                            <td colspan="1" style="display: none;" style="text-align:right;" class="taxable_price">Taxable Charge</td>
+                            <td><input type="text" style="display: none;" name="quotation[taxable_price]" value="" readonly class="taxable_price text_right" tabindex="24" style="width:70px;" /></td>
                             <td style="text-align:right;" class="cgst_td"> CGST </td>
-                            <td><input type="text" tabindex="25" value="" name="quotation[cgst_price]" readonly class="add_cgst text_right cgst_price" style="width:100px;" /></td>
+                            <td><input type="text" style="display: none;" tabindex="25" value="" name="quotation[cgst_price]" readonly class="add_cgst text_right cgst_price" style="width:100px;" /></td>
                             <td style="text-align:right;" class="sgst_td"> SGST </td>
                             <!-- <td style="text-align:right;" class="igst_td"> IGST </td> -->
-                            <td><input type="text" tabindex="26" value="" name="quotation[sgst_price]" readonly class="add_sgst text_right sgst_price" style="width:70px;" /></td>
-                            <td colspan="1" class="net_total_tag" style="text-align:right;font-weight:bold;">Net Total</td>
-                            <td><input type="text" tabindex="27" name="quotation[net_total]" id="net_total" readonly="readonly" class="final_amt text_right" style="width:70px;" /></td>
-                            <td></td>
+                            <td><input type="text" style="display: none;" tabindex="26" value="" name="quotation[sgst_price]" readonly class="add_sgst text_right sgst_price" style="width:70px;" /></td>
                         </tr>
+                        <td colspan="6" class="net_total_tag" style="text-align:right;font-weight:bold;">Net Total</td>
+                        <td><input type="text" tabindex="27" name="quotation[net_total]" id="net_total" readonly="readonly" class="final_amt text_right" style="width:70px;" /></td>
                         <tr>
                             <td colspan="10">
                                 <label class="">Remarks</label>
@@ -843,7 +842,7 @@ if (!empty($customers)) {
             // $('.sub_tag').attr('colspan',5);
             // $('.net_total_tag').attr('colspan',1);
             $('#tin').attr('disabled', false);
-            $('#add_quotation').find('tr td.sgst_td').show();
+            // $('#add_quotation').find('tr td.sgst_td').show();
             // $('#add_quotation').find('tr td.igst_td').show();
             $('#add_quotation').find('tr td.cgst_td').show();
             $('#add_new_values').find('.taxable_price').show();
@@ -854,9 +853,9 @@ if (!empty($customers)) {
             // $('.net_total_tag').attr('colspan',3);
             // $('.sub_tag').attr('colspan',3);
             $('#tin').attr('disabled', true);
-            $('#add_quotation').find('tr td.cgst_td').show();
-            $('#add_quotation').find('tr td.sgst_td').show();
-            $('#add_quotation').find('tr td.igst_td').show();
+            // $('#add_quotation').find('tr td.cgst_td').show();
+            // $('#add_quotation').find('tr td.sgst_td').show();
+            // $('#add_quotation').find('tr td.igst_td').show();
             $('#add_new_values').find('tr td.labour').show();
             $('#add_new_values').find('.taxable_price').show();
             $('#add_new_values').find('.add_cgst').show();
@@ -1200,6 +1199,10 @@ if (!empty($customers)) {
         }
     });
     $(document).ready(function() {
+        setTimeout(function() {
+            $('.model_no:first').focus();
+            $('.model_no:last').focus();
+        }, 500);
         if ($('#gst_type').val() == '') {
             $('#add_quotation').find('tr td.igst_td').hide();
             $('#add_new_values').find('tr td.igst_td').hide();
@@ -1822,6 +1825,10 @@ if (!empty($customers)) {
                             this_val.closest('tr').find('.qty').focus();
                             this_val.closest('tr').find('.qty').attr('tabindex', '');
                             this_val.closest('tr').find('.percost').attr('tabindex', '');
+                        } else {
+                            sweetAlert("Error...", "This Product is not available!", "error");
+                            return false;
+
                         }
                     }
                 });

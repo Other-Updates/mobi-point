@@ -3,7 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Gen_model extends CI_Model {
+class Gen_model extends CI_Model
+{
 
     private $table_name1 = 'po';
     private $table_name2 = 'po_details';
@@ -25,17 +26,19 @@ class Gen_model extends CI_Model {
     // var $selectcolumn = 'q.id,c.store_name,q.q_no,q.total_qty,q.net_total,q.delivery_schedule,q.notification_date,q.created_date';
 
     var $selectcolumn = 'c.id,c.store_name,c.state_id,c.tin,c.name,c.mobil_number,c.email_id,c.address1,q.id,q.q_no,q.total_qty,q.tax,q.ref_name,q.tax_label,'
-            . 'q.net_total,q.delivery_schedule,q.notification_date,q.mode_of_payment,q.remarks,q.subtotal_qty,q.estatus,q.validity,q.created_date';
+        . 'q.net_total,q.delivery_schedule,q.notification_date,q.mode_of_payment,q.remarks,q.subtotal_qty,q.estatus,q.validity,q.created_date';
     var $column_order = array(null, 'q.q_no', 'c.store_name', 'q.total_qty', 'q.net_total', 'q.delivery_schedule', 'q.notification_date', 'q.created_date', 'q.estatus', null);
     var $column_search = array('q.q_no', 'c.store_name', 'q.total_qty', 'q.net_total', 'q.delivery_schedule', 'q.notification_date', 'q.created_date', 'q.estatus');
     var $order = array('q.id' => 'DESC'); // default order
 
-    function __construct() {
+    function __construct()
+    {
 
         parent::__construct();
     }
 
-    public function insert_quotation($data) {
+    public function insert_quotation($data)
+    {
 
         if ($this->db->insert($this->erp_quotation, $data)) {
 
@@ -49,14 +52,16 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function insert_quotation_details($data) {
+    public function insert_quotation_details($data)
+    {
 
         $this->db->insert_batch($this->erp_quotation_details, $data);
 
         return true;
     }
 
-    public function update_increment($id) {
+    public function update_increment($id)
+    {
 
         $this->db->where($this->increment_table . '.id', 12);
 
@@ -68,7 +73,8 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function get_customer($atten_inputs) {
+    public function get_customer($atten_inputs)
+    {
 
 
 
@@ -98,7 +104,7 @@ class Gen_model extends CI_Model {
 
             $query[$i]['receipt_bill'] = $this->db->get('receipt_bill')->result_array();
 
-            $bal = $bal + ($val['net_total'] - ( $query[$i]['receipt_bill'][0]['receipt_paid'] + $query[$i]['receipt_bill'][0]['receipt_discount']));
+            $bal = $bal + ($val['net_total'] - ($query[$i]['receipt_bill'][0]['receipt_paid'] + $query[$i]['receipt_bill'][0]['receipt_discount']));
 
             $i++;
         }
@@ -108,7 +114,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_email_details() {
+    public function get_all_email_details()
+    {
 
         $this->db->select('*');
 
@@ -121,7 +128,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_customer_by_id($id) {
+    public function get_customer_by_id($id)
+    {
 
         $this->db->select('name,mobil_number,email_id,address1,store_name,customer_type,credit_days,credit_limit');
 
@@ -130,7 +138,8 @@ class Gen_model extends CI_Model {
         return $this->db->get($this->customer)->result_array();
     }
 
-    public function get_all_nick_name() {
+    public function get_all_nick_name()
+    {
 
         $this->db->select('*');
 
@@ -141,7 +150,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_product($atten_inputs) {
+    public function get_product($atten_inputs)
+    {
 
         $this->db->select('erp_product.id,erp_product.model_no,product_name,product_description,product_image,type,cash_cus_price,credit_cus_price,cash_con_price,credit_con_price,vip_price,vvip_price,cost_price,selling_price,cgst,sgst,discount,category_id,erp_product.firm_id,erp_product.brand_id,h1_price,h2_price,unit,igst,erp_stock.quantity,erp_product.sales_price,erp_product.hsn_sac,erp_product.cost_price_without_gst,erp_product.sales_price_without_gst');
 
@@ -153,10 +163,10 @@ class Gen_model extends CI_Model {
             $this->db->where($this->erp_product . '.category_id', $atten_inputs['cat_it']);
 
         $this->db->where($this->erp_product . '.id', $atten_inputs['model_number_id']);
-        
-        $this->db->join('erp_stock', 'erp_stock.product_id = erp_product.id', 'left');
 
-        $this->db->where('erp_stock.quantity >', 0.00);
+        $this->db->join('erp_stock', 'erp_stock.product_id = erp_product.id AND erp_stock.category = erp_product.category_id AND erp_stock.brand = erp_product.brand_id', 'left');
+
+        // $this->db->where('erp_stock.quantity >', 0.00);
 
         $this->db->where('erp_stock.category !=', 0);
 
@@ -164,8 +174,7 @@ class Gen_model extends CI_Model {
 
         $query = $this->db->get($this->erp_product)->result_array();
 
-        // echo $this->db->last_query();
-        // exit;
+
 
 
         foreach ($query as $key => $result_data) {
@@ -180,7 +189,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_product_by_frim_id($atten_inputs) {
+    public function get_product_by_frim_id($atten_inputs)
+    {
 
         $this->db->select('erp_product.id,erp_product.product_name as value,erp_product.category_id,erp_stock.quantity');
         $this->db->join('erp_stock', 'erp_stock.product_id = erp_product.id', 'left');
@@ -190,10 +200,9 @@ class Gen_model extends CI_Model {
         $this->db->where($this->erp_product . '.status', 1);
         //if ($id != '')
         $this->db->where($this->erp_product . '.firm_id', $atten_inputs['firm_id']);
-        if($atten_inputs['category_id'])
+        if ($atten_inputs['category_id'])
             $this->db->where($this->erp_product . '.category_id', $atten_inputs['category_id']);
         if (isset($atten_inputs['sale_type']) && $atten_inputs['sale_type'] == "purchase") {
-
         } else {
             $this->db->where('erp_stock.quantity >', 0.00);
         }
@@ -211,7 +220,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_model_no_by_frim_id($atten_inputs) {
+    public function get_model_no_by_frim_id($atten_inputs)
+    {
 
         $this->db->select('id,model_no as value');
 
@@ -232,7 +242,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_service($atten_inputs, $id) {
+    public function get_service($atten_inputs, $id)
+    {
 
         $this->db->select('id,model_no,product_name,product_description,product_image,type,selling_price,cgst,sgst,category_id,brand_id');
 
@@ -250,7 +261,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_quotation($serch_data) {
+    public function get_all_quotation($serch_data)
+    {
 
 
 
@@ -310,7 +322,7 @@ class Gen_model extends CI_Model {
         }
 
         $this->db->select('customer.id as customer,customer.store_name,customer.state_id,customer.tin,customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_quotation.id,erp_quotation.q_no,erp_quotation.total_qty,erp_quotation.tax,erp_quotation.ref_name,erp_quotation.tax_label,'
-                . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.validity,erp_quotation.created_date');
+            . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.validity,erp_quotation.created_date');
 
 
 
@@ -377,7 +389,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_quotation_for_quotation_report($search = NULL) {
+    public function get_all_quotation_for_quotation_report($search = NULL)
+    {
 
 
 
@@ -437,7 +450,7 @@ class Gen_model extends CI_Model {
         }
 
         $this->db->select('customer.id as customer,customer.store_name,customer.state_id,customer.tin,customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_quotation.id,erp_quotation.q_no,erp_quotation.total_qty,erp_quotation.tax,erp_quotation.ref_name,erp_quotation.tax_label,'
-                . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.validity,erp_quotation.created_date');
+            . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.validity,erp_quotation.created_date');
 
 
 
@@ -505,7 +518,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    function get_quotation_report_datatables($search_data) {
+    function get_quotation_report_datatables($search_data)
+    {
 
 
 
@@ -559,7 +573,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    function _get_quotation_report_datatables_query($serch_data = array()) {
+    function _get_quotation_report_datatables_query($serch_data = array())
+    {
 
         if (!isset($serch_data['from_date']))
             $serch_data['from_date'] = '';
@@ -623,7 +638,7 @@ class Gen_model extends CI_Model {
         }
 
         $this->db->select('customer.id as customer,customer.store_name,customer.state_id,customer.tin,customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_quotation.id,erp_quotation.q_no,erp_quotation.total_qty,erp_quotation.tax,erp_quotation.ref_name,erp_quotation.tax_label,'
-                . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.validity,erp_quotation.created_date');
+            . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.validity,erp_quotation.created_date');
 
 
 
@@ -708,7 +723,8 @@ class Gen_model extends CI_Model {
         }
     }
 
-    function count_filtered_quotation_report() {
+    function count_filtered_quotation_report()
+    {
 
         $this->_get_quotation_report_datatables_query();
 
@@ -717,7 +733,8 @@ class Gen_model extends CI_Model {
         return $query->num_rows();
     }
 
-    function count_all_quotation_report() {
+    function count_all_quotation_report()
+    {
 
         $this->_get_quotation_report_datatables_query();
 
@@ -726,7 +743,8 @@ class Gen_model extends CI_Model {
         return $this->db->count_all_results();
     }
 
-    public function get_all_quotation_for_report($search = NULL) {
+    public function get_all_quotation_for_report($search = NULL)
+    {
 
         //$this->db->select('(select SUM(erp_stock.quantity) from erp_stock where product_id = erp_product.id) as individual');
 
@@ -740,7 +758,7 @@ class Gen_model extends CI_Model {
         }
 
         $this->db->select('customer.id as customer,customer.store_name,customer.state_id,customer.tin,customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_quotation.id,erp_quotation.q_no,erp_quotation.total_qty,erp_quotation.tax,erp_quotation.ref_name,erp_quotation.tax_label,'
-                . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.validity,erp_quotation.created_date');
+            . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.validity,erp_quotation.created_date');
 
 
 
@@ -804,10 +822,11 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function get_all_quotation_by_id($id) {
+    public function get_all_quotation_by_id($id)
+    {
 
         $this->db->select('erp_user.nick_name,customer.id as customer,customer.store_name,customer.state_id,customer.tin,customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_quotation.id,erp_quotation.q_no,erp_quotation.total_qty,erp_quotation.tax,erp_quotation.ref_name,erp_quotation.tax_label,'
-                . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.validity,erp_quotation.created_date,erp_quotation.firm_id,erp_manage_firms.firm_name');
+            . 'erp_quotation.net_total,erp_quotation.delivery_schedule,erp_quotation.notification_date,erp_quotation.mode_of_payment,erp_quotation.remarks,erp_quotation.subtotal_qty,erp_quotation.estatus,erp_quotation.validity,erp_quotation.created_date,erp_quotation.firm_id,erp_manage_firms.firm_name');
 
         //$this->db->where('erp_quotation.estatus',1);
 
@@ -829,10 +848,11 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function get_all_product_by_id($id) {
+    public function get_all_product_by_id($id)
+    {
 
         $this->db->select('erp_product.id,erp_product.model_no,erp_product.product_name,erp_product.product_image,'
-                . 'erp_quotation_details.product_description');
+            . 'erp_quotation_details.product_description');
 
         $this->db->where('erp_quotation.id', $id);
 
@@ -850,12 +870,13 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function get_all_quotation_details_by_id($id) {
+    public function get_all_quotation_details_by_id($id)
+    {
 
         $this->db->select('erp_category.cat_id,erp_category.categoryName,erp_product.id,erp_product.product_name,erp_brand.id,erp_brand.brands,erp_product.model_no,'
-                . 'erp_quotation_details.id as del_id,erp_quotation_details.category,erp_quotation_details.product_id,erp_quotation_details.brand,erp_quotation_details.quantity,'
-                . 'erp_quotation_details.per_cost,erp_quotation_details.tax,erp_quotation_details.gst,erp_quotation_details.discount,erp_quotation_details.sub_total,erp_product.model_no,erp_product.product_image,erp_quotation_details.unit,erp_quotation_details.igst,'
-                . 'erp_quotation_details.product_description,erp_product.type,erp_product.hsn_sac_name');
+            . 'erp_quotation_details.id as del_id,erp_quotation_details.category,erp_quotation_details.product_id,erp_quotation_details.brand,erp_quotation_details.quantity,'
+            . 'erp_quotation_details.per_cost,erp_quotation_details.tax,erp_quotation_details.gst,erp_quotation_details.discount,erp_quotation_details.sub_total,erp_product.model_no,erp_product.product_image,erp_quotation_details.unit,erp_quotation_details.igst,'
+            . 'erp_quotation_details.product_description,erp_product.type,erp_product.hsn_sac_name');
 
         $this->db->where('erp_quotation_details.q_id', $id);
 
@@ -889,20 +910,21 @@ class Gen_model extends CI_Model {
             $i++;
         }
 
-//        if ($query->num_rows() >= 0) {
-//            return $query->result_array();
-//        echo"<pre>";
-//        print_r($query);
-//        exit;
-//        }
+        //        if ($query->num_rows() >= 0) {
+        //            return $query->result_array();
+        //        echo"<pre>";
+        //        print_r($query);
+        //        exit;
+        //        }
 
         return $query;
     }
 
-    public function get_all_quotation_history_by_id($id) {
+    public function get_all_quotation_history_by_id($id)
+    {
 
         $this->db->select('erp_user.nick_name,customer.store_name,customer.state_id,customer.tin,customer.id,customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_quotation_history.q_no,erp_quotation_history.total_qty,erp_quotation_history.tax,erp_quotation_history.ref_name,erp_quotation_history.tax_label,'
-                . 'erp_quotation_history.net_total,erp_quotation_history.delivery_schedule,erp_quotation_history.notification_date,erp_quotation_history.mode_of_payment,erp_quotation_history.remarks,erp_quotation_history.subtotal_qty,erp_quotation_history.validity,erp_quotation_history.created_date,erp_quotation_history.firm_id,erp_manage_firms.firm_name');
+            . 'erp_quotation_history.net_total,erp_quotation_history.delivery_schedule,erp_quotation_history.notification_date,erp_quotation_history.mode_of_payment,erp_quotation_history.remarks,erp_quotation_history.subtotal_qty,erp_quotation_history.validity,erp_quotation_history.created_date,erp_quotation_history.firm_id,erp_manage_firms.firm_name');
 
         $this->db->where('erp_quotation_history.eStatus', 1);
 
@@ -924,12 +946,13 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function get_all_quotation_history_details_by_id($id) {
+    public function get_all_quotation_history_details_by_id($id)
+    {
 
         $this->db->select('erp_category.cat_id,erp_category.categoryName,erp_brand.id,erp_brand.brands,erp_product.model_no,'
-                . ' erp_product.id,erp_product.model_no,erp_product.product_name,erp_product.product_image,erp_quotation_history_details.product_description,erp_product.type,erp_quotation_history_details.unit,'
-                . 'erp_quotation_history_details.category,erp_quotation_history_details.product_id,erp_quotation_history_details.brand,erp_quotation_history_details.quantity,erp_quotation_history_details.igst,'
-                . 'erp_quotation_history_details.per_cost,erp_quotation_history_details.tax,erp_quotation_history_details.gst,erp_quotation_history_details.sub_total,erp_product.hsn_sac_name');
+            . ' erp_product.id,erp_product.model_no,erp_product.product_name,erp_product.product_image,erp_quotation_history_details.product_description,erp_product.type,erp_quotation_history_details.unit,'
+            . 'erp_quotation_history_details.category,erp_quotation_history_details.product_id,erp_quotation_history_details.brand,erp_quotation_history_details.quantity,erp_quotation_history_details.igst,'
+            . 'erp_quotation_history_details.per_cost,erp_quotation_history_details.tax,erp_quotation_history_details.gst,erp_quotation_history_details.sub_total,erp_product.hsn_sac_name');
 
         $this->db->where('erp_quotation_history.id', $id);
 
@@ -951,7 +974,8 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function get_his_quotation_by_id($id) {
+    public function get_his_quotation_by_id($id)
+    {
 
         $this->db->select('*');
 
@@ -960,7 +984,8 @@ class Gen_model extends CI_Model {
         return $this->db->get($this->erp_quotation)->result_array();
     }
 
-    public function get_all_history_quotation_by_id($id) {
+    public function get_all_history_quotation_by_id($id)
+    {
 
         $this->db->select('*');
 
@@ -969,7 +994,8 @@ class Gen_model extends CI_Model {
         return $this->db->get($this->erp_quotation_history)->result_array();
     }
 
-    public function insert_history_quotation($data) {
+    public function insert_history_quotation($data)
+    {
 
         if ($this->db->insert($this->erp_quotation_history, $data)) {
 
@@ -981,7 +1007,8 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function get_reference_amount($id) {
+    public function get_reference_amount($id)
+    {
 
         $this->db->select('erp_user.id,erp_reference_groups.commission_rate,erp_reference_groups.user_id');
 
@@ -994,21 +1021,24 @@ class Gen_model extends CI_Model {
         return $query[0]['commission_rate'];
     }
 
-    public function insert_invoice_product_details($data) {
+    public function insert_invoice_product_details($data)
+    {
 
         $this->db->insert_batch('erp_invoice_product_details', $data);
 
         return true;
     }
 
-    public function insert_history_quotation_details($data) {
+    public function insert_history_quotation_details($data)
+    {
 
         $this->db->insert_batch($this->erp_quotation_history_details, $data);
 
         return true;
     }
 
-    public function get_his_quotation_deteils_by_id($id) {
+    public function get_his_quotation_deteils_by_id($id)
+    {
 
         $this->db->select('*');
 
@@ -1017,21 +1047,24 @@ class Gen_model extends CI_Model {
         return $this->db->get($this->erp_quotation_details)->result_array();
     }
 
-    public function delete_quotation_deteils_by_id($id) {
+    public function delete_quotation_deteils_by_id($id)
+    {
 
         $this->db->where('q_id', $id);
 
         $this->db->delete($this->erp_quotation_details);
     }
 
-    public function delete_id($id) {
+    public function delete_id($id)
+    {
 
         $this->db->where('id', $id);
 
         $this->db->delete($this->erp_quotation_details);
     }
 
-    public function change_quotation_status($id, $status) {
+    public function change_quotation_status($id, $status)
+    {
 
         $this->db->where($this->erp_quotation . '.id', $id);
 
@@ -1043,7 +1076,8 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function update_quotation($data, $id) {
+    public function update_quotation($data, $id)
+    {
 
         $this->db->where($this->erp_quotation . '.id', $id);
 
@@ -1055,7 +1089,8 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function delete_quotation($id) {
+    public function delete_quotation($id)
+    {
 
         $this->db->where('id', $id);
 
@@ -1067,7 +1102,8 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function all_history_quotations($id) {
+    public function all_history_quotations($id)
+    {
 
         $this->db->select('*');
 
@@ -1093,7 +1129,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_customer_by_id($id) {
+    public function get_all_customer_by_id($id)
+    {
 
         $this->db->select('*');
 
@@ -1113,7 +1150,8 @@ class Gen_model extends CI_Model {
         return false;
     }
 
-    public function get_all_gen($serch_data = NULL) {
+    public function get_all_gen($serch_data = NULL)
+    {
 
 
 
@@ -1212,7 +1250,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_prefix_by_frim_id($id) {
+    public function get_prefix_by_frim_id($id)
+    {
 
         $this->db->select('prefix');
 
@@ -1221,7 +1260,8 @@ class Gen_model extends CI_Model {
         return $this->db->get('erp_manage_firms')->result_array();
     }
 
-    public function get_reference_group_by_frim_id($id) {
+    public function get_reference_group_by_frim_id($id)
+    {
 
         $this->db->select('*');
 
@@ -1272,7 +1312,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_sales_man_by_frim_id($id) {
+    public function get_sales_man_by_frim_id($id)
+    {
 
         $this->db->select('*');
 
@@ -1283,7 +1324,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_product() {
+    public function get_all_product()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -1303,7 +1345,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_customers() {
+    public function get_all_customers()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -1326,7 +1369,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_customer_quotation() {
+    public function get_all_customer_quotation()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -1352,7 +1396,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_product_quotation() {
+    public function get_all_product_quotation()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -1378,7 +1423,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_quotation_no() {
+    public function get_all_quotation_no()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -1402,7 +1448,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_company_details_by_firm($s_id) {
+    public function get_company_details_by_firm($s_id)
+    {
 
         $this->db->select('erp_manage_firms.*,erp_quotation.firm_id');
 
@@ -1415,7 +1462,8 @@ class Gen_model extends CI_Model {
         return $query;
     }
 
-    public function get_datatables() {
+    public function get_datatables()
+    {
 
         $this->db->select($this->selectColumn);
 
@@ -1437,7 +1485,8 @@ class Gen_model extends CI_Model {
         return $query->result_array();
     }
 
-    function _get_datatables_query() {
+    function _get_datatables_query()
+    {
 
         //Join Table
 
@@ -1515,7 +1564,8 @@ class Gen_model extends CI_Model {
         }
     }
 
-    public function count_all() {
+    public function count_all()
+    {
 
         $this->db->from($this->primaryTable);
 
@@ -1524,7 +1574,8 @@ class Gen_model extends CI_Model {
         return $this->db->count_all_results();
     }
 
-    public function count_filtered() {
+    public function count_filtered()
+    {
 
         $this->_get_datatables_query();
 
@@ -1536,5 +1587,4 @@ class Gen_model extends CI_Model {
 
         return $query->num_rows();
     }
-
 }

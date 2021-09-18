@@ -118,19 +118,21 @@ $data['company_details'] = $this->admin_model->get_company_details();
             </div>
             <div class="col-sm-2">
                 <div class="form-group">
-                    <label class="control-label">Model</label>
-                    <select id='brand' class="form-control">
-                        <option>Select</option>
-                        <?php
-                        if (isset($brand) && !empty($brand)) {
-                            foreach ($brand as $val) {
-                        ?>
-                                <option value='<?= $val['id'] ?>'><?= $val['brands'] ?></option>
-                        <?php
+                    <div class="col-sm-8 wid100-div">
+                        <label class="control-label">Model</label>
+
+                        <select id='brand' class="form-control">
+                            <option value="">Select</option>
+                            <?php
+                            if (isset($brand) && !empty($brand)) {
+                                foreach ($brand as $val) { ?>
+                                    <option value='<?= $val['id'] ?>'><?= $val['brands'] ?></option>
+                            <?php
+                                }
                             }
-                        }
-                        ?>
-                    </select>
+                            ?>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="col-md-3"><a id='search' class="btn btn-success"><span class="glyphicon glyphicon-search "></span> Search</a></div>
@@ -208,6 +210,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                     data.firm_id = $('#firm_id').val();
                     data.category = $('#category').val();
                     data.product = $('#product').val();
+                    data.brand = $('#brand').val();
                 }
             },
             //Set column definition initialisation properties.

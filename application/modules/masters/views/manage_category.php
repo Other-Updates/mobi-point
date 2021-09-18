@@ -34,9 +34,9 @@
                                     <table id="basicTable" class="table-striped table responsive dataTable no-footer dtr-inline">
                                         <thead>
                                             <tr>
-                                                <th><?php echo $language['s_no'] ?></th>
-                                                <th><?php echo $language['category'] ?></th>
-                                                <th class="action-btn-align"><?php echo $language['action'] ?></th>
+                                                <th>S.No</th>
+                                                <th>Catagory</th>
+                                                <th class="action-btn-align">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -146,7 +146,7 @@ if (isset($category_list) && !empty($category_list)) {
                         <input type="hidden" value="<?php echo $val['id']; ?>" class="id" />
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary delete_yes" id="yesin"><?php echo $language['yes'] ?></button>
+                        <button class="btn btn-primary delete_yes" id="yesin">Yes</button>
                         <button type="button" class="btn btn-danger1 delete_all" data-dismiss="modal" id="no"><?php echo $language['no'] ?></button>
                     </div>
                 </div>

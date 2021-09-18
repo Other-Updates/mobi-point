@@ -32,6 +32,7 @@ class Stock extends MX_Controller
         $this->load->model('purchase_order/purchase_order_model');
         $this->load->model('api/notification_model');
         $this->load->model('master_category/master_category_model');
+        $this->load->model('master_brand/master_brand_model');
         $this->load->model('product/product_model');
         if (isset($_GET['notification']))
             $this->notification_model->update_notification(array('status' => 1), $_GET['notification']);
@@ -41,21 +42,16 @@ class Stock extends MX_Controller
     {
         $data = array();
         //$datas["stock"] = $po = $this->stock_model->get_all_stock();
-
-
         $firms = $this->user_auth->get_user_firms();
         $frim_id = array();
         foreach ($firms as $value) {
             $frim_id[] = $value['firm_id'];
         }
-
         $data['firm_details'] = $this->stock_model->get_firm_name($frim_id);
         //echo "<pre>";print_r($data);exit;
         $data['product'] = $this->product_model->get_product();
         $data['cat'] = $this->master_category_model->get_category_by_firm($frim_id);
-
-
-
+        $data['brand'] = $this->master_brand_model->get_brand();
         $this->template->write_view('content', 'stock/stock_list', $data);
         $this->template->render();
     }

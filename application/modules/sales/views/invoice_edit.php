@@ -504,7 +504,7 @@ if (!empty($customers)) {
                                                 if (isset($category) && !empty($category)) {
                                                     foreach ($category as $va) {
                                                 ?>
-                                                        <option value='<?php echo $va['cat_id'] ?>'><?php echo $va['categoryName'] ?></option>
+                                                        <option value='<?php echo $va['cat_id'] ?>' <?php echo ($va['cat_id'] == $vals['category']) ? 'selected' : ''; ?>><?php echo $va['categoryName'] ?></option>
                                                 <?php
                                                     }
                                                 }
