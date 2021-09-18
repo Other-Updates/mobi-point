@@ -1877,8 +1877,8 @@ class Report_model extends CI_Model
             $gst_values = array_filter($gst_values);
         }
         // echo "<pre>";
-        //  print_r($gst_values);
-        //  exit;
+        // print_r($gst_values);
+        // exit;
         $this->db->select('erp_product.cgst, erp_product.sgst');
         $this->db->distinct('erp_product.cgst, erp_product.sgst');
         $product_query = $this->db->get($this->erp_product)->result_array();

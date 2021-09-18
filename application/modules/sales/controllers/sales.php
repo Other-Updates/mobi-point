@@ -3440,7 +3440,7 @@ class Sales extends MX_Controller
                 $this->project_cost_model->remove_stocks_by_invdit($results, $qty, $firm_id, $cat_id);
             }
 
-            exit;
+
 
             $data['company_details'] = $this->admin_model->get_company_details();
 

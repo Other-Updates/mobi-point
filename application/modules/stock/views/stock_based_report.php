@@ -62,7 +62,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
     <div class="panel-body pnone">
         <div class="row search_table_hide mb-0">
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Shop Name</label>
                     <div class="col-sm-8">
@@ -122,7 +122,25 @@ $data['company_details'] = $this->admin_model->get_company_details();
                     </div>
                 </div>
             </div>
-            <div class="col-md-3"><a id='search' class="btn btn-success"><span class="glyphicon glyphicon-search "></span> Search</a></div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Model</label>
+                    <div class="col-sm-8">
+                        <select id='brand' class="form-control">
+                            <option value="">Select</option>
+                            <?php
+                            if (isset($brand) && !empty($brand)) {
+                                foreach ($brand as $val) { ?>
+                                    <option value='<?= $val['id'] ?>'><?= $val['brands'] ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"><a id='search' class="btn btn-success"><span class="glyphicon glyphicon-search "></span> Search</a></div>
         </div>
     </div>
     <div class="contentpanel mb-50">
@@ -134,7 +152,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         <td>S.No</td>
                         <!-- <td width=''>Shop</td> -->
                         <td width=''>Category</td>
-                        <td width=''>Brand</td>
+                        <td width=''>Model</td>
                         <td width=''>Product</td>
                         <td width=''>Cost Price</td>
                         <td width='' class="action-btn-align">Qty</td>
@@ -202,8 +220,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
         var inventory = 1;
         table = jQuery('#example1').DataTable({
             "lengthMenu": [
-                [50, 100, 150, -1],
-                [50, 100, 150, "All"]
+                [50, 100, 500, -1],
+                [50, 100, 500, "All"]
             ],
             "pageLength": 50,
             "processing": true, //Feature control the processing indicator.

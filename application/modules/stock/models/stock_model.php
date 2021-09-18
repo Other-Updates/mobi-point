@@ -18,7 +18,8 @@ class Stock_model extends CI_Model
     var $primaryTable = 'erp_stock u';
     //var $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,p.model_no,r.firm_name';
     var $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,p.model_no,r.firm_name,p.cost_price,p.cgst,p.sgst,p.cost_price_without_gst,p.min_qty';
-    var $column_order = array(null, 'r.firm_name', 'c.categoryName', 'p.product_name', 'b.brands', 'u.quantity', null); //set column field database for datatable orderable
+    var $column_order = array(null,  'c.categoryName', 'p.product_name', 'b.brands', 'u.quantity', null); //set column field database for datatable orderable
+    var $manual_order = array(null,  'c.categoryName', 'b.brands', 'p.product_name', 'p.cost_price', 'u.quantity', 'p.cost_price_without_gst', 'p.cgst', 'p.sgst', null);
     var $column_search = array('r.firm_name', 'c.categoryName', 'p.product_name', 'b.brands', 'u.quantity', 'p.cost_price'); //set column field database for datatable searchable
     var $order = array('u.id' => 'ASC '); // default order
 
@@ -154,8 +155,8 @@ class Stock_model extends CI_Model
         }
 
 
-        if (isset($_POST['order']) && $this->column_order[$_POST['order']['0']['column']] != null) { // here order processing
-            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        if (isset($_POST['order']) && $this->manual_order[$_POST['order']['0']['column']] != null) { // here order processing
+            $this->db->order_by($this->manual_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else if (isset($this->order)) {
             $order = $this->order;
             $this->db->order_by(key($order), $order[key($order)]);

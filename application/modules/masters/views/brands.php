@@ -13,8 +13,8 @@
         var table;
         table = jQuery('#brandTable').DataTable({
             "lengthMenu": [
-                [50, 100, 150, -1],
-                [50, 100, 150, "All"]
+                [50, 100, 500, -1],
+                [50, 100, 500, "All"]
             ],
             "pageLength": 50,
             "processing": true, //Feature control the processing indicator.
@@ -179,7 +179,7 @@
                                 <thead>
                                     <tr>
                                         <th style="text-align:center;">S.No</th>
-                                        <th style="text-align:center;">Shop Name</th>
+                                        <!-- <th style="text-align:center;">Shop Name</th> -->
                                         <th style="text-align:center;">Category Name</th>
                                         <th style="text-align:center;">Model Name</th>
                                         <th style="text-align:center;">HSN Number</th>

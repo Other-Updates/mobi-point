@@ -179,7 +179,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         <td class="action-btn-align">S.No</td>
                         <td>Category</td>
                         <td>Product</td>
-                        <td>Brand</td>
+                        <td>Model</td>
                         <!-- <td>Model No</td> -->
                         <td class="action-btn-align">Quantity</td>
                     </tr>
@@ -237,8 +237,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
         var table;
         table = $('#myTable').DataTable({
             "lengthMenu": [
-                [50, 100, 150, -1],
-                [50, 100, 150, "All"]
+                [50, 100, 500, -1],
+                [50, 100, 500, "All"]
             ],
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.

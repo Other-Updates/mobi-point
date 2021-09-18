@@ -80,7 +80,7 @@ class Stock extends MX_Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $ass->firm_name;
+            // $row[] = $ass->firm_name;
             $row[] = $ass->categoryName;
             $row[] = $ass->product_name;
             $row[] = $ass->brands;

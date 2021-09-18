@@ -237,8 +237,8 @@ if (!empty($sales)) {
         //datatables
         table = jQuery('#basicTable_call_back').DataTable({
             "lengthMenu": [
-                [50, 100, 150, -1],
-                [50, 100, 150, "All"]
+                [50, 100, 500, -1],
+                [50, 100, 500, "All"]
             ],
             "pageLength": 50,
             "processing": true, //Feature control the processing indicator.
