@@ -1,14 +1,14 @@
-<?php $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template'); ?>
+<?php $theme_path = $this->config->item('theme_locations').$this->config->item('active_template');?>
 <!--
-<script src="<?php echo $theme_path; ?>/js/jquery-1.8.2.js" type="text/javascript"></script> -->
-<script src="<?php echo $theme_path; ?>/js/jquery-ui-my-1.10.3.min.js"></script>
-<link rel="stylesheet" href="<?php echo $theme_path; ?>/css/bootstrap-select.css" />
-<script src="<?php echo $theme_path; ?>/js/bootstrap-select.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/fSelect.css" />
-<script type="text/javascript" src="<?php echo $theme_path; ?>/js/jquery.scannerdetection.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js//sweetalert.css">
-<script src="<?php echo $theme_path; ?>/js/sweetalert.min.js" type="text/javascript"></script>
-<script type='text/javascript' src='<?= $theme_path; ?>/js/fSelect.js'></script>
+<script src="<?php echo $theme_path;?>/js/jquery-1.8.2.js" type="text/javascript"></script> -->
+<script src="<?php echo $theme_path;?>/js/jquery-ui-my-1.10.3.min.js"></script>
+<link rel="stylesheet" href="<?php echo $theme_path;?>/css/bootstrap-select.css" />
+<script src="<?php echo $theme_path;?>/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?=$theme_path;?>/css/fSelect.css" />
+<script type="text/javascript" src="<?php echo $theme_path;?>/js/jquery.scannerdetection.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $theme_path;?>/js//sweetalert.css">
+<script src="<?php echo $theme_path;?>/js/sweetalert.min.js" type="text/javascript"></script>
+<script type='text/javascript' src='<?=$theme_path;?>/js/fSelect.js'></script>
 <style type="text/css">
     .text_right {
         text-align: right;
@@ -170,23 +170,23 @@
 </style>
 <?php
 $model_numbers_json = array();
-if (!empty($products)) {
-    foreach ($products as $list) {
-        $model_numbers_json[] = '{ id: "' . $list['id'] . '", value: "' . $list['product_name'] . '"}';
+if(!empty($products)){
+    foreach($products as $list){
+        $model_numbers_json[] = '{ id: "'.$list['id'].'", value: "'.$list['product_name'].'"}';
     }
 }
 $model_numbers_extra = array();
-if (!empty($products)) {
-    foreach ($products as $list) {
-        if (!empty($list['model_no'])) {
-            $model_numbers_extra[] = '{ id: "' . $list['id'] . '", value: "' . $list['model_no'] . '"}';
+if(!empty($products)){
+    foreach($products as $list){
+        if(!empty($list['model_no'])){
+            $model_numbers_extra[] = '{ id: "'.$list['id'].'", value: "'.$list['model_no'].'"}';
         }
     }
 }
 $customers_json = array();
-if (!empty($customers)) {
-    foreach ($customers as $list) {
-        $customers_json[] = '{ id: "' . $list['id'] . '", value: "' . $list['store_name'] . '"}';
+if(!empty($customers)){
+    foreach($customers as $list){
+        $customers_json[] = '{ id: "'.$list['id'].'", value: "'.$list['store_name'].'"}';
     }
 }
 ?>
@@ -198,11 +198,11 @@ if (!empty($customers)) {
     <div class="contentpanel mb-45">
         <div class="media">
             <h4>Add Invoice &nbsp;
-                <?php if (count($firms) == 1) { ?>
+                <?php if(count($firms) == 1){?>
                     <div class="cuto-firm">
-                        Shop : <small> <?php echo $firms[0]['firm_name']; ?> </small>
+                        Shop : <small> <?php echo $firms[0]['firm_name'];?> </small>
                     </div>
-                <?php } ?>
+                <?php }?>
             </h4>
         </div>
         <table class="static" style="display: none;">
@@ -251,11 +251,11 @@ if (!empty($customers)) {
                     <select name='brand[]' tabindex="-1" class="form-control form-align brand_id" style="display: none;">
                         <option>Select</option>
                         <?php
-                        if (isset($brand) && !empty($brand)) {
-                            foreach ($brand as $val) {
-                        ?>
-                                <option value='<?php echo $val['id'] ?>'><?php echo $val['brands'] ?></option>
-                        <?php
+                        if(isset($brand) && !empty($brand)){
+                            foreach($brand as $val){
+                                ?>
+                                <option value='<?php echo $val['id']?>'><?php echo $val['brands']?></option>
+                                <?php
                             }
                         }
                         ?>
@@ -409,24 +409,24 @@ if (!empty($customers)) {
         <form method="post" class="panel-body" id="quotation">
             <div class="row" id="add_sales">
                 <div class="col-md-4">
-                    <?php if (count($firms) > 0) { ?>
+                    <?php if(count($firms) > 0){?>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Shop Name</label>
                             <div class="col-sm-8">
                                 <select onchange="Firm(this.value, 0)" name="quotation[firm_id]" class="form-control form-align required" id="firm" tabindex="1">
                                     <option value="">Select</option>
                                     <?php
-                                    if (isset($firms) && !empty($firms)) {
-                                        foreach ($firms as $key => $firm) {
-                                            if ($key == 0) {
+                                    if(isset($firms) && !empty($firms)){
+                                        foreach($firms as $key=> $firm){
+                                            if($key == 0){
                                                 $select = "selected=selected";
-                                            } else {
+                                            } else{
                                                 $select = '';
                                             }
-                                    ?>
-                                            <option <?php echo $select; ?> value="<?php echo $firm['firm_id']; ?>">
-                                                <?php echo $firm['firm_name']; ?> </option>
-                                    <?php
+                                            ?>
+                                            <option <?php echo $select;?> value="<?php echo $firm['firm_id'];?>">
+                                                <?php echo $firm['firm_name'];?> </option>
+                                            <?php
                                         }
                                     }
                                     ?>
@@ -434,21 +434,21 @@ if (!empty($customers)) {
                                 <span class="error_msg"></span>
                             </div>
                         </div>
-                    <?php
-                    } else {
-                    ?>
+                        <?php
+                    } else{
+                        ?>
                         <select onchange="Firm(this.value)" name="quotation[firm_id]" class="form-control form-align required" id="firm" readonly="" style="display:none;">
                             <?php
-                            if (isset($firms) && !empty($firms)) {
-                                foreach ($firms as $firm) {
-                            ?>
-                                    <option value="<?php echo $firm['firm_id']; ?>"> <?php echo $firm['firm_name']; ?> </option>
-                            <?php
+                            if(isset($firms) && !empty($firms)){
+                                foreach($firms as $firm){
+                                    ?>
+                                    <option value="<?php echo $firm['firm_id'];?>"> <?php echo $firm['firm_name'];?> </option>
+                                    <?php
                                 }
                             }
                             ?>
                         </select>
-                    <?php } ?>
+                    <?php }?>
                     <div class="form-group dnone">
                         <label class="col-sm-4 control-label">Customer Mobile </label>
                         <div class="col-sm-8">
@@ -473,16 +473,16 @@ if (!empty($customers)) {
                             <select name='quotation[sales_man]' tabindex="4" class="form-control class_req" id="sales_man">
                                 <option>Select</option>
                                 <?php
-                                if (isset($sales_man) && !empty($sales_man)) {
-                                    foreach ($sales_man as $val) {
-                                ?>
-                                        <option value='<?php echo $val['id'] ?>' <?php
-                                                                                    if ($val['id'] == 1) {
-                                                                                        echo "selected";
-                                                                                    }
-                                                                                    ?>>
-                                            <?php echo $val['sales_man_name'] ?></option>
-                                <?php
+                                if(isset($sales_man) && !empty($sales_man)){
+                                    foreach($sales_man as $val){
+                                        ?>
+                                        <option value='<?php echo $val['id']?>' <?php
+                                        if($val['id'] == 1){
+                                            echo "selected";
+                                        }
+                                        ?>>
+                                            <?php echo $val['sales_man_name']?></option>
+                                        <?php
                                     }
                                 }
                                 ?>
@@ -492,17 +492,17 @@ if (!empty($customers)) {
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <?php if (count($firms) > 1) { ?>
+                    <?php if(count($firms) > 1){?>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Invoice Number</label>
                             <div class="col-sm-8">
                                 <input type="text" tabindex="-1" name="quotation[q_no]" class="code form-control colournamedup  form-align" readonly="readonly" value="" id="grn_no">
                             </div>
                         </div>
-                    <?php } else {
-                    ?>
+                    <?php } else{
+                        ?>
                         <input type="hidden" tabindex="-1" name="quotation[q_no]" class="code form-control colournamedup  form-align" readonly="readonly" value="" id="grn_no">
-                    <?php } ?>
+                    <?php }?>
                     <div class="customer_details_invoice"><label id="customer_details_label"></label></div>
                     <div class="form-group dnone">
                         <label class="col-sm-4 control-label">Customer Email ID</label>
@@ -550,7 +550,7 @@ if (!empty($customers)) {
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Date <span style="color:#F00; font-style:oblique;">*</span></label>
                         <div class="col-sm-8">
-                            <input type="text" tabindex="7" class="form-control form-align datepicker required" name="quotation[created_date]" placeholder="dd-mm-yyyy" value="<?php echo date('d-m-Y'); ?>">
+                            <input type="text" tabindex="7" class="form-control form-align datepicker required" name="quotation[created_date]" placeholder="dd-mm-yyyy" value="<?php echo date('d-m-Y');?>">
                             <span class="error_msg"></span>
                         </div>
                     </div>
@@ -638,71 +638,71 @@ if (!empty($customers)) {
                                     <option value="">Select</option>
                                 </select>
                             </td>
-                            <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="" />
-                            <!-- <td class="action-btn-align">
-                                <input type="hidden"  style="width:100%"  class='form-align tabwid model_no_extra' readonly="" />
-                                <input type="text" tabindex="-1" name='money_transfer[]' style="width:70px;" class="money" />
-                            </td> -->
-                            <td class="action-btn-align">
-                                <select name='brand[]' tabindex="-1" class="form-control form-align brand_id" style="display: none;">
-                                    <option value="">Select</option>
-                                    <?php
-                                    if (isset($brand) && !empty($brand)) {
-                                        foreach ($brand as $val) {
+                    <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="" />
+                    <!-- <td class="action-btn-align">
+                        <input type="hidden"  style="width:100%"  class='form-align tabwid model_no_extra' readonly="" />
+                        <input type="text" tabindex="-1" name='money_transfer[]' style="width:70px;" class="money" />
+                    </td> -->
+                    <td class="action-btn-align">
+                        <select name='brand[]' tabindex="-1" class="form-control form-align brand_id" style="display: none;">
+                            <option value="">Select</option>
+                            <?php
+                            if(isset($brand) && !empty($brand)){
+                                foreach($brand as $val){
                                     ?>
-                                            <option value='<?php echo $val['id'] ?>'><?php echo $val['brands'] ?></option>
+                                    <option value='<?php echo $val['id']?>'><?php echo $val['brands']?></option>
                                     <?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                                <div class="col-xs-8">
-                                    <input type="text" tabindex="12" name='quantity[]' style="width:70px;" class="qty required quantity" data-stock="0" />
-                                </div>
-                                <div class="col-xs-4">
-                                    <span class="label label-success stock_qty"> 0 </span>
-                                </div>
-                                <span class="error_msg"></span>
-                            </td>
-                            <td class="action-btn-align">
-                                <p style="display: none;" class="gstcost">1</p>
-                                <p style="display: none;" class="nogstcost">2</p>
-                                <input type="text" name="cost_price[]" style="width:70px;" id="cost_price" class="costing_price perwhole required" />
-                                <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
-                                <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
-                                <span class="error_msg"></span>
-                            </td>
-                            <td class="action-btn-align">
-                                <p style="display: none;" class="gst">1</p>
-                                <p style="display: none;" class="nogst">2</p>
-                                <!-- <input type="text" name="cost_price"  style="width:70px;" id="cost_price"/> -->
-                                <input type="text" tabindex="13" name='per_cost[]' style="width:70px;" class="selling_price percost required" />
-                                <input type="hidden" name="sp_with_gst[]" class="sp_with_gst">
-                                <input type="hidden" name="sp_without_gst[]" class="sp_without_gst">
-                                <span class="error_msg"></span>
-                            </td>
-                            <!-- <td class="action-btn-align">
-                                <input type="text" tabindex="14" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" />
-                            </td> -->
-                            <td class="action-btn-align cgst_td" style="display: none;">
-                                <input type="text" style="display: none;" name='tax[]' tabindex="15" style="width:70px;" class="pertax" readonly="readonly" />
-                            </td>
-                            <td class="action-btn-align sgst_td" style="display: none;">
-                                <input type="text" name='gst[]' style="display: none;" tabindex="16" style="width:70px;" class="gst" readonly="readonly" />
-                            </td>
-                            <!--
-                            <td class="action-btn-align igst_td">
-                                <input type="text" name='igst[]' tabindex="17" style="width:70px;" class="igst wid50"
-                                    readonly="readonly" />
-                            </td> -->
-                            <td>
-                                <input type="text" style="width:70px;" tabindex="18" name='sub_total[]' readonly="readonly" class="subtotal text_right" />
-                            </td>
-                            <td>
-                                <input type="text" style="width:70px;" id="profit" class="profit" />
-                            </td>
-                            <td class="action-btn-align"><a id='delete_group' tabindex="-1" class="btn btn-danger delete_group"><span class="glyphicon glyphicon-trash"></span></a></td>
-                        </tr>
+                                }
+                            }
+                            ?>
+                        </select>
+                        <div class="col-xs-8">
+                            <input type="text" tabindex="12" name='quantity[]' style="width:70px;" class="qty required quantity" data-stock="0" />
+                        </div>
+                        <div class="col-xs-4">
+                            <span class="label label-success stock_qty"> 0 </span>
+                        </div>
+                        <span class="error_msg"></span>
+                    </td>
+                    <td class="action-btn-align">
+                        <p style="display: none;" class="gstcost">1</p>
+                        <p style="display: none;" class="nogstcost">2</p>
+                        <input type="text" name="cost_price[]" style="width:70px;" id="cost_price" class="costing_price perwhole required" />
+                        <input type="hidden" name="cp_with_gst[]" class="cp_with_gst">
+                        <input type="hidden" name="cp_without_gst[]" class="cp_without_gst">
+                        <span class="error_msg"></span>
+                    </td>
+                    <td class="action-btn-align">
+                        <p style="display: none;" class="gst">1</p>
+                        <p style="display: none;" class="nogst">2</p>
+                        <!-- <input type="text" name="cost_price"  style="width:70px;" id="cost_price"/> -->
+                        <input type="text" tabindex="13" name='per_cost[]' style="width:70px;" class="selling_price percost required" />
+                        <input type="hidden" name="sp_with_gst[]" class="sp_with_gst">
+                        <input type="hidden" name="sp_without_gst[]" class="sp_without_gst">
+                        <span class="error_msg"></span>
+                    </td>
+                    <!-- <td class="action-btn-align">
+                        <input type="text" tabindex="14" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" />
+                    </td> -->
+                    <td class="action-btn-align cgst_td" style="display: none;">
+                        <input type="text" style="display: none;" name='tax[]' tabindex="15" style="width:70px;" class="pertax" readonly="readonly" />
+                    </td>
+                    <td class="action-btn-align sgst_td" style="display: none;">
+                        <input type="text" name='gst[]' style="display: none;" tabindex="16" style="width:70px;" class="gst" readonly="readonly" />
+                    </td>
+                    <!--
+                    <td class="action-btn-align igst_td">
+                        <input type="text" name='igst[]' tabindex="17" style="width:70px;" class="igst wid50"
+                            readonly="readonly" />
+                    </td> -->
+                    <td>
+                        <input type="text" style="width:70px;" tabindex="18" name='sub_total[]' readonly="readonly" class="subtotal text_right" />
+                    </td>
+                    <td>
+                        <input type="text" style="width:70px;" id="profit" class="profit" />
+                    </td>
+                    <td class="action-btn-align"><a id='delete_group' tabindex="-1" class="btn btn-danger delete_group"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    </tr>
                     </tbody>
                     <tbody class="addtional">
                         <tr>
@@ -713,18 +713,18 @@ if (!empty($customers)) {
                             <td class="action-btn-align"><input type="text" name="quotation[profit_total]" tabindex="21" readonly="readonly" class="profit_total" style="width:70px;" /></td>
                             <td></td>
                         </tr>
-                        <input type="hidden" name="advance" tabindex="-1" id="advance" readonly="readonly" class="advance text_right" style="width:100px;" />
-                        <tr>
-                            <td colspan="5" style="width:70px; text-align:right;"></td>
-                            <!--
-                            <td colspan="3" style="text-align:right;font-weight:bold;"><input type="text" tabindex="22"
-                                    name="quotation[tax_label]" class='tax_label text_right' style="width:100%;" /></td> -->
-                            <td style="display: none">
-                                <input type="text" name="quotation[tax]" class='totaltax text_right' tabindex="23" style="width:70px;" />
-                            </td>
-                            <td></td>
-                        </tr>
-                        <input type="hidden" name="quotation[round_off]" tabindex="-1" value="" class="round_off text_right" style="width:100px;" readonly="" />
+                    <input type="hidden" name="advance" tabindex="-1" id="advance" readonly="readonly" class="advance text_right" style="width:100px;" />
+                    <tr>
+                        <td colspan="5" style="width:70px; text-align:right;"></td>
+                        <!--
+                        <td colspan="3" style="text-align:right;font-weight:bold;"><input type="text" tabindex="22"
+                                name="quotation[tax_label]" class='tax_label text_right' style="width:100%;" /></td> -->
+                        <td style="display: none">
+                            <input type="text" name="quotation[tax]" class='totaltax text_right' tabindex="23" style="width:70px;" />
+                        </td>
+                        <td></td>
+                    </tr>
+                    <input type="hidden" name="quotation[round_off]" tabindex="-1" value="" class="round_off text_right" style="width:100px;" readonly="" />
                     </tbody>
                     <input type="hidden" name="quotation[transport]" value="0" class="transport text_right" tabindex="-1" style="width:70px;" />
                     <tbody class="additional" id="add_new_values">
@@ -738,14 +738,14 @@ if (!empty($customers)) {
                             <!-- <td style="text-align:right;" class="igst_td"> IGST </td> -->
                             <td><input type="text" style="display: none;" tabindex="26" value="" name="quotation[sgst_price]" readonly class="add_sgst text_right sgst_price" style="width:70px;" /></td>
                         </tr>
-                        <td colspan="6" class="net_total_tag" style="text-align:right;font-weight:bold;">Net Total</td>
-                        <td><input type="text" tabindex="27" name="quotation[net_total]" id="net_total" readonly="readonly" class="final_amt text_right" style="width:70px;" /></td>
-                        <tr>
-                            <td colspan="10">
-                                <label class="">Remarks</label>
-                                <input name="quotation[remarks]" tabindex="28" type="text" class="form-control" style="width:90%; display: inline" />
-                            </td>
-                        </tr>
+                    <td colspan="6" class="net_total_tag" style="text-align:right;font-weight:bold;">Net Total</td>
+                    <td><input type="text" tabindex="27" name="quotation[net_total]" id="net_total" readonly="readonly" class="final_amt text_right" style="width:70px;" /></td>
+                    <tr>
+                        <td colspan="10">
+                            <label class="">Remarks</label>
+                            <input name="quotation[remarks]" tabindex="28" type="text" class="form-control" style="width:90%; display: inline" />
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -772,7 +772,7 @@ if (!empty($customers)) {
 </div>
 <script>
     function calculatesubtotal() {
-        $('.subtotal').each(function() {
+        $('.subtotal').each(function () {
             var percost = $(this).closest('tr').find('.percost').val();
             var qty = $(this).closest('tr').find('.qty').val();
             if (percost == 1) {
@@ -789,7 +789,7 @@ if (!empty($customers)) {
 
     function profitcalculation() {
         var fin_total = 0;
-        $('.profit').each(function() {
+        $('.profit').each(function () {
             var profit = $(this);
             var percost = $(this).closest('tr').find('.percost').val();
             var qty = $(this).closest('tr').find('.qty').val();
@@ -802,7 +802,7 @@ if (!empty($customers)) {
 
     function profittotalcalculation() {
         var sin_total = 0;
-        $('.profit').each(function() {
+        $('.profit').each(function () {
             var profittotal = $(this);
             total + $(this).closest('tr').find('.profit').val();
             sin_total = sin_total + Number(profittotal.val());
@@ -813,7 +813,7 @@ if (!empty($customers)) {
 
     function finaltotal() {
         var finaltotal = 0;
-        $('.subtotal').each(function() {
+        $('.subtotal').each(function () {
             finaltotal = finaltotal + Number($(this).val());
         });
         $('.final_sub_total').val(finaltotal);
@@ -822,7 +822,7 @@ if (!empty($customers)) {
 
     function calculate() {
         var gg = $('.gst-invoice:checked').val();
-        $('.costing_price').each(function() {
+        $('.costing_price').each(function () {
             if (gg == 1) {
                 $(this).val($(this).parent().find('.gstcost').html());
             } else {
@@ -830,7 +830,7 @@ if (!empty($customers)) {
             }
         })
         var gg = $('.gst-invoice:checked').val();
-        $('.selling_price').each(function() {
+        $('.selling_price').each(function () {
             if (gg == 1) {
                 $(this).val($(this).parent().find('.gst').html());
             } else {
@@ -862,35 +862,35 @@ if (!empty($customers)) {
             $('#add_new_values').find('.add_sgst').show();
         }
     }
-    $('.gst-invoice').on('change', function() {
+    $('.gst-invoice').on('change', function () {
         calculate();
         calculatesubtotal();
         finaltotal();
         // profitcalculation();
     });
-    $('body').on('keyup', '.costing_price', function() {
+    $('body').on('keyup', '.costing_price', function () {
         profitcalculation();
     });
-    $('body').on('keyup', '.selling_price', function() {
-        profitcalculation();
-        calculatesubtotal();
-        finaltotal();
-    });
-    $('.qty').on('keyup', function() {
+    $('body').on('keyup', '.selling_price', function () {
         profitcalculation();
         calculatesubtotal();
         finaltotal();
     });
-    $('body').on('keyup', '.profit', function() {
+    $('.qty').on('keyup', function () {
+        profitcalculation();
+        calculatesubtotal();
+        finaltotal();
+    });
+    $('body').on('keyup', '.profit', function () {
         profittotalcalculation();
         // calculatesubtotal();
         // finaltotal();
     });
 </script>
-<link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/toastr.min.css" />
-<script type='text/javascript' src='<?= $theme_path; ?>/js/toastr.min.js'></script>
+<link rel="stylesheet" type="text/css" href="<?=$theme_path;?>/css/toastr.min.css" />
+<script type='text/javascript' src='<?=$theme_path;?>/js/toastr.min.js'></script>
 <script type="text/javascript">
-    $('#customer_gstin').on('blur', function() {
+    $('#customer_gstin').on('blur', function () {
         var gstinformat = new RegExp('^[0-9]{.}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');
         var gstin_val = $.trim($('#customer_gstin').val());
         if (gstinformat.test(gstin_val)) {
@@ -903,18 +903,18 @@ if (!empty($customers)) {
         }
     });
     $('.multi_select').fSelect();
-    $('#add_customer_manually').on('click', function(e) {
+    $('#add_customer_manually').on('click', function (e) {
         //$('#test1').show();
         clear_data();
         $('#test1').modal('toggle');
     });
-    $('#model_discard').on('click', function(e) {
+    $('#model_discard').on('click', function (e) {
         // $('#test1').hide();
         clear_data();
         $('#test1').modal('toggle');
     });
     // $('input[name=model_no[]]').focus();
-    $('document').ready(function() {
+    $('document').ready(function () {
         $('#firm').focus();
         var cus_name = $('#customer_name').val();
         if (cus_name == '') {
@@ -930,11 +930,11 @@ if (!empty($customers)) {
         $('#address').val('');
         $('#customer_gstin').val('');
     }
-    $('#update_customer').on('click', function(e) {
+    $('#update_customer').on('click', function (e) {
         var m = 0;
         var firm_id = $('#firm').val();
         if (firm_id) {
-            $('.mandatory').each(function(i) {
+            $('.mandatory').each(function (i) {
                 this_val = $.trim($(this).val());
                 this_id = $(this).attr('id');
                 num = $(this).attr('data-num');
@@ -947,7 +947,7 @@ if (!empty($customers)) {
                 }
                 if (num == 6 && $.trim(this_val).length > 1) {
                     var gstinformat = new RegExp(
-                        '^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');
+                            '^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');
                     if (gstinformat.test($.trim(this_val))) {
                         $('#gstinerr').text('').css('display', 'inline-block');
                         $('#gstinerr').text('');
@@ -959,7 +959,7 @@ if (!empty($customers)) {
                 if (num == 2 && this_val.length > 1) {
                     var mail = this_val;
                     var efilter =
-                        /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+                            /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
                     if (mail != "" && !efilter.test(mail)) {
                         $('.field2').text('Enter Valid Email').css('display', 'inline-block');
                         m++;
@@ -971,7 +971,7 @@ if (!empty($customers)) {
                                 email: mail,
                                 firm_id: firm_id
                             },
-                            success: function(result) {
+                            success: function (result) {
                                 //  alert(result);
                                 if (result != 0) {
                                     $('.field2').text(result).css('display', 'inline-block');
@@ -991,7 +991,7 @@ if (!empty($customers)) {
                             number: this_val,
                             firm_id: firm_id
                         },
-                        success: function(result) {
+                        success: function (result) {
                             //alert(result!=0);
                             if (result != 0) {
                                 $('.field4').text(result).css('display', 'inline-block');
@@ -1024,7 +1024,7 @@ if (!empty($customers)) {
                         cus_address: cus_address,
                         customer_gstin: customer_gstin
                     },
-                    success: function(result) {
+                    success: function (result) {
                         //alert(result!=0);
                         $.ajax({
                             type: 'POST',
@@ -1032,9 +1032,9 @@ if (!empty($customers)) {
                                 cust_id: result,
                                 firm_id: firm_id
                             },
-                            url: "<?php echo $this->config->item('base_url'); ?>" +
-                                "quotation/get_customer/",
-                            success: function(data) {
+                            url: "<?php echo $this->config->item('base_url');?>" +
+                                    "quotation/get_customer/",
+                            success: function (data) {
                                 var result = JSON.parse(data);
                                 if (result != null && result.length > 0) {
                                     $("#gst_type").val(result[0].state_id);
@@ -1052,16 +1052,16 @@ if (!empty($customers)) {
                                     $("#approved_by").val(result[0].approved_by);
                                     $("#advance").val(result[0].advance);
                                     $("#customer_details_label").html(
-                                        '<span class="label label-success" style="float:right">' +
-                                        result[0].balance + ' </span>' + result[0].store_name +
-                                        '<br>' + result[0].address1 + '<br> Email : ' + result[
+                                            '<span class="label label-success" style="float:right">' +
+                                            result[0].balance + ' </span>' + result[0].store_name +
+                                            '<br>' + result[0].address1 + '<br> Email : ' + result[
                                             0].email_id + '<br> Mobile : ' + result[0]
-                                        .mobil_number);
+                                            .mobil_number);
                                     if (result[0].customer_type == 1 || result[0].customer_type ==
-                                        3)
+                                            3)
                                         $("#bill1").attr('checked', false);
                                     else if (result[0].customer_type == 2 || result[0]
-                                        .customer_type == 4)
+                                            .customer_type == 4)
                                         $("#bill2").attr('checked', false);
                                     else
                                         $(".receiver").prop("checked", false);
@@ -1093,7 +1093,7 @@ if (!empty($customers)) {
 <script type="text/javascript">
     var formHasChanged = false;
     var submitted = false;
-    $('#tin').on('blur', function() {
+    $('#tin').on('blur', function () {
         var gstinformat = new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');
         var gstin_val = $.trim($('#tin').val());
         if (gstinformat.test(gstin_val)) {
@@ -1105,7 +1105,7 @@ if (!empty($customers)) {
             $('#gstin_err').text('Enter valid GSTIN').css('display', 'inline-block');
         }
     });
-    $('.save').on('click', function() {
+    $('.save').on('click', function () {
         submitted = true;
         var net_total = $('#net_total').val();
         var credit_limit = $('#credit_limit').val();
@@ -1124,63 +1124,63 @@ if (!empty($customers)) {
             m++;
         }
         /*$('.required').each(function () {
-                var tr = $('#app_table tr').length;
-                if (tr > 1)            {
-                    test = $(this).closest('tr td').find('input.model_no').val();
-                    if (test == '') {
-                        $(this).closest('tr').remove();
-                    }
-                }
-            });
-            $('.required').each(function () {
-                this_val = $.trim($(this).val());
-                this_id = $(this).attr("id");
-                this_class = $(this).attr("class");
-                cat_name = $(this).closest('tr').find('.catname').val();
-                // console.log(cat_name);
-                if (this_val == "") {
-                    if (this_id == "ime_code_vals") {
-                        this_class = $(this).closest('div').attr('class');
-                        if (cat_name == "Fresh Mobiles" || cat_name == "Used Mobiles" || cat_name ==
-                                "Smart Phone-Brand New" || cat_name == "Smart Phone-REFURBISHED" || cat_name == "FEAUTERE Phone" || cat_name == "Smart Phone") {
-                            $(this).closest('td.ime_code_error').find('.error_msg').text('Please add imei code')
-                                    .css('display', 'inline-block');
-                            m++;
-                        } else {
-                            $(this).closest('td.ime_code_error').find('.error_msg').text('');
-                        }
-                    } else {
-                        $(this).closest('tr td').find('.error_msg').text('This field is required').css(
-                                'display', 'inline-block');
-                        $(this).closest('div .form-group').find('.error_msg').text('This field is required')
-                                .css('display', 'inline-block');
-                        m++;
-                    }
-                } else {
-                    $(this).closest('tr td').find('.error_msg').text('');
-                    $(this).closest('div .form-group').find('.error_msg').text('');
-                }
-            }); */
+         var tr = $('#app_table tr').length;
+         if (tr > 1)            {
+         test = $(this).closest('tr td').find('input.model_no').val();
+         if (test == '') {
+         $(this).closest('tr').remove();
+         }
+         }
+         });
+         $('.required').each(function () {
+         this_val = $.trim($(this).val());
+         this_id = $(this).attr("id");
+         this_class = $(this).attr("class");
+         cat_name = $(this).closest('tr').find('.catname').val();
+         // console.log(cat_name);
+         if (this_val == "") {
+         if (this_id == "ime_code_vals") {
+         this_class = $(this).closest('div').attr('class');
+         if (cat_name == "Fresh Mobiles" || cat_name == "Used Mobiles" || cat_name ==
+         "Smart Phone-Brand New" || cat_name == "Smart Phone-REFURBISHED" || cat_name == "FEAUTERE Phone" || cat_name == "Smart Phone") {
+         $(this).closest('td.ime_code_error').find('.error_msg').text('Please add imei code')
+         .css('display', 'inline-block');
+         m++;
+         } else {
+         $(this).closest('td.ime_code_error').find('.error_msg').text('');
+         }
+         } else {
+         $(this).closest('tr td').find('.error_msg').text('This field is required').css(
+         'display', 'inline-block');
+         $(this).closest('div .form-group').find('.error_msg').text('This field is required')
+         .css('display', 'inline-block');
+         m++;
+         }
+         } else {
+         $(this).closest('tr td').find('.error_msg').text('');
+         $(this).closest('div .form-group').find('.error_msg').text('');
+         }
+         }); */
         /*if ($('.receiver:checked').length <= 0)
-        {
-            $("#type1").html("This field is required");
-            m = 1;
-        } else
-        {
-            $("#type1").html("");
-        } */
+         {
+         $("#type1").html("This field is required");
+         m = 1;
+         } else
+         {
+         $("#type1").html("");
+         } */
         /*  $('.quantity').each(function() {
-            var qty = $(this).closest('tr').find('.stock_qty').text();
-            this_val = $.trim($(this).val());
-            if (Number(this_val) > Number(qty))
-            {
-                $(this).closest('td').find('.error_msg').text('Invalid quantity').css('display',
-                    'inline-block');
-                m++;
-            } else {
-                $(this).closest('td').find('.error_msg').text("");
-            }
-        }); */
+         var qty = $(this).closest('tr').find('.stock_qty').text();
+         this_val = $.trim($(this).val());
+         if (Number(this_val) > Number(qty))
+         {
+         $(this).closest('td').find('.error_msg').text('Invalid quantity').css('display',
+         'inline-block');
+         m++;
+         } else {
+         $(this).closest('td').find('.error_msg').text("");
+         }
+         }); */
         if (m > 0) {
             $('html, body').animate({
                 scrollTop: ($('.error_msg:visible').offset().top - 60)
@@ -1198,8 +1198,8 @@ if (!empty($customers)) {
             }
         }
     });
-    $(document).ready(function() {
-        setTimeout(function() {
+    $(document).ready(function () {
+        setTimeout(function () {
             $('.model_no:first').focus();
             $('.model_no:last').focus();
         }, 500);
@@ -1208,18 +1208,18 @@ if (!empty($customers)) {
             $('#add_new_values').find('tr td.igst_td').hide();
         }
         $('#firm').trigger('change');
-        $('body').on('keydown', 'input#customer_name', function(e) {
+        $('body').on('keydown', 'input#customer_name', function (e) {
             var firm_id = $('#firm').val();
-            var c_data = [<?php echo implode(',', $customers_json); ?>];
+            var c_data = [<?php echo implode(',', $customers_json);?>];
             // console.log(c_data);
-            $("#customer_name").blur(function() {
+            $("#customer_name").blur(function () {
                 var keyEvent = $.Event("keydown");
                 keyEvent.keyCode = $.ui.keyCode.ENTER;
                 $(this).trigger(keyEvent);
                 // Stop event propagation if needed
                 return false;
             }).autocomplete({
-                source: function(request, response) {
+                source: function (request, response) {
                     // filter array to only entries you want to display limited to 10
                     /* var outputArray = new Array();
                      // var nodata = new Array({"id":"0","value":"No Data"});
@@ -1239,9 +1239,9 @@ if (!empty($customers)) {
                         data: {
                             firm_id: $('#firm').val()
                         },
-                        url: "<?php echo $this->config->item('base_url'); ?>" +
-                            "sales/get_customer_by_firm/",
-                        success: function(data) {
+                        url: "<?php echo $this->config->item('base_url');?>" +
+                                "sales/get_customer_by_firm/",
+                        success: function (data) {
                             data = JSON.parse(data);
                             var c_data = data;
                             var outputArray = new Array();
@@ -1261,7 +1261,7 @@ if (!empty($customers)) {
                 },
                 minLength: 0,
                 autoFocus: true,
-                select: function(event, ui) {
+                select: function (event, ui) {
                     if (ui.item.value == "Add new Customer") {
                         clear_data();
                         $('#test1').modal('toggle');
@@ -1275,9 +1275,9 @@ if (!empty($customers)) {
                                 cust_id: cust_id,
                                 firm_id: firm_id
                             },
-                            url: "<?php echo $this->config->item('base_url'); ?>" +
-                                "quotation/get_customer/",
-                            success: function(data) {
+                            url: "<?php echo $this->config->item('base_url');?>" +
+                                    "quotation/get_customer/",
+                            success: function (data) {
                                 var result = JSON.parse(data);
                                 if (result != null && result.length > 0) {
                                     $("#gst_type").val(result[0].state_id);
@@ -1292,16 +1292,16 @@ if (!empty($customers)) {
                                     $("#credit_limit").val(result[0].credit_limit);
                                     $("#credit_days").val(result[0].credit_days);
                                     $("#temp_credit_limit").val(result[0]
-                                        .temp_credit_limit);
+                                            .temp_credit_limit);
                                     $("#approved_by").val(result[0].approved_by);
                                     $("#advance").val(result[0].advance);
                                     $("#customer_details_label").html(
-                                        '<span class="label label-success" style="float:right">' +
-                                        result[0].balance + ' </span>' + result[
+                                            '<span class="label label-success" style="float:right">' +
+                                            result[0].balance + ' </span>' + result[
                                             0].store_name + '<br>' + result[0]
-                                        .address1 + '<br> Email : ' + result[0]
-                                        .email_id + '<br> Mobile : ' + result[0]
-                                        .mobil_number);
+                                            .address1 + '<br> Email : ' + result[0]
+                                            .email_id + '<br> Mobile : ' + result[0]
+                                            .mobil_number);
                                     //                                if (result[0].customer_type == 1 || result[0].customer_type == 3)
                                     //                                    $("#bill1").attr('checked', 'checked');
                                     //                                else if (result[0].customer_type == 2 || result[0].customer_type == 4)
@@ -1309,7 +1309,7 @@ if (!empty($customers)) {
                                     //                                else
                                     //                                    $(".receiver").prop("checked", false);
                                     if (result[0].customer_type == 1 || result[0]
-                                        .customer_type == 3)
+                                            .customer_type == 3)
                                         $("#bill1").attr('checked', false);
                                     else if (result[0].customer_type == 2 || result[
                                             0].customer_type == 4)
@@ -1320,18 +1320,18 @@ if (!empty($customers)) {
                                     if ($('#gst_type').val() != '') {
                                         if ($('#gst_type').val() == 31) {
                                             $('#add_quotation').find(
-                                                'tr td.sgst_td').show();
+                                                    'tr td.sgst_td').show();
                                             $('#add_quotation').find(
-                                                'tr td.igst_td').hide();
+                                                    'tr td.igst_td').hide();
                                         } else {
                                             $('#add_quotation').find(
-                                                'tr td.igst_td').show();
+                                                    'tr td.igst_td').show();
                                             $('#add_quotation').find(
-                                                'tr td.sgst_td').hide();
+                                                    'tr td.sgst_td').hide();
                                         }
                                     } else {
                                         $('#add_quotation').find('tr td.igst_td')
-                                            .hide();
+                                                .hide();
                                     }
                                 } else {
                                     alert("111");
@@ -1340,7 +1340,7 @@ if (!empty($customers)) {
                         });
                     }
                     var prod_array = new Array();
-                    $(".product_id").each(function() {
+                    $(".product_id").each(function () {
                         prod_array.push($(this).val());
                     });
                     //if (!empty(prod_array)) {
@@ -1350,36 +1350,36 @@ if (!empty($customers)) {
                             cust_id: cust_id,
                             prod_array: prod_array
                         },
-                        url: "<?php echo $this->config->item('base_url'); ?>" +
-                            "sales/get_product_cost/",
-                        success: function(data) {
+                        url: "<?php echo $this->config->item('base_url');?>" +
+                                "sales/get_product_cost/",
+                        success: function (data) {
                             var result = JSON.parse(data);
                             if (data != null && result.length > 0) {
-                                $('input#product_cost').each(function(i) {
+                                $('input#product_cost').each(function (i) {
                                     if (i != 0) {
                                         var product_id = '';
                                         product_id = $(this).closest('tr')
-                                            .find('input#product_id').val();
+                                                .find('input#product_id').val();
                                         var qty = '';
                                         qty = $(this).closest('tr').find(
-                                            'input.qty').val();
+                                                'input.qty').val();
                                         if (qty == '') {
                                             $(this).closest('tr').find(
                                                     'input.selling_price')
-                                                .val(result[product_id]
-                                                    .selling_price);
+                                                    .val(result[product_id]
+                                                            .selling_price);
                                             $(this).closest('tr').find(
-                                                'input.subtotal').val(
-                                                '');
+                                                    'input.subtotal').val(
+                                                    '');
                                             $(this).closest('tr').find(
-                                                'input.gross').val('');
+                                                    'input.gross').val('');
                                         } else {
                                             $(this).closest('tr').find(
                                                     'input.selling_price')
-                                                .val(result[product_id]
-                                                    .selling_price);
+                                                    .val(result[product_id]
+                                                            .selling_price);
                                             $(this).closest('tr').find(
-                                                '.qty').trigger('keyup');
+                                                    '.qty').trigger('keyup');
                                             //                                            var price = result[product_id].selling_price * qty;
                                             //                                            $(this).closest('tr').find('input.selling_price').val(price);
                                         }
@@ -1393,7 +1393,7 @@ if (!empty($customers)) {
             });
         });
     });
-    $('#add_group').click(function() {
+    $('#add_group').click(function () {
         var tableBody = $(".static").find('tr').clone();
         $(tableBody).closest('tr').find('.model_no,.percost,.qty').addClass('required');
         var cus_name = $('#customer_name').val();
@@ -1421,7 +1421,7 @@ if (!empty($customers)) {
             $('#add_quotation').find('tr td.igst_td').hide();
         }
         var i = 1;
-        $('#app_table tr').each(function() {
+        $('#app_table tr').each(function () {
             $(this).closest("tr").find('.s_no').html(i);
             $("#app_table").find('tr:last td input.model_no').focus();
             $(this).closest("tr").find('.s_no').html(i);
@@ -1429,40 +1429,40 @@ if (!empty($customers)) {
         });
         $('table#add_quotation').find("tbody#app_table").find('tr:last td:nth-child(2) input').focus();
     });
-    $('#add_group_service').click(function() {
+    $('#add_group_service').click(function () {
         var tableBody = $(".static_ser").find('tr').clone();
         $(tableBody).closest('tr').find('.model_no,.percost,.qty').addClass('required');
         $('#app_table').append(tableBody);
         $('#add_quotation tbody tr td:nth-child(2)').addClass('relative');
     });
-    $(document).on('click', '.delete_group', function() {
+    $(document).on('click', '.delete_group', function () {
         $(this).closest("tr").remove();
         calculate_function();
         var i = 1;
-        $('#app_table tr').each(function() {
+        $('#app_table tr').each(function () {
             $(this).closest("tr").find('.s_no').html(i);
             i++;
         });
     });
-    $(".remove_comments").on('click', function() {
+    $(".remove_comments").on('click', function () {
         $(this).closest("tr").remove();
         var full_total = 0;
-        $('.total_qty').each(function() {
+        $('.total_qty').each(function () {
             full_total = full_total + Number($(this).val());
         });
         $('.full_total').val(full_total);
     });
     $(document).on('keyup', '.qty,.percost,.pertax,.totaltax,.gst,.igst,.discount,.transport,.labour',
-        function() {
-            calculate_function();
-        });
-    $(".r-plus").on('click', function() {
+            function () {
+                calculate_function();
+            });
+    $(".r-plus").on('click', function () {
         var round_off = $('.round_off').val();
         $('.temp_round_off_plus').val(round_off);
         $('.temp_round_off_minus').val(0);
         calculate_function();
     });
-    $(".r-minus").on('click', function() {
+    $(".r-minus").on('click', function () {
         var round_off = $('.round_off').val();
         $('.temp_round_off_minus').val(round_off);
         $('.temp_round_off_plus').val(0);
@@ -1480,7 +1480,7 @@ if (!empty($customers)) {
         var advance = Number($('.advance').val());
         var cgst = 0;
         var sgst = 0;
-        $('.qty').each(function() {
+        $('.qty').each(function () {
             var qty = $(this);
             var percost = $(this).closest('tr').find('.percost');
             var perwhole = $(this).closest('tr').find('.perwhole');
@@ -1536,12 +1536,12 @@ if (!empty($customers)) {
     }
     $(".datepicker").datepicker({
         setDate: new Date(),
-        onClose: function() {
+        onClose: function () {
             $("#app_table").find('tr:first td  input.model_no').focus();
         }
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#po_no").autocomplete(BASE_URL + "gen/get_po_list", {
             width: 260,
             autoFocus: true,
@@ -1549,7 +1549,7 @@ if (!empty($customers)) {
             selectFirst: false
         });
     });
-    $('#search').on('click', function() {
+    $('#search').on('click', function () {
         for_loading();
         $.ajax({
             url: BASE_URL + "po/search_result",
@@ -1562,7 +1562,7 @@ if (!empty($customers)) {
                 from_date: $('#from_date').val(),
                 to_date: $('#to_date').val()
             },
-            success: function(result) {
+            success: function (result) {
                 for_response();
                 $('#result_div').html(result);
             }
@@ -1571,10 +1571,10 @@ if (!empty($customers)) {
 </script>
 <script>
     function checkAvailable(term) {
-        var product_data = [<?php echo implode(',', $model_numbers_json); ?>];
+        var product_data = [<?php echo implode(',', $model_numbers_json);?>];
         var length = term.length,
-            chck = false,
-            term = term.toLowerCase();
+                chck = false,
+                term = term.toLowerCase();
         for (var i = 0, z = product_data.length; i < z; i++)
             if (product_data[i].substring(0, length).toLowerCase() === term)
                 return true;
@@ -1583,11 +1583,11 @@ if (!empty($customers)) {
 </script>
 <script>
     // $(document).ready(function () {
-    $('body').on('keydown', '#add_quotation input.model_no', function(e) {
+    $('body').on('keydown', '#add_quotation input.model_no', function (e) {
         var _this = $(this);
-        // var product_data = [<?php echo implode(',', $model_numbers_json); ?>];
+        // var product_data = [<?php echo implode(',', $model_numbers_json);?>];
         $('#add_quotation tbody tr input.model_no').autocomplete({
-            source: function(request, response) {
+            source: function (request, response) {
                 var val = _this.closest('tr input.model_no').val();
                 cat_id = $('#firm').val();
                 cust_id = $('#customer_id').val();
@@ -1600,8 +1600,8 @@ if (!empty($customers)) {
                             pro: val
                         },
                         async: false,
-                        url: '<?php echo base_url(); ?>quotation/get_product_by_frim_id',
-                        success: function(data) {
+                        url: '<?php echo base_url();?>quotation/get_product_by_frim_id',
+                        success: function (data) {
                             product_data = JSON.parse(data);
                         }
                     });
@@ -1623,39 +1623,39 @@ if (!empty($customers)) {
             //  position: {collision: "flip"},
             minLength: 0,
             autoFocus: true,
-            select: function(event, ui) {
+            select: function (event, ui) {
                 this_val = $(this);
                 product = ui.item.value;
                 $(this).val(product);
-                model_number_id = ui.item.id;
+                product_id = ui.item.id;
                 cat_it = ui.item.category_id;
                 $.ajax({
                     type: 'POST',
                     data: {
-                        model_number_id: model_number_id,
+                        product_id: product_id,
                         c_id: cust_id,
                         firm_id: $('#firm').val(),
                         cat_it: cat_it
                     },
-                    url: "<?php echo $this->config->item('base_url'); ?>" +
-                        "quotation/get_product/",
-                    success: function(data) {
+                    url: "<?php echo $this->config->item('base_url');?>" +
+                            "quotation/get_product/",
+                    success: function (data) {
                         var result = JSON.parse(data);
                         if (result != null && result.length > 0) {
                             var ime_result = result[0].ime_details;
                             var option_text = '';
                             if (ime_result != null && ime_result.length > 0) {
                                 option_text +=
-                                    '<div  tabindex="0"><select id="ime_code_id" class="form-control multi_select ime_code_id" multiple="multiple" autocomplete="off" name="ime_code_id[]">';
+                                        '<div  tabindex="0"><select id="ime_code_id" class="form-control multi_select ime_code_id" multiple="multiple" autocomplete="off" name="ime_code_id[]">';
                                 option_text += '<option value="">Select</option>';
-                                $.each(ime_result, function(key, value) {
+                                $.each(ime_result, function (key, value) {
                                     if (value.ime_code != '') {
                                         selected = '';
                                         if (key == 0)
                                             selected = 'selected';
                                         option_text += '<option  value="' + value
-                                            .ime_code + '"  ' + selected + '>' + value
-                                            .ime_code + '</option>';
+                                                .ime_code + '"  ' + selected + '>' + value
+                                                .ime_code + '</option>';
                                     }
                                 });
                                 option_text += '</select></div>';
@@ -1663,19 +1663,19 @@ if (!empty($customers)) {
                                 // this_val.closest('tr').find('td .ime_code_select').append(option_text);
                                 // this_val.closest('tr').find('td .multi_select').fSelect();
                                 var datas = this_val.closest('tr').find('td .ime_code_id')
-                                    .val();
+                                        .val();
                                 this_val.closest('tr').find('td .ime_code_val').val(datas);
                             } else {
                                 // $('#sales_man').html('');
                                 this_val.closest('tr').find('.ime_code_id').html(
-                                    option_text);
+                                        option_text);
                                 this_val.closest('tr').find('.ime_code_val').removeClass('required');
                             }
                             if (result[0].quantity != null) {
                                 this_val.closest('tr').find('.stock_qty').html(result[0]
-                                    .quantity);
+                                        .quantity);
                                 this_val.closest('tr').find('.qty').attr('data-stock',
-                                    result[0].quantity);
+                                        result[0].quantity);
                             } else {
                                 this_val.closest('tr').find('.stock_qty').html('0');
                                 this_val.closest('tr').find('.qty').attr('data-stock', 0);
@@ -1684,11 +1684,11 @@ if (!empty($customers)) {
                             this_val.closest('tr').find('.hsn_code').val(result[0].hsn_sac);
                             this_val.closest('tr').find('.unit').val(result[0].unit);
                             this_val.closest('tr').find('.brand_id').val(result[0]
-                                .brand_id);
+                                    .brand_id);
                             this_val.closest('tr').find('.cat_id').val(result[0]
-                                .category_id);
+                                    .category_id);
                             var categoryname = this_val.closest('tr').find('.cat_id').find(
-                                'option:selected').text();
+                                    'option:selected').text();
                             this_val.closest('tr').find('.catname').val(categoryname);
                             // console.log(categoryname);  console.log(option_text);
                             if (categoryname == '') {
@@ -1775,7 +1775,7 @@ if (!empty($customers)) {
                             //                  });
                             // $('.profit_total').val(fin_total);
                             var fin_total = 0;
-                            $('.profit').each(function() {
+                            $('.profit').each(function () {
 
                                 var percost = $(this).closest('tr').find('.percost').val();
                                 var qty = $(this).closest('tr').find('.qty').val();
@@ -1795,21 +1795,21 @@ if (!empty($customers)) {
                             this_val.closest('tr').find('.type').val(result[0].type);
                             this_val.closest('tr').find('.product_id').val(result[0].id);
                             this_val.closest('tr').find('.model_no').val(result[0]
-                                .product_name);
+                                    .product_name);
                             this_val.closest('tr').find('.model_no_extra').val(result[0]
-                                .model_no);
+                                    .model_no);
                             this_val.closest('tr').find('.product_description').val(result[
-                                0].product_description);
+                                    0].product_description);
                             if ($('#gst_type').val() != '') {
                                 if ($('#gst_type').val() == 31) {
                                     this_val.closest('tr').find('.pertax').val(result[0]
-                                        .cgst);
+                                            .cgst);
                                     this_val.closest('tr').find('.gst').val(result[0].sgst);
                                 } else {
                                     this_val.closest('tr').find('.pertax').val(result[0]
-                                        .cgst);
+                                            .cgst);
                                     this_val.closest('tr').find('.igst').val(result[0]
-                                        .igst);
+                                            .igst);
                                 }
                             }
                             calculate_function();
@@ -1836,9 +1836,9 @@ if (!empty($customers)) {
         });
     });
     // });
-    $(document).ready(function() {
-        $('body').on('keydown', 'input.model_no_extra', function(e) {
-            //  var product_data = [<?php echo implode(',', $model_numbers_extra); ?>];
+    $(document).ready(function () {
+        $('body').on('keydown', 'input.model_no_extra', function (e) {
+            //  var product_data = [<?php echo implode(',', $model_numbers_extra);?>];
             var product_data = [];
             cat_id = $('#firm').val();
             cust_id = $('#customer_id').val();
@@ -1847,14 +1847,14 @@ if (!empty($customers)) {
                 data: {
                     firm_id: cat_id
                 },
-                url: '<?php echo base_url(); ?>quotation/get_model_no_by_frim_id',
+                url: '<?php echo base_url();?>quotation/get_model_no_by_frim_id',
                 async: false,
-                success: function(data) {
+                success: function (data) {
                     product_data = JSON.parse(data);
                 }
             });
             $(".model_no_extra").autocomplete({
-                source: function(request, response) {
+                source: function (request, response) {
                     // filter array to only entries you want to display limited to 10
                     var outputArray = new Array();
                     for (var i = 0; i < product_data.length; i++) {
@@ -1871,7 +1871,7 @@ if (!empty($customers)) {
                 },
                 minLength: 0,
                 autoFill: false,
-                select: function(event, ui) {
+                select: function (event, ui) {
                     this_val = $(this);
                     product = ui.item.value;
                     $(this).val(product);
@@ -1882,69 +1882,69 @@ if (!empty($customers)) {
                             model_number_id: model_number_id,
                             c_id: cust_id
                         },
-                        url: "<?php echo $this->config->item('base_url'); ?>" +
-                            "quotation/get_product/" + cat_id,
-                        success: function(data) {
+                        url: "<?php echo $this->config->item('base_url');?>" +
+                                "quotation/get_product/" + cat_id,
+                        success: function (data) {
                             var result = JSON.parse(data);
                             if (result != null && result.length > 0) {
                                 if (result[0].quantity != null) {
                                     this_val.closest('tr').find('.stock_qty').html(
-                                        result[0].quantity);
+                                            result[0].quantity);
                                     this_val.closest('tr').find('.qty').attr(
-                                        'data-stock', result[0].quantity);
+                                            'data-stock', result[0].quantity);
                                 } else {
                                     this_val.closest('tr').find('.stock_qty').html(
-                                        '0');
+                                            '0');
                                     this_val.closest('tr').find('.qty').attr(
-                                        'data-stock', 0);
+                                            'data-stock', 0);
                                 }
                                 this_val.closest('tr').find('.unit').val(result[0]
-                                    .unit);
+                                        .unit);
                                 this_val.closest('tr').find('.brand_id').val(result[
-                                    0].brand_id);
+                                        0].brand_id);
                                 this_val.closest('tr').find('.cat_id').val(result[0]
-                                    .category_id);
+                                        .category_id);
                                 //this_val.closest('tr').find('.discount').val(result[0].discount);
                                 this_val.closest('tr').addClass('tr_' + result[0][
-                                    'id'
+                                        'id'
                                 ]);
                                 if (result[0].selling_price != '') {
                                     this_val.closest('tr').find('.selling_price')
-                                        .val(result[0].sales_price);
+                                            .val(result[0].sales_price);
                                     this_val.closest('tr').find('.sp_with_gst').val(
-                                        result[0].sales_price);
+                                            result[0].sales_price);
                                     this_val.closest('tr').find('.sp_without_gst')
-                                        .val(result[0].sales_price_without_gst);
+                                            .val(result[0].sales_price_without_gst);
                                 } else {
                                     this_val.closest('tr').find('.selling_price')
-                                        .val('0');
+                                            .val('0');
                                 }
                                 this_val.closest('tr').find('.type').val(result[0]
-                                    .type);
+                                        .type);
                                 this_val.closest('tr').find('.product_id').val(
-                                    result[0].id);
+                                        result[0].id);
                                 this_val.closest('tr').find('.model_no').val(result[
-                                    0].product_name);
+                                        0].product_name);
                                 this_val.closest('tr').find('.model_no_extra').val(
-                                    result[0].model_no);
+                                        result[0].model_no);
                                 this_val.closest('tr').find('.product_description')
-                                    .val(result[0].product_description);
+                                        .val(result[0].product_description);
                                 if ($('#gst_type').val() != '') {
                                     if ($('#gst_type').val() == 31) {
                                         this_val.closest('tr').find('.pertax').val(
-                                            result[0].cgst);
+                                                result[0].cgst);
                                         this_val.closest('tr').find('.gst').val(
-                                            result[0].sgst);
+                                                result[0].sgst);
                                     } else {
                                         this_val.closest('tr').find('.pertax').val(
-                                            result[0].cgst);
+                                                result[0].cgst);
                                         this_val.closest('tr').find('.igst').val(
-                                            result[0].igst);
+                                                result[0].igst);
                                     }
                                 }
                                 calculate_function();
                                 var name = $('#app_table tr:last').find('.model_no')
-                                    .val();
+                                        .val();
                                 if (name != '')
                                     $('#add_group').trigger('click');
                             }
@@ -1954,15 +1954,15 @@ if (!empty($customers)) {
             });
         });
     });
-    $("#model_no_ser").on('keyup', function() {
+    $("#model_no_ser").on('keyup', function () {
         var this_ = $(this);
         // cat_id = this_.closest('tr').find('.cat_id').val();
         cat_id = $('#firm').val();
         $.ajax({
             type: "GET",
-            url: "<?php echo $this->config->item('base_url'); ?>" + "quotation/get_service/" + cat_id,
+            url: "<?php echo $this->config->item('base_url');?>" + "quotation/get_service/" + cat_id,
             data: 's=' + $(this).val(),
-            success: function(datas) {
+            success: function (datas) {
                 if (datas) {
                     this_.closest('tr').find(".suggesstion-box1").show();
                     this_.closest('tr').find(".suggesstion-box1").html(datas);
@@ -1973,12 +1973,12 @@ if (!empty($customers)) {
             }
         });
     });
-    $(document).ready(function() {
-        $('body').click(function() {
+    $(document).ready(function () {
+        $('body').click(function () {
             $(this).closest('tr').find(".suggesstion-box1").hide();
         });
     });
-    $('.pro_class').on('click', function() {
+    $('.pro_class').on('click', function () {
         $(this).closest('tr').find('.cat_id').val($(this).attr('pro_cat'));
         $(this).closest('tr').find('.pertax').val($(this).attr('pro_cgst'));
         $(this).closest('tr').find('.gst').val($(this).attr('pro_sgst'));
@@ -1988,14 +1988,14 @@ if (!empty($customers)) {
         $(this).closest('tr').find('.product_id').val($(this).attr('pro_id'));
         $(this).closest('tr').find('.model_no').val($(this).attr('pro_name'));
         $(this).closest('tr').find('.product_description').val($(this).attr('pro_name') + "  " + $(this).attr(
-            'pro_description'));
+                'pro_description'));
         $(this).closest('tr').find('.product_image').attr('src',
-            "<?php echo $this->config->item("base_url") . 'attachement/product/' ?>" + $(this).attr('pro_image')
-        );
+                "<?php echo $this->config->item("base_url").'attachement/product/'?>" + $(this).attr('pro_image')
+                );
         $(this).closest('tr').find(".suggesstion-box1").hide();
         calculate_function();
     });
-    $('.ser_class').on('click', function() {
+    $('.ser_class').on('click', function () {
         $(this).closest('tr').find('.cat_id').val($(this).attr('ser_cat'));
         $(this).closest('tr').find('.pertax').val($(this).attr('ser_cgst'));
         $(this).closest('tr').find('.gst').val($(this).attr('ser_sgst'));
@@ -2005,10 +2005,10 @@ if (!empty($customers)) {
         $(this).closest('tr').find('.product_id').val($(this).attr('ser_id'));
         $(this).closest('tr').find('.model_no_ser').val($(this).attr('ser_name'));
         $(this).closest('tr').find('.product_description').val($(this).attr('ser_name') + "  " + $(this).attr(
-            'ser_description'));
+                'ser_description'));
         $(this).closest('tr').find('.product_image').attr('src',
-            "<?php echo $this->config->item("base_url") . 'attachement/product/' ?>" + $(this).attr('ser_image')
-        );
+                "<?php echo $this->config->item("base_url").'attachement/product/'?>" + $(this).attr('ser_image')
+                );
         $(this).closest('tr').find(".suggesstion-box1").hide();
         calculate_function();
     });
@@ -2023,14 +2023,14 @@ if (!empty($customers)) {
                 data: {
                     firm_id: val
                 },
-                url: '<?php echo base_url(); ?>masters/products/get_category_by_frim_id',
-                success: function(data) {
+                url: '<?php echo base_url();?>masters/products/get_category_by_frim_id',
+                success: function (data) {
                     var result = JSON.parse(data);
                     if (result != null && result.length > 0) {
                         option_text = '<option value="">Select Category</option>';
-                        $.each(result, function(key, value) {
+                        $.each(result, function (key, value) {
                             option_text += '<option value="' + value.cat_id + '">' + value
-                                .categoryName + '</option>';
+                                    .categoryName + '</option>';
                         });
                         $('.cat_id').html(option_text);
                         $('.cat_id,.model_no,.model_no_extra').val('');
@@ -2050,8 +2050,8 @@ if (!empty($customers)) {
                 data: {
                     firm_id: val
                 },
-                url: '<?php echo base_url(); ?>quotation/get_prefix_by_frim_id/',
-                success: function(data1) {
+                url: '<?php echo base_url();?>quotation/get_prefix_by_frim_id/',
+                success: function (data1) {
                     $('#grn_no').val(data1[0]['prefix']);
                     $('#sales_id').val(data1[0]['prefix']);
                     $('#invoice_id').val(data1[0]['prefix']);
@@ -2062,8 +2062,8 @@ if (!empty($customers)) {
                             type: data1[0]['prefix'],
                             code: 'TT'
                         },
-                        url: '<?php echo base_url(); ?>quotation/get_increment_id/',
-                        success: function(data2) {
+                        url: '<?php echo base_url();?>quotation/get_increment_id/',
+                        success: function (data2) {
                             $('#grn_no').val(data2);
                             $('#sales_id').val(data2);
                             $('#invoice_id').val(data2);
@@ -2073,11 +2073,11 @@ if (!empty($customers)) {
                             var increment_id1 = $('#sales_id').val().split("/");
                             var increment_id2 = $('#invoice_id').val().split("/");
                             final_id = data1[0]['prefix'] + '-' + increment_id[1] + '' +
-                                increment_id[2];
+                                    increment_id[2];
                             sales_id = 'SL-' + data1[0]['prefix'] + '-' + increment_id1[1] + '-' +
-                                increment_id1[2];
+                                    increment_id1[2];
                             inv_id = 'INV-' + data1[0]['prefix'] + '-' + increment_id2[1] + '-' +
-                                increment_id2[2];
+                                    increment_id2[2];
                             $('#sales_id').val(sales_id);
                             $('#grn_no').val(final_id);
                             $('#grn_no_2').text(final_id);
@@ -2093,15 +2093,15 @@ if (!empty($customers)) {
                 data: {
                     firm_id: val
                 },
-                url: '<?php echo base_url(); ?>quotation/get_reference_group_by_frim_id/',
-                success: function(data1) {
+                url: '<?php echo base_url();?>quotation/get_reference_group_by_frim_id/',
+                success: function (data1) {
                     // $('#ref_class').html('');
                     var result = JSON.parse(data1);
                     if (result != null && result.length > 0) {
                         option_text = '<option value="">Select</option>';
-                        $.each(result, function(key, value) {
+                        $.each(result, function (key, value) {
                             option_text += '<option value="' + value.user_id + '">' + value.user_name +
-                                '</option>';
+                                    '</option>';
                         });
                         $('#ref_class').html(option_text);
                     } else {
@@ -2116,15 +2116,15 @@ if (!empty($customers)) {
                 data: {
                     firm_id: val
                 },
-                url: '<?php echo base_url(); ?>quotation/get_sales_man_by_frim_id/',
-                success: function(data1) {
+                url: '<?php echo base_url();?>quotation/get_sales_man_by_frim_id/',
+                success: function (data1) {
                     // $('#sales_man').html('');
                     var result = JSON.parse(data1);
                     if (result != null && result.length > 0) {
                         option_text = '<option value="">Select</option>';
-                        $.each(result, function(key, value) {
+                        $.each(result, function (key, value) {
                             option_text += '<option selected="true" value="' + value.id + '">' + value
-                                .sales_man_name + '</option>';
+                                    .sales_man_name + '</option>';
                         });
                         $('#sales_man').html(option_text);
                     } else {
@@ -2137,7 +2137,7 @@ if (!empty($customers)) {
             $('.model_no').attr('readonly', 'readonly');
         }
     }
-    $(document).on('change', '.ime_code_id', function() {
+    $(document).on('change', '.ime_code_id', function () {
         var ime_id_val = $(this).val();
         if (!ime_id_val)
             var ime_id_val_length = 0;
@@ -2147,7 +2147,7 @@ if (!empty($customers)) {
         $(this).closest('tr').find('td .qty').val(ime_id_val_length);
         calculate_function();
     });
-    $('.qty').on('keyup', function() {
+    $('.qty').on('keyup', function () {
         class_name = $(this).closest('tr').attr('class');
         var pro_qty = $(this).val();
         var stock_qty = $(this).attr('data-stock');
@@ -2175,7 +2175,7 @@ if (!empty($customers)) {
                 hidden_ime = ime_val.split(",");
                 var hidden_qty = hidden_ime.length;
                 var check_qty = hidden_qty - 1;
-                $.each(hidden_ime, function(key, value) {
+                $.each(hidden_ime, function (key, value) {
                     if (key < check_qty)
                         ime_code.push(value);
                 });
@@ -2194,8 +2194,8 @@ if (!empty($customers)) {
                     ime_code: ime_val
                 },
                 async: false,
-                url: '<?php echo base_url(); ?>sales/get_ime_code_from_productqty',
-                success: function(data) {
+                url: '<?php echo base_url();?>sales/get_ime_code_from_productqty',
+                success: function (data) {
                     // print_r(data);
                     // exit;
                     var data = JSON.parse(data);
@@ -2205,17 +2205,17 @@ if (!empty($customers)) {
                         var ime_code = [];
                         var ime_val = $('.' + class_name + '').find('td .ime_code_val').val();
                         if (ime_val == '') {
-                            $.each(data, function(key, value) {
+                            $.each(data, function (key, value) {
                                 ime_code.push(value.ime_code);
                             });
                             $('.' + class_name + '').find('td .ime_code_val').val(ime_code);
                         } else {
                             var ime_code = [];
                             hidden_ime = ime_val.split(",");
-                            $.each(hidden_ime, function(key, value) {
+                            $.each(hidden_ime, function (key, value) {
                                 ime_code.push(value);
                             });
-                            $.each(data, function(key, value) {
+                            $.each(data, function (key, value) {
                                 ime_code.push(value.ime_code);
                             });
                             $('.' + class_name + '').find('td .ime_code_val').val(ime_code);
@@ -2247,7 +2247,7 @@ if (!empty($customers)) {
             return false;
         } else if (barcode != '' && cust_id != '') {
             var ime = 0;
-            $('#app_table .ime_code_id').each(function() {
+            $('#app_table .ime_code_id').each(function () {
                 hidden_ime = $(this).val();
                 if (hidden_ime != "null") {
                     if (jQuery.inArray(barcode, hidden_ime) != '-1') {
@@ -2270,17 +2270,17 @@ if (!empty($customers)) {
                         barcode: barcode,
                         cust_id: cust_id
                     },
-                    url: '<?php echo base_url(); ?>sales/get_all_products/',
-                    success: function(data) {
+                    url: '<?php echo base_url();?>sales/get_all_products/',
+                    success: function (data) {
                         result = JSON.parse(data);
                         if (result != null && result.length > 0) {
-                            $.each(result, function(key, value) {
+                            $.each(result, function (key, value) {
                                 var prod_array = new Array();
-                                $(".product_id").each(function() {
+                                $(".product_id").each(function () {
                                     prod_array.push($(this).val());
                                 });
                                 //var disabled = ''
-                                $('#app_table tr').each(function() {
+                                $('#app_table tr').each(function () {
                                     val = $(this).closest("tr").find('.product_id').val();
                                     if (val == '')
                                         $(this).closest("tr").remove();
@@ -2290,70 +2290,70 @@ if (!empty($customers)) {
                                     var add = Number(qty_val) + Number(1);
                                     var select2 = 0;
                                     $('#app_table .tr_' + value.id).find(".fs-dropdown .fs-option")
-                                        .each(function() {
-                                            imie_val = $(this).attr('data-value');
-                                            if (imie_val == barcode) {
-                                                $(this).trigger('click');
-                                                //$(this).addClass('selected');
-                                                //  $('#app_table .tr_' + value.id).find(".fs-label").text(barcode);
-                                                select2++;
-                                            }
-                                        });
+                                            .each(function () {
+                                                imie_val = $(this).attr('data-value');
+                                                if (imie_val == barcode) {
+                                                    $(this).trigger('click');
+                                                    //$(this).addClass('selected');
+                                                    //  $('#app_table .tr_' + value.id).find(".fs-label").text(barcode);
+                                                    select2++;
+                                                }
+                                            });
                                     if (select2 > 0) {
                                         $('#app_table .tr_' + value.id).find('.qty').val(add);
                                         calculate_function();
                                     } else {
                                         sweetAlert("Error...", "This Product is not available!",
-                                            "error");
+                                                "error");
                                         return false;
                                     }
                                 } else {
                                     $('#firm').val(result[0]['firm_id']);
                                     var tableBody = $(".static").find('tr').clone();
                                     $(tableBody).closest('tr').find(
-                                        'select,.model_no,.model_no_ser,.percost,.qty').addClass(
-                                        'required');
+                                            'select,.model_no,.model_no_ser,.percost,.qty').addClass(
+                                            'required');
                                     $('#app_table').append(tableBody);
                                     s = 1;
-                                    $('#app_table tr').each(function() {
+                                    $('#app_table tr').each(function () {
                                         $(this).closest("tr").find('.s_no').html(s);
                                         s++;
                                     });
                                     $(tableBody).closest('tr').find('.model_no').val(result[0][
-                                        'product_name'
+                                            'product_name'
                                     ]);
                                     if (result[0]['product_image'] == '')
                                         $(tableBody).closest('tr').find('.product_image').attr('src',
-                                            "<?php echo $this->config->item("base_url") . 'attachement/product/' ?>" +
-                                            result[0]['product_image']);
+                                                "<?php echo $this->config->item("base_url").'attachement/product/'?>" +
+                                                result[0]['product_image']);
                                     else
                                         $(tableBody).closest('tr').find('.product_image').attr('src',
-                                            "<?php echo $this->config->item("base_url") . 'attachement/product/no-img.gif' ?>"
-                                        );
+                                                "<?php echo $this->config->item("base_url").'attachement/product/no-img.gif'?>"
+                                                );
                                     $(tableBody).closest('tr').find('.product_description').val(result[
-                                        0]['product_description']);
+                                            0]['product_description']);
                                     var ime_result = result[0]['ime_details'];
                                     var option_text = '';
                                     if (ime_result != null && ime_result.length > 0) {
                                         option_text +=
-                                            '<div  tabindex="0"><select id="ime_code_id" class="form-control multi_select ime_code_id" multiple="multiple" autocomplete="off" name="ime_code_id">';
+                                                '<div  tabindex="0"><select id="ime_code_id" class="form-control multi_select ime_code_id" multiple="multiple" autocomplete="off" name="ime_code_id">';
                                         option_text += '<option value="">Select</option>';
-                                        $.each(ime_result, function(key, value) {
+                                        $.each(ime_result, function (key, value) {
                                             //console.log(value.ime_code);
                                             selected = '';
                                             if (value.ime_code == barcode)
                                                 selected = 'selected';
                                             option_text += '<option  value="' + value.ime_code +
-                                                '"  ' + selected + '>' + value.ime_code +
-                                                '</option>';
+                                                    '"  ' + selected + '>' + value.ime_code +
+                                                    '</option>';
                                         });
                                         option_text += '</select></div>';
                                         $(tableBody).closest('tr').find('td .ime_code_select').empty();
                                         $(tableBody).closest('tr').find('td .ime_code_select').append(
-                                            option_text);
+                                                option_text);
                                         $(tableBody).closest('tr').find('td .multi_select').fSelect();
                                         var datas = $(tableBody).closest('tr').find('td .ime_code_id')
-                                            .val();
+                                                .val();
                                         $(tableBody).closest('tr').find('td .ime_code_val').val(datas);
                                     } else {
                                         // $('#sales_man').html('');
@@ -2367,34 +2367,34 @@ if (!empty($customers)) {
                                     // ]);
                                     // $(tableBody).closest('tr').find('.selling_price').val(result[0]['sales_price_without_gst']);
                                     $(tableBody).closest('tr').find('.sp_with_gst').val(result[0][
-                                        'sales_price'
+                                            'sales_price'
                                     ]);
                                     $(tableBody).closest('tr').find('.selling_price').val(result[0][
-                                        'sales_price'
+                                            'sales_price'
                                     ]);
                                     $(tableBody).closest('tr').find('.sp_without_gst').val(result[0]
-                                        .sales_price_without_gst);
+                                            .sales_price_without_gst);
                                     $(tableBody).closest('tr').find('.qty').attr('data-stock', result[0]
-                                        ['qty']);
+                                    ['qty']);
                                     $(tableBody).closest('tr').find('td .hsn_code').val(result[0][
-                                        'hsn_sac'
+                                            'hsn_sac'
                                     ]);
                                     $(tableBody).closest('tr').find('.stock_qty').text(result[0][
-                                        'qty'
+                                            'qty'
                                     ]);
                                     $(tableBody).closest('tr').find('.type').val(result[0]['type']);
                                     $(tableBody).closest('tr').find('.brand_id').val(result[0][
-                                        'brand_id'
+                                            'brand_id'
                                     ]);
                                     $(tableBody).closest('tr').find('.unit').val(result[0]['unit']);
                                     $(tableBody).closest('tr').find('.cat_id').val(result[0][
-                                        'category_id'
+                                            'category_id'
                                     ]);
                                     $(tableBody).closest('tr').find('.model_no').val(result[0][
-                                        'product_name'
+                                            'product_name'
                                     ]);
                                     $(tableBody).closest('tr').find('.model_no_extra').val(result[0][
-                                        'model_no'
+                                            'model_no'
                                     ]);
                                     $(tableBody).closest('tr').find('.igst_td').hide();
                                     //$('#add_quotation').find('tr td.igst_td').hide();
@@ -2407,19 +2407,19 @@ if (!empty($customers)) {
                                     if ($('#gst_type').val() != '') {
                                         if ($('#gst_type').val() == 31) {
                                             $(tableBody).closest('tr').find('.pertax').val(result[0][
-                                                'cgst'
+                                                    'cgst'
                                             ]);
                                             $(tableBody).closest('tr').find('.gst').val(result[0][
-                                                'sgst'
+                                                    'sgst'
                                             ]);
                                             $(tableBody).closest('tr').find('.igst').hide();
                                         } else {
                                             $(tableBody).closest('tr').find('.pertax').val(result[0][
-                                                'cgst'
+                                                    'cgst'
                                             ]);
                                             $(tableBody).closest('tr').find('.gst').hide();
                                             $(tableBody).closest('tr').find('.igst').val(result[0][
-                                                'igst'
+                                                    'igst'
                                             ]);
                                         }
                                     }
@@ -2439,16 +2439,16 @@ if (!empty($customers)) {
             return false;
         }
     }
-    $(window).bind('scannerDetectionReceive', function(event, data) {
+    $(window).bind('scannerDetectionReceive', function (event, data) {
         target_ele = event.target.activeElement;
     });
-    $('input').on('keypress', function() {
+    $('input').on('keypress', function () {
         formHasChanged = true;
     });
-    $('select').on('click', function() {
+    $('select').on('click', function () {
         formHasChanged = true;
     });
-    $(document).keydown(function(e) {
+    $(document).keydown(function (e) {
         var keycode = e.keyCode;
         if (keycode == 113) {
             $('#add_group').trigger('click');
