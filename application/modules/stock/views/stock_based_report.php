@@ -157,6 +157,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         <td width=''>Cost Price</td>
                         <td width='' class="action-btn-align">Qty</td>
                         <td width='' class="action-btn-align" style="text-align:center;">Total Price (Without GST)</td>
+                        <td width='' class="action-btn-align" style="text-align:center !important;">GST</td>
                         <td width='' class="action-btn-align" style="text-align:center !important;">CGST</td>
                         <td width='' class="action-btn-align" style="text-align:center !important;">SGST</td>
                         <td width='' class="action-btn-align" style="text-align:center !important;">Total Price (With GST)</td>
@@ -174,6 +175,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         <td width=''></td>
                         <td width=''></td>
                         <td width='' class="total-bg action-btn-align"></td>
+                        <td width=''></td>
                         <td width=''></td>
                         <td width=''></td>
                         <td width=''></td>

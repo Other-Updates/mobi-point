@@ -491,11 +491,11 @@ if (!empty($customers)) {
                                                         </select>
                                                     </div>
                                                 <?php  } else if ($vals['categoryName'] == 'Online-Payment' || $vals['categoryName'] == 'Recharge' || $vals['categoryName'] == 'Money Transfer' || $vals['categoryName'] == 'Payments' || $vals['categoryName'] == 'Service') { ?>
-                                                    <input type="text" name='ime_code_val[]' style="width:70px;" class="ime_code_val required" value="<?php echo $vals['ime_code_select']; ?>" id="ime_code_vals" />
+                                                    <input type="text" name='ime_code_val[]' style="width:100%;" value="<?php echo $vals['ime_code_select']; ?>" id="ime_code_vals" />
                                                 <?php } ?>
                                             </div>
-                                            <input type="hidden" name='ime_code_val[]' style="width:70px;" class="ime_code_val required" value="<?php echo $vals['ime_code_details_hidden']; ?>" id="ime_code_vals" />
-                                            <span class="error_msg ime_code_error"></span>
+                                            <!-- <input type="hidden" name='ime_code_val[]' style="width:70px;" class="ime_code_val required" value="<?php echo $vals['ime_code_details_hidden']; ?>" id="ime_code_vals" />
+                                            <span class="error_msg ime_code_error"></span> -->
                                         </td>
                                         <td style="display:none;">
                                             <select id='cat_id' tabindex="-1" style="display:none;" class='cat_id static_style' name='categoty[]'>
@@ -516,9 +516,9 @@ if (!empty($customers)) {
                                         <?php if (isset($vals['stock']) && !empty($vals['stock'])) { ?>
                                             <td>
                                                 <input type="hidden" name='available_quantity[]' style="width:70px;" class="code form-control colournamedup tabwid form-align " value="<?php echo $vals['stock'][0]['quantity'] ?>" readonly="readonly" />
-                                                <div class="col-xs-8"> <input <?php echo ($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles')  ? 'readonly' : ''; ?> type="text" tabindex="6" name='quantity[]' style="width:70px;margin-top: 2px;" class="qty required quantity" exist_qty="<?php echo round($vals['quantity']); ?>" data-stock="<?php echo round($vals['quantity']); ?>" value="<?php echo round($vals['quantity']); ?>" /></div>
+                                                <div class="col-xs-8"> <input <?php echo ($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles')  ? 'readonly' : ''; ?> type="text" tabindex="6" name='quantity[]' style="width:70px;margin-top: 2px;" class="qty required quantity" exist_qty="<?php echo round($vals['quantity']); ?>" value="<?php echo round($vals['quantity']); ?>" /></div>
                                                 <input type="hidden" name='quantity_old[]' style="width:70px;" value="<?php echo $vals['quantity'] ?>" />
-                                                <div class="col-xs-4"> <span class="label label-success stock_qty"> <?php echo $vals['stock'][0]['quantity'] ?> </span></div>
+                                                <div class="col-xs-4"> <span class="label label-success stock_qty" data-stock="<?php echo round($vals['quantity']); ?>"> <?php echo $vals['stock'][0]['quantity'] ?> </span></div>
                                                 <span class="error_msg error_msg_qty"></span>
                                             </td>
                                         <?php } else { ?>
@@ -651,7 +651,7 @@ if (!empty($customers)) {
                             <td colspan="6" class="net_tag" style="text-align:right;font-weight:bold;">Net Total</td>
                             <td><input type="text" tabindex="-1" name="quotation[net_total]" readonly="readonly" class="final_amt text_right" style="width:70px;" value="<?php echo $quotation[0]['net_total']; ?>" /></td>
                             <tr>
-                                <td colspan="11">
+                                <td colspan="10">
                                     <span>Remarks&nbsp;</span>
                                     <input name="quotation[remarks]" tabindex="-1" type="text" class="form-control" value="<?php echo $val['remarks']; ?>" style="width:100%; display: inline" />
                                 </td>
@@ -1582,8 +1582,8 @@ if (!empty($customers)) {
                             $('.' + class_name + '').find('td .ime_code_val').val(ime_code);
                         }
                     } else {
-                        sweetAlert("Error...", "This Product is not available!", "error");
-                        return false;
+                        // sweetAlert("Error...", "This Product is not available!", "error");
+                        // return false;
                     }
                 }
             });

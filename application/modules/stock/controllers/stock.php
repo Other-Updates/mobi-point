@@ -193,6 +193,7 @@ class Stock extends MX_Controller
             $frim_id[] = $value['firm_id'];
         }
         $data['cat'] = $this->master_category_model->get_category_by_firm($frim_id);
+        $data['brand'] = $this->master_brand_model->get_brand();
 
         $data['frim_list'] = $this->report_model->get_all_firms();
 
@@ -207,6 +208,7 @@ class Stock extends MX_Controller
 
         $search_arr['category'] = $search_data['category'];
         $search_arr['product'] = $search_data['product'];
+        $search_arr['brand'] = $search_data['brand'];
         $search_arr['length'] = $search_data['length'];
         $search_arr['start'] = $search_data['start'];
         $custom_col = 'stock_report';
@@ -232,6 +234,11 @@ class Stock extends MX_Controller
             $row[] = number_format($ass->cost_price, 2);
             $row[] = round($ass->quantity);
             $row[] = number_format($ass->quantity * $ass->cost_price_without_gst, 2);
+            $cgst = number_format(($ass->quantity * $ass->cost_price * $ass->cgst) / 100, 2);
+            $sgst = number_format(($ass->quantity * $ass->cost_price * $ass->sgst) / 100, 2);
+
+            // $row[] = number_format($ass->quantity * );
+            $row[] = ((($cgst + $sgst) * 2) / 100) . '%';
             $row[] = number_format(($ass->quantity * $ass->cost_price * $ass->cgst) / 100, 2);
             $row[] = number_format(($ass->quantity * $ass->cost_price * $ass->sgst) / 100, 2);
             //$net_total = $ass->quantity * $ass->cost_price;
