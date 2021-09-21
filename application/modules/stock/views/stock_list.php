@@ -55,13 +55,13 @@ $data['company_details'] = $this->admin_model->get_company_details();
     </div>
     <div class="panel-body pnone">
         <div class="row search_table_hide mb-0">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label class="col-sm-4 control-label">
                         Shop</label>
                     <div class="col-sm-8">
                         <select id='firm_id' class="form-control" onchange="Firm(this.value)">
-                            <option value="">Select</option>
+                            <!-- <option value="">Select</option> -->
                             <?php
                             if (isset($firm_details) && !empty($firm_details)) {
                                 foreach ($firm_details as $key => $val) {
@@ -118,9 +118,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
             </div>
             <div class="col-sm-2">
                 <div class="form-group">
-                    <div class="col-sm-8 wid100-div">
-                        <label class="control-label">Model</label>
-
+                    <label class="col-sm-4 control-label">Model</label>
+                    <div class="col-sm-8">
                         <select id='brand' class="form-control">
                             <option value="">Select</option>
                             <?php
@@ -135,7 +134,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                     </div>
                 </div>
             </div>
-            <div class="col-md-3"><a id='search' class="btn btn-success"><span class="glyphicon glyphicon-search "></span> Search</a></div>
+            <div class="col-md-1"><a id='search' class="btn btn-success"><span class="glyphicon glyphicon-search "></span> Search</a></div>
         </div>
     </div>
     <div class="contentpanel mb-50">
@@ -144,7 +143,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 <thead>
                     <tr>
                         <td width='5%'>S.No</td>
-                        <td width='20%'>Shop</td>
+                        <!-- <td width='20%'>Shop</td> -->
                         <td width='15%'>Category</td>
                         <td width='15%'>Product</td>
                         <td width='5%'>Model</td>
@@ -155,15 +154,15 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 </thead>
                 <tbody id="result_div">
                 </tbody>
-                <tfoot class="hide_class">
+                <tfoot>
                     <tr>
                         <td width='5%'></td>
-                        <td width='20%'></td>
+                        <!-- <td width='20%'></td> -->
                         <td width='15%'></td>
                         <td width='15%'></td>
                         <td width='5%'></td>
                         <td width='10%' class="total-bg action-btn-align"></td>
-                        <!-- <td width='10%' class="hide_class"></td>-->
+                        <td width='10%'></td>
                     </tr>
                 </tfoot>
             </table>
@@ -194,8 +193,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
         var inventory = 1;
         table = jQuery('#example1').DataTable({
             "lengthMenu": [
-                [50, 100, 150, -1],
-                [50, 100, 150, "All"]
+                [50, 100, 500, -1],
+                [50, 100, 500, "All"]
             ],
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.

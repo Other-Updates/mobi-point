@@ -1882,7 +1882,9 @@ class Sales extends MX_Controller
                 $cat_id = $input['old_cat_id'][$key];
                 $this->project_cost_model->remove_stocks_by_invdit($results, $qty, $firm_id, $cat_id);
             }
-            exit;
+
+
+
             $data['company_details'] = $this->admin_model->get_company_details();
             $user_info = $this->user_auth->get_from_session('user_info');
             $input['quotation']['created_by'] = $user_info[0]['id'];

@@ -251,7 +251,19 @@ class Brands extends MX_Controller
     }
     public function brand_ajaxList()
     {
-        $list = $this->brand_model->get_datatables();
+        $search_data = $this->input->post();
+        $search_arr = array();
+        $search_arr['search'] = $search_data['search']['value'];
+        // $search_arr['brand'] = $search_data['brand'];
+        // $search_arr['hsn'] = $search_data['hsn'];
+        // $search_arr['gst'] = $search_data['gst'];
+        $search_arr['length'] = $search_data['length'];
+        $search_arr['start'] = $search_data['start'];
+        //$search_arr['category'] = $search_data['category'];
+        if (empty($search_arr)) {
+            $search_arr = array();
+        }
+        $list = $this->brand_model->get_datatables($search_arr);
         //  echo "<pre>";print_r($list);exit;
         $data = array();
         $no = $_POST['start'];
@@ -262,7 +274,7 @@ class Brands extends MX_Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $ass->firm_name;
+            // $row[] = $ass->firm_name;
             $row[] = $ass->cat_name;
             $row[] = $ass->brands;
             $row[] = $ass->hsn;

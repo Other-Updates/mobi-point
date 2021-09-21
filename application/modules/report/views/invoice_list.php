@@ -361,8 +361,8 @@ if (isset($all_gst) && !empty($all_gst)) {
         var table;
         table = $('#basicTable_call_back').DataTable({
             "lengthMenu": [
-                [50, 100, 150, -1],
-                [50, 100, 150, "All"]
+                [50, 100, 500, -1],
+                [50, 100, 500, "All"]
             ],
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.

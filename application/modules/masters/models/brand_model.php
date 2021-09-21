@@ -7,8 +7,9 @@ class Brand_model extends CI_Model
     private $table_name1 = 'increment_table';
     var $joinTable1 = 'erp_manage_firms r';
     var $primaryTable = 'erp_brand b';
-    var $selectColumn = 'b.id,b.cat_id,b.brands,r.firm_name,b.firm_id,b.cat_id';
-    var $column_order = array(null, 'r.firm_name', 'b.brands', null); //set column field database for datatable orderable
+    public $erp_category = 'erp_category as c';
+    var $selectColumn = 'b.id,b.cat_id,c.categoryName as cat_name,b.brands,r.firm_name,b.firm_id,b.cat_id';
+    var $column_order = array(null, 'c.categoryName', 'b.brands', 'b.hsn', 'b.gst', null); //set column field database for datatable orderable
     var $column_search = array('r.firm_name', 'b.brands'); //set column field database for datatable searchable
     var $order = array('b.cat_id' => 'DESC'); // default order
     function __construct()
@@ -130,10 +131,11 @@ class Brand_model extends CI_Model
         $query = $this->db->get('erp_brand')->result_array();
         return $query;
     }
-    function _get_datatables_query()
+    function _get_datatables_query($search_data = array())
     {
         //Join Table
         $this->db->join($this->joinTable1, 'r.firm_id=b.firm_id');
+        $this->db->join($this->erp_category, 'b.cat_id=c.cat_id', 'left');
         $this->db->where('b.status', 1);
         $firms = $this->user_auth->get_user_firms();
         $frim_id = array();
@@ -156,6 +158,20 @@ class Brand_model extends CI_Model
             }
             $i++;
         }
+        // if ($search_data['category'] != '' || $search_data['category'] != 'Select' || $search_data['product'] != '') {
+        //     if ($search_data['category'] != '') { // first loop
+        //         $this->db->where('b.category', $search_data['category']);
+        //     }
+        // }
+        // if ($search_data['product'] != '' || $search_data['product'] != 'Select' || $search_data['product'] != '') {
+        //     if ($search_data['product'] != '') { // first loop
+        //         $this->db->where_in('u.product_id', $search_data['product']);
+        //     }
+        // }
+        if ($search_data['search'] != '') {
+            // $this->db->where('b.brands', $search_data['search']);
+            // $this->db->where('b.brands', $search_data['search']);
+        }
         if ($like) {
             $where = "b.firm_id IN (" . $new . ") AND (" . $like . ")";
             $this->db->where($where);
@@ -167,24 +183,29 @@ class Brand_model extends CI_Model
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
-    function get_datatables()
+    function get_datatables($search_data)
     {
         $this->db->select($this->selectColumn);
         $this->db->select('hsn,gst');
-        $this->_get_datatables_query();
+        $this->_get_datatables_query($search_data);
         $firms = $this->user_auth->get_user_firms();
+
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
+        if ($search_data['length'] != -1) {
+            $this->db->limit($search_data['length'], $search_data['start']);
+        }
         $query = $this->db->get();
         $query = $query->result();
-        foreach ($query as $key => $result_data) {
-            $this->db->where('cat_id', $result_data->cat_id);
-            $results = $this->db->get('erp_category')->result_array();
-            if (!empty($results))
-                $query[$key]->cat_name = $results[0]['categoryName'];
-            else
-                $query[$key]->cat_name = '';
-        }
+        // Removed unwanted loop 18-09-2021
+        // foreach ($query as $key => $result_data) {
+        //     $this->db->where('cat_id', $result_data->cat_id);
+        //     $results = $this->db->get('erp_category')->result_array();
+        //     if (!empty($results))
+        //         $query[$key]->cat_name = $results[0]['categoryName'];
+        //     else
+        //         $query[$key]->cat_name = '';
+        // }
         // $datas= $query->result();
         //echo "<pre>";print_r($query);exit;
         return $query;

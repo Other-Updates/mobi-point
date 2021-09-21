@@ -1,14 +1,13 @@
-<?php $theme_path = $this->config->item('theme_locations').$this->config->item('active_template');?>
-<!--
-<script src="<?php echo $theme_path;?>/js/jquery-1.8.2.js" type="text/javascript"></script> -->
-<script src="<?php echo $theme_path;?>/js/jquery-ui-my-1.10.3.min.js"></script>
-<link rel="stylesheet" href="<?php echo $theme_path;?>/css/bootstrap-select.css" />
-<script src="<?php echo $theme_path;?>/js/bootstrap-select.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<?=$theme_path;?>/css/fSelect.css" />
-<script type="text/javascript" src="<?php echo $theme_path;?>/js/jquery.scannerdetection.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $theme_path;?>/js//sweetalert.css">
-<script src="<?php echo $theme_path;?>/js/sweetalert.min.js" type="text/javascript"></script>
-<script type='text/javascript' src='<?=$theme_path;?>/js/fSelect.js'></script>
+<?php $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template'); ?>
+<script src="<?php echo $theme_path; ?>/js/jquery-ui-my-1.10.3.min.js"></script>
+<link rel="stylesheet" href="<?php echo $theme_path; ?>/css/bootstrap-select.css" />
+<script src="<?php echo $theme_path; ?>/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/fSelect.css" />
+<script type="text/javascript" src="<?php echo $theme_path; ?>/js/jquery.scannerdetection.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js//sweetalert.css">
+<script src="<?php echo $theme_path; ?>/js/sweetalert.min.js" type="text/javascript"></script>
+<script type='text/javascript' src='<?= $theme_path; ?>/js/fSelect.js'></script>
+
 <style type="text/css">
     .text_right {
         text-align: right;
@@ -1319,8 +1318,8 @@ if(!empty($customers)){
                                     $("#bill1").attr('checked', 'checked');
                                     if ($('#gst_type').val() != '') {
                                         if ($('#gst_type').val() == 31) {
-                                            $('#add_quotation').find(
-                                                    'tr td.sgst_td').show();
+                                            // $('#add_quotation').find(
+                                            //     'tr td.sgst_td').show();
                                             $('#add_quotation').find(
                                                     'tr td.igst_td').hide();
                                         } else {
