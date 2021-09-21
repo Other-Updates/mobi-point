@@ -198,6 +198,11 @@ class Expenses extends MX_Controller
             } else {
                 $edit_row = '<a class="tooltips btn btn-info btn-fw btn-xs alerts" href=""><i class="fa fa-edit"></i></a>';
             }
+            if ($this->user_auth->is_action_allowed('expenses', 'expenses', 'delete')) {
+                $edit_row = '<a class="tooltips btn btn-info btn-fw btn-xs" href="' . base_url() . 'expenses/edit/' . $ass->id . '"><i class="fa fa-edit"></i></a>';
+            } else {
+                $edit_row = '<a class="tooltips btn btn-info btn-fw btn-xs alerts" href=""><i class="fa fa-edit"></i></a>';
+            }
             $no++;
             $row = array();
             $row[] = $no;
