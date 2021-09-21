@@ -260,18 +260,21 @@ if(!empty($customers)){
             <!--                <td>
                 <input type="text"  name='discount[]' style="width:70px;" class="discount" />
             </td>-->
-            <td class="action-btn-align">
-                <input type="text" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" />
-            </td>
+                <!--                <td>
+                    <input type="text"  name='discount[]' style="width:70px;" class="discount" />
+                </td>-->
+                <!-- <td class="action-btn-align">
+                    <input type="text" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" />
+                </td> -->
 
-            <td class="action-btn-align cgst_td">
-                <input type="text" tabindex="-1" name='tax[]' style="width:70px;" class="pertax" readonly="readonly" />
-            </td>
+                <!-- <td class="action-btn-align cgst_td">
+                    <input type="text" tabindex="-1" name='tax[]' style="width:70px;" class="pertax" readonly="readonly" />
+                </td>
 
 
-            <td class="action-btn-align sgst_td">
-                <input type="text" tabindex="-1" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
-            </td>
+                <td class="action-btn-align sgst_td">
+                    <input type="text" tabindex="-1" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
+                </td> -->
 
             <!--
             <td class="action-btn-align igst_td">
@@ -491,12 +494,12 @@ if(!empty($customers)){
                                                                     ?>
                                                         </select>
                                                     </div>
-                                                <?php } else if($vals['categoryName'] == 'Online-Payment' || $vals['categoryName'] == 'Recharge' || $vals['categoryName'] == 'Money Transfer' || $vals['categoryName'] == 'Payments' || $vals['categoryName'] == 'Service'){?>
-                                                    <input type="text" name='ime_code_val[]' style="width:70px;" class="ime_code_val required" value="<?php echo $vals['ime_code_select'];?>" id="ime_code_vals" />
-                                                <?php }?>
+                                                <?php  } else if ($vals['categoryName'] == 'Online-Payment' || $vals['categoryName'] == 'Recharge' || $vals['categoryName'] == 'Money Transfer' || $vals['categoryName'] == 'Payments' || $vals['categoryName'] == 'Service') { ?>
+                                                    <input type="text" name='ime_code_val[]' style="width:100%;" value="<?php echo $vals['ime_code_select']; ?>" id="ime_code_vals" />
+                                                <?php } ?>
                                             </div>
-                                            <input type="hidden" name='ime_code_val[]' style="width:70px;" class="ime_code_val required" value="<?php echo $vals['ime_code_details_hidden'];?>" id="ime_code_vals" />
-                                            <span class="error_msg ime_code_error"></span>
+                                            <!-- <input type="hidden" name='ime_code_val[]' style="width:70px;" class="ime_code_val required" value="<?php echo $vals['ime_code_details_hidden']; ?>" id="ime_code_vals" />
+                                            <span class="error_msg ime_code_error"></span> -->
                                         </td>
                                         <td style="display:none;">
                                             <select id='cat_id' tabindex="-1" style="display:none;" class='cat_id static_style' name='categoty[]'>
@@ -512,64 +515,79 @@ if(!empty($customers)){
                                                 ?>
                                             </select>
                                         </td>
-                                <input type="hidden" class='form-align tabwid model_no_extra' value="<?php echo $vals['model_no'];?>" style="width:100%" />
-                                <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="<?php echo $vals['unit'];?>" />
-                                <?php if(isset($vals['stock']) && !empty($vals['stock'])){?>
-                                    <td>
-                                        <input type="hidden" name='available_quantity[]' style="width:70px;" class="code form-control colournamedup tabwid form-align " value="<?php echo $vals['stock'][0]['quantity']?>" readonly="readonly" />
-                                        <div class="col-xs-8"> <input <?php echo ($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles')?'readonly':'';?> type="text" tabindex="6" name='quantity[]' style="width:70px;margin-top: 2px;" class="qty required quantity" exist_qty="<?php echo round($vals['quantity']);?>" data-stock="<?php echo round($vals['stock'][0]['quantity']);?>" value="<?php echo round($vals['quantity']);?>" /></div>
-                                        <input type="hidden" name='quantity_old[]' style="width:70px;" value="<?php echo $vals['quantity']?>" />
-                                        <div class="col-xs-4"> <span class="label label-success stock_qty"> <?php echo $vals['stock'][0]['quantity']?> </span></div>
-                                        <span class="error_msg error_msg_qty"></span>
-                                    </td>
-                                <?php } else{?>
-                                    <td>
-                                        <div class="avl_qty"></div>
-                                        <div class="col-xs-8">
-                                            <input type="text" tabindex="6" name='quantity[]' style="width:70px;" class="qty required quantity" exist_qty="<?php echo $vals['quantity']?>" value="<?php echo $vals['quantity']?>" />
-                                            <input type="hidden" name='quantity_old[]' style="width:70px;" value="<?php echo $vals['quantity']?>" />
-                                        </div>
-                                        <div class="col-xs-4"> <span class="label label-success stock_qty"> 0 </span></div>
-                                        <span class="error_msg error_msg_qty"></span>
-                                    </td>
-                                <?php }?>
-                                <td class="action-btn-align">
-                                    <p style="display: none;" class="gstcost">1</p>
-                                    <p style="display: none;" class="nogstcost">2</p>
-                                    <!-- <?php print_r($val)?> -->
-                                    <input type="text" name="cost_price[]" style="width:70px;" id="cost_price" class="costing_price perwhole required" tabindex="6" value="<?php echo $vals['cost_price']?>" />
-                                    <input type="hidden" name="cp_with_gst[]" class="cp_with_gst" value="<?php echo $vals['cp_with_gst']?>">
-                                    <input type="hidden" name="cp_without_gst[]" class="cp_without_gst" value="<?php echo $vals['cp_without_gst']?>">
-                                    <span class="error_msg"></span>
-                                </td>
-                                <td>
-                                    <input type="text" tabindex="6" name='per_cost[]' style="width:70px;" class="selling_price percost required" value="<?php echo $vals['per_cost']?>" />
-                                    <input type="hidden" name="sp_with_gst[]" class="sp_with_gst" value="<?php echo $vals['sp_with_gst']?>">
-                                    <input type="hidden" name="sp_without_gst[]" class="sp_without_gst" value="<?php echo $vals['sp_without_gst']?>">
-                                    <span class="error_msg "></span>
-                                </td>
-                                <td class="action-btn-align">
-                                    <input type="text" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" value="<?php echo $vals['hsn_sac'];?>" />
-                                </td>
-                                <?php if($gsttype == 1){?>
-                                    <td>
-                                        <input maxlength="8" type="text" tabindex="-1" name='tax[]' readonly="readonly" style="width:70px;" class="pertax" value="<?php echo number_format($vals['tax'], 2);?>" />
-                                    </td>
-                                <?php }?>
-                                <?php if($gsttype == 1){?>
-                                    <?php
-                                    $gst_type = $quotation[0]['state_id'];
-                                    if($gst_type == 31){
-                                        ?>
-                                        <td>
-                                            <input maxlength="8" type="text" tabindex="-1" name='gst[]' readonly="readonly" style="width:70px;" class="gst" value="<?php echo number_format($vals['gst'], 2);?>" />
+                                        <input type="hidden" class='form-align tabwid model_no_extra' value="<?php echo $vals['model_no']; ?>" style="width:100%" />
+                                        <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="<?php echo $vals['unit']; ?>" />
+                                        <?php if (isset($vals['stock']) && !empty($vals['stock'])) { ?>
+                                            <td>
+                                                <input type="hidden" name='available_quantity[]' style="width:70px;" class="code form-control colournamedup tabwid form-align " value="<?php echo $vals['stock'][0]['quantity'] ?>" readonly="readonly" />
+                                                <div class="col-xs-8"> <input <?php echo ($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles')  ? 'readonly' : ''; ?> type="text" tabindex="6" name='quantity[]' style="width:70px;margin-top: 2px;" class="qty required quantity" exist_qty="<?php echo round($vals['quantity']); ?>" value="<?php echo round($vals['quantity']); ?>" /></div>
+                                                <input type="hidden" name='quantity_old[]' style="width:70px;" value="<?php echo $vals['quantity'] ?>" />
+                                                <div class="col-xs-4"> <span class="label label-success stock_qty" data-stock="<?php echo round($vals['quantity']); ?>"> <?php echo $vals['stock'][0]['quantity'] ?> </span></div>
+                                                <span class="error_msg error_msg_qty"></span>
+                                            </td>
+                                        <?php } else { ?>
+                                            <td>
+                                                <div class="avl_qty"></div>
+                                                <div class="col-xs-8">
+                                                    <input type="text" tabindex="6" name='quantity[]' style="width:70px;" class="qty required quantity" exist_qty="<?php echo $vals['quantity'] ?>" value="<?php echo $vals['quantity'] ?>" />
+                                                    <input type="hidden" name='quantity_old[]' style="width:70px;" value="<?php echo $vals['quantity'] ?>" />
+                                                </div>
+                                                <div class="col-xs-4"> <span class="label label-success stock_qty"> 0 </span></div>
+                                                <span class="error_msg error_msg_qty"></span>
+                                            </td>
+                                        <?php } ?>
+                                        <td class="action-btn-align">
+                                            <p style="display: none;" class="gstcost">1</p>
+                                            <p style="display: none;" class="nogstcost">2</p>
+                                            <!-- <?php print_r($val) ?> -->
+                                            <input type="text" name="cost_price[]" style="width:70px;" id="cost_price" class="costing_price perwhole required" tabindex="6" value="<?php echo $vals['cost_price'] ?>" />
+                                            <input type="hidden" name="cp_with_gst[]" class="cp_with_gst" value="<?php echo $vals['cp_with_gst'] ?>">
+                                            <input type="hidden" name="cp_without_gst[]" class="cp_without_gst" value="<?php echo $vals['cp_without_gst'] ?>">
+                                            <span class="error_msg"></span>
                                         </td>
-                                    <?php } else{?>
-                                    <?php }?>
-                        <!-- <td>
-                            <input type="text" name='igst[]' tabindex="-1" style="width:70px;" class="igst" readonly="readonly" value="<?php echo number_format($vals['igst'], 2);?>" />
-                        </td> -->
+                                        <td>
+                                            <input type="text" tabindex="6" name='per_cost[]' style="width:70px;" class="selling_price percost required" value="<?php echo $vals['per_cost'] ?>" />
+                                            <input type="hidden" name="sp_with_gst[]" class="sp_with_gst" value="<?php echo $vals['sp_with_gst'] ?>">
+                                            <input type="hidden" name="sp_without_gst[]" class="sp_without_gst" value="<?php echo $vals['sp_without_gst'] ?>">
+                                            <span class="error_msg "></span>
+                                        </td>
+                                        <!-- <td class="action-btn-align">
+                                            <input type="text" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" value="<?php echo $vals['hsn_sac']; ?>" />
+                                        </td> -->
+                                        <!-- <?php if ($gsttype == 1) { ?>
+                                            <td>
+                                                <input maxlength="8" type="text" tabindex="-1" name='tax[]' readonly="readonly" style="width:70px;" class="pertax" value="<?php echo number_format($vals['tax'], 2); ?>" />
+                                            </td>
+                                        <?php } ?> -->
+
+                                        <!-- <?php if ($gsttype == 1) { ?>
+                                            <?php
+                                                    $gst_type = $quotation[0]['state_id'];
+                                                    if ($gst_type == 31) {
+                                            ?>
+                                                <td>
+                                                    <input maxlength="8" type="text" tabindex="-1" name='gst[]' readonly="readonly" style="width:70px;" class="gst" value="<?php echo number_format($vals['gst'], 2); ?>" />
+                                                </td>
+                                            <?php } else { ?>
+                                            <?php } ?> -->
+                                        <!-- <td>
+                                                <input type="text" name='igst[]' tabindex="-1" style="width:70px;" class="igst" readonly="readonly" value="<?php echo number_format($vals['igst'], 2); ?>" />
+                                            </td> -->
                                     <?php
+                                                }
+                                                //   }
+                                    ?>
+                                    <td>
+                                        <input type="text" tabindex="-1" style="width:70px;" name='sub_total[]' readonly="readonly" class="subtotal text_right" value="<?php echo $vals['sub_total'] ?>" />
+                                    </td>
+                                    <td class="action-btn-align">
+                                        <input type="text" style="width:70px;" tabindex="6" id="profit" value="<?php echo $vals['profit'] ?>" class="profit" />
+                                    </td>
+                                    <input type="hidden" value="<?php echo trim($val['q_id']); ?>" class="del_id" />
+                                    <td width="2%" class="action-btn-align"><a id='delete_label' value="<?php echo $vals['del_id']; ?>" class="del btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
+                                    </tr>
+                            <?php
+                                    $i++;
                                 }
                                 //   }
                                 ?>
@@ -589,73 +607,74 @@ if(!empty($customers)){
                         ?>
                         </tbody>
                         <tbody>
-                        <td colspan="3" class="total_table_tag" style="width:70px; text-align:right !important;"><b>Total</b></td>
-                        <td><input type="text" tabindex="-1" name="quotation[total_qty]" readonly="readonly" value="<?php echo $val['total_qty'];?>" class="total_qty" style="width:70px; margin-left:10px;" id="total" /></td>
-                        <td colspan="5" class="sub_tag" style="text-align:right;"><b>Sub Total</b></td>
-                        <td><input type="text" name="quotation[subtotal_qty]" tabindex="-1" readonly="readonly" value="<?php echo $val['subtotal_qty'];?>" class="final_sub_total text_right" style="width:70px;" /><input type="hidden" class="temp_sub_total" value="" /></td>
-                        <td class="action-btn-align"><input type="text" name="quotation[profit_total]" tabindex="21" value="<?php echo $val['profit_total'];?>" readonly="readonly" class="profit_total" style="width:70px;" /></td>
-                        <td></td>
-                        <input type="hidden" name="advance" tabindex="-1" readonly="readonly" value="<?php echo (!empty($val['advance']))?$val['advance']:0;?>" class="advance text_right" style="width:70px;" />
-                        <?php if($gsttype == 1){?>
-                            <tr>
-                                <td colspan="5" style="width:70px; text-align:right;"></td>
-                                <td style="display: none" colspan="3" style="text-align:right;font-weight:bold;"><input type="text" tabindex="-1" name="quotation[tax_label]" class='tax_label text_right' value="<?php echo $val['tax_label'];?>" style="width:100%;" /></td>
-                                <td style="display: none">
-                                    <input type="text" name="quotation[tax]" value="<?php
-                                    if($val['tax'] != 0){
-                                        echo $val['tax'];
-                                    }
-                                    ?>" class='totaltax text_right' tabindex="-1" style="width:70px;" />
-                                </td>
-                                <td></td>
-                            </tr>
-                        <?php }?>
-                        <input type="hidden" name="quotation[round_off]" tabindex="-1" value="<?php echo $val['round_off'];?>" class="round_off text_right" style="width:70px;" readonly />
+                            <td colspan="3" class="total_table_tag" style="width:70px; text-align:right !important;"><b>Total</b></td>
+                            <td><input type="text" tabindex="-1" name="quotation[total_qty]" readonly="readonly" value="<?php echo $val['total_qty']; ?>" class="total_qty" style="width:70px; margin-left:10px;" id="total" /></td>
+                            <td colspan="2" class="sub_tag" style="text-align:right;"><b>Sub Total</b></td>
+                            <td><input type="text" name="quotation[subtotal_qty]" tabindex="-1" readonly="readonly" value="<?php echo $val['subtotal_qty']; ?>" class="final_sub_total text_right" style="width:70px;" /><input type="hidden" class="temp_sub_total" value="" /></td>
+                            <td class="action-btn-align"><input type="text" name="quotation[profit_total]" tabindex="21" value="<?php echo $val['profit_total']; ?>" readonly="readonly" class="profit_total" style="width:70px;" /></td>
+                            <td></td>
+                            <input type="hidden" name="advance" tabindex="-1" readonly="readonly" value="<?php echo (!empty($val['advance'])) ? $val['advance'] : 0; ?>" class="advance text_right" style="width:70px;" />
+                            <?php if ($gsttype == 1) { ?>
+                                <tr>
+                                    <td colspan="5" style="width:70px; text-align:right;"></td>
+                                    <td style="display: none" colspan="3" style="text-align:right;font-weight:bold;"><input type="text" tabindex="-1" name="quotation[tax_label]" class='tax_label text_right' value="<?php echo $val['tax_label']; ?>" style="width:100%;" /></td>
+                                    <td style="display: none">
+                                        <input type="text" name="quotation[tax]" value="<?php
+                                                                                        if ($val['tax'] != 0) {
+                                                                                            echo $val['tax'];
+                                                                                        }
+                                                                                        ?>" class='totaltax text_right' tabindex="-1" style="width:70px;" />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            <?php } ?>
+                            <input type="hidden" name="quotation[round_off]" tabindex="-1" value="<?php echo $val['round_off']; ?>" class="round_off text_right" style="width:70px;" readonly />
                         </tbody>
                         <input type="hidden" name="quotation[transport]" value="0" class="transport text_right" tabindex="-1" style="width:70px;" />
                         <tbody class="additional" id="add_new_values">
+                            <tr style="display:none">
+                                <?php if ($gsttype == 1) { ?>
+                                    <input type="hidden" tabindex="-1" name="quotation[labour]" value="<?php echo $quotation[0]['labour']; ?>" class="labour text_right" style="width:70px;" />
+                                <?php } ?>
+                                <?php if ($gsttype == 1) { ?>
+                                    <td colspan="2" style="text-align:right;">Taxable Charge</td>
+                                <?php } ?>
+                                <?php if ($gsttype == 1) { ?>
+                                    <td><input type="text" tabindex="-1" name="quotation[taxable_price]" value="<?php echo $quotation[0]['taxable_price']; ?>" readonly="readonly" class=" text_right taxable_price" style="width:70px;" /></td>
+                                <?php } ?>
+                                <?php if ($gsttype == 1) { ?>
+                                    <td colspan="1" style="text-align:right !important;">CGST:</td>
+                                <?php } ?>
+                                <?php if ($gsttype == 1) { ?>
+                                    <td><input tabindex="-1" type="text" name="quotation[cgst_price]" value="<?php echo $val['cgst_price']; ?>" readonly class="add_cgst text_right cgst_price" style="width:70px;" /></td>
+                                <?php } ?>
+                                <?php if ($gsttype == 1) { ?>
+                                    <?php
+                                    $gst_type = $quotation[0]['state_id'];
+                                    if ($gst_type == 31) {
+                                    ?>
+                                        <td colspan="1" style="text-align:right;">SGST:</td>
+                                    <?php } else { ?>
+                                        <td colspan="1" style="text-align:right;">IGST:</td>
+                                    <?php
+                                    }
+                                    ?>
+                                <?php } ?>
+                                <?php if ($gsttype == 1) { ?>
+                                    <td><input type="text" tabindex="-1" value="<?php echo $val['sgst_price']; ?>" name="quotation[sgst_price]" readonly class="add_sgst sgst_price text_right" style="width:70px;" /></td>
+                                <?php } ?>
+                                <input type="hidden" name="quotation[transport]" value="<?php echo $quotation[0]['transport']; ?>" class="transport text_right" tabindex="-1" style="width:70px;" />
+                            </tr>
+
+                            <td colspan="6" class="net_tag" style="text-align:right;font-weight:bold;">Net Total</td>
+                            <td><input type="text" tabindex="-1" name="quotation[net_total]" readonly="readonly" class="final_amt text_right" style="width:70px;" value="<?php echo $quotation[0]['net_total']; ?>" /></td>
                             <tr>
-                                <?php if($gsttype == 1){?>
-                            <input type="hidden" tabindex="-1" name="quotation[labour]" value="<?php echo $quotation[0]['labour'];?>" class="labour text_right" style="width:70px;" />
-                        <?php }?>
-                        <?php if($gsttype == 1){?>
-                            <td colspan="2" style="text-align:right;">Taxable Charge</td>
-                        <?php }?>
-                        <?php if($gsttype == 1){?>
-                            <td><input type="text" tabindex="-1" name="quotation[taxable_price]" value="<?php echo $quotation[0]['taxable_price'];?>" readonly="readonly" class=" text_right taxable_price" style="width:70px;" /></td>
-                        <?php }?>
-                        <?php if($gsttype == 1){?>
-                            <td colspan="1" style="text-align:right !important;">CGST:</td>
-                        <?php }?>
-                        <?php if($gsttype == 1){?>
-                            <td><input tabindex="-1" type="text" name="quotation[cgst_price]" value="<?php echo $val['cgst_price'];?>" readonly class="add_cgst text_right cgst_price" style="width:70px;" /></td>
-                        <?php }?>
-                        <?php if($gsttype == 1){?>
-                            <?php
-                            $gst_type = $quotation[0]['state_id'];
-                            if($gst_type == 31){
-                                ?>
-                                <td colspan="1" style="text-align:right;">SGST:</td>
-                            <?php } else{?>
-                                <td colspan="1" style="text-align:right;">IGST:</td>
-                                <?php
-                            }
-                            ?>
-                        <?php }?>
-                        <?php if($gsttype == 1){?>
-                            <td><input type="text" tabindex="-1" value="<?php echo $val['sgst_price'];?>" name="quotation[sgst_price]" readonly class="add_sgst sgst_price text_right" style="width:70px;" /></td>
-                        <?php }?>
-                        <input type="hidden" name="quotation[transport]" value="<?php echo $quotation[0]['transport'];?>" class="transport text_right" tabindex="-1" style="width:70px;" />
-                        <td colspan="2" class="net_tag" style="text-align:right;font-weight:bold;">Net Total</td>
-                        <td><input type="text" tabindex="-1" name="quotation[net_total]" readonly="readonly" class="final_amt text_right" style="width:70px;" value="<?php echo $quotation[0]['net_total'];?>" /></td>
-                        <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="11">
-                                <span>Remarks&nbsp;</span>
-                                <input name="quotation[remarks]" tabindex="-1" type="text" class="form-control" value="<?php echo $val['remarks'];?>" style="width:100%; display: inline" />
-                            </td>
-                        </tr>
+                                <td colspan="10">
+                                    <span>Remarks&nbsp;</span>
+                                    <input name="quotation[remarks]" tabindex="-1" type="text" class="form-control" value="<?php echo $val['remarks']; ?>" style="width:100%; display: inline" />
+                                </td>
+                            </tr>
+
                         </tbody>
                     </table>
                     <input type="hidden" name="gst_type" id="gst_type" class="gst_type" value="<?php echo $quotation[0]['state_id'];?>" />

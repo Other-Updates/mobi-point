@@ -280,12 +280,20 @@
                     </tr>
                 </table>
                 <br>
-
-                <div>
-                    <a href="<?php echo $this->config->item('base_url') . 'print_view' ?>" class="btn btn-defaultprint6 gst"><span class="glyphicon glyphicon-print"></span> GST Print </a>
-                    <a href="<?php echo $this->config->item('base_url') . 'print_view' ?>" class="btn btn-defaultprint6 nogst"><span class="glyphicon glyphicon-print"></span> NOGST Print </a>
+                <div class="form-group" style="text-align:center">
+                    <label class="col-sm-2 control-label">Customer Name </label>
+                    <div class="col-sm-2">
+                        <input type="text" width="15%" tabindex="2" name="customer[store_name]" id="customer_name" class='form-control form-align auto_customer' />
+                        <span class="error_msg"></span>
+                        <input type="hidden" name="customer[id]" id="customer_id" class='id_customer  form-align' />
+                        <!--<input type="hidden"  name="quotation[product_id]" id="cust_id" class='id_customer' />-->
+                        <div id="suggesstion-box" class="auto-asset-search "></div>
+                    </div>
                 </div>
-
+                <div style="text-align:center">
+                    <button class="btn btn-defaultprint6 print_gst"><span class="glyphicon glyphicon-print"> <a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list/' ?>"></span> GST Print</a></button>
+                    <button class="btn btn-defaultprint6 print_nogst"><span class="glyphicon glyphicon-print"><a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list/' ?>"></span> NO GST Print </a></button>
+                </div>
                 <table class="table table-striped table-bordered responsive print_bgclr m-b-0" id="add_quotation" cellpadding="0" cellspacing="0">
                     <thead style="color:white !important;">
                         <tr style="text-align:center; color:white !important;">
@@ -331,7 +339,7 @@
                         ?>
                                 <tr style="border-bottom:1px solid black;">
                                     <td class="action-btn-align">
-                                        <input type="checkbox" id="box" class="box" name="checkbox" value="" />
+                                        <input type="checkbox" id="box" class="box" name="checkbox" />
                                     </td>
                                     <td>
                                         <?php echo $vals['product_name'] ?><br /? IMEI : </td>
@@ -599,35 +607,47 @@ if (isset($quotation_details) && !empty($quotation_details)) {
             window.print();
             // ConfirmDialog('Are you sure want to Print invoice ?');
         });
-        $('.gst').click(function() {
-            // document.location.href = 'sales/print_view/';
+        $('.print_gst').click(function() {
+            if ($('[type="checkbox"]').is(":checked")) {
+                window.print();
+
+            } else {
+
+            }
+
+
+        });
+        $('.print_nogst').click(function() {
+            if ($('[type="checkbox"]').is(":checked")) {
+                window.print();
+
+            } else {
+
+            }
+
         });
 
-        // window.print();
-    });
-    $('.nogst').click(function() {
-        // window.print();
-        // document.location.href = 'sales/print_view/';
-    });
 
-
-
-    function ConfirmDialog(message) {
-        $('<div></div>').appendTo('body')
-            .html('<div><h6><strong>' + message + '</strong></h6></div>')
-            .dialog({
-                modal: true,
-                title: 'Print Confirm',
-                zIndex: 10000,
-                autoOpen: true,
-                width: '300px',
-                resizable: false,
-                buttons: {
-                    Yes: function() {
-                        // $(obj).removeAttr('onclick');
-                        // $(obj).parents('.Parent').remove();
-                        window.print();
-                        $(this).dialog("close");
+        function ConfirmDialog(message) {
+            $('<div></div>').appendTo('body')
+                .html('<div><h6><strong>' + message + '</strong></h6></div>')
+                .dialog({
+                    modal: true,
+                    title: 'Print Confirm',
+                    zIndex: 10000,
+                    autoOpen: true,
+                    width: '300px',
+                    resizable: false,
+                    buttons: {
+                        Yes: function() {
+                            // $(obj).removeAttr('onclick');
+                            // $(obj).parents('.Parent').remove();
+                            window.print();
+                            $(this).dialog("close");
+                        },
+                        No: function() {
+                            $(this).dialog("close");
+                        }
                     },
                     No: function() {
                         $(this).dialog("close");
