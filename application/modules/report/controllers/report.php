@@ -474,14 +474,14 @@ class Report extends MX_Controller
     function customer_based_report()
     {
         //$data['all_style'] = $this->project_cost_model->get_invoice();
-        //$data['all_supplier'] = $this->report_model->get_all_customer();
+        $data['all_supplier'] = $this->report_model->get_all_customer();
         // $data['all_receipt'] = $this->project_cost_model->get_all_customer_invoice();
         $data['all_receipt'] = $this->report_model->get_all_invoice();
         //$data["sales_man_list"] = $this->sales_man_model->get_sales_man();
         $data['all_product'] = $this->report_model->get_all_product_invoice();
         //echo "<pre>";print_r($data);exit;
         $data['frim_list'] = $this->report_model->get_all_firms();
-        $data['customer_list'] = $this->report_model->get_all_customers();
+        // $data['customer_list'] = $this->report_model->get_all_customers();
         $data['product_list'] = $this->report_model->get_all_products();
         $this->template->write_view('content', 'report/customer_report', $data);
         $this->template->render();

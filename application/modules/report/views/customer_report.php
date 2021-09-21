@@ -158,16 +158,16 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-sm-2">
                     <div class="form-group">
-                        <label class="control-label">Customer</label>
-                        <select id='customer' class="form-control">
+                        <label class="control-label">Customer Type</label>
+                        <select id='cust_type' class="form-control">
                             <option>Select</option>
                             <?php
-                            if (isset($customer_list) && !empty($customer_list)) {
-                                foreach ($customer_list as $val) {
+                            if (isset($all_supplier) && !empty($all_supplier)) {
+                                foreach ($all_supplier as $val) {
                             ?>
-                                    <option value='<?= $val['id'] ?>'><?= $val['customer_name'] ?></option>
+                                    <option value='<?= $val['id'] ?>'><?= $val['store_name'] ?></option>
                             <?php
                                 }
                             }
@@ -192,39 +192,22 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label">Product</label>
-                        <select id='product' class="form-control">
-                            <option>Select</option>
-                            <?php
-                            if (isset($product_list) && !empty($product_list)) {
-                                foreach ($product_list as $val) {
-                            ?>
-                                    <option value='<?= $val['id'] ?>'><?= $val['product_name'] ?></option>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </select>
+
+                <div class="row hide_class">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">From Date</label>
+                            <input type="text" id='from_date' value="<?php echo date('01-m-Y') ?>" class="form-control datepicker" name="inv_date" placeholder="dd-mm-yyyy">
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row hide_class">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label">From Date</label>
-                        <input type="text" id='from_date' value="<?php echo date('01-m-Y') ?>" class="form-control datepicker" name="inv_date" placeholder="dd-mm-yyyy">
+                    <div class="col-md-3 hide_class">
+                        <div class="form-group">
+                            <label class="control-label">To Date</label>
+                            <input type="text" id='to_date' value="<?php echo date('d-m-Y') ?>" class="form-control datepicker" name="inv_date" placeholder="dd-mm-yyyy">
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3 hide_class">
-                    <div class="form-group">
-                        <label class="control-label">To Date</label>
-                        <input type="text" id='to_date' value="<?php echo date('d-m-Y') ?>" class="form-control datepicker" name="inv_date" placeholder="dd-mm-yyyy">
-                    </div>
-                </div>
-                <input type="hidden" name="overdue" id="overdue" value="" />
-                <!-- <div class="col-md-3">
+                    <input type="hidden" name="overdue" id="overdue" value="" />
+                    <!-- <div class="col-md-3">
                      <div class="form-group">
                          <label class="control-label">Overdue / Advance</label>
                          <select name="overdue" id="overdue" class="form-control">
@@ -235,104 +218,104 @@ $data['company_details'] = $this->admin_model->get_company_details();
                          </select>
                      </div>
                  </div>-->
-                <div class="col-md-3">
-                    <div class="form-group mcenter">
-                        <label class="control-label col-md-12 mnone">&nbsp;</label>
-                        <a id='search' class="btn btn-success  mtop4"><span class="glyphicon glyphicon-search "></span> Search</a>
-                        <a class="btn btn-danger1 mtop4" id="clear"><span class="fa fa-close"></span> Clear</a>
+                    <div class="col-md-3">
+                        <div class="form-group mcenter">
+                            <label class="control-label col-md-12 mnone">&nbsp;</label>
+                            <a id='search' class="btn btn-success  mtop4"><span class="glyphicon glyphicon-search "></span> Search</a>
+                            <a class="btn btn-danger1 mtop4" id="clear"><span class="fa fa-close"></span> Clear</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="contentpanel">
-            <div class="panel-body mt-top5">
-                <div class="">
-                    <table id="basicTable_call_back" class="adjustm table table-striped table-bordered responsive dataTable no-footer dtr-inline result_div
+            <div class="contentpanel">
+                <div class="panel-body mt-top5">
+                    <div class="">
+                        <table id="basicTable_call_back" class="adjustm table table-striped table-bordered responsive dataTable no-footer dtr-inline result_div
                            cusinvamt-right cusadvamt-right cuspaid0amt-right cusdisamt-right cusbalance-right cisinvdate-cntr cusduedate-cntr cusstatus-cntr">
-                        <thead>
-                            <tr>
-                                <th class="action-btn-align">S.No</th>
-                                <th class="action-btn-align">Customer Name</th>
-                                <th class='action-btn-align'>Invoice No</th>
-                                <th class="action-btn-align" style="text-align:center;">Invoice Amount</th>
-                                <!--<td class="action-btn-align">Advance Amt</td>-->
-                                <!--<td class="action-btn-align">Paid Amount</td>-->
-                                <!--  <td class="action-btn-align">Return Amt</td>
+                            <thead>
+                                <tr>
+                                    <th class="action-btn-align">S.No</th>
+                                    <th class="action-btn-align">Customer Name</th>
+                                    <th class='action-btn-align'>Invoice No</th>
+                                    <th class="action-btn-align" style="text-align:center;">Invoice Amount</th>
+                                    <!--<td class="action-btn-align">Advance Amt</td>-->
+                                    <!--<td class="action-btn-align">Paid Amount</td>-->
+                                    <!--  <td class="action-btn-align">Return Amt</td>
                                 <td class="action-btn-align">Discount Amt</td>
                                 <td class="action-btn-align">Balance</td>-->
-                                <th class="action-btn-align" style="text-align:center;">Invoice Date</th>
-                                <!-- <td class="action-btn-align">Paid Date</td>
+                                    <th class="action-btn-align" style="text-align:center;">Invoice Date</th>
+                                    <!-- <td class="action-btn-align">Paid Date</td>
                                 <td class=" action-btn-align">Payment Status</td>-->
-                                <th class="hide_class action-btn-align" style="text-align:center;">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="result_data">
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="text_right total-bg"><?= number_format($inv, 2, '.', ',') ?></td>
-                                <!-- <td class="text_right total-bg"><?= number_format($advance, 2, '.', ',') ?></td>-->
-                                <!--  <td class="text_right total-bg"><?= number_format($paid, 2, '.', ',') ?></td>
+                                    <th class="hide_class action-btn-align" style="text-align:center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="result_data">
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text_right total-bg"><?= number_format($inv, 2, '.', ',') ?></td>
+                                    <!-- <td class="text_right total-bg"><?= number_format($advance, 2, '.', ',') ?></td>-->
+                                    <!--  <td class="text_right total-bg"><?= number_format($paid, 2, '.', ',') ?></td>
                               <td class="text_right total-bg"></td>
                                 <td class="text_right total-bg"></td>
                                 <td class="text_right total-bg"><?= number_format($bal, 2, '.', ',') ?></td>-->
-                                <td class=""></td>
-                                <!--  <td class=""></td>
+                                    <td class=""></td>
+                                    <!--  <td class=""></td>
                                 <td class=""></td>-->
-                            </tr>
-                        </tfoot>
-                    </table>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="action-btn-align mb-10">
+                        <button class="btn btn-defaultprint6 print_btn"><span class="glyphicon glyphicon-print"></span> Print</button>
+                        <!--<button class="btn btn-success excel_btn1" ><span class="glyphicon glyphicon-print"></span> Excel</button>-->
+                        <div class="btn-group">
+                            <button type="button" class=" btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-print"></span> Excel
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" class="excel_btn1">Current Entries</a></li>
+                                <li><a href="#" id="excel-prt">Entire Entries</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="action-btn-align mb-10">
-                    <button class="btn btn-defaultprint6 print_btn"><span class="glyphicon glyphicon-print"></span> Print</button>
-                    <!--<button class="btn btn-success excel_btn1" ><span class="glyphicon glyphicon-print"></span> Excel</button>-->
-                    <div class="btn-group">
-                        <button type="button" class=" btn btn-success dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-print"></span> Excel
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#" class="excel_btn1">Current Entries</a></li>
-                            <li><a href="#" id="excel-prt">Entire Entries</a></li>
-                        </ul>
+            </div>
+        </div>
+        <div id="tabs-2" class="tab-content">
+            <div class="contentpanel">
+                <div class="panel-body">
+                    <div id='result_div' class="mscroll">
+                        <b>Chart View Of Local and Non-Local Customers</b>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="pie_chart_div" class="pcenter"></div>
+                            </div>
+                            <div class="col-md-6 pwid50">
+                                <div id="bar_chart_div" class="pcenter"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="action-btn-align mb-10">
+                        <button class="btn btn-defaultprint6 print_btn"><span class="glyphicon glyphicon-print"></span> Print</button>
+                        <button class="btn btn-success excel_btn"><span class="glyphicon glyphicon-print"></span> Excel</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="tabs-2" class="tab-content">
-        <div class="contentpanel">
-            <div class="panel-body">
-                <div id='result_div' class="mscroll">
-                    <b>Chart View Of Local and Non-Local Customers</b>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div id="pie_chart_div" class="pcenter"></div>
-                        </div>
-                        <div class="col-md-6 pwid50">
-                            <div id="bar_chart_div" class="pcenter"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="action-btn-align mb-10">
-                    <button class="btn btn-defaultprint6 print_btn"><span class="glyphicon glyphicon-print"></span> Print</button>
-                    <button class="btn btn-success excel_btn"><span class="glyphicon glyphicon-print"></span> Excel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    $('.print_btn').click(function() {
-        window.print();
-    });
-    $('#clear').on('click', function() {
-        window.location.reload();
-    });
-</script>
+    <script>
+        $('.print_btn').click(function() {
+            window.print();
+        });
+        $('#clear').on('click', function() {
+            window.location.reload();
+        });
+    </script>
 </div><!-- contentpanel -->
 </div><!-- mainpanel -->
 <div id="export_excel"></div>

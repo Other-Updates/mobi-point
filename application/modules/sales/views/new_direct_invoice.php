@@ -1693,7 +1693,7 @@ if (!empty($customers)) {
                             if (categoryname == '') {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
                                 this_val.closest('tr').find('.ime_code_val').removeClass('required');
-                            } else if (categoryname == 'Fresh Mobiles' || categoryname == 'Used Mobiles' || categoryname == "Smart Phone-Brand New" || categoryname == "Smart Phone-REFURBISHED" || categoryname == "FEAUTERE Phone" || categoryname == "Smart Phone") {
+                            } else if (categoryname == 'Fresh Mobiles' || categoryname == 'Used Mobiles' || categoryname == "Smart Phone-Brand New" || categoryname == "Smart Phone-REFURBISHED" || categoryname == " Feature Phone" || categoryname == "Smart Phone") {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
                                 this_val.closest('tr').find('td .ime_code_select').append(option_text);
                                 this_val.closest('tr').find('td .multi_select').fSelect();
@@ -1702,7 +1702,7 @@ if (!empty($customers)) {
                                 // || categoryname !=  "Smart Phone-Brand New" ||  categoryname !=  "Smart Phone-REFURBISHED"
                                 // || categoryname != 'Online-Payment' || categoryname !='Recharge' ){
                                 //     this_val.closest('tr').find('td .ime_code_select').empty();
-                            } else if (categoryname == 'Online-Payment' || categoryname == 'Recharge' || categoryname == 'Money Transfer' || categoryname == 'Payments' || categoryname == 'Service') {
+                            } else if (categoryname == 'Online-Payment' || categoryname == 'Recharge' || categoryname == 'Money Transfer' || categoryname == 'Payments' || categoryname == 'Service' || categoryname == 'Simcards') {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
                                 this_val.closest('tr').find('td .ime_code_select').append("<input type='text' min='0' name='money_transfer[]' />");
                                 this_val.closest('tr').find('.ime_code_val').removeClass('required');

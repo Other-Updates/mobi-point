@@ -19,6 +19,7 @@ class Sales extends MX_Controller
             'sales/quotation_view' => 'no_restriction',
             'sales/invoice_view' => 'no_restriction',
             'sales/invoice_views' => 'no_restriction',
+            'sales/print_view' => 'no_restriction',
             'sales/invoice_edit' => 'no_restriction',
             'sales/fresh_mobile_sale_edit' => 'no_restriction',
             'sales/used_mobile_sale_edit' => 'no_restriction',
@@ -1902,7 +1903,7 @@ class Sales extends MX_Controller
                 foreach ($input['categoty'] as $key => $val) {
                     $insert['q_id'] = $input['quotation']['q_id'];
                     $insert['in_id'] = $input['pc_id'];
-                    $insert['category'] = ($val == '' ? $val : $input['old_cat_id'][$key]);
+                    $insert['category'] = $val;
                     $insert['product_id'] = $input['product_id'][$key];
                     $insert['product_description'] = $input['product_description'][$key];
                     $insert['product_type'] = 1;
@@ -2573,7 +2574,7 @@ class Sales extends MX_Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $ass['shop_name'];
+            // $row[] = $ass['shop_name'];
             $row[] = $ass['store_name'];
             //  $row[] = number_format($ass['net_total'], 2);
             if ($ass['invoice_status'] == 'waiting') {
@@ -2623,6 +2624,8 @@ class Sales extends MX_Controller
                         $invoice_edit = 'used_mobile_sale_edit';
                     elseif ($ass['categoryName'] == 'Accessories')
                         $invoice_edit = 'accessories_sale_edit';
+                    // elseif ($ass['categoryName'] == 'Money Transfer')
+                    //     $invoice_edit = 'accessories_sale_edit';
                     else
                         $invoice_edit = 'invoice_edit';
                     if ($this->user_auth->is_action_allowed('sales', 'invoice', 'edit')) {
