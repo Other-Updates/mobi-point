@@ -9,6 +9,7 @@
     .text_right {
         text-align: right;
     }
+
     .box,
     .box-body,
     .content {
@@ -16,53 +17,66 @@
         margin: 0;
         border-radius: 0;
     }
+
     #top_heading_fix h3 {
         top: -57px;
         left: 6px;
     }
+
     #TB_overlay {
         z-index: 20000 !important;
     }
+
     #TB_window {
         z-index: 25000 !important;
     }
+
     .dialog_black {
         z-index: 30000 !important;
     }
+
     #boxscroll22 {
         max-height: 291px;
         overflow: auto;
         cursor: inherit !important;
     }
+
     .auto-asset-search ul#country-list li:hover {
         background: #c3c3c3;
         cursor: pointer;
     }
+
     .auto-asset-search ul#country-list li {
         background: #dadada;
         margin: 0;
         padding: 5px;
         border-bottom: 1px solid #f3f3f3;
     }
+
     ul li {
         list-style-type: none;
     }
+
     .dropdown-menu {
         min-width: 190px;
     }
+
     .dataTable tbody tr td:last-child,
     .dataTable thead tr th:last-child {
         text-align: right;
     }
+
     .bold_heading {
         font-weight: bold;
     }
+
     .words,
     .goods-condi {
         display: none;
         width: 100%;
         margin-bottom: 20px;
     }
+
     .goods-condi .gc1 {
         border: 1px solid #000;
         float: left;
@@ -70,6 +84,7 @@
         height: 110px;
         padding: 5px;
     }
+
     .goods-condi .gc2 {
         border: 1px solid #000;
         float: left;
@@ -77,6 +92,7 @@
         height: 110px;
         padding: 5px;
     }
+
     .goods-condi .gc3 {
         border: 1px solid #000;
         float: left;
@@ -84,76 +100,122 @@
         height: 110px;
         padding: 5px;
     }
+
     .print_bgclr.table thead th {
         color: #fff !important;
     }
+
     .print_header_tit {
         width: 100%;
         text-align: right;
     }
+
     .m-b-0 {
         margin-bottom: 0px;
     }
+
     .table.table-bordered td:last-child {
         border-right-width: 1px;
     }
+
     .m-0 {
         margin: 0px;
     }
-    .cashbill-tit {background: #003e94; padding: 6px 22px; border-radius:10px; color: #fff; text-align: center;font-size: 25px;display: table;margin: 0 auto; margin-bottom: 20px;}
+
+    .cashbill-tit {
+        background: #003e94;
+        padding: 6px 22px;
+        border-radius: 10px;
+        color: #fff;
+        text-align: center;
+        font-size: 25px;
+        display: table;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+
     @media print {
-        .cashbill-tit {background: #003e94 !important; padding: 6px 22px; border-radius:10px; color: #fff !important; text-align: center;font-size: 25px;display: table; margin-bottom: 20px;}
+        .cashbill-tit {
+            background: #003e94 !important;
+            padding: 6px 22px;
+            border-radius: 10px;
+            color: #fff !important;
+            text-align: center;
+            font-size: 25px;
+            display: table;
+            margin-bottom: 20px;
+        }
+
         .print_header {
             min-height: 110px !important;
             font-size: 14px;
         }
-        .tot-amount, .tot-text {font-size: 20px !important;}
+
+        .tot-amount,
+        .tot-text {
+            font-size: 20px !important;
+        }
+
         .print_header table td {
             padding: 5px !important;
             border: 0 !important;
         }
-        table tr td, .print_header table {
+
+        table tr td,
+        .print_header table {
             border: 1px solid black !important;
         }
+
         .print_header table {
             border-bottom-color: #fff !important;
         }
+
         table tr {
             border-right: 1px solid black !important;
         }
+
         body {
             -webkit-print-color-adjust: exact;
         }
+
         .imeview {
             border-top: 1px solid black !important;
         }
+
         table tr td {
             border: 1px solid black !important;
         }
+
         .table-bordered>tfoot>tr>td {
             border: 1px solid black !important;
         }
+
         .words {
             display: block;
             margin-top: -21px;
         }
+
         .print_bgclr.table>thead:first-child>tr:first-child>th {
             background-color: #003e94 !important;
             -webkit-print-color-adjust;
-            border-color:#003e94 !important;
+            border-color: #003e94 !important;
         }
+
         .print_bgclr thead th {
             color: #fff !important;
             font-weight: bold;
         }
+
         .table-bordered>tfoot>tr> {
             border-top: 1px solid black !important;
             border-bottom: 1px solid black !important;
         }
+
         .tfootbotom {
             margin-top: -5px !important;
             border: 1ps solid black !important;
         }
+
         .table>thead>tr>td,
         .table>tbody>tr>td,
         .table>tfoot>tr>td {
@@ -161,15 +223,18 @@
             line-height: 1.928571;
             font-size: 14px !important;
         }
-        .table>thead>tr>th{
+
+        .table>thead>tr>th {
             padding: 5px 10px 5px 10px !important;
             font-size: 14px !important;
             font-weight: 600 !important;
         }
+
         .goods-condi {
             display: block;
         }
     }
+
     @page {
         size: A4 portrait !important;
         margin: 0.4cm;
@@ -215,6 +280,12 @@
                     </tr>
                 </table>
                 <br>
+
+                <div>
+                    <a href="<?php echo $this->config->item('base_url') . 'print_view' ?>" class="btn btn-defaultprint6 gst"><span class="glyphicon glyphicon-print"></span> GST Print </a>
+                    <a href="<?php echo $this->config->item('base_url') . 'print_view' ?>" class="btn btn-defaultprint6 nogst"><span class="glyphicon glyphicon-print"></span> NOGST Print </a>
+                </div>
+
                 <table class="table table-striped table-bordered responsive print_bgclr m-b-0" id="add_quotation" cellpadding="0" cellspacing="0">
                     <thead style="color:white !important;">
                         <tr style="text-align:center; color:white !important;">
@@ -260,10 +331,11 @@
                         ?>
                                 <tr style="border-bottom:1px solid black;">
                                     <td class="action-btn-align">
-                                    <input type="checkbox" id="box" class="box" name="checkbox" value="" />
+                                        <input type="checkbox" id="box" class="box" name="checkbox" value="" />
                                     </td>
                                     <td>
-                                        <?php echo $vals['product_name'] ?><br/? IMEI : </td> <td class="">
+                                        <?php echo $vals['product_name'] ?><br /? IMEI : </td>
+                                    <td class="">
                                         <?php echo !empty($vals['hsn_sac']) ? $vals['hsn_sac'] : '-'; ?>
                                     </td>
                                     <td class="action-btn-align">
@@ -280,59 +352,59 @@
                         }
                         ?>
                     </tbody>
-                    <?php if($gsttype == 1){ ?>
-                    <tfoot>
-                        <?php
-                        foreach ($val['other_cost'] as $key) {
-                        ?>
-                        <?php }
-                        ?>
-                        <?php
-                        $gst = number_format(($quotation[0]['cgst_price'] + $quotation[0]['sgst_price']), 2)
-                        ?>
-                        <tr>
-                            <td align="right" colspan="4"><b>GST</b></td>
-                            <td align="center">12%</td>
-                            <td align="right"><?php echo $gst; ?></td>
-                        </tr>
-                        <?php if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) { ?>
+                    <?php if ($gsttype == 1) { ?>
+                        <tfoot>
+                            <?php
+                            foreach ($val['other_cost'] as $key) {
+                            ?>
+                            <?php }
+                            ?>
+                            <?php
+                            $gst = number_format(($quotation[0]['cgst_price'] + $quotation[0]['sgst_price']), 2)
+                            ?>
                             <tr>
-                                <td align="right" colspan="4"><b><?php echo $quotation[0]['tax_label']; ?></b></td>
-                                <td align="center">-</td>
-                                <td align="right"><?php echo $quotation[0]['tax']; ?></td>
+                                <td align="right" colspan="4"><b>GST</b></td>
+                                <td align="center">12%</td>
+                                <td align="right"><?php echo $gst; ?></td>
                             </tr>
-                        <?php } ?>
-                    </tfoot>
+                            <?php if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) { ?>
+                                <tr>
+                                    <td align="right" colspan="4"><b><?php echo $quotation[0]['tax_label']; ?></b></td>
+                                    <td align="center">-</td>
+                                    <td align="right"><?php echo $quotation[0]['tax']; ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tfoot>
                     <?php } ?>
                 </table>
                 <table width="100%" class="tfootbotom table table-bordered m-b-0">
                     <tr style="border-bottom:1px solid black; background: #f4f8fb;">
-                    <?php if($gsttype == 1){ ?>
-                        <td width="15%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">Taxable Price : </td>
+                        <?php if ($gsttype == 1) { ?>
+                            <td width="15%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">Taxable Price : </td>
                         <?php } ?>
-                        <?php if($gsttype == 1){ ?>
-                        <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td>
+                        <?php if ($gsttype == 1) { ?>
+                            <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td>
                         <?php } ?>
-                        <?php if($gsttype == 1){ ?>
-                        <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">CGST : </td>
+                        <?php if ($gsttype == 1) { ?>
+                            <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">CGST : </td>
                         <?php } ?>
-                        <?php if($gsttype == 1){ ?>
-                        <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td>
+                        <?php if ($gsttype == 1) { ?>
+                            <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td>
                         <?php } ?>
-                        <?php if($gsttype == 1){ ?>
-                        <?php
-                        $gst_type = $quotation[0]['state_id'];
-                        if ($gst_type == 31) {
-                        ?>
-                            <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">SGST : </td>
-                        <?php } else { ?>
-                            <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">IGST : </td>
-                        <?php
-                        }
-                        ?>
-                         <?php } ?>
-                         <?php if($gsttype == 1){ ?>
-                        <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td>
+                        <?php if ($gsttype == 1) { ?>
+                            <?php
+                            $gst_type = $quotation[0]['state_id'];
+                            if ($gst_type == 31) {
+                            ?>
+                                <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">SGST : </td>
+                            <?php } else { ?>
+                                <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">IGST : </td>
+                            <?php
+                            }
+                            ?>
+                        <?php } ?>
+                        <?php if ($gsttype == 1) { ?>
+                            <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td>
                         <?php } ?>
                         <td width="12%" colspan="" style="text-align:center;font-weight:bold;" class="bor-tb0 tot-text">Net Total : </td>
                         <?php
@@ -442,9 +514,11 @@ if (isset($quotation_details) && !empty($quotation_details)) {
     .heightclass {
         height: auto;
     }
+
     .scrollclass {
         height: 245px;
     }
+
     .modal-dialog {
         width: 420px !important;
         margin: 30px auto;
@@ -465,6 +539,7 @@ if (isset($quotation_details) && !empty($quotation_details)) {
             toastr.error("IME Code Not available", 'Warning Message.!');
         }
     }
+
     function ime_modal_discard(id) {
         $('#ime_modal' + id + '').modal('hide');
     }
@@ -496,8 +571,7 @@ if (isset($quotation_details) && !empty($quotation_details)) {
         $('#approve').click(function() {
             var id = '<?php echo $quotation[0]['id'] ?>';
             var user = '<?php echo $user_info[0]['role'] ?>';
-            if (user == 1)
-            {
+            if (user == 1) {
                 $.ajax({
                     url: BASE_URL + "sales/approve_invoice",
                     type: 'POST',
@@ -525,31 +599,44 @@ if (isset($quotation_details) && !empty($quotation_details)) {
             window.print();
             // ConfirmDialog('Are you sure want to Print invoice ?');
         });
-        function ConfirmDialog(message) {
-            $('<div></div>').appendTo('body')
-                .html('<div><h6><strong>' + message + '</strong></h6></div>')
-                .dialog({
-                    modal: true,
-                    title: 'Print Confirm',
-                    zIndex: 10000,
-                    autoOpen: true,
-                    width: '300px',
-                    resizable: false,
-                    buttons: {
-                        Yes: function() {
-                            // $(obj).removeAttr('onclick');
-                            // $(obj).parents('.Parent').remove();
-                            window.print();
-                            $(this).dialog("close");
-                        },
-                        No: function() {
-                            $(this).dialog("close");
-                        }
+        $('.gst').click(function() {
+            // document.location.href = 'sales/print_view/';
+        });
+
+        // window.print();
+    });
+    $('.nogst').click(function() {
+        // window.print();
+        // document.location.href = 'sales/print_view/';
+    });
+
+
+
+    function ConfirmDialog(message) {
+        $('<div></div>').appendTo('body')
+            .html('<div><h6><strong>' + message + '</strong></h6></div>')
+            .dialog({
+                modal: true,
+                title: 'Print Confirm',
+                zIndex: 10000,
+                autoOpen: true,
+                width: '300px',
+                resizable: false,
+                buttons: {
+                    Yes: function() {
+                        // $(obj).removeAttr('onclick');
+                        // $(obj).parents('.Parent').remove();
+                        window.print();
+                        $(this).dialog("close");
                     },
-                    close: function(event, ui) {
-                        $(this).remove();
+                    No: function() {
+                        $(this).dialog("close");
                     }
-                });
-        }
+                },
+                close: function(event, ui) {
+                    $(this).remove();
+                }
+            });
+    }
     });
 </script>

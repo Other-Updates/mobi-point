@@ -25,7 +25,7 @@
     }
 </style>
 <?php
-$this->config->item('firm_id');
+// $this->config->item('firm_id');
 $this->load->model('admin/admin_model');
 $data['company_details'] = $this->admin_model->get_company_details();
 ?>
@@ -140,7 +140,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
             </div>
         </div>
     </div>
-    <div class="col-md-12 grid-margin stretch-card" id="expense_list_table" style="display:none">
+    <div class="col-md-12 grid-margin stretch-card" id="expense_list_table">
         <div class="card">
             <div class="card-body">
                 <div class="tab-content tab-content-solid">
@@ -176,7 +176,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                                 </tr>
                             </tfoot>
                         </table>
-                        <div class="action-btn-align mb-10" style="display:none">
+                        <div class="action-btn-align mb-10">
                             <button class="btn btn-primary print_btn"><span class="icon-printer"></span> Print</button>
                             <div class="btn-group">
                                 <button type="button" class=" btn btn-success" data-toggle="dropdown">
@@ -252,7 +252,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                     "url": "<?php echo site_url('expenses/expenses_ajaxList/'); ?>",
                     "type": "POST",
                     "data": function(data) {
-                        data.firm_id = $('#firm').val();
+                        // data.firm_id = $('#firm').val();
                         data.cat_id = $('#ex_category').val();
                         data.sub_cat_id = $('#ex_subcat').val();
                         data.from_date = $('#from_date').val();
