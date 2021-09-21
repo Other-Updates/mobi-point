@@ -1,12 +1,10 @@
 <?php $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template'); ?>
+<!--
+<script src="<?php echo $theme_path; ?>/js/jquery-1.8.2.js" type="text/javascript"></script> -->
 <script src="<?php echo $theme_path; ?>/js/jquery-ui-my-1.10.3.min.js"></script>
-<link rel="stylesheet" href="<?php echo $theme_path; ?>/css/bootstrap-select.css" />
-<script src="<?php echo $theme_path; ?>/js/bootstrap-select.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/fSelect.css" />
-<script type="text/javascript" src="<?php echo $theme_path; ?>/js/jquery.scannerdetection.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js//sweetalert.css">
-<script src="<?php echo $theme_path; ?>/js/sweetalert.min.js" type="text/javascript"></script>
-<script type='text/javascript' src='<?= $theme_path; ?>/js/fSelect.js'></script>
+<script src="<?php echo $theme_path; ?>/js/jQuery.print.js"></script>
+<link rel="stylesheet" type="text/css" href="<?= $theme_path; ?>/css/jquery-confirm.min.css" />
+<script type='text/javascript' src='<?= $theme_path; ?>/js/jquery-confirm.min.js'></script>
 <style type="text/css">
     .text_right {
         text-align: right;
@@ -242,12 +240,6 @@
         margin: 0.4cm;
     }
 </style>
-<?php $customers_json = array();
-if (!empty($customers)) {
-    foreach ($customers as $list) {
-        $customers_json[] = '{ id: "' . $list['id'] . '", value: "' . $list['store_name'] . '"}';
-    }
-} ?>
 <div class="mainpanel">
     <div class="hide_class media mt--40">
         <h4 class="hide_class">View Sales Invoice</h4>
@@ -288,25 +280,17 @@ if (!empty($customers)) {
                     </tr>
                 </table>
                 <br>
-                <div class="form-group" style="text-align:center">
-                    <label class="col-sm-2 control-label">Customer Name </label>
-                    <div class="col-sm-2">
-                        <input type="text" width="15%" tabindex="2" name="customer[store_name]" id="customer_name" class='form-control form-align auto_customer' />
-                        <span class="error_msg"></span>
-                        <input type="hidden" name="customer[id]" id="customer_id" class='id_customer  form-align' />
-                        <!--<input type="hidden"  name="quotation[product_id]" id="cust_id" class='id_customer' />-->
-                        <div id="suggesstion-box" class="auto-asset-search "></div>
-                    </div>
+
+                <div>
+                    <a href="<?php echo $this->config->item('base_url') . 'print_view' ?>" class="btn btn-defaultprint6 gst"><span class="glyphicon glyphicon-print"></span> GST Print </a>
+                    <a href="<?php echo $this->config->item('base_url') . 'print_view' ?>" class="btn btn-defaultprint6 nogst"><span class="glyphicon glyphicon-print"></span> NOGST Print </a>
                 </div>
-                <div style="text-align:center">
-                    <button class="btn btn-defaultprint6 print_gst"><span class="glyphicon glyphicon-print"> <a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list/' ?>"></span> GST Print</a></button>
-                    <button class="btn btn-defaultprint6 print_nogst"><span class="glyphicon glyphicon-print"><a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list/' ?>"></span> NO GST Print </a></button>
-                </div>
+
                 <table class="table table-striped table-bordered responsive print_bgclr m-b-0" id="add_quotation" cellpadding="0" cellspacing="0">
                     <thead style="color:white !important;">
                         <tr style="text-align:center; color:white !important;">
                             <th width="1%" class="first_td1 action-btn-align">S.No</th>
-                            <th width="59%" class="first_td1 pro-wid">Product&nbsp;Name&nbsp;&nbsp;&nbsp;</th>
+                            <th width="59%" class="first_td1 pro-wid">Product&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th width="15%" class="first_td1">HSN Code</th>
                             <th width="7%" class="first_td1 action-btn-align ser-wid">QTY</th>
                             <th width="7%" class="text_right">Rate</td>
@@ -347,7 +331,7 @@ if (!empty($customers)) {
                         ?>
                                 <tr style="border-bottom:1px solid black;">
                                     <td class="action-btn-align">
-                                        <input type="checkbox" id="box" class="box" name="checkbox" />
+                                        <input type="checkbox" id="box" class="box" name="checkbox" value="" />
                                     </td>
                                     <td>
                                         <?php echo $vals['product_name'] ?><br /? IMEI : </td>
@@ -368,60 +352,60 @@ if (!empty($customers)) {
                         }
                         ?>
                     </tbody>
-
-                    <tfoot>
-                        <?php
-                        foreach ($val['other_cost'] as $key) {
-                        ?>
-                        <?php }
-                        ?>
-                        <?php
-                        $gst = number_format(($quotation[0]['cgst_price'] + $quotation[0]['sgst_price']), 2)
-                        ?>
-                        <!-- <tr>
-                            <td align="right" colspan="4"><b>GST</b></td>
-                            <td align="center">12%</td>
-                            <td align="right"><?php echo $gst; ?></td>
-                        </tr> -->
-                        <?php if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) { ?>
+                    <?php if ($gsttype == 1) { ?>
+                        <tfoot>
+                            <?php
+                            foreach ($val['other_cost'] as $key) {
+                            ?>
+                            <?php }
+                            ?>
+                            <?php
+                            $gst = number_format(($quotation[0]['cgst_price'] + $quotation[0]['sgst_price']), 2)
+                            ?>
                             <tr>
-                                <td align="right" colspan="4"><b><?php echo $quotation[0]['tax_label']; ?></b></td>
-                                <td align="center">-</td>
-                                <td align="right"><?php echo $quotation[0]['tax']; ?></td>
+                                <td align="right" colspan="4"><b>GST</b></td>
+                                <td align="center">12%</td>
+                                <td align="right"><?php echo $gst; ?></td>
                             </tr>
-                        <?php } ?>
-                    </tfoot>
-
+                            <?php if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) { ?>
+                                <tr>
+                                    <td align="right" colspan="4"><b><?php echo $quotation[0]['tax_label']; ?></b></td>
+                                    <td align="center">-</td>
+                                    <td align="right"><?php echo $quotation[0]['tax']; ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tfoot>
+                    <?php } ?>
                 </table>
                 <table width="100%" class="tfootbotom table table-bordered m-b-0">
                     <tr style="border-bottom:1px solid black; background: #f4f8fb;">
-
-                        <!-- <td width="15%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">Taxable Price : </td> -->
-
-
-                        <!-- <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td> -->
-
-
-                        <!-- <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">CGST : </td> -->
-
-
-                        <!-- <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td> -->
-
-
-                        <?php
-                        $gst_type = $quotation[0]['state_id'];
-                        if ($gst_type == 31) {
-                        ?>
-                            <!-- <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">SGST : </td> -->
-                        <?php } else { ?>
-                            <!-- <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">IGST : </td> -->
-                        <?php
-                        }
-                        ?>
-
-
-                        <!-- <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td> -->
-
+                        <?php if ($gsttype == 1) { ?>
+                            <td width="15%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">Taxable Price : </td>
+                        <?php } ?>
+                        <?php if ($gsttype == 1) { ?>
+                            <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td>
+                        <?php } ?>
+                        <?php if ($gsttype == 1) { ?>
+                            <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">CGST : </td>
+                        <?php } ?>
+                        <?php if ($gsttype == 1) { ?>
+                            <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td>
+                        <?php } ?>
+                        <?php if ($gsttype == 1) { ?>
+                            <?php
+                            $gst_type = $quotation[0]['state_id'];
+                            if ($gst_type == 31) {
+                            ?>
+                                <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">SGST : </td>
+                            <?php } else { ?>
+                                <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">IGST : </td>
+                            <?php
+                            }
+                            ?>
+                        <?php } ?>
+                        <?php if ($gsttype == 1) { ?>
+                            <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td>
+                        <?php } ?>
                         <td width="12%" colspan="" style="text-align:center;font-weight:bold;" class="bor-tb0 tot-text">Net Total : </td>
                         <?php
                         $net_total = $quotation[0]['net_total'];
@@ -516,7 +500,7 @@ if (isset($quotation_details) && !empty($quotation_details)) {
                             </table>
                         </div>
                     </div>
-                    <div class="modal-footer action-btn-align">
+                    <div class="modal-footer action-btn-align" style="">
                         <button type="button" class="btn btn-danger1 " onclick="ime_modal_discard(<?php echo $po_vals["id"]; ?>)"> Discard</button>
                     </div>
                 </div>
@@ -543,193 +527,6 @@ if (isset($quotation_details) && !empty($quotation_details)) {
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('body').on('keydown', 'input#customer_name', function(e) {
-            var firm_id = $('#firm').val();
-            var c_data = [<?php echo implode(',', $customers_json); ?>];
-            // console.log(c_data);
-            $("#customer_name").blur(function() {
-                var keyEvent = $.Event("keydown");
-                keyEvent.keyCode = $.ui.keyCode.ENTER;
-                $(this).trigger(keyEvent);
-                // Stop event propagation if needed
-                return false;
-            }).autocomplete({
-                source: function(request, response) {
-                    // filter array to only entries you want to display limited to 10
-                    /* var outputArray = new Array();
-                     // var nodata = new Array({"id":"0","value":"No Data"});
-                     for (var i = 0; i < c_data.length; i++) {
-                     if (c_data[i].value.toLowerCase().match(request.term.toLowerCase())) {
-                     //console.log(c_data[i]);
-                     outputArray.push(c_data[i]);
-                     }
-                     }
-                     if (outputArray.length == 0) {
-                     var nodata = 'Add new Customer';
-                     outputArray.push(nodata);
-                     }
-                     response(outputArray.slice(0, 10));*/
-                    $.ajax({
-                        type: 'POST',
-                        data: {
-                            firm_id: $('#firm').val()
-                        },
-                        url: "<?php echo $this->config->item('base_url'); ?>" +
-                            "sales/get_customer_by_firm/",
-                        success: function(data) {
-                            data = JSON.parse(data);
-                            var c_data = data;
-                            var outputArray = new Array();
-                            for (var i = 0; i < c_data.length; i++) {
-                                if (c_data[i].value.toLowerCase().match(request.term
-                                        .toLowerCase())) {
-                                    outputArray.push(c_data[i]);
-                                }
-                            }
-                            if (outputArray.length == 0) {
-                                var nodata = 'Add new Customer';
-                                outputArray.push(nodata);
-                            }
-                            response(outputArray.slice(0, 10));
-                        }
-                    });
-                },
-                minLength: 0,
-                autoFocus: true,
-                // select: function(event, ui) {
-                //     if (ui.item.value == "Add new Customer") {
-                //         clear_data();
-                //         $('#test1').modal('toggle');
-                //         return false;
-                //     } else {
-                //         $("#app_table input,select").attr("disabled", false);
-                //         cust_id = ui.item.id;
-                //         $.ajax({
-                //             type: 'POST',
-                //             data: {
-                //                 cust_id: cust_id,
-                //                 firm_id: firm_id
-                //             },
-                //             url: "<?php echo $this->config->item('base_url'); ?>" +
-                //                 "quotation/get_customer/",
-                //             success: function(data) {
-                //                 var result = JSON.parse(data);
-                //                 if (result != null && result.length > 0) {
-                //                     $("#gst_type").val(result[0].state_id);
-                //                     $("#customer_id").val(result[0].id);
-                //                     $("#c_id").val(result[0].id);
-                //                     $("#cus_type").val(result[0].customer_type);
-                //                     $("#customer_name").val(result[0].store_name);
-                //                     $("#customer_no").val(result[0].mobil_number);
-                //                     $("#email_id").val(result[0].email_id);
-                //                     $("#address1").val(result[0].address1);
-                //                     $("#tin").val(result[0].tin);
-                //                     $("#credit_limit").val(result[0].credit_limit);
-                //                     $("#credit_days").val(result[0].credit_days);
-                //                     $("#temp_credit_limit").val(result[0]
-                //                         .temp_credit_limit);
-                //                     $("#approved_by").val(result[0].approved_by);
-                //                     $("#advance").val(result[0].advance);
-                //                     $("#customer_details_label").html(
-                //                         '<span class="label label-success" style="float:right">' +
-                //                         result[0].balance + ' </span>' + result[
-                //                             0].store_name + '<br>' + result[0]
-                //                         .address1 + '<br> Email : ' + result[0]
-                //                         .email_id + '<br> Mobile : ' + result[0]
-                //                         .mobil_number);
-                //                     //                                if (result[0].customer_type == 1 || result[0].customer_type == 3)
-                //                     //                                    $("#bill1").attr('checked', 'checked');
-                //                     //                                else if (result[0].customer_type == 2 || result[0].customer_type == 4)
-                //                     //                                    $("#bill2").attr('checked', 'checked');
-                //                     //                                else
-                //                     //                                    $(".receiver").prop("checked", false);
-                //                     if (result[0].customer_type == 1 || result[0]
-                //                         .customer_type == 3)
-                //                         $("#bill1").attr('checked', false);
-                //                     else if (result[0].customer_type == 2 || result[
-                //                             0].customer_type == 4)
-                //                         $("#bill2").attr('checked', false);
-                //                     else
-                //                         $(".receiver").prop("checked", false);
-                //                     $("#bill1").attr('checked', 'checked');
-                //                     if ($('#gst_type').val() != '') {
-                //                         if ($('#gst_type').val() == 31) {
-                //                             // $('#add_quotation').find(
-                //                             //     'tr td.sgst_td').show();
-                //                             $('#add_quotation').find(
-                //                                 'tr td.igst_td').hide();
-                //                         } else {
-                //                             $('#add_quotation').find(
-                //                                 'tr td.igst_td').show();
-                //                             $('#add_quotation').find(
-                //                                 'tr td.sgst_td').hide();
-                //                         }
-                //                     } else {
-                //                         $('#add_quotation').find('tr td.igst_td')
-                //                             .hide();
-                //                     }
-                //                 } else {
-                //                     alert("111");
-                //                 }
-                //             }
-                //         });
-                //     }
-                //     var prod_array = new Array();
-                //     $(".product_id").each(function() {
-                //         prod_array.push($(this).val());
-                //     });
-                //     //if (!empty(prod_array)) {
-                //     $.ajax({
-                //         type: 'POST',
-                //         data: {
-                //             cust_id: cust_id,
-                //             prod_array: prod_array
-                //         },
-                //         url: "<?php echo $this->config->item('base_url'); ?>" +
-                //             "sales/get_product_cost/",
-                //         success: function(data) {
-                //             var result = JSON.parse(data);
-                //             if (data != null && result.length > 0) {
-                //                 $('input#product_cost').each(function(i) {
-                //                     if (i != 0) {
-                //                         var product_id = '';
-                //                         product_id = $(this).closest('tr')
-                //                             .find('input#product_id').val();
-                //                         var qty = '';
-                //                         qty = $(this).closest('tr').find(
-                //                             'input.qty').val();
-                //                         if (qty == '') {
-                //                             $(this).closest('tr').find(
-                //                                     'input.selling_price')
-                //                                 .val(result[product_id]
-                //                                     .selling_price);
-                //                             $(this).closest('tr').find(
-                //                                 'input.subtotal').val(
-                //                                 '');
-                //                             $(this).closest('tr').find(
-                //                                 'input.gross').val('');
-                //                         } else {
-                //                             $(this).closest('tr').find(
-                //                                     'input.selling_price')
-                //                                 .val(result[product_id]
-                //                                     .selling_price);
-                //                             $(this).closest('tr').find(
-                //                                 '.qty').trigger('keyup');
-                //                             //                                            var price = result[product_id].selling_price * qty;
-                //                             //                                            $(this).closest('tr').find('input.selling_price').val(price);
-                //                         }
-                //                     }
-                //                 });
-                //             }
-                //         }
-                //     });
-                //     //}
-                // }
-            });
-        });
-    });
-
     function ime_modal_open(id, count) {
         if (count > 0) {
             $('#ime_modal' + id + '').modal('show');
@@ -802,52 +599,44 @@ if (isset($quotation_details) && !empty($quotation_details)) {
             window.print();
             // ConfirmDialog('Are you sure want to Print invoice ?');
         });
-        $('.print_gst').click(function() {
-            if ($('[type="checkbox"]').is(":checked")) {
-                window.print();
-
-            } else {
-
-            }
-
-
-        });
-        $('.print_nogst').click(function() {
-            if ($('[type="checkbox"]').is(":checked")) {
-                window.print();
-
-            } else {
-
-            }
-
+        $('.gst').click(function() {
+            // document.location.href = 'sales/print_view/';
         });
 
+        // window.print();
+    });
+    $('.nogst').click(function() {
+        // window.print();
+        // document.location.href = 'sales/print_view/';
+    });
 
-        function ConfirmDialog(message) {
-            $('<div></div>').appendTo('body')
-                .html('<div><h6><strong>' + message + '</strong></h6></div>')
-                .dialog({
-                    modal: true,
-                    title: 'Print Confirm',
-                    zIndex: 10000,
-                    autoOpen: true,
-                    width: '300px',
-                    resizable: false,
-                    buttons: {
-                        Yes: function() {
-                            // $(obj).removeAttr('onclick');
-                            // $(obj).parents('.Parent').remove();
-                            window.print();
-                            $(this).dialog("close");
-                        },
-                        No: function() {
-                            $(this).dialog("close");
-                        }
+
+
+    function ConfirmDialog(message) {
+        $('<div></div>').appendTo('body')
+            .html('<div><h6><strong>' + message + '</strong></h6></div>')
+            .dialog({
+                modal: true,
+                title: 'Print Confirm',
+                zIndex: 10000,
+                autoOpen: true,
+                width: '300px',
+                resizable: false,
+                buttons: {
+                    Yes: function() {
+                        // $(obj).removeAttr('onclick');
+                        // $(obj).parents('.Parent').remove();
+                        window.print();
+                        $(this).dialog("close");
                     },
-                    close: function(event, ui) {
-                        $(this).remove();
+                    No: function() {
+                        $(this).dialog("close");
                     }
-                });
-        }
+                },
+                close: function(event, ui) {
+                    $(this).remove();
+                }
+            });
+    }
     });
 </script>

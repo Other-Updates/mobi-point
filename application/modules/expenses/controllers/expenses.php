@@ -3,9 +3,11 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Expenses extends MX_Controller {
+class Expenses extends MX_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         if (!$this->user_auth->is_logged_in()) {
             redirect($this->config->item('base_url') . 'admin');
@@ -30,42 +32,45 @@ class Expenses extends MX_Controller {
             $this->user_auth->is_permission_allowed();
             redirect($this->config->item('base_url'));
         }
-        
+
         $this->load->model('expenses/expense_model');
         $this->load->model('masters/manage_firms_model');
         $this->load->model('masters/subcategory_model');
         $this->template->write_view('session_msg', 'masters/sess_msg');
     }
 
-    public function index() {
+    public function index()
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $data = array();
-        
+
         $data["category_list"] = $this->subcategory_model->get_all_category_list($client_id);
         //$data['firms'] = $firms = $this->expense_model->get_all_firms();
         $data["firms"] = $firms = $this->manage_firms_model->get_all_firms($client_id);
-        $data['sub_category_list']=$this->subcategory_model->get_all_subcategory_list($client_id);
+        $data['sub_category_list'] = $this->subcategory_model->get_all_subcategory_list($client_id);
         // print_r($data); exit;
         $this->template->write_view('content', 'expenses/index', $data);
         $this->template->render();
     }
 
-    public function expenses_list() {
+    public function expenses_list()
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $data = array();
         // $data['firms'] = $firms = $this->expense_model->get_all_firms();
         $data["firms"] = $firms = $this->manage_firms_model->get_all_firms($client_id);
         $data["category_list"] = $this->subcategory_model->get_all_category_list($client_id);
         $data['expense_details'] = $this->expense_model->get_all_expenses();
-        $data['sub_category_list']=$this->subcategory_model->get_all_subcategory_list($client_id);
-        // echo'<pre>';  
-        // print_r($data); 
+        $data['sub_category_list'] = $this->subcategory_model->get_all_subcategory_list($client_id);
+        // echo'<pre>';
+        // print_r($data);
         //    exit;
         $this->template->write_view('content', 'expenses/expenses_list', $data);
         $this->template->render();
     }
 
-    public function insert_expense() {
+    public function insert_expense()
+    {
         $client_id = $this->user_auth->get_login_client_id();
         if ($this->input->post()) {
             $input = $this->input->post();
@@ -108,20 +113,23 @@ class Expenses extends MX_Controller {
         }
     }
 
-    public function get_subcategory() {
+    public function get_subcategory()
+    {
         $input = $this->input->post('category_id');
         $data = $this->expense_model->getSubCategory($input);
         echo json_encode($data);
     }
 
-    public function get_company_amount() {
+    public function get_company_amount()
+    {
 
         $input = $this->input->post('firm_id');
         $data = $this->expense_model->getCompanyAmt($input);
         echo json_encode($data);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $data = array();
         //$data['firms'] = $firms = $this->expense_model->get_all_firms();
@@ -138,7 +146,8 @@ class Expenses extends MX_Controller {
         $this->template->render();
     }
 
-    public function update_expenses($id) {
+    public function update_expenses($id)
+    {
         $input = array();
         if ($this->input->post()) {
             $input = $this->input->post();
@@ -164,7 +173,8 @@ class Expenses extends MX_Controller {
         }
     }
 
-    public function balance_list() {
+    public function balance_list()
+    {
         $data = array();
         $client_id = $this->user_auth->get_login_client_id();
         $data["firms"] = $firms = $this->manage_firms_model->get_all_firms($client_id);
@@ -174,7 +184,8 @@ class Expenses extends MX_Controller {
         $this->template->render();
     }
 
-    function expenses_ajaxList() {
+    function expenses_ajaxList()
+    {
         $search_data = array();
         $search_data = $this->input->post();
         $list = $this->expense_model->get_datatables($search_data);
@@ -183,6 +194,11 @@ class Expenses extends MX_Controller {
         $no = $_POST['start'];
         foreach ($list as $ass) {
             if ($this->user_auth->is_action_allowed('expenses', 'expenses', 'edit')) {
+                $edit_row = '<a class="tooltips btn btn-info btn-fw btn-xs" href="' . base_url() . 'expenses/edit/' . $ass->id . '"><i class="fa fa-edit"></i></a>';
+            } else {
+                $edit_row = '<a class="tooltips btn btn-info btn-fw btn-xs alerts" href=""><i class="fa fa-edit"></i></a>';
+            }
+            if ($this->user_auth->is_action_allowed('expenses', 'expenses', 'delete')) {
                 $edit_row = '<a class="tooltips btn btn-info btn-fw btn-xs" href="' . base_url() . 'expenses/edit/' . $ass->id . '"><i class="fa fa-edit"></i></a>';
             } else {
                 $edit_row = '<a class="tooltips btn btn-info btn-fw btn-xs alerts" href=""><i class="fa fa-edit"></i></a>';
@@ -210,7 +226,8 @@ class Expenses extends MX_Controller {
         exit;
     }
 
-    function balancesheet_ajaxList() {
+    function balancesheet_ajaxList()
+    {
         $search_data = array();
         $search_data = $this->input->post();
         $list = $this->expense_model->get_balance_datatables($search_data);
@@ -230,7 +247,7 @@ class Expenses extends MX_Controller {
             $row = array();
             $row[] = $no;
             $row[] = $ass->prefix;
-//            $row[] = $ass->company_amount;
+            //            $row[] = $ass->company_amount;
             if ($ass->comments == 1) {
                 $type = 'Sales';
             } elseif ($ass->comments == 2) {
@@ -280,16 +297,18 @@ class Expenses extends MX_Controller {
         exit;
     }
 
-    function getall_expenses_entries() {
+    function getall_expenses_entries()
+    {
 
         $search_data = array();
         $search_data = $this->input->get();
         $expenses_data = $this->expense_model->get_expenses_datas($search_data);
-//        echo "<pre>"; print_r($data);  exit;
+        //        echo "<pre>"; print_r($data);  exit;
         $this->export_all_expenses_csv($expenses_data);
     }
 
-    function export_all_expenses_csv($query, $timezones = array()) {
+    function export_all_expenses_csv($query, $timezones = array())
+    {
 
         // output headers so that the file is downloaded rather than displayed
         header('Content-Type: text/csv; charset=utf-8');
@@ -297,7 +316,7 @@ class Expenses extends MX_Controller {
         // create a file pointer connected to the output stream
         $output = fopen('php://output', 'w');
         // output the column headings
-//        Order has been changes
+        //        Order has been changes
         fputcsv($output, array('S.No', 'Company', 'Expense Type', 'Category', 'Sub Category', 'Mode', 'Expense Amount', 'Created Date'));
         // fetch the data
         //$rows = mysql_query($query);
@@ -311,16 +330,18 @@ class Expenses extends MX_Controller {
         exit;
     }
 
-    function getall_balance_entries() {
+    function getall_balance_entries()
+    {
         $search_data = array();
         $search_data = $this->input->get();
 
         $balance_data = $this->expense_model->get_balance_datas($search_data);
-//        echo "<pre>"; print_r($data);  exit;
+        //        echo "<pre>"; print_r($data);  exit;
         $this->export_all_balance_data_csv($balance_data);
     }
 
-    function export_all_balance_data_csv($query, $timezones = array()) {
+    function export_all_balance_data_csv($query, $timezones = array())
+    {
 
         // output headers so that the file is downloaded rather than displayed
         header('Content-Type: text/csv; charset=utf-8');
@@ -372,5 +393,4 @@ class Expenses extends MX_Controller {
         }
         exit;
     }
-
 }
