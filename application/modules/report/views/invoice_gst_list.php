@@ -96,9 +96,16 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 <div class="form-group">
                     <label class="control-label">Customer Type</label>
                     <select id='cust_type' class="form-control">
-                        <option value="">Select</option>
-                        <option value='1'>B to B</option>
-                        <option value='2'>B to C</option>
+                        <option>Select</option>
+                        <?php
+                        if (isset($all_supplier) && !empty($all_supplier)) {
+                            foreach ($all_supplier as $val) {
+                        ?>
+                                <option value='<?= $val['id'] ?>'><?= $val['store_name'] ?></option>
+                        <?php
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
