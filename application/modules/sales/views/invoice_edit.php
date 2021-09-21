@@ -327,10 +327,10 @@ if (!empty($customers)) {
                                 <input type="radio" tabindex="1" class="receiver" value="credit" name="quotation[bill_type]" <?php echo ($val['bill_type'] == 'credit') ? 'checked' : '' ?> />Credit Sale<br>
                                 <span id="type1" class="error_msg"></span>
                             </td>
-                            <td width="25%"><input type="radio" tabindex="1" class="gst-invoice" value="1" name="quotation[bill_category]" <?php echo ($val['bill_category'] == '1') ? 'checked' : '' ?> disabled />GST
+                            <!-- <td width="25%"><input type="radio" tabindex="1" class="gst-invoice" value="1" name="quotation[bill_category]" <?php echo ($val['bill_category'] == '1') ? 'checked' : '' ?> disabled />GST
                                 <input type="radio" tabindex="1" class="gst-invoice" value="2" name="quotation[bill_category]" <?php echo ($val['bill_category'] == '2') ? 'checked' : '' ?> disabled />NO GST<br>
                                 <span id="type1" class="error_msg"></span>
-                            </td>
+                            </td> -->
                             <?php $gsttype = $val['bill_category']; ?>
                             <td width="10%" class="first_td1"><span class="tdhead">Reference NO :</span> <?php echo $val['q_no']; ?></td>
                             <!-- <td width="25%"></td> -->

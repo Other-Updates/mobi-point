@@ -4747,7 +4747,7 @@ class Sales extends MX_Controller
 
             $row[] = $no;
 
-            $row[] = $ass['shop_name'];
+            // $row[] = $ass['shop_name'];
 
             $row[] = $ass['store_name'];
 

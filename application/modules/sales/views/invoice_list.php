@@ -136,7 +136,7 @@ if (!empty($sales)) {
                     <tr style="text-align:center;">
                         <th class="action-btn-align">S.No</th>
                         <!-- <td class='action-btn-align'>Quotation No</td>-->
-                        <th>Shop Name</th>
+                        <!-- <th>Shop Name</th> -->
                         <th>Customer Name</th>
                         <!--<td class="text_right">Quotation Amount</td>-->
                         <th>Sales Invoice No</th>
@@ -155,7 +155,7 @@ if (!empty($sales)) {
                 <tfoot>
                     <tr>
                         <td></td>
-                        <td></td>
+                        <!-- <td></td> -->
                         <td></td>
                         <td class=""></td>
                         <!-- <td class=""></td>-->

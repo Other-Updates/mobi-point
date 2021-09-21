@@ -368,60 +368,60 @@ if (!empty($customers)) {
                         }
                         ?>
                     </tbody>
-                    <?php if ($gsttype == 1) { ?>
-                        <tfoot>
-                            <?php
-                            foreach ($val['other_cost'] as $key) {
-                            ?>
-                            <?php }
-                            ?>
-                            <?php
-                            $gst = number_format(($quotation[0]['cgst_price'] + $quotation[0]['sgst_price']), 2)
-                            ?>
+
+                    <tfoot>
+                        <?php
+                        foreach ($val['other_cost'] as $key) {
+                        ?>
+                        <?php }
+                        ?>
+                        <?php
+                        $gst = number_format(($quotation[0]['cgst_price'] + $quotation[0]['sgst_price']), 2)
+                        ?>
+                        <!-- <tr>
+                            <td align="right" colspan="4"><b>GST</b></td>
+                            <td align="center">12%</td>
+                            <td align="right"><?php echo $gst; ?></td>
+                        </tr> -->
+                        <?php if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) { ?>
                             <tr>
-                                <td align="right" colspan="4"><b>GST</b></td>
-                                <td align="center">12%</td>
-                                <td align="right"><?php echo $gst; ?></td>
+                                <td align="right" colspan="4"><b><?php echo $quotation[0]['tax_label']; ?></b></td>
+                                <td align="center">-</td>
+                                <td align="right"><?php echo $quotation[0]['tax']; ?></td>
                             </tr>
-                            <?php if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) { ?>
-                                <tr>
-                                    <td align="right" colspan="4"><b><?php echo $quotation[0]['tax_label']; ?></b></td>
-                                    <td align="center">-</td>
-                                    <td align="right"><?php echo $quotation[0]['tax']; ?></td>
-                                </tr>
-                            <?php } ?>
-                        </tfoot>
-                    <?php } ?>
+                        <?php } ?>
+                    </tfoot>
+
                 </table>
                 <table width="100%" class="tfootbotom table table-bordered m-b-0">
                     <tr style="border-bottom:1px solid black; background: #f4f8fb;">
-                        <?php if ($gsttype == 1) { ?>
-                            <td width="15%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">Taxable Price : </td>
-                        <?php } ?>
-                        <?php if ($gsttype == 1) { ?>
-                            <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td>
-                        <?php } ?>
-                        <?php if ($gsttype == 1) { ?>
-                            <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">CGST : </td>
-                        <?php } ?>
-                        <?php if ($gsttype == 1) { ?>
-                            <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td>
-                        <?php } ?>
-                        <?php if ($gsttype == 1) { ?>
-                            <?php
-                            $gst_type = $quotation[0]['state_id'];
-                            if ($gst_type == 31) {
-                            ?>
-                                <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">SGST : </td>
-                            <?php } else { ?>
-                                <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">IGST : </td>
-                            <?php
-                            }
-                            ?>
-                        <?php } ?>
-                        <?php if ($gsttype == 1) { ?>
-                            <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td>
-                        <?php } ?>
+
+                        <!-- <td width="15%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">Taxable Price : </td> -->
+
+
+                        <!-- <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td> -->
+
+
+                        <!-- <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">CGST : </td> -->
+
+
+                        <!-- <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td> -->
+
+
+                        <?php
+                        $gst_type = $quotation[0]['state_id'];
+                        if ($gst_type == 31) {
+                        ?>
+                            <!-- <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">SGST : </td> -->
+                        <?php } else { ?>
+                            <!-- <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">IGST : </td> -->
+                        <?php
+                        }
+                        ?>
+
+
+                        <!-- <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td> -->
+
                         <td width="12%" colspan="" style="text-align:center;font-weight:bold;" class="bor-tb0 tot-text">Net Total : </td>
                         <?php
                         $net_total = $quotation[0]['net_total'];
