@@ -497,7 +497,7 @@ class Customers extends MX_Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $ass->firm_name;
+            // $row[] = $ass->firm_name;
             $row[] = ucfirst($ass->store_name);
             $row[] = $customer_type;
             $row[] = $ass->mobil_number;

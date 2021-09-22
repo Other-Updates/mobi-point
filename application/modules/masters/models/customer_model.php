@@ -3,7 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Customer_model extends CI_Model {
+class Customer_model extends CI_Model
+{
 
     private $table_name = 'customer';
     private $table_name1 = 'master_state';
@@ -17,14 +18,16 @@ class Customer_model extends CI_Model {
     var $column_search = array('u.store_name', 'r.firm_name', 'u.address1', 'u.email_id'); //set column field database for datatable searchable
     var $order = array('u.id' => 'DESC'); // default order
 
-    function __construct() {
+    function __construct()
+    {
 
         parent::__construct();
 
         $this->load->database();
     }
 
-    function getfirm_id_based_on_firm_name($firm_name) {
+    function getfirm_id_based_on_firm_name($firm_name)
+    {
 
         $this->db->select('firm_id');
 
@@ -42,13 +45,15 @@ class Customer_model extends CI_Model {
         }
     }
 
-    function get_firm_name($id) {
+    function get_firm_name($id)
+    {
         $this->db->where('firm_id', $id);
         $data = $this->db->get('erp_manage_firms')->result_array();
         return $data[0]['firm_name'];
     }
 
-    function insert_customer($data) {
+    function insert_customer($data)
+    {
 
         if ($this->db->insert($this->table_name, $data)) {
 
@@ -62,7 +67,8 @@ class Customer_model extends CI_Model {
         return false;
     }
 
-    function insert_state($data) {
+    function insert_state($data)
+    {
 
         if ($this->db->insert($this->table_name1, $data)) {
 
@@ -76,7 +82,8 @@ class Customer_model extends CI_Model {
         return false;
     }
 
-    function state() {
+    function state()
+    {
 
         $this->db->select('*');
 
@@ -92,7 +99,8 @@ class Customer_model extends CI_Model {
         return false;
     }
 
-    function get_all_street() {
+    function get_all_street()
+    {
 
         $this->db->select('street_name');
 
@@ -108,7 +116,8 @@ class Customer_model extends CI_Model {
         return false;
     }
 
-    function get_customer1($id) {
+    function get_customer1($id)
+    {
 
         $this->db->select($this->table_name . '.*');
 
@@ -125,7 +134,8 @@ class Customer_model extends CI_Model {
         return $query;
     }
 
-    function get_customer() {
+    function get_customer()
+    {
 
         $this->db->select($this->table_name . '.*');
 
@@ -147,7 +157,8 @@ class Customer_model extends CI_Model {
         return $query;
     }
 
-    function update_customer($data, $id) {
+    function update_customer($data, $id)
+    {
 
 
 
@@ -162,7 +173,8 @@ class Customer_model extends CI_Model {
         return false;
     }
 
-    function delete_customer($id) {
+    function delete_customer($id)
+    {
 
         $this->db->where('id', $id);
 
@@ -174,7 +186,8 @@ class Customer_model extends CI_Model {
         return false;
     }
 
-    function add_duplicate_email($input) {
+    function add_duplicate_email($input)
+    {
 
 
 
@@ -194,7 +207,8 @@ class Customer_model extends CI_Model {
         }
     }
 
-    public function check_duplicate_email($input) {
+    public function check_duplicate_email($input)
+    {
         $this->db->select('*');
 
         $this->db->where('status', 1);
@@ -211,7 +225,8 @@ class Customer_model extends CI_Model {
         }
     }
 
-    public function check_duplicate_mobile_num($input) {
+    public function check_duplicate_mobile_num($input)
+    {
         $this->db->select('*');
 
         $this->db->where('status', 1);
@@ -228,7 +243,8 @@ class Customer_model extends CI_Model {
         }
     }
 
-    function add_duplicate_mobile($input) {
+    function add_duplicate_mobile($input)
+    {
 
 
 
@@ -248,7 +264,8 @@ class Customer_model extends CI_Model {
         }
     }
 
-    function update_duplicate_email($input, $id) {
+    function update_duplicate_email($input, $id)
+    {
 
         $this->db->select('*');
 
@@ -263,7 +280,8 @@ class Customer_model extends CI_Model {
         return $query;
     }
 
-    function update_duplicate_mobile($input, $id) {
+    function update_duplicate_mobile($input, $id)
+    {
 
         $this->db->select('*');
 
@@ -278,7 +296,8 @@ class Customer_model extends CI_Model {
         return $query;
     }
 
-    function get_customer_by_id($id) {
+    function get_customer_by_id($id)
+    {
 
         $this->db->select($this->table_name . '.store_name');
 
@@ -289,7 +308,8 @@ class Customer_model extends CI_Model {
         return $query;
     }
 
-    function get_customer_with_agent($id) {
+    function get_customer_with_agent($id)
+    {
 
         $this->db->select($this->table_name . '.*');
 
@@ -306,7 +326,8 @@ class Customer_model extends CI_Model {
         return $query;
     }
 
-    function is_customer_name_exist($store_name, $frim, $mobile) {
+    function is_customer_name_exist($store_name, $frim, $mobile)
+    {
 
         $this->db->select($this->table_name . '.id');
 
@@ -331,7 +352,8 @@ class Customer_model extends CI_Model {
         return NULL;
     }
 
-    function is_supplier_name_exist($store_name, $frim) {
+    function is_supplier_name_exist($store_name, $frim)
+    {
 
         $this->db->select($this->vendor . '.id');
 
@@ -354,7 +376,8 @@ class Customer_model extends CI_Model {
         return NULL;
     }
 
-    function insert_supplier($data) {
+    function insert_supplier($data)
+    {
 
         if ($this->db->insert($this->vendor, $data)) {
 
@@ -364,7 +387,8 @@ class Customer_model extends CI_Model {
         return false;
     }
 
-    function update_supplierr($data, $id) {
+    function update_supplierr($data, $id)
+    {
 
         $this->db->where('id', $id);
 
@@ -378,7 +402,8 @@ class Customer_model extends CI_Model {
         return false;
     }
 
-    function get_con_customer_list() {
+    function get_con_customer_list()
+    {
 
         $types = array('3', '4');
 
@@ -398,7 +423,8 @@ class Customer_model extends CI_Model {
         return NULL;
     }
 
-    function get_state_id($state) {
+    function get_state_id($state)
+    {
 
 
 
@@ -420,7 +446,8 @@ class Customer_model extends CI_Model {
         return NULL;
     }
 
-    function _get_datatables_query() {
+    function _get_datatables_query()
+    {
         //Join Table
         $this->db->join($this->joinTable1, 'r.firm_id=u.firm_id');
         $this->db->where('u.status', 1);
@@ -457,7 +484,8 @@ class Customer_model extends CI_Model {
         }
     }
 
-    function get_datatables() {
+    function get_datatables()
+    {
         $this->db->select($this->selectColumn);
         $this->_get_datatables_query();
         $firms = $this->user_auth->get_user_firms();
@@ -467,7 +495,8 @@ class Customer_model extends CI_Model {
         return $query->result();
     }
 
-    function count_filtered() {
+    function count_filtered()
+    {
 
         $this->_get_datatables_query();
 
@@ -476,14 +505,16 @@ class Customer_model extends CI_Model {
         return $query->num_rows();
     }
 
-    function count_all() {
+    function count_all()
+    {
 
         $this->db->from($this->primaryTable);
 
         return $this->db->count_all_results();
     }
 
-    function get_customer_name_by_id($id) {
+    function get_customer_name_by_id($id)
+    {
 
         $this->db->select($this->table_name . '.id,name');
 
@@ -501,7 +532,8 @@ class Customer_model extends CI_Model {
         return NULL;
     }
 
-    function count_local_customers($monthly = 0, $month = NULL) {
+    function count_local_customers($monthly = 0, $month = NULL)
+    {
 
         $types = array('local');
 
@@ -526,7 +558,8 @@ class Customer_model extends CI_Model {
         return NULL;
     }
 
-    function count_non_local_customers($monthly = 0, $month = NULL) {
+    function count_non_local_customers($monthly = 0, $month = NULL)
+    {
 
         $types = array('non-local');
 
@@ -550,5 +583,4 @@ class Customer_model extends CI_Model {
 
         return NULL;
     }
-
 }

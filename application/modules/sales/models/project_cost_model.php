@@ -32,7 +32,7 @@ class Project_cost_model extends CI_Model
     var $joinTable2 = 'erp_invoice c';
     var $primaryTable = 'erp_quotation u';
     var $selectColumn = 'u.id,u.q_no,u.net_total,r.store_name,c.id As i_id,c.net_total As inv_amount,c.inv_id,c.invoice_status,c.payment_status,c.delivery_status,c.contract_customer,c.customer,c.created_date';
-    var $column_order = array(null, 'u.q_no', 'r.store_name', 'u.net_total', 'c.inv_id', 'c.net_total', 'c.created_date', 'c.invoice_status', 'c.payment_status', 'c.delivery_status', null);
+    var $column_order = array(null, 'r.store_name', 'c.inv_id', 'u.q_no',  'u.net_total',  'c.profit_total', 'c.created_date',  null);
     var $column_search = array('u.q_no', 'r.store_name', 'u.net_total', 'c.inv_id', 'c.net_total', 'c.created_date', 'c.invoice_status', 'c.payment_status', 'c.delivery_status');
     var $order = array('u.id' => 'DESC'); // default order
     function __construct()

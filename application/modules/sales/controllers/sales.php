@@ -1136,6 +1136,10 @@ class Sales extends MX_Controller
                         $this->stock_details($insert, $inv_id);
                         unset($insert['firm']);
                     }
+                    // print_r($input['money_transfer']);
+                    // echo "<pre>";
+                    // print_r($insert_arr);
+                    // exit;
                     $this->project_cost_model->insert_invoice_details($insert_arr);
                     $this->project_cost_model->insert_invoice_product_details($insert_arr);
                 }

@@ -2,7 +2,9 @@
 <!-- <script type="text/javascript" src="<?php echo $theme_path; ?>/js/jquery-1.8.2.js"></script> -->
 <script type="text/javascript" src="<?php echo $theme_path; ?>/js/jquery-ui-1.10.3.min.js"></script>
 <style type="text/css">
-    .td-pad { padding:6px; }
+    .td-pad {
+        padding: 6px;
+    }
 </style>
 <div class="mainpanel">
     <div class="media"></div>
@@ -15,7 +17,7 @@
                 <!-- Nav tabs -->
                 <ul class="list-inline tabs-nav tabsize-17" role="tablist">
                     <li role="presentation" class="active"><a href="#userrole-details" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false">User Role List</a></li>
-                    <li role="presentation" class=""><a href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'add')): ?>#userrole<?php endif ?>" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="false" class="<?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'add')): ?>alerts<?php endif ?>">Add User Role</a></li>
+                    <li role="presentation" class=""><a href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>#userrole<?php endif ?>" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="false" class="<?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>alerts<?php endif ?>">Add User Role</a></li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content tabbor">
@@ -36,7 +38,7 @@
                                                         </div>
                                                     </div>
                                                     <span id="user_role_error" class="reset" style="color:#F00;"></span>
-                                                    <span id="duplica_user" class="val"  style="color:#F00;"></span>
+                                                    <span id="duplica_user" class="val" style="color:#F00;"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -53,7 +55,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane active tablelist" id="userrole-details">
                         <div class="frameset1">
-                            <table id="basicTable" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline" >
+                            <table id="basicTable" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline">
                                 <thead>
                                     <tr>
                                         <th class='action-btn-align'>S.No</th>
@@ -67,14 +69,15 @@
                                         $i = 1;
                                         foreach ($user_roles as $list) {
                                             if ($list['id'] != 0) {
-                                                ?>
-                                                <tr><td class="first_td"><?php echo $i; ?></td>
+                                    ?>
+                                                <tr>
+                                                    <td class="first_td"><?php echo $i; ?></td>
                                                     <td><?php echo ucfirst($list['user_role']); ?></td>
                                                     <td class="action-btn-align">
-                                                        <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'edit')): ?><?php echo base_url() . 'masters/user_roles/user_permissions/' . $list['id']; ?><?php endif ?>" class="tooltips btn btn-default btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'edit')): ?>alerts<?php endif ?>" title="User Permissions"><span class="fa fa-gear"></span></a>&nbsp;
+                                                        <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'edit')) : ?><?php echo base_url() . 'masters/user_roles/user_permissions/' . $list['id']; ?><?php endif ?>" class="tooltips btn btn-default btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'edit')) : ?>alerts<?php endif ?>" title="User Permissions"><span class="fa fa-gear"></span></a>&nbsp;
                                                     </td>
                                                 </tr>
-                                                <?php
+                                        <?php
                                                 $i++;
                                             }
                                         }
@@ -83,7 +86,7 @@
                                         <tr>
                                             <td colspan="3">No User Roles found</td>
                                         </tr>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                 </tbody>
@@ -97,11 +100,11 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).on('click', '.alerts', function () {
+    $(document).on('click', '.alerts', function() {
         sweetAlert("Oops...", "This Access is blocked!", "error");
         return false;
     });
-    $('#user_role').on('blur', function () {
+    $('#user_role').on('blur', function() {
         var user_role = $('#user_role').val();
         if (user_role == '' || user_role == null || user_role.trim().length == 0) {
             $('#user_role_error').html('Required Field');
@@ -110,7 +113,7 @@
         }
     });
 
-    $('#submit').on('click', function () {
+    $('#submit').on('click', function() {
         var i = 0;
         var user_role = $('#user_role').val();
         if (user_role == '' || user_role == null || user_role.trim().length == 0) {
@@ -121,8 +124,7 @@
         }
 
         var user = $('#duplica_user').html();
-        if ((user.trim()).length > 0)
-        {
+        if ((user.trim()).length > 0) {
             i = 1;
         }
         if (i == 1) {
@@ -131,19 +133,18 @@
             return true;
         }
     });
-    $("#user_role").on('blur', function ()
-    {
+    $("#user_role").on('blur', function() {
         email = $("#user_role").val();
-        $.ajax(
-                {
-                    url: BASE_URL + "masters/user_roles/add_duplicate_user",
-                    type: 'get',
-                    data: {value1: email},
-                    success: function (result)
-                    {
-                        $("#duplica_user").html(result);
-                    }
-                });
+        $.ajax({
+            url: BASE_URL + "masters/user_roles/add_duplicate_user",
+            type: 'get',
+            data: {
+                value1: email
+            },
+            success: function(result) {
+                $("#duplica_user").html(result);
+            }
+        });
     });
 </script>
 <br />
@@ -151,9 +152,8 @@
 if (isset($user_roles) && !empty($user_roles)) {
     $i = 0;
     foreach ($user_roles as $role) {
-        ?>
-        <div id="test1_<?php echo $role['id']; ?>" class="modal fade in" tabindex="-1"
-             role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" align="center">
+?>
+        <div id="test1_<?php echo $role['id']; ?>" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" align="center">
             <div class="modal-dialog">
                 <div class="modal-content modalcontent-top">
                     <div class="modal-header modal-padding modalcolor"><a class="close modal-close closecolor" data-dismiss="modal">×</a>
@@ -183,7 +183,7 @@ if (isset($user_roles) && !empty($user_roles)) {
                 </div>
             </div>
         </div>
-        <?php
+<?php
     }
 }
 ?>
@@ -191,34 +191,42 @@ if (isset($user_roles) && !empty($user_roles)) {
 <?php
 if (isset($user_roles) && !empty($user_roles)) {
     foreach ($user_roles as $role) {
-        ?>
+?>
         <div id="test3_<?php echo $role['id']; ?>" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" align="center">
-            <div class="modal-dialog"><div class="modal-content modalcontent-top"><div class="modal-header modal-padding modalcolor"><a class="close modal-close closecolor" data-dismiss="modal">×</a><h4 class="inactivepop">In-Active Fit</h4><h3 id="myModalLabel">
-                    </div><div class="modal-body">
+            <div class="modal-dialog">
+                <div class="modal-content modalcontent-top">
+                    <div class="modal-header modal-padding modalcolor"><a class="close modal-close closecolor" data-dismiss="modal">×</a>
+                        <h4 class="inactivepop">In-Active Fit</h4>
+                        <h3 id="myModalLabel">
+                    </div>
+                    <div class="modal-body">
                         Do you want In-Active? &nbsp; <strong><?php echo $role['user_role']; ?></strong>
                         <input type="hidden" value="<?php echo $role['id']; ?>" id="hidin" class="hidin" />
-                    </div><div class="modal-footer action-btn-align">
+                    </div>
+                    <div class="modal-footer action-btn-align">
                         <button class="btn btn-primary delete_yes yesin" id="yesin">Yes</button>
-                        <button type="button" class="btn btn-danger delete_all"  data-dismiss="modal" id="no"> No</button>
+                        <button type="button" class="btn btn-danger delete_all" data-dismiss="modal" id="no"> No</button>
                     </div>
                 </div>
             </div>
         </div>
-        <?php
+<?php
     }
 }
 ?>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.delete_yes').on('click', function () {
+    $(document).ready(function() {
+        $('.delete_yes').on('click', function() {
             for_loading('Loading Data Please Wait...');
             var hidin = $(this).parent().parent().find('.hidin').val();
             $.ajax({
                 url: BASE_URL + 'masters/user_roles/delete',
                 type: 'get',
-                data: {value1: hidin},
-                success: function (result) {
+                data: {
+                    value1: hidin
+                },
+                success: function(result) {
                     window.location.reload(BASE_URL + 'masters/user_roles');
                     for_response('Deleted Successfully...');
                 }
@@ -228,7 +236,7 @@ if (isset($user_roles) && !empty($user_roles)) {
         $('.fade').css('display', 'none');
     });
 
-    $('.up_fit').on('blur', function () {
+    $('.up_fit').on('blur', function() {
         var up_fit = $(this).parent().parent().find('.up_fit').val();
         var m = $(this).offsetParent().find('.upfiterror');
         if (up_fit == '' || up_fit == null || up_fit.trim().length == 0) {
@@ -238,12 +246,12 @@ if (isset($user_roles) && !empty($user_roles)) {
         }
     });
 
-    $('#cancel').on('click', function () {
+    $('#cancel').on('click', function() {
         $('.reset').html('');
         $('.dup').html('');
     });
 
-    $('#edit').on('click', function () {
+    $('#edit').on('click', function() {
         var i = 0;
         var id = $(this).parent().parent().find('.id').val();
         var up_fit = $(this).parent().parent().find('.up_fit').val();
@@ -265,8 +273,12 @@ if (isset($user_roles) && !empty($user_roles)) {
             $.ajax({
                 url: BASE_URL + 'masters/user_roles/update_user_role',
                 type: 'POST',
-                data: {value1: id, value2: up_fit, value3: up_per},
-                success: function (result) {
+                data: {
+                    value1: id,
+                    value2: up_fit,
+                    value3: up_per
+                },
+                success: function(result) {
                     window.location.reload(BASE_URL + 'masters/user_roles');
                     for_response('Updated Successfully...');
                 }
@@ -276,7 +288,7 @@ if (isset($user_roles) && !empty($user_roles)) {
         $('.fade').css('display', 'none');
     });
 
-    $('#no').on('click', function () {
+    $('#no').on('click', function() {
         var h_fit = $(this).parent().parent().parent().find('.h_fit').val();
         $(this).parent().parent().find('.up_fit').val(h_fit);
         var m = $(this).offsetParent().find('.upfiterror');

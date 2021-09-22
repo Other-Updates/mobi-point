@@ -410,8 +410,8 @@ if (!empty($all_street)) {
                             <table id="example" class="display dataTable table table-striped table-bordered responsive dataTable dtr-inline no-footer " cellspacing="0" width="100%">
                                 <thead>
                                     <tr style="text-align:center;">
-                                        <th style="text-align:center;" class="sorting">S.No</th>
-                                        <th style="text-align:center;">Shop Name</th>
+                                        <th style="text-align:center;">S.No</th>
+                                        <!-- <th style="text-align:center;">Name</th> -->
                                         <th style="text-align:center;">Customer Name</th>
                                         <th style="text-align:center;">Customer Type</th>
                                         <th style="text-align:center;">Mobile Number</th>
@@ -521,12 +521,12 @@ if (isset($customer) && !empty($customer)) {
                 "url": "<?php echo site_url('masters/customers/ajaxList/'); ?>",
                 "type": "POST",
                 sucess: function(data) {
-                    console.log(data);
+                    // console.log(data);
                 }
             },
             //Set column definition initialisation properties.
             "columnDefs": [{
-                    "targets": [0, 5], //first column / numbering column
+                    "targets": [0, 6], //first column / numbering column
                     "orderable": false, //set not orderable
                 },
                 {

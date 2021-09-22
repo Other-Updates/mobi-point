@@ -453,17 +453,64 @@
         calculate_function();
     });
 
+    // function calculate_function() {
+    //     var final_qty = 0;
+    //     var final_sub_total = 0;
+    //     var cgst = 0;
+    //     var sgst = 0;
+    //     $('.return_qty').each(function() {
+    //         var rq = $(this).closest('tr').find('.return_qty');
+    //         var qty = $(this).closest('tr').find('.qty');
+    //         var qty = $(this).closest('tr').find('.delivery_qty');
+    //         var percost = $(this).closest('tr').find('.percost');
+    //         var pertax = $(this).closest('tr').find('.pertax');
+    //         if ($('#gst_type').val() != '') {
+    //             if ($('#gst_type').val() == 31) {
+    //                 gst = $(this).closest('tr').find('.gst');
+    //             } else {
+    //                 gst = $(this).closest('tr').find('.igst');
+    //             }
+    //         }
+    //         var subtotal = $(this).closest('tr').find('.subtotal');
+    //         var discount = $(this).closest('tr').find('.discount');
+    //         var transport = $(this).closest('tr').find('.transport');
+    //         if ((Number(qty.val()) - Number(rq.val())) != 0) {
+    //             pertax1 = Number(pertax.val() / 100) * Number(percost.val());
+    //             gst1 = Number(gst.val() / 100) * Number(percost.val());
+    //             discount1 = Number(discount.val() / 100) * Number(percost.val());
+    //             sub_total1 = ((Number(qty.val()) - Number(rq.val())) * Number(percost.val())) + (pertax1 * (Number(qty.val()) - Number(rq.val()))) + (gst1 * (Number(qty.val()) - Number(rq.val())));
+    //             sub_total = (sub_total1 + Number(transport.val())) - (discount1 * (Number(qty.val()) - Number(rq.val())));
+    //             subtotal.val(sub_total.toFixed(2));
+    //             final_qty = final_qty + (Number(qty.val()) - Number(rq.val()));
+    //             final_sub_total = final_sub_total + sub_total;
+    //         } else {
+    //             sub_total = 0
+    //             subtotal.val(sub_total.toFixed(2));
+    //             final_sub_total = final_sub_total + sub_total;
+    //         }
+    //     });
+    //     $('.total_qty').val(final_qty);
+    //     // console.log(final_sub_total);
+    //     $('.final_sub_total').val(final_sub_total.toFixed(2));
+    //     $('.final_amt').val((final_sub_total + Number($('.totaltax').val())).toFixed(2));
+    // }
     function calculate_function() {
         var final_qty = 0;
         var final_sub_total = 0;
+        var transport = Number($('.transport').val());
+        var labour = Number($('.labour').val());
+        var advance = Number($('.advance').val());
         var cgst = 0;
         var sgst = 0;
         $('.return_qty').each(function() {
             var rq = $(this).closest('tr').find('.return_qty');
-            // var qty = $(this).closest('tr').find('.qty');
-            var qty = $(this).closest('tr').find('.delivery_qty');
+            var qty = $(this).closest('tr').find('.qty');
             var percost = $(this).closest('tr').find('.percost');
             var pertax = $(this).closest('tr').find('.pertax');
+            var subtotal = $(this).closest('tr').find('.subtotal');
+            // var transport = $(this).closest('tr').find('.transport');
+            // var labour = $(this).closest('tr').find('.labour');
+            var round_off = $(this).closest('tr').find('.round_off');
             if ($('#gst_type').val() != '') {
                 if ($('#gst_type').val() == 31) {
                     gst = $(this).closest('tr').find('.gst');
@@ -471,28 +518,49 @@
                     gst = $(this).closest('tr').find('.igst');
                 }
             }
-            var subtotal = $(this).closest('tr').find('.subtotal');
-            var discount = $(this).closest('tr').find('.discount');
-            var transport = $(this).closest('tr').find('.transport');
-            if ((Number(qty.val()) - Number(rq.val())) != 0) {
+            // var subtotal = $(this).closest('tr').find('.subtotal');
+            //  var discount = $(this).closest('tr').find('.discount');
+            if (Number(qty.val()) != 0) {
+                tot = Number(qty.val()) * Number(percost.val());
+                $(this).closest('tr').find('.gross').val(tot);
+                taxless = Number(qty.val()) * Number(percost.val());
                 pertax1 = Number(pertax.val() / 100) * Number(percost.val());
                 gst1 = Number(gst.val() / 100) * Number(percost.val());
-                discount1 = Number(discount.val() / 100) * Number(percost.val());
-                sub_total1 = ((Number(qty.val()) - Number(rq.val())) * Number(percost.val())) + (pertax1 * (Number(qty.val()) - Number(rq.val()))) + (gst1 * (Number(qty.val()) - Number(rq.val())));
-                sub_total = (sub_total1 + Number(transport.val())) - (discount1 * (Number(qty.val()) - Number(rq.val())));
+                // cgst += Number(pertax.val() / 100) * taxless;
+                // sgst += Number(gst.val() / 100) * taxless;
+                cgst += (pertax1 * (Number(qty.val()) - Number(rq.val())))
+                sgst += (gst1 * (Number(qty.val()) - Number(rq.val())))
+                // discount1 = Number(discount.val() / 100) * Number(percost.val());
+                var discount1 = 0;
+                sub_total1 = ((Number(qty.val()) - Number(rq.val())) * Number(percost.val()));
+                sub_total = sub_total1 - (discount1 * (Number(qty.val()) - Number(rq.val())));
                 subtotal.val(sub_total.toFixed(2));
                 final_qty = final_qty + (Number(qty.val()) - Number(rq.val()));
                 final_sub_total = final_sub_total + sub_total;
-            } else {
-                sub_total = 0
-                subtotal.val(sub_total.toFixed(2));
-                final_sub_total = final_sub_total + sub_total;
             }
         });
+        $('.add_cgst').val(cgst.toFixed(2));
+        $('.add_sgst').val(sgst.toFixed(2));
         $('.total_qty').val(final_qty);
-        // console.log(final_sub_total);
         $('.final_sub_total').val(final_sub_total.toFixed(2));
-        $('.final_amt').val((final_sub_total + Number($('.totaltax').val())).toFixed(2));
+        //$('.temp_sub_total').val(temp_sub_total);
+        //other item total
+        total_item = 0;
+        $('.totaltax').each(function() {
+            var totaltax = $(this);
+            if (Number(totaltax.val()) != 0) {
+                total_item = total_item + Number(totaltax.val());
+            }
+        });
+        var final_amt = final_sub_total + total_item + transport + labour + cgst + sgst;
+        final_amt = final_amt - advance;
+        value = final_amt.toFixed(2);
+        var round = value.split('.');
+        $('.round_off').val('0.' + round[1]);
+        var temp_round_off_minus = Number($('.round_off').val());
+        var finals = final_amt - Number(temp_round_off_minus);
+        finals = Math.abs(finals);
+        $('.final_amt').val(final_sub_total.toFixed(2));
     }
     $(document).ready(function() {
         jQuery('.datepicker').datepicker();

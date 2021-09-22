@@ -187,7 +187,7 @@ class Suppliers extends MX_Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $ass->firm_name;
+            // $row[] = $ass->firm_name;
             $row[] = $ass->store_name;
             $row[] = $ass->email_id;
             $row[] = $ass->mobil_number;

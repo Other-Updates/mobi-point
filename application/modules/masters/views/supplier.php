@@ -1,5 +1,4 @@
 <?php $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template'); ?>
-<!--<script src="<?php echo $theme_path; ?>/js/jquery-1.8.2.js" type="text/javascript"></script> -->
 <script src="<?php echo $theme_path; ?>/js/jquery-ui-1.10.3.min.js"></script>
 <style>
     .input-group-addon .fa {
@@ -345,7 +344,7 @@
                                 <thead>
                                     <tr>
                                         <th class='action-btn-align'>S.No</th>
-                                        <th style="text-align:center;">Shop Name</th>
+                                        <!-- <th style="text-align:center;">Shop Name</th> -->
                                         <th style="text-align:center;">Supplier Name</th>
                                         <th style="text-align:center;">Email Address</th>
                                         <th style="text-align:center;">Mobile Number</th>
@@ -457,7 +456,7 @@
                     },
                     //Set column definition initialisation properties.
                     "columnDefs": [{
-                            "targets": [0, 7], //first column / numbering column
+                            "targets": [0, 5], //first column / numbering column
                             "orderable": false, //set not orderable
                         },
                         {

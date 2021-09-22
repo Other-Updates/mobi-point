@@ -285,7 +285,7 @@ if (!empty($sales)) {
                 // Total over all pages
                 symbol = " ";
                 var numFormat = $.fn.dataTable.render.number('\,', '.', 2, symbol).display;
-                var cols = [4, 5, 6];
+                var cols = [4, 5];
                 for (x in cols) {
                     total = api.column(cols[x]).data().reduce(function(a, b) {
                         return (intVal(a) + intVal(b)).toFixed(2);

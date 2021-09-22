@@ -472,13 +472,14 @@ if (!empty($brand)) {
                             </div>
                         </form>
                     </div>
+
                     <div role="tabpanel" class="tab-pane active tablelist" id="field-agent-details">
                         <div class="frameset_big1">
                             <table id="example" class="display dataTable table table-striped table-bordered responsive dataTable dtr-inline no-footer aln-right sale_right" cellspacing="0" width="100%">
                                 <thead>
                                     <tr style="text-align:center;">
                                         <th width="5%" class='action-btn-align'>S.No</th>
-                                        <th width="10%" style="text-align:center;">Shop Name</th>
+                                        <!-- <th width="10%" style="text-align:center;">Shop Name</th> -->
                                         <th width="15%" style="text-align:center;">Product Name</th>
                                         <th width="12%" style="text-align:center;">Category Name</th>
                                         <th width="12%" style="text-align:center;">Model Name</th>
@@ -504,6 +505,7 @@ if (!empty($brand)) {
         </div>
     </div>
 </div>
+
 <div id="myModal" class="modal fade" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -616,8 +618,8 @@ if (!empty($brand)) {
         //datatables
         table = jQuery('#example').DataTable({
             "lengthMenu": [
-                [10, 25, 50, 100, -1],
-                [10, 25, 50, 100, "All"]
+                [50, 100, 500, -1],
+                [50, 100, 500, "All"]
             ],
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -630,7 +632,7 @@ if (!empty($brand)) {
             },
             //Set column definition initialisation properties.
             "columnDefs": [{
-                    "targets": [0, 7], //first column / numbering column
+                    "targets": [0, 6], //first column / numbering column
                     "orderable": false, //set not orderable
                 },
                 {

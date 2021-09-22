@@ -3,7 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Stock_model extends CI_Model {
+class Stock_model extends CI_Model
+{
 
     private $erp_stock = 'erp_stock';
     private $erp_stock_history = 'erp_stock_history';
@@ -21,11 +22,13 @@ class Stock_model extends CI_Model {
     var $column_search = array('r.firm_name', 'c.categoryName', 'p.product_name', 'b.brands', 'u.quantity', 'p.cost_price'); //set column field database for datatable searchable
     var $order = array('u.id' => 'ASC '); // default order
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    public function get_all_stock($serch_data) {
+    public function get_all_stock($serch_data)
+    {
 
 
         $this->db->select('erp_category.categoryName,erp_product.product_name,erp_brand.brands,erp_stock.quantity,erp_product.model_no,erp_manage_firms.firm_name,erp_stock.id, erp_product.cost_price, erp_product.cgst, erp_product.sgst');
@@ -90,7 +93,8 @@ class Stock_model extends CI_Model {
         return false;
     }
 
-    public function get_all_stock_by_id($id) {
+    public function get_all_stock_by_id($id)
+    {
         $this->db->select('erp_category.categoryName,erp_product.product_name,erp_brand.brands,erp_stock.quantity');
         $this->db->join('erp_category', 'erp_category.id=erp_stock.category');
         $this->db->join('erp_product', 'erp_product.id=erp_stock.product_id');
@@ -102,12 +106,13 @@ class Stock_model extends CI_Model {
         return false;
     }
 
-    function _get_datatables_query($search_data = array()) {
+    function _get_datatables_query($search_data = array())
+    {
         //Join Table
         $this->db->join($this->joinTable1, 'r.firm_id=u.firm_id', 'LEFT');
         $this->db->join($this->joinTable2, 'c.cat_id=u.category', 'LEFT');
         $this->db->join($this->joinTable3, 'p.id=u.product_id', 'LEFT');
-//        $this->db->join($this->joinTable4, 'b.id=u.brand', 'LEFT');
+        //        $this->db->join($this->joinTable4, 'b.id=u.brand', 'LEFT');
         $this->db->join($this->joinTable4, 'b.id=p.brand_id', 'LEFT');
         $this->db->where('u.category !=', 0);
         $this->db->where('u.product_id !=', 0);
@@ -133,12 +138,12 @@ class Stock_model extends CI_Model {
             $i++;
         }
 
-        if ($search_data['category'] != '' || $search_data['category'] != 'Select' || $search_data['product'] != '') {
+        if ($search_data['category'] != '' || $search_data['category'] != 'Select') {
             if ($search_data['category'] != '') { // first loop
                 $this->db->where('u.category', $search_data['category']);
             }
         }
-        if ($search_data['product'] != '' || $search_data['product'] != 'Select' || $search_data['product'] != '') {
+        if ($search_data['product'] != '' || $search_data['product'] != 'Select') {
             if ($search_data['product'] != '') { // first loop
                 $this->db->where_in('u.product_id', $search_data['product']);
             }
@@ -153,7 +158,8 @@ class Stock_model extends CI_Model {
         }
     }
 
-    function get_firm_name($id) {
+    function get_firm_name($id)
+    {
 
         $this->db->select('firm_name,firm_id');
         $this->db->where_in('firm_id', $id);
@@ -161,7 +167,8 @@ class Stock_model extends CI_Model {
         return $query;
     }
 
-    function get_datatables($search_data, $custom_col = NULL) {
+    function get_datatables($search_data, $custom_col = NULL)
+    {
         if ($custom_col != NULL) {
             $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,p.model_no,r.firm_name,p.cost_price,p.cgst,p.sgst,p.cost_price_without_gst';
             $this->db->select($selectColumn);
@@ -177,7 +184,8 @@ class Stock_model extends CI_Model {
         $this->_get_datatables_query($search_data);
         if ($_POST['length'] != -1) {
             $this->db->limit($_POST['length'], $_POST['start']);
-        }if ($search_data['length'] != -1) {
+        }
+        if ($search_data['length'] != -1) {
             $this->db->limit($search_data['length'], $search_data['start']);
         }
         $query = $this->db->get();
@@ -188,13 +196,15 @@ class Stock_model extends CI_Model {
         return $query->result();
     }
 
-    function count_filtered() {
+    function count_filtered()
+    {
         $this->_get_datatables_query();
         $query = $this->db->get();
         return $query->num_rows();
     }
 
-    function count_all() {
+    function count_all()
+    {
         $firms = $this->user_auth->get_user_firms();
         $frim_id = array();
         foreach ($firms as $value) {
@@ -205,7 +215,8 @@ class Stock_model extends CI_Model {
         return $this->db->count_all_results();
     }
 
-    public function get_all_stock_for_report($search = NULL, $custom_col = NULL) {
+    public function get_all_stock_for_report($search = NULL, $custom_col = NULL)
+    {
         //$this->db->select('(select SUM(erp_stock.quantity) from erp_stock where product_id = erp_product.id) as individual');
 
         $firms = $this->user_auth->get_user_firms();
@@ -262,7 +273,8 @@ class Stock_model extends CI_Model {
         return false;
     }
 
-    public function get_all_stock_for_stockreport($search = NULL, $custom_col = NULL) {
+    public function get_all_stock_for_stockreport($search = NULL, $custom_col = NULL)
+    {
 
         //echo "Comes here..";
         //echo "<pre>";
@@ -326,12 +338,12 @@ class Stock_model extends CI_Model {
         return false;
     }
 
-    public function update_stock($id, $data) {
+    public function update_stock($id, $data)
+    {
         $this->db->where('erp_stock' . '.id', $id);
         if ($this->db->update('erp_stock', $data)) {
             return true;
         }
         return false;
     }
-
 }

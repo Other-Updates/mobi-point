@@ -1377,7 +1377,7 @@ class Purchase_order extends MX_Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $ass['firm_name'];
+            // $row[] = $ass['firm_name'];
             $row[] = $ass['po_no'];
             // $row[] = ($ass['pr_status'] == 'approved') ? $ass['po_no'] : '-';
             $row[] = $ass['store_name'];

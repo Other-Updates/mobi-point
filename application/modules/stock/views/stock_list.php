@@ -214,18 +214,14 @@ $data['company_details'] = $this->admin_model->get_company_details();
             },
             //Set column definition initialisation properties.
             "columnDefs": [{
-                "targets": [0, 5], //first column / numbering column
-                "orderable": false, //set not orderable
-            }, ],
-            responsive: true,
-            columnDefs: [{
-                    responsivePriority: 1,
-                    targets: 0
+                    "targets": [0, 5], //first column / numbering column
+                    "orderable": false, //set not orderable
+
                 },
                 {
-                    responsivePriority: 2,
-                    targets: -2
-                }
+                    "class": "text_center",
+                    "targets": [0, 1, 2]
+                },
             ],
             "footerCallback": function(row, data, start, end, display) {
                 var api = this.api(),

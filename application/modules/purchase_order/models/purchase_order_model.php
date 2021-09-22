@@ -3,7 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Purchase_order_model extends CI_Model {
+class Purchase_order_model extends CI_Model
+{
 
     private $table_name4 = 'master_style';
     private $table_name5 = 'master_style_size';
@@ -19,20 +20,22 @@ class Purchase_order_model extends CI_Model {
     var $joinTable2 = 'erp_po_details pd';
     var $joinTable3 = 'erp_manage_firms f';
     var $primaryTable = 'erp_po p';
-    var $category= 'erp_category c';
+    var $category = 'erp_category c';
     var $selectcolumn = 'v.tin,v.store_name,v.state_id,v.name,v.mobil_number,v.email_id,v.address1,p.*,f.firm_name,c.CategoryName';
-    var $column_order = array(null, 'f.firm_name', 'p.pr_no', 'p.pr_status', 'v.store_name', 'p.total_qty', 'p.delivery_qty', 'p.net_total', 'p.created_date', 'p.pr_status', 'p.delivery_status', null);
+    var $column_order = array(null, 'p.pr_no', 'v.store_name', 'p.total_qty', 'p.net_total', 'p.created_date', null);
     var $column_search = array('f.firm_name', 'p.pr_no', 'p.pr_status', 'v.store_name', 'p.total_qty', 'p.delivery_qty', 'p.net_total', 'p.created_date', 'p.pr_status', 'p.delivery_status');
     var $order = array('p.id' => 'DESC'); // default order
 
-    function __construct() {
+    function __construct()
+    {
 
         parent::__construct();
 
         $this->load->database();
     }
 
-    public function insert_po($data) {
+    public function insert_po($data)
+    {
 
         if ($this->db->insert($this->erp_po, $data)) {
 
@@ -46,7 +49,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function get_supplier_by_firmid($id) {
+    public function get_supplier_by_firmid($id)
+    {
         $this->db->Select('id,store_name');
         $this->db->where('firm_id', $id);
         $query = $this->db->get('vendor')->result_array();
@@ -60,7 +64,8 @@ class Purchase_order_model extends CI_Model {
         return $result;
     }
 
-    public function remove_stocks_by_poedit($product_id, $qty, $firm_id, $cat_id) {
+    public function remove_stocks_by_poedit($product_id, $qty, $firm_id, $cat_id)
+    {
 
         if ($qty != 0) {
             $this->db->where('firm_id', $firm_id);
@@ -84,14 +89,16 @@ class Purchase_order_model extends CI_Model {
         }
     }
 
-    public function insert_po_details($data) {
+    public function insert_po_details($data)
+    {
 
         $this->db->insert_batch($this->erp_po_details, $data);
 
         return true;
     }
 
-    public function insertpo_details($data) {
+    public function insertpo_details($data)
+    {
 
 
         if ($this->db->insert($this->erp_po_details, $data)) {
@@ -106,7 +113,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function insert_ime_code($data) {
+    public function insert_ime_code($data)
+    {
 
         $ime_code = explode(',', $data['ime_code']);
 
@@ -125,14 +133,16 @@ class Purchase_order_model extends CI_Model {
         return $insert_id;
     }
 
-    public function get_ime_by_poid($id) {
+    public function get_ime_by_poid($id)
+    {
         $this->db->select('ime_code');
         $this->db->where('po_id', $id);
         $query = $this->db->get('erp_po_ime_code_details')->result_array();
         return $query;
     }
 
-    public function check_duplicate_ime_code($code) {
+    public function check_duplicate_ime_code($code)
+    {
 
 
 
@@ -156,7 +166,8 @@ class Purchase_order_model extends CI_Model {
             return 0;
     }
 
-    public function check_duplicate_ime_code_edit($code) {
+    public function check_duplicate_ime_code_edit($code)
+    {
 
 
 
@@ -178,7 +189,8 @@ class Purchase_order_model extends CI_Model {
             return 0;
     }
 
-    public function check_stock($check_stock, $po_id) {
+    public function check_stock($check_stock, $po_id)
+    {
 
         $this->db->select('erp_category.firm_id');
 
@@ -206,9 +218,9 @@ class Purchase_order_model extends CI_Model {
         if (isset($current_stock) && !empty($current_stock)) {
 
             //Update Stock
-//echo "<pre>";
-//print_r($check_stock);
-//print_r($current_stock);
+            //echo "<pre>";
+            //print_r($check_stock);
+            //print_r($current_stock);
 
             $quantity = $check_stock['quantity'] + $current_stock[0]['quantity'];
 
@@ -263,7 +275,8 @@ class Purchase_order_model extends CI_Model {
         $this->db->insert($this->erp_stock_history, $insert_stock_his);
     }
 
-    public function insert_stock_details($data) {
+    public function insert_stock_details($data)
+    {
 
 
 
@@ -272,21 +285,24 @@ class Purchase_order_model extends CI_Model {
         return true;
     }
 
-    public function insert_stock_history($data) {
+    public function insert_stock_history($data)
+    {
 
         $this->db->insert_batch($this->erp_stock_history, $data);
 
         return true;
     }
 
-    public function get_stock_details() {
+    public function get_stock_details()
+    {
 
         $this->db->select('*');
 
         return $this->db->get($this->erp_stock)->result_array();
     }
 
-    public function update_increment($id) {
+    public function update_increment($id)
+    {
 
         $this->db->where($this->increment_table . '.id', 5);
 
@@ -298,24 +314,25 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function get_customer($atten_inputs) {
+    public function get_customer($atten_inputs)
+    {
 
-//        $firms = $this->user_auth->get_user_firms();
-//        $frim_id = array();
-//        foreach ($firms as $value) {
-//            $frim_id[] = $value['firm_id'];
-//        }
+        //        $firms = $this->user_auth->get_user_firms();
+        //        $frim_id = array();
+        //        foreach ($firms as $value) {
+        //            $frim_id[] = $value['firm_id'];
+        //        }
 
         $this->db->select('name,id,mobil_number,email_id,address1,store_name,tin,credit_days,state_id');
 
         $this->db->where($this->vendor . '.status', 1);
 
         // $this->db->where_in($this->vendor . '.firm_id', $frim_id);
-//        if ($id != NULL) {
-//            $this->db->where($this->vendor . '.firm_id', $id);
-//        }if (!empty($atten_inputs)) {
-//            $this->db->like($this->vendor . '.store_name', $atten_inputs['q']);
-//        }
+        //        if ($id != NULL) {
+        //            $this->db->where($this->vendor . '.firm_id', $id);
+        //        }if (!empty($atten_inputs)) {
+        //            $this->db->like($this->vendor . '.store_name', $atten_inputs['q']);
+        //        }
 
         $this->db->where($this->vendor . '.id', $atten_inputs['cust_id']);
 
@@ -324,7 +341,8 @@ class Purchase_order_model extends CI_Model {
         return $query;
     }
 
-    public function get_customer_by_id($id) {
+    public function get_customer_by_id($id)
+    {
 
         $this->db->select('name,mobil_number,email_id,address1');
 
@@ -333,10 +351,11 @@ class Purchase_order_model extends CI_Model {
         return $this->db->get($this->vendor)->result_array();
     }
 
-    public function get_product($atten_inputs) {
+    public function get_product($atten_inputs)
+    {
 
         $this->db->select('erp_product.id,model_no,product_name,product_description,product_image,type,cost_price,sales_price,cgst,sgst,igst,discount,category_id,brand_id,unit,erp_stock.quantity,erp_product.hsn_sac,erp_product.cost_price_without_gst');
-		
+
         //if ($id != '')
         //    $this->db->where($this->erp_product . '.firm_id', $id);
 
@@ -355,7 +374,8 @@ class Purchase_order_model extends CI_Model {
         return $query;
     }
 
-    public function get_product_by_id($id) {
+    public function get_product_by_id($id)
+    {
 
         $this->db->select('model_no,product_name,product_description,product_image');
 
@@ -364,7 +384,8 @@ class Purchase_order_model extends CI_Model {
         return $this->db->get($this->erp_product)->result_array();
     }
 
-    public function get_all_purchase_order_details($purchase_order_id) {
+    public function get_all_purchase_order_details($purchase_order_id)
+    {
 
         $this->db->select('SUM(delivery_quantity) AS delivery_quantity');
 
@@ -373,7 +394,8 @@ class Purchase_order_model extends CI_Model {
         return $this->db->get($this->erp_po_details)->result_array();
     }
 
-    public function get_all_po($serch_data = array()) {
+    public function get_all_po($serch_data = array())
+    {
 
         if (isset($serch_data) && !empty($serch_data)) {
 
@@ -458,7 +480,7 @@ class Purchase_order_model extends CI_Model {
 
         $this->db->join('erp_po_details', 'erp_po_details.po_id=erp_po.id');
 
-        $this->db->join('erp_manage_firms', 'erp_manage_firms.firm_id=erp_po.firm_id', 'left');   
+        $this->db->join('erp_manage_firms', 'erp_manage_firms.firm_id=erp_po.firm_id', 'left');
 
         $this->db->group_by('erp_po.id');
 
@@ -474,7 +496,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function get_all_purchase_order($serch_data = array()) {
+    public function get_all_purchase_order($serch_data = array())
+    {
 
         if (isset($serch_data) && !empty($serch_data)) {
 
@@ -532,7 +555,7 @@ class Purchase_order_model extends CI_Model {
         }
 
         $this->db->select('vendor.id as vendor,vendor.tin,vendor.store_name,vendor.state_id,vendor.name,vendor.mobil_number,vendor.email_id,vendor.address1,erp_po.id,erp_po.po_no,erp_po.total_qty,erp_po.tax,erp_po.tax_label,'
-                . 'erp_po.net_total,erp_po.delivery_schedule,erp_po.mode_of_payment,erp_po.remarks,erp_po.subtotal_qty,erp_po.estatus,erp_po.created_date');
+            . 'erp_po.net_total,erp_po.delivery_schedule,erp_po.mode_of_payment,erp_po.remarks,erp_po.subtotal_qty,erp_po.estatus,erp_po.created_date');
 
         $this->db->select('erp_manage_firms.firm_name');
 
@@ -574,7 +597,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    function get_purchase_report_datatables($search_data) {
+    function get_purchase_report_datatables($search_data)
+    {
 
 
 
@@ -592,7 +616,8 @@ class Purchase_order_model extends CI_Model {
         return $query;
     }
 
-    function _get_purchase_report_datatables_query($serch_data = array()) {
+    function _get_purchase_report_datatables_query($serch_data = array())
+    {
 
         if (!isset($serch_data['from_date']))
             $serch_data['from_date'] = '';
@@ -675,7 +700,7 @@ class Purchase_order_model extends CI_Model {
         }
 
         $this->db->select('vendor.id as vendor,vendor.tin,vendor.store_name,vendor.state_id,vendor.name,vendor.mobil_number,vendor.email_id,vendor.address1,erp_po.id,erp_po.po_no,erp_po.total_qty,erp_po.tax,erp_po.tax_label,'
-                . 'erp_po.net_total,erp_po.delivery_schedule,erp_po.mode_of_payment,erp_po.remarks,erp_po.subtotal_qty,erp_po.estatus,erp_po.created_date');
+            . 'erp_po.net_total,erp_po.delivery_schedule,erp_po.mode_of_payment,erp_po.remarks,erp_po.subtotal_qty,erp_po.estatus,erp_po.created_date');
 
         $this->db->select('erp_manage_firms.firm_name');
 
@@ -694,7 +719,8 @@ class Purchase_order_model extends CI_Model {
         $this->db->order_by($this->erp_po . '.id', 'desc');
     }
 
-    public function get_purchase_link($search_data) {
+    public function get_purchase_link($search_data)
+    {
 
         if (!empty($search_data['product'])) {
 
@@ -721,7 +747,8 @@ class Purchase_order_model extends CI_Model {
         }
     }
 
-    function count_filtered_purchase_report() {
+    function count_filtered_purchase_report()
+    {
 
         $this->_get_purchase_report_datatables_query();
 
@@ -730,7 +757,8 @@ class Purchase_order_model extends CI_Model {
         return $query->num_rows();
     }
 
-    function count_all_purchase_report() {
+    function count_all_purchase_report()
+    {
 
         $this->_get_purchase_report_datatables_query();
 
@@ -739,7 +767,8 @@ class Purchase_order_model extends CI_Model {
         return $this->db->count_all_results();
     }
 
-    public function get_all_po_for_report($search = NULL) {
+    public function get_all_po_for_report($search = NULL)
+    {
 
 
 
@@ -755,7 +784,7 @@ class Purchase_order_model extends CI_Model {
         }
 
         $this->db->select('vendor.id as vendor,vendor.tin,vendor.store_name,vendor.state_id,vendor.name,vendor.mobil_number,vendor.email_id,vendor.address1,erp_po.id,erp_po.po_no,erp_po.total_qty,erp_po.tax,erp_po.tax_label,'
-                . 'erp_po.net_total,erp_po.delivery_schedule,erp_po.mode_of_payment,erp_po.remarks,erp_po.subtotal_qty,erp_po.estatus,erp_po.created_date');
+            . 'erp_po.net_total,erp_po.delivery_schedule,erp_po.mode_of_payment,erp_po.remarks,erp_po.subtotal_qty,erp_po.estatus,erp_po.created_date');
 
         $this->db->select('erp_manage_firms.firm_name');
 
@@ -836,7 +865,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function get_all_po_by_id($id) {
+    public function get_all_po_by_id($id)
+    {
 
         $this->db->select('vendor.id as vendor,vendor.tin,vendor.store_name,vendor.state_id,vendor.name,vendor.mobil_number,vendor.email_id,vendor.address1,erp_po.*,erp_manage_firms.firm_name');
 
@@ -858,10 +888,11 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function get_all_product_by_id($id) {
+    public function get_all_product_by_id($id)
+    {
 
         $this->db->select('erp_product.id,erp_product.model_no,erp_product.product_name,erp_product.product_image,'
-                . 'erp_po_details.product_description');
+            . 'erp_po_details.product_description');
 
         $this->db->where('erp_po_details.id', $id);
 
@@ -879,7 +910,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function get_all_po_details_by_id($id) {
+    public function get_all_po_details_by_id($id)
+    {
 
         $this->db->select('erp_category.categoryName,erp_product.product_name,erp_brand.brands,erp_product.hsn_sac_name,erp_product.hsn_sac,erp_po_details.*');
 
@@ -936,13 +968,15 @@ class Purchase_order_model extends CI_Model {
         return $query;
     }
 
-    public function delete_ime_by_poid($id) {
+    public function delete_ime_by_poid($id)
+    {
         $this->db->where('po_id', $id);
         $ime_details = $this->db->delete('erp_po_ime_code_details');
         return $ime_details;
     }
 
-    public function update_dc($data, $id) {
+    public function update_dc($data, $id)
+    {
 
         $this->db->where('erp_po' . '.id', $id);
 
@@ -954,7 +988,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function update_dc_details($data, $id) {
+    public function update_dc_details($data, $id)
+    {
 
         $this->db->where('erp_po_details' . '.id', $id);
 
@@ -965,8 +1000,9 @@ class Purchase_order_model extends CI_Model {
 
         return false;
     }
-	
-	public function update_product($data, $id) {
+
+    public function update_product($data, $id)
+    {
 
         $this->db->where('erp_product' . '.id', $id);
 
@@ -978,7 +1014,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function check_old_qty($purchase_order_detail_id) {
+    public function check_old_qty($purchase_order_detail_id)
+    {
 
         $this->db->select('erp_po_details.*');
 
@@ -989,14 +1026,16 @@ class Purchase_order_model extends CI_Model {
         return $query;
     }
 
-    public function delete_po_deteils_by_id($id) {
+    public function delete_po_deteils_by_id($id)
+    {
 
         $this->db->where('po_id', $id);
 
         $this->db->delete($this->erp_po_details);
     }
 
-    public function change_po_status($id, $status) {
+    public function change_po_status($id, $status)
+    {
 
         $this->db->where($this->erp_po . '.id', $id);
 
@@ -1008,7 +1047,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function update_po($data, $id) {
+    public function update_po($data, $id)
+    {
 
         $this->db->where($this->erp_po . '.id', $id);
 
@@ -1020,7 +1060,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function delete_po($id) {
+    public function delete_po($id)
+    {
 
         $this->db->where('id', $id);
 
@@ -1032,7 +1073,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function get_the_total_po_count() {
+    public function get_the_total_po_count()
+    {
 
         $current_date = date('Y-m-d');
 
@@ -1050,7 +1092,8 @@ class Purchase_order_model extends CI_Model {
         return false;
     }
 
-    public function get_all_product() {
+    public function get_all_product()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -1070,7 +1113,8 @@ class Purchase_order_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_customers() {
+    public function get_all_customers()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -1092,7 +1136,8 @@ class Purchase_order_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_supplier_po() {
+    public function get_all_supplier_po()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -1118,7 +1163,8 @@ class Purchase_order_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_product_po() {
+    public function get_all_product_po()
+    {
 
         $firms = $this->user_auth->get_user_firms();
 
@@ -1144,7 +1190,8 @@ class Purchase_order_model extends CI_Model {
         return $query;
     }
 
-    public function get_company_details_by_firm($s_id) {
+    public function get_company_details_by_firm($s_id)
+    {
 
         $this->db->select('erp_manage_firms.*,erp_po.firm_id');
 
@@ -1157,7 +1204,8 @@ class Purchase_order_model extends CI_Model {
         return $query;
     }
 
-    public function get_datatables() {
+    public function get_datatables()
+    {
 
         $this->db->select($this->selectColumn);
 
@@ -1175,7 +1223,7 @@ class Purchase_order_model extends CI_Model {
 
 
         $query = $this->db->get();
-       
+
 
         $data = $query->result_array();
 
@@ -1183,7 +1231,8 @@ class Purchase_order_model extends CI_Model {
         return $data;
     }
 
-    function _get_datatables_query() {
+    function _get_datatables_query()
+    {
 
         //Join Table
 
@@ -1208,7 +1257,7 @@ class Purchase_order_model extends CI_Model {
 
         $this->db->join($this->joinTable3, 'f.firm_id=p.firm_id', 'left');
 
-        $this->db->join($this->category, 'c.cat_id=p.po_cat_type','left',false);    
+        $this->db->join($this->category, 'c.cat_id=p.po_cat_type', 'left', false);
 
         // $this->db->group_by('p.id');
 
@@ -1256,7 +1305,8 @@ class Purchase_order_model extends CI_Model {
         }
     }
 
-    public function count_all() {
+    public function count_all()
+    {
 
         $this->db->from($this->primaryTable);
 
@@ -1265,7 +1315,8 @@ class Purchase_order_model extends CI_Model {
         return $this->db->count_all_results();
     }
 
-    public function count_filtered() {
+    public function count_filtered()
+    {
 
         $this->_get_datatables_query();
 
@@ -1278,7 +1329,8 @@ class Purchase_order_model extends CI_Model {
         return $query->num_rows();
     }
 
-    public function get_company_details_by_firmid($firm_id) {
+    public function get_company_details_by_firmid($firm_id)
+    {
 
         $this->db->select('erp_manage_firms.*');
 
@@ -1289,7 +1341,8 @@ class Purchase_order_model extends CI_Model {
         return $query;
     }
 
-    public function check_duplicate_pr_id($input) {
+    public function check_duplicate_pr_id($input)
+    {
         $this->db->select('*');
         $this->db->where('po_no', $input['value1']);
         $this->db->where('eStatus', 1);
@@ -1299,7 +1352,8 @@ class Purchase_order_model extends CI_Model {
         }
     }
 
-    public function check_duplicate_pr_id_edit($input, $id) {
+    public function check_duplicate_pr_id_edit($input, $id)
+    {
         $this->db->select('*');
         $this->db->where('po_no', $input);
         $this->db->where('id !=', $id);
@@ -1309,5 +1363,4 @@ class Purchase_order_model extends CI_Model {
 
         return $query;
     }
-
 }
