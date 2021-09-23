@@ -228,6 +228,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                     $(api.column(cols[x]).footer()).html(Math.round(pageTotal));
                 }
             },
+            responsive: true,
         });
         $('#search').click(function() { //button filter event click
             table.ajax.reload(); //just reload table

@@ -132,8 +132,8 @@ class Stock_model extends CI_Model
         if ($search_data['brand'] != '' && $search_data['brand'] != 'Select') {
             $this->db->where('u.brand', $search_data['brand']);
         }
-        if (isset($_POST['order']) && $this->column_order[$_POST['order']['0']['column']] != null) { // here order processing
-            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        if (isset($_POST['order']) && $this->manual_order[$_POST['order']['0']['column']] != null) { // here order processing
+            $this->db->order_by($this->manual_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else if (isset($this->order)) {
             $order = $this->order;
             $this->db->order_by(key($order), $order[key($order)]);
@@ -149,7 +149,7 @@ class Stock_model extends CI_Model
     function get_datatables($search_data, $custom_col = NULL)
     {
         if ($custom_col != NULL) {
-            $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,p.model_no,r.firm_name,p.cost_price,p.cgst,p.sgst,p.cost_price_without_gst';
+            $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,b.gst,p.model_no,r.firm_name,p.cost_price,p.cgst,p.sgst,p.cost_price_without_gst';
             $this->db->select($selectColumn);
         } else {
             $this->db->select($this->selectColumn);

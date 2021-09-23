@@ -238,7 +238,7 @@ class Stock extends MX_Controller
             $sgst = number_format(($ass->quantity * $ass->cost_price * $ass->sgst) / 100, 2);
 
             // $row[] = number_format($ass->quantity * );
-            $row[] = ((($cgst + $sgst) * 2) / 100) . '%';
+            $row[] = $ass->gst . '%';
             $row[] = number_format(($ass->quantity * $ass->cost_price * $ass->cgst) / 100, 2);
             $row[] = number_format(($ass->quantity * $ass->cost_price * $ass->sgst) / 100, 2);
             //$net_total = $ass->quantity * $ass->cost_price;

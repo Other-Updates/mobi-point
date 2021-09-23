@@ -992,9 +992,9 @@ class Sales extends MX_Controller
     {
         if ($this->input->post()) {
             $input = $this->input->post();
-            // echo '<pre>';
-            // print_r($input);
-            // exit;
+            echo '<pre>';
+            print_r($input);
+
             $bill_type = $input['quotation']['bill_category'];
             $net_total = $input['quotation']['net_total'];
             $data['company_details'] = $this->admin_model->get_company_details();
@@ -1094,52 +1094,56 @@ class Sales extends MX_Controller
             $input['quotation']['invoice_id'] = $insert_id1;
             $input['quotation']['inv_id'] = $inv_id;
             $this->sales_return_model->insert_sr($input['quotation']);
+
+            $insert_arr = array();
             if (isset($insert_id1) && !empty($insert_id1)) {
                 $input = $this->input->post();
                 if (isset($input['categoty']) && !empty($input['categoty'])) {
-                    $insert_arr = array();
+
                     foreach ($input['categoty'] as $key => $val) {
-                        $insert['in_id'] = $insert_id1;
-                        $insert['q_id'] = $insert_id;
-                        $insert['category'] = $val;
-                        $insert['product_id'] = $input['product_id'][$key];
-                        $insert['product_description'] = $input['product_description'][$key];
-                        $insert['product_type'] = 1;
-                        $insert['brand'] = $input['brand'][$key];
-                        $insert['unit'] = $input['unit'][$key];
-                        $insert['quantity'] = $input['quantity'][$key];
-                        if ($input['quotation']['delivery_status'] == 'delivered') {
-                            $insert['delivery_quantity'] = $input['quantity'][$key];
+                        if (!empty($val)) {
+                            $insert['in_id'] = $insert_id1;
+                            $insert['q_id'] = $insert_id;
+                            $insert['category'] = $val;
+                            $insert['product_id'] = $input['product_id'][$key];
+                            $insert['product_description'] = $input['product_description'][$key];
+                            $insert['money_transfer'] = $input['money_transfer'][$key];
+                            $insert['product_type'] = 1;
+                            $insert['brand'] = $input['brand'][$key];
+                            $insert['unit'] = $input['unit'][$key];
+                            $insert['quantity'] = $input['quantity'][$key];
+                            if ($input['quotation']['delivery_status'] == 'delivered') {
+                                $insert['delivery_quantity'] = $input['quantity'][$key];
+                            }
+                            $insert['cost_price'] = $input['cost_price'][$key];
+                            $insert['per_cost'] = $input['per_cost'][$key];
+                            $insert['sp_with_gst'] = $input['sp_with_gst'][$key];
+                            $insert['sp_without_gst'] = $input['sp_without_gst'][$key];
+                            $insert['tax'] = $input['tax'][$key];
+                            $insert['gst'] = $input['gst'][$key];
+                            // $insert['bill_category']= $input['bill_category'][$key];
+                            $insert['igst'] = $input['igst'][$key];
+                            // $insert['product_description'] = @$input['money_transfer'][$key];
+                            $insert['discount'] = (!empty($input['discount'][$key])) ? $input['discount'][$key] : '';
+                            $insert['sub_total'] = $input['sub_total'][$key];
+                            $insert['created_date'] = date('Y-m-d H:i');
+                            $insert_arr[] = $insert;
+                            $stock_arr = array();
+                            $inv_id['inv_id'] = $input['quotation']['inv_id'];
+                            $stock_arr[] = $inv_id;
+                            $insert['firm'] = $input['quotation']['firm_id'];
+                            //Update product - cost and Sales Price
+                            if ($bill_type == 1) {
+                                $updateData = array('cost_price' => $insert['cost_price'], 'sales_price' => $insert['per_cost'], 'submit' => 0);
+                                $this->product_model->update_product($updateData, $insert['product_id'], array());
+                            }
+                            $this->stock_details($insert, $inv_id);
+                            unset($insert['firm']);
                         }
-                        $insert['cost_price'] = $input['cost_price'][$key];
-                        $insert['per_cost'] = $input['per_cost'][$key];
-                        $insert['sp_with_gst'] = $input['sp_with_gst'][$key];
-                        $insert['sp_without_gst'] = $input['sp_without_gst'][$key];
-                        $insert['tax'] = $input['tax'][$key];
-                        $insert['gst'] = $input['gst'][$key];
-                        // $insert['bill_category']= $input['bill_category'][$key];
-                        $insert['igst'] = $input['igst'][$key];
-                        $insert['product_description'] = @$input['money_transfer'][$key];
-                        $insert['discount'] = (!empty($input['discount'][$key])) ? $input['discount'][$key] : '';
-                        $insert['sub_total'] = $input['sub_total'][$key];
-                        $insert['created_date'] = date('Y-m-d H:i');
-                        $insert_arr[] = $insert;
-                        $stock_arr = array();
-                        $inv_id['inv_id'] = $input['quotation']['inv_id'];
-                        $stock_arr[] = $inv_id;
-                        $insert['firm'] = $input['quotation']['firm_id'];
-                        //Update product - cost and Sales Price
-                        if ($bill_type == 1) {
-                            $updateData = array('cost_price' => $insert['cost_price'], 'sales_price' => $insert['per_cost'], 'submit' => 0);
-                            $this->product_model->update_product($updateData, $insert['product_id'], array());
-                        }
-                        $this->stock_details($insert, $inv_id);
-                        unset($insert['firm']);
                     }
-                    // print_r($input['money_transfer']);
-                    // echo "<pre>";
-                    // print_r($insert_arr);
-                    // exit;
+                }
+                // print_r($input['money_transfer']);
+                if (isset($insert_arr) && !empty($insert_arr)) {
                     $this->project_cost_model->insert_invoice_details($insert_arr);
                     $this->project_cost_model->insert_invoice_product_details($insert_arr);
                 }
@@ -1156,8 +1160,9 @@ class Sales extends MX_Controller
                 }
                 $sms = $this->sms_model->send_sms($insert_id1, 'invoice');
             }
+
             $input_data = $this->input->post();
-            $this->update_new_direct_invoice($input, $insert_invoice_id);
+            // $this->update_new_direct_invoice($input, $insert_invoice_id);
             $receipt_id = $insert_invoice_id;
             $receipt_num = $this->master_model->get_last_id('rp_code');
             $insert_data = [
@@ -1880,7 +1885,11 @@ class Sales extends MX_Controller
     {
         if ($this->input->post()) {
             $input = $this->input->post();
-            //Remove Old Product stock
+            echo '<pre>';
+            print_r($input);
+            exit;
+
+            // Remove Old Product stock
             foreach ($input['old_product_id'] as $key => $results) {
                 $qty = $input['old_product_qty'][$key];
                 $firm_id = $input['old_firm_id'][$key];
@@ -1910,6 +1919,7 @@ class Sales extends MX_Controller
                     $insert['category'] = $val;
                     $insert['product_id'] = $input['product_id'][$key];
                     $insert['product_description'] = $input['product_description'][$key];
+                    $insert['money_transfer'] = $input['money_transfer'][$key];
                     $insert['product_type'] = 1;
                     $insert['brand'] = $input['brand'][$key];
                     $insert['unit'] = $input['unit'][$key];

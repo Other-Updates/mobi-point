@@ -123,8 +123,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
     </div>
     <div class="contentpanel mb-50">
         <div class="panel-body mt-top5">
-            <table id="example1" class="display dataTable table table-striped table-bordered responsive dataTable dtr-inline no-footer
-                   costprice-right quantity1-cntr tprice-right cgstam-right sgstamt-right totalpricewith-right" cellspacing="0" width="100%">
+            <table id="example1" class="display dataTable table table-striped table-bordered responsive dataTable dtr-inline no-footer" cellspacing="0" width="100%">
                 <thead>
                     <tr style="text-align:center;">
                         <td>S.No</td>

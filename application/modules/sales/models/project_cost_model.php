@@ -860,7 +860,7 @@ class Project_cost_model extends CI_Model
     {
         $this->db->select('erp_invoice_details.cost_price,erp_category.cat_id,erp_category.categoryName,erp_product.id,erp_product.product_name,erp_brand.id,erp_brand.brands,erp_product.hsn_sac_name,erp_invoice_details.category,erp_invoice_details.product_id,erp_invoice_details.brand,erp_invoice_details.quantity,erp_invoice_details.unit,'
             . 'erp_invoice_details.per_cost,erp_invoice_details.tax,erp_invoice_details.gst,erp_invoice_details.sub_total,erp_product.model_no,erp_product.product_image,erp_invoice_details.discount,erp_invoice_details.igst,'
-            . 'erp_invoice_details.product_description,erp_invoice_details.id,erp_product.hsn_sac,erp_product.sales_price_without_gst,,erp_invoice_details.sp_with_gst');
+            . 'erp_invoice_details.product_description,erp_invoice_details.id,erp_product.hsn_sac,erp_product.sales_price_without_gst,,erp_invoice_details.sp_with_gst,money_transfer');
         $this->db->where('erp_invoice_details.in_id', intval($id));
         $this->db->join('erp_quotation', 'erp_quotation.id=erp_invoice_details.q_id', 'LEFT');
         $this->db->join('erp_category', 'erp_category.cat_id=erp_invoice_details.category', 'left');
@@ -1903,7 +1903,7 @@ class Project_cost_model extends CI_Model
         $this->db->where_in('i.firm_id', $frim_id);
         $this->db->group_by('q.id');
         $this->db->from('erp_invoice i');
-        $column_order = array(null, 'q.q_no', 'c.store_name', 'q.net_total', 'i.inv_id', 'i.net_total', 'i.created_date', 'i.invoice_status', 'i.payment_status', 'i.delivery_status', null);
+        $column_order = array(null,  'c.store_name', 'i.inv_id', 'i.total_qty', 'i.net_total', 'i.profit_total', 'i.created_date',  null);
         $column_search = array('q.q_no', 'c.store_name', 'q.net_total', 'i.inv_id', 'i.net_total', 'i.created_date', 'i.invoice_status', 'i.payment_status', 'i.delivery_status');
         $order = array('q.id' => 'DESC');
         $i = 0;

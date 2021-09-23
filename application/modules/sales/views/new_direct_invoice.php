@@ -240,12 +240,12 @@ if (!empty($customers)) {
                         <option value="">Select</option>
                     </select>
                 </td>
-                <!--
-                <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="" />
-                 <td class="action-btn-align">
-                    <input type="hidden"  style="width:100%"  class='form-align tabwid model_no_extra' readonly="readonly"/> -->
-                <!-- <input type="text"  tabindex="-1" name='money_transfer[]' style="width:70px;" class="money" /> -->
-                <!-- </td> -->
+
+                <!-- <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="" /> -->
+                <td class="action-btn-align" style="display: none;">
+                    <!-- <input type="hidden"  style="width:100%"  class='form-align tabwid model_no_extra' readonly="readonly"/> -->
+                    <input type="hidden" tabindex="-1" name='money_transfer[]' style="width:70px;" class="money" />
+                </td>
                 <td class="qty_text">
                     <select name='brand[]' tabindex="-1" class="form-control form-align brand_id" style="display: none;">
                         <option>Select</option>
@@ -638,10 +638,10 @@ if (!empty($customers)) {
                                 </select>
                             </td>
                             <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="" />
-                            <!-- <td class="action-btn-align">
-                                <input type="hidden"  style="width:100%"  class='form-align tabwid model_no_extra' readonly="" />
-                                <input type="text" tabindex="-1" name='money_transfer[]' style="width:70px;" class="money" />
-                            </td> -->
+                            <td class="action-btn-align" style="display: none;">
+                                <!-- <input type="hidden"  style="width:100%"  class='form-align tabwid model_no_extra' readonly="" /> -->
+                                <input type="hidden" tabindex="-1" name='money_transfer[]' style="width:70px;" class="money" />
+                            </td>
                             <td class="action-btn-align">
                                 <select name='brand[]' tabindex="-1" class="form-control form-align brand_id" style="display: none;">
                                     <option value="">Select</option>
