@@ -116,26 +116,14 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         <div class="form-group">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-4" style="position:relative;">
-                                <?php
-                                $value = '';
-                                if (!empty($this->session->userdata('product_name_wise'))) {
-                                    //print_r($this->session->userdata('product_name_wise'));
-                                    $product = $this->session->userdata('product_name_wise');
-                                    $value = $product['product_name'];
-                                }
-                                ?>
-                                <input type="text" placeholder="Enter Product Name" id="product_name_src" name="filter[product_name_src]" value="<?php echo $value; ?>" title="Enter product name" class="form-align form-control">
-                                <div id="suggesstion-box_ins" class="auto-asset-search hide_class"></div>
+
                             </div>
                             <div class="col-sm-2">
-                                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary">
-                                <input type="button" name="reset" id="product_name_wise_reset" value="Reset" class="btn btn-success">
+
                             </div>
                         </div>
+
                     </div>
-                    <input type="hidden" name="filter[product_id]" id="product_id_hdn" />
-                    <input type="hidden" name="filter[product_name]" id="product_name_hdn">
-                </div>
             </form>
             <div class="tabpad">
                 <table id="basicTable_call_back" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline totalqua-cntr returnqua-cntr presentqua-cntr totalamt-right" cellspacing="0" width="100%">
@@ -307,8 +295,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
         var table;
         table = jQuery('#basicTable_call_back').DataTable({
             "lengthMenu": [
-                [50, 100, 150, -1],
-                [50, 100, 150, "All"]
+                [50, 100, 500, -1],
+                [50, 100, 500, "All"]
             ],
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.

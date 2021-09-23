@@ -160,7 +160,7 @@ if (!empty($customers)) {
                 <td class="action-btn-align s_no"></td>
                 <td>
                     <input type="hidden" id="catname" class="catname" name="catname" value="" />
-                    <select id='cat_id' tabindex="-1" class='form-align cat_id static_style class_req form-control' style="width:100%" name='categoty[]'>
+                    <select id='cat_id' class='form-align cat_id static_style class_req form-control' style="width:100%" name='categoty[]'>
                         <option value="">Select</option>
                         <?php
                         if (isset($category) && !empty($category)) {
@@ -186,7 +186,7 @@ if (!empty($customers)) {
                     <div id="suggesstion-box1" class="auto-asset-search suggesstion-box1"></div>
                 </td>
                 <td>
-                    <select tabindex="-1" name='brand[]' class="form-align form-control brand_id">
+                    <select name='brand[]' class="form-align form-control brand_id">
                         <option>Select</option>
                         <?php
                         if (isset($brand) && !empty($brand)) {
@@ -200,7 +200,7 @@ if (!empty($customers)) {
                     </select>
                     <span class="error_msg"></span>
                 </td>
-                <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="" />
+                <input type="hidden" name='unit[]' style="width:70px;" class="unit" value="" />
                 <!-- <td class="action-btn-align">
                 <input type="text"  tabindex="-1"   name='unit[]' style="width:70px;" class="unit" />
                 <span class="error_msg"></span>
@@ -221,10 +221,10 @@ if (!empty($customers)) {
                 </td>-->
                 <td class="ime_modal ime_code_error">
                     <div class="col-md-5">
-                        <input type="text" tabindex="-1" name='available_quantity[]' style="width:50px;" class="form-control  stock_qty" value="0" readonly="readonly" />
+                        <input type="text" name='available_quantity[]' style="width:50px;" class="form-control  stock_qty" value="0" readonly="readonly" />
                     </div>
                     <div class="col-md-5">
-                        <input type="text" tabindex="" name='quantity[]' style="width:50px;" class=" required qty  form-control" value="0" />
+                        <input type="text" name='quantity[]' style="width:50px;" class=" required qty  form-control" value="0" />
                     </div>
                     <div class="col-md-2">
                         <a class="btn btn-info btn-xs ime_modal_add" style="margin-top:6px; margin-left:-5px;" title="Add Ime Code">
@@ -235,13 +235,13 @@ if (!empty($customers)) {
                     <span class="error_msg"></span>
                 </td>
                 <td style="text-align: center;">
-                    <input type="text" tabindex="-1" name='per_cost[]' style="width:70px;" class="cost_price percost " id="price" />
+                    <input type="text" name='per_cost[]' style="width:70px;" class="cost_price percost " id="price" />
                     <input type="hidden" name="price_with_gst[]" class="price_with_gst">
                     <input type="hidden" name="price_without_gst[]" class="price_without_gst">
                     <span class="error_msg"></span>
                 </td>
                 <td style="text-align: center;">
-                    <input type="text" tabindex="14" name='sale_cost[]' style="width:70px;" class="sales_price salecost" />
+                    <input type="text" name='sale_cost[]' style="width:70px;" class="sales_price salecost" />
                 </td>
                 <!--  <td class="action-btn-align">
                 <input type="text"  tabindex="-1"   style="width:70px;" class="gross"  />
@@ -249,25 +249,25 @@ if (!empty($customers)) {
                 <td class="action-btn-align">
                     <input type="text" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" />
                 </td>
-                <input type="hidden" tabindex="-1" name='discount[]' style="width:70px;" class="discount" />
+                <input type="hidden" name='discount[]' style="width:70px;" class="discount" />
                 <!-- <td>
                                 <input type="text"    tabindex="-1"  name='discount[]' style="width:70px;" class="discount" />
                             </td>-->
                 <td class="action-btn-align cgst_td">
-                    <input type="text" tabindex="-1" name='tax[]' style="width:70px;" class="pertax" readonly="readonly" />
+                    <input type="text" name='tax[]' style="width:70px;" class="pertax" readonly="readonly" />
                 </td>
                 <td class="action-btn-align sgst_td">
-                    <input type="text" tabindex="-1" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
+                    <input type="text" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
                 </td>
                 <td class="action-btn-align igst_td">
-                    <input type="text" tabindex="-1" name='igst[]' style="width:70px;" class="igst wid50" readonly="readonly" />
+                    <input type="text" name='igst[]' style="width:70px;" class="igst wid50" readonly="readonly" />
                 </td>
-                <input type="hidden" tabindex="-1" name='transport[]' style="width:70px;" class="transport" value="" />
+                <input type="hidden" name='transport[]' style="width:70px;" class="transport" value="" />
                 <!-- <td>
                 <input type="text"   tabindex="-1"   name='transport[]' style="width:70px;" class="transport" />
             </td>-->
                 <td>
-                    <input type="text" tabindex="-1" style="width:70px;" name='sub_total[]' readonly="readonly" id="sub_toatl" class="subtotal text_right" />
+                    <input type="text" style="width:70px;" name='sub_total[]' readonly="readonly" id="sub_toatl" class="subtotal text_right" />
                 </td>
                 <input type="hidden" value="" class=" ime_code" name="ime_code[]" id="" />
                 <td class="action-btn-align">
@@ -284,7 +284,7 @@ if (!empty($customers)) {
                         <label class="col-sm-4 control-label">Shop Name <span style="color:#F00; font-style:oblique;">*</span></label>
                         <div class="col-sm-8">
                             <?php if (count($firms) > 1) { ?>
-                                <select tabindex="1" onchange="Firm(this.value)" name="po[firm_id]" class="form-control form-align required" id="firm">
+                                <select onchange="Firm(this.value)" name="po[firm_id]" class="form-control form-align required" id="firm">
                                     <option value="">Select</option>
                                     <?php
                                     if (isset($firms) && !empty($firms)) {
@@ -304,7 +304,7 @@ if (!empty($customers)) {
                             <?php
                             } else {
                             ?>
-                                <select tabindex="1" onchange="Firm(this.value)" name="po[firm_id]" class="form-control form-align required" id="firm" readonly="">
+                                <select onchange="Firm(this.value)" name="po[firm_id]" class="form-control form-align required" id="firm" readonly="">
                                     <?php
                                     if (isset($firms) && !empty($firms)) {
                                         foreach ($firms as $firm) {
@@ -322,7 +322,7 @@ if (!empty($customers)) {
                     <div class="form-group">
                         <label class="col-sm-4 control-label first_td1">PO NO <span style="color:#F00; font-style:oblique;">*</span></label>
                         <div class="col-sm-8">
-                            <input type="text" tabindex="-1" name="po[pr_no]" class="code form-control colournamedup  form-align" value="" id="pr_id">
+                            <input type="text" name="po[pr_no]" class="code form-control colournamedup  form-align" value="" id="pr_id">
                             <input type="hidden" name="po[po_no]" class="code form-control colournamedup  form-align" readonly="readonly" value="" id="po_id">
                             <span id="pr_id_err" class="error_msg"></span>
                             <span id="duplicate_err" class="val" style="color:#F00; font-style:oblique;"></span>
@@ -332,7 +332,7 @@ if (!empty($customers)) {
                         <label class="col-sm-4 control-label">Supplier Name <span style="color:#F00; font-style:oblique;">*</span></label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="text" tabindex="2" name="supplier[store_name]" id="customer_name" class=' form-align auto_customer required ' />
+                                <input type="text" name="supplier[store_name]" id="customer_name" class=' form-align auto_customer required ' />
                                 <div class="input-group-addon">
                                     <i class="fa fa-bank"></i>
                                 </div>
@@ -376,7 +376,7 @@ if (!empty($customers)) {
                         <label class="col-sm-4 control-label first_td1">Supplier&nbsp;Mobile&nbsp;No</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input tabindex="-1" type="text" name="supplier[mobil_number]" id="customer_no" class="form-align" />
+                                <input type="text" name="supplier[mobil_number]" id="customer_no" class="form-align" />
                                 <div class="input-group-addon">
                                     <i class="fa fa-phone"></i>
                                 </div>
@@ -388,7 +388,7 @@ if (!empty($customers)) {
                         <label class="col-sm-4 control-label first_td1">Supplier Email ID</label>
                         <div class="col-sm-8" id='customer_td'>
                             <div class="input-group">
-                                <input type="text" tabindex="-1" name="supplier[email_id]" id="email_id" class=" form-align" />
+                                <input type="text" name="supplier[email_id]" id="email_id" class=" form-align" />
                                 <div class="input-group-addon">
                                     <i class="fa fa-envelope"></i>
                                 </div>
@@ -400,7 +400,7 @@ if (!empty($customers)) {
                         <label class="col-sm-4 control-label first_td1">GSTIN No</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="text" name="supplier[tin_no]" tabindex="-1" id="tin" class="form-align" />
+                                <input type="text" name="supplier[tin_no]" id="tin" class="form-align" />
                                 <div class="input-group-addon">
                                     <i class="fa fa-cog"></i>
                                 </div>
@@ -414,7 +414,7 @@ if (!empty($customers)) {
                     <div class="form-group">
                         <label class="col-sm-4 control-label first_td1">Supplier Address</label>
                         <div class="col-sm-8">
-                            <textarea name="supplier[address1]" tabindex="-1" id="address1" class="form-control form-align"></textarea>
+                            <textarea name="supplier[address1]" id="address1" class="form-control form-align"></textarea>
                             <span class="error_msg"></span>
                         </div>
                     </div>
@@ -422,7 +422,7 @@ if (!empty($customers)) {
                         <label class="col-sm-4 control-label first_td1">Date</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="text" tabindex="-1" class="form-align datepicker required" name="po[created_date]" placeholder="dd-mm-yyyy" value="<?php echo date('d-m-Y'); ?>" id="form_date" onblur="validate_date('form_date')" )>
+                                <input type="text" class="form-align datepicker required" name="po[created_date]" placeholder="dd-mm-yyyy" value="<?php echo date('d-m-Y'); ?>" id="form_date" onblur="validate_date('form_date')" )>
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
@@ -433,8 +433,8 @@ if (!empty($customers)) {
                     <div class="form-group">
                         <label class="col-sm-4 control-label first_td1">Bill Type<span style="color:#F00; font-style:oblique;">*</span></label>
                         <div class="col-sm-8">
-                            <input type="radio" tabindex="3" class="receiver" value="cash" name="po[po_type]" checked /> Cash Purchase &nbsp;
-                            <input type="radio" tabindex="3" class="receiver" value="credit" name="po[po_type]" /> Credit Purchase<br>
+                            <input type="radio" class="receiver" value="cash" name="po[po_type]" checked /> Cash Purchase &nbsp;
+                            <input type="radio" class="receiver" value="credit" name="po[po_type]" /> Credit Purchase<br>
                             <span id="type1" class="error_msg"></span>
                         </div>
                     </div>
@@ -518,7 +518,7 @@ if (!empty($customers)) {
                             </td>
                             <td>
                                 <input type="hidden" id="catname" class="catname" name="catname" value="" />
-                                <select id='cat_id' tabindex="-1" class='form-control cat_id static_style class_req required' name='categoty[]' style="width:100%">
+                                <select id='cat_id' class='form-control cat_id static_style class_req required' name='categoty[]' style="width:100%">
                                     <option value="">Select</option>
                                     <?php
                                     if (isset($category) && !empty($category)) {
@@ -538,7 +538,7 @@ if (!empty($customers)) {
                             <td style="display:none">
                             </td>
                             <td>
-                                <input type="text" tabindex="4" name="model_no[]" id="model_no" style="width:100%" class='form-control form-align auto_customer tabwid model_no required' readonly="" />
+                                <input type="text" name="model_no[]" id="model_no" style="width:100%" class='form-control form-align auto_customer tabwid model_no required' readonly="" />
                                 <span class="error_msg"></span>
                                 <input type="hidden" name="product_id[]" id="product_id" class='product_id tabwid form-align' />
                                 <input type="hidden" name="product_name" id="product_name" class='product_name tabwid form-align' />
@@ -548,7 +548,7 @@ if (!empty($customers)) {
                             <div id="add_modal">
                             </div>
                             <td>
-                                <select id='brand_id' name='brand[]' tabindex="-1" class="form-control brand_id">
+                                <select id='brand_id' name='brand[]' class="form-control brand_id">
                                     <option value="">Select</option>
                                     <?php
                                     if (isset($brand) && !empty($brand)) {
@@ -562,17 +562,17 @@ if (!empty($customers)) {
                                 </select>
                                 <span class="error_msg"></span>
                             </td>
-                            <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="" />
+                            <input type="hidden" name='unit[]' style="width:70px;" class="unit" value="" />
                             <!-- <td class="action-btn-align">
                                 <input type="text"   tabindex="-1"  name='unit[]' style="width:70px;" class="unit" />
                                 <span class="error_msg"></span>
                             </td>-->
                             <td class="ime_modal ime_code_error">
                                 <div class="col-md-5">
-                                    <input type="text" tabindex="-1" name='available_quantity[]' style="width:50px;" class="form-control  stock_qty" value="0" readonly="readonly" />
+                                    <input type="text" name='available_quantity[]' style="width:50px;" class="form-control  stock_qty" value="0" readonly="readonly" />
                                 </div>
                                 <div class="col-md-5">
-                                    <input type="text" tabindex="" name='quantity[]' style="width:50px;" class="qty  form-control required" value="0" />
+                                    <input type="text" name='quantity[]' style="width:50px;" class="qty  form-control required" value="0" />
                                 </div>
                                 <div class="col-md-2">
                                     <a class="btn btn-info btn-xs ime_modal_add" id="ime_code_add" style="margin-top:6px; margin-left:-5px;" title="Add IMEI Code" onclick="ime_modal(0)">
@@ -583,17 +583,17 @@ if (!empty($customers)) {
                                 <span class="error_msg"></span>
                             </td>
                             <td style="text-align: center;">
-                                <input type="text" tabindex="" name='per_cost[]' style="width:70px;" class="cost_price percost required" />
+                                <input type="text" name='per_cost[]' style="width:70px;" class="cost_price percost required" />
                                 <input type="hidden" name="price_with_gst[]" class="price_with_gst">
                                 <input type="hidden" name="price_without_gst[]" class="price_without_gst">
                                 <span class="error_msg"></span>
                             </td>
                             <td style="text-align: center;">
-                                <input type="text" tabindex="-1" name='sale_cost[]' style="width:70px;" class="sales_price salecost " id="price" />
+                                <input type="text" name='sale_cost[]' style="width:70px;" class="sales_price salecost " id="price" />
                                 <!--  <td class="action-btn-align">
                         <input type="text"  tabindex="-1"   style="width:70px;" class="gross" />
                     </td>-->
-                                <input type="hidden" tabindex="-1" name='discount[]' style="width:70px;" class="discount" />
+                                <input type="hidden" name='discount[]' style="width:70px;" class="discount" />
                             <td class="action-btn-align">
                                 <input type="text" style="width:75px;" class="hsn_code" readonly="readonly" autocomplete="off" />
                             </td>
@@ -601,24 +601,24 @@ if (!empty($customers)) {
                                 <input type="text"   tabindex="-1"   name='discount[]' style="width:70px;" class="discount" />
                             </td>-->
                             <td class="action-btn-align cgst_td">
-                                <input type="text" tabindex="-1" name='tax[]' style="width:70px;" class="pertax" readonly="readonly" />
+                                <input type="text" name='tax[]' style="width:70px;" class="pertax" readonly="readonly" />
                             </td>
                             <td class="action-btn-align sgst_td">
-                                <input type="text" tabindex="-1" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
+                                <input type="text" name='gst[]' style="width:70px;" class="gst" readonly="readonly" />
                             </td>
                             <td class="action-btn-align igst_td">
-                                <input type="text" tabindex="-1" name='igst[]' style="width:70px;" class="igst wid50" readonly="readonly" />
+                                <input type="text" name='igst[]' style="width:70px;" class="igst wid50" readonly="readonly" />
                             </td>
-                            <input type="hidden" tabindex="-1" name='transport[]' style="width:70px;" class="transport" value="" />
+                            <input type="hidden" name='transport[]' style="width:70px;" class="transport" value="" />
                             <!-- <td>
                         <input type="text"   tabindex="-1"   name='transport[]' style="width:70px;" class="transport" />
                     </td>-->
                             <td>
-                                <input type="text" tabindex="-1" style="width:70px;" name='sub_total[]' readonly="readonly" class="subtotal text_right" />
+                                <input type="text" style="width:70px;" name='sub_total[]' readonly="readonly" class="subtotal text_right" />
                             </td>
                             <input type="hidden" value="" class=" ime_code_first" name="ime_code[]" id="" />
                             <td class="action-btn-align">
-                                <a id='delete_group' tabindex="-1" class="btn btn-danger delete_group"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a id='delete_group' class="btn btn-danger delete_group"><span class="glyphicon glyphicon-trash"></span></a>
                             </td>
                         </tr>
                     </tbody>
@@ -627,38 +627,38 @@ if (!empty($customers)) {
                             <td colspan="4" style="width:70px; text-align:right;"></td>
                             <td>
                                 <div class="col-md-5"><b>Total</b></div>
-                                <div class="col-md-5"><input type="text" tabindex="-1" name="po[total_qty]" readonly="readonly" class="total_qty" style="width:50px;" id="total" /></div>
+                                <div class="col-md-5"><input type="text" name="po[total_qty]" readonly="readonly" class="total_qty" style="width:50px;" id="total" /></div>
                             </td>
                             <td colspan="5" style="text-align:right;"><b>Sub Total</b></td>
-                            <td><input type="text" tabindex="-1" name="po[subtotal_qty]" readonly="readonly" class="final_sub_total text_right" style="width:70px;" /></td>
+                            <td><input type="text" name="po[subtotal_qty]" readonly="readonly" class="final_sub_total text_right" style="width:70px;" /></td>
                             <td class="hide_class"></td>
                         </tr>
                         <tr>
                             <td colspan="6" style="width:70px; text-align:right;"></td>
                             <td colspan="4" style="text-align:right;font-weight:bold;">
-                                <input type="text" tabindex="-1" name="po[tax_label]" class='tax_label text_right' style="width:100%;" />
+                                <input type="text" name="po[tax_label]" class='tax_label text_right' style="width:100%;" />
                             </td>
                             <td>
-                                <input type="text" tabindex="-1" name="po[tax]" class='totaltax text_right' style="width:70px;" />
+                                <input type="text" name="po[tax]" class='totaltax text_right' style="width:70px;" />
                             </td>
                             <td class="hide_class"></td>
                         </tr>
                         <tr>
                             <td colspan="4" style="text-align:right;font-weight:bold;">
                                 Taxable Price</td>
-                            <td><input type="text" tabindex="-1" name="po[taxable_price]" readonly="readonly" class="taxable_price text_right" style="width:70px;" /></td>
+                            <td><input type="text" name="po[taxable_price]" readonly="readonly" class="taxable_price text_right" style="width:70px;" /></td>
                             <td colspan="1" style="text-align:right;font-weight:bold;">CGST</td>
-                            <td><input type="text" tabindex="-1" name="po[cgst_price]" readonly="readonly" class="cgst_price text_right" style="width:70px;" /></td>
+                            <td><input type="text" name="po[cgst_price]" readonly="readonly" class="cgst_price text_right" style="width:70px;" /></td>
                             <td colspan="1" style="text-align:right;font-weight:bold;" class="igst_sgst">SGST</td>
-                            <td><input type="text" tabindex="-1" name="po[sgst_price]" readonly="readonly" class="sgst_price text_right" style="width:70px;" /></td>
+                            <td><input type="text" name="po[sgst_price]" readonly="readonly" class="sgst_price text_right" style="width:70px;" /></td>
                             <td colspan="1" style="text-align:right;font-weight:bold;">Net Total</td>
-                            <td><input type="text" tabindex="-1" name="po[net_total]" readonly="readonly" class="final_amt text_right" style="width:70px;" /></td>
+                            <td><input type="text" name="po[net_total]" readonly="readonly" class="final_amt text_right" style="width:70px;" /></td>
                             <td class="hide_class"></td>
                         </tr>
                         <tr>
                             <td colspan="15">
                                 <span class="remark">Remarks</span>
-                                <input name="po[remarks]" tabindex="-1" type="text" class="form-control remark" />
+                                <input name="po[remarks]" type="text" class="form-control remark" />
                             </td>
                         </tr>
                     </tfoot>
@@ -671,7 +671,7 @@ if (!empty($customers)) {
                         <label class="col-sm-4 control-label">1. Delivery Schedule</label>
                         <div class="col-sm-8">
                             <div>
-                                <input type="text" tabindex="-1" class="form-control datepicker class_req borderra0 terms" name="po[delivery_schedule]" id="delivery_schedule" placeholder="dd-mm-yyyy" value="<?php echo date('d-m-Y'); ?>" onblur="validate_date('delivery_schedule')">
+                                <input type="text" class="form-control datepicker class_req borderra0 terms" name="po[delivery_schedule]" id="delivery_schedule" placeholder="dd-mm-yyyy" value="<?php echo date('d-m-Y'); ?>" onblur="validate_date('delivery_schedule')">
                                 <span id="colorpoerror" class="invalid_date_error2" style="color:#F00;"></span>
                             </div>
                         </div>
@@ -680,7 +680,7 @@ if (!empty($customers)) {
                         <label class="col-sm-4 control-label">3. Mode of Payment</label>
                         <div class="col-sm-8">
                             <div>
-                                <input type="text" tabindex="-1" class="form-control class_req borderra0 terms" name="po[mode_of_payment]" />
+                                <input type="text" class="form-control class_req borderra0 terms" name="po[mode_of_payment]" />
                             </div>
                         </div>
                     </div>
@@ -691,8 +691,8 @@ if (!empty($customers)) {
             <input type="hidden" name="po[supplier]" id="c_id" class='id_customer' />
             <input type="hidden" name="gst_type" id="gst_type" class="gst_type" value="" />
             <div class="action-btn-align mb-bot20">
-                <button class="btn btn-primary save" name="print" tabindex="-1" value="no" id="save"><span class="glyphicon glyphicon-plus"></span> Create </button>
-                <button class="btn btn-primary save" name="print" tabindex="" value="yes" id="save"><span class="glyphicon glyphicon-plus"></span> Save and <span class="glyphicon glyphicon-print"></span> print</button>
+                <button class="btn btn-primary save" name="print" value="no" id="save"><span class="glyphicon glyphicon-plus"></span> Create </button>
+                <button class="btn btn-primary save" name="print" value="yes" id="save"><span class="glyphicon glyphicon-plus"></span> Save and <span class="glyphicon glyphicon-print"></span> print</button>
             </div>
             <br />
         </form>

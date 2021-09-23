@@ -332,7 +332,7 @@
                                 <tr>
                                     <td colspan="13">
                                         <span class="remark">Remarks&nbsp;&nbsp;&nbsp;</span>
-                                        <input name="po[remarks]" type="text" class="form-control remark" value="<?php echo $val['remarks']; ?>" readonly="readonly" />
+                                        <input name="po[remarks]" type="text" class="form-control remark" value="<?php echo $val['remarks']; ?>" />
                                     </td>
                                 </tr>
                             </tfoot>
