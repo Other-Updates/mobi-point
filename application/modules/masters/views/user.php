@@ -173,7 +173,7 @@
                             <table id="basicTable" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline">
                                 <thead>
                                     <th class='action-btn-align'>S.No</th>
-                                    <th class='action-btn-align'>Name</th>
+                                    <!-- <th class='action-btn-align'>Name</th> -->
                                     <th class='action-btn-align'>User Name</th>
                                     <th class='action-btn-align'>Mobile Number</th>
                                     <th class='action-btn-align'>Email Id</th>
@@ -190,7 +190,7 @@
                                     ?>
                                             <tr>
                                                 <td class="first_td"><?php echo "$i"; ?></td>
-                                                <td><?php echo $val['name']; ?></td>
+                                                <!-- <td><?php echo $val['name']; ?></td> -->
                                                 <td><?php echo $val['username']; ?></td>
                                                 <td><?php echo $val['mobile_no']; ?></td>
                                                 <td><?php echo $val['email_id']; ?></td>

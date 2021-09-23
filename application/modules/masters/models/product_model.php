@@ -3,7 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Product_model extends CI_Model {
+class Product_model extends CI_Model
+{
 
     private $table_name = 'erp_product';
     private $increment_table = 'increment_table';
@@ -13,13 +14,14 @@ class Product_model extends CI_Model {
     var $joinTable2 = 'erp_category c';
     var $primaryTable = 'erp_product u';
     var $selectColumn = 'u.id,u.product_name,c.categoryName,u.type,u.cost_price,u.qty,r.firm_name,u.product_image,u.barcode,u.sales_price,u.brand_id';
-    var $column_order = array(null, 'r.firm_name', 'u.product_name', 'c.categoryName', 'u.brand_id', 'u.cost_price','u.sales_price', null); //set column field database for datatable orderable
+    var $column_order = array(null, 'u.product_name', 'c.categoryName', 'u.brand_id', 'u.cost_price', 'u.sales_price', null); //set column field database for datatable orderable
     var $column_search = array('u.product_name', 'c.categoryName', 'r.firm_name', 'u.type', 'u.qty', 'u.cost_price'); //set column field database for datatable searchable
     var $order = array('u.id' => 'ASC'); // default order
     private $erp_stock = 'erp_stock';
     private $erp_stock_history = 'erp_stock_history';
 
-    function __construct() {
+    function __construct()
+    {
 
 
 
@@ -30,7 +32,8 @@ class Product_model extends CI_Model {
         $this->load->database();
     }
 
-    public function insert_product($data) {
+    public function insert_product($data)
+    {
 
 
 
@@ -50,7 +53,8 @@ class Product_model extends CI_Model {
         return false;
     }
 
-    public function check_imie_exists($data) {
+    public function check_imie_exists($data)
+    {
 
         $this->db->select('ime_code');
 
@@ -68,7 +72,8 @@ class Product_model extends CI_Model {
             return '';
     }
 
-    public function get_product_by_firm_catid($data) {
+    public function get_product_by_firm_catid($data)
+    {
 
         $firm_id = $data['firm_id'];
 
@@ -97,7 +102,8 @@ class Product_model extends CI_Model {
             return $data;
     }
 
-    public function check_imiecode_availability($data) {
+    public function check_imiecode_availability($data)
+    {
 
         $this->db->select('ime_code');
 
@@ -115,13 +121,14 @@ class Product_model extends CI_Model {
                 return "IMIE code not available..Please purchase the product..";
             else
                 return "Product has minimum " . count($query) . " " . "barcode...Please add valid barcode count..";
-        }else {
+        } else {
 
             return 1;
         }
     }
 
-    public function get_ime_codes($count, $product_id) {
+    public function get_ime_codes($count, $product_id)
+    {
 
         $this->db->select('ime_code');
 
@@ -136,7 +143,8 @@ class Product_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function update_increment($data) {
+    public function update_increment($data)
+    {
 
 
 
@@ -156,20 +164,22 @@ class Product_model extends CI_Model {
         return false;
     }
 
-    public function get_product() {
-         $firms = $this->user_auth->get_user_firms();
-         $frim_id = array();
-         foreach ($firms as $value) {
-              $frim_id[] = $value['firm_id'];
+    public function get_product()
+    {
+        $firms = $this->user_auth->get_user_firms();
+        $frim_id = array();
+        foreach ($firms as $value) {
+            $frim_id[] = $value['firm_id'];
         }
         $this->db->where_in('firm_id', $frim_id);
-        
+
         $this->db->select($this->table_name . '.*');
         $query = $this->db->get($this->table_name)->result_array();
         return $query;
     }
 
-    public function get_product_by_id($id) {
+    public function get_product_by_id($id)
+    {
 
 
 
@@ -195,14 +205,16 @@ class Product_model extends CI_Model {
         return $query;
     }
 
-    public function update_image($id, $image) {
+    public function update_image($id, $image)
+    {
 
         $this->db->where('id', $id);
 
         return $this->db->update('erp_product', ["product_image" => trim($image)]);
     }
 
-    public function update_product($data, $id, $product_update_array) {
+    public function update_product($data, $id, $product_update_array)
+    {
         unset($data['submit']);
 
         /*
@@ -267,7 +279,8 @@ class Product_model extends CI_Model {
         return false;
     }
 
-    public function delete_product($id) {
+    public function delete_product($id)
+    {
 
 
 
@@ -287,7 +300,8 @@ class Product_model extends CI_Model {
         return false;
     }
 
-    function add_duplicate_product($input) {
+    function add_duplicate_product($input)
+    {
 
 
 
@@ -323,7 +337,8 @@ class Product_model extends CI_Model {
         }
     }
 
-    function get_brand_name($id) {
+    function get_brand_name($id)
+    {
 
         $this->db->select('brands');
 
@@ -334,7 +349,8 @@ class Product_model extends CI_Model {
         return $query[0]['brands'];
     }
 
-    function update_duplicate_product($input, $id) {
+    function update_duplicate_product($input, $id)
+    {
 
 
 
@@ -361,7 +377,8 @@ class Product_model extends CI_Model {
         return $query;
     }
 
-    function is_product_name_exist($store_name, $cat_id, $frim, $firm_id) {
+    function is_product_name_exist($store_name, $cat_id, $frim, $firm_id)
+    {
 
 
 
@@ -411,7 +428,8 @@ class Product_model extends CI_Model {
         return NULL;
     }
 
-    function is_category_name_exist($store_name, $frim, $firm_id) {
+    function is_category_name_exist($store_name, $frim, $firm_id)
+    {
 
 
 
@@ -456,7 +474,8 @@ class Product_model extends CI_Model {
         return NULL;
     }
 
-    function check_cat_exists($cat, $firm) {
+    function check_cat_exists($cat, $firm)
+    {
 
 
 
@@ -474,7 +493,8 @@ class Product_model extends CI_Model {
             return '';
     }
 
-    function check_brand_exists($cat_id, $firm_id, $brand) {
+    function check_brand_exists($cat_id, $firm_id, $brand)
+    {
 
 
 
@@ -494,7 +514,8 @@ class Product_model extends CI_Model {
             return '';
     }
 
-    function check_product_exists($product_name, $firm_id, $cat_id, $brand_id) {
+    function check_product_exists($product_name, $firm_id, $cat_id, $brand_id)
+    {
 
 
 
@@ -516,7 +537,8 @@ class Product_model extends CI_Model {
             return '';
     }
 
-    function is_brand_name_exist($store_name, $frim, $firm_id) {
+    function is_brand_name_exist($store_name, $frim, $firm_id)
+    {
 
 
 
@@ -561,7 +583,8 @@ class Product_model extends CI_Model {
         return NULL;
     }
 
-    function insert_category($data) {
+    function insert_category($data)
+    {
 
 
 
@@ -581,7 +604,8 @@ class Product_model extends CI_Model {
         return false;
     }
 
-    function insert_brand($data) {
+    function insert_brand($data)
+    {
 
 
 
@@ -601,7 +625,8 @@ class Product_model extends CI_Model {
         return false;
     }
 
-    function update_category($data, $id) {
+    function update_category($data, $id)
+    {
 
 
 
@@ -621,7 +646,8 @@ class Product_model extends CI_Model {
         return false;
     }
 
-    function _get_datatables_query() {
+    function _get_datatables_query()
+    {
 
         //Join Table
 
@@ -684,7 +710,8 @@ class Product_model extends CI_Model {
         }
     }
 
-    function get_datatables() {
+    function get_datatables()
+    {
 
         $this->db->select($this->selectColumn);
 
@@ -715,7 +742,8 @@ class Product_model extends CI_Model {
         return $query;
     }
 
-    function count_filtered() {
+    function count_filtered()
+    {
 
 
 
@@ -730,7 +758,8 @@ class Product_model extends CI_Model {
         return $query->num_rows();
     }
 
-    function count_all() {
+    function count_all()
+    {
 
 
 
@@ -774,7 +803,8 @@ class Product_model extends CI_Model {
         return $this->db->count_all_results();
     }
 
-    public function get_category_by_frim_id($id) {
+    public function get_category_by_frim_id($id)
+    {
 
 
 
@@ -797,8 +827,9 @@ class Product_model extends CI_Model {
         return $query;
     }
 
-    public function get_brand_by_frim_id($id) {
-        
+    public function get_brand_by_frim_id($id)
+    {
+
         $this->db->select($this->erp_brand . '.*');
         $this->db->where($this->erp_brand . '.firm_id', $id);
         $this->db->where($this->erp_brand . '.status', 1);
@@ -807,7 +838,7 @@ class Product_model extends CI_Model {
     }
 
     // public function get_hsn($id) {
-        
+
     //     $this->db->select($this->erp_product . '.*');
     //     // $this->db->where($this->erp_brand . '.firm_id', $id);
     //     // $this->db->where($this->erp_brand . '.hsn');
@@ -817,7 +848,8 @@ class Product_model extends CI_Model {
     //     return $query;
     // }
 
-    public function check_stock($check_stock) {
+    public function check_stock($check_stock)
+    {
 
 
 
@@ -954,7 +986,8 @@ class Product_model extends CI_Model {
         $this->db->insert($this->erp_stock_history, $insert_stock_his);
     }
 
-    public function get_barcode_by_limit($id) {
+    public function get_barcode_by_limit($id)
+    {
 
 
 
@@ -994,7 +1027,8 @@ class Product_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_products_to_export() {
+    public function get_all_products_to_export()
+    {
 
 
 
@@ -1029,5 +1063,4 @@ class Product_model extends CI_Model {
 
         return $query;
     }
-
 }
