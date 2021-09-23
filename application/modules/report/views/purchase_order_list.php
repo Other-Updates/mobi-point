@@ -81,26 +81,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
     </div>
     <div class="panel-body mt--40">
         <div class="row search_table_hide search-area">
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label class="control-label">Shop Name</label>
-                    <select id='firm_id' class="form-control">
-                        <!-- <option>Select</option> -->
-                        <?php
-                        if (isset($firm_list) && !empty($firm_list)) {
-                            foreach ($firm_list as $key => $val) {
-                                $select = '';
-                                if ($key == 0) {
-                                    $select = 'selected=selected';
-                                } ?>
-                                <option <?php echo $select; ?> value='<?= $val['firm_id'] ?>'><?= $val['firm_name'] ?></option>
-                        <?php
-                            }
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
+
             <div class="col-sm-3">
                 <div class="form-group">
                     <label class="control-label">PO NO</label>
@@ -350,8 +331,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
         var table;
         table = $('#basicTable_call_back').DataTable({
             "lengthMenu": [
-                [50, 100, 150, -1],
-                [50, 100, 150, "All"]
+                [50, 100, 500, -1],
+                [50, 100, 500, "All"]
             ],
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.

@@ -351,7 +351,7 @@ class Report_model extends CI_Model
         // $this->db->where('q_id', intval($val['id']));
         $this->db->where("erp_invoice.inv_id !=", 'Wings Invoice');
         $this->db->join('customer', 'customer.id=erp_invoice.customer');
-        $column_order = array(null, 'customer.store_name', 'erp_invoice.inv_id', null, null, 'erp_invoice.commission_rate', null, null, null);
+        $column_order = array(null, 'customer.store_name', 'erp_invoice.inv_id', 'erp_invoice.created_date', 'erp_invoice.net_total', 'erp_invoice.commission_rate', null, null, 'erp_invoice.profit_total');
         $column_search = array('customer.name', 'erp_invoice.inv_id');
         $order = array('erp_invoice.id' => 'desc');
         $i = 0;
@@ -872,7 +872,7 @@ class Report_model extends CI_Model
                 $this->db->where('erp_invoice.firm_id', $frim_id[0]);
             }
         }
-        $column_order = array(null, 'customer.store_name', 'erp_invoice.inv_id', 'erp_invoice.net_total', 'customer.advance', null, null, null, null, null, null, null,);
+        $column_order = array(null, 'customer.store_name', 'erp_invoice.inv_id', 'erp_invoice.net_total', 'erp_invoice.created_date');
         $column_search = array('customer.store_name', 'erp_invoice.inv_id', 'erp_invoice.net_total', 'customer.advance');
         $order = array('erp_invoice.id' => 'DESC');
         $i = 0;
@@ -1042,7 +1042,7 @@ class Report_model extends CI_Model
         $this->db->join('erp_sales_man', 'erp_sales_man.id=erp_invoice.sales_man', 'LEFT');
         $this->db->join('erp_invoice_details', 'erp_invoice_details.in_id=erp_invoice.id');
         $this->db->group_by('erp_invoice.id');
-        $column_order = array(null, 'erp_invoice.inv_id', 'customer.store_name', 'erp_invoice.total_qty', null, null, 'erp_invoice.subtotal_qty', 'erp_invoice.net_total', null, null, null, null, null, null, null,);
+        $column_order = array(null, 'erp_invoice.inv_id', 'customer.store_name', 'erp_invoice.total_qty',  'erp_invoice.net_total', 'erp_invoice.created_date', 'erp_sales_man.sales_man_name');
         $column_search = array('customer.store_name', 'erp_invoice.inv_id', 'erp_invoice.net_total', 'customer.advance');
         $order = array('erp_invoice.id' => 'DESC');
         $i = 0;
@@ -1225,7 +1225,7 @@ class Report_model extends CI_Model
         $this->db->join('erp_sales_man', 'erp_sales_man.id=erp_invoice.sales_man', 'LEFT');
         $this->db->join('erp_invoice_details', 'erp_invoice_details.in_id=erp_invoice.id');
         $this->db->group_by('erp_invoice.id');
-        $column_order = array(null, 'erp_invoice.inv_id', 'customer.store_name', 'erp_invoice.total_qty', null, null, 'erp_invoice.subtotal_qty', 'erp_invoice.net_total', null, null, null, null, null, null, null,);
+        $column_order = array(null, 'erp_invoice.inv_id', 'customer.store_name', null, 'erp_invoice.total_qty', 'erp_invoice.cgst_price', 'erp_invoice.sgst_price',  'erp_invoice.subtotal_qty', 'erp_invoice.net_total', 'erp_invoice.created_date',);
         $column_search = array('customer.store_name', 'erp_invoice.inv_id', 'erp_invoice.net_total', 'customer.advance');
         $order = array('erp_invoice.id' => 'DESC');
         $i = 0;

@@ -75,23 +75,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
     </div>
     <div class="panel-body mt--40">
         <div class="row search_table_hide search-area">
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label class="control-label">Firm</label>
-                    <select id='firm_id' class="form-control">
-                        <!-- <option value="">Select</option> -->
-                        <?php
-                        if (isset($firms) && !empty($firms)) {
-                            foreach ($firms as $firm) {
-                        ?>
-                                <option value='<?= $firm['firm_id'] ?>'><?= $firm['firm_name'] ?></option>
-                        <?php
-                            }
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
+
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="control-label">Customer Type</label>
@@ -161,9 +145,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <td class="action-btn-align">S.No</td>
                             <td class="action-btn-align">Invoice ID</td>
                             <!-- <td class="action-btn-align">Firm Name</td> -->
-                            <td class="action-btn-align">Firm GSTIN</td>
+                            <!-- <td class="action-btn-align">Firm GSTIN</td> -->
                             <td class="action-btn-align">Customer Name</td>
-                            <td class="action-btn-align">Customer GSTIN</td>
+                            <!-- <td class="action-btn-align">Customer GSTIN</td> -->
                             <td class="action-btn-align">Total QTY</td>
                             <td class="action-btn-align">CGST</td>
                             <td class="action-btn-align">SGST</td>
@@ -185,15 +169,15 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <!-- <td></td> -->
                             <td></td>
                             <td></td>
+                            <!-- <td></td> -->
                             <td></td>
-                            <td></td>
-                            <td class="action-btn-align"></td>
+                            <!-- <td class="action-btn-align"></td> -->
                             <td class="action-btn-align total-bg" style="text-aligh:center;"></td>
                             <td class="text_right total-bg"></td>
                             <td class="text_right total-bg"></td>
                             <td class="text_right total-bg"></td>
                             <td class="text_right total-bg"></td>
-                            <td></td>
+
                             <!--                            <td></td>
                             <td ></td>
                             <td></td>
@@ -387,7 +371,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
             },
             //Set column definition initialisation properties.
             "columnDefs": [{
-                "targets": [0, 10], //first column / numbering column
+                "targets": [0, 8], //first column / numbering column
                 "orderable": false, //set not orderable
             }, ],
             //            "dataFilter": function (data) {
@@ -418,7 +402,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         i : 0;
                 };
                 // Total over all pages
-                var cols = [6, 7, 8, 9, 10];
+                var cols = [6, 7, 8];
                 for (x in cols) {
                     total = api.column(cols[x]).data().reduce(function(a, b) {
                         return intVal(a) + intVal(b);

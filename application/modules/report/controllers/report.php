@@ -1285,9 +1285,9 @@ class Report extends MX_Controller
             //$row[] = $ass->firm_name;
             $row[] = '<a href="' . $this->config->item('base_url') . 'sales/invoice_views/' . $val['id'] . '" target="_blank">' . $val['inv_id'] . '</a>';
             // $row[] = $val['firm_name'];
-            $row[] = ($val['gstin']) ? $val['gstin'] : '';
+            // $row[] = ($val['gstin']) ? $val['gstin'] : '';
             $row[] = ($val['store_name']) ? $val['store_name'] : $val['name'];
-            $row[] = ($val['tin']) ? $val['tin'] : '';
+            // $row[] = ($val['tin']) ? $val['tin'] : '';
             $row[] = $val['total_qty'];
             $row[] = number_format(($val['erp_invoice_details'][0]['cgst']), 2);
             $row[] = number_format(($val['erp_invoice_details'][0]['sgst']), 2);

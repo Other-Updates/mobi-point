@@ -62,28 +62,6 @@ $data['company_details'] = $this->admin_model->get_company_details();
     <div class="panel-body pnone">
         <div class="row search_table_hide mb-0">
 
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Shop Name</label>
-                    <div class="col-sm-8">
-                        <select id='firm_id' class="form-control">
-                            <option value="">Select</option>
-                            <?php
-                            if (isset($frim_list) && !empty($frim_list)) {
-                                foreach ($frim_list as $key => $val) {
-                                    $select = '';
-                                    if ($key == 0) {
-                                        $select = "selected=selected";
-                                    } ?>
-                                    <option <?php echo $select; ?> value='<?= $val['firm_id'] ?>'><?= $val['firm_name'] ?></option>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Category</label>

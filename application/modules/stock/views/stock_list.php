@@ -53,125 +53,101 @@ $data['company_details'] = $this->admin_model->get_company_details();
     <div class="media mt--20">
         <h4>Stock List</h4>
     </div>
-    <div class="panel-body pnone">
-        <div class="row search_table_hide mb-0">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">
-                        Shop</label>
-                    <div class="col-sm-8">
-                        <select id='firm_id' class="form-control" onchange="Firm(this.value)">
-                            <!-- <option value="">Select</option> -->
-                            <?php
-                            if (isset($firm_details) && !empty($firm_details)) {
-                                foreach ($firm_details as $key => $val) {
-                                    $select = '';
-                                    if ($key == 0) {
-                                        $select = "selected=selected";
-                                    } ?>
-                                    <option <?php echo $select; ?> value='<?= $val['firm_id'] ?>'><?= $val['firm_name'] ?></option>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Category</label>
-                    <div class="col-sm-8">
-                        <select id='category' class="form-control">
-                            <option value="">Select</option>
-                            <?php
-                            if (isset($cat) && !empty($cat)) {
-                                foreach ($cat as $val) {
-                            ?>
-                                    <option value='<?= $val['cat_id'] ?>'><?= $val['categoryName'] ?></option>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Product</label>
-                    <div class="col-sm-8 wid100-div">
-                        <select id='product' name="product[]" class="form-control multi_select wid100" multiple="multiple">
-                            <option value='0'>Select</option>
-                            <?php
-                            if (isset($product) && !empty($product)) {
-                                foreach ($product as $val) {
-                            ?>
-                                    <option value='<?= $val['id'] ?>'><?= $val['product_name'] ?></option>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Model</label>
-                    <div class="col-sm-8">
-                        <select id='brand' class="form-control">
-                            <option value="">Select</option>
-                            <?php
-                            if (isset($brand) && !empty($brand)) {
-                                foreach ($brand as $val) { ?>
-                                    <option value='<?= $val['id'] ?>'><?= $val['brands'] ?></option>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-1"><a id='search' class="btn btn-success"><span class="glyphicon glyphicon-search "></span> Search</a></div>
-        </div>
-    </div>
-    <div class="contentpanel mb-50">
-        <div class="panel-body mt-top5">
-            <table id="example1" class="display dataTable table table-striped table-bordered responsive dataTable dtr-inline no-footer action-cntr" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <td width='5%'>S.No</td>
-                        <!-- <td width='20%'>Shop</td> -->
-                        <td width='15%'>Category</td>
-                        <td width='15%'>Product</td>
-                        <td width='5%'>Model</td>
-                        <td width='10%' class="action-btn-align">Quantity</td>
-                        <td width='5%' class="action-btn-align">Shortage Quantity</td>
-                        <!--<td width='10%' class="hide_class action-btn-align">Action</td>-->
-                    </tr>
-                </thead>
-                <tbody id="result_div">
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td width='5%'></td>
-                        <!-- <td width='20%'></td> -->
-                        <td width='15%'></td>
-                        <td width='15%'></td>
-                        <td width='5%'></td>
-                        <td width='10%' class="total-bg action-btn-align"></td>
-                        <td width='10%'></td>
-                    </tr>
-                </tfoot>
-            </table>
-            <div class="action-btn-align">
-                <button class="btn btn-defaultprint6 print_btn"><span class="glyphicon glyphicon-print"></span> Print</button>
-                <button class="btn btn-success excel" id="excel-prt"><span class="glyphicon glyphicon-print"></span> Excel</button>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Category</label>
+            <div class="col-sm-8">
+                <select id='category' class="form-control">
+                    <option value="">Select</option>
+                    <?php
+                    if (isset($cat) && !empty($cat)) {
+                        foreach ($cat as $val) {
+                    ?>
+                            <option value='<?= $val['cat_id'] ?>'><?= $val['categoryName'] ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
+                </select>
             </div>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Product</label>
+            <div class="col-sm-8 wid100-div">
+                <select id='product' name="product[]" class="form-control multi_select wid100" multiple="multiple">
+                    <option value='0'>Select</option>
+                    <?php
+                    if (isset($product) && !empty($product)) {
+                        foreach ($product as $val) {
+                    ?>
+                            <option value='<?= $val['id'] ?>'><?= $val['product_name'] ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Model</label>
+            <div class="col-sm-8">
+                <select id='brand' class="form-control">
+                    <option value="">Select</option>
+                    <?php
+                    if (isset($brand) && !empty($brand)) {
+                        foreach ($brand as $val) { ?>
+                            <option value='<?= $val['id'] ?>'><?= $val['brands'] ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"><a id='search' class="btn btn-success"><span class="glyphicon glyphicon-search "></span> Search</a></div>
+</div>
+</div>
+<div class="contentpanel mb-50">
+    <div class="panel-body mt-top5">
+        <table id="example1" class="display dataTable table table-striped table-bordered responsive dataTable dtr-inline no-footer action-cntr" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <td width='5%'>S.No</td>
+                    <!-- <td width='20%'>Shop</td> -->
+                    <td width='15%'>Category</td>
+                    <td width='15%'>Product</td>
+                    <td width='5%'>Model</td>
+                    <td width='10%' class="action-btn-align">Quantity</td>
+                    <td width='5%' class="action-btn-align">Shortage Quantity</td>
+                    <!--<td width='10%' class="hide_class action-btn-align">Action</td>-->
+                </tr>
+            </thead>
+            <tbody id="result_div">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td width='5%'></td>
+                    <!-- <td width='20%'></td> -->
+                    <td width='15%'></td>
+                    <td width='15%'></td>
+                    <td width='5%'></td>
+                    <td width='10%' class="total-bg action-btn-align"></td>
+                    <td width='10%'></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="action-btn-align">
+            <button class="btn btn-defaultprint6 print_btn"><span class="glyphicon glyphicon-print"></span> Print</button>
+            <button class="btn btn-success excel" id="excel-prt"><span class="glyphicon glyphicon-print"></span> Excel</button>
+        </div>
+    </div>
+</div>
 </div>
 <script type="text/javascript" src="<?php echo $theme_path; ?>/js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path; ?>/plugin/datatables/js/jquery.dataTables.min.js"></script>
