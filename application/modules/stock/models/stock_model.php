@@ -130,7 +130,7 @@ class Stock_model extends CI_Model
             }
         }
         if ($search_data['brand'] != '' && $search_data['brand'] != 'Select') {
-            $this->db->where('b.brands', $search_data['brand']);
+            $this->db->where('b.id', $search_data['brand']);
         }
         if (isset($_POST['order']) && $this->manual_order[$_POST['order']['0']['column']] != null) { // here order processing
             $this->db->order_by($this->manual_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);

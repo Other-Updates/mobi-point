@@ -490,12 +490,13 @@ if (!empty($customers)) {
                                                             ?>
                                                         </select>
                                                     </div>
-                                                <?php  } else if ($vals['categoryName'] == 'Online-Payment' || $vals['categoryName'] == 'Recharge' || $vals['categoryName'] == 'Money Transfer' || $vals['categoryName'] == 'Payments' || $vals['categoryName'] == 'Service') { ?>
+                                                <?php  } ?>
+                                                <?php if ($vals['categoryName'] == 'Online-Payment' || $vals['categoryName'] == 'Recharge' || $vals['categoryName'] == 'Money Transfer' || $vals['categoryName'] == 'Payments' || $vals['categoryName'] == 'Service') { ?>
                                                     <input type="text" name='money_transfer[]' value="<?php echo $vals['money_transfer']; ?>" />
+                                                <?php } else { ?>
+                                                    <input type="hidden" name='money_transfer[]' value="" />
                                                 <?php } ?>
                                             </div>
-                                            <!-- <input type="hidden" name='ime_code_val[]' style="width:70px;" class="ime_code_val required" value="<?php echo $vals['money_transfer']; ?>" id="ime_code_vals" />
-                                            <span class="error_msg ime_code_error"></span> -->
                                         </td>
                                         <td style="display:none;">
                                             <select id='cat_id' tabindex="-1" style="display:none;" class='cat_id static_style' name='categoty[]'>
@@ -513,7 +514,6 @@ if (!empty($customers)) {
                                         </td>
                                         <input type="hidden" class='form-align tabwid model_no_extra' value="<?php echo $vals['model_no']; ?>" style="width:100%" />
                                         <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="<?php echo $vals['unit']; ?>" />
-                                        <input type="hidden" tabindex="-1" name='money_transfer[]' style="width:100px;" class="money" />
                                         <?php if (isset($vals['stock']) && !empty($vals['stock'])) { ?>
                                             <td>
                                                 <input type="hidden" name='available_quantity[]' style="width:70px;" class="code form-control colournamedup tabwid form-align " value="<?php echo $vals['stock'][0]['quantity'] ?>" readonly="readonly" />
@@ -1244,10 +1244,12 @@ if (!empty($customers)) {
                             // }
                             if (categoryname == '') {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
+                                this_val.closest('tr').find('td .ime_code_select').append("<input type='hidden'  name='money_transfer[]' />");
                                 this_val.closest('tr').find('.ime_code_val').removeClass('required');
                             } else if (categoryname == 'Fresh Mobiles' || categoryname == 'Used Mobiles' || categoryname == "Smart Phone-Brand New" || categoryname == "Smart Phone-REFURBISHED" || categoryname == " Feature Phone" || categoryname == "Smart Phone") {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
                                 this_val.closest('tr').find('td .ime_code_select').append(option_text);
+                                this_val.closest('tr').find('td .ime_code_select').append("<input type='hidden'  name='money_transfer[]' />");
                                 this_val.closest('tr').find('td .multi_select').fSelect();
                                 this_val.closest('tr').find('.ime_code_val').removeClass('required');
 
@@ -1257,6 +1259,7 @@ if (!empty($customers)) {
                                 this_val.closest('tr').find('.ime_code_val').removeClass('required');
                             } else {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
+                                this_val.closest('tr').find('td .ime_code_select').append("<input type='hidden'  name='money_transfer[]' />");
                                 this_val.closest('tr').find('.ime_code_val').removeClass('required');
                             }
                             //  this_val.closest('tr').find('.pertax').val(result[0].cgst);

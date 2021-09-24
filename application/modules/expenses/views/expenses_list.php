@@ -74,21 +74,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
             <div class="card-body">
                 <form id="form-filter" class="form-horizontal">
                     <div class="form-group row">
-                        <div class="col col-md-3">
-                            <label>Company</label>
-                            <select id='firm' class="form-control">
-                                <!-- <option value="">Select</option> -->
-                                <?php
-                                if (isset($firms) && !empty($firms)) {
-                                    foreach ($firms as $val) {
-                                ?>
-                                        <option value='<?= $val['firm_id'] ?>'><?php echo $val['firm_name'] ?></option>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
+
                         <div class="col col-md-3">
                             <label>Category</label>
                             <select class="form-control" id="ex_category">

@@ -74,24 +74,10 @@ $data['company_details'] = $this->admin_model->get_company_details();
             <div class="card-body">
                 <form id="form-filter" class="form-horizontal">
                     <div class="form-group row">
-                        <div class="col col-md-3">
-                            <label>Company</label>
-                            <select id='firm' class="form-control">
-                                <!-- <option value="">Select</option> -->
-                                <?php
-                                if (isset($firms) && !empty($firms)) {
-                                    foreach ($firms as $val) {
-                                ?>
-                                        <option value='<?= $val['firm_id'] ?>'><?= $val['firm_name'] ?></option>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
+
                         <div class="col col-md-3">
                             <label>Opening Balance</label>
-                            <input type="text" id='firm_amt' class="form-control" name="company_amount" readonly="">
+                            <input type="text" id='firm_amt' class="form-control" name="company_amount">
                         </div>
                         <div class="col col-md-2">
                             <label>From Date</label>
@@ -103,12 +89,10 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <span class="date_err" style="color:#F00;font-size: 12px "></span>
                         </div>
                         <div class="col col-md-2">
-                            <label class="control-label col-md-12 mnone">&nbsp;</label>
+                            <label class="control-label col-md-12 mnone"></label>
                             <a id='search' class="btn btn-success  mtop4" title="Search">SUBMIT<span class=" icon-magnifier"></span></a>&nbsp;
                             <a class="btn btn-danger mtop4" id='clear' title="Clear">CLEAR<span></span></a>
                         </div>
-                    </div>
-                    <div class="form-group row">
                     </div>
                 </form>
             </div>

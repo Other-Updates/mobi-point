@@ -1885,9 +1885,9 @@ class Sales extends MX_Controller
     {
         if ($this->input->post()) {
             $input = $this->input->post();
-            echo '<pre>';
-            print_r($input);
-            exit;
+            // echo '<pre>';
+            // print_r($input);
+            // exit;
 
             // Remove Old Product stock
             foreach ($input['old_product_id'] as $key => $results) {
@@ -1911,66 +1911,68 @@ class Sales extends MX_Controller
             $input['quotation']['sale_cat_type'] = $input['sale_cat_type'];
             $insert_id = $this->project_cost_model->update_invoice($input['quotation'], $input['pc_id']);
             $delete_id = $this->project_cost_model->delete_inv_by_id($input['pc_id']);
-            if (isset($input['categoty']) && !empty($input['categoty'])) {
+
+            if (isset($input['product_id']) && !empty($input['product_id'])) {
                 $insert_arr = array();
-                foreach ($input['categoty'] as $key => $val) {
-                    $insert['q_id'] = $input['quotation']['q_id'];
-                    $insert['in_id'] = $input['pc_id'];
-                    $insert['category'] = $val;
-                    $insert['product_id'] = $input['product_id'][$key];
-                    $insert['product_description'] = $input['product_description'][$key];
-                    $insert['money_transfer'] = $input['money_transfer'][$key];
-                    $insert['product_type'] = 1;
-                    $insert['brand'] = $input['brand'][$key];
-                    $insert['unit'] = $input['unit'][$key];
-                    $insert['quantity'] = $input['quantity'][$key];
-                    $insert['cost_price'] = $input['cost_price'][$key];
-                    $insert['per_cost'] = $input['per_cost'][$key];
-                    $insert['sp_with_gst'] = ($input['sp_with_gst'][$key] > 0) ? $input['sp_with_gst'][$key] : 0.00;
-                    $insert['sp_without_gst'] = ($input['sp_without_gst'][$key] > 0) ? $input['sp_without_gst'][$key] : 0.00;
-                    $insert['tax'] = ($input['tax'][$key] > 0) ? $input['tax'][$key] : 0.00;
-                    $insert['gst'] = ($input['gst'][$key] > 0) ? $input['gst'][$key] : 0.00;
-                    $insert['igst'] = ($input['igst'][$key] > 0) ? $input['igst'][$key] : 0.00;
-                    $insert['discount'] = ($input['discount'][$key] > 0) ? $input['discount'][$key] : 0.00;
-                    $insert['sub_total'] = ($input['sub_total'][$key] > 0) ? $input['sub_total'][$key] : 0.00;
-                    if ($input['quotation']['delivery_status'] == 'delivered') {
-                        $insert['delivery_quantity'] = $input['quantity'][$key];
-                    }
-                    $insert['created_date'] = date('Y-m-d H:i');
-                    $insert_details_id = $this->project_cost_model->insert_invoicedetails($insert);
-                    $insert_arr[] = $insert;
-                    if ($insert['product_id'] > 0 && $insert['cost_price']) {
-                        $cost_price = $insert['cost_price'];
-                        $cgst = $insert['tax'];
-                        $sgst = $insert['gst'];
-                        $taxes = ($cgst + $sgst);
-                        $cp_with_gst = $cost_price * (($taxes) / 100);
-                        $cost_price_with_gst = $cost_price + $cp_with_gst;
-                        $product_data = array();
-                        $product_data['cost_price_without_gst'] = $insert['cost_price'];
-                        $product_data['cost_price'] = $cost_price_with_gst;
-                        $this->product_model->update_product($product_data, $insert['product_id']);
-                    }
+                foreach ($input['product_id'] as $key => $val) {
+                    if ($val > 0) {
+                        $insert['q_id'] = $input['quotation']['q_id'];
+                        $insert['in_id'] = $input['pc_id'];
+                        $insert['category'] = ($input['category'][$key] > 0) ? $input['category'][$key] : 0;
+                        $insert['product_id'] = $input['product_id'][$key];
+                        $insert['product_description'] = $input['product_description'][$key];
+                        $insert['money_transfer'] = ($input['money_transfer'][$key] != '') ? $input['money_transfer'][$key] : '';
+                        $insert['product_type'] = 1;
+                        $insert['brand'] = $input['brand'][$key];
+                        $insert['unit'] = $input['unit'][$key];
+                        $insert['quantity'] = $input['quantity'][$key];
+                        $insert['cost_price'] = $input['cost_price'][$key];
+                        $insert['per_cost'] = $input['per_cost'][$key];
+                        $insert['sp_with_gst'] = ($input['sp_with_gst'][$key] > 0) ? $input['sp_with_gst'][$key] : 0.00;
+                        $insert['sp_without_gst'] = ($input['sp_without_gst'][$key] > 0) ? $input['sp_without_gst'][$key] : 0.00;
+                        $insert['tax'] = ($input['tax'][$key] > 0) ? $input['tax'][$key] : 0.00;
+                        $insert['gst'] = ($input['gst'][$key] > 0) ? $input['gst'][$key] : 0.00;
+                        $insert['igst'] = ($input['igst'][$key] > 0) ? $input['igst'][$key] : 0.00;
+                        $insert['discount'] = ($input['discount'][$key] > 0) ? $input['discount'][$key] : 0.00;
+                        $insert['sub_total'] = ($input['sub_total'][$key] > 0) ? $input['sub_total'][$key] : 0.00;
+                        if ($input['quotation']['delivery_status'] == 'delivered') {
+                            $insert['delivery_quantity'] = $input['quantity'][$key];
+                        }
+                        $insert['created_date'] = date('Y-m-d H:i');
+                        $insert_details_id = $this->project_cost_model->insert_invoicedetails($insert);
+                        $insert_arr[] = $insert;
+                        if ($insert['product_id'] > 0 && $insert['cost_price']) {
+                            $cost_price = $insert['cost_price'];
+                            $cgst = $insert['tax'];
+                            $sgst = $insert['gst'];
+                            $taxes = ($cgst + $sgst);
+                            $cp_with_gst = $cost_price * (($taxes) / 100);
+                            $cost_price_with_gst = $cost_price + $cp_with_gst;
+                            $product_data = array();
+                            $product_data['cost_price_without_gst'] = $insert['cost_price'];
+                            $product_data['cost_price'] = $cost_price_with_gst;
+                            $this->product_model->update_product($product_data, $insert['product_id']);
+                        }
 
-                    $customer['tin'] = $input['customer']['tin'];
-                    $this->customer_model->update_customer($customer, $input['customer']['id']);
-                    $this->project_cost_model->open_imeie($input['pc_id']);
-                    $update_data = [
-                        "sales_id" => $input['pc_id'],
-                        "sales_details_id" => $insert_details_id,
-                    ];
-                    if ($input['ime_code_val'] != "")
-                        $this->project_cost_model->update_ime_status($input['product_id'][$key], $input['ime_code_val'][$key], $input['quantity'][$key], $update_data);
-                    // $this->project_cost_model->update_ime_status($input['product_id'][$key], $input['money_transfer'][$key], $input['quantity'][$key], $update_data);
-                    $stock_arr = array();
-                    $inv_id['inv_id'] = $input['quotation']['inv_id'];
-                    $stock_arr[] = $inv_id;
-                    $insert_data = $insert;
-                    $insert_data['firm'] = $input['quotation']['firm_id'];
-                    $this->stock_details($insert_data, $inv_id);
+                        $customer['tin'] = $input['customer']['tin'];
+                        $this->customer_model->update_customer($customer, $input['customer']['id']);
+                        $this->project_cost_model->open_imeie($input['pc_id']);
+                        $update_data = [
+                            "sales_id" => $input['pc_id'],
+                            "sales_details_id" => $insert_details_id,
+                        ];
+                        if ($input['ime_code_val'] != "")
+                            $this->project_cost_model->update_ime_status($input['product_id'][$key], $input['ime_code_val'][$key], $input['quantity'][$key], $update_data);
+                        // $this->project_cost_model->update_ime_status($input['product_id'][$key], $input['money_transfer'][$key], $input['quantity'][$key], $update_data);
+                        $stock_arr = array();
+                        $inv_id['inv_id'] = $input['quotation']['inv_id'];
+                        $stock_arr[] = $inv_id;
+                        $insert_data = $insert;
+                        $insert_data['firm'] = $input['quotation']['firm_id'];
+                        $this->stock_details($insert_data, $inv_id);
+                    }
+                    //$this->project_cost_model->insert_invoice_details($insert_arr);
                 }
-                //$this->project_cost_model->insert_invoice_details($insert_arr);
-
             }
 
             $receipt_id = $input['pc_id'];

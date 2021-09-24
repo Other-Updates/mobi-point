@@ -211,6 +211,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
             "ajax": {
                 "url": "<?php echo site_url('stock/ajaxList_report/'); ?>",
                 "type": "POST",
+
                 //"data": {"product": product, "category": $('#category').val(), "inventory": 1}
             },
             //Set column definition initialisation properties.
@@ -261,6 +262,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
             },
         });
+        $('#search').click(function() { //button filter event click
+            table.ajax.reload(); //just reload table
+        });
 
         // new $.fn.dataTable.FixedHeader(table);
     });
@@ -295,31 +299,31 @@ $data['company_details'] = $this->admin_model->get_company_details();
     $('.print_btn').click(function() {
         window.print();
     });
-    $('#search').on('click', function() {
-        // alert(1);
-        for_loading();
-        $.ajax({
-            url: BASE_URL + "stock/stock_report_search_result",
-            type: 'GET',
-            cache: false,
-            data: {
-                product: $('#product').val(),
-                category: $('#category').val(),
-                firm_id: $('#firm_id').val(),
-                inventory: 1,
-            },
-            success: function(result) {
-                for_response();
-                var table = $('#example1').DataTable();
-                table.destroy();
-                $('#result_div').html('');
-                $('#result_div').html(result);
-                datatable();
+    // $('#search').on('click', function() {
+    //     // alert(1);
+    //     for_loading();
+    //     $.ajax({
+    //         url: BASE_URL + "stock/stock_report_search_result",
+    //         type: 'GET',
+    //         cache: false,
+    //         data: {
+    //             product: $('#product').val(),
+    //             category: $('#category').val(),
+    //             firm_id: $('#firm_id').val(),
+    //             inventory: 1,
+    //         },
+    //         success: function(result) {
+    //             for_response();
+    //             var table = $('#example1').DataTable();
+    //             table.destroy();
+    //             $('#result_div').html('');
+    //             $('#result_div').html(result);
+    //             datatable();
 
 
-            }
-        });
-    });
+    //         }
+    //     });
+    // });
 
     function isNumber(evt, this_ele) {
         this_val = $(this_ele).val();
