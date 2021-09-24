@@ -16,7 +16,7 @@ class Stock_model extends CI_Model
     //var $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,p.model_no,r.firm_name';
     var $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,p.model_no,r.firm_name,p.cost_price,p.cgst,p.sgst,p.cost_price_without_gst,p.min_qty';
     var $column_order = array(null,  'c.categoryName', 'p.product_name', 'b.brands', 'u.quantity', null); //set column field database for datatable orderable
-    var $manual_order = array(null,  'c.categoryName', 'b.brands', 'p.product_name', 'p.cost_price', 'u.quantity', 'p.cost_price_without_gst', 'p.cgst', 'p.sgst', null);
+    var $manual_order = array(null,  'c.categoryName', 'b.brands', 'p.product_name', 'p.cost_price', 'u.quantity', 'p.cost_price_without_gst', 'b.gst', 'p.cgst', 'p.sgst', null);
     var $column_search = array('r.firm_name', 'c.categoryName', 'p.product_name', 'b.brands', 'u.quantity', 'p.cost_price'); //set column field database for datatable searchable
     var $order = array('u.id' => 'ASC '); // default order
     function __construct()
@@ -130,7 +130,7 @@ class Stock_model extends CI_Model
             }
         }
         if ($search_data['brand'] != '' && $search_data['brand'] != 'Select') {
-            $this->db->where('u.brand', $search_data['brand']);
+            $this->db->where('b.brands', $search_data['brand']);
         }
         if (isset($_POST['order']) && $this->manual_order[$_POST['order']['0']['column']] != null) { // here order processing
             $this->db->order_by($this->manual_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);

@@ -992,8 +992,8 @@ class Sales extends MX_Controller
     {
         if ($this->input->post()) {
             $input = $this->input->post();
-            echo '<pre>';
-            print_r($input);
+            // echo '<pre>';
+            // print_r($input);
 
             $bill_type = $input['quotation']['bill_category'];
             $net_total = $input['quotation']['net_total'];
@@ -1951,6 +1951,7 @@ class Sales extends MX_Controller
                         $product_data['cost_price'] = $cost_price_with_gst;
                         $this->product_model->update_product($product_data, $insert['product_id']);
                     }
+
                     $customer['tin'] = $input['customer']['tin'];
                     $this->customer_model->update_customer($customer, $input['customer']['id']);
                     $this->project_cost_model->open_imeie($input['pc_id']);
@@ -1960,6 +1961,7 @@ class Sales extends MX_Controller
                     ];
                     if ($input['ime_code_val'] != "")
                         $this->project_cost_model->update_ime_status($input['product_id'][$key], $input['ime_code_val'][$key], $input['quantity'][$key], $update_data);
+                    // $this->project_cost_model->update_ime_status($input['product_id'][$key], $input['money_transfer'][$key], $input['quantity'][$key], $update_data);
                     $stock_arr = array();
                     $inv_id['inv_id'] = $input['quotation']['inv_id'];
                     $stock_arr[] = $inv_id;
@@ -1968,7 +1970,9 @@ class Sales extends MX_Controller
                     $this->stock_details($insert_data, $inv_id);
                 }
                 //$this->project_cost_model->insert_invoice_details($insert_arr);
+
             }
+
             $receipt_id = $input['pc_id'];
             $receipt_num = $this->master_model->get_last_id('rp_code');
             $update_data = [

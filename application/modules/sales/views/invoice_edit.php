@@ -371,14 +371,14 @@ if (!empty($customers)) {
                             <input type="hidden" name="pc_id" id="pc_id" class='id_customer form-align tabwid' value="<?php echo $val['id']; ?>" />
                         </tr>
                     </table>
-                    <table class="table  table-bordered responsive dataTable no-footer dtr-inline" id="add_quotation">
+                    <table class="table  table-bordered responsive dataTable no-footer dtr-inline text-center" id="add_quotation">
                         <thead>
                             <tr style="text-align:center;">
                                 <td width="3%" class="first_td1">S.No</td>
                                 <td width="20%" class="first_td1">Product Name</td>
                                 <td width="15%" class="first_td1">IMEI Code</td>
                                 <td width="10%" class="first_td1 action-btn-align">QTY</td>
-                                <td width="8%" class="first_td1 action-btn-align">Cost Price <span style="color:#F00; font-style:oblique;">*</span></td>
+                                <td width="8%" class="first_td1 action-btn-align">Cost Price </td>
                                 <td width="8%" class="first_td1 action-btn-align">Sale Price</td>
                                 <!-- <td width="4%" class="first_td1 action-btn-align">Total</td>-->
                                 <!-- <td width="6%" class="first_td1 action-btn-align">HSN Code</td> -->
@@ -404,7 +404,7 @@ if (!empty($customers)) {
                                 ?> -->
                                 <td width="7%" class="first_td1 action-btn-align">Net Value</td>
                                 <td width="10%" class="action-btn-align">Profit</td>
-                                <td width="2%" class="action-btn-align">
+                                <td width="5%" class="action-btn-align">
                                     <a id='add_group' tabindex="7" class="btn btn-success form-control pad10"><span class="glyphicon glyphicon-plus"></span></a>
                                 </td>
                             </tr>
@@ -471,7 +471,7 @@ if (!empty($customers)) {
                                             </select>
                                         </td>
                                         <td>
-                                            <div class="ime_code_select">
+                                            <div class="ime_code_select" style="width:100px;">
                                                 <?php if ($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles' || $vals['categoryName'] == 'Smart Phone-Brand New' ||  $vals['categoryName'] == 'Smart Phone-REFURBISHED' || $vals['categoryName'] == 'Smart Phone-Brand New' ||  $vals['categoryName'] ==  "FEAUTERE Phone" ||  $vals['categoryName'] ==  "Smart Phone") { ?>
                                                     <div tabindex="0">
                                                         <select id="ime_code_id" class="form-control multi_select ime_code_id " multiple="multiple" autocomplete="off" name="ime_code_id[]">
@@ -491,7 +491,7 @@ if (!empty($customers)) {
                                                         </select>
                                                     </div>
                                                 <?php  } else if ($vals['categoryName'] == 'Online-Payment' || $vals['categoryName'] == 'Recharge' || $vals['categoryName'] == 'Money Transfer' || $vals['categoryName'] == 'Payments' || $vals['categoryName'] == 'Service') { ?>
-                                                    <input type="text" name='ime_code_val[]' style="width:100%;" value="<?php echo $vals['money_transfer']; ?>" />
+                                                    <input type="text" name='money_transfer[]' value="<?php echo $vals['money_transfer']; ?>" />
                                                 <?php } ?>
                                             </div>
                                             <!-- <input type="hidden" name='ime_code_val[]' style="width:70px;" class="ime_code_val required" value="<?php echo $vals['money_transfer']; ?>" id="ime_code_vals" />
@@ -513,7 +513,7 @@ if (!empty($customers)) {
                                         </td>
                                         <input type="hidden" class='form-align tabwid model_no_extra' value="<?php echo $vals['model_no']; ?>" style="width:100%" />
                                         <input type="hidden" tabindex="-1" name='unit[]' style="width:70px;" class="unit" value="<?php echo $vals['unit']; ?>" />
-                                        <!-- <input type="hidden" tabindex="-1" name='money_transfer[]' style="width:70px;" class="money" value="<?php echo $vals['money_transfer']; ?>" /> -->
+                                        <input type="hidden" tabindex="-1" name='money_transfer[]' style="width:100px;" class="money" />
                                         <?php if (isset($vals['stock']) && !empty($vals['stock'])) { ?>
                                             <td>
                                                 <input type="hidden" name='available_quantity[]' style="width:70px;" class="code form-control colournamedup tabwid form-align " value="<?php echo $vals['stock'][0]['quantity'] ?>" readonly="readonly" />
@@ -595,22 +595,20 @@ if (!empty($customers)) {
                             <td colspan="2" class="sub_tag" style="text-align:right;"><b>Sub Total</b></td>
                             <td><input type="text" name="quotation[subtotal_qty]" tabindex="-1" readonly="readonly" value="<?php echo $val['subtotal_qty']; ?>" class="final_sub_total text_right" style="width:70px;" /><input type="hidden" class="temp_sub_total" value="" /></td>
                             <td class="action-btn-align"><input type="text" name="quotation[profit_total]" tabindex="21" value="<?php echo $val['profit_total']; ?>" readonly="readonly" class="profit_total" style="width:70px;" /></td>
-                            <td></td>
                             <input type="hidden" name="advance" tabindex="-1" readonly="readonly" value="<?php echo (!empty($val['advance'])) ? $val['advance'] : 0; ?>" class="advance text_right" style="width:70px;" />
-                            <?php if ($gsttype == 1) { ?>
-                                <tr>
-                                    <td colspan="5" style="width:70px; text-align:right;"></td>
-                                    <td style="display: none" colspan="3" style="text-align:right;font-weight:bold;"><input type="text" tabindex="-1" name="quotation[tax_label]" class='tax_label text_right' value="<?php echo $val['tax_label']; ?>" style="width:100%;" /></td>
-                                    <td style="display: none">
-                                        <input type="text" name="quotation[tax]" value="<?php
-                                                                                        if ($val['tax'] != 0) {
-                                                                                            echo $val['tax'];
-                                                                                        }
-                                                                                        ?>" class='totaltax text_right' tabindex="-1" style="width:70px;" />
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            <?php } ?>
+                            <td></td>
+                            <tr>
+                                <td colspan="5" style="width:70px; text-align:right;"></td>
+                                <td style="display: none" colspan="3" style="text-align:right;font-weight:bold;"><input type="text" tabindex="-1" name="quotation[tax_label]" class='tax_label text_right' value="<?php echo $val['tax_label']; ?>" style="width:100%;" /></td>
+                                <td style="display: none">
+                                    <input type="text" name="quotation[tax]" value="<?php
+                                                                                    if ($val['tax'] != 0) {
+                                                                                        echo $val['tax'];
+                                                                                    }
+                                                                                    ?>" class='totaltax text_right' tabindex="-1" style="width:70px;" />
+                                </td>
+                            </tr>
+
                             <input type="hidden" name="quotation[round_off]" tabindex="-1" value="<?php echo $val['round_off']; ?>" class="round_off text_right" style="width:70px;" readonly />
                         </tbody>
                         <input type="hidden" name="quotation[transport]" value="0" class="transport text_right" tabindex="-1" style="width:70px;" />
@@ -620,13 +618,13 @@ if (!empty($customers)) {
                                 <input type="hidden" tabindex="-1" name="quotation[labour]" value="<?php echo $quotation[0]['labour']; ?>" class="labour text_right" style="width:70px;" />
 
 
-                                <td colspan="2" style="text-align:right;">Taxable Charge</td>
+                                <td colspan="1" style="text-align:right;">Taxable Charge</td>
 
 
                                 <td><input type="text" tabindex="-1" name="quotation[taxable_price]" value="<?php echo $quotation[0]['taxable_price']; ?>" readonly="readonly" class=" text_right taxable_price" style="width:70px;" /></td>
 
 
-                                <td colspan="1" style="text-align:right !important;">CGST:</td>
+                                <td style="text-align:right !important;">CGST:</td>
 
 
                                 <td><input tabindex="-1" type="text" name="quotation[cgst_price]" value="<?php echo $val['cgst_price']; ?>" readonly class="add_cgst text_right cgst_price" style="width:70px;" /></td>
@@ -636,9 +634,9 @@ if (!empty($customers)) {
                                 $gst_type = $quotation[0]['state_id'];
                                 if ($gst_type == 31) {
                                 ?>
-                                    <td colspan="1" style="text-align:right;">SGST:</td>
+                                    <td style="text-align:right;">SGST:</td>
                                 <?php } else { ?>
-                                    <td colspan="1" style="text-align:right;">IGST:</td>
+                                    <td style="text-align:right;">IGST:</td>
                                 <?php
                                 }
                                 ?>
@@ -648,12 +646,14 @@ if (!empty($customers)) {
 
                                 <input type="hidden" name="quotation[transport]" value="<?php echo $quotation[0]['transport']; ?>" class="transport text_right" tabindex="-1" style="width:70px;" />
                             </tr>
-
-                            <td colspan="7" class="net_tag" style="text-align:right;font-weight:bold;">Net Total</td>
+                            <td></td>
+                            <td colspan="6" class="net_tag" style="text-align:right;font-weight:bold;">Net Total</td>
                             <td><input type="text" tabindex="-1" name="quotation[net_total]" readonly="readonly" class="final_amt text_right" style="width:70px;" value="<?php echo $quotation[0]['net_total']; ?>" /></td>
+                            <td></td>
                             <tr>
-                                <td colspan="10">
-                                    <span>Remarks&nbsp;</span>
+                                <td></td>
+                                <td colspan="9">
+                                    <label style="text-align:center;font-weight:bold;">Remarks</label>
                                     <input name="quotation[remarks]" tabindex="-1" type="text" class="form-control" value="<?php echo $val['remarks']; ?>" style="width:100%; display: inline" />
                                 </td>
                             </tr>
@@ -1253,7 +1253,7 @@ if (!empty($customers)) {
 
                             } else if (categoryname == 'Online-Payment' || categoryname == 'Recharge' || categoryname == 'Money Transfer' || categoryname == 'Payments' || categoryname == 'Service' || categoryname == 'Simcards') {
                                 this_val.closest('tr').find('td .ime_code_select').empty();
-                                this_val.closest('tr').find('td .ime_code_select').append("<input type='text'  name='money_transfer' />");
+                                this_val.closest('tr').find('td .ime_code_select').append("<input type='text'  name='money_transfer[]' />");
                                 this_val.closest('tr').find('.ime_code_val').removeClass('required');
                             } else {
                                 this_val.closest('tr').find('td .ime_code_select').empty();

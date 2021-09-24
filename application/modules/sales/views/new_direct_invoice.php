@@ -260,7 +260,7 @@ if (!empty($customers)) {
                         ?>
                     </select>
                     <div class="col-xs-8">
-                        <input type="text" tabindex="-1" name='quantity[]' style="width:70px;" class="qty quantity" value="" id="qty" data-stock="0" />
+                        <input type="text" tabindex="-1" name='quantity[]' style="width:70px;" class="qty required quantity" value="" id="qty" data-stock="0" />
                     </div>
                     <div class="col-xs-4"> <span class="label label-success stock_qty"> 0 </span></div>
                     <span class="error_msg"></span>
@@ -721,7 +721,7 @@ if (!empty($customers)) {
                             <td style="display: none">
                                 <input type="text" name="quotation[tax]" class='totaltax text_right' tabindex="23" style="width:70px;" />
                             </td>
-                            <td></td>
+
                         </tr>
                         <input type="hidden" name="quotation[round_off]" tabindex="-1" value="" class="round_off text_right" style="width:100px;" readonly="" />
                     </tbody>
@@ -734,11 +734,12 @@ if (!empty($customers)) {
                             <td style="text-align:right;" class="cgst_td"> CGST </td>
                             <td><input type="text" style="display: none;" tabindex="25" value="" name="quotation[cgst_price]" readonly class="add_cgst text_right cgst_price" style="width:100px;" /></td>
                             <td style="text-align:right;" class="sgst_td"> SGST </td>
-                            <!-- <td style="text-align:right;" class="igst_td"> IGST </td> -->
                             <td><input type="text" style="display: none;" tabindex="26" value="" name="quotation[sgst_price]" readonly class="add_sgst text_right sgst_price" style="width:70px;" /></td>
                         </tr>
                         <td colspan="6" class="net_total_tag" style="text-align:right;font-weight:bold;">Net Total</td>
                         <td><input type="text" tabindex="27" name="quotation[net_total]" id="net_total" readonly="readonly" class="final_amt text_right" style="width:70px;" /></td>
+                        <td></td>
+                        <td></td>
                         <tr>
                             <td colspan="10">
                                 <label class="">Remarks</label>
@@ -875,7 +876,7 @@ if (!empty($customers)) {
         calculatesubtotal();
         finaltotal();
     });
-    $('.qty').on('keyup', function() {
+    $('body').on('keyup', '.qty', function() {
         profitcalculation();
         calculatesubtotal();
         finaltotal();

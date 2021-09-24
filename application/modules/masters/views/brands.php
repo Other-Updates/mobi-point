@@ -117,42 +117,42 @@
                                                 <div class="input-group">
                                                     <input type="text" name="brands" class="brand brandnamedup borderra0 form-align" placeholder=" Enter Model" id="brandname" maxlength="40" />
                                                     <div class="input-group-addon">
-                                                        <i class="fa fa-fa"></i>
+                                                        <i class="fa fa-bank"></i>
                                                     </div>
                                                 </div>
                                                 <span id="cnameerror" class="reset" style="color:#F00; font-style:italic;"></span>
                                                 <span id="dup" class="dup" style="color:#F00; font-style:italic;"></span>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">HSN NUMBER<span style="color:#F00; font-style:oblique;">*</span></label>
-                                        <div class="col-sm-8">
-                                            <div class="input-group">
-                                                <input type="text" placeholder=" Enter HSN" name="hsn" id="hsn" maxlength="40" />
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-shopping-cart"></i>
+                                    </div>                                
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">HSN NUMBER<span style="color:#F00; font-style:oblique;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <input type="text" placeholder=" Enter HSN" name="hsn" id="hsn" maxlength="40" />
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </div>
                                                 </div>
+                                                <span id="hsnerr" class="reset" style="color:#F00; font-style:italic;"></span>
+                                                <!-- <span id="dup" class="dup" style="color:#F00; font-style:italic;"></span> -->
                                             </div>
-                                            <span id="hsnerr" class="reset" style="color:#F00; font-style:italic;"></span>
-                                            <!-- <span id="dup" class="dup" style="color:#F00; font-style:italic;"></span> -->
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">GST<span style="color:#F00; font-style:oblique;">*</span></label>
-                                        <div class="col-sm-8">
-                                            <div class="input-group">
-                                                <input type="text" name="gst" placeholder=" Enter GST" id="gst" maxlength="40" />
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-tag"></i>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">GST<span style="color:#F00; font-style:oblique;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="gst" placeholder=" Enter GST" id="gst" maxlength="40" />
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-tag"></i>
+                                                    </div>
                                                 </div>
+                                                <span id="gsterr" class="reset" style="color:#F00; font-style:italic;"></span>
+                                                <!-- <span id="dup" class="dup" style="color:#F00; font-style:italic;"></span> -->
                                             </div>
-                                            <span id="gsterr" class="reset" style="color:#F00; font-style:italic;"></span>
-                                            <!-- <span id="dup" class="dup" style="color:#F00; font-style:italic;"></span> -->
                                         </div>
                                     </div>
                                 </div>
@@ -462,7 +462,7 @@
                                     <div class="input-group">
                                         <input type="text" class="brand form-control colornameup colornamecup brandnameup borderra0 form-align" name="brands" value="" id="modal_model" maxlength="40" /><input type="hidden" id="root1_h" class="root1_h" value="" />
                                         <div class="input-group-addon">
-                                            <i class="fa fa-fa"></i>
+                                            <i class="fa fa-bank"></i>
                                         </div>
                                     </div>
                                     <span id="cnameerrorup" class="cnameerrorup" style="color:#F00; font-style:italic;"></span>
@@ -475,7 +475,7 @@
                                     <div class="input-group">
                                         <input type="text" placeholder=" Enter HSN" name="hsn" id="model_hsn" maxlength="40" /><input type="hidden" id="root1_h" class="root1_h" value="" />
                                         <div class="input-group-addon">
-                                            <i class="fa fa-fa"></i>
+                                            <i class="fa fa-shopping-cart"></i>
                                         </div>
                                     </div>
                                     <span id="cnameerrorup" class="cnameerrorup" style="color:#F00; font-style:italic;"></span>
@@ -487,7 +487,7 @@
                                     <div class="input-group">
                                         <input type="text" name="gst" placeholder=" Enter GST" id="model_gst" maxlength="40" /><input type="hidden" id="root1_h" class="root1_h" value="" />
                                         <div class="input-group-addon">
-                                            <i class="fa fa-fa"></i>
+                                            <i class="fa fa-tag"></i>
                                         </div>
                                     </div>
                                     <span id="cnameerrorup" class="cnameerrorup" style="color:#F00; font-style:italic;"></span>

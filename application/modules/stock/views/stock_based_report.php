@@ -151,7 +151,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         <td width=''></td>
                         <td width=''></td>
                         <td width=''></td>
-                        <td width='' class="total-bg action-btn-align"></td>
+                        <td width=''></td>
                         <td width=''></td>
                         <td width=''></td>
                         <td width=''></td>
@@ -216,7 +216,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
             //Set column definition initialisation properties.
 
             "columnDefs": [{
-                "targets": [0, 5, 6], //first column / numbering column
+                "targets": [0], //first column / numbering column
                 "orderable": false, //set not orderable
             }, ],
             "footerCallback": function(row, data, start, end, display) {

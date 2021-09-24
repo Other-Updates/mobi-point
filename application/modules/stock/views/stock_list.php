@@ -132,7 +132,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
             </tbody>
             <tfoot>
                 <tr>
-                    <td width='5%'></td>
+                    <td width='5%' style="text-align:center;"></td>
                     <!-- <td width='20%'></td> -->
                     <td width='15%'></td>
                     <td width='15%'></td>
@@ -195,8 +195,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                 },
                 {
-                    "class": "text_center",
-                    "targets": [0, 1, 2]
+                    "class": "action-btn-align",
+                    "targets": [1, 2, 3, 4]
                 },
             ],
             "footerCallback": function(row, data, start, end, display) {
@@ -210,7 +210,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         i : 0;
                 };
                 // Total over all pages
-                var cols = [5];
+                var cols = [4];
                 symbol = " ";
                 var numFormat = $.fn.dataTable.render.number('\,', '.', 2, symbol).display;
                 for (x in cols) {

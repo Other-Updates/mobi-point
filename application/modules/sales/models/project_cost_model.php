@@ -264,7 +264,7 @@ class Project_cost_model extends CI_Model
         foreach ($query as $val) {
             $this->db->select('*');
             $this->db->where('j_id', intval($val['id']));
-            $this->db->where('type =', project_cost);
+            $this->db->where('type =', 'project_cost');
             $query[$i]['other_cost'] = $this->db->get('erp_other_cost')->result_array();
             $i++;
         }
@@ -325,7 +325,7 @@ class Project_cost_model extends CI_Model
         foreach ($query as $val) {
             $this->db->select('*');
             $this->db->where('j_id', intval($val['id']));
-            $this->db->where('type =', project_cost);
+            $this->db->where('type =', 'project_cost');
             $query[$i]['other_cost'] = $this->db->get('erp_other_cost')->result_array();
             $i++;
         }
@@ -349,7 +349,7 @@ class Project_cost_model extends CI_Model
         foreach ($query as $val) {
             $this->db->select('*');
             $this->db->where('j_id', intval($val['id']));
-            $this->db->where('type =', project_cost);
+            $this->db->where('type =', 'project_cost');
             $query[$i]['other_cost'] = $this->db->get('erp_other_cost')->result_array();
             $i++;
         }
@@ -457,7 +457,7 @@ class Project_cost_model extends CI_Model
         foreach ($query as $val) {
             $this->db->select('*');
             $this->db->where('j_id', intval($val['id']));
-            $this->db->where('type =', project_cost);
+            $this->db->where('type =', 'project_cost');
             $query[$i]['other_cost'] = $this->db->get('erp_other_cost')->result_array();
             $i++;
         }
@@ -810,7 +810,7 @@ class Project_cost_model extends CI_Model
         foreach ($query as $val) {
             $this->db->select('*');
             $this->db->where('j_id', intval($val['id']));
-            $this->db->where('type =', project_cost);
+            $this->db->where('type =', 'project_cost');
             $query[$i]['other_cost'] = $this->db->get('erp_other_cost')->result_array();
             $i++;
         }
