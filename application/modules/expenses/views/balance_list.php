@@ -107,7 +107,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <thead>
                                 <tr>
                                     <td class="action-btn-align">S.No</td>
-                                    <td class="action-btn-align">Company</td>
+                                    <!-- <td class="action-btn-align">Company</td> -->
                                     <!--<td class="action-btn-align">Opening Balance</td>-->
                                     <td class="action-btn-align">Type</td>
                                     <td class="action-btn-align">Details</td>
@@ -125,7 +125,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <tfoot id="footer_id" style="display:none">
                                 <tr>
                                     <td></td>
-                                    <td></td>
+                                    <!-- <td></td> -->
                                     <!--<td></td>-->
                                     <td></td>
                                     <td></td>
@@ -202,7 +202,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             i : 0;
                     };
                     // Total over all pages
-                    var cols = [5, 6];
+                    var cols = [4, 5];
                     var currency_symbol = '<span class="hide_rupee">&#8377;</span>'
                     var numFormat = $.fn.dataTable.render.number('\,', '.', 2, currency_symbol).display;
                     for (x in cols) {
@@ -234,7 +234,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         targets: -2
                     },
                     {
-                        "targets": [0, 7], //first column / numbering column
+                        "targets": [0], //first column / numbering column
                         "orderable": false, //set not orderable
                     },
                 ]

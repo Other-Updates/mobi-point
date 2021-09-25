@@ -182,7 +182,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 "url": "<?php echo site_url('stock/ajaxList/'); ?>",
                 "type": "POST",
                 "data": function(data) {
-                    data.firm_id = $('#firm_id').val();
+                    // data.firm_id = $('#firm_id').val();
                     data.category = $('#category').val();
                     data.product = $('#product').val();
                     data.brand = $('#brand').val();

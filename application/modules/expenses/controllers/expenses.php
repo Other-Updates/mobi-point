@@ -199,14 +199,14 @@ class Expenses extends MX_Controller
                 $edit_row = '<a class="tooltips btn btn-info btn-fw btn-xs alerts" href=""><i class="fa fa-edit"></i></a>';
             }
             if ($this->user_auth->is_action_allowed('expenses', 'expenses', 'delete')) {
-                $edit_row = '<a class="tooltips btn btn-info btn-fw btn-xs" href="' . base_url() . 'expenses/edit/' . $ass->id . '"><i class="fa fa-edit"></i></a>';
+                $delete_row = '<a class="tooltips btn btn-info btn-fw btn-xs" href="'  . $ass->id . '"><i class="fa fa-trash"></i></a>';
             } else {
-                $edit_row = '<a class="tooltips btn btn-info btn-fw btn-xs alerts" href=""><i class="fa fa-edit"></i></a>';
+                $delete_row = '<a class="tooltips btn btn-info btn-fw btn-xs alerts" href=""><i class="fa fa-trash"></i></a>';
             }
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $ass->prefix;
+            // $row[] = $ass->prefix;
             $row[] = ucfirst($ass->type);
             $row[] = ucfirst($ass->category);
             $row[] = ucfirst($ass->sub_category);
@@ -214,6 +214,7 @@ class Expenses extends MX_Controller
             $row[] = number_format($ass->amount ? $ass->amount : '0.00', 2);
             $row[] = ($ass->created_at != '' && $ass->created_at != '0000-00-00 00:00:00') ? date('d-M-Y', strtotime($ass->created_at)) : '-';
             $row[] = $edit_row;
+            $row[] = $delete_row;
             $data[] = $row;
         }
         $output = array(
@@ -246,7 +247,7 @@ class Expenses extends MX_Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $ass->prefix;
+            // $row[] = $ass->prefix;
             //            $row[] = $ass->company_amount;
             if ($ass->comments == 1) {
                 $type = 'Sales';

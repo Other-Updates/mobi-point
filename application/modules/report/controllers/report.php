@@ -313,20 +313,19 @@ class Report extends MX_Controller
     }
     function stock_report()
     {
-        $data['product'] = $this->product_model->get_product();
-        $data['brand'] = $this->master_brand_model->get_brand();
+        $data = array();
+        //$datas["stock"] = $po = $this->stock_model->get_all_stock();
         $firms = $this->user_auth->get_user_firms();
         $frim_id = array();
         foreach ($firms as $value) {
             $frim_id[] = $value['firm_id'];
         }
+        $data['firm_details'] = $this->stock_model->get_firm_name($frim_id);
+        //echo "<pre>";print_r($data);exit;
+        $data['product'] = $this->product_model->get_product();
         $data['cat'] = $this->master_category_model->get_category_by_firm($frim_id);
-        //  $data['cat'] = $this->master_category_model->get_all_category();
-        $data['firm_list'] = $this->report_model->get_all_firms();
-        // $data['cat_list'] = $this->report_model->get_all_category();
-        //echo"<pre>"; print_r($data); exit;
-        //$data['stock'] = $this->stock_model->get_all_stock();
-        $this->template->write_view('content', 'report/stock_list', $data);
+        $data['brand'] = $this->master_brand_model->get_brand();
+        $this->template->write_view('content', 'stock/stock_list', $data);
         $this->template->render();
     }
     public function stock_search_result()
@@ -1040,8 +1039,8 @@ class Report extends MX_Controller
         $search_arr['to_date'] = $search_data['to_date'];
         $search_arr['inv_id'] = $search_data['inv_id'];
         $search_arr['customer'] = $search_data['customer'];
-        $search_arr['product'] = $search_data['product'];
-        $search_arr['firm_id'] = $search_data['firm_id'];
+        // $search_arr['product'] = $search_data['product'];
+        // $search_arr['firm_id'] = $search_data['firm_id'];
         //$search_arr['category'] = $search_data['category'];
         if (empty($search_arr)) {
             $search_arr = array();
@@ -1249,7 +1248,7 @@ class Report extends MX_Controller
         // fetch the data
         //$rows = mysql_query($query);
         // loop over the rows, outputting them
-        foreach ($query[quotation] as $key => $val) {
+        foreach ($query['quotation'] as $key => $val) {
             $row = array($key + 1, $val['inv_id'], $val['firm_name'], ($val['gstin']) ? $val['gstin'] : '', ($val['store_name']) ? $val['store_name'] : $val['name'], ($val['tin']) ? $val['tin'] : '', $val['total_qty'], number_format(($val['erp_invoice_details'][0]['cgst']), 2), number_format(($val['erp_invoice_details'][0]['sgst']), 2), number_format($val['subtotal_qty'], 2), number_format($val['net_total'], 2), ($val['created_date'] != '1970-01-01') ? date('d-M-Y', strtotime($val['created_date'])) : '');
             //echo "<pre>";print_r($row);exit;
             fputcsv($output, $row);

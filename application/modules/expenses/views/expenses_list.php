@@ -117,7 +117,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <span class="date_err" style="color:#F00;font-size: 12px "></span>
                         </div>
                         <div class="col col-md-3">
-                            <label class="control-label col-md-12 mnone">&nbsp;</label>
+                            <label class="control-label col-md-12 mnone"></label>
                             <a id='search' class="btn btn-success  mtop4" title="Search">SUBMIT<span class=" icon-magnifier"></span></a>&nbsp;
                             <a class="btn btn-danger mtop4" id='clear' title="Clear">CLEAR<span></span></a>
                         </div>
@@ -135,7 +135,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <thead>
                                 <tr>
                                     <th class="action-btn-align">S.No</th>
-                                    <th class="action-btn-align">Company</th>
+                                    <!-- <th class="action-btn-align">Company</th> -->
                                     <th class="action-btn-align">Expense Type</th>
                                     <th class="action-btn-align">Category</th>
                                     <th class="action-btn-align">Sub category</th>
@@ -151,7 +151,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <tfoot>
                                 <tr>
                                     <td></td>
-                                    <td></td>
+                                    <!-- <td></td> -->
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -257,7 +257,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             i : 0;
                     };
                     // Total over all pages
-                    var cols = [6];
+                    var cols = [5];
                     var numFormat = $.fn.dataTable.render.number('\,', '.', 2, '&#8377;').display;
                     for (x in cols) {
                         total = api.column(cols[x]).data().reduce(function(a, b) {
@@ -288,7 +288,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         targets: -2
                     },
                     {
-                        "targets": [0, 8], //first column / numbering column
+                        "targets": [0, 7], //first column / numbering column
                         "orderable": false, //set not orderable
                     },
                 ]

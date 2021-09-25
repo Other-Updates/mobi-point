@@ -3,7 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Expense_model extends CI_Model {
+class Expense_model extends CI_Model
+{
 
     private $expense = 'expense';
     private $erp_manage_firms = 'erp_manage_firms';
@@ -18,15 +19,17 @@ class Expense_model extends CI_Model {
     var $joinTable2 = 'manage_sub_category tab_3';
     var $primaryTable = 'expense tab_1';
     var $selectColumn = 'tab_2.prefix,tab_1.*,tab_3.sub_category,tab_4.category';
-    var $column_order = array('tab_1.id', 'tab_2.prefix', 'tab_1.mode', 'tab_4.category', 'tab_3.sub_category', 'tab_1.type', 'tab_1.amount');
+    var $column_order = array(null, 'tab_1.type',  'tab_4.category', 'tab_3.sub_category', 'tab_1.mode',  'tab_1.amount', 'tab_1.created_at', null);
     var $column_search = array('tab_1.id', 'tab_2.prefix', 'tab_1.mode', 'tab_4.category', 'tab_3.sub_category', 'tab_1.type', 'tab_1.amount');
     var $order = array('tab_1.id' => 'desc ');
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    public function insert_expense($data) {
+    public function insert_expense($data)
+    {
         if ($this->db->insert($this->expense, $data)) {
             $insert_id = $this->db->insert_id();
             return $insert_id;
@@ -34,7 +37,8 @@ class Expense_model extends CI_Model {
         return FALSE;
     }
 
-    public function insert_balance_sheet($data) {
+    public function insert_balance_sheet($data)
+    {
         if ($this->db->insert($this->balance_sheet, $data)) {
             $insert_id = $this->db->insert_id();
             return $insert_id;
@@ -42,7 +46,8 @@ class Expense_model extends CI_Model {
         return FALSE;
     }
 
-    public function get_all_firms() {
+    public function get_all_firms()
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $firms = $this->get_all_firms_by_user_id($client_id);
         $frim_id = array();
@@ -57,7 +62,8 @@ class Expense_model extends CI_Model {
         return $query;
     }
 
-    public function update_company_amt($data, $firm_id) {
+    public function update_company_amt($data, $firm_id)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $data['company_amount'] = $data;
         $this->db->where('firm_id', $firm_id);
@@ -68,7 +74,8 @@ class Expense_model extends CI_Model {
         return false;
     }
 
-    public function get_all_expenses() {
+    public function get_all_expenses()
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $firms = $this->get_all_firms_by_user_id($client_id);
         $frim_id = array();
@@ -89,7 +96,8 @@ class Expense_model extends CI_Model {
         return NULL;
     }
 
-    public function get_all_balance() {
+    public function get_all_balance()
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $this->db->select('tab_2.prefix,tab_1.*,tab_3.sub_category,tab_4.category');
         $this->db->join($this->erp_manage_firms . ' AS tab_2', 'tab_2.firm_id = tab_1.firm_id', 'LEFT');
@@ -105,7 +113,8 @@ class Expense_model extends CI_Model {
         return NULL;
     }
 
-    public function getSubCategory($data) {
+    public function getSubCategory($data)
+    {
 
         $this->db->select('id,sub_category');
         $this->db->where('category_id', $data);
@@ -113,7 +122,8 @@ class Expense_model extends CI_Model {
         return $query;
     }
 
-    public function getCompanyAmt($data) {
+    public function getCompanyAmt($data)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $this->db->select('firm_id,firm_name,company_amount,opening_balance');
         $this->db->where('client_id', $client_id);
@@ -122,7 +132,8 @@ class Expense_model extends CI_Model {
         return $query;
     }
 
-    public function edit_expenses($id) {
+    public function edit_expenses($id)
+    {
         $this->db->select('*');
         $this->db->where('id', $id);
         $query = $this->db->get($this->expense);
@@ -132,7 +143,8 @@ class Expense_model extends CI_Model {
         return NULL;
     }
 
-    public function update_expenses($input, $id) {
+    public function update_expenses($input, $id)
+    {
         $this->db->where('id', $id);
         if ($this->db->update($this->expense, $input)) {
             return true;
@@ -140,7 +152,8 @@ class Expense_model extends CI_Model {
         return false;
     }
 
-    public function update_balance_sheet($input, $id) {
+    public function update_balance_sheet($input, $id)
+    {
         $this->db->where('id', $id);
         if ($this->db->update($this->balance_sheet, $input)) {
             return true;
@@ -148,7 +161,8 @@ class Expense_model extends CI_Model {
         return false;
     }
 
-    public function get_subcategory($key) {
+    public function get_subcategory($key)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $this->db->select('tab_2.*,tab_1.comments');
         $this->db->join($this->manage_sub_category . ' AS tab_2', 'tab_1.id = tab_2.category_id', 'Join');
@@ -159,7 +173,8 @@ class Expense_model extends CI_Model {
         return $query;
     }
 
-    public function get_cat_subcat_details($key) {
+    public function get_cat_subcat_details($key)
+    {
 
         $this->db->select('tab_1.*');
         $this->db->where('tab_1.comments', $key);
@@ -197,13 +212,15 @@ class Expense_model extends CI_Model {
         return $result;
     }
 
-    public function insert_sub_category($data) {
+    public function insert_sub_category($data)
+    {
 
         $this->db->insert($this->manage_sub_category, $data);
         return $this->db->insert_id();
     }
 
-    public function get_all_firms_by_user_id($user_id) {
+    public function get_all_firms_by_user_id($user_id)
+    {
         $this->db->select('erp_manage_firms.firm_id, firm_name, prefix');
         $this->db->join('erp_user_firms', 'erp_user_firms.firm_id = erp_manage_firms.firm_id');
         $this->db->where('erp_user_firms.user_id', $user_id);
@@ -211,7 +228,8 @@ class Expense_model extends CI_Model {
         return $query;
     }
 
-    public function get_datatables($search_data) {
+    public function get_datatables($search_data)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $firms = $this->get_all_firms_by_user_id($client_id);
         $frim_id = array();
@@ -282,14 +300,16 @@ class Expense_model extends CI_Model {
         return $query->result();
     }
 
-    public function count_all() {
+    public function count_all()
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $this->db->where('client_id', $client_id);
         $this->db->from($this->primaryTable);
         return $this->db->count_all_results();
     }
 
-    public function count_filtered($search_data) {
+    public function count_filtered($search_data)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $firms = $this->get_all_firms_by_user_id($client_id);
         $frim_id = array();
@@ -350,7 +370,8 @@ class Expense_model extends CI_Model {
         return $query->num_rows();
     }
 
-    public function get_balance_datatables($search_data) {
+    public function get_balance_datatables($search_data)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $firms = $this->get_all_firms_by_user_id($client_id);
         $frim_id = array();
@@ -392,7 +413,7 @@ class Expense_model extends CI_Model {
         }
 
 
-        $column_order = array('tab_1.id', 'tab_2.prefix', 'tab_1.mode', 'tab_4.category', 'tab_3.sub_category', 'tab_1.type', 'tab_2.company_amount', 'tab_1.amount', 'tab_1.amount', 'tab_1.balance', 'tab_1.created_at');
+        $column_order = array(null, 'tab_1.type', 'tab_1.mode', 'tab_1.created_at',  'tab_1.amount', 'tab_1.amount', 'tab_1.balance',);
         $column_search = array('tab_1.id', 'tab_2.prefix', 'tab_1.type', 'tab_4.category', 'tab_3.sub_category', 'tab_1.mode', 'tab_2.opening_balance', 'tab_1.amount', 'tab_1.amount', 'tab_1.balance', 'tab_1.created_at');
         $order = array('tab_1.id' => 'ASC');
         $i = 0;
@@ -428,14 +449,16 @@ class Expense_model extends CI_Model {
         return $query->result();
     }
 
-    public function count_all_balance() {
+    public function count_all_balance()
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $this->db->where('client_id', $client_id);
         $this->db->from($this->balance_sheet);
         return $this->db->count_all_results();
     }
 
-    public function count_filtered_balance($search_data) {
+    public function count_filtered_balance($search_data)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $this->db->select('tab_2.prefix,tab_2.opening_balance,tab_1.*,tab_3.sub_category,tab_4.category,tab_4.comments,tab_5.inv_id,tab_6.po_no,tab_7.store_name,tab_8.store_name as cust_name');
         $this->db->join($this->erp_manage_firms . ' AS tab_2', 'tab_2.firm_id = tab_1.firm_id', 'LEFT');
@@ -501,7 +524,8 @@ class Expense_model extends CI_Model {
         return $query->num_rows();
     }
 
-    public function get_expenses_datas($search_data) {
+    public function get_expenses_datas($search_data)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $this->db->select('tab_2.prefix,tab_1.*,tab_3.sub_category,tab_4.category');
         $this->db->join($this->erp_manage_firms . ' AS tab_2', 'tab_2.firm_id = tab_1.firm_id', 'LEFT');
@@ -544,7 +568,8 @@ class Expense_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function get_balance_datas($search_data) {
+    public function get_balance_datas($search_data)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $this->db->select('tab_2.prefix,tab_2.opening_balance,tab_1.*,tab_3.sub_category,tab_4.category,tab_4.comments,tab_5.inv_id,tab_6.po_no,tab_7.store_name,tab_8.store_name as cust_name');
         $this->db->join($this->erp_manage_firms . ' AS tab_2', 'tab_2.firm_id = tab_1.firm_id', 'LEFT');
@@ -584,7 +609,8 @@ class Expense_model extends CI_Model {
         return $query->result_array();
     }
 
-    function get_balance_datas_by_inv_id($inv_id) {
+    function get_balance_datas_by_inv_id($inv_id)
+    {
         $client_id = $this->user_auth->get_login_client_id();
         $this->db->select('SUM(amount) AS amount,firm_id');
         $this->db->where('inv_id', $inv_id);
@@ -593,9 +619,9 @@ class Expense_model extends CI_Model {
         return $query;
     }
 
-    function delete_balance_data_by_inv($inv_id) {
+    function delete_balance_data_by_inv($inv_id)
+    {
         $this->db->where('inv_id', $inv_id);
         $this->db->delete($this->balance_sheet);
     }
-
 }

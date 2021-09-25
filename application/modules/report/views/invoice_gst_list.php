@@ -172,7 +172,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <!-- <td></td> -->
                             <td></td>
                             <!-- <td class="action-btn-align"></td> -->
-                            <td class="action-btn-align total-bg" style="text-aligh:center;"></td>
+                            <td class="action-btn-align total-bg" style="text-align:center;"></td>
                             <td class="text_right total-bg"></td>
                             <td class="text_right total-bg"></td>
                             <td class="text_right total-bg"></td>
