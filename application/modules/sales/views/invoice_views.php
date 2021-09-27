@@ -288,16 +288,7 @@ if (!empty($customers)) {
                     </tr>
                 </table>
                 <br>
-                <div class="form-group" style="text-align:center">
-                    <label class="col-sm-2 control-label">Customer Name </label>
-                    <div class="col-sm-2">
-                        <input type="text" width="15%" tabindex="2" name="customer[store_name]" id="customer_name" class='form-control form-align auto_customer' />
-                        <span class="error_msg"></span>
-                        <input type="hidden" name="customer[id]" id="customer_id" class='id_customer  form-align' />
-                        <!--<input type="hidden"  name="quotation[product_id]" id="cust_id" class='id_customer' />-->
-                        <div id="suggesstion-box" class="auto-asset-search "></div>
-                    </div>
-                </div>
+
                 <div style="text-align:center">
                     <button class="btn btn-defaultprint6 print_gst"><span class="glyphicon glyphicon-print"> <a href="<?php echo $this->config->item('base_url') . 'sales/print_view' ?>"></span> GST Print</a></button>
                     <button class="btn btn-defaultprint6 print_nogst"><span class="glyphicon glyphicon-print"><a href="<?php echo $this->config->item('base_url') . 'sales/print_view' ?>"></span> NO GST Print </a></button>
@@ -349,9 +340,10 @@ if (!empty($customers)) {
                                     <td class="action-btn-align">
                                         <input type="checkbox" id="box" class="box" name="checkbox" />
                                     </td>
+
                                     <td>
-                                        <?php echo $vals['product_name'] ?><br /? IMEI : </td>
-                                    <td class="">
+                                        <?php echo $vals['product_name'] ?></td>
+                                    <td>
                                         <?php echo !empty($vals['hsn_sac']) ? $vals['hsn_sac'] : '-'; ?>
                                     </td>
                                     <td class="action-btn-align">

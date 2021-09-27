@@ -484,14 +484,15 @@ class Sales extends MX_Controller
     }
     public function print_view($id)
     {
-        $datas["quotation"] = $quotation = $this->project_cost_model->get_all_invoice_by_id($id);
+        $datas["quotation"] = $quotation = $this->project_cost_model->get_all_invoice_by_id();
         $datas["in_words"] = $this->convert_number($datas["quotation"][0]['net_total']);
-        $datas["quotation_details"] = $quotation_details = $this->project_cost_model->get_all_invoice_details_by_id($id);
+        $datas["quotation_details"] = $quotation_details = $this->project_cost_model->get_all_invoice_details_by_id();
         $datas["category"] = $category = $this->categories_model->get_all_category();
         $datas['company_details'] = $this->admin_model->get_company_details();
         $datas["brand"] = $brand = $this->brand_model->get_brand();
+        $datas['all_supplier'] = $this->project_cost_model->get_all_customer();
         $datas["user_info"] = $this->user_auth->get_from_session('user_info');
-        $datas['company_details'] = $this->project_cost_model->get_company_details_by_firm($id);
+        $datas['company_details'] = $this->project_cost_model->get_company_details_by_firm();
         // $datas['ime_code_details']=$this->project_cost_model->get_sales_ime_details($id);
         //  echo "<pre>";print_r($datas);exit;
         $this->template->write_view('content', 'print_view', $datas);

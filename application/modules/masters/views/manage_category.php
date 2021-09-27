@@ -1,15 +1,15 @@
 <?php $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template'); ?>
-<link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.css">
-<script src="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.js"></script>
-<script src="<?php echo $theme_path ?>/js/tabs.js"></script>
-<script src="<?php echo $theme_path; ?>/node_modules/datatables.net/js/jquery.dataTables.js"></script>
-<script src="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
-<link rel="stylesheet" href="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" />
+<!-- <link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.css"> -->
+<!-- <script src="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.js"></script> -->
+<!-- <script src="<?php echo $theme_path ?>/js/tabs.js"></script>/ -->
+<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net/js/jquery.dataTables.js"></script> -->
+<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script> -->
+<!-- <link rel="stylesheet" href="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" /> -->
 <link href="<?php echo $theme_path ?>/css/select2.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/fixedHeader.dataTables.min.css" />
+<!-- <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/fixedHeader.dataTables.min.css" /> -->
 <script src="<?php echo $theme_path ?>/js/select2.min.js"></script>
-<script type='text/javascript' src='<?php echo $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js'></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js/sweetalert.css">
+<!-- <script type='text/javascript' src='<?php echo $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js'></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js/sweetalert.css"> -->
 <script src="<?php echo $theme_path; ?>/js/sweetalert.min.js" type="text/javascript"></script>
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
@@ -35,7 +35,7 @@
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
-                                                <th>Catagory</th>
+                                                <th>Category</th>
                                                 <th class="action-btn-align">Action</th>
                                             </tr>
                                         </thead>
@@ -123,7 +123,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -197,9 +196,7 @@ if (isset($category_list) && !empty($category_list)) {
             });
         });
         $('.modal').css("display", "none");
-
-        new $.fn.dataTable.FixedHeader(table);
-
+        // new $.fn.dataTable.FixedHeader(table);
         $(document).on('click', '.delete_row', function() {
             var hidin = $(this).attr('delete_id');
             swal({
@@ -229,7 +226,6 @@ if (isset($category_list) && !empty($category_list)) {
             });
         });
     });
-
     $('#cancel').on('click', function() {
         $('.val').text("");
         $('#duplica_category').text("");
@@ -246,7 +242,6 @@ if (isset($category_list) && !empty($category_list)) {
         var cat_name = $.trim($("#manage_category").val());
         var comments = $.trim($("#comments").val());
         if ((cat_name) != '') {
-
             $.ajax({
                 url: BASE_URL + "masters/manage_category/add_duplicate_category",
                 type: 'POST',
@@ -264,7 +259,6 @@ if (isset($category_list) && !empty($category_list)) {
         }
     });
     $('#comments').on('blur', function() {
-
         var comments = $('#comments').val();
         if (comments == '' || comments == null || comments.trim().length == 0) {
             $('#comments_err').html(language["required_field"]);
@@ -272,12 +266,10 @@ if (isset($category_list) && !empty($category_list)) {
             $('#comments_err').html(" ");
         }
     });
-
     $('#submit').on('click', function() {
         var cat_name = $.trim($("#manage_category").val());
         var comments = $.trim($("#comments").val());
         if (cat_name != '') {
-
             $.ajax({
                 url: BASE_URL + "masters/manage_category/add_duplicate_category",
                 type: 'POST',
@@ -293,16 +285,13 @@ if (isset($category_list) && !empty($category_list)) {
         } else {
             $("#duplica_category").html('');
         }
-
         var i = 0;
-
         if (comments == '' || comments == null || comments.trim().length == 0) {
             $('#comments_err').html(language["required_field"]);
             i = 1;
         } else {
             $('#comments_err').html(" ");
         }
-
         var manage_category = $("#manage_category").val();
         if (manage_category == "" || manage_category == null || manage_category.trim().length == 0) {
             $("#category_error").text(language["required_field"]);
@@ -319,6 +308,5 @@ if (isset($category_list) && !empty($category_list)) {
         } else {
             return true;
         }
-
     });
 </script>
