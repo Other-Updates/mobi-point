@@ -70,7 +70,7 @@ class Stock extends MX_Controller
         if (empty($search_arr)) {
             $search_arr = array();
         }
-        $list = $this->stock_model->get_datatables($search_arr);
+        $list = $this->stock_model->get_datatables_stock($search_arr);
 
         //  echo "<pre>";print_r($list);exit;
         $data = array();
@@ -82,8 +82,9 @@ class Stock extends MX_Controller
             $row[] = $no;
             // $row[] = $ass->firm_name;
             $row[] = $ass->categoryName;
-            $row[] = $ass->product_name;
             $row[] = $ass->brands;
+            $row[] = $ass->product_name;
+
             $row[] = round($ass->quantity);
             if ($ass->min_qty > 0) {
                 $row[] = $ass->min_qty - $ass->quanity;

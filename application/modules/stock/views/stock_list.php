@@ -73,6 +73,24 @@ $data['company_details'] = $this->admin_model->get_company_details();
             </div>
         </div>
     </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Model</label>
+            <div class="col-sm-8">
+                <select id='brand' class="form-control">
+                    <option value="">Select</option>
+                    <?php
+                    if (isset($brand) && !empty($brand)) {
+                        foreach ($brand as $val) { ?>
+                            <option value='<?= $val['id'] ?>'><?= $val['brands'] ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+    </div>
     <div class="col-md-3">
         <div class="form-group">
             <label class="col-sm-4 control-label">Product</label>
@@ -92,24 +110,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
             </div>
         </div>
     </div>
-    <div class="col-sm-2">
-        <div class="form-group">
-            <label class="col-sm-4 control-label">Model</label>
-            <div class="col-sm-8">
-                <select id='brand' class="form-control">
-                    <option value="">Select</option>
-                    <?php
-                    if (isset($brand) && !empty($brand)) {
-                        foreach ($brand as $val) { ?>
-                            <option value='<?= $val['id'] ?>'><?= $val['brands'] ?></option>
-                    <?php
-                        }
-                    }
-                    ?>
-                </select>
-            </div>
-        </div>
-    </div>
+
     <div class="col-md-1"><a id='search' class="btn btn-success"><span class="glyphicon glyphicon-search "></span> Search</a></div>
 </div>
 </div>
@@ -121,8 +122,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
                     <td width='5%'>S.No</td>
                     <!-- <td width='20%'>Shop</td> -->
                     <td width='15%'>Category</td>
-                    <td width='15%'>Product</td>
                     <td width='5%'>Model</td>
+                    <td width='15%'>Product</td>
+
                     <td width='10%' class="action-btn-align">Quantity</td>
                     <td width='5%' class="action-btn-align">Shortage Quantity</td>
                     <!--<td width='10%' class="hide_class action-btn-align">Action</td>-->

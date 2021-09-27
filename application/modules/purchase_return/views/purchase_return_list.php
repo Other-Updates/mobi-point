@@ -144,9 +144,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
                                     <td class="action-btn-align"><?= $val['delivery_qty'] ?></td>
                                     <!--                                <td class="action-btn-align"><?= $val['tax'] ?></td> -->
                                     <!--<td class="text_right"><?= number_format($val['subtotal_qty'], 2); ?></td>-->
-                                    <td class="text_right"><?= $over_all_net_total; ?></td>
-                                    <!--<td class="text_right"><?= $val['net_total']; ?></td>-->
-                                    <td class='action-btn-align'><?= ($val['delivery_schedule'] != '1970-01-01') ? date('d-M-Y', strtotime($val['delivery_schedule'])) : ''; ?></td>
+                                    <!-- <td class="text_right"><?= $over_all_net_total; ?></td> -->
+                                    <td class="text_right"><?= $val['net_total']; ?></td>
+                                    <td class='action-btn-align'><?= ($val['delivery_schedule'] != 'd-M-Y') ? date('d-M-Y', strtotime($val['delivery_schedule'])) : '-'; ?></td>
                                     <!--<td><?= $val['mode_of_payment'] ?></td>
                                     <!--<td><?= $val['remarks'] ?></td>-->
                                     <td class='hide_class  action-btn-align'>

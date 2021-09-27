@@ -15,7 +15,7 @@ class Stock_model extends CI_Model
     var $primaryTable = 'erp_stock u';
     //var $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,p.model_no,r.firm_name';
     var $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,p.model_no,r.firm_name,p.cost_price,p.cgst,p.sgst,p.cost_price_without_gst,p.min_qty';
-    var $column_order = array(null,  'c.categoryName', 'p.product_name', 'b.brands', 'u.quantity', null); //set column field database for datatable orderable
+    var $column_order = array(null,  'c.categoryName', 'b.brands', 'p.product_name',  'u.quantity', null); //set column field database for datatable orderable
     var $manual_order = array(null,  'c.categoryName', 'b.brands', 'p.product_name', 'p.cost_price', 'u.quantity', 'p.cost_price_without_gst', 'b.gst', 'p.cgst', 'p.sgst', null);
     var $column_search = array('r.firm_name', 'c.categoryName', 'p.product_name', 'b.brands', 'u.quantity', 'p.cost_price'); //set column field database for datatable searchable
     var $order = array('u.id' => 'ASC '); // default order
@@ -139,6 +139,57 @@ class Stock_model extends CI_Model
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
+    function _get_datatables_query_stock($search_data = array())
+    {
+        //Join Table
+        $this->db->join($this->joinTable1, 'r.firm_id=u.firm_id', 'LEFT');
+        $this->db->join($this->joinTable2, 'c.cat_id=u.category', 'LEFT');
+        $this->db->join($this->joinTable3, 'p.id=u.product_id', 'LEFT');
+        //        $this->db->join($this->joinTable4, 'b.id=u.brand', 'LEFT');
+        $this->db->join($this->joinTable4, 'b.id=p.brand_id', 'LEFT');
+        $this->db->where('u.category !=', 0);
+        $this->db->where('u.product_id !=', 0);
+        $firms = $this->user_auth->get_user_firms();
+        $frim_id = array();
+        foreach ($firms as $value) {
+            $frim_id[] = $value['firm_id'];
+        }
+        $this->db->where_in('u.firm_id', $frim_id);
+        $this->db->from($this->primaryTable);
+        $i = 0;
+        //print_r($this->column_search);
+        foreach ($this->column_search as $item) {
+            // echo $_POST['search']['value'];
+            // loop column
+            if ($_POST['search']['value']) { // if datatable send POST for search
+                if ($i == 0) { // first loop
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like($item, $_POST['search']['value']);
+                }
+            }
+            $i++;
+        }
+        if ($search_data['category'] != '' || $search_data['category'] != 'Select' || $search_data['product'] != '') {
+            if ($search_data['category'] != '') { // first loop
+                $this->db->where('u.category', $search_data['category']);
+            }
+        }
+        if ($search_data['product'] != '' || $search_data['product'] != 'Select' || $search_data['product'] != '') {
+            if ($search_data['product'] != '') { // first loop
+                $this->db->where_in('u.product_id', $search_data['product']);
+            }
+        }
+        if ($search_data['brand'] != '' && $search_data['brand'] != 'Select') {
+            $this->db->where('b.id', $search_data['brand']);
+        }
+        if (isset($_POST['order']) && $this->column_order[$_POST['order']['0']['column']] != null) { // here order processing
+            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else if (isset($this->order)) {
+            $order = $this->order;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
     function get_firm_name($id)
     {
         $this->db->select('firm_name,firm_id');
@@ -169,9 +220,38 @@ class Stock_model extends CI_Model
         //exit;
         return $query->result();
     }
+    function get_datatables_stock($search_data, $custom_col = NULL)
+    {
+        if ($custom_col != NULL) {
+            $selectColumn = 'u.id,u.quantity,c.categoryName,p.product_name,b.brands,b.gst,p.model_no,r.firm_name,p.cost_price,p.cgst,p.sgst,p.cost_price_without_gst';
+            $this->db->select($selectColumn);
+        } else {
+            $this->db->select($this->selectColumn);
+        }
+        $this->db->where('p.product_name !=', '');
+        $this->db->where('r.firm_name !=', '');
+        $this->db->where('b.brands !=', '');
+        $this->_get_datatables_query_stock($search_data);
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        if ($search_data['length'] != -1) {
+            $this->db->limit($search_data['length'], $search_data['start']);
+        }
+        $query = $this->db->get();
+        //echo $this->db->last_query();
+        //exit;
+        return $query->result();
+    }
     function count_filtered()
     {
         $this->_get_datatables_query();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+    function count_filtered_stock()
+    {
+        $this->_get_datatables_query_stock();
         $query = $this->db->get();
         return $query->num_rows();
     }
