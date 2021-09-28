@@ -78,6 +78,18 @@
                                             <span id="email_id_err" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Company Amount<span style="color:#F00; font-style:oblique;">*</span></label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <input type="text" name="company_amount" class="  form-align" id="company_amount" />
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-money"></i>
+                                                </div>
+                                            </div>
+                                            <!-- <span id="email_id_err" class="val" style="color:#F00; font-style:oblique;"></span> -->
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
