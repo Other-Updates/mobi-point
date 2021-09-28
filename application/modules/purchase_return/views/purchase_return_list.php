@@ -98,6 +98,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             $this->load->model('purchase_return/purchase_return_model');
                             $i = 1;
                             $over_all_net_total = 0;
+                            // echo '<pre>';
+                            // print_r($po);
+                            // exit;
                             foreach ($po as $val) {
                                 $over_all_net_total = 0;
                                 $get_pr_details = $this->purchase_return_model->getpr_details_based_on_pr($val['id']);
@@ -146,9 +149,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
                                     <!--<td class="text_right"><?= number_format($val['subtotal_qty'], 2); ?></td>-->
                                     <!-- <td class="text_right"><?= $over_all_net_total; ?></td> -->
                                     <td class="text_right"><?= $val['net_total']; ?></td>
-                                    <td class='action-btn-align'><?= ($val['delivery_schedule'] != 'd-M-Y') ? date('d-M-Y', strtotime($val['delivery_schedule'])) : '-'; ?></td>
+                                    <td class='action-btn-align'><?= ($val['created_date'] != '1970-01-01') ? date('d-M-Y', strtotime($val['created_date'])) : '-'; ?></td>
                                     <!--<td><?= $val['mode_of_payment'] ?></td>
-                                    <!--<td><?= $val['remarks'] ?></td>-->
+                                    <!-- <td><?= $val['remarks'] ?></td> -->
                                     <td class='hide_class  action-btn-align'>
                                         <a href="<?php if ($this->user_auth->is_action_allowed('purchase', 'purchase_return', 'edit')) : ?><?php echo $this->config->item('base_url') . 'purchase_return/po_edit/' . $val['id'] ?><?php endif ?>" data-toggle="tooltip" class="tooltips btn btn-info btn-xs <?php if (!$this->user_auth->is_action_allowed('purchase', 'purchase_return', 'edit')) : ?>alerts<?php endif ?>" title="" data-original-title="Edit"><span>Make Return</span></a>
                                         <?php

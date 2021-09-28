@@ -125,7 +125,7 @@ if (!empty($all_street)) {
                                         <label class="col-sm-4 control-label">Mobile Number <span style="color:#F00; font-style:oblique;">*</span></label>
                                         <div class="col-sm-8">
                                             <div class="input-group">
-                                                <input type="text" name="number" class="number form-align" id="number" />
+                                                <input type="text" name="number" class="number form-align" id="number" maxlength="10" />
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-phone"></i>
                                                 </div>

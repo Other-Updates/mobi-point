@@ -20,7 +20,7 @@ class Sales_return extends MX_Controller
             'sales_return/get_customer_by_id' => array('add', 'edit'),
             'sales_return/get_product' => array('edit'),
             'sales_return/get_product_by_id' => 'no_restriction',
-            'sales_return/po_edit' => 'no_restriction',
+            'sales_return/sr_edit' => 'no_restriction',
             'sales_return/update_po' => 'no_restriction',
             'sales_return/po_delete' => 'no_restriction',
             'sales_return/history_view' => 'no_restriction',
@@ -173,7 +173,7 @@ class Sales_return extends MX_Controller
         echo json_encode($data_customer);
         exit;
     }
-    public function po_edit($id)
+    public function sr_edit($id)
     {
         $datas["po"] = $po = $this->sales_return_model->get_all_inv_by_id($id);
         $datas["po_details"] = $po_details = $this->sales_return_model->get_all_inv_details_by_id($id);
@@ -419,6 +419,7 @@ class Sales_return extends MX_Controller
     }
     function ajaxList()
     {
+
         $search_data = $this->input->post();
         $search_arr = array();
         $filter = $this->session->userdata('product_name_wise');
@@ -435,6 +436,7 @@ class Sales_return extends MX_Controller
         //        die;
         $data = array();
         $no = $_POST['start'];
+
         foreach ($list as $val) {
             $quotation = $this->sales_return_model->get_all_invoice_by_id($val['id']);
             $quotation_details = $this->sales_return_model->get_all_sr_details_by_id($val['id']);
@@ -478,7 +480,7 @@ class Sales_return extends MX_Controller
                 $total_qty = '<td class="action-btn-align">' . $val['total_qty'] . ' </td><td></td>';
             } */
             if ($this->user_auth->is_action_allowed('sales', 'sales_return', 'edit')) {
-                $url1 = $this->config->item('base_url') . 'sales_return/po_edit/' . $val['id'];
+                $url1 = $this->config->item('base_url') . 'sales_return/sr_edit/' . $val['id'];
             }
             if (!$this->user_auth->is_action_allowed('sales', 'sales_return', 'edit')) {
                 $alert1 = 'alerts';

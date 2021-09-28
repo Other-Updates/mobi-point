@@ -376,7 +376,7 @@ if (!empty($customers)) {
                         <label class="col-sm-4 control-label first_td1">Supplier&nbsp;Mobile&nbsp;No</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="text" name="supplier[mobil_number]" id="customer_no" class="form-align" />
+                                <input type="text" name="supplier[mobil_number]" maxlength="10" id="customer_no" class="form-align" />
                                 <div class="input-group-addon">
                                     <i class="fa fa-phone"></i>
                                 </div>

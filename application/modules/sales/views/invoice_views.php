@@ -291,7 +291,7 @@ if (!empty($customers)) {
 
                 <div style="text-align:center">
                     <button class="btn btn-defaultprint6 print_gst"><span class="glyphicon glyphicon-print"> <a href="<?php echo $this->config->item('base_url') . 'sales/print_view' ?>"></span> GST Print</a></button>
-                    <button class="btn btn-defaultprint6 print_nogst"><span class="glyphicon glyphicon-print"><a href="<?php echo $this->config->item('base_url') . 'sales/print_view' ?>"></span> NO GST Print </a></button>
+                    <button class="btn btn-defaultprint6 print_gst"><span class="glyphicon glyphicon-print"><a href="<?php echo $this->config->item('base_url') . 'sales/print_view' ?>"></span> NO GST Print </a></button>
                 </div>
                 <table class="table table-striped table-bordered responsive print_bgclr m-b-0" id="add_quotation" cellpadding="0" cellspacing="0">
                     <thead style="color:white !important;">
@@ -721,6 +721,51 @@ if (isset($quotation_details) && !empty($quotation_details)) {
             });
         });
     });
+    $(document).ready(function() {
+        $('.print_gst').click(function() {
+            var firm_id = $('#firm').val();
+            // var c_data = [<?php echo implode(',', $customers_json); ?>];
+            // console.log(c_data);
+            $("#box").blur(function() {
+                var keyEvent = $.Event("keydown");
+                keyEvent.keyCode = $.ui.keyCode.ENTER;
+                $(this).trigger(keyEvent);
+                // Stop event propagation if needed
+                return false;
+            }).autocomplete({
+                source: function(request, response) {
+
+                    $.ajax({
+                        type: 'POST',
+                        data: {
+                            firm_id: $('#firm').val()
+                        },
+                        url: "<?php echo $this->config->item('base_url'); ?>" +
+                            "sales/get_product_by_id/",
+                        success: function(data) {
+                            data = JSON.parse(data);
+                            var c_data = data;
+                            var outputArray = new Array();
+                            for (var i = 0; i < c_data.length; i++) {
+                                if (c_data[i].value.toLowerCase().match(request.term
+                                        .toLowerCase())) {
+                                    outputArray.push(c_data[i]);
+                                }
+                            }
+                            if (outputArray.length == 0) {
+                                var nodata = 'Add new Customer';
+                                outputArray.push(nodata);
+                            }
+                            response(outputArray.slice(0, 10));
+                        }
+                    });
+                },
+                minLength: 0,
+                autoFocus: true,
+
+            });
+        });
+    });
 
     function ime_modal_open(id, count) {
         if (count > 0) {
@@ -795,22 +840,22 @@ if (isset($quotation_details) && !empty($quotation_details)) {
             // ConfirmDialog('Are you sure want to Print invoice ?');
         });
         $('.print_gst').click(function() {
-            if ($('[type="checkbox"]').is(":checked")) {
-                window.print();
+            // if ($('[type="checkbox"]').is(":checked")) {
+            //     window.print();
 
-            } else {
+            // } else {
 
-            }
+            // }
 
 
         });
         $('.print_nogst').click(function() {
-            if ($('[type="checkbox"]').is(":checked")) {
-                window.print();
+            // if ($('[type="checkbox"]').is(":checked")) {
+            //     window.print();
 
-            } else {
+            // } else {
 
-            }
+            // }
 
         });
 

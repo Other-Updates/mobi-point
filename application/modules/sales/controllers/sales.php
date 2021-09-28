@@ -71,6 +71,7 @@ class Sales extends MX_Controller
             'sales/check_ime_qty' => 'no_restriction',
             'sales/get_ime_code_from_productqty' => 'no_restriction',
             'sales/get_customer_by_firm' => 'no_restriction',
+            'sales/get_product_by_id' => 'no_restriction',
             ''
         );
         if (!$this->user_auth->is_permission_allowed($access_arr, $main_module)) {
@@ -2461,6 +2462,14 @@ class Sales extends MX_Controller
         echo json_encode($data);
         exit;
     }
+    // public function get_product_by_id()
+    // {
+    //     $firm_id = $this->input->post('firm_id');
+    //     $data = $this->project_cost_model->get_product_by_id($firm_id);
+    //     echo json_encode($data);
+    //     exit;
+    // }
+
     function get_all_products()
     {
         $input = $this->input->post();

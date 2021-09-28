@@ -1363,7 +1363,11 @@ class Purchase_order extends MX_Controller
         $list = $this->purchase_order_model->get_datatables();
         $data = array();
         $no = $_POST['start'];
+        // echo '<pre>';
+        // print_r($list);
+        // exit;
         foreach ($list as $ass) {
+
             /* if ($this->user_auth->is_action_allowed('purchase', 'purchase_request', 'edit')) {
               $edit = '<a href="' . $this->config->item('base_url') . 'purchase_order/po_edit/' . $ass['id'] . '" data-toggle="tooltip" class="tooltips btn btn-default btn-xs" title="" ><span class="fa fa-log-out "> <span class="fa fa-edit"></span></span></a>';
               } else {

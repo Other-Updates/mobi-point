@@ -124,7 +124,7 @@
                                                 <span id="dup" class="dup" style="color:#F00; font-style:italic;"></span>
                                             </div>
                                         </div>
-                                    </div>                                
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">HSN NUMBER<span style="color:#F00; font-style:oblique;">*</span></label>
@@ -162,33 +162,37 @@
                                     <a href="<?php echo $this->config->item('base_url') . 'masters/brands' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
                                 </div>
                             </form>
+
                         </div>
+
                     </div>
-                    <div role="tabpanel" class="tab-pane active tablelist" id="brand-details">
-                        <div class="frameset1">
-                            <div id="list">
-                                <div class="">
-                                    <table id="brandTable" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline">
-                                        <thead>
-                                            <tr>
-                                                <th style="text-align:center;">S.No</th>
-                                                <!-- <th style="text-align:center;">Shop Name</th> -->
-                                                <th style="text-align:center;">Category Name</th>
-                                                <th style="text-align:center;">Model Name</th>
-                                                <th style="text-align:center;">HSN Number</th>
-                                                <th style="text-align:center;">GST</th>
-                                                <th class="action-btn-align" style="text-align:center;">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
+
+
+                </div>
+                <div role="tabpanel" class="tab-pane active tablelist" id="brand-details">
+                    <div class="frameset1">
+                        <div id="list">
+                            <div class="">
+                                <table id="brandTable" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center;">S.No</th>
+                                            <!-- <th style="text-align:center;">Shop Name</th> -->
+                                            <th style="text-align:center;">Category Name</th>
+                                            <th style="text-align:center;">Model Name</th>
+                                            <th style="text-align:center;">HSN Number</th>
+                                            <th style="text-align:center;">GST</th>
+                                            <th class="action-btn-align" style="text-align:center;">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="panel-body action-btn-align">
-                            <button type="button" class="btn btn-primary add_bluk_import"><i class="icon-plus-circle2 position-left"></i> Import Models</button>
-                        </div>
+                    </div>
+                    <div class="panel-body action-btn-align">
+                        <button type="button" class="btn btn-primary add_bluk_import"><i class="icon-plus-circle2 position-left"></i> Import Models</button>
                     </div>
                 </div>
             </div>

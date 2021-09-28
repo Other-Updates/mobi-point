@@ -47,9 +47,6 @@ class Purchase_return extends MX_Controller
         //$datas["po"] = $po = $this->purchase_return_model->get_all_po();
         $datas["po"] = $po = $this->purchase_return_model->get_all_po_in_pr_table();
         $datas['company_details'] = $this->admin_model->get_company_details();
-        //        echo "<pre>";
-        //        print_r($datas);
-        //        exit;
         $this->template->write_view('content', 'purchase_return/purchase_return_list', $datas);
         $this->template->render();
     }
@@ -155,9 +152,9 @@ class Purchase_return extends MX_Controller
     {
         $input = $this->input->post();
         if (!empty($input)) {
-            //            echo "<pre>";
-            //            print_r($this->input->post());
-            //  exit;
+            // echo "<pre>";
+            // print_r($this->input->post());
+            // exit;
             $pr_id = $id;
             $get_pr_id = $this->purchase_return_model->get_purchase_order_id($id);
             $purchase_order_id = $get_pr_id[0]['po_id'];
@@ -166,6 +163,7 @@ class Purchase_return extends MX_Controller
                 $categoty = $input['categoty'][$key];
                 $product = $input['product_id'][$key];
                 $brand = $input['brand'][$key];
+                $quantity = $input['quantity'][$key];
                 $product_description = $input['product_description'][$key];
                 $unit = $input['unit'][$key];
                 $per_cost = $input['per_cost'][$key];
@@ -197,6 +195,7 @@ class Purchase_return extends MX_Controller
                 $stock_arr['category'] = $categoty;
                 $stock_arr['product_id'] = $product;
                 $stock_arr['brand'] = $brand;
+                // $stock_arr['quantity'] = $quantity;
                 $stock_arr['return_quantity'] = $return_qty;
                 $this->stock_details($stock_arr, $po_id);
                 // ERP PR..
