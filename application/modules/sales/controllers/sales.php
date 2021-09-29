@@ -485,6 +485,10 @@ class Sales extends MX_Controller
     }
     public function print_view($id)
     {
+        $data = $this->input->post();
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
         $datas["quotation"] = $quotation = $this->project_cost_model->get_all_invoice_by_id();
         $datas["in_words"] = $this->convert_number($datas["quotation"][0]['net_total']);
         $datas["quotation_details"] = $quotation_details = $this->project_cost_model->get_all_invoice_details_by_id();
