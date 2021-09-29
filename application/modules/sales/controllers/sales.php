@@ -490,6 +490,7 @@ class Sales extends MX_Controller
         $datas["quotation_details"] = $quotation_details = $this->project_cost_model->get_all_invoice_details_by_id();
         $datas["category"] = $category = $this->categories_model->get_all_category();
         $datas['company_details'] = $this->admin_model->get_company_details();
+        $datas["products"] = $this->gen_model->get_all_product();
         $datas["brand"] = $brand = $this->brand_model->get_brand();
         $datas['all_supplier'] = $this->project_cost_model->get_all_customer();
         $datas["user_info"] = $this->user_auth->get_from_session('user_info');
