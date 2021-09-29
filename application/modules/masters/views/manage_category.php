@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
-                                    <table id="basicTable" class="table-striped table responsive dataTable no-footer dtr-inline">
+                                    <table id="categorytable" class="table-striped table responsive dataTable no-footer dtr-inline">
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
@@ -63,17 +63,10 @@
                                                                 <span class="icon-trash"></span></a>
                                                         </td>
                                                     </tr>
-                                                <?php
+                                            <?php
                                                     $i++;
                                                 }
-                                            } else {
-                                                ?>
-                                                <tr>
-                                                    <td colspan="3"><?php echo $language['no_data_available'] ?></td>
-                                                </tr>
-                                            <?php
-                                            }
-                                            ?>
+                                            } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -159,7 +152,7 @@ if (isset($category_list) && !empty($category_list)) {
     var language_json = <?php echo json_encode($language); ?>;
     var language = language_json;
     $(document).ready(function() {
-        var table = $('#basicTable').DataTable({
+        var table = $('#categorytable').DataTable({
             "searchDelay": 500,
             "oLanguage": {
                 "sLengthMenu": language["show"] + " _MENU_ " + language["entries"],
@@ -173,7 +166,7 @@ if (isset($category_list) && !empty($category_list)) {
                 }
             },
             "columnDefs": [{
-                "targets": [0, 2], //first column / numbering column
+                "targets": [0, 1], //first column / numbering column
                 "orderable": false, //set not orderable
             }, ],
         });

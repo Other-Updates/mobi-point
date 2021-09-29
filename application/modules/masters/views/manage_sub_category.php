@@ -30,7 +30,7 @@
                 <div class="tab-content tab-content-solid">
                     <div role="tabpanel" aria-labelledby="tab-6-1" class="tab-pane fade show active" id="sub_category-details">
                         <div class="table-responsive">
-                            <table id="basicTable" class="table-striped table responsive dataTable no-footer dtr-inline">
+                            <table id="categoryTable" class="table-striped table responsive dataTable no-footer dtr-inline">
                                 <thead>
                                     <tr>
                                         <th><?php echo $language['s_no'] ?></th>
@@ -213,7 +213,7 @@ if (isset($all_list) && !empty($all_list)) {
                 }
             });
         });
-        var table = $('#basicTable').DataTable({
+        var table = $('#categoryTable').DataTable({
 
             "oLanguage": {
                 "sLengthMenu": language["show"] + " _MENU_ " + language["entries"],
@@ -227,7 +227,7 @@ if (isset($all_list) && !empty($all_list)) {
                 }
             },
             "columnDefs": [{
-                "targets": [0, 3], //first column / numbering column
+                "targets": [0, 2], //first column / numbering column
                 "orderable": false, //set not orderable
             }, ],
         });

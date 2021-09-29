@@ -289,7 +289,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 }
             ]
         });
-        new $.fn.dataTable.FixedHeader(table);
+        // new $.fn.dataTable.FixedHeader(table);
     }
     $(document).ready(function() {
         var table;
@@ -355,7 +355,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 }
             ]
         });
-        new $.fn.dataTable.FixedHeader(table);
+        // new $.fn.dataTable.FixedHeader(table);
         $("#yesin").live("click", function() {
             var hidin = $(this).parent().parent().find('.id').val();
             // alert(hidin);

@@ -290,189 +290,190 @@ if (!empty($customers)) {
                 <br>
 
                 <div style="text-align:center">
-                    <button class="btn btn-defaultprint6 print_gst"><span class="glyphicon glyphicon-print"> <a href="<?php echo $this->config->item('base_url') . 'sales/print_view' ?>"></span> GST Print</a></button>
-                    <button class="btn btn-defaultprint6 print_gst"><span class="glyphicon glyphicon-print"><a href="<?php echo $this->config->item('base_url') . 'sales/print_view' ?>"></span> NO GST Print </a></button>
+                    <button class="btn btn-defaultprint6 print_gst" id="gstprint"><span class="glyphicon glyphicon-print"> </span> GST Print</button>
+                    <button class="btn btn-defaultprint6 print_gst" id="gstprint"><span class="glyphicon glyphicon-print"></span> NO GST Print </button>
                 </div>
-                <table class="table table-striped table-bordered responsive print_bgclr m-b-0" id="add_quotation" cellpadding="0" cellspacing="0">
-                    <thead style="color:white !important;">
-                        <tr style="text-align:center; color:white !important;">
-                            <th width="1%" class="first_td1 action-btn-align">S.No</th>
-                            <th width="59%" class="first_td1 pro-wid">Product&nbsp;Name&nbsp;&nbsp;&nbsp;</th>
-                            <th width="15%" class="first_td1">HSN Code</th>
-                            <th width="7%" class="first_td1 action-btn-align ser-wid">QTY</th>
-                            <th width="7%" class="text_right">Rate</td>
-                            <th width="15%" class="first_td1 qty-wid text_right">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody id='app_table'>
-                        <?php
-                        $i = 1;
-                        $cgst = 0;
-                        $sgst = 0;
-                        if (isset($quotation_details) && !empty($quotation_details)) {
-                            foreach ($quotation_details as $vals) {
-                                $cgst1 = ($vals['tax'] / 100) * ($vals['sp_with_gst'] * $vals['quantity']);
-                                $gst_type = $quotation[0]['state_id'];
-                                if ($gst_type != '') {
-                                    if ($gst_type == 31) {
-                                        $sgst1 = ($vals['gst'] / 100) * ($vals['sp_with_gst'] * $vals['quantity']);
-                                    } else {
-                                        $sgst1 = ($vals['igst'] / 100) * ($vals['sp_with_gst'] * $vals['quantity']);
+                <form action="<?php echo $this->config->item('base_url'); ?>sales/print_view" enctype="multipart/form-data" name="form" method="post">
+                    <table class="table table-striped table-bordered responsive print_bgclr m-b-0" id="add_quotation" cellpadding="0" cellspacing="0">
+                        <thead style="color:white !important;">
+                            <tr style="text-align:center; color:white !important;">
+                                <th width="1%" class="first_td1 action-btn-align">S.No</th>
+                                <th width="59%" class="first_td1 pro-wid">Product&nbsp;Name&nbsp;&nbsp;&nbsp;</th>
+                                <th width="15%" class="first_td1">HSN Code</th>
+                                <th width="7%" class="first_td1 action-btn-align ser-wid">QTY</th>
+                                <th width="7%" class="text_right">Rate</td>
+                                <th width="15%" class="first_td1 qty-wid text_right">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id='app_table'>
+                            <?php
+                            $i = 1;
+                            $cgst = 0;
+                            $sgst = 0;
+                            if (isset($quotation_details) && !empty($quotation_details)) {
+                                foreach ($quotation_details as $vals) {
+                                    $cgst1 = ($vals['tax'] / 100) * ($vals['sp_with_gst'] * $vals['quantity']);
+                                    $gst_type = $quotation[0]['state_id'];
+                                    if ($gst_type != '') {
+                                        if ($gst_type == 31) {
+                                            $sgst1 = ($vals['gst'] / 100) * ($vals['sp_with_gst'] * $vals['quantity']);
+                                        } else {
+                                            $sgst1 = ($vals['igst'] / 100) * ($vals['sp_with_gst'] * $vals['quantity']);
+                                        }
                                     }
-                                }
-                                $cgst += $cgst1;
-                                $sgst += $sgst1;
-                                if (isset($val['round_off']) && $val['round_off'] > 0) {
-                                    if ($val['net_total'] > ($val['subtotal_qty'] + $val['transport'] + $val['labour'] + $cgst + $sgst)) {
-                                        $round_off_plus = $val['round_off'];
-                                        $round_off_minus = 0;
-                                    } else if ($val['net_total'] < ($val['subtotal_qty'] + $val['transport'] + $val['labour'] + $cgst + $sgst)) {
-                                        $round_off_minus = $val['round_off'];
-                                        $round_off_plus = 0;
-                                    } else {
-                                        $round_off_plus = 0;
-                                        $round_off_minus = 0;
+                                    $cgst += $cgst1;
+                                    $sgst += $sgst1;
+                                    if (isset($val['round_off']) && $val['round_off'] > 0) {
+                                        if ($val['net_total'] > ($val['subtotal_qty'] + $val['transport'] + $val['labour'] + $cgst + $sgst)) {
+                                            $round_off_plus = $val['round_off'];
+                                            $round_off_minus = 0;
+                                        } else if ($val['net_total'] < ($val['subtotal_qty'] + $val['transport'] + $val['labour'] + $cgst + $sgst)) {
+                                            $round_off_minus = $val['round_off'];
+                                            $round_off_plus = 0;
+                                        } else {
+                                            $round_off_plus = 0;
+                                            $round_off_minus = 0;
+                                        }
                                     }
-                                }
-                                $net_total = $val['net_total'];
-                        ?>
-                                <tr style="border-bottom:1px solid black;">
-                                    <td class="action-btn-align">
-                                        <input type="checkbox" id="box" class="box" name="checkbox" />
-                                    </td>
+                                    $net_total = $val['net_total'];
+                            ?>
+                                    <tr style="border-bottom:1px solid black;">
+                                        <td class="action-btn-align">
+                                            <input type="checkbox" id="box" class="box" name="checkbox" value=<?php echo $vals['id'] ?> />
+                                        </td>
 
-                                    <td>
-                                        <?php echo $vals['product_name'] ?></td>
-                                    <td>
-                                        <?php echo !empty($vals['hsn_sac']) ? $vals['hsn_sac'] : '-'; ?>
-                                    </td>
-                                    <td class="action-btn-align">
-                                        <?php echo $vals['quantity'] ?>
-                                    </td>
-                                    <td align="right"><?php echo number_format($vals['per_cost'], 2); ?></td>
-                                    <td class="text_right" style="text-align:right;">
-                                        <?php echo number_format($vals['sub_total'], 2); ?>
-                                    </td>
-                                </tr>
-                        <?php
-                                $i++;
+                                        <td>
+                                            <?php echo $vals['product_name'] ?></td>
+                                        <td>
+                                            <?php echo !empty($vals['hsn_sac']) ? $vals['hsn_sac'] : '-'; ?>
+                                        </td>
+                                        <td class="action-btn-align">
+                                            <?php echo $vals['quantity'] ?>
+                                        </td>
+                                        <td align="right"><?php echo number_format($vals['per_cost'], 2); ?></td>
+                                        <td class="text_right" style="text-align:right;">
+                                            <?php echo number_format($vals['sub_total'], 2); ?>
+                                        </td>
+                                    </tr>
+                            <?php
+                                    $i++;
+                                }
                             }
-                        }
-                        ?>
-                    </tbody>
+                            ?>
+                        </tbody>
 
-                    <tfoot>
-                        <?php
-                        foreach ($val['other_cost'] as $key) {
-                        ?>
-                        <?php }
-                        ?>
-                        <?php
-                        $gst = number_format(($quotation[0]['cgst_price'] + $quotation[0]['sgst_price']), 2)
-                        ?>
-                        <!-- <tr>
+                        <tfoot>
+                            <?php
+                            foreach ($val['other_cost'] as $key) {
+                            ?>
+                            <?php }
+                            ?>
+                            <?php
+                            $gst = number_format(($quotation[0]['cgst_price'] + $quotation[0]['sgst_price']), 2)
+                            ?>
+                            <!-- <tr>
                             <td align="right" colspan="4"><b>GST</b></td>
                             <td align="center">12%</td>
                             <td align="right"><?php echo $gst; ?></td>
                         </tr> -->
-                        <?php if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) { ?>
-                            <tr>
-                                <td align="right" colspan="4"><b><?php echo $quotation[0]['tax_label']; ?></b></td>
-                                <td align="center">-</td>
-                                <td align="right"><?php echo $quotation[0]['tax']; ?></td>
-                            </tr>
-                        <?php } ?>
-                    </tfoot>
+                            <?php if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) { ?>
+                                <tr>
+                                    <td align="right" colspan="4"><b><?php echo $quotation[0]['tax_label']; ?></b></td>
+                                    <td align="center">-</td>
+                                    <td align="right"><?php echo $quotation[0]['tax']; ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tfoot>
 
-                </table>
-                <table width="100%" class="tfootbotom table table-bordered m-b-0">
-                    <tr style="border-bottom:1px solid black; background: #f4f8fb;">
+                    </table>
+                    <table width="100%" class="tfootbotom table table-bordered m-b-0">
+                        <tr style="border-bottom:1px solid black; background: #f4f8fb;">
 
-                        <!-- <td width="15%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">Taxable Price : </td> -->
-
-
-                        <!-- <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td> -->
+                            <!-- <td width="15%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">Taxable Price : </td> -->
 
 
-                        <!-- <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">CGST : </td> -->
+                            <!-- <td width="10%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['taxable_price'], 2); ?></td> -->
 
 
-                        <!-- <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td> -->
+                            <!-- <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">CGST : </td> -->
 
 
-                        <?php
-                        $gst_type = $quotation[0]['state_id'];
-                        if ($gst_type == 31) {
-                        ?>
-                            <!-- <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">SGST : </td> -->
-                        <?php } else { ?>
-                            <!-- <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">IGST : </td> -->
-                        <?php
-                        }
-                        ?>
+                            <!-- <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['cgst_price'], 2); ?></td> -->
 
 
-                        <!-- <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td> -->
+                            <?php
+                            $gst_type = $quotation[0]['state_id'];
+                            if ($gst_type == 31) {
+                            ?>
+                                <!-- <td width="8%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">SGST : </td> -->
+                            <?php } else { ?>
+                                <!-- <td width="10%" colspan="" style="text-align:center;" class="bor-tb0 bold_heading">IGST : </td> -->
+                            <?php
+                            }
+                            ?>
 
-                        <td width="12%" colspan="" style="text-align:center;font-weight:bold;" class="bor-tb0 tot-text">Net Total : </td>
-                        <?php
-                        $net_total = $quotation[0]['net_total'];
-                        if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) {
-                            //$net_total = $net_total + $quotation[0]['tax'];
-                        } ?>
-                        <td width="10%" class="text_right bor-tb0 tot-amount"><b class="tot-amount"><?php echo number_format($net_total, 2); ?></b></td>
-                    </tr>
-                    <tr>
-                        <td align="center"><b>Rupees : </b> <?php echo $val['remarks']; ?>
-                        </td>
-                        <td colspan="11" class="bor-tb0  ">
-                            <span class=""><?php echo $in_words; ?></span>
-                        </td>
-                    </tr>
-                </table><br>
-                <div class="goods-condi">
-                    <div class="gc1" style="text-align:center;">
-                        Received the goods in<br /> goods condition <br /><br /><br /><b>Customer's Signature</b>
+
+                            <!-- <td width="9%" class="text_right bor-tb0"><?php echo number_format($quotation[0]['sgst_price'], 2); ?></td> -->
+
+                            <td width="12%" colspan="" style="text-align:center;font-weight:bold;" class="bor-tb0 tot-text">Net Total : </td>
+                            <?php
+                            $net_total = $quotation[0]['net_total'];
+                            if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) {
+                                //$net_total = $net_total + $quotation[0]['tax'];
+                            } ?>
+                            <td width="10%" class="text_right bor-tb0 tot-amount"><b class="tot-amount"><?php echo number_format($net_total, 2); ?></b></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><b>Rupees : </b> <?php echo $val['remarks']; ?>
+                            </td>
+                            <td colspan="11" class="bor-tb0  ">
+                                <span class=""><?php echo $in_words; ?></span>
+                            </td>
+                        </tr>
+                    </table><br>
+                    <div class="goods-condi">
+                        <div class="gc1" style="text-align:center;">
+                            Received the goods in<br /> goods condition <br /><br /><br /><b>Customer's Signature</b>
+                        </div>
+                        <div class="gc2">
+                            Goods once sold will not be taken back or exchanged.<br />
+                            Warranty as per terms& Conditions of the manufacyure.<br />
+                            All disputes are subject to coimbatore jurisdiction.
+                        </div>
+                        <div class="gc3" style="text-align:center;">FOR <b>Mob-Point</b></div>
                     </div>
-                    <div class="gc2">
-                        Goods once sold will not be taken back or exchanged.<br />
-                        Warranty as per terms& Conditions of the manufacyure.<br />
-                        All disputes are subject to coimbatore jurisdiction.
+                    <div class="sign row col-md-12" style="margin-top:20px ; display: none;">
+                        <div class="col-xs-6">
+                            <p style="text-align:center; color:#003e94 !important;"><br>Thank You! Vist again!!</p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p style="text-align:center; color:#003e94 !important;"><br>Service with Satisfaction</p>
+                        </div>
                     </div>
-                    <div class="gc3" style="text-align:center;">FOR <b>Mob-Point</b></div>
-                </div>
-                <div class="sign row col-md-12" style="margin-top:20px ; display: none;">
-                    <div class="col-xs-6">
-                        <p style="text-align:center; color:#003e94 !important;"><br>Thank You! Vist again!!</p>
-                    </div>
-                    <div class="col-xs-6">
-                        <p style="text-align:center; color:#003e94 !important;"><br>Service with Satisfaction</p>
-                    </div>
-                </div>
-                <!-- <div class="" style="text-align:center; margin-top:3px;">
+                    <!-- <div class="" style="text-align:center; margin-top:3px;">
                     <p>This software developed by <b style="color:blue !important;">F2F Solutions</b> &nbsp;&nbsp;|&nbsp;&nbsp; Email:info@f2fsolutions.co.in &nbsp;&nbsp;|&nbsp;&nbsp; Phone: +91 95008 51999</p>
                 </div> -->
-                <div class="hide_class action-btn-align">
-                    <a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list/' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
-                    <?php if ($quotation[0]['customer_type'] == 3) { ?>
-                        <button class="btn btn-defaultprint6" data-toggle="dropdown"><span class="glyphicon glyphicon-print"></span> Print</button>
-                        <ul class="dropdown-menu dropdown-menu-left" style="bottom: auto; top: 98%;margin-left: 630px;">
-                            <li><a href="javascript:void(0);" class="print_cus" mode="1" sr_id="<?php echo $quotation[0]['id']; ?>"><i class="icon-copy3"></i> Customer Invoice</a></li>
-                            <li><a href="javascript:void(0);" class="print_con" mode="2" sr_id="<?php echo $quotation[0]['id']; ?>"><i class="icon-copy4"></i> Contractor Invoice</a></li>
-                        </ul>
-                    <?php } else { ?>
-                        <button class="btn btn-defaultprint6 print_btn"><span class="glyphicon glyphicon-print"></span> Print</button>
-                    <?php } ?>
-                    <?php if ((isset($_GET['notification']) && $_GET['notification'] != '') || ($user_info[0]['role'] == 1 && $quotation[0]['invoice_status'] == 'waiting')) { ?>
-                        <button class="btn btn-defaultprint6" id="approve">Approve</button>
-                    <?php } ?>
-                    <!--<input type="button" class="btn btn-success" id='send_mail' style="float:right;top: 100%"  value="Send Email"/>
+                    <div class="hide_class action-btn-align">
+                        <a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list/' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
+                        <?php if ($quotation[0]['customer_type'] == 3) { ?>
+                            <button class="btn btn-defaultprint6" data-toggle="dropdown"><span class="glyphicon glyphicon-print"></span> Print</button>
+                            <ul class="dropdown-menu dropdown-menu-left" style="bottom: auto; top: 98%;margin-left: 630px;">
+                                <li><a href="javascript:void(0);" class="print_cus" mode="1" sr_id="<?php echo $quotation[0]['id']; ?>"><i class="icon-copy3"></i> Customer Invoice</a></li>
+                                <li><a href="javascript:void(0);" class="print_con" mode="2" sr_id="<?php echo $quotation[0]['id']; ?>"><i class="icon-copy4"></i> Contractor Invoice</a></li>
+                            </ul>
+                        <?php } else { ?>
+                            <button class="btn btn-defaultprint6 print_btn"><span class="glyphicon glyphicon-print"></span> Print</button>
+                        <?php } ?>
+                        <?php if ((isset($_GET['notification']) && $_GET['notification'] != '') || ($user_info[0]['role'] == 1 && $quotation[0]['invoice_status'] == 'waiting')) { ?>
+                            <button class="btn btn-defaultprint6" id="approve">Approve</button>
+                        <?php } ?>
+                        <!--<input type="button" class="btn btn-success" id='send_mail' style="float:right;top: 100%"  value="Send Email"/>
                     -->
-                </div>
-        <?php
+                    </div>
+            <?php
             }
         }
-        ?>
+            ?>
     </div><!-- contentpanel -->
 </div><!-- mainpanel -->
 <?php
@@ -518,6 +519,7 @@ if (isset($quotation_details) && !empty($quotation_details)) {
     }
 }
 ?>
+</form>
 <style>
     .heightclass {
         height: auto;
@@ -721,51 +723,51 @@ if (isset($quotation_details) && !empty($quotation_details)) {
             });
         });
     });
-    $(document).ready(function() {
-        $('.print_gst').click(function() {
-            var firm_id = $('#firm').val();
-            // var c_data = [<?php echo implode(',', $customers_json); ?>];
-            // console.log(c_data);
-            $("#box").blur(function() {
-                var keyEvent = $.Event("keydown");
-                keyEvent.keyCode = $.ui.keyCode.ENTER;
-                $(this).trigger(keyEvent);
-                // Stop event propagation if needed
-                return false;
-            }).autocomplete({
-                source: function(request, response) {
 
-                    $.ajax({
-                        type: 'POST',
-                        data: {
-                            firm_id: $('#firm').val()
-                        },
-                        url: "<?php echo $this->config->item('base_url'); ?>" +
-                            "sales/get_product_by_id/",
-                        success: function(data) {
-                            data = JSON.parse(data);
-                            var c_data = data;
-                            var outputArray = new Array();
-                            for (var i = 0; i < c_data.length; i++) {
-                                if (c_data[i].value.toLowerCase().match(request.term
-                                        .toLowerCase())) {
-                                    outputArray.push(c_data[i]);
-                                }
+    $('#gstprint').click(function() {
+        // var firm_id = $('#firm').val();
+        // var c_data = [<?php echo implode(',', $customers_json); ?>];
+        // console.log(c_data);
+        $("#box").blur(function() {
+            var keyEvent = $.Event("keydown");
+            keyEvent.keyCode = $.ui.keyCode.ENTER;
+            $(this).trigger(keyEvent);
+            // Stop event propagation if needed
+            return false;
+        }).autocomplete({
+            source: function(request, response) {
+
+                $.ajax({
+                    type: 'POST',
+                    data: {
+                        firm_id: $('#firm').val()
+                    },
+                    url: "<?php echo $this->config->item('base_url'); ?>" +
+                        "sales/print_view/",
+                    success: function(data) {
+                        data = JSON.parse(data);
+                        var c_data = data;
+                        var outputArray = new Array();
+                        for (var i = 0; i < c_data.length; i++) {
+                            if (c_data[i].value.toLowerCase().match(request.term
+                                    .toLowerCase())) {
+                                outputArray.push(c_data[i]);
                             }
-                            if (outputArray.length == 0) {
-                                var nodata = 'Add new Customer';
-                                outputArray.push(nodata);
-                            }
-                            response(outputArray.slice(0, 10));
                         }
-                    });
-                },
-                minLength: 0,
-                autoFocus: true,
+                        if (outputArray.length == 0) {
+                            var nodata = 'Add new Customer';
+                            outputArray.push(nodata);
+                        }
+                        response(outputArray.slice(0, 10));
+                    }
+                });
+            },
+            minLength: 0,
+            autoFocus: true,
 
-            });
         });
     });
+
 
     function ime_modal_open(id, count) {
         if (count > 0) {
