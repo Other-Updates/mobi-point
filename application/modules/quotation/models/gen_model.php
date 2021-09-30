@@ -739,6 +739,23 @@ class Gen_model extends CI_Model
         $query = $this->db->get('erp_product')->result_array();
         return $query;
     }
+    public function get_all_print_product_by_id()
+    {
+        $this->db->select('erp_invoice_details.id,erp_invoice_details.product_id,'
+            . 'erp_invoice_details.product_description');
+        $this->db->where('erp_invoice_details.id', 'id');
+        // $this->db->join('erp_quotation', 'erp_quotation.id=erp_quotation_details.q_id');
+        // $this->db->join('erp_product', 'erp_product.id=erp_quotation_details.product_id');
+        $query = $this->db->get('erp_invoice_details');
+        //  echo $this->db->last_query();
+        //    echo "<pre>";
+        //    print_r($query);
+        //    exit;
+        if ($query->num_rows() >= 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
     public function get_all_customers()
     {
         $firms = $this->user_auth->get_user_firms();

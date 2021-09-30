@@ -1030,6 +1030,7 @@ class Project_cost_model extends CI_Model
         }
         return false;
     }
+
     public function get_all_quotation_details_by_id($id)
     {
         $this->db->select('erp_category.cat_id,erp_category.categoryName,erp_product.id,erp_product.product_name,erp_brand.id,erp_brand.brands,erp_product.cost_price,'
