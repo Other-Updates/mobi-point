@@ -124,7 +124,7 @@ if (!empty($data['todays_purchases']) && count($data['todays_purchases']) > 0) {
 </style>
 <?php
 $collapse_menu = '';
-if ($cur_class == 'report' || $cur_class == 'purchase_order' || $cur_class == 'sales')
+if ($cur_class == 'report' || $cur_class == 'purchase_order' || $cur_class == 'sales' ||  $cur_class == 'purchase_return')
     $collapse_menu = 'sidebar-collapse';
 ?>
 

@@ -142,8 +142,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
                                     <?php } else {
                                     ?>
                                         <td class="action-btn-align"><?= $val['total_qty'] ?></td>
-                                        <td class="action-btn-align"><?= $val['return_quantity'][0]['return_quantity'] ?></td>
+                                        <td class="action-btn-align"><?= $val['return_quantity[]'] ?></td>
                                     <?php } ?>
+                                    <!-- <td class="action-btn-align"><?= $val['delivery_qty'] ?></td> -->
                                     <td class="action-btn-align"><?= $val['delivery_qty'] ?></td>
                                     <!--                                <td class="action-btn-align"><?= $val['tax'] ?></td> -->
                                     <!--<td class="text_right"><?= number_format($val['subtotal_qty'], 2); ?></td>-->
