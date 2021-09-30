@@ -483,7 +483,7 @@ class Sales extends MX_Controller
         $this->template->write_view('content', 'invoice_views', $datas);
         $this->template->render();
     }
-    public function print_view($id)
+    public function print_view()
     {
         $data = $this->input->post();
         // echo "<pre>";
@@ -497,7 +497,7 @@ class Sales extends MX_Controller
         $datas["products"] = $this->gen_model->get_all_product();
         $datas["brand"] = $brand = $this->brand_model->get_brand();
         $datas['all_supplier'] = $this->project_cost_model->get_all_customer();
-        $datas["user_info"] = $this->user_auth->get_from_session('user_info');
+        // $datas["user_info"] = $this->user_auth->get_from_session('user_info');
         $datas['company_details'] = $this->project_cost_model->get_company_details_by_firm();
         // $datas['ime_code_details']=$this->project_cost_model->get_sales_ime_details($id);
         //  echo "<pre>";print_r($datas);exit;

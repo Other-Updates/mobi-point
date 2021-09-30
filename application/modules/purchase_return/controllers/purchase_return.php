@@ -159,7 +159,7 @@ class Purchase_return extends MX_Controller
             $get_pr_id = $this->purchase_return_model->get_purchase_order_id($id);
             $purchase_order_id = $get_pr_id[0]['po_id'];
             foreach ($input['id'] as $key => $val) {
-                // $erp_pr_details_id = trim($val);
+                $erp_pr_details_id = trim($val);
                 $categoty = $input['categoty'][$key];
                 $product = $input['product_id'][$key];
                 $brand = $input['brand'][$key];
@@ -176,7 +176,7 @@ class Purchase_return extends MX_Controller
                 // $po_details = $this->purchase_return_model->get_po_details($purchase_order_id);
                 $po_details = $this->purchase_return_model->get_po_details_based_on_prdcat($purchase_order_id, $categoty, $brand);
                 $already_delivery_qty = $po_details[0]['delivery_quantity'];
-                $return_qty = $input['return_quantity'][0];
+                $return_qty = $input['return_quantity'][$erp_pr_details_id][0];
                 $data = array();
                 // Erp Product Details Update
                 $data['delivery_quantity'] = $already_delivery_qty - $return_qty;

@@ -2,25 +2,35 @@
 $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template');
 ?>
 <style>
-    .st{
+    .st {
         /*float: left;*/
         width: 82.1px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    .table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>th,
-    .table>thead:first-child>tr:first-child>th, .table>caption+thead>tr:first-child>td,
-    .table>colgroup+thead>tr:first-child>td, .table>thead:first-child>tr:first-child>td
-    {
+
+    .table>caption+thead>tr:first-child>th,
+    .table>colgroup+thead>tr:first-child>th,
+    .table>thead:first-child>tr:first-child>th,
+    .table>caption+thead>tr:first-child>td,
+    .table>colgroup+thead>tr:first-child>td,
+    .table>thead:first-child>tr:first-child>td {
         padding: 5px;
     }
+
     #chartdiv {
         width: 100%;
         height: 288px;
     }
-    td a { border: none !important; }
-    td a:hover { border: none !important; }
+
+    td a {
+        border: none !important;
+    }
+
+    td a:hover {
+        border: none !important;
+    }
 </style>
 <div class="mainpanel">
     <div class="media">
@@ -28,10 +38,9 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
         <?php
         $user_info = $this->user_info = $this->session->userdata('user_info');
         if (($user_info[0]['role'] != 1)) {
-
         } else {
             $amount = $this->admin_model->get_company_amount();
-            ?>
+        ?>
             <h4 class="com-align">Company Amount: <?php echo number_format($amount[0]['value']); ?></h4>
         <?php }
         ?>
@@ -51,128 +60,129 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 $po_data = $po_data . ',';
         }
         $po_data = $po_data . ']';
-    }else {
+    } else {
         $po_data = '[[1, 0], [2, 0], [3,0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0], [10, 0], [11, 0], [12, 0]]';
     }
 
-     $cur_class = $this->router->class;
-     $cur_method = $this->router->method;
+    $cur_class = $this->router->class;
+    $cur_method = $this->router->method;
     ?>
 
-  
-    <?php if ($this->user_auth->is_section_allowed('dashboard', 'dashboard_list_view')): ?>
-    <div class="row dash-icons">
-        <!-- <div class="col-md-1">
-            <a href="<?php //echo $this->config->item('base_url') . 'quotation/quotation_list' ?>">
+
+    <?php if ($this->user_auth->is_section_allowed('dashboard', 'dashboard_list_view')) : ?>
+        <div class="row dash-icons">
+            <!-- <div class="col-md-1">
+            <a href="<?php //echo $this->config->item('base_url') . 'quotation/quotation_list'
+                        ?>">
                 <div class="dashboard-icons orange-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/1.png" />
                     <div>Quotation</div>
                 </div>
             </a>
         </div> -->
-        <div class="col-md-2">
-            <div class="card-design">
-                <div class="card-design-inner">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list' ?>">Purchase order</a></div>
-                            <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>                            
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_1.png" /></div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-md-12">
-                            <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card-design">
-                <div class="card-design-inner">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>">Purchase Return</a></div>
-                            <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_5.png" /></div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-md-12">
-                            <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+            <div class="col-md-2">
+                <div class="card-design">
+                    <div class="card-design-inner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list' ?>">Purchase order</a></div>
+                                <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i><?php echo 'total' ?> 12345687</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_1.png" /></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12">
+                                <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card-design">
-                <div class="card-design-inner">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'stock/' ?>">Stock <br><br></a></div>
-                            <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_4.png" /></div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-md-12">
-                            <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'stock/' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card-design">
-                <div class="card-design-inner">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list' ?>">Sales Invoice</a></div>
-                            <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_2.png" /></div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-md-12">
-                            <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+            <div class="col-md-2">
+                <div class="card-design">
+                    <div class="card-design-inner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>">Purchase Return</a></div>
+                                <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_5.png" /></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12">
+                                <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card-design">
-                <div class="card-design-inner">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">Sales Return</a></div>
-                            <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_6.png" /></div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-md-12">
-                            <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+            <div class="col-md-2">
+                <div class="card-design">
+                    <div class="card-design-inner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'stock/' ?>">Stock <br><br></a></div>
+                                <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_4.png" /></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12">
+                                <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'stock/' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- <div class="col-md-4">
+            <div class="col-md-2">
+                <div class="card-design">
+                    <div class="card-design-inner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list' ?>">Sales Invoice</a></div>
+                                <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_2.png" /></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12">
+                                <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card-design">
+                    <div class="card-design-inner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">Sales Return</a></div>
+                                <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_6.png" /></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12">
+                                <div class="cd-link"><a href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">View Details <i class="fa fa-angle-right"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-4">
             <a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list' ?>">
                 <div class="dashboard-icons red-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/2.png" />
                     <div>Purchase order</div>
                 </div>
             </a>
-        </div> 
+        </div>
        <div class="col-md-2">
             <a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>">
                 <div class="dashboard-icons blue-bg hvr-ripple-out">
@@ -181,7 +191,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 </div>
             </a>
         </div>-->
-        <!-- <div class="col-md-2">
+            <!-- <div class="col-md-2">
             <a href="<?php echo $this->config->item('base_url') . 'purchase_receipt/receipt_list' ?>">
                 <div class="dashboard-icons pink-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/4.png" />
@@ -189,7 +199,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 </div>
             </a>
         </div> -->
-        <!-- <div class="col-md-4">
+            <!-- <div class="col-md-4">
             <a href="<?php echo $this->config->item('base_url') . 'stock/' ?>">
                 <div class="dashboard-icons green-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/5.png" />
@@ -198,7 +208,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
             </a>
         </div> -->
 
-        <!-- <div class="col-md-4">
+            <!-- <div class="col-md-4">
             <a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list' ?>">
                 <div class="dashboard-icons yellow-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/8.png" />
@@ -206,7 +216,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 </div>
             </a>
         </div> -->
-        <!-- <div class="col-md-1">
+            <!-- <div class="col-md-1">
             <a href="<?php echo $this->config->item('base_url') . 'stock/sku_management' ?>">
                 <div class="dashboard-icons gray-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/6.png" />
@@ -214,7 +224,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 </div>
             </a>
         </div> -->
-         <!-- <div class="col-md-2">
+            <!-- <div class="col-md-2">
             <a href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">
                 <div class="dashboard-icons dark-blue-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/7.png" />
@@ -222,7 +232,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                 </div>
             </a>
         </div> -->
-        <!-- <div class="col-md-2">
+            <!-- <div class="col-md-2">
             <a href="<?php echo $this->config->item('base_url') . 'sales_receipt/receipt_list' ?>">
                 <div class="dashboard-icons yellow-bg hvr-ripple-out">
                     <img src="<?= $theme_path; ?>/images/icons/8.png" />
@@ -248,29 +258,31 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
         </div> -->
 
 
-    </div>
+        </div>
     <?php endif; ?>
 
-     <?php if ($this->user_auth->is_section_allowed('dashboard', 'today_purchase_sales_list')): ?>
-    <div class="contentpanel panel-body pb-0">
-        <div class="row row-stat">
-            <div class="col-md-12">
-                <div class="mdiv1">
-                    <div class="pull-left">
-                        <div class="header-sale">
-                            <a href="#" class="btn btn-success btn-group">Today Sales : <i class="fa fa-inr"></i> <span><?php //echo ($total_sales != 0) ? $total_sales : '0.00';                       ?></span></a>
+    <?php if ($this->user_auth->is_section_allowed('dashboard', 'today_purchase_sales_list')) : ?>
+        <div class="contentpanel panel-body pb-0">
+            <div class="row row-stat">
+                <div class="col-md-12">
+                    <div class="mdiv1">
+                        <div class="pull-left">
+                            <div class="header-sale">
+                                <a href="#" class="btn btn-success btn-group">Today Sales : <i class="fa fa-inr"></i> <span><?php //echo ($total_sales != 0) ? $total_sales : '0.00';
+                                                                                                                            ?></span></a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pull-left">
-                        <div class="header-sale">
-                            <a href="#" class="btn btn-danger1 btn-group">Today Purchase  : <i class="fa fa-inr"></i> <span><?php //echo ($total_purchases != 0) ? $total_purchases : '0.00';                       ?></span></a>
+                        <div class="pull-left">
+                            <div class="header-sale">
+                                <a href="#" class="btn btn-danger1 btn-group">Today Purchase : <i class="fa fa-inr"></i> <span><?php //echo ($total_purchases != 0) ? $total_purchases : '0.00';
+                                                                                                                                ?></span></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="clearfix"></div>
+                <div class="clearfix"></div>
 
-            <!--            <div class="col-md-4">
+                <!--            <div class="col-md-4">
                             <div class="panel panel-success-alt noborder">
                                 <div class="panel-heading noborder">
                                     <div class="panel-btns">
@@ -293,7 +305,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
             <?php
             if (isset($report['enquiry']) && !empty($report['enquiry'])) {
                 foreach ($report['enquiry'] as $enquiry) {
-                    ?>
+            ?>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <tr>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <td class="qty_align"><?php echo $enquiry['enquiry_no']; ?></td>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <td class="qty_align"><?php echo $enquiry['customer_name']; ?></td>
@@ -304,7 +316,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
             } else {
                 echo '<tr><td colspan="3">No pending Enquiry</td></tr>';
             }
-            ?>
+                    ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -312,63 +324,64 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                                 </div> panel-body
                             </div> panel
                         </div> col-md-4 -->
-            <?php
-            $data['invoice'] = $this->admin_model->get_firm_based_pending_invoice();
-            //echo '<pre>';
-            //print_r($data['invoice']);
-            // exit;
-            ?>
-            <div class="col-md-6">
-                <div class="panel panel-primary noborder">
-                    <div class="panel-heading  panel-back  noborder">
+                <?php
+                $data['invoice'] = $this->admin_model->get_firm_based_pending_invoice();
+                //echo '<pre>';
+                //print_r($data['invoice']);
+                // exit;
+                ?>
+                <div class="col-md-6">
+                    <div class="panel panel-primary noborder">
+                        <div class="panel-heading  panel-back  noborder">
 
-                        <div class="media-body1"><a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list'; ?>"class="pull-right btn btn-success">View All</a><br />
-                            <h5 class="md-title nomargin">Today Purchase</h5>                        </div><!-- media-body -->
-                        <hr>
-                        <div class="clearfix mt20">
-                            <div id="parent">
-                                <table class="table table-bordered fixTable margin0">
-                                    <thead>
-                                    <th class="qty_align">Firm Name</th>
-                                    <th class="qty_align">Purchase Id</th>
-                                    <th class="qty_align">Supplier Name</th>
-                                    <th class="qty_align">Purchase Amount</th>
-                                   
-                                    </thead>
-                                    <tbody>
-                                        <?php
+                            <div class="media-body1"><a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list'; ?>" class="pull-right btn btn-success">View All</a><br />
+                                <h5 class="md-title nomargin">Today Purchase</h5>
+                            </div><!-- media-body -->
+                            <hr>
+                            <div class="clearfix mt20">
+                                <div id="parent">
+                                    <table class="table table-bordered fixTable margin0">
+                                        <thead>
+                                            <th class="qty_align">Firm Name</th>
+                                            <th class="qty_align">Purchase Id</th>
+                                            <th class="qty_align">Supplier Name</th>
+                                            <th class="qty_align">Purchase Amount</th>
 
-                                        $data['today_purchase']=$today_purchase;
-                                        if (isset($data['today_purchase']) && !empty($data['today_purchase'])) {
-                                            foreach ($data['today_purchase'] as $today_purchase) {
-                                                ?>
-                                                <tr>
-                                                    <td class="qty_align"><?php echo $today_purchase['firm_name']; ?></td>
+                                        </thead>
+                                        <tbody>
+                                            <?php
 
-                                                    <?php $url=$this->config->item('base_url'). "purchase_order/po_view/".$today_purchase['id'];?>
-                                                    <td class="qty_align"><a  href="<?php echo $url; ?>" ><?php echo $today_purchase['po_no']; ?></a></td>
-                                                    <td class="qty_align"><?php echo ucfirst($today_purchase['supplier_name']); ?></td>
-                                                    <td class="qty_align"><?php echo number_format($today_purchase['net_total'], 2);?></td>
-                                                </tr>
-                                                <?php
+                                            $data['today_purchase'] = $today_purchase;
+                                            if (isset($data['today_purchase']) && !empty($data['today_purchase'])) {
+                                                foreach ($data['today_purchase'] as $today_purchase) {
+                                            ?>
+                                                    <tr>
+                                                        <td class="qty_align"><?php echo $today_purchase['firm_name']; ?></td>
+
+                                                        <?php $url = $this->config->item('base_url') . "purchase_order/po_view/" . $today_purchase['id']; ?>
+                                                        <td class="qty_align"><a href="<?php echo $url; ?>"><?php echo $today_purchase['po_no']; ?></a></td>
+                                                        <td class="qty_align"><?php echo ucfirst($today_purchase['supplier_name']); ?></td>
+                                                        <td class="qty_align"><?php echo number_format($today_purchase['net_total'], 2); ?></td>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            } else {
+                                                echo '<tr><td colspan="4">No Today Purchase Order</td></tr>';
                                             }
-                                        } else {
-                                            echo '<tr><td colspan="4">No Today Purchase Order</td></tr>';
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--            <?php
-            $data['today_po'] = $this->admin_model->get_cash_credit_po();
-            $data['today_sales'] = $this->admin_model->get_cash_credit_sales();
-            ?>
+                <!--            <?php
+                                $data['today_po'] = $this->admin_model->get_cash_credit_po();
+                                $data['today_sales'] = $this->admin_model->get_cash_credit_sales();
+                                ?>
                         <div class="col-md-3">
                             <div class="panel panel-dark noborder">
                                 <div class="panel-heading panel-red noborder">
@@ -390,7 +403,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
             <?php
             if (!empty($data['today_po'])) {
                 foreach ($data['today_po'] as $val) {
-                    ?>
+            ?>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <tr>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <td align="left"><?php echo $val['firm_name']; ?></td>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <td align="center"><?php echo ($val['po_cash'][0]['po_cash'] != '') ? number_format($val['po_cash'][0]['po_cash'], 2) : '0.00'; ?></td>
@@ -399,7 +412,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                     <?php
                 }
             }
-            ?>
+                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -428,7 +441,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
             <?php
             if (!empty($data['today_sales'])) {
                 foreach ($data['today_sales'] as $val) {
-                    ?>
+            ?>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <tr>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <td align="left"><?php echo $val['firm_name']; ?></td>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <td align="center"><?php echo ($val['inv_cash'][0]['inv_cash'] != '') ? number_format($val['inv_cash'][0]['inv_cash'], 2) : '0.00'; ?></td>
@@ -437,7 +450,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                     <?php
                 }
             }
-            ?>
+                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -446,100 +459,102 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                                 </div> panel-body
                             </div>
                         </div>-->
-            <!--<div class="clearfix"></div>-->
-            <div class="col-md-6">
-                <div class="panel panel-dark noborder">
-                    <div class="panel-heading panel-red noborder">
-                        <div class="media-body1"><a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list'; ?>"class="pull-right btn btn-success">View All</a><br />
-                            <h5 class="md-title nomargin">Today  Sales Invoice</h5>
-                        </div><!-- media-body -->
-                        <hr>
-                        <div class="clearfix mt20">
-                            <div id="parent">
-                                <table class="table table-bordered fixTable margin0">
-                                    <thead>
-                                    <th class="qty_align">Firm Name</th>
-                                    <th class="qty_align">Sales Id </th>
-                                    <th class="qty_align">Customer Name</th>
-                                    <th class="qty_align">Sales Amount</th>
-                                   
-                                    </thead>
-                                    <tbody>
-                                        <?php
+                <!--<div class="clearfix"></div>-->
+                <div class="col-md-6">
+                    <div class="panel panel-dark noborder">
+                        <div class="panel-heading panel-red noborder">
+                            <div class="media-body1"><a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list'; ?>" class="pull-right btn btn-success">View All</a><br />
+                                <h5 class="md-title nomargin">Today Sales Invoice</h5>
+                            </div><!-- media-body -->
+                            <hr>
+                            <div class="clearfix mt20">
+                                <div id="parent">
+                                    <table class="table table-bordered fixTable margin0">
+                                        <thead>
+                                            <th class="qty_align">Firm Name</th>
+                                            <th class="qty_align">Sales Id </th>
+                                            <th class="qty_align">Customer Name</th>
+                                            <th class="qty_align">Sales Amount</th>
 
-                                        $data['today_sales']=$today_sales;
-                                        if (isset($data['today_sales']) && !empty($data['today_sales'])) {
-                                            foreach ($data['today_sales'] as $today_sales) {
-                                                ?>
-                                                <tr>
-                                                    <td class="qty_align"><?php echo $today_sales['firm_name']; ?></td>
+                                        </thead>
+                                        <tbody>
+                                            <?php
 
-                                                    <?php $url=$this->config->item('base_url'). "sales/invoice_views/".$today_sales['id'];?>
-                                                    <td class="qty_align"><a  href="<?php echo $url; ?>" ><?php echo $today_sales['inv_id']; ?></a></td>
-                                                    <td class="qty_align"><?php echo ucfirst($today_sales['customer_name']); ?></td>
-                                                    <td class="qty_align"><?php echo number_format($today_sales['net_total'], 2);?></td>
-                                                </tr>
-                                                <?php
+                                            $data['today_sales'] = $today_sales;
+                                            if (isset($data['today_sales']) && !empty($data['today_sales'])) {
+                                                foreach ($data['today_sales'] as $today_sales) {
+                                            ?>
+                                                    <tr>
+                                                        <td class="qty_align"><?php echo $today_sales['firm_name']; ?></td>
+
+                                                        <?php $url = $this->config->item('base_url') . "sales/invoice_views/" . $today_sales['id']; ?>
+                                                        <td class="qty_align"><a href="<?php echo $url; ?>"><?php echo $today_sales['inv_id']; ?></a></td>
+                                                        <td class="qty_align"><?php echo ucfirst($today_sales['customer_name']); ?></td>
+                                                        <td class="qty_align"><?php echo number_format($today_sales['net_total'], 2); ?></td>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            } else {
+                                                echo '<tr><td colspan="4">No Today Purchase Order</td></tr>';
                                             }
-                                        } else {
-                                            echo '<tr><td colspan="4">No Today Purchase Order</td></tr>';
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
 
-                    </div><!-- panel-body -->
-                </div><!-- panel -->
-            </div><!-- col-md-4 -->
-            <?php //}        ?>
+                        </div><!-- panel-body -->
+                    </div><!-- panel -->
+                </div><!-- col-md-4 -->
+                <?php //}
+                ?>
 
-            <?php //if (($user_info[0]['role'] == 1) || ($user_info[0]['role'] == 2)) {          ?>
+                <?php //if (($user_info[0]['role'] == 1) || ($user_info[0]['role'] == 2)) {
+                ?>
 
 
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-body padding15">
-                        <h5 class="md-title">Invoice Vs Month</h5>
-                        <div id="basicFlotLegend" class="flotLegend"></div>
-                        <div id="basicflot" class="flotChart"></div>
-                    </div><!-- panel-body -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body padding15">
+                            <h5 class="md-title">Invoice Vs Month</h5>
+                            <div id="basicFlotLegend" class="flotLegend"></div>
+                            <div id="basicflot" class="flotChart"></div>
+                        </div><!-- panel-body -->
 
-                </div><!-- panel -->
-            </div>
-            <!--                <div class="col-md-6">
+                    </div><!-- panel -->
+                </div>
+                <!--                <div class="col-md-6">
                                     <div class="panel panel-default">
                                     <div id="chartdiv"></div>
                                 </div>
                             </div>-->
 
 
-        </div><!-- row -->
+            </div><!-- row -->
 
-        <div id="invoice_pen" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" align="center">
-            <div class="modal-dialog">
-                <div class="modal-content modalcontent-top">
-                    <div class="modal-header modal-padding modalcolor"> <a class="close modal-close closecolor" data-dismiss="modal">X</a>
-                        <h3 id="myModalLabel" class="inactivepop">Invoice Details</h3>
-                    </div>
-                    <div id="cust_change">
+            <div id="invoice_pen" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" align="center">
+                <div class="modal-dialog">
+                    <div class="modal-content modalcontent-top">
+                        <div class="modal-header modal-padding modalcolor"> <a class="close modal-close closecolor" data-dismiss="modal">X</a>
+                            <h3 id="myModalLabel" class="inactivepop">Invoice Details</h3>
+                        </div>
+                        <div id="cust_change">
 
-                    </div>
-                    <div class="modal-footer action-btn-align">
-                        <button type="button" class="btn btn-danger1 delete_all"  data-dismiss="modal" id="no">Cancel</button>
+                        </div>
+                        <div class="modal-footer action-btn-align">
+                            <button type="button" class="btn btn-danger1 delete_all" data-dismiss="modal" id="no">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <?php // }
-        ?>
-        <!-- row -->
+            <?php // }
+            ?>
+            <!-- row -->
 
-    </div><!-- contentpanel -->
+        </div><!-- contentpanel -->
 
-<?php endif;?>
+    <?php endif; ?>
 
 </div><!-- mainpanel -->
 
@@ -552,37 +567,37 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
 <script src="<?= $theme_path; ?>/js/chart/light.js"></script>
 <!-- Chart code -->
 <script>
-                                                        var chart = AmCharts.makeChart("chartdiv", {
-                                                            "type": "pie",
-                                                            "theme": "light",
-                                                            "dataProvider": [{
-                                                                    "country": "CROMPTON",
-                                                                    "litres": 20
-                                                                }, {
-                                                                    "country": "HAVELLS FUSION",
-                                                                    "litres": 4
-                                                                }, {
-                                                                    "country": "ORIENT",
-                                                                    "litres": 25
-                                                                }, {
-                                                                    "country": "HAVELLS",
-                                                                    "litres": 7
-                                                                }, {
-                                                                    "country": "OTHERS",
-                                                                    "litres": 1
-                                                                }],
-                                                            "valueField": "litres",
-                                                            "titleField": "country",
-                                                            "balloon": {
-                                                                "fixedPosition": true
-                                                            },
-                                                            "export": {
-                                                                "enabled": true
-                                                            }
-                                                        });
+    var chart = AmCharts.makeChart("chartdiv", {
+        "type": "pie",
+        "theme": "light",
+        "dataProvider": [{
+            "country": "CROMPTON",
+            "litres": 20
+        }, {
+            "country": "HAVELLS FUSION",
+            "litres": 4
+        }, {
+            "country": "ORIENT",
+            "litres": 25
+        }, {
+            "country": "HAVELLS",
+            "litres": 7
+        }, {
+            "country": "OTHERS",
+            "litres": 1
+        }],
+        "valueField": "litres",
+        "titleField": "country",
+        "balloon": {
+            "fixedPosition": true
+        },
+        "export": {
+            "enabled": true
+        }
+    });
 </script>
 <script type="text/javascript">
-    jQuery(document).ready(function () {
+    jQuery(document).ready(function() {
 
         "use strict";
 
@@ -595,8 +610,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
             qty = Math.round(qty_arr[2]);
             qty_val = Math.round(qty_arr[5]);
 
-            if (qty_val == '')
-            {
+            if (qty_val == '') {
                 qty_val = 0;
             }
 
@@ -611,57 +625,68 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
 
         /*****SIMPLE CHART*****/
 
-        var newCust =<?= $po_data ?>;
+        var newCust = <?= $po_data ?>;
 
         var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         var plot = jQuery.plot(jQuery("#basicflot"),
-                [{
-                        data: newCust,
-                        label: "Invoice Amount",
-                        color: "#797a7a"
-                    }
-                ],
-                {
-                    series: {
-                        lines: {
-                            show: false
+            [{
+                data: newCust,
+                label: "Invoice Amount",
+                color: "#797a7a"
+            }], {
+                series: {
+                    lines: {
+                        show: false
 
-                        },
-                        splines: {
-                            show: true,
-                            tension: 0.4,
-                            lineWidth: 1,
-                            fill: 0.4
-                        },
-                        shadowSize: 0
                     },
-                    points: {
+                    splines: {
                         show: true,
+                        tension: 0.4,
+                        lineWidth: 1,
+                        fill: 0.4
                     },
-                    legend: {
-                        container: '#basicFlotLegend',
-                        noColumns: 0
-                    },
-                    grid: {
-                        hoverable: true,
-                        clickable: true,
-                        borderColor: '#ddd',
-                        borderWidth: 0,
-                        labelMargin: 5,
-                        backgroundColor: '#fff'
-                    },
-                    yaxis: {
-                        min: 0,
-                        color: '#eee'
-                    },
-                    xaxis: {
-                        color: '#eee',
-                        ticks: [[1, 'Jan'], [2, 'Feb'], [3, 'Mar'], [4, 'Apr'], [5, 'May'], [6, 'Jun'], [7, 'Jul'], [8, 'Aug'], [9, 'Sep'], [10, 'Oct'], [11, 'Nov'], [12, 'Dec']]
-                    }
-                });
+                    shadowSize: 0
+                },
+                points: {
+                    show: true,
+                },
+                legend: {
+                    container: '#basicFlotLegend',
+                    noColumns: 0
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: true,
+                    borderColor: '#ddd',
+                    borderWidth: 0,
+                    labelMargin: 5,
+                    backgroundColor: '#fff'
+                },
+                yaxis: {
+                    min: 0,
+                    color: '#eee'
+                },
+                xaxis: {
+                    color: '#eee',
+                    ticks: [
+                        [1, 'Jan'],
+                        [2, 'Feb'],
+                        [3, 'Mar'],
+                        [4, 'Apr'],
+                        [5, 'May'],
+                        [6, 'Jun'],
+                        [7, 'Jul'],
+                        [8, 'Aug'],
+                        [9, 'Sep'],
+                        [10, 'Oct'],
+                        [11, 'Nov'],
+                        [12, 'Dec']
+                    ]
+                }
+            });
 
         var previousPoint = null;
-        jQuery("#basicflot").bind("plothover", function (event, pos, item) {
+        jQuery("#basicflot").bind("plothover", function(event, pos, item) {
             jQuery("#x").text(pos.x.toFixed(2));
             jQuery("#y").text(pos.y.toFixed(2));
 
@@ -671,10 +696,10 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
 
                     jQuery("#tooltip").remove();
                     var x = item.datapoint[0].toFixed(2),
-                            y = item.datapoint[1].toFixed(2);
+                        y = item.datapoint[1].toFixed(2);
 
                     showTooltip(item.pageX, item.pageY,
-                            item.series.label + " of " + x + " = " + y);
+                        item.series.label + " of " + x + " = " + y);
                 }
 
             } else {
@@ -684,7 +709,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
 
         });
 
-        jQuery("#basicflot").bind("plotclick", function (event, pos, item) {
+        jQuery("#basicflot").bind("plotclick", function(event, pos, item) {
             if (item) {
                 plot.highlight(item.series, item.datapoint);
             }
@@ -845,7 +870,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
 
         // Basic Wizard
         jQuery('#basicWizard').bootstrapWizard({
-            onTabShow: function (tab, navigation, index) {
+            onTabShow: function(tab, navigation, index) {
                 tab.prevAll().addClass('done');
                 tab.nextAll().removeClass('done');
                 tab.removeClass('done');
@@ -864,7 +889,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
         });
 
         // This will submit the basicWizard form
-        jQuery('.panel-wizard').submit(function () {
+        jQuery('.panel-wizard').submit(function() {
             alert('This will submit the form wizard');
             return false // remove this to submit to specified action url
         });
@@ -874,15 +899,16 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
 <script src="<?= $theme_path; ?>/js/jquery-2.1.3.js"></script>
 <script src="<?= $theme_path; ?>/js/tableHeadFixer.js"></script>
 <script>
-    function invoiceDetails(val)
-    {
+    function invoiceDetails(val) {
 
         $.ajax({
             type: 'POST',
-            data: {customer: val},
+            data: {
+                customer: val
+            },
             url: '<?php echo base_url(); ?>admin/get_customer_by_invoice/' + val,
             cache: false,
-            success: function (data) {
+            success: function(data) {
                 $('#cust_change').html('');
                 $('#cust_change').html(data);
                 $('.modal').css("display", "block");
@@ -891,12 +917,17 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
         });
 
     }
-    $(document).ready(function () {
+    $(document).ready(function() {
         // $('#invoice_pen').modal('show');
         $(".fixTable").tableHeadFixer();
     });
 </script>
 <style>
-    #parent {height: 244px;	}
-    table.fixTable { border-top: none;}
+    #parent {
+        height: 244px;
+    }
+
+    table.fixTable {
+        border-top: none;
+    }
 </style>

@@ -339,7 +339,7 @@ if (!empty($customers)) {
                             ?>
                                     <tr style="border-bottom:1px solid black;">
                                         <td class="action-btn-align">
-                                            <input type="checkbox" id="box" class="box" name="checkbox" value=<?php echo $vals['id'] ?> />
+                                            <input type="checkbox" id="box" class="box" name="checkbox[]" value=<?php echo $vals['id'] ?> />
                                         </td>
 
                                         <td>
