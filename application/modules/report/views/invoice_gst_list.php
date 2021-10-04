@@ -139,8 +139,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 <table id="basicTable_call_back" class="table table-striped table-bordered responsive no-footer dtr-inline totlqua-cntr cgst2-right
                        sgst2-right subtotal1-right invamountgst-right customergstn-cntr">
                     <thead>
-                        <input type="hidden" id="current_values" value="" />
-                        <input type="hidden" id="total_values" value="" />
+                        <!-- <input type="hidden" id="current_values" value="" />
+                        <input type="hidden" id="total_values" value="" /> -->
                         <tr>
                             <td class="action-btn-align">S.No</td>
                             <td class="action-btn-align">Invoice ID</td>
@@ -173,9 +173,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <td></td>
                             <!-- <td class="action-btn-align"></td> -->
                             <td class="action-btn-align total-bg" style="text-align:center;"></td>
-                            <td class="text_right total-bg"></td>
-                            <td class="text_right total-bg"></td>
-                            <td class="text_right total-bg"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td class="text_right total-bg"></td>
 
                             <!--                            <td></td>
@@ -402,7 +402,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         i : 0;
                 };
                 // Total over all pages
-                var cols = [6, 7, 8];
+                var cols = [3, 7, 8];
                 for (x in cols) {
                     total = api.column(cols[x]).data().reduce(function(a, b) {
                         return intVal(a) + intVal(b);

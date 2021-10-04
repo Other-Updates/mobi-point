@@ -292,166 +292,161 @@
             }
         });
         $("#target_rate").on('blur', function() {
-            var target_rate = $("#target_rate").val();
-            if (target_rate == "" || target_rate == null || target_rate.trim().length == 0) {
-                $("#cuserror14").html("Required Field");
-                i = 1;
-            }
-            if (target_rate.length != 4) {
-                $("#cuserror14").html("Invalid Format");
-                i = 1;
-            }
-            if (!target_rate.match(/\d{4}/)) {
-                $("#cuserror14").html("Invalid Format");
-                i = 1;
-            }
-            var _thisYear = new Date().getFullYear();
-            if (parseInt(target_rate) > _thisYear || parseInt(target_rate) < 1900) {
-                $("#cuserror14").html("Invalid Format");
-                i = 1;
-            } else {
-                $("#cuserror14").html("");
-            }
-        });
-        $("#branch").on('blur', function() {
-            var branch = $("#branch").val();
-            if (branch == "" || branch == null || branch.trim().length == 0) {
-                $("#cuserror10").html("Required Field");
-            } else {
-                $("#cuserror10").html("");
-            }
-        });
-        $("#acnum").on('blur', function() {
-            var acnum = $("#acnum").val();
-            if (acnum == "" || acnum == null || acnum.trim().length == 0) {
-                $("#cuserror11").html("Required Field");
-            } else {
-                $("#cuserror11").html("");
-            }
-        });
-        $('#reset').on('click', function() {
-            $('.val').html("");
-        });
-        $('#submit').on('click', function() {
-            var i = 0;
-            var mobile_number = $("#number").val();
-            var nfilter = /^(\+91-|\+91|0)?\d{10}$/;
-            if (mobile_number == "") {
-                $("#cuserror4").text("Required Field");
-                m = 1;
-            } else if (!nfilter.test(mobile_number)) {
-                $("#cuserror4").text("Enter Valid Mobile Number");
-                m = 1;
-            } else {
-                $("#cuserror4").text("");
-            }
-            var acnum = $("#acnum").val();
-            if (acnum == "" || acnum == null || acnum.trim().length == 0) {
-                $("#cuserror11").html("Required Field");
-                i = 1;
-            } else {
-                $("#cuserror11").html("");
-            }
-            var name = $("#sales_man_name").val();
-            var filter = /^[a-zA-Z.\s]{3,30}$/;
-            if (name == "" || name == null || name.trim().length == 0) {
-                $("#contact_personerr").html("Required Field");
-                i = 1;
-            } else if (!filter.test(name)) {
-                $("#contact_personerr").html("Alphabets and Min 3 to Max 30 ");
-                i = 1;
-            } else {
-                $("#contact_personerr").html("");
-            }
-            var mail = $('#mail').val();
-            var efilter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-            if (mail == "") {
-                $("#cuserror5").text("MailID is required");
-                i = 1;
-            } else if (mail != "" && !efilter.test(mail)) {
-                $("#cuserror5").text('Enter Valid Email');
-                i = 1;
-            } else {
-                $("#cuserror5").text('');
-            }
-            var address = $('#address').val();
-            if (address == "" || address == null || address.trim().length == 0) {
-                $('#cuserror3').html("Required Field");
-                i = 1;
-            } else {
-                $('#cuserror3').html("");
-            }
-            var ifsc = $('#ifsc').val();
-            var ifscformat = /[A-Z|a-z]{4}[0][a-zA-Z0-9]{6}$/;
-            if (ifsc == "" || ifsc == null || ifsc.trim().length == 0) {
-                $('#ifsc1').html("");
-                i = 1;
-            } else if (ifsc != "" && !ifscformat.test(ifsc)) {
-                $("#ifsc1").text('Enter Valid IFSC Code');
-                i = 1;
-            } else {
-                $("#ifsc1").text('');
-            }
-            var bank = $('#bank').val();
-            if (bank == "" || bank == null || bank.trim().length == 0) {
-                $('#cuserror6').html("Required Field");
-                i = 1;
-            } else {
-                $('#cuserror6').html("");
-            }
-            var branch = $("#branch").val();
-            if (branch == "" || branch == null || branch.trim().length == 0) {
-                $("#cuserror10").html("Required Field");
-                i = 1;
-            } else {
-                $("#cuserror10").html("");
-            }
-            var ifsc = $("#ifsc").val();
-            if (ifsc == "" || ifsc == null || ifsc.trim().length == 0) {
-                $("#ifsc1").html("Required Field");
-                i = 1;
-            } else {
-                $("#ifsc1").html("");
-            }
-            var target_rate = $("#target_rate").val();
-            if (target_rate == "") {
-                $("#cuserror14").html("Required Field");
-                i = 1;
-            }
-            if (target_rate.length != 4) {
-                $("#cuserror14").html("Invalid Format");
-                i = 1;
-            }
-            if (!target_rate.match(/\d{4}/)) {
-                $("#cuserror14").html("Invalid Format");
-                i = 1;
-            }
-            var _thisYear = new Date().getFullYear();
-            if (parseInt(target_rate) > _thisYear || parseInt(target_rate) < 1900) {
-                $("#cuserror14").html("Invalid Format");
-                i = 1;
-            } else {
-                $("#cuserror14").html("");
-            }
-            if (i == 1) {
-                return false;
-            } else {
-                return true;
-            }
-        });
-        $(".email_dup").on('blur', function() {
-            email = $("#mail").val();
-            $.ajax({
-                url: BASE_URL + "masters/sales_man/add_duplicate_email",
-                type: 'get',
-                data: {
-                    value1: email
-                },
-                success: function(result) {
-                    //$("#duplica").html(result);
+                var target_rate = $("#target_rate").val();
+                if (target_rate == "" || target_rate == null || target_rate.trim().length == 0) {
+                    $("#cuserror14").html("Required Field");
+                    i = 1;
                 }
-            });
+                // if (target_rate.length != 4) {
+                //     $("#cuserror14").html("Invalid Format");
+                //     i = 1;
+                // }
+                // if (!target_rate.match(/\d{4}/)) {
+                //     $("#cuserror14").html("Invalid Format");
+                //     i = 1;
+                // }
+                // var _thisYear = new Date().getFullYear();
+                // if (parseInt(target_rate) > _thisYear || parseInt(target_rate) < 1900) {
+                //     $("#cuserror14").html("Invalid Format");
+                //     i = 1;
+                // } else {
+                $("#cuserror14").html("");
+            }
+        }); $("#branch").on('blur', function() {
+        var branch = $("#branch").val();
+        if (branch == "" || branch == null || branch.trim().length == 0) {
+            $("#cuserror10").html("Required Field");
+        } else {
+            $("#cuserror10").html("");
+        }
+    }); $("#acnum").on('blur', function() {
+        var acnum = $("#acnum").val();
+        if (acnum == "" || acnum == null || acnum.trim().length == 0) {
+            $("#cuserror11").html("Required Field");
+        } else {
+            $("#cuserror11").html("");
+        }
+    }); $('#reset').on('click', function() {
+        $('.val').html("");
+    }); $('#submit').on('click', function() {
+        var i = 0;
+        var mobile_number = $("#number").val();
+        var nfilter = /^(\+91-|\+91|0)?\d{10}$/;
+        if (mobile_number == "") {
+            $("#cuserror4").text("Required Field");
+            m = 1;
+        } else if (!nfilter.test(mobile_number)) {
+            $("#cuserror4").text("Enter Valid Mobile Number");
+            m = 1;
+        } else {
+            $("#cuserror4").text("");
+        }
+        var acnum = $("#acnum").val();
+        if (acnum == "" || acnum == null || acnum.trim().length == 0) {
+            $("#cuserror11").html("Required Field");
+            i = 1;
+        } else {
+            $("#cuserror11").html("");
+        }
+        var name = $("#sales_man_name").val();
+        var filter = /^[a-zA-Z.\s]{3,30}$/;
+        if (name == "" || name == null || name.trim().length == 0) {
+            $("#contact_personerr").html("Required Field");
+            i = 1;
+        } else if (!filter.test(name)) {
+            $("#contact_personerr").html("Alphabets and Min 3 to Max 30 ");
+            i = 1;
+        } else {
+            $("#contact_personerr").html("");
+        }
+        var mail = $('#mail').val();
+        var efilter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if (mail == "") {
+            $("#cuserror5").text("MailID is required");
+            i = 1;
+        } else if (mail != "" && !efilter.test(mail)) {
+            $("#cuserror5").text('Enter Valid Email');
+            i = 1;
+        } else {
+            $("#cuserror5").text('');
+        }
+        var address = $('#address').val();
+        if (address == "" || address == null || address.trim().length == 0) {
+            $('#cuserror3').html("Required Field");
+            i = 1;
+        } else {
+            $('#cuserror3').html("");
+        }
+        var ifsc = $('#ifsc').val();
+        var ifscformat = /[A-Z|a-z]{4}[0][a-zA-Z0-9]{6}$/;
+        if (ifsc == "" || ifsc == null || ifsc.trim().length == 0) {
+            $('#ifsc1').html("");
+            i = 1;
+        } else if (ifsc != "" && !ifscformat.test(ifsc)) {
+            $("#ifsc1").text('Enter Valid IFSC Code');
+            i = 1;
+        } else {
+            $("#ifsc1").text('');
+        }
+        var bank = $('#bank').val();
+        if (bank == "" || bank == null || bank.trim().length == 0) {
+            $('#cuserror6').html("Required Field");
+            i = 1;
+        } else {
+            $('#cuserror6').html("");
+        }
+        var branch = $("#branch").val();
+        if (branch == "" || branch == null || branch.trim().length == 0) {
+            $("#cuserror10").html("Required Field");
+            i = 1;
+        } else {
+            $("#cuserror10").html("");
+        }
+        var ifsc = $("#ifsc").val();
+        if (ifsc == "" || ifsc == null || ifsc.trim().length == 0) {
+            $("#ifsc1").html("Required Field");
+            i = 1;
+        } else {
+            $("#ifsc1").html("");
+        }
+        // var target_rate = $("#target_rate").val();
+        // if (target_rate == "") {
+        //     $("#cuserror14").html("Required Field");
+        //     i = 1;
+        // }
+        // if (target_rate.length != 4) {
+        //     $("#cuserror14").html("Invalid Format");
+        //     i = 1;
+        // }
+        // if (!target_rate.match(/\d{4}/)) {
+        //     $("#cuserror14").html("Invalid Format");
+        //     i = 1;
+        // }
+        // var _thisYear = new Date().getFullYear();
+        // if (parseInt(target_rate) > _thisYear || parseInt(target_rate) < 1900) {
+        //     $("#cuserror14").html("Invalid Format");
+        //     i = 1;
+        // } else {
+        //     $("#cuserror14").html("");
+        // }
+        if (i == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }); $(".email_dup").on('blur', function() {
+        email = $("#mail").val();
+        $.ajax({
+            url: BASE_URL + "masters/sales_man/add_duplicate_email",
+            type: 'get',
+            data: {
+                value1: email
+            },
+            success: function(result) {
+                //$("#duplica").html(result);
+            }
         });
+    });
     });
 </script>
 <?php

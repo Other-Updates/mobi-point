@@ -1,19 +1,7 @@
 <?php $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template'); ?>
-<!-- <link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.css"> -->
-<!-- <script src="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.js"></script> -->
-<!-- <script src="<?php echo $theme_path ?>/js/tabs.js"></script> -->
-<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net/js/jquery.dataTables.js"></script> -->
-<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script> -->
-<!-- <link rel="stylesheet" href="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" /> -->
 <link href="<?php echo $theme_path ?>/css/select2.css" rel="stylesheet" />
-<!-- <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/fixedHeader.dataTables.min.css" /> -->
-<!-- <script src="<?php echo $theme_path ?>/js/select2.min.js"></script> -->
-<!-- <script type='text/javascript' src='<?php echo $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js'></script> -->
-<!-- <link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" /> -->
-<!-- <script src="<?php echo $theme_path ?>/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script> -->
 <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js/sweetalert.css">
 <script src="<?php echo $theme_path; ?>/js/sweetalert.min.js" type="text/javascript"></script>
-
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
@@ -28,7 +16,7 @@
                     </li>
                 </ul>
                 <div class="tab-content tab-content-solid">
-                    <div role="tabpanel" aria-labelledby="tab-6-1" class="tab-pane fade show active" id="sub_category-details">
+                    <div role="tabpanel" aria-labelledby="tab-6-1" class="tab-pane fade show active in" id="sub_category-details">
                         <div class="table-responsive">
                             <table id="categoryTable" class="table-striped table responsive dataTable no-footer dtr-inline">
                                 <thead>
@@ -87,9 +75,9 @@
                                     <div class="form-group">
                                         <label class="col-sm-12 col-form-label"><?php echo $language['category']; ?> <span style="color:#F00; font-style:oblique;">*</span></label>
                                         <div class="col-sm-12">
-                                            <div class="">
+                                            <div>
                                                 <select name="category" class="form-control required" id="category_add">
-                                                    <option value=""><?php echo $language['select']; ?></option>
+                                                    <option><?php echo $language['select']; ?></option>
                                                     <?php
                                                     if (isset($category_list) && !empty($category_list)) {
                                                         foreach ($category_list as $cat_list) {

@@ -1,16 +1,8 @@
 <?php $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template'); ?>
-<!-- <link rel="stylesheet" href="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.css"> -->
-<!-- <script src="<?php echo $theme_path ?>/node_modules/pwstabs/assets/jquery.pwstabs.min.js"></script> -->
-<!-- <script src="<?php echo $theme_path ?>/js/tabs.js"></script>/ -->
-<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net/js/jquery.dataTables.js"></script> -->
-<!-- <script src="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script> -->
-<!-- <link rel="stylesheet" href="<?php echo $theme_path; ?>/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" /> -->
 <link href="<?php echo $theme_path ?>/css/select2.css" rel="stylesheet" />
-<!-- <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/fixedHeader.dataTables.min.css" /> -->
-<script src="<?php echo $theme_path ?>/js/select2.min.js"></script>
-<!-- <script type='text/javascript' src='<?php echo $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js'></script> -->
-<!-- <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js/sweetalert.css"> -->
+<link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js/sweetalert.css">
 <script src="<?php echo $theme_path; ?>/js/sweetalert.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo $theme_path; ?>/plugin/datatables/js/jquery.dataTables.min.js"></script>
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
@@ -27,28 +19,34 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content tab-content-solid">
-                    <div role="tabpanel" aria-labelledby="tab-6-1" class="tab-pane fade show active" id="category-details">
+                    <div role="tabpanel" aria-labelledby="tab-6-1" class="tab-pane fade show active in" id="category-details">
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
                                     <table id="categorytable" class="table-striped table responsive dataTable no-footer dtr-inline">
                                         <thead>
                                             <tr>
-                                                <th>S.No</th>
-                                                <th>Category</th>
-                                                <th class="action-btn-align">Action</th>
+                                                <th><?php echo $language['s_no'] ?></th>
+                                                <th><?php echo $language['category'] ?></th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+
+
                                             <?php
+                                            // echo "<pre>";
+                                            // print_r($category_list);
+                                            // exit;
                                             if (isset($category_list) && !empty($category_list)) {
+
                                                 $i = 1;
                                                 foreach ($category_list as $list) {
                                             ?>
                                                     <tr class="category<?php echo $list['id']; ?>">
                                                         <td class="first_td"><?php echo $i; ?></td>
                                                         <td><?php echo ucfirst($list['category']); ?></td>
-                                                        <td class="action-btn-align">
+                                                        <td>
                                                             <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_category', 'edit')) : ?><?php echo $this->config->item('base_url') . 'masters/manage_category/edit/' . $list['id'] ?><?php endif ?>" class="tooltips btn btn-info btn-fw btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'edit')) : ?>alerts<?php endif ?>" title="<?php echo $language['edit']; ?>">
                                                                 <span class="fa fa-edit"></span></a>&nbsp;&nbsp;
                                                             <!--<a href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_category', 'delete')) : ?>#test3_<?php echo $list['id']; ?><?php endif ?>" data-toggle="modal" name="delete" class="tooltips btn btn-danger btn-fw btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'delete')) : ?>alerts<?php endif ?>" title="<?php echo $language['delete']; ?>">
@@ -96,7 +94,7 @@
                                         <label class="col-sm-12 col-form-label">Add category <span style="color:#F00; font-style:oblique;">*</span></label>
                                         <div class="col-sm-12">
                                             <div class="input-group">
-                                                <input type="text" name="category" id="manage_category" class="borderra0 form-control" placeholder="<?php echo $language['enter_category'] ?>" />
+                                                <input type="text" name="category" id="manage_category" class="borderra0 form-control" />
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-user"></i>
                                                 </div>

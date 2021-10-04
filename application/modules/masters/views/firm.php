@@ -115,7 +115,7 @@
                                         <label class="col-sm-4 control-label">Pin Code<span style="color:#F00; font-style:oblique;">*</span></label>
                                         <div class="col-sm-8">
                                             <div class="input-group">
-                                                <input type="text" name="pincode" class=" form-align" id="pin_code" />
+                                                <input type="text" name="pincode" class=" form-align" id="pin_code" maxlength="6" />
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-shopping-cart"></i>
                                                 </div>
