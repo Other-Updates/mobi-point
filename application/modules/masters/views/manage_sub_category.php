@@ -2,23 +2,26 @@
 <link href="<?php echo $theme_path ?>/css/select2.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js/sweetalert.css">
 <script src="<?php echo $theme_path; ?>/js/sweetalert.min.js" type="text/javascript"></script>
-<div class="row">
-    <div class="col-md-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Expense Sub Category Details</h4>
-                <ul class="nav nav-tabs tab-solid  tab-solid-primary" role="tablist">
-                    <li class="nav-item">
+
+<div class="">
+    <div class="contentpanel mb-50">
+        <div class="media mt--2">
+            <h4>Expense Sub Category Details</h4>
+        </div>
+        <div class="panel-body">
+            <div class="tabs">
+                <ul class="list-inline tabs-nav tabsize-17" role="tablist">
+                    <li role="presentation" class="active">
                         <a class="nav-link active" id="tab-6-1" href="#sub_category-details" aria-controls="home-6-1" role="tab" data-toggle="tab" aria-selected="true"><i class="mdi mdi-table-large"></i>Expense SubCategory List</a>
                     </li>
-                    <li class="nav-item">
+                    <li role="presentation">
                         <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_sub_category', 'add')) : ?>#sub_category<?php endif ?>" aria-controls="profile-6-2" role="tab" aria-selected="false" class="nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_sub_category ', 'add')) : ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i><?php echo $language['add_new'] ?></a>
                     </li>
                 </ul>
-                <div class="tab-content tab-content-solid">
-                    <div role="tabpanel" aria-labelledby="tab-6-1" class="tab-pane fade show active in" id="sub_category-details">
+                <div class="tab-content">
+                    <div role="tabpanel" aria-labelledby="tab-6-1" class="tab-pane active in" id="sub_category-details">
                         <div class="table-responsive">
-                            <table id="categoryTable" class="table-striped table responsive dataTable no-footer dtr-inline">
+                            <table id="categoryTable" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline">
                                 <thead>
                                     <tr>
                                         <th><?php echo $language['s_no'] ?></th>
@@ -68,7 +71,7 @@
                         </div>
 
                     </div>
-                    <div role="tabpanel" aria-labelledby="tab-6-2" class="tab-pane fade" id="sub_category">
+                    <div role="tabpanel" aria-labelledby="tab-6-2" class="tab-pane" id="sub_category">
                         <form action="<?php echo $this->config->item('base_url'); ?>masters/manage_sub_category/insert_sub_category " name="form" method="post">
                             <div class="row">
                                 <div class="col-md-6">

@@ -3,27 +3,29 @@
 <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/js/sweetalert.css">
 <script src="<?php echo $theme_path; ?>/js/sweetalert.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo $theme_path; ?>/plugin/datatables/js/jquery.dataTables.min.js"></script>
-<div class="row">
-    <div class="col-md-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Expense Category Details</h4>
+<div class="">
+    <div class="contentpanel mb-50">
+        <div class="media mt--2">
+            <h4>Expense Category Details</h4>
+        </div>
+        <div class="panel-body">
+            <div class="tabs">
                 <!-- Nav tabs -->
-                <ul class="nav nav-tabs tab-solid  tab-solid-primary" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="tab-6-1" data-toggle="tab" href="#category-details" role="tab" aria-controls="home-6-1" aria-selected="true"><i class="mdi mdi-table-large"></i>Expense Category List</a>
+                <ul class="list-inline tabs-nav tabsize-17" role="tablist">
+                    <li role="presentation" class="active">
+                        <a id="tab-6-1" data-toggle="tab" href="#category-details" role="tab" aria-controls="home-6-1" aria-selected="true"><i class="mdi mdi-table-large"></i>Expense Category List</a>
                     </li>
-                    <li class="nav-item">
+                    <li role="presentation">
                         <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>#addcategory<?php endif ?>" role="tab" aria-controls="profile-6-2" aria-selected="false" class="nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i><?php echo $language['add_new'] ?></a>
                     </li>
                 </ul>
                 <!-- Tab panes -->
-                <div class="tab-content tab-content-solid">
-                    <div role="tabpanel" aria-labelledby="tab-6-1" class="tab-pane fade show active in" id="category-details">
-                        <div class="row">
-                            <div class="col-12">
+                <div class="tab-content">
+                    <div role="tabpanel" aria-labelledby="tab-6-1" class="tab-pane active in" id="category-details">
+                        <div class="">
+                            <div class="">
                                 <div class="table-responsive">
-                                    <table id="categorytable" class="table-striped table responsive dataTable no-footer dtr-inline">
+                                    <table id="categorytable" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline">
                                         <thead>
                                             <tr>
                                                 <th><?php echo $language['s_no'] ?></th>
@@ -72,7 +74,7 @@
                             <div id="view"></div>
                         </div>
                     </div>
-                    <div role="tabpanel" aria-labelledby="tab-6-2" class="tab-pane fade" id="addcategory">
+                    <div role="tabpanel" aria-labelledby="tab-6-2" class="tab-pane" id="addcategory">
                         <form name="myform" method="post" action="<?php echo $this->config->item('base_url'); ?>masters/manage_category/add/">
                             <div class="row">
                                 <div class="col-md-6">

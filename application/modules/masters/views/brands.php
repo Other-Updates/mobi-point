@@ -168,31 +168,32 @@
                     </div>
 
 
-                </div>
-                <div role="tabpanel" class="tab-pane active tablelist" id="brand-details">
-                    <div class="frameset1">
-                        <div id="list">
-                            <div class="">
-                                <table id="brandTable" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align:center;">S.No</th>
-                                            <!-- <th style="text-align:center;">Shop Name</th> -->
-                                            <th style="text-align:center;">Category Name</th>
-                                            <th style="text-align:center;">Model Name</th>
-                                            <th style="text-align:center;">HSN Number</th>
-                                            <th style="text-align:center;">GST</th>
-                                            <th class="action-btn-align" style="text-align:center;">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                
+                    <div role="tabpanel" class="tab-pane active tablelist" id="brand-details">
+                        <div class="frameset1">
+                            <div id="list">
+                                <div class="">
+                                    <table id="brandTable" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align:center;">S.No</th>
+                                                <!-- <th style="text-align:center;">Shop Name</th> -->
+                                                <th style="text-align:center;">Category Name</th>
+                                                <th style="text-align:center;">Model Name</th>
+                                                <th style="text-align:center;">HSN Number</th>
+                                                <th style="text-align:center;">GST</th>
+                                                <th class="action-btn-align" style="text-align:center;">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel-body action-btn-align">
-                        <button type="button" class="btn btn-primary add_bluk_import"><i class="icon-plus-circle2 position-left"></i> Import Models</button>
+                        <div class="panel-body action-btn-align">
+                            <button type="button" class="btn btn-primary add_bluk_import"><i class="icon-plus-circle2 position-left"></i> Import Models</button>
+                        </div>
                     </div>
                 </div>
             </div>
