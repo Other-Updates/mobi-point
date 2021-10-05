@@ -431,13 +431,14 @@ class Sales_return extends MX_Controller
             $search_arr = array();
         }
         $list = $this->sales_return_model->get_datatables($search_arr);
-        //        echo '<pre>';
-        //        print_r($list);
-        //        die;
+        // echo '<pre>';
+        // print_r($list);
+        // exit;
         $data = array();
         $no = $_POST['start'];
 
         foreach ($list as $val) {
+
             $quotation = $this->sales_return_model->get_all_invoice_by_id($val['id']);
             $quotation_details = $this->sales_return_model->get_all_sr_details_by_id($val['id']);
             $cgst = 0;
@@ -525,6 +526,9 @@ class Sales_return extends MX_Controller
                 $data[] = $row;
             }
         }
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->sales_return_model->count_all(),

@@ -146,11 +146,11 @@ if (!empty($customers)) {
 
 
 
-            
+
                 <td class="action-btn-align s_no"></td>
 
                 <td>
-                <input type="hidden" id="catname" class="catname" name ="catname" value=""/>
+                    <input type="hidden" id="catname" class="catname" name="catname" value="" />
                     <select id='cat_id' tabindex="-1" class='form-align cat_id static_style class_req form-control' style="width:100%" name='categoty[]'>
 
                         <option value="">Select</option>
@@ -295,8 +295,8 @@ if (!empty($customers)) {
 
                 <td style="text-align: center;">
 
-                     <input type="text" tabindex="-1" name='sale_cost[]' style="width:70px;" class="sales_price salecost " id="price" />
-                </td>	
+                    <input type="text" tabindex="-1" name='sale_cost[]' style="width:70px;" class="sales_price salecost " id="price" />
+                </td>
 
                 <!-- <td class="action-btn-align">
 
@@ -364,7 +364,7 @@ if (!empty($customers)) {
 
 
 
-                <a id='delete_group' class="btn btn-danger delete_group"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a id='delete_group' class="btn btn-danger delete_group"><span class="glyphicon glyphicon-trash"></span></a>
 
                 </td>
 
@@ -377,7 +377,7 @@ if (!empty($customers)) {
             foreach ($po as $val) {
         ?>
                 <form method="post" class="panel-body" id="po_edit_form">
-                
+
                     <div class="row">
                         <div class="col-md-4">
 
@@ -587,7 +587,7 @@ if (!empty($customers)) {
                                                 <?php echo $i; ?>
                                             </td>
                                             <td>
-                                            <input type="hidden" id="catname" class="catname" name ="catname" value="<?php echo $vals['categoryName'] ?>"/>
+                                                <input type="hidden" id="catname" class="catname" name="catname" value="<?php echo $vals['categoryName'] ?>" />
                                                 <select id='cat_id' class='form-control cat_id static_style class_req required' name='categoty[]' style="width:100%">
                                                     <option value="">Select</option>
                                                     <?php
@@ -674,7 +674,7 @@ if (!empty($customers)) {
 
                                             <td style="text-align: center;">
                                                 <input type="text" tabindex="1" name='sale_cost[]' style="width:70px;" class="sales_price salecost required" value="<?php echo $vals['sale_cost']; ?>" />
-											</td>	
+                                            </td>
 
                                             <!--<td class="action-btn-align">
                                         <input type="text"   tabindex="1"  style="width:70px;" class="gross"   />
@@ -708,7 +708,7 @@ if (!empty($customers)) {
                                             <td>
                                                 <input type="text" style="width:70px;" name='sub_total[]' readonly="readonly" class="subtotal text_right" value="<?php echo $vals['price_with_gst']; ?>" />
                                             </td>
-                                            <td class="action-btn-align"><a id='delete_group' class="btn btn-danger delete_group"><span class="glyphicon glyphicon-trash"></span></a></td>
+                                            <!-- <td class="action-btn-align"><a id='delete_group' class="btn btn-danger delete_group"><span class="glyphicon glyphicon-trash"></span></a></td> -->
                                         </tr>
                                 <?php
                                         $i++;
@@ -751,7 +751,7 @@ if (!empty($customers)) {
                                     <td><input type="text"  name="po[net_total]"  readonly="readonly"  tabindex="-1" class="final_amt text_right" style="width:70px;" value="<?php echo $val['net_total']; ?>" /></td>
                                     <td></td>
                                 </tr>-->
-                                <?php //echo "<pre>";print_r($val);exit;  
+                                <?php //echo "<pre>";print_r($val);exit;
                                 ?>
                                 <tr>
 
@@ -890,16 +890,16 @@ if (!empty($customers)) {
         });
         $('.required').each(function() {
 
-                this_val = $.trim($(this).val());
+            this_val = $.trim($(this).val());
 
-                this_id = $(this).attr("id");
+            this_id = $(this).attr("id");
 
-                this_class = $(this).attr("class");
+            this_class = $(this).attr("class");
 
-                cat_name =  $(this).closest('tr').find('.catname').val();
+            cat_name = $(this).closest('tr').find('.catname').val();
 
 
-                if (this_val == "" || ($(this).hasClass('qty') && this_val == 0) && ($(this).closest('table').hasClass('static')== false)) {
+            if (this_val == "" || ($(this).hasClass('qty') && this_val == 0) && ($(this).closest('table').hasClass('static') == false)) {
                 if (this_id == "ime_code_value") {
                     this_class = $(this).closest('div').attr('class');
                     if (cat_name == "Fresh Mobiles" || cat_name == "Used Mobiles") {
@@ -908,32 +908,31 @@ if (!empty($customers)) {
                     } else {
                         $(this).closest('td.ime_code_error').find('.error_msg').text('');
                     }
-                }
-                 else {
-
-                        $(this).closest('tr td').find('.error_msg').text('This field is required').css('display', 'inline-block');
-
-                        $(this).closest('div .form-group').find('.error_msg').text('This field is required').css('display', 'inline-block');
-
-                        m++;
-                    }
                 } else {
 
-                    $(this).closest('tr td').find('.error_msg').text('');
+                    $(this).closest('tr td').find('.error_msg').text('This field is required').css('display', 'inline-block');
 
-                    $(this).closest('div .form-group').find('.error_msg').text('');
+                    $(this).closest('div .form-group').find('.error_msg').text('This field is required').css('display', 'inline-block');
 
+                    m++;
                 }
-            });
-
-            $('input.required.qty').each(function(){
-           
-           if($(this).val() <= 0 && ($(this).closest('table').hasClass('static')== false)){
-           
-                $(this).closest('td.ime_code_error').find('.error_msg').text('Invalid Qty').css('display', 'inline-block');
-                 m++;
             } else {
-                if(m <= '0')
+
+                $(this).closest('tr td').find('.error_msg').text('');
+
+                $(this).closest('div .form-group').find('.error_msg').text('');
+
+            }
+        });
+
+        $('input.required.qty').each(function() {
+
+            if ($(this).val() <= 0 && ($(this).closest('table').hasClass('static') == false)) {
+
+                $(this).closest('td.ime_code_error').find('.error_msg').text('Invalid Qty').css('display', 'inline-block');
+                m++;
+            } else {
+                if (m <= '0')
                     $(this).closest('td.ime_code_error').find('.error_msg').text('');
             }
         });
@@ -968,7 +967,7 @@ if (!empty($customers)) {
         } else {
             $("#duplica_err").html('');
         }
-        
+
         if (m > 0) {
             $('html, body').animate({
                 scrollTop: ($('.error_msg:visible').offset().top - 60)
@@ -1406,7 +1405,7 @@ if (!empty($customers)) {
     });
 
 
-    $(document).on('click','.delete_group',function() {
+    $(document).on('click', '.delete_group', function() {
         $(this).closest("tr").remove();
         calculate_function();
 
@@ -1427,7 +1426,7 @@ if (!empty($customers)) {
         console.log(full_total);
     });
 
-    $(document).on('keyup','.qty',function() {
+    $(document).on('keyup', '.qty', function() {
         var qty = $(this).val();
 
         if (qty % 1 === 0) {
@@ -1443,7 +1442,7 @@ if (!empty($customers)) {
 
     });
 
-    $(document).on('keyup','.percost,.salecost,.pertax,.totaltax,.gst,.igst,.discount,.transport',function() {
+    $(document).on('keyup', '.percost,.salecost,.pertax,.totaltax,.gst,.igst,.discount,.transport', function() {
 
         calculate_function();
 
@@ -1607,7 +1606,7 @@ if (!empty($customers)) {
                         type: 'POST',
                         data: {
                             firm_id: cat_id,
-                            category_id:category_id,
+                            category_id: category_id,
                             pro: val,
                             sale_type: 'purchase'
                         },
@@ -1961,10 +1960,10 @@ if (!empty($customers)) {
         formHasChanged = true;
     });
 
-    $(document).on('change','.cat_id',function(){
-            $(this).closest('td').find('.catname').val($(this).find('option:selected').text());
-            
-    });  
+    $(document).on('change', '.cat_id', function() {
+        $(this).closest('td').find('.catname').val($(this).find('option:selected').text());
+
+    });
 
     $("#pr_no").blur(function() {
 

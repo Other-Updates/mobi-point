@@ -28,6 +28,7 @@ class Project_cost_model extends CI_Model
     private $erp_po_details = 'erp_po_details';
     private $erp_email_settings = 'erp_email_settings';
     private $receipt_bill = 'receipt_bill';
+    private $print_table = 'erp_invoice_print_details';
     var $joinTable1 = 'customer r';
     var $joinTable2 = 'erp_invoice c';
     var $primaryTable = 'erp_quotation u';
@@ -856,12 +857,15 @@ class Project_cost_model extends CI_Model
         }
         return $query;
     }
-    public function get_all_invoice_details_by_id($id)
+    public function get_all_invoice_details_by_id($id, $inv_detail_ids = NULL)
     {
         $this->db->select('erp_invoice_details.cost_price,erp_category.cat_id,erp_category.categoryName,erp_product.id,erp_product.product_name,erp_brand.id,erp_brand.brands,erp_product.hsn_sac_name,erp_invoice_details.category,erp_invoice_details.product_id,erp_invoice_details.brand,erp_invoice_details.quantity,erp_invoice_details.unit,'
             . 'erp_invoice_details.per_cost,erp_invoice_details.tax,erp_invoice_details.gst,erp_invoice_details.sub_total,erp_product.model_no,erp_product.product_image,erp_invoice_details.discount,erp_invoice_details.igst,'
             . 'erp_invoice_details.product_description,erp_invoice_details.id,erp_product.hsn_sac,erp_product.sales_price_without_gst,erp_invoice_details.sp_with_gst,erp_invoice_details.money_transfer');
         $this->db->where('erp_invoice_details.in_id', intval($id));
+        if ($inv_detail_ids != NULL) {
+            $this->db->where_in('erp_invoice_details.id', $inv_detail_ids);
+        }
         $this->db->join('erp_quotation', 'erp_quotation.id=erp_invoice_details.q_id', 'LEFT');
         $this->db->join('erp_product', 'erp_product.id=erp_invoice_details.product_id');
         $this->db->join('erp_category', 'erp_category.cat_id=erp_product.category_id', 'left');
@@ -2329,6 +2333,29 @@ class Project_cost_model extends CI_Model
             $query['inv_all_details'] = $inv_all_details;
         }
         return $query;
+    }
+    public function add_print_view_details($data)
+    {
+
+        if ($this->db->insert_batch($this->print_table, $data)) {
+
+            return true;
+        }
+
+        return false;
+    }
+    public function get_print_details($current_fields)
+    {
+        $this->db->select('inv_id,group_concat(inv_detail_id) as inv_detail_id', false);
+        $this->db->where('print_current_fields', $current_fields);
+        $this->db->group_by('inv_id');
+        $query = $this->db->get($this->print_table)->row_array();
+
+        if (!empty($query)) {
+            return $query;
+        }
+
+        return false;
     }
     // function update_product_from_invice($product_id,$costprice,$sale_price){
     //     $this->db->where('erp_product', $product_id);

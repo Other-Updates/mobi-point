@@ -72,7 +72,7 @@ class Sales extends MX_Controller
             'sales/get_ime_code_from_productqty' => 'no_restriction',
             'sales/get_customer_by_firm' => 'no_restriction',
             'sales/get_product_by_id' => 'no_restriction',
-            ''
+            'sales/add_print_view' => 'no_restriction',
         );
         if (!$this->user_auth->is_permission_allowed($access_arr, $main_module)) {
             redirect($this->config->item('base_url'));
@@ -483,24 +483,20 @@ class Sales extends MX_Controller
         $this->template->write_view('content', 'invoice_views', $datas);
         $this->template->render();
     }
-    public function print_view()
+    public function print_view($current_fields)
     {
-        $data = $this->input->post();
-        // echo "<pre>";
-        // print_r($data);
-        // exit;
-        $datas["quotation"] = $quotation = $this->project_cost_model->get_all_invoice_by_id();
+        $print_details = $this->project_cost_model->get_print_details($current_fields);
+        $id = $print_details['inv_id'];
+        $inv_detail_ids = explode(',', $print_details['inv_detail_id']);
+        $datas["quotation"] = $quotation = $this->project_cost_model->get_all_invoice_by_id($id);
         $datas["in_words"] = $this->convert_number($datas["quotation"][0]['net_total']);
-        $datas["quotation_details"] = $quotation_details = $this->project_cost_model->get_all_invoice_details_by_id();
+        $datas["quotation_details"] = $quotation_details = $this->project_cost_model->get_all_invoice_details_by_id($id, $inv_detail_ids);
         $datas["category"] = $category = $this->categories_model->get_all_category();
         $datas['company_details'] = $this->admin_model->get_company_details();
-        $datas["products"] = $this->gen_model->get_all_print_product_by_id();
         $datas["brand"] = $brand = $this->brand_model->get_brand();
-        $datas['all_supplier'] = $this->project_cost_model->get_all_customer();
-        // $datas["user_info"] = $this->user_auth->get_from_session('user_info');
-        $datas['company_details'] = $this->project_cost_model->get_company_details_by_firm();
-        // $datas['ime_code_details']=$this->project_cost_model->get_sales_ime_details($id);
-        //  echo "<pre>";print_r($datas);exit;
+        $datas["user_info"] = $this->user_auth->get_from_session('user_info');
+        $datas['company_details'] = $this->project_cost_model->get_company_details_by_firm($id);
+
         $this->template->write_view('content', 'print_view', $datas);
         $this->template->render();
     }
@@ -2875,5 +2871,24 @@ class Sales extends MX_Controller
             }
         }
         return $data;
+    }
+
+    function add_print_view()
+    {
+        $post_data = $this->input->post();
+        if (!empty($post_data)) {
+            $print_data = [];
+            $current_fields = time();
+            foreach ($post_data['inv_detail_id'] as $inv_detail_id) {
+                $insert_data = array();
+                $insert_data['inv_id'] = $post_data['inv_id'];
+                $insert_data['inv_detail_id'] = $inv_detail_id;
+                $insert_data['print_current_fields'] = $current_fields;
+                $print_data[] = $insert_data;
+            }
+            $this->project_cost_model->add_print_view_details($print_data);
+            echo $current_fields;
+            exit;
+        }
     }
 }

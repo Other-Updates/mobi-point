@@ -163,7 +163,7 @@
                                     <td width="2%" class="first_td1">S.No</td>
                                     <td width="10%" class="first_td1">Category</td>
                                     <td width="10%" class="first_td1">Product Name</td>
-                                    <td width="10%" class="first_td1">Brand</td>
+                                    <!-- <td width="10%" class="first_td1">Brand</td> -->
                                     <td width="5%" class="first_td1">Unit</td>
                                     <!--<td width="10%" class="first_td1">Product Description</td>-->
                                     <td width="8%" class="first_td1 action-btn-align">QTY</td>
@@ -232,10 +232,10 @@
                                             <td class="action-btn-align">
                                                 <input type="text" tabindex="1" name='unit[]' style="width:70px;" class="unit" value="<?php echo $vals['unit']; ?>" readonly="readonly" />
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <input type="hidden" name='brand[]' readonly="" value='<?php echo $vals['id'] ?>'>
                                                 <input type="text" tabindex="-1" class=" form-align" readonly="" value='<?php echo $vals['brands'] ?>'>
-                                            </td>
+                                            </td> -->
                                             <!--                                        <td>
                                                 <textarea  name="product_description[]" id="product_description" class='form-align auto_customer tabwid product_description' readonly="readonly" />  <?php echo $vals['product_description']; ?></textarea>
                                             </td>-->
@@ -296,15 +296,15 @@
                             <tbody>
                                 <td colspan="5" style="width:70px; text-align:right;">Total</td>
                                 <td><input type="text" name="po[total_qty]" readonly="readonly" value="<?php echo $val['total_qty']; ?>" class="total_qty" style="width:70px; margin-left:17px;" id="total" /></td>
-                                <td colspan="3" style="text-align:right;">Sub Total</td>
+                                <td colspan="2" style="text-align:right;">Sub Total</td>
                                 <td><input type="text" name="po[subtotal_qty]" readonly="readonly" value="<?php echo $val['subtotal_qty']; ?>" class="final_sub_total text_right" style="width:70px;" /><input type="hidden" class="temp_sub_total" value="" /></td>
                             </tbody>
                             <tbody>
-                                <td colspan="9" style="text-align:right;">Advance Amount</td>
+                                <td colspan="8" style="text-align:right;">Advance Amount</td>
                                 <td><input type="text" name="advance" readonly="readonly" value="<?php echo (!empty($val['advance'])) ? $val['advance'] : 0; ?>" class="advance text_right" style="width:70px;" /></td>
                             </tbody>
                             <tbody class="addtional">
-                                <td colspan="9" style="text-align:right;">Round Off ( - )<br>
+                                <td colspan="8" style="text-align:right;">Round Off ( - )<br>
                                 </td>
                                 <td><input type="text" name="po[round_off]" value="<?php echo $val['round_off']; ?>" class="round_off text_right" style="width:70px;" readonly />
                                 </td>
@@ -317,7 +317,7 @@
                                 if ($gst_type != '') {
                                     if ($gst_type == 31) {
                                 ?>
-                                        <td colspan="4" style="text-align:right;">SGST:</td>
+                                        <td colspan="3" style="text-align:right;">SGST:</td>
                                     <?php } else { ?>
                                         <td colspan="4" style="text-align:right;">IGST:</td>
                                 <?php
@@ -329,13 +329,13 @@
                             <tbody class="addtional">
                                 <td colspan="4" style="text-align:right;">Transport Charge</td>
                                 <td><input type="text" name="po[transport]" value="<?php echo $po[0]['transport']; ?>" class="transport text_right" style="width:70px;" readonly="" /></td>
-                                <td colspan="4" style="text-align:right;">Labour Charge</td>
+                                <td colspan="3" style="text-align:right;">Labour Charge</td>
                                 <td><input type="text" name="po[labour]" value="<?php echo $po[0]['labour']; ?>" class="labour text_right" style="width:70px;" readonly="" /></td>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="4" style="width:70px; text-align:right;"></td>
-                                    <td colspan="5" style="text-align:right;font-weight:bold;">Net Total</td>
+                                    <td colspan="4" style="text-align:right;font-weight:bold;">Net Total</td>
                                     <td><input type="text" name="po[net_total]" readonly="readonly" class="final_amt text_right" style="width:70px;" value="" /></td>
                                 </tr>
                                 <tr>

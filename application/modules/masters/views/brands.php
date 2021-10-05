@@ -168,7 +168,7 @@
                     </div>
 
 
-                
+
                     <div role="tabpanel" class="tab-pane active tablelist" id="brand-details">
                         <div class="frameset1">
                             <div id="list">

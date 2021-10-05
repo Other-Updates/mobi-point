@@ -288,12 +288,12 @@ if (!empty($customers)) {
                     </tr>
                 </table>
                 <br>
-                <form action="<?php echo $this->config->item('base_url'); ?>sales/print_view" enctype="multipart/form-data" target="_blank" name="form" method="post">
+                <form action="javascript:" enctype="multipart/form-data" id="invoice_form" method="post">
                     <div style="text-align:center">
-                        <button class="btn btn-defaultprint6 print_gst"><span class="glyphicon glyphicon-print"> </span> GST Print</button>
-                        <button class="btn btn-defaultprint6 print_gst"><span class="glyphicon glyphicon-print"></span> NO GST Print </button>
+                        <button class="btn btn-defaultprint6 print_gst" data-type="gst"><span class="glyphicon glyphicon-print"> </span> GST Print</button>
+                        <button class="btn btn-defaultprint6 print_gst" data-type="no_gst"><span class="glyphicon glyphicon-print"></span> NO GST Print </button>
                     </div>
-
+                    <input type="hidden" id="invoice_id" name="inv_id" value=<?php echo $val['id'] ?> />
                     <table class="table table-striped table-bordered responsive print_bgclr m-b-0" id="add_quotation" cellpadding="0" cellspacing="0">
                         <thead style="color:white !important;">
                             <tr style="text-align:center; color:white !important;">
@@ -339,7 +339,7 @@ if (!empty($customers)) {
                             ?>
                                     <tr style="border-bottom:1px solid black;">
                                         <td class="action-btn-align">
-                                            <input type="checkbox" id="box" class="box" name="checkbox[]" value=<?php echo $vals['id'] ?> />
+                                            <input type="checkbox" class="box inv_detail_ids" name="inv_detail_id[]" value=<?php echo $vals['id'] ?> />
                                         </td>
 
                                         <td>
@@ -538,6 +538,32 @@ if (isset($quotation_details) && !empty($quotation_details)) {
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
     $(document).ready(function() {
+
+        $(document).on('click', '.print_gst', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            var _this = $(this);
+            var print_type = _this.attr('data-type');
+            var inv_detail_id = [];
+            $('#invoice_form').find('.inv_detail_ids:checked').each(function() {
+                inv_detail_id.push($(this).val());
+            });
+            $.ajax({
+                type: 'POST',
+                data: {
+                    inv_id: $('#invoice_form').find('#invoice_id').val(),
+                    inv_detail_id: inv_detail_id,
+                },
+                url: "<?php echo $this->config->item('base_url'); ?>" +
+                    "sales/add_print_view/",
+                success: function(data) {
+                    if (data) {
+                        location.href = "<?php echo $this->config->item('base_url'); ?>" +
+                            "sales/print_view/" + data;
+                    }
+                }
+            });
+        });
         $('body').on('keydown', 'input#customer_name', function(e) {
             var firm_id = $('#firm').val();
             var c_data = [<?php echo implode(',', $customers_json); ?>];
@@ -840,16 +866,6 @@ if (isset($quotation_details) && !empty($quotation_details)) {
         $('.print_btn').click(function() {
             window.print();
             // ConfirmDialog('Are you sure want to Print invoice ?');
-        });
-        $('.print_gst').click(function() {
-            // if ($('[type="checkbox"]').is(":checked")) {
-            //     window.print();
-
-            // } else {
-
-            // }
-
-
         });
         $('.print_nogst').click(function() {
             // if ($('[type="checkbox"]').is(":checked")) {

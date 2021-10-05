@@ -243,9 +243,9 @@ class Stock_model extends CI_Model
         //exit;
         return $query->result();
     }
-    function count_filtered()
+    function count_filtered($search_arr)
     {
-        $this->_get_datatables_query();
+        $this->_get_datatables_query($search_arr);
         $query = $this->db->get();
         return $query->num_rows();
     }
