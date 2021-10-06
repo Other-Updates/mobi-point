@@ -209,7 +209,7 @@ class Stock extends MX_Controller
 
         $search_arr['category'] = $search_data['category'];
         $search_arr['product'] = $search_data['product'];
-        $search_arr['brands'] = $search_data['brands'];
+        $search_arr['brand'] = $search_data['brand'];
         $search_arr['length'] = $search_data['length'];
         $search_arr['start'] = $search_data['start'];
         $custom_col = 'stock_report';

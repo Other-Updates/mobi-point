@@ -1267,6 +1267,16 @@ class Report extends MX_Controller
     function gst_report_ajaxList()
     {
         $search_data = $this->input->post();
+        $search_arr = array();
+        $search_data['from_date'] = $search_data['from_date'];
+        $search_data['to_date'] = $search_data['to_date'];
+        // $search_arr['inv_id'] = $search_data['inv_id'];
+        $search_data['cust_type'] = $search_data['cust_type'];
+        // $search_data['product'] = $search_data['product'];
+        $search_data['gst'] = $search_data['gst'];
+        if (empty($search_arr)) {
+            $search_arr = array();
+        }
         $list = $this->report_model->get_gst_datatables($search_data);
         $list_array = array();
         foreach ($list as $value) {

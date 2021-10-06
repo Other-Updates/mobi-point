@@ -80,10 +80,11 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 <div class="form-group">
                     <label class="control-label">Customer Type</label>
                     <select id='cust_type' class="form-control">
-                        <option>Select</option>
+                        <option value="">Select</option>
                         <?php
                         if (isset($all_supplier) && !empty($all_supplier)) {
                             foreach ($all_supplier as $val) {
+                                print_r($val);
                         ?>
                                 <option value='<?= $val['id'] ?>'><?= $val['store_name'] ?></option>
                         <?php
@@ -263,91 +264,91 @@ $data['company_details'] = $this->admin_model->get_company_details();
             selectFirst: false
         });
     });
-    $('#search').on('click', function() {
-        /*var table = $('#basicTable_call_back').DataTable();
-         table.destroy();
-         $('#basicTable_call_back').DataTable({
-         processing: true,
-         serverSide: true,
-         "ajax": {
-         "url": BASE_URL + "report/gst_report_ajaxList/",
-         type: 'POST',
-         cache: false,
-         data: {
-         firm_id: $('#firm_id').val(),
-         cust_type: $('#cust_type').val(),
-         from_date: $('#from_date').val(),
-         to_date: $('#to_date').val(),
-         gst: $('#gst_sales_report').val(),
-         },
-         },
-         "columnDefs": [
-         {
-         "targets": [0, 11], //first column / numbering column
-         "orderable": false, //set not orderable
-         },
-         ],
-         "columnDefs": [
-         {
-         "targets": [0, 11], //first column / numbering column
-         "orderable": false, //set not orderable
-         },
-         ],
-         "footerCallback": function (row, data, start, end, display) {
-         var api = this.api(), data;
-         // Remove the formatting to get integer data for summation
-         var intVal = function (i) {
-         return typeof i === 'string' ?
-         i.replace(/[\$,]/g, '') * 1 :
-         typeof i === 'number' ?
-         i : 0;
-         };
-         // Total over all pages
-         var cols = [6, 7, 8, 9, 10];
-         for (x in cols) {
-         total = api.column(cols[x]).data().reduce(function (a, b) {
-         return intVal(a) + intVal(b);
-         }, 0);
-         // Total over this page
-         pageTotal = api.column(cols[x], {page: 'current'}).data().reduce(function (a, b) {
-         return intVal(a) + intVal(b);
-         }, 0);
-         // Update footer
-         if (Math.floor(pageTotal) == pageTotal && $.isNumeric(pageTotal)) {
-         pageTotal = pageTotal;
-         } else {
-         pageTotal = pageTotal.toFixed(2); /* float */
-        /*}
-         $(api.column(cols[x]).footer()).html(pageTotal);
-         }
-         },
-         responsive: true,
-         columnDefs: [
-         {responsivePriority: 1, targets: 0},
-         {responsivePriority: 2, targets: -2}
-         ]
-         });*/
-        //alert($('#gst_sales_report').val());
-        for_loading();
-        $.ajax({
-            url: BASE_URL + "report/invoice_gst_search_result",
-            type: 'GET',
-            cache: false,
-            data: {
-                // firm_id: $('#firm_id').val(),
-                cust_type: $('#cust_type').val(),
-                from_date: $('#from_date').val(),
-                to_date: $('#to_date').val(),
-                gst: $('#gst_sales_report').val(),
-            },
-            success: function(result) {
-                for_response();
-                $('.result_div').html('');
-                $('.result_div').html(result);
-                data_tab_init();
-            }
-        });
-    });
+    // $('#search').on('click', function() {
+    //     /*var table = $('#basicTable_call_back').DataTable();
+    //      table.destroy();
+    //      $('#basicTable_call_back').DataTable({
+    //      processing: true,
+    //      serverSide: true,
+    //      "ajax": {
+    //      "url": BASE_URL + "report/gst_report_ajaxList/",
+    //      type: 'POST',
+    //      cache: false,
+    //      data: {
+    //      firm_id: $('#firm_id').val(),
+    //      cust_type: $('#cust_type').val(),
+    //      from_date: $('#from_date').val(),
+    //      to_date: $('#to_date').val(),
+    //      gst: $('#gst_sales_report').val(),
+    //      },
+    //      },
+    //      "columnDefs": [
+    //      {
+    //      "targets": [0, 11], //first column / numbering column
+    //      "orderable": false, //set not orderable
+    //      },
+    //      ],
+    //      "columnDefs": [
+    //      {
+    //      "targets": [0, 11], //first column / numbering column
+    //      "orderable": false, //set not orderable
+    //      },
+    //      ],
+    //      "footerCallback": function (row, data, start, end, display) {
+    //      var api = this.api(), data;
+    //      // Remove the formatting to get integer data for summation
+    //      var intVal = function (i) {
+    //      return typeof i === 'string' ?
+    //      i.replace(/[\$,]/g, '') * 1 :
+    //      typeof i === 'number' ?
+    //      i : 0;
+    //      };
+    //      // Total over all pages
+    //      var cols = [6, 7, 8, 9, 10];
+    //      for (x in cols) {
+    //      total = api.column(cols[x]).data().reduce(function (a, b) {
+    //      return intVal(a) + intVal(b);
+    //      }, 0);
+    //      // Total over this page
+    //      pageTotal = api.column(cols[x], {page: 'current'}).data().reduce(function (a, b) {
+    //      return intVal(a) + intVal(b);
+    //      }, 0);
+    //      // Update footer
+    //      if (Math.floor(pageTotal) == pageTotal && $.isNumeric(pageTotal)) {
+    //      pageTotal = pageTotal;
+    //      } else {
+    //      pageTotal = pageTotal.toFixed(2); /* float */
+    //     /*}
+    //      $(api.column(cols[x]).footer()).html(pageTotal);
+    //      }
+    //      },
+    //      responsive: true,
+    //      columnDefs: [
+    //      {responsivePriority: 1, targets: 0},
+    //      {responsivePriority: 2, targets: -2}
+    //      ]
+    //      });*/
+    //     //alert($('#gst_sales_report').val());
+    //     for_loading();
+    //     $.ajax({
+    //         url: BASE_URL + "report/invoice_gst_search_result",
+    //         type: 'GET',
+    //         cache: false,
+    //         data: {
+    //             // firm_id: $('#firm_id').val(),
+    //             cust_type: $('#cust_type').val(),
+    //             from_date: $('#from_date').val(),
+    //             to_date: $('#to_date').val(),
+    //             gst: $('#gst_sales_report').val(),
+    //         },
+    //         success: function(result) {
+    //             for_response();
+    //             $('.result_div').html('');
+    //             $('.result_div').html(result);
+    //             data_tab_init();
+    //         }
+    //     });
+    // });
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -368,6 +369,13 @@ $data['company_details'] = $this->admin_model->get_company_details();
             "ajax": {
                 "url": "<?php echo site_url('report/gst_report_ajaxList/'); ?>",
                 "type": "POST",
+                "data": function(data) {
+                    // firm_id: $('#firm_id').val(),
+                    data.cust_type = $('#cust_type').val();
+                    data.from_date = $('#from_date').val();
+                    data.to_date = $('#to_date').val();
+                    data.gst = $('#gst_sales_report').val();
+                }
             },
             //Set column definition initialisation properties.
             "columnDefs": [{
@@ -433,6 +441,10 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 }
             ],
         });
+        $('#search').click(function() { //button filter event click
+            table.ajax.reload(); //just reload table
+        });
+
         // new $.fn.dataTable.FixedHeader(table);
         $("#yesin").live("click", function() {
             var hidin = $(this).parent().parent().find('.id').val();

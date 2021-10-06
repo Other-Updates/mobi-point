@@ -140,7 +140,7 @@
                                     <td>Target Rate / Year<span style="color:#F00; font-style:oblique;">*</span></td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="number" name="target_rate" class="store form-control form-align" id="target_rate" />
+                                            <input type="text" name="target_rate" class="store form-control form-align" id="target_rate" />
                                             <div class="input-group-addon">
                                                 <i class="fa fa-bank"></i>
                                             </div>

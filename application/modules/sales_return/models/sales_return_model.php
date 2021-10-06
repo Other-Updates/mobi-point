@@ -279,7 +279,7 @@ class Sales_return_model extends CI_Model
         $this->db->where('erp_invoice.estatus !=', 0);
         $this->db->where("erp_invoice.inv_id !=", 'Wings Invoice');
         $this->db->join('customer', 'customer.id=erp_invoice.customer');
-        $column_order = array(null, 'erp_invoice.inv_id', 'customer.store_name', 'erp_invoice.total_qty', 'erp_invoice.net_total', null, null);
+        $column_order = array(null, 'erp_invoice.inv_id', 'customer.store_name', 'erp_invoice.total_qty', 'erp_invoice.taxable_price', null, null);
         $column_search = array('erp_invoice.inv_id', 'customer.store_name', 'erp_invoice.net_total', 'erp_invoice.total_qty');
         $order = array('erp_invoice.id' => 'DESC');
         $i = 0;

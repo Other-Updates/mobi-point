@@ -1131,9 +1131,9 @@ class Report_model extends CI_Model
                 $this->db->where_in($this->erp_invoice . '.id', implode(',', $serch_data['inv_id']));
             }
             if (!empty($serch_data['cust_type']) && $serch_data['cust_type'] != 'Select') {
-                if ($serch_data['cust_type'] == 1) {
+                if ($serch_data['cust_type'] == 0) {
                     $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
-                } else if ($serch_data['cust_type'] == 2) {
+                } else if ($serch_data['cust_type'] == 3) {
                     $this->db->where($this->customer . '.tin IS NULL');
                 }
             }
@@ -1199,10 +1199,10 @@ class Report_model extends CI_Model
             $this->db->where_in('erp_invoice.firm_id', $frim_id);
         }
         if (!empty($serch_data['cust_type']) && $serch_data['cust_type'] != 'Select') {
-            if ($serch_data['cust_type'] == 1) {
+            if ($serch_data['cust_type'] == 0) {
                 $this->db->where($this->customer . '.tin IS NULL');
                 //                $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
-            } else if ($serch_data['cust_type'] == 2) {
+            } else if ($serch_data['cust_type'] == 3) {
                 $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
                 //                $this->db->where($this->customer . '.tin IS NULL');
             }

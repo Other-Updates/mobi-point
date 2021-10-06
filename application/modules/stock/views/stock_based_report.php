@@ -104,7 +104,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                     <label class="col-sm-4 control-label">Product</label>
                     <div class="col-sm-8 wid100-div">
                         <select id='product' name="product[]" class="form-control multi_select wid100">
-                            <option>Select</option>
+                            <option value="">Select</option>
                             <?php
                             if (isset($product) && !empty($product)) {
                                 foreach ($product as $val) {
@@ -212,6 +212,12 @@ $data['company_details'] = $this->admin_model->get_company_details();
             "ajax": {
                 "url": "<?php echo site_url('stock/ajaxList_report/'); ?>",
                 "type": "POST",
+                "data": function(data) {
+                    // data.firm_id = $('#firm_id').val();
+                    data.category = $('#category').val();
+                    data.product = $('#product').val();
+                    data.brand = $('#brand').val();
+                }
 
                 //"data": {"product": product, "category": $('#category').val(), "inventory": 1}
             },
