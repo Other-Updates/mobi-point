@@ -425,9 +425,18 @@ class Report extends MX_Controller
     }
     public function invoice_gst_search_result()
     {
-        $search_data = $this->input->get();
-        $data['search_data'] = $search_data;
-        $data['quotation'] = $this->project_cost_model->get_gst_invoice($search_data);
+        $serch_data = $this->input->get();
+        $serch_data = array();
+        $serch_data['cust_type'] = $serch_data['cust_type'];
+        $serch_data['from_date'] = $serch_data['from_date'];
+        $serch_data['to_date'] = $serch_data['to_date'];
+        $serch_data['gst'] = $serch_data['gst'];
+        // $serch_arr['firm_id'] = $serch_data['firm_id'];
+        if (empty($serch_data)) {
+            $serch_data = array();
+        }
+        // $data['serch_data'] = $serch_data;
+        $data['quotation'] = $this->project_cost_model->get_gst_invoice($serch_data);
         $list_array = array();
         $this->load->library('session');
         $list = array();
@@ -596,7 +605,7 @@ class Report extends MX_Controller
         $search_arr['from_date'] = $search_data['from_date'];
         //$search_arr['brand'] = $search_data['brand'];
         $search_arr['to_date'] = $search_data['to_date'];
-        $search_arr['firm_id'] = $search_data['firm_id'];
+        // $search_arr['firm_id'] = $search_data['firm_id'];
         //$search_arr['category'] = $search_data['category'];
         if (empty($search_arr)) {
             $search_arr = array();

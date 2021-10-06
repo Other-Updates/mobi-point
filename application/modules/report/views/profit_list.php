@@ -190,7 +190,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         i : 0;
                 };
                 // Total over all pages
-                var cols = [4, 5, 6, 8];
+                var cols = [4, 6, 8];
                 symbol = " ";
                 var numFormat = $.fn.dataTable.render.number('\,', '.', 2, symbol).display;
                 for (x in cols) {
@@ -215,7 +215,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
             },
             //Set column definition initialisation properties.
             "columnDefs": [{
-                "targets": [0, 4], //first column / numbering column
+                "targets": [0, 8], //first column / numbering column
                 "orderable": false, //set not orderable
             }, ],
             responsive: true,

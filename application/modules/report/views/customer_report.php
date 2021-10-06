@@ -146,8 +146,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <?php
                             if (isset($all_supplier) && !empty($all_supplier)) {
                                 foreach ($all_supplier as $val) {
+
                             ?>
-                                    <option value='<?= $val['id'] ?>'><?= $val['store_name'] ?></option>
+                                    <option value='<?= $val['customer'] ?>'><?= $val['store_name'] ?></option>
                             <?php
                                 }
                             }
@@ -357,7 +358,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 "type": "POST",
                 "data": function(data) {
                     data.inv_id = $('#inv_id').val();
-                    data.customer = $('#customer').val();
+                    data.customer = $('#cust_type').val();
                     data.product = $('#product').val();
                     data.sales_man = $('#sales_man').val();
                     data.from_date = $('#from_date').val();

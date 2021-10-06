@@ -33,8 +33,8 @@
                 <td></td>
                 <td class="action-btn-align"></td>
                 <!-- <td class="text_right total-bg"></td> -->
-                <td class="text_right total-bg"></td>
-                <td class="text_right total-bg"></td>
+                <td></td>
+                <td></td>
                 <td class="text_right total-bg"></td>
                 <td class="text_right total-bg"></td>
                 <!--<td></td>-->
@@ -78,13 +78,13 @@
                             <tr>
                                 <td class='first_td action-btn-align'><?= $i ?></td>
                                 <td class="action-btn-align"><?php echo $url ?></td>
-                                <td><?php echo ($val['gstin']) ? $val['gstin'] : ''; ?></td>
+                                <!-- <td><?php echo ($val['gstin']) ? $val['gstin'] : ''; ?></td> -->
                                 <td><?php
                                     echo ($val['store_name']) ? $val['store_name'] : $val['name'];
                                     ?></td>
-                                <td><?php
-                                    echo ($val['tin']) ? $val['tin'] : 'NULL';
-                                    ?></td>
+                                <!-- <td><?php
+                                            echo ($val['tin']) ? $val['tin'] : 'NULL';
+                                            ?></td> -->
                                 <?php
                                 //echo "<pre>";
                                 //print_r($quotation['inv_all_details']);

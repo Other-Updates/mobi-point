@@ -121,11 +121,11 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 <tr>
                     <td width='5%'>S.No</td>
                     <!-- <td width='20%'>Shop</td> -->
-                    <td width='15%'>Category</td>
-                    <td width='5%'>Model</td>
+                    <td width='10%'>Category</td>
+                    <td width='15%'>Model</td>
                     <td width='15%'>Product</td>
 
-                    <td width='10%' class="action-btn-align">Quantity</td>
+                    <td width='5%' class="action-btn-align">Quantity</td>
                     <td width='5%' class="action-btn-align">Shortage Quantity</td>
                     <!--<td width='10%' class="hide_class action-btn-align">Action</td>-->
                 </tr>
@@ -136,11 +136,11 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 <tr>
                     <td width='5%' style="text-align:center;"></td>
                     <!-- <td width='20%'></td> -->
-                    <td width='15%'></td>
-                    <td width='15%'></td>
-                    <td width='5%'></td>
-                    <td width='10%' class="total-bg action-btn-align"></td>
                     <td width='10%'></td>
+                    <td width='15%'></td>
+                    <td width='15%'></td>
+                    <td width='5%' class="total-bg action-btn-align"></td>
+                    <td width='5%'></td>
                 </tr>
             </tfoot>
         </table>
