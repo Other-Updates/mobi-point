@@ -440,13 +440,13 @@ class Purchase_return_model extends CI_Model
         $this->db->select('erp_manage_firms.firm_name');
         $firms = $this->user_auth->get_user_firms();
         $frim_id = array();
-        foreach ($firms as $value) {
-            $frim_id[] = $value['firm_id'];
-        }
-        $this->db->where_in('erp_pr.firm_id', $frim_id);
+        // foreach ($firms as $value) {
+        //     $frim_id[] = $value['firm_id'];
+        // }
+        // $this->db->where_in('erp_pr.firm_id', $frim_id);
         $this->db->where('erp_pr.estatus !=', 0);
         $this->db->where('erp_pr.pr_status =', 'approved');
-        $this->db->join('vendor', 'vendor.id=erp_pr.supplier');
+        $this->db->join('vendor', 'vendor.id=erp_pr.supplier', 'left');
         $this->db->join('erp_manage_firms', 'erp_manage_firms.firm_id=erp_pr.firm_id', 'left');
         $this->db->order_by($this->erp_pr . '.po_id', 'desc');
         $query = $this->db->get('erp_pr')->result_array();

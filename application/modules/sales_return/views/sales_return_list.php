@@ -309,10 +309,10 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 "type": "POST",
             },
             //Set column definition initialisation properties.
-            // "columnDefs": [{
-            //     "targets": [0, 7], //first column / numbering column
-            //     "orderable": false, //set not orderable
-            // }, ],
+            "columnDefs": [{
+                "targets": [0, 7], //first column / numbering column
+                "orderable": false, //set not orderable
+            }, ],
             "footerCallback": function(row, data, start, end, display) {
                 var api = this.api(),
                     data;
@@ -345,15 +345,15 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 }
             },
             responsive: true,
-            columnDefs: [{
-                    responsivePriority: 1,
-                    targets: 0
-                },
-                {
-                    responsivePriority: 2,
-                    targets: -2
-                }
-            ]
+            // columnDefs: [{
+            //         responsivePriority: 1,
+            //         targets: 0
+            //     },
+            //     {
+            //         responsivePriority: 2,
+            //         targets: -2
+            //     }
+            // ]
         });
         // new $.fn.dataTable.FixedHeader(table);
         $("#yesin").live("click", function() {

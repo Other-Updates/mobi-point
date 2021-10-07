@@ -74,7 +74,7 @@ class Sales_return extends MX_Controller
         //        echo "<pre>";
         //        print_r($datas);
         //        exit;
-        $this->template->write_view('content', 'sales_return/sales_return_list', $datas);
+        $this->template->write_view('content', 'sales_return/sales_return_list');
         $this->template->render();
     }
     public function invoice_view($id)
