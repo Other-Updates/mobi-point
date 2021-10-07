@@ -140,7 +140,7 @@
                                     <td>Target Rate / Year<span style="color:#F00; font-style:oblique;">*</span></td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" name="target_rate" class="store form-control form-align" id="target_rate" />
+                                            <input type="text" name="target_rate" class=" form-control form-align" id="target_rate" maxlength='4' />
                                             <div class="input-group-addon">
                                                 <i class="fa fa-bank"></i>
                                             </div>
@@ -210,248 +210,261 @@
 </div>
 <br />
 <?php $base_url = $this->config->item('base_url'); ?>
+
 <script type="text/javascript">
-    $('document').ready(function() {
-        $("#sales_man_name").on('blur', function() {
-            var name = $("#sales_man_name").val();
-            var filter = /^[a-zA-Z.\s]{3,30}$/;
-            if (name == "" || name == null || name.trim().length == 0) {
-                $("#contact_personerr").html("Required Field");
-            } else if (!filter.test(name)) {
-                $("#contact_personerr").html("Alphabets and Min 3 to Max 30 ");
-            } else {
-                $("#contact_personerr").html("");
-            }
+    $('#submit').on('click', function() {
+        // $("#sales_man_name").on('blur', function() {
+        //     var name = $("#sales_man_name").val();
+        //     var filter = /^[a-zA-Z.\s]{3,30}$/;
+        //     if (name == "" || name == null || name.trim().length == 0) {
+        //         $("#contact_personerr").html("Required Field");
+        //     } else if (!filter.test(name)) {
+        //         $("#contact_personerr").html("Alphabets and Min 3 to Max 30 ");
+        //     } else {
+        //         $("#contact_personerr").html("");
+        //     }
+        // });
+        // $("#mail").on('blur', function() {
+        //     var mail = $("#mail").val();
+        //     var efilter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        //     if (mail == "") {
+        //         $("#cuserror5").html("Required Field");
+        //     } else if (!efilter.test(mail) && mail != "") {
+        //         $("#cuserror5").html("Enter Valid Email");
+        //     } else {
+        //         $("#cuserror5").html("");
+        //     }
+        // });
+        // $('#address').on('blur', function() {
+        //     var address = $('#address').val();
+        //     if (address == "" || address == null || address.trim().length == 0) {
+        //         $('#cuserror3').html("Required Field");
+        //     } else {
+        //         $('#cuserror3').html("");
+        //     }
+        // });
+        // $("#number").keydown(function(e) {
+        //     if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+        //         (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+        //         (e.keyCode >= 35 && e.keyCode <= 40)) {
+        //         return;
+        //     }
+        //     if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        //         e.preventDefault();
+        //     }
+        // });
+        // $("#number").keyup(function() {
+        //     var number = $("#number").val();
+        //     //        $(this).val($(this).val().replace(/[^0-9\.]/g, ""));
+        //     var nfilter = /^(\+91-|\+91|0)?\d{10}$/;
+        //     if (number == "") {
+        //         $("#cuserror4").text("Required Field");
+        //     } else if (!nfilter.test(number)) {
+        //         $("#cuserror4").text("Enter Valid Mobile Number");
+        //     } else {
+        //         $("#cuserror4").text("");
+        //     }
+        // });
+        // $("#acnum").keydown(function(e) {
+        //     if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+        //         (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+        //         (e.keyCode >= 35 && e.keyCode <= 40)) {
+        //         return;
+        //     }
+        //     if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        //         e.preventDefault();
+        //     }
+        // });
+        // $('#bank').on('blur', function() {
+        //     var bank = $('#bank').val();
+        //     if (bank == "" || bank == null || bank.trim().length == 0) {
+        //         $('#cuserror6').html("Required Field");
+        //     } else {
+        //         $('#cuserror6').html("");
+        //     }
+        // });
+        // $("#number").on('blur', function() {
+        //     var mobile_number = $("#number").val();
+        //     if (mobile_number == "" || mobile_number == null || mobile_number.trim().length == 0) {
+        //         $("#cuserror4").html("Required Field");
+        //         i = 1;
+        //     } else {
+        //         $("#cuserror4").html("");
+        //     }
+        // });
+
+
+        // $("#branch").on('blur', function() {
+        //     var branch = $("#branch").val();
+        //     if (branch == "" || branch == null || branch.trim().length == 0) {
+        //         $("#cuserror10").html("Required Field");
+        //     } else {
+        //         $("#cuserror10").html("");
+        //     }
+        // });
+        // $("#acnum").on('blur', function() {
+        //     var acnum = $("#acnum").val();
+        //     if (acnum == "" || acnum == null || acnum.trim().length == 0) {
+        //         $("#cuserror11").html("Required Field");
+        //     } else {
+        //         $("#cuserror11").html("");
+        //     }
+        // });
+        // $("#target_rate").on('blur', function() {
+        //     var target_rate = $("#target_rate").val();
+        //     if (target_rate == "" || target_rate == null || target_rate.trim().length == 0) {
+        //         $("#cuserror14").html("Required Field");
+        //     } else {
+        //         $("#cuserror14").html("");
+        //     }
+
+        // });
+
+        $('#reset').on('click', function() {
+            $('.val').html("");
         });
-        $("#mail").on('blur', function() {
-            var mail = $("#mail").val();
-            var efilter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-            if (mail == "") {
-                $("#cuserror5").html("Required Field");
-            } else if (!efilter.test(mail) && mail != "") {
-                $("#cuserror5").html("Enter Valid Email");
-            } else {
-                $("#cuserror5").html("");
-            }
-        });
-        $('#address').on('blur', function() {
-            var address = $('#address').val();
-            if (address == "" || address == null || address.trim().length == 0) {
-                $('#cuserror3').html("Required Field");
-            } else {
-                $('#cuserror3').html("");
-            }
-        });
-        $("#number").keydown(function(e) {
-            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
-                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-                (e.keyCode >= 35 && e.keyCode <= 40)) {
-                return;
-            }
-            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                e.preventDefault();
-            }
-        });
-        $("#number").keyup(function() {
-            var number = $("#number").val();
-            //        $(this).val($(this).val().replace(/[^0-9\.]/g, ""));
-            var nfilter = /^(\+91-|\+91|0)?\d{10}$/;
-            if (number == "") {
-                $("#cuserror4").text("Required Field");
-            } else if (!nfilter.test(number)) {
-                $("#cuserror4").text("Enter Valid Mobile Number");
-            } else {
-                $("#cuserror4").text("");
-            }
-        });
-        $("#acnum").keydown(function(e) {
-            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
-                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-                (e.keyCode >= 35 && e.keyCode <= 40)) {
-                return;
-            }
-            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                e.preventDefault();
-            }
-        });
-        $('#bank').on('blur', function() {
-            var bank = $('#bank').val();
-            if (bank == "" || bank == null || bank.trim().length == 0) {
-                $('#cuserror6').html("Required Field");
-            } else {
-                $('#cuserror6').html("");
-            }
-        });
-        $("#number").on('blur', function() {
-            var mobile_number = $("#number").val();
-            if (mobile_number == "" || mobile_number == null || mobile_number.trim().length == 0) {
-                $("#cuserror4").html("Required Field");
-                i = 1;
-            } else {
-                $("#cuserror4").html("");
-            }
-        });
-        $("#target_rate").on('blur', function() {
-                var target_rate = $("#target_rate").val();
-                if (target_rate == "" || target_rate == null || target_rate.trim().length == 0) {
-                    $("#cuserror14").html("Required Field");
-                    i = 1;
-                }
-                // if (target_rate.length != 4) {
-                //     $("#cuserror14").html("Invalid Format");
-                //     i = 1;
-                // }
-                // if (!target_rate.match(/\d{4}/)) {
-                //     $("#cuserror14").html("Invalid Format");
-                //     i = 1;
-                // }
-                // var _thisYear = new Date().getFullYear();
-                // if (parseInt(target_rate) > _thisYear || parseInt(target_rate) < 1900) {
-                //     $("#cuserror14").html("Invalid Format");
-                //     i = 1;
-                // } else {
-                $("#cuserror14").html("");
-            }
-        }); $("#branch").on('blur', function() {
-        var branch = $("#branch").val();
-        if (branch == "" || branch == null || branch.trim().length == 0) {
-            $("#cuserror10").html("Required Field");
-        } else {
-            $("#cuserror10").html("");
-        }
-    }); $("#acnum").on('blur', function() {
-        var acnum = $("#acnum").val();
-        if (acnum == "" || acnum == null || acnum.trim().length == 0) {
-            $("#cuserror11").html("Required Field");
-        } else {
-            $("#cuserror11").html("");
-        }
-    }); $('#reset').on('click', function() {
-        $('.val').html("");
-    }); $('#submit').on('click', function() {
+
+
         var i = 0;
         var mobile_number = $("#number").val();
         var nfilter = /^(\+91-|\+91|0)?\d{10}$/;
         if (mobile_number == "") {
             $("#cuserror4").text("Required Field");
             m = 1;
+
         } else if (!nfilter.test(mobile_number)) {
             $("#cuserror4").text("Enter Valid Mobile Number");
             m = 1;
         } else {
             $("#cuserror4").text("");
         }
+
         var acnum = $("#acnum").val();
         if (acnum == "" || acnum == null || acnum.trim().length == 0) {
             $("#cuserror11").html("Required Field");
             i = 1;
+
         } else {
             $("#cuserror11").html("");
         }
-        var name = $("#sales_man_name").val();
-        var filter = /^[a-zA-Z.\s]{3,30}$/;
-        if (name == "" || name == null || name.trim().length == 0) {
-            $("#contact_personerr").html("Required Field");
-            i = 1;
-        } else if (!filter.test(name)) {
-            $("#contact_personerr").html("Alphabets and Min 3 to Max 30 ");
-            i = 1;
-        } else {
-            $("#contact_personerr").html("");
-        }
+
+        // var name = $("#sales_man_name").val();
+        // var filter = /^[a-zA-Z.\s]{3,30}$/;
+        // if (name == "" || name == null || name.trim().length == 0) {
+        //     $("#contact_personerr").html("Required Field");
+        //     i = 1;
+        // } else if (!filter.test(name)) {
+        //     $("#contact_personerr").html("Alphabets and Min 3 to Max 30 ");
+        //     i = 1;
+
+        // } else {
+        //     $("#contact_personerr").html("");
+        // }
+
         var mail = $('#mail').val();
         var efilter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         if (mail == "") {
             $("#cuserror5").text("MailID is required");
             i = 1;
+
         } else if (mail != "" && !efilter.test(mail)) {
             $("#cuserror5").text('Enter Valid Email');
             i = 1;
+
         } else {
             $("#cuserror5").text('');
         }
+
         var address = $('#address').val();
         if (address == "" || address == null || address.trim().length == 0) {
             $('#cuserror3').html("Required Field");
             i = 1;
+
         } else {
             $('#cuserror3').html("");
         }
-        var ifsc = $('#ifsc').val();
-        var ifscformat = /[A-Z|a-z]{4}[0][a-zA-Z0-9]{6}$/;
-        if (ifsc == "" || ifsc == null || ifsc.trim().length == 0) {
-            $('#ifsc1').html("");
-            i = 1;
-        } else if (ifsc != "" && !ifscformat.test(ifsc)) {
-            $("#ifsc1").text('Enter Valid IFSC Code');
-            i = 1;
-        } else {
-            $("#ifsc1").text('');
-        }
+
+        // var ifsc = $('#ifsc').val();
+        // var ifscformat = /[A-Z|a-z]{4}[0][a-zA-Z0-9]{6}$/;
+        // if (ifsc == "" || ifsc == null || ifsc.trim().length == 0) {
+        //     $('#ifsc1').html("");
+        //     i = 1;
+        // } else if (ifsc != "" && !ifscformat.test(ifsc)) {
+        //     $("#ifsc1").text('Enter Valid IFSC Code');
+        //     i = 1;
+
+        // } else {
+        //     $("#ifsc1").text('');
+        // }
+
         var bank = $('#bank').val();
         if (bank == "" || bank == null || bank.trim().length == 0) {
             $('#cuserror6').html("Required Field");
             i = 1;
+
         } else {
             $('#cuserror6').html("");
         }
+
         var branch = $("#branch").val();
         if (branch == "" || branch == null || branch.trim().length == 0) {
             $("#cuserror10").html("Required Field");
             i = 1;
+
         } else {
             $("#cuserror10").html("");
         }
+        var name = $("#sales_man_name").val();
+        if (name == "" || name == null || name.trim().length == 0) {
+            $("#cuserror14").html("Required Field");
+            i = 1;
+        } else {
+            $("#cuserror14").html("");
+        }
+        var target_rate = $("#target_rate").val();
+        if (target_rate == "" || target_rate == null || target_rate.trim().length == 0) {
+            $("#contact_personerr").html("Required Field");
+            i = 1;
+        } else {
+            $("#contact_personerr").html("");
+        }
+
+
         var ifsc = $("#ifsc").val();
         if (ifsc == "" || ifsc == null || ifsc.trim().length == 0) {
             $("#ifsc1").html("Required Field");
             i = 1;
+
         } else {
             $("#ifsc1").html("");
         }
-        // var target_rate = $("#target_rate").val();
-        // if (target_rate == "") {
-        //     $("#cuserror14").html("Required Field");
-        //     i = 1;
-        // }
-        // if (target_rate.length != 4) {
-        //     $("#cuserror14").html("Invalid Format");
-        //     i = 1;
-        // }
-        // if (!target_rate.match(/\d{4}/)) {
-        //     $("#cuserror14").html("Invalid Format");
-        //     i = 1;
-        // }
-        // var _thisYear = new Date().getFullYear();
-        // if (parseInt(target_rate) > _thisYear || parseInt(target_rate) < 1900) {
-        //     $("#cuserror14").html("Invalid Format");
-        //     i = 1;
-        // } else {
-        //     $("#cuserror14").html("");
-        // }
+
         if (i == 1) {
             return false;
         } else {
             return true;
         }
-    }); $(".email_dup").on('blur', function() {
-        email = $("#mail").val();
-        $.ajax({
-            url: BASE_URL + "masters/sales_man/add_duplicate_email",
-            type: 'get',
-            data: {
-                value1: email
-            },
-            success: function(result) {
-                //$("#duplica").html(result);
-            }
+
+        $(".email_dup").on('blur', function() {
+            email = $("#mail").val();
+            $.ajax({
+                url: BASE_URL + "masters/sales_man/insert_sales_man",
+                type: 'get',
+                data: {
+                    value1: email
+                },
+                success: function(result) {
+                    //$("#duplica").html(result);
+                }
+            });
         });
-    });
     });
 </script>
 <?php
 if (isset($sales_man) && !empty($sales_man)) {
     foreach ($sales_man as $val) {
+        // print_r($val);
+        // exit;
 ?>
         <div id="test3_<?php echo $val['id']; ?>" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" align="center">
             <div class="modal-dialog">
@@ -487,7 +500,7 @@ if (isset($sales_man) && !empty($sales_man)) {
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#yesin").on("click", function() {
+        $(".delete_yes").on("click", function() {
             var hidin = $(this).parent().parent().find('.id').val();
             // alert(hidin);
             $.ajax({

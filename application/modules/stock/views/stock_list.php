@@ -111,8 +111,10 @@ $data['company_details'] = $this->admin_model->get_company_details();
         </div>
     </div>
 
-    <div class="col-md-1"><a id='search' class="btn btn-success"><span class="glyphicon glyphicon-search "></span> Search</a></div>
-    <div class="col-md-1"><a id='clear' class="btn btn-success"><span class="fa fa-close "></span>Clear</a></div>
+    <div class="col-md-3">
+        <a id='search' class="btn btn-success"><span class="glyphicon glyphicon-search "></span> Search</a>
+        <a id='clear' class="btn btn-success"><span class="fa fa-close "></span>Clear</a>
+    </div>
 </div>
 </div>
 <div class="contentpanel mb-50">

@@ -169,13 +169,13 @@
                                     <td width="8%" class="first_td1 action-btn-align">QTY</td>
                                     <td width="8%" class="first_td1 action-btn-align">Unit Price</td>
                                     <!--<td  width="7%" class="first_td1">Discount %</td>-->
-                                    <td width="5%" class="first_td1">CGST %</td>
+                                    <!-- <td width="5%" class="first_td1">CGST %</td> -->
                                     <?php
                                     $gst_type = $po[0]['state_id'];
                                     if ($gst_type != '') {
                                         if ($gst_type == 31) {
                                     ?>
-                                            <td width="5%" class="first_td1  proimg-wid">SGST%</td>
+                                            <!-- <td width="5%" class="first_td1  proimg-wid">SGST%</td> -->
                                         <?php } else { ?>
                                             <td width="5%" class="first_td1 proimg-wid">IGST%</td>
                                     <?php
@@ -263,18 +263,18 @@
                                             <td class="action-btn-align">
                                                 <input type="text" tabindex="-1" name='per_cost[]' style="width:70px;" class="percost required " value="<?php echo $vals['per_cost'] ?>" readonly="readonly" />
                                             </td>
-                                            <td class="action-btn-align">
+                                            <!-- <td class="action-btn-align">
                                                 <input type="hidden" tabindex="-1" name='discount[]' style="width:70px;" class="discount" value="<?php echo $vals['discount'] ?>" readonly="readonly" />
                                                 <input type="text" tabindex="-1" name='tax[]' style="width:70px;" class="pertax" value="<?php echo $vals['tax'] ?>" readonly="readonly" />
-                                            </td>
+                                            </td> -->
                                             <?php
                                             $gst_type = $po[0]['state_id'];
                                             if ($gst_type != '') {
                                                 if ($gst_type == 31) {
                                             ?>
-                                                    <td class="action-btn-align">
+                                                    <!-- <td class="action-btn-align">
                                                         <input type="text" name='gst[]' style="width:70px;" class="gst" value="<?php echo $vals['gst'] ?>" readonly="readonly" />
-                                                    </td>
+                                                    </td> -->
                                                 <?php } else { ?>
                                                     <td>
                                                         <input type="text" name='igst[]' style="width:70px;" class="igst" value="<?php echo $vals['igst']; ?>" readonly="readonly" />
@@ -294,30 +294,30 @@
                                 ?>
                             </tbody>
                             <tbody>
-                                <td colspan="5" style="width:70px; text-align:right;">Total</td>
-                                <td><input type="text" name="po[total_qty]" readonly="readonly" value="<?php echo $val['total_qty']; ?>" class="total_qty" style="width:70px; margin-left:17px;" id="total" /></td>
-                                <td colspan="2" style="text-align:right;">Sub Total</td>
+                                <td colspan="4" style="width:70px; text-align:right;">Total</td>
+                                <td><input type="text" name="po[total_qty]" readonly="readonly" value="<?php echo $val['total_qty']; ?>" class="total_qty" style="width:70px; margin-left:50px;" id="total" /></td>
+                                <td colspan="1" style="text-align:right;">Sub Total</td>
                                 <td><input type="text" name="po[subtotal_qty]" readonly="readonly" value="<?php echo $val['subtotal_qty']; ?>" class="final_sub_total text_right" style="width:70px;" /><input type="hidden" class="temp_sub_total" value="" /></td>
                             </tbody>
                             <tbody>
-                                <td colspan="8" style="text-align:right;">Advance Amount</td>
+                                <td colspan="6" style="text-align:right;">Advance Amount</td>
                                 <td><input type="text" name="advance" readonly="readonly" value="<?php echo (!empty($val['advance'])) ? $val['advance'] : 0; ?>" class="advance text_right" style="width:70px;" /></td>
                             </tbody>
                             <tbody class="addtional">
-                                <td colspan="8" style="text-align:right;">Round Off ( - )<br>
+                                <td colspan="6" style="text-align:right;">Round Off ( - )<br>
                                 </td>
                                 <td><input type="text" name="po[round_off]" value="<?php echo $val['round_off']; ?>" class="round_off text_right" style="width:70px;" readonly />
                                 </td>
                             </tbody>
                             <tbody class="additional">
-                                <td colspan="4" style="text-align:right;">CGST:</td>
+                                <td colspan="3" style="text-align:right;">CGST:</td>
                                 <td><input type="text" value="<?php echo $val['cgst']; ?>" readonly class="add_cgst text_right" style="width:70px;" /></td>
                                 <?php
                                 $gst_type = $po[0]['state_id'];
                                 if ($gst_type != '') {
                                     if ($gst_type == 31) {
                                 ?>
-                                        <td colspan="3" style="text-align:right;">SGST:</td>
+                                        <td colspan="2" style="text-align:right;">SGST:</td>
                                     <?php } else { ?>
                                         <td colspan="4" style="text-align:right;">IGST:</td>
                                 <?php
@@ -327,15 +327,15 @@
                                 <td><input type="text" value="<?php echo $val['sgst']; ?>" readonly class="add_sgst text_right" style="width:70px;" /></td>
                             </tbody>
                             <tbody class="addtional">
-                                <td colspan="4" style="text-align:right;">Transport Charge</td>
+                                <td colspan="3" style="text-align:right;">Transport Charge</td>
                                 <td><input type="text" name="po[transport]" value="<?php echo $po[0]['transport']; ?>" class="transport text_right" style="width:70px;" readonly="" /></td>
-                                <td colspan="3" style="text-align:right;">Labour Charge</td>
+                                <td colspan="2" style="text-align:right;">Labour Charge</td>
                                 <td><input type="text" name="po[labour]" value="<?php echo $po[0]['labour']; ?>" class="labour text_right" style="width:70px;" readonly="" /></td>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="4" style="width:70px; text-align:right;"></td>
-                                    <td colspan="4" style="text-align:right;font-weight:bold;">Net Total</td>
+                                    <td colspan="3" style="width:70px; text-align:right;"></td>
+                                    <td colspan="3" style="text-align:right;font-weight:bold;">Net Total</td>
                                     <td><input type="text" name="po[net_total]" readonly="readonly" class="final_amt text_right" style="width:70px;" value="" /></td>
                                 </tr>
                                 <tr>

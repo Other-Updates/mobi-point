@@ -52,7 +52,7 @@
                                                                                                                         echo "delete_row";
                                                                                                                     }
                                                                                                                     ?>" delete_id="<?php echo $list['id']; ?>" title="<?php echo $language['delete'] ?>">
-                                                        <span class="icon-trash"></span></a>
+                                                        <span class="fa fa-ban"></span></a>
                                                 </td>
                                             </tr>
                                         <?php

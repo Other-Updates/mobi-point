@@ -722,20 +722,6 @@
                 } else {
                     $('#superror').text("");
                 }
-                /*var name = $("#name").val();
-                 var filter = /^[a-zA-Z.\s]{3,30}$/;
-                 if (name == "" || name == null || name.trim().length == 0)
-                 {
-                 $("#superror1").html("Required Field");
-                 i = 1;
-                 } else if (!filter.test(name))
-                 {
-                 $("#superror1").html("Alphabets and Min 3 to Max 30 ");
-                 i = 1;
-                 } else
-                 {
-                 $("#superror1").html("");
-                 } */
                 var store = $("#store").val();
                 if (store == "" || store == null || store.trim().length == 0) {
                     $("#superror2").text("Required Field");

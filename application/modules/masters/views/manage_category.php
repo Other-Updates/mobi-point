@@ -60,7 +60,7 @@
                                                                                                                                 echo "delete_row";
                                                                                                                             }
                                                                                                                             ?>" delete_id="<?php echo $list['id']; ?>" title="<?php echo $language['delete']; ?>">
-                                                                <span class="icon-trash"></span></a>
+                                                                <span class="fa fa-ban"></span></a>
                                                         </td>
                                                     </tr>
                                             <?php
@@ -137,9 +137,9 @@ if (isset($category_list) && !empty($category_list)) {
                         Do you want delete this category <strong><?= $val['category']; ?>?</strong>
                         <input type="hidden" value="<?php echo $val['id']; ?>" class="id" />
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer action-btn-align">
                         <button class="btn btn-primary delete_yes" id="yesin">Yes</button>
-                        <button type="button" class="btn btn-danger1 delete_all" data-dismiss="modal" id="no"><?php echo $language['no'] ?></button>
+                        <button type="button" class="btn btn-danger1 delete_all" data-dismiss="modal" id="no"> No</button>
                     </div>
                 </div>
             </div>
