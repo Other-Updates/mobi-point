@@ -220,8 +220,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
     //        window.print();
     //    });
     $('.print_btn').click(function() {
-        var url = '<?php echo base_url(); ?>report/gst_report_pdf/';
-        window.open(url, '_blank');
+        window.print();
     });
     $('#clear').live('click', function() {
         window.location.reload();
@@ -594,13 +593,33 @@ $data['company_details'] = $this->admin_model->get_company_details();
      }
      });
      */
+    // $('#excel-prt').on('click', function() {
+    //     var firm_id = $('#firm_id').val();
+    //     var cust_type = $('#cust_type').val();
+    //     var from_date = $('#from_date').val();
+    //     var to_date = $('#to_date').val();
+    //     var gst = $('#gst_sales_report').val();
+    //     window.location = (BASE_URL + 'report/getall_gst_entries?firm_id=' + firm_id + '&cust_type=' + cust_type + '&from_date=' + from_date + '&to_date=' + to_date + '&gst=' + gst);
+    // });
     $('#excel-prt').on('click', function() {
-        var firm_id = $('#firm_id').val();
-        var cust_type = $('#cust_type').val();
-        var from_date = $('#from_date').val();
-        var to_date = $('#to_date').val();
-        var gst = $('#gst_sales_report').val();
-        window.location = (BASE_URL + 'report/getall_gst_entries?firm_id=' + firm_id + '&cust_type=' + cust_type + '&from_date=' + from_date + '&to_date=' + to_date + '&gst=' + gst);
+        var arr = [];
+        arr.push({
+            'firm_id': $('#firm_id').val()
+        });
+        arr.push({
+            'cust_type': $('#cust_type').val()
+        });
+        arr.push({
+            'from_date': $('#from_date').val()
+        });
+        arr.push({
+            'to_date': $('#to_date').val()
+        });
+        arr.push({
+            'gst': $('#gst_sales_report').val()
+        });
+        var arrStr = JSON.stringify(arr);
+        window.location.replace('<?php echo $this->config->item('base_url') . 'report/getall_gst_entries?search=' ?>' + arrStr);
     });
 </script>
 <script src="<?= $theme_path; ?>/js/fixedheader/jquery.dataTables.min.js"></script>

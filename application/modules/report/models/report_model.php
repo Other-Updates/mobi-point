@@ -1216,7 +1216,7 @@ class Report_model extends CI_Model
         }
         $this->db->select('customer.id as customer,customer.store_name,customer.tin,customer.state_id, customer.name,customer.mobil_number,customer.email_id,customer.address1,erp_invoice.id,erp_invoice.inv_id,erp_quotation.q_no,erp_invoice.total_qty,erp_invoice.tax,erp_quotation.ref_name,erp_invoice.tax_label,'
             . 'erp_invoice.net_total,erp_invoice.created_date,'
-            . 'erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.customer_po,'
+            . 'erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.sgst_price,erp_invoice.cgst_price,erp_invoice.estatus,erp_invoice.customer_po,'
             . 'erp_sales_man.sales_man_name,erp_invoice.q_id,erp_manage_firms.gstin,erp_manage_firms.firm_name');
         $this->db->where('erp_invoice.subtotal_qty !=', 0);
         $this->db->join('erp_quotation', 'erp_quotation.id=erp_invoice.q_id');
@@ -2147,7 +2147,7 @@ class Report_model extends CI_Model
         $this->db->from('erp_invoice');
         return $this->db->count_all_results();
     }
-    public function count_filtered_gst()
+    public function count_filtered_gst($search_data)
     {
         if (!empty($serch_data['from_date']))
             $serch_data['from_date'] = date('Y-m-d', strtotime($serch_data['from_date']));

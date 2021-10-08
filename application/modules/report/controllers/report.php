@@ -1253,12 +1253,12 @@ class Report extends MX_Controller
         $output = fopen('php://output', 'w');
         // output the column headings
         //Order has been changes
-        fputcsv($output, array('S.No', 'Invoice ID', 'Firm Name', 'Firm GSTIN', 'Customer name', 'Customer GSTIN', 'Total QTY', 'CGST', 'SGST', 'Sub Total', 'Inv Amt', 'INV Date'));
+        fputcsv($output, array('S.No', 'Invoice ID', 'Customer name', 'Total QTY', 'CGST', 'SGST', 'Sub Total', 'Inv Amt', 'INV Date'));
         // fetch the data
         //$rows = mysql_query($query);
         // loop over the rows, outputting them
         foreach ($query['quotation'] as $key => $val) {
-            $row = array($key + 1, $val['inv_id'], $val['firm_name'], ($val['gstin']) ? $val['gstin'] : '', ($val['store_name']) ? $val['store_name'] : $val['name'], ($val['tin']) ? $val['tin'] : '', $val['total_qty'], number_format(($val['erp_invoice_details'][0]['cgst']), 2), number_format(($val['erp_invoice_details'][0]['sgst']), 2), number_format($val['subtotal_qty'], 2), number_format($val['net_total'], 2), ($val['created_date'] != '1970-01-01') ? date('d-M-Y', strtotime($val['created_date'])) : '');
+            $row = array($key + 1, $val['inv_id'], ($val['store_name']) ? $val['store_name'] : $val['name'], $val['total_qty'], number_format(($val['erp_invoice_details'][0]['cgst']), 2), number_format(($val['erp_invoice_details'][0]['sgst']), 2), number_format($val['subtotal_qty'], 2), number_format($val['net_total'], 2), ($val['created_date'] != '1970-01-01') ? date('d-M-Y', strtotime($val['created_date'])) : '');
             //echo "<pre>";print_r($row);exit;
             fputcsv($output, $row);
         }
@@ -1307,8 +1307,10 @@ class Report extends MX_Controller
             $row[] = ($val['store_name']) ? $val['store_name'] : $val['name'];
             // $row[] = ($val['tin']) ? $val['tin'] : '';
             $row[] = $val['total_qty'];
-            $row[] = number_format(($val['erp_invoice_details'][0]['cgst']), 2);
-            $row[] = number_format(($val['erp_invoice_details'][0]['sgst']), 2);
+            // $row[] = number_format(($val['erp_invoice_details'][0]['cgst']), 2);
+            // $row[] = number_format(($val['erp_invoice_details'][0]['sgst']), 2);
+            $row[] = number_format($val['cgst_price'], 2);
+            $row[] = number_format($val['sgst_price'], 2);
             $row[] = number_format($val['subtotal_qty'], 2);
             $row[] = number_format($val['net_total'], 2);
             //            $row[] = number_format(($val['receipt_bill'][0]['receipt_paid'] + $val['advance']), 2, '.', ',');
@@ -1325,7 +1327,7 @@ class Report extends MX_Controller
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->report_model->count_all_gst(),
-            "recordsFiltered" => $this->report_model->count_filtered_gst(),
+            "recordsFiltered" => $this->report_model->count_filtered_gst($search_data),
             "data" => $data,
         );
         echo json_encode($output);

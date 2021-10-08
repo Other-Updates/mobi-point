@@ -414,19 +414,21 @@
         } else {
             $("#cuserror10").html("");
         }
+
         var name = $("#sales_man_name").val();
         if (name == "" || name == null || name.trim().length == 0) {
-            $("#cuserror14").html("Required Field");
-            i = 1;
-        } else {
-            $("#cuserror14").html("");
-        }
-        var target_rate = $("#target_rate").val();
-        if (target_rate == "" || target_rate == null || target_rate.trim().length == 0) {
             $("#contact_personerr").html("Required Field");
             i = 1;
         } else {
             $("#contact_personerr").html("");
+        }
+
+        var target_rate = $("#target_rate").val();
+        if (target_rate == "" || target_rate == null || target_rate.trim().length == 0) {
+            $("#cuserror14").html("Required Field");
+            i = 1;
+        } else {
+            $("#cuserror14").html("");
         }
 
 

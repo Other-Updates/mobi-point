@@ -407,15 +407,15 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 "orderable": false, //set not orderable
             }, ],
             responsive: true,
-            columnDefs: [{
-                    responsivePriority: 1,
-                    targets: 0
-                },
-                {
-                    responsivePriority: 2,
-                    targets: -2
-                }
-            ],
+            // columnDefs: [{
+            //         responsivePriority: 1,
+            //         targets: 0
+            //     },
+            //     {
+            //         responsivePriority: 2,
+            //         targets: -2
+            //     }
+            // ],
         });
         $('#search').click(function() { //button filter event click
             table.ajax.reload(); //just reload table
