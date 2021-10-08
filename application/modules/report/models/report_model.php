@@ -352,7 +352,7 @@ class Report_model extends CI_Model
         $this->db->where("erp_invoice.inv_id !=", 'Wings Invoice');
         $this->db->join('customer', 'customer.id=erp_invoice.customer');
         $column_order = array(null, 'customer.store_name', 'erp_invoice.inv_id', 'erp_invoice.created_date', 'erp_invoice.net_total', 'erp_invoice.commission_rate', null, null, 'erp_invoice.profit_total');
-        $column_search = array('customer.name', 'erp_invoice.inv_id');
+        $column_search = array('customer.store_name', 'erp_invoice.inv_id', 'erp_invoice.created_date', 'erp_invoice.net_total', 'erp_invoice.profit_total');
         $order = array('erp_invoice.id' => 'desc');
         $i = 0;
         foreach ($column_search as $item) { // loop column

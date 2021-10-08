@@ -266,7 +266,7 @@ class Sales_return_model extends CI_Model
             }
         }
         $this->db->select('customer.store_name,customer.name,customer.mobil_number,customer.email_id,customer.state_id,customer.address1,erp_invoice.id,erp_invoice.inv_id,erp_invoice.total_qty,erp_invoice.tax,erp_invoice.tax_label,'
-            . 'erp_invoice.q_id,erp_invoice.delivery_qty,erp_invoice.customer,erp_invoice.net_total,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.estatus,erp_invoice.customer_po,erp_invoice.payment_status');
+            . 'erp_invoice.q_id,erp_invoice.delivery_qty,erp_invoice.taxable_price,erp_invoice.customer,erp_invoice.net_total,erp_invoice.remarks,erp_invoice.subtotal_qty,erp_invoice.estatus,erp_invoice.estatus,erp_invoice.customer_po,erp_invoice.payment_status');
         if (!empty($in_ids)) {
             $this->db->where_in('erp_invoice.id', $in_ids);
         }

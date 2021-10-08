@@ -408,21 +408,21 @@ class Purchase_order_model extends CI_Model
                 $this->db->where_in('erp_po.firm_id', $frim_id);
             }
         }
-        $this->db->select('vendor.id as vendor,vendor.tin,vendor.store_name,vendor.state_id,vendor.name,vendor.mobil_number,vendor.email_id,vendor.address1,erp_po.id,erp_po.po_no,erp_po.total_qty,erp_po.tax,erp_po.tax_label,'
+        $this->db->select('v.id as vendor,v.tin,v.store_name,v.state_id,v.name,v.mobil_number,v.email_id,v.address1,erp_po.id,erp_po.po_no,erp_po.total_qty,erp_po.tax,erp_po.tax_label,'
             . 'erp_po.net_total,erp_po.delivery_schedule,erp_po.mode_of_payment,erp_po.remarks,erp_po.subtotal_qty,erp_po.estatus,erp_po.created_date');
         $this->db->select('erp_manage_firms.firm_name');
         $this->db->where('erp_po.estatus !=', 0);
-        $this->db->join('vendor', 'vendor.id=erp_po.supplier');
+        $this->db->join('vendor as v', 'v.id=erp_po.supplier');
         $this->db->join('erp_po_details', 'erp_po_details.po_id=erp_po.id');
         $this->db->join('erp_manage_firms', 'erp_manage_firms.firm_id=erp_po.firm_id', 'left');
         $this->db->group_by('erp_po.id');
         $this->db->order_by($this->erp_po . '.id', 'desc');
         $order = array('erp_po.id' => 'DESC');
 
-        if (isset($_POST['order']) && $column_order[$_POST['order']['0']['column']] != null) { // here order processing
-            $this->db->order_by($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        if (isset($_POST['order']) &&   $this->column_order[$_POST['order']['0']['column']] != null) { // here order processing
+            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else if (isset($order)) {
-            $order = $order;
+            // $order = $order;
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
