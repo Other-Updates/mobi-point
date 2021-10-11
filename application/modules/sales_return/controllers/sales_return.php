@@ -504,11 +504,14 @@ class Sales_return extends MX_Controller
                 //$row[] = $ass->firm_name;
                 $row[] = $val['inv_id'];
                 $row[] = $val['store_name'];
+
                 if ($val['return'][1]['total_qty'] > 0) {
+
                     $row[] = $val['delivery_qty'];
                     $row[] = number_format($val['return'][0]['net_total'], 2);
                     $row[] = ($val['return'][1]['total_qty']);
                     $cst_amount = $val['return'][1]['cgst'] + $val['return'][1]['sgst'];
+
                     if ($val['taxable_price'] != '0.00') {
                         $val['return'][1]['net_total'] = $val['return'][1]['net_total'] + $cst_amount;
                     }

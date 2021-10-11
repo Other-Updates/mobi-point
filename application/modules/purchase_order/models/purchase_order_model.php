@@ -365,6 +365,7 @@ class Purchase_order_model extends CI_Model
     }
     function _get_purchase_report_datatables_query($serch_data = array())
     {
+        $column_order = array(null, 'erp_po.po_no', 'v.store_name', 'erp_po.total_qty', 'erp_po.net_total', 'erp_po.created_date', null);
         if (!isset($serch_data['from_date']))
             $serch_data['from_date'] = '';
         if (!isset($serch_data['to_date']))
@@ -416,14 +417,15 @@ class Purchase_order_model extends CI_Model
         $this->db->join('erp_po_details', 'erp_po_details.po_id=erp_po.id');
         $this->db->join('erp_manage_firms', 'erp_manage_firms.firm_id=erp_po.firm_id', 'left');
         $this->db->group_by('erp_po.id');
-        $this->db->order_by($this->erp_po . '.id', 'desc');
+        // $this->db->order_by($this->erp_po . '.id', 'desc');
         $order = array('erp_po.id' => 'DESC');
 
-        if (isset($_POST['order']) &&   $this->column_order[$_POST['order']['0']['column']] != null) { // here order processing
-            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        if (isset($_POST['order']) && $column_order[$_POST['order']['0']['column']] != null) { // here order processing
+            $this->db->order_by($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else if (isset($order)) {
-            // $order = $order;
-            $this->db->order_by(key($order), $order[key($order)]);
+            $order = $order;
+            // $this->db->order_by(key($order), $order[key($order)]);
+            $this->db->order_by($this->erp_po . '.id', 'desc');
         }
     }
     public function get_purchase_link($search_data)

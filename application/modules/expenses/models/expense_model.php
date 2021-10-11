@@ -258,7 +258,7 @@ class Expense_model extends CI_Model
 
                 $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') >='" . $search_data["from_date"] . "'");
             } elseif (isset($search_data["from_date"]) && $search_data["from_date"] == "" && isset($search_data["to_date"]) && $search_data["to_date"] != "") {
-                $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
+                $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') <= '" . $search_data["to_date"] . "'");
             }
             if (!empty($search_data['firm_id']) && $search_data['firm_id'] != 'Select') {
 
@@ -338,7 +338,7 @@ class Expense_model extends CI_Model
 
                 $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') >='" . $search_data["from_date"] . "'");
             } elseif (isset($search_data["from_date"]) && $search_data["from_date"] == "" && isset($search_data["to_date"]) && $search_data["to_date"] != "") {
-                $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
+                $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') <= '" . $search_data["to_date"] . "'");
             }
             if (!empty($search_data['firm_id']) && $search_data['firm_id'] != 'Select') {
 
@@ -404,7 +404,7 @@ class Expense_model extends CI_Model
 
                 $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') >='" . $search_data["from_date"] . "'");
             } elseif (isset($search_data["from_date"]) && $search_data["from_date"] == "" && isset($search_data["to_date"]) && $search_data["to_date"] != "") {
-                $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
+                $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') <= '" . $search_data["to_date"] . "'");
             }
             if (!empty($search_data['firm_id']) && $search_data['firm_id'] != 'Select') {
 
@@ -413,8 +413,8 @@ class Expense_model extends CI_Model
         }
 
 
-        $column_order = array(null, 'tab_1.type', 'tab_1.mode', 'tab_1.created_at',  'tab_1.amount', 'tab_1.amount', 'tab_1.balance',);
-        $column_search = array('tab_1.id', 'tab_2.prefix', 'tab_1.type', 'tab_4.category', 'tab_3.sub_category', 'tab_1.mode', 'tab_2.opening_balance', 'tab_1.amount', 'tab_1.amount', 'tab_1.balance', 'tab_1.created_at');
+        $column_order = array(null, 'tab_4.comments', 'tab_1.mode', 'tab_1.created_at',  'tab_1.amount', 'tab_1.amount', 'tab_1.balance',);
+        $column_search = array('tab_1.id', 'tab_4.comments', 'tab_1.mode',  'tab_1.type', 'tab_1.mode', 'tab_2.opening_balance', 'tab_1.amount', 'tab_1.amount', 'tab_1.balance', 'tab_1.created_at');
         $order = array('tab_1.id' => 'ASC');
         $i = 0;
         foreach ($column_search as $item) { // loop column
@@ -485,7 +485,7 @@ class Expense_model extends CI_Model
 
                 $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') >='" . $search_data["from_date"] . "'");
             } elseif (isset($search_data["from_date"]) && $search_data["from_date"] == "" && isset($search_data["to_date"]) && $search_data["to_date"] != "") {
-                $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
+                $this->db->where("DATE_FORMAT(tab_1.created_at,'%Y-%m-%d') <= '" . $search_data["to_date"] . "'");
             }
             if (!empty($search_data['firm_id']) && $search_data['firm_id'] != 'Select') {
 

@@ -41,8 +41,10 @@ class Manage_category extends MX_Controller
         $data = array();
         $data['language'] = $language = $this->language;
         $client_id = $this->user_auth->get_login_client_id();
-
         $data['category_list'] = $this->category_model->get_all_category_list($client_id);
+        // echo '<pre>';
+        // print_r($data);
+        // exit;
         $this->template->write_view('content', 'masters/manage_category', $data);
         $this->template->render();
     }

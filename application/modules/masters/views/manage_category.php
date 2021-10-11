@@ -16,7 +16,7 @@
                         <a id="tab-6-1" data-toggle="tab" href="#category-details" role="tab" aria-controls="home-6-1" aria-selected="true"><i class="mdi mdi-table-large"></i>Expense Category List</a>
                     </li>
                     <li role="presentation">
-                        <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>#addcategory<?php endif ?>" role="tab" aria-controls="profile-6-2" aria-selected="false" class="nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i><?php echo $language['add_new'] ?></a>
+                        <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>#addcategory<?php endif ?>" role="tab" aria-controls="profile-6-2" aria-selected="false" class="nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i> Add New</a>
                     </li>
                 </ul>
                 <!-- Tab panes -->
@@ -28,8 +28,8 @@
                                     <table id="categorytable" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline">
                                         <thead>
                                             <tr>
-                                                <th><?php echo $language['s_no'] ?></th>
-                                                <th><?php echo $language['category'] ?></th>
+                                                <th>S.NO</th>
+                                                <th>Category</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -49,9 +49,9 @@
                                                         <td class="first_td"><?php echo $i; ?></td>
                                                         <td><?php echo ucfirst($list['category']); ?></td>
                                                         <td>
-                                                            <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_category', 'edit')) : ?><?php echo $this->config->item('base_url') . 'masters/manage_category/edit/' . $list['id'] ?><?php endif ?>" class="tooltips btn btn-info btn-fw btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'edit')) : ?>alerts<?php endif ?>" title="<?php echo $language['edit']; ?>">
+                                                            <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_category', 'edit')) : ?><?php echo $this->config->item('base_url') . 'masters/manage_category/edit/' . $list['id'] ?><?php endif ?>" class="tooltips btn btn-info btn-fw btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'edit')) : ?>alerts<?php endif ?>" title="Edit">
                                                                 <span class="fa fa-edit"></span></a>&nbsp;&nbsp;
-                                                            <!--<a href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_category', 'delete')) : ?>#test3_<?php echo $list['id']; ?><?php endif ?>" data-toggle="modal" name="delete" class="tooltips btn btn-danger btn-fw btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'delete')) : ?>alerts<?php endif ?>" title="<?php echo $language['delete']; ?>">
+                                                            <!--<a href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_category', 'delete')) : ?>#test3_<?php echo $list['id']; ?><?php endif ?>" data-toggle="modal" name="delete" class="tooltips btn btn-danger btn-fw btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'delete')) : ?>alerts<?php endif ?>" title="Delete">
                                                                 <span class="icon-trash"></span></a>-->
                                                             <a name="delete" class="tooltips btn btn-danger btn-fw btn-xs <?php
                                                                                                                             if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'delete')) {
@@ -82,7 +82,7 @@
                                         <label class="col-sm-12 col-form-label">Type <span style="color:#F00; font-style:oblique;">*</span></label>
                                         <div class="col-sm-12">
                                             <select name="comments" class="form-control required" id="comments">
-                                                <option value=""><?php echo $language['select'] ?></option>
+                                                <option value=""> Select</option>
                                                 <option value="1">Sales</option>
                                                 <option value="2">Purchase</option>
                                                 <option value="3">Others</option>
@@ -108,9 +108,9 @@
                                 </div>
                             </div>
                             <div class="frameset_table action-btn-align">
-                                <input type="submit" value="<?php echo $language['submit'] ?>" class="submit btn btn-success btn-fw " id="submit">
-                                <input type="reset" value="<?php echo $language['clear'] ?>" class="btn  btn-danger btn-fw" id="cancel">
-                                <a href="<?php echo $this->config->item('base_url') . 'masters/manage_category' ?>" class="btn btn-dark btn-fw"><span class="glyphicon"></span>&nbsp;<?php echo $language['back'] ?></a>
+                                <input type="submit" value="Submit" class="submit btn btn-success btn-fw " id="submit">
+                                <input type="reset" value="Clear" class="btn  btn-danger btn-fw" id="cancel">
+                                <a href="<?php echo $this->config->item('base_url') . 'masters/manage_category' ?>" class="btn btn-dark btn-fw"><span class="glyphicon"></span>&nbsp;Back</a>
                             </div>
                         </form>
                     </div>
@@ -155,14 +155,14 @@ if (isset($category_list) && !empty($category_list)) {
         var table = $('#categorytable').DataTable({
             "searchDelay": 500,
             "oLanguage": {
-                "sLengthMenu": language["show"] + " _MENU_ " + language["entries"],
-                "sInfoEmpty": language["showing"] + ' 0 ' + language["to"] + ' 0 ' + language["of"] + ' 0 ' + language["entries"],
-                "sInfo": language["showing"] + ' _START_ ' + language["to"] + ' _END_ ' + language["of"] + ' _TOTAL_ ' + language["entries"],
-                "sZeroRecords": language["no_data_available"],
-                "sSearch": language["search"],
+                "sLengthMenu": Show + " _MENU_ " + Entries,
+                "sInfoEmpty": Showing + ' 0 ' + to + ' 0 ' + of +' 0 ' + Entries,
+                "sInfo": Showing + ' _START_ ' + to + ' _END_ ' + of +' _TOTAL_ ' + Entries,
+                "sZeroRecords": No Data Available,
+                "sSearch": Search,
                 "oPaginate": {
-                    "sPrevious": language["previous"],
-                    "sNext": language["next"],
+                    "sPrevious": Previous,
+                    "sNext": Next,
                 }
             },
             "columnDefs": [{
@@ -180,11 +180,11 @@ if (isset($category_list) && !empty($category_list)) {
                     value1: hidin
                 },
                 success: function(result) {
-                    swal(language["deleted"], language["exp_cat_delete_success"], language["sucess"]);
+                    swal(language["deleted"], language["exp_cat_delete_success"], Success);
                     $('.category' + hidin).remove();
                     $('.modal-backdrop').hide();
                     $('.deletemodal').hide();
-                    $('.sa-confirm-button-container .confirm').html(language["ok"]);
+                    $('.sa-confirm-button-container .confirm').html(OK);
                 }
             });
         });
@@ -212,7 +212,7 @@ if (isset($category_list) && !empty($category_list)) {
                             //swal(language["deleted"], "Expense Category successfully deleted!", language["sucess"]);
                             swal("Deleted!", "Expense Category successfully deleted!", "success");
                             $('.category' + hidin).remove();
-                            $('.sa-confirm-button-container .confirm').html(language["ok"]);
+                            $('.sa-confirm-button-container .confirm').html(OK);
                         }
                     });
                 }
@@ -226,7 +226,7 @@ if (isset($category_list) && !empty($category_list)) {
     $("#manage_category").on('blur', function() {
         var category = $("#manage_category").val();
         if (category == "" || category == null || category.trim().length == 0) {
-            $("#category_error").text(language["required_field"]);
+            $("#category_error").text(Required Field);
         } else {
             $("#category_error").text("");
         }
@@ -254,7 +254,7 @@ if (isset($category_list) && !empty($category_list)) {
     $('#comments').on('blur', function() {
         var comments = $('#comments').val();
         if (comments == '' || comments == null || comments.trim().length == 0) {
-            $('#comments_err').html(language["required_field"]);
+            $('#comments_err').html(Required Field);
         } else {
             $('#comments_err').html(" ");
         }
@@ -280,14 +280,14 @@ if (isset($category_list) && !empty($category_list)) {
         }
         var i = 0;
         if (comments == '' || comments == null || comments.trim().length == 0) {
-            $('#comments_err').html(language["required_field"]);
+            $('#comments_err').html(Required Field);
             i = 1;
         } else {
             $('#comments_err').html(" ");
         }
         var manage_category = $("#manage_category").val();
         if (manage_category == "" || manage_category == null || manage_category.trim().length == 0) {
-            $("#category_error").text(language["required_field"]);
+            $("#category_error").text(Required Field);
             i = 1;
         } else {
             $("#category_error").text("");

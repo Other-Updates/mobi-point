@@ -107,7 +107,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         </div>
                         <div class="col col-md-3">
                             <label>From Date</label>
-                            <input type="text" id='from_date' value="<?php echo date('01-m-Y') ?>" class="form-control datepicker" name="from_date" placeholder="dd-mm-yyyy" style="background-color:white;">
+                            <input type="text" id='from_date' value="<?php echo date('01-09-Y') ?>" class="form-control datepicker" name="from_date" placeholder="dd-mm-yyyy" style="background-color:white;">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -230,7 +230,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 ],
                 "processing": true, //Feature control the processing indicator.
                 "serverSide": true, //Feature control DataTables' server-side processing mode.
-                "retrieve": true,
+                // "retrieve": true,
+                responsive: true,
                 "order": [], //Initial no order.
                 //dom: 'Bfrtip',
                 // Load data for the table's content from an Ajax source

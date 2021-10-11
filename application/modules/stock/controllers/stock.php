@@ -235,12 +235,14 @@ class Stock extends MX_Controller
             $row[] = number_format($ass->cost_price, 2);
             $row[] = round($ass->quantity);
             $row[] = number_format($ass->quantity * $ass->cost_price_without_gst, 2);
-            $cgst = number_format(($ass->quantity * $ass->cost_price * $ass->cgst) / 100, 2);
-            $sgst = number_format(($ass->quantity * $ass->cost_price * $ass->sgst) / 100, 2);
+            // $cgst = number_format(($ass->quantity * $ass->cost_price * $ass->cgst) / 100, 2);
+            // $sgst = number_format(($ass->quantity * $ass->cost_price * $ass->sgst) / 100, 2);
 
             // $row[] = number_format($ass->quantity * );
             $row[] = $ass->gst . '%';
-            $row[] = number_format(($ass->quantity * $ass->cost_price * $ass->cgst) / 100, 2);
+            // $row[] = number_format(($ass->quantity * $ass->cost_price * $ass->cgst) / 100, 2);
+            $row[] = $ass->cgst . '%';
+            $row[] = $ass->sgst . '%';
             $row[] = number_format(($ass->quantity * $ass->cost_price * $ass->sgst) / 100, 2);
             //$net_total = $ass->quantity * $ass->cost_price;
             $row[] = number_format($ass->quantity * $ass->cost_price, 2);

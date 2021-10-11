@@ -122,5 +122,3 @@ class Manage_sub_category extends MX_Controller {
     }
 
 }
-
-?>
