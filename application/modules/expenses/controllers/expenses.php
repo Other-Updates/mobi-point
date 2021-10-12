@@ -183,6 +183,15 @@ class Expenses extends MX_Controller
         $this->template->write_view('content', 'expenses/balance_list', $data);
         $this->template->render();
     }
+    public function delete()
+    {
+
+        $id = $this->input->POST('value1'); {
+            $this->expense_model->delete($id);
+            $data["expense_details"] = $this->expense_model->get_all_expenses();
+            redirect($this->config->item('base_url') . 'masters/expenses_list', $data);
+        }
+    }
 
     function expenses_ajaxList()
     {
@@ -198,10 +207,12 @@ class Expenses extends MX_Controller
             } else {
                 $edit_row = '<a class="tooltips btn btn-info btn-fw btn-xs alerts" href=""><i class="fa fa-edit"></i></a>';
             }
+            $delete_row = '';
             if ($this->user_auth->is_action_allowed('expenses', 'expenses', 'delete')) {
-                $delete_row = '<a class="tooltips btn btn-info btn-fw btn-xs" href="'  . $ass->id . '"><i class="fa fa-trash"></i></a>';
+                $delete_row = '<a class="tooltips btn btn-info btn-fw btn-xs" href="' . base_url() . 'expenses/delete/'  . $ass->id . '"><i class="fa fa-trash"></i></a>';
+                // $delete_row = '<a onclick="check(' . $ass->id . ')" class="tooltips btn btn-default btn-xs delete_row" delete_id="test3_' . $ass->id . '" data-toggle="modal" name="delete" title="In-Active" id="delete"><i class="fa fa-ban"></i></a>';
             } else {
-                $delete_row = '<a class="tooltips btn btn-info btn-fw btn-xs alerts" href=""><i class="fa fa-trash"></i></a>';
+                $delete_row = '<a class="tooltips btn btn-info btn-fw btn-xs alerts" ><i class="fa fa-trash"></i></a>';
             }
             $no++;
             $row = array();
@@ -213,8 +224,8 @@ class Expenses extends MX_Controller
             $row[] = ucfirst($ass->mode);
             $row[] = number_format($ass->amount ? $ass->amount : '0.00', 2);
             $row[] = ($ass->created_at != '' && $ass->created_at != '0000-00-00 00:00:00') ? date('d-M-Y', strtotime($ass->created_at)) : '-';
-            $row[] = $edit_row;
-            $row[] = $delete_row;
+            $row[] = $edit_row . $delete_row;
+            // $row[] = $delete_row;
             $data[] = $row;
         }
         $output = array(
@@ -318,13 +329,13 @@ class Expenses extends MX_Controller
         $output = fopen('php://output', 'w');
         // output the column headings
         //        Order has been changes
-        fputcsv($output, array('S.No', 'Company', 'Expense Type', 'Category', 'Sub Category', 'Mode', 'Expense Amount', 'Created Date'));
+        fputcsv($output, array('S.No', 'Expense Type', 'Category', 'Sub Category', 'Mode', 'Expense Amount', 'Created Date'));
         // fetch the data
         //$rows = mysql_query($query);
         // loop over the rows, outputting them
 
         foreach ($query as $key => $value) {
-            $row = array($key + 1, $value['prefix'], $value['type'], $value['category'], $value['sub_category'], $value['mode'], number_format($value['amount'], 2), ($value['created_at'] != '1970-01-01') ? date('d-M-Y', strtotime($value['created_at'])) : '');
+            $row = array($key + 1, $value['type'], $value['category'], $value['sub_category'], $value['mode'], number_format($value['amount'], 2), ($value['created_at'] != '1970-01-01') ? date('d-M-Y', strtotime($value['created_at'])) : '');
             fputcsv($output, $row);
         }
 

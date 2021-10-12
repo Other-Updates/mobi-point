@@ -492,6 +492,7 @@ class Sales extends MX_Controller
         $datas["in_words"] = $this->convert_number($datas["quotation"][0]['net_total']);
         $datas["quotation_details"] = $quotation_details = $this->project_cost_model->get_all_invoice_details_by_id($id, $inv_detail_ids);
         $datas["category"] = $category = $this->categories_model->get_all_category();
+        $data['all_supplier'] = $this->project_cost_model->get_all_customer();
         $datas['company_details'] = $this->admin_model->get_company_details();
         $datas["brand"] = $brand = $this->brand_model->get_brand();
         $datas["user_info"] = $this->user_auth->get_from_session('user_info');
@@ -2884,6 +2885,7 @@ class Sales extends MX_Controller
                 $insert_data['inv_id'] = $post_data['inv_id'];
                 $insert_data['inv_detail_id'] = $inv_detail_id;
                 $insert_data['print_current_fields'] = $current_fields;
+                $insert_data['print_id'] = 'PRT-' . $print_data;
                 $print_data[] = $insert_data;
             }
             $this->project_cost_model->add_print_view_details($print_data);

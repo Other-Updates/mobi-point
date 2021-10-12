@@ -456,12 +456,31 @@ $data['company_details'] = $this->admin_model->get_company_details();
         });
     }
     $('#excel-prt').on('click', function() {
-        var firm_id = $('#firm').val();
-        var cat_id = $('#ex_category').val();
-        var sub_cat_id = $('#ex_subcat').val();
-        var from_date = $('#from_date').val();
-        var to_date = $('#to_date').val();
-        window.location = (BASE_URL + 'expenses/getall_expenses_entries?firm_id=' + firm_id + '&cat_id=' + cat_id + '&sub_cat_id=' + sub_cat_id + '&from_date=' + from_date + '&to_date=' + to_date);
+        // var firm_id = $('#firm').val();
+        // var cat_id = $('#ex_category').val();
+        // var sub_cat_id = $('#ex_subcat').val();
+        // var from_date = $('#from_date').val();
+        // var to_date = $('#to_date').val();
+        var arr = [];
+        arr.push({
+            'firm_id': $('#firm_id').val()
+        });
+        arr.push({
+            'cat_id': $('#ex_category').val()
+        });
+        arr.push({
+            'sub_cat_id': $('#ex_subcat').val()
+        });
+        arr.push({
+            'from_date': $('#from_date').val()
+        });
+        arr.push({
+            'to_date': $('#to_date').val()
+        });
+
+        var arrStr = JSON.stringify(arr);
+        window.location = (BASE_URL + 'expenses/getall_expenses_entries?' + arrStr);
+        // window.location.replace('<?php echo $this->config->item('base_url') . 'report/getall_expenses_entries?search=' ?>' + arrStr);
     });
     $("#from_date").datepicker({
         autoclose: true,

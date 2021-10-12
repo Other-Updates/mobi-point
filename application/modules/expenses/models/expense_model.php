@@ -219,6 +219,14 @@ class Expense_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    function delete($id)
+    {
+        $this->db->where('id', $id);
+        if ($this->db->update($this->table_name, $data = array('status' => 0))) {
+            return true;
+        }
+        return false;
+    }
     public function get_all_firms_by_user_id($user_id)
     {
         $this->db->select('erp_manage_firms.firm_id, firm_name, prefix');

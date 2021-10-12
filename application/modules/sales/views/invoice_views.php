@@ -552,6 +552,7 @@ if (isset($quotation_details) && !empty($quotation_details)) {
                 type: 'POST',
                 data: {
                     inv_id: $('#invoice_form').find('#invoice_id').val(),
+                    // print_id: $('#invoice_form').find('#invoice_id').val(),
                     inv_detail_id: inv_detail_id,
                 },
                 url: "<?php echo $this->config->item('base_url'); ?>" +

@@ -158,7 +158,7 @@ if (isset($category_list) && !empty($category_list)) {
                 "sLengthMenu": Show + " _MENU_ " + Entries,
                 "sInfoEmpty": Showing + ' 0 ' + to + ' 0 ' + of +' 0 ' + Entries,
                 "sInfo": Showing + ' _START_ ' + to + ' _END_ ' + of +' _TOTAL_ ' + Entries,
-                "sZeroRecords": No Data Available,
+                "sZeroRecords": 'No Data Available',
                 "sSearch": Search,
                 "oPaginate": {
                     "sPrevious": Previous,
@@ -226,7 +226,7 @@ if (isset($category_list) && !empty($category_list)) {
     $("#manage_category").on('blur', function() {
         var category = $("#manage_category").val();
         if (category == "" || category == null || category.trim().length == 0) {
-            $("#category_error").text(Required Field);
+            $("#category_error").text('Required Field');
         } else {
             $("#category_error").text("");
         }
@@ -254,7 +254,7 @@ if (isset($category_list) && !empty($category_list)) {
     $('#comments').on('blur', function() {
         var comments = $('#comments').val();
         if (comments == '' || comments == null || comments.trim().length == 0) {
-            $('#comments_err').html(Required Field);
+            $('#comments_err').html('Required Field');
         } else {
             $('#comments_err').html(" ");
         }
@@ -280,14 +280,14 @@ if (isset($category_list) && !empty($category_list)) {
         }
         var i = 0;
         if (comments == '' || comments == null || comments.trim().length == 0) {
-            $('#comments_err').html(Required Field);
+            $('#comments_err').html('Required Field');
             i = 1;
         } else {
             $('#comments_err').html(" ");
         }
         var manage_category = $("#manage_category").val();
         if (manage_category == "" || manage_category == null || manage_category.trim().length == 0) {
-            $("#category_error").text(Required Field);
+            $("#category_error").text('Required Field');
             i = 1;
         } else {
             $("#category_error").text("");
