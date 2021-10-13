@@ -155,14 +155,14 @@ if (isset($category_list) && !empty($category_list)) {
         var table = $('#categorytable').DataTable({
             "searchDelay": 500,
             "oLanguage": {
-                "sLengthMenu": Show + " _MENU_ " + Entries,
-                "sInfoEmpty": Showing + ' 0 ' + to + ' 0 ' + of +' 0 ' + Entries,
-                "sInfo": Showing + ' _START_ ' + to + ' _END_ ' + of +' _TOTAL_ ' + Entries,
+                "sLengthMenu": "Show_MENU_ Entries",
+                "sInfoEmpty": ' Showing  0 to  0  of  0  Entries',
+                "sInfo": 'Showing_START_ to  _END_  of  _TOTAL_  Entries',
                 "sZeroRecords": 'No Data Available',
-                "sSearch": Search,
+                "sSearch": 'Search',
                 "oPaginate": {
-                    "sPrevious": Previous,
-                    "sNext": Next,
+                    "sPrevious": 'Previous',
+                    "sNext": 'Next',
                 }
             },
             "columnDefs": [{

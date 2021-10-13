@@ -411,7 +411,7 @@
                                 <h3 id="myModalLabel" class="inactivepop">In-Active Supplier</h3>
                             </div>
                             <div class="modal-body">
-                                Do You Want In-Active This Supplier? <?php echo $val['name']; ?> <strong>(<?php echo $val['store_name']; ?>)</strong>
+                                Do You Want In-Active This Supplier?
                                 <input type="hidden" value="<?php echo $val['id']; ?>" class="id" />
                             </div>
                             <div class="modal-footer action-btn-align">

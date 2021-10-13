@@ -19,6 +19,7 @@ class Expenses extends MX_Controller
             'expenses/insert_expense' => array('add'),
             'expenses/get_subcategory' => array('add'),
             'expenses/edit' => array('edit'),
+            'expenses/delete' => array('delete'),
             'expenses/get_company_amount' => 'no_restriction',
             'expenses/update_expenses' => array('edit'),
             'expenses/balance_list' => 'no_restriction',
@@ -186,7 +187,11 @@ class Expenses extends MX_Controller
     public function delete()
     {
 
-        $id = $this->input->POST('value1'); {
+        $id = $this->input->POST('delete_id');
+        // echo "<pre>";
+        // print_r($id);
+        // exit;
+        {
             $this->expense_model->delete($id);
             $data["expense_details"] = $this->expense_model->get_all_expenses();
             redirect($this->config->item('base_url') . 'masters/expenses_list', $data);
@@ -209,8 +214,8 @@ class Expenses extends MX_Controller
             }
             $delete_row = '';
             if ($this->user_auth->is_action_allowed('expenses', 'expenses', 'delete')) {
-                $delete_row = '<a class="tooltips btn btn-info btn-fw btn-xs" href="' . base_url() . 'expenses/delete/'  . $ass->id . '"><i class="fa fa-trash"></i></a>';
-                // $delete_row = '<a onclick="check(' . $ass->id . ')" class="tooltips btn btn-default btn-xs delete_row" delete_id="test3_' . $ass->id . '" data-toggle="modal" name="delete" title="In-Active" id="delete"><i class="fa fa-ban"></i></a>';
+                // $delete_row = '<a class="tooltips btn btn-info btn-fw btn-xs" href="' . base_url() . 'expenses/delete/'  . $ass->id . '"><i class="fa fa-trash"></i></a>';
+                $delete_row = '<a onclick=" check(' . $ass->id . ')" class="tooltips btn btn-default btn-xs delete_row" delete_id="' . $ass->id . '"><i class="fa fa-ban"></i></a>';
             } else {
                 $delete_row = '<a class="tooltips btn btn-info btn-fw btn-xs alerts" ><i class="fa fa-trash"></i></a>';
             }

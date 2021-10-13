@@ -3,9 +3,11 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Manage_sub_category extends MX_Controller {
+class Manage_sub_category extends MX_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         if (!$this->user_auth->is_logged_in())
             redirect($this->config->item('base_url') . 'users/login');
@@ -34,17 +36,22 @@ class Manage_sub_category extends MX_Controller {
         $this->template->write_view('session_msg', 'masters/session_msg', $language_data);
     }
 
-    public function index() {
+    public function index()
+    {
         $data = array();
         $data['language'] = $language = $this->language;
         $client_id = $this->user_auth->get_login_client_id();
         $data['all_list'] = $this->subcategory_model->get_all_list($client_id);
         $data['category_list'] = $this->subcategory_model->get_all_category_list($client_id);
+        // echo '<pre>';
+        // print_r($data);
+        // exit;
         $this->template->write_view('content', 'masters/manage_sub_category', $data);
         $this->template->render();
     }
 
-    public function insert_sub_category() {
+    public function insert_sub_category()
+    {
         $data['language'] = $language = $this->language;
         $client_id = $this->user_auth->get_login_client_id();
         if ($this->input->post()) {
@@ -62,7 +69,8 @@ class Manage_sub_category extends MX_Controller {
         }
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $data = array();
         $data['language'] = $language = $this->language;
         $client_id = $this->user_auth->get_login_client_id();
@@ -72,7 +80,8 @@ class Manage_sub_category extends MX_Controller {
         $this->template->render();
     }
 
-    public function update_subcategory($id) {
+    public function update_subcategory($id)
+    {
         $data['language'] = $language = $this->language;
         $data = array();
         if ($this->input->post()) {
@@ -90,12 +99,14 @@ class Manage_sub_category extends MX_Controller {
         }
     }
 
-    public function delete() {
+    public function delete()
+    {
         $id = $this->input->POST('value1');
         $this->subcategory_model->delete_subcategory($id);
     }
 
-    public function add_duplicate_subcategory() {
+    public function add_duplicate_subcategory()
+    {
         $data['language'] = $language = $this->language;
         $client_id = $this->user_auth->get_login_client_id();
         $input = $this->input->post();
@@ -103,12 +114,14 @@ class Manage_sub_category extends MX_Controller {
         $i = 0;
         if ($validation) {
             $i = 1;
-        }if ($i == 1) {
+        }
+        if ($i == 1) {
             echo $language['expsub_category_already_exists'];
         }
     }
 
-    public function update_duplicate_subcategory() {
+    public function update_duplicate_subcategory()
+    {
         $data['language'] = $language = $this->language;
         $client_id = $this->user_auth->get_login_client_id();
         $input = $this->input->post();
@@ -116,9 +129,9 @@ class Manage_sub_category extends MX_Controller {
         $i = 0;
         if ($validation) {
             $i = 1;
-        }if ($i == 1) {
+        }
+        if ($i == 1) {
             echo $language['expsub_category_already_exists'];
         }
     }
-
 }

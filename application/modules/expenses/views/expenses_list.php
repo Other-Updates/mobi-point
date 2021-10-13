@@ -311,6 +311,10 @@ $data['company_details'] = $this->admin_model->get_company_details();
             table.ajax.reload(); //just reload table
         });
     });
+
+    function check(val) {
+        $('#test' + val).modal('show');
+    }
     // $('#search').click(function() { //button filter event click
     //     // console.log(1);
     //     var table;
@@ -497,6 +501,25 @@ $data['company_details'] = $this->admin_model->get_company_details();
         $('#from_date').datepicker('setEndDate', endDate);
     }).on('clearDate', function(selected) {
         $('#from_date').datepicker('setEndDate', null);
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".delete").on("click", function() {
+            var hidin = $(this).parent().parent().find('.id').val();
+            $.ajax({
+                url: BASE_URL + "masters/suppliers/delete_vendor",
+                type: 'POST',
+                data: {
+                    value1: hidin
+                },
+                success: function(result) {
+                    window.location.reload(BASE_URL + "masters/suppliers/");
+                }
+            });
+        });
+        $('.modal').css("display", "none");
+        $('.fade').css("display", "none");
     });
 </script>
 <!-- <script src="<?= $theme_path; ?>/js/fixedheader/dataTables.fixedHeader.min.js"></script> -->

@@ -15,7 +15,7 @@
                         <a class="nav-link active" id="tab-6-1" href="#sub_category-details" aria-controls="home-6-1" role="tab" data-toggle="tab" aria-selected="true"><i class="mdi mdi-table-large"></i>Expense SubCategory List</a>
                     </li>
                     <li role="presentation">
-                        <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_sub_category', 'add')) : ?>#sub_category<?php endif ?>" aria-controls="profile-6-2" role="tab" aria-selected="false" class="nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_sub_category ', 'add')) : ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i><?php echo $language['add_new'] ?></a>
+                        <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_sub_category', 'add')) : ?>#sub_category<?php endif ?>" aria-controls="profile-6-2" role="tab" aria-selected="false" class="nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_sub_category ', 'add')) : ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i>Add New</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -24,8 +24,8 @@
                             <table id="categoryTable" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline">
                                 <thead>
                                     <tr>
-                                        <th><?php echo $language['s_no'] ?></th>
-                                        <th><?php echo $language['category'] ?></th>
+                                        <th>S.NO</th>
+                                        <th>Category</th>
                                         <th><?php echo $language['sub_category'] ?></th>
                                         <th class="action-btn-align">Action</th>
                                     </tr>
@@ -41,9 +41,9 @@
                                                 <td><?php echo ucfirst($list['category']); ?></td>
                                                 <td><?php echo ucfirst($list['sub_category']); ?></td>
                                                 <td class="action-btn-align">
-                                                    <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_sub_category', 'edit')) : ?><?php echo $this->config->item('base_url') . 'masters/manage_sub_category/edit/' . $list['id'] ?><?php endif ?>" class="tooltips btn btn-info btn-fw btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'edit')) : ?>alerts<?php endif ?>" title="<?php echo $language['edit'] ?>">
+                                                    <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_sub_category', 'edit')) : ?><?php echo $this->config->item('base_url') . 'masters/manage_sub_category/edit/' . $list['id'] ?><?php endif ?>" class="tooltips btn btn-info btn-fw btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'edit')) : ?>alerts<?php endif ?>" title="Edit">
                                                         <span class="fa fa-edit"></span></a>&nbsp;&nbsp;
-                                                    <!--<a href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_sub_category', 'delete')) : ?>#test3_<?php echo $list['id']; ?><?php endif ?>" data-toggle="modal" name="delete" class="tooltips btn btn-danger btn-fw btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'delete')) : ?>alerts<?php endif ?>" title="<?php echo $language['delete'] ?>">
+                                                    <!--<a href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_sub_category', 'delete')) : ?>#test3_<?php echo $list['id']; ?><?php endif ?>" data-toggle="modal" name="delete" class="tooltips btn btn-danger btn-fw btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'delete')) : ?>alerts<?php endif ?>" title="Delete">
                                                         <span class="icon-trash"></span></a>-->
                                                     <a name="delete" class="tooltips btn btn-danger btn-fw btn-xs <?php
                                                                                                                     if (!$this->user_auth->is_action_allowed('masters', 'manage_category', 'delete')) {
@@ -51,7 +51,7 @@
                                                                                                                     } else {
                                                                                                                         echo "delete_row";
                                                                                                                     }
-                                                                                                                    ?>" delete_id="<?php echo $list['id']; ?>" title="<?php echo $language['delete'] ?>">
+                                                                                                                    ?>" delete_id="<?php echo $list['id']; ?>" title="Delete">
                                                         <span class="fa fa-ban"></span></a>
                                                 </td>
                                             </tr>
@@ -61,7 +61,7 @@
                                     } else {
                                         ?>
                                         <tr>
-                                            <td colspan="4"><?php echo $language['no_data_available'] ?></td>
+                                            <td colspan="4">No Data Available</td>
                                         </tr>
                                     <?php
                                     }
@@ -76,11 +76,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-sm-12 col-form-label"><?php echo $language['category']; ?> <span style="color:#F00; font-style:oblique;">*</span></label>
+                                        <label class="col-sm-12 col-form-label">Category <span style="color:#F00; font-style:oblique;">*</span></label>
                                         <div class="col-sm-12">
                                             <div>
                                                 <select name="category" class="form-control required" id="category_add">
-                                                    <option><?php echo $language['select']; ?></option>
+                                                    <option>Select</option>
                                                     <?php
                                                     if (isset($category_list) && !empty($category_list)) {
                                                         foreach ($category_list as $cat_list) {
@@ -113,9 +113,9 @@
                                 </div>
                             </div>
                             <div class="frameset_table action-btn-align">
-                                <input type="submit" value="<?php echo $language['submit'] ?>" class="submit btn btn-success btn-fw" id="submit">
-                                <input type="reset" value="<?php echo $language['clear'] ?>" class=" btn btn-danger btn-fw" id="cancel">
-                                <a href="<?php echo $this->config->item('base_url') . 'masters/manage_sub_category' ?>" class="btn btn-dark btn-fw"><span class="glyphicon"></span>&nbsp;<?php echo $language['back'] ?></a>
+                                <input type="submit" value=" Submit" class="submit btn btn-success btn-fw" id="submit">
+                                <input type="reset" value="Clear" class=" btn btn-danger btn-fw" id="cancel">
+                                <a href="<?php echo $this->config->item('base_url') . 'masters/manage_sub_category' ?>" class="btn btn-dark btn-fw"><span class="glyphicon"></span>&nbsp;Back</a>
                             </div>
                         </form>
                     </div>
@@ -144,8 +144,8 @@ if (isset($all_list) && !empty($all_list)) {
                         <input type="hidden" value="<?php echo $val['id']; ?>" class="id" />
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary delete_yes" id="yesin"><?php echo $language['yes'] ?></button>
-                        <button type="button" class="btn btn-danger1 delete_all" data-dismiss="modal" id="no"><?php echo $language['no'] ?></button>
+                        <button class="btn btn-primary delete_yes" id="yesin">Yes</button>
+                        <button type="button" class="btn btn-danger1 delete_all" data-dismiss="modal" id="no">No</button>
                     </div>
                 </div>
             </div>
@@ -167,11 +167,11 @@ if (isset($all_list) && !empty($all_list)) {
                     value1: hidin
                 },
                 success: function(result) {
-                    swal(language["deleted"], language["expsub_cat_delete_success"], language["sucess"]);
+                    swal("Deleted!", language["expsub_cat_delete_success"], "Success");
                     $('.subcat' + hidin).remove();
                     $('.modal-backdrop').hide();
                     $('.deletemodal').hide();
-                    $('.sa-confirm-button-container .confirm').html(language["ok"]);
+                    $('.sa-confirm-button-container .confirm').html('OK');
                 }
             });
         });
@@ -198,7 +198,7 @@ if (isset($all_list) && !empty($all_list)) {
                             //swal(language["deleted"], language["expsub_cat_delete_success"], language["sucess"]);
                             swal("Deleted!", "Expense Sub Category successfully deleted!", "success");
                             $('.subcat' + hidin).remove();
-                            $('.sa-confirm-button-container .confirm').html(language["ok"]);
+                            $('.sa-confirm-button-container .confirm').html("ok");
                         }
                     });
                 }
@@ -207,14 +207,14 @@ if (isset($all_list) && !empty($all_list)) {
         var table = $('#categoryTable').DataTable({
 
             "oLanguage": {
-                "sLengthMenu": language["show"] + " _MENU_ " + language["entries"],
-                "sInfoEmpty": language["showing"] + ' 0 ' + language["to"] + ' 0 ' + language["of"] + ' 0 ' + language["entries"],
-                "sInfo": language["showing"] + ' _START_ ' + language["to"] + ' _END_ ' + language["of"] + ' _TOTAL_ ' + language["entries"],
-                "sZeroRecords": language["no_data_available"],
-                "sSearch": language["search"],
+                "sLengthMenu": "show_MENU_entries",
+                "sInfoEmpty": "showing 0 to 0 of 0  + entries",
+                "sInfo": 'Showing_START_ to  _END_  of  _TOTAL_  Entries',
+                "sZeroRecords": 'No Data Available',
+                "sSearch": 'Search',
                 "oPaginate": {
-                    "sPrevious": language["previous"],
-                    "sNext": language["next"],
+                    "sPrevious": 'Previous',
+                    "sNext": "next",
                 }
             },
             "columnDefs": [{
@@ -228,7 +228,7 @@ if (isset($all_list) && !empty($all_list)) {
 
         var sub_category = $('#subcategory_add').val();
         if (sub_category == '' || sub_category == null || sub_category.trim().length == 0) {
-            $('#sub_cat_err').html(language["required_field"]);
+            $('#sub_cat_err').html("Required Field");
         } else {
             $('#sub_cat_err').html(" ");
         }
@@ -238,7 +238,7 @@ if (isset($all_list) && !empty($all_list)) {
 
         var category = $("#category_add").val();
         if (category == "" || category == null || category.trim().length == 0) {
-            $("#category_error").text(language["required_field"]);
+            $("#category_error").text("Required Field");
         } else {
             $("#category_error").text("");
         }
@@ -290,7 +290,7 @@ if (isset($all_list) && !empty($all_list)) {
 
         var sub_category = $('#subcategory_add').val();
         if (sub_category == '' || sub_category == null || sub_category.trim().length == 0) {
-            $('#sub_cat_err').html(language["required_field"]);
+            $('#sub_cat_err').html("Required Field");
             i = 1;
         } else {
             $('#sub_cat_err').html(" ");
@@ -298,7 +298,7 @@ if (isset($all_list) && !empty($all_list)) {
 
         var category = $("#category_add").val();
         if (category == "" || category == null || category.trim().length == 0) {
-            $("#category_error").text(language["required_field"]);
+            $("#category_error").text("Required Field");
             i = 1;
         } else {
             $("#category_error").text("");
