@@ -107,7 +107,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         </div>
                         <div class="col col-md-3">
                             <label>From Date</label>
-                            <input type="text" id='from_date' value="<?php echo date('01-09-Y') ?>" class="form-control datepicker" name="from_date" placeholder="dd-mm-yyyy" style="background-color:white;">
+                            <input type="text" id='from_date' value="<?php echo date('01-m-Y') ?>" class="form-control datepicker" name="from_date" placeholder="dd-mm-yyyy" style="background-color:white;">
+                            <!-- <input type="text" name="reports[date_range][from_date]"  value="10/08/2021" readonly="readonly"> -->
                         </div>
                     </div>
                     <div class="form-group row">

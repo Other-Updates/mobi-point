@@ -152,7 +152,7 @@
                                         <label class="col-sm-4 control-label">Email Address</label>
                                         <div class="col-sm-8">
                                             <div class="input-group">
-                                                <input type="text" name="mail" class="  form-align" id="mail" />
+                                                <input type="text" name="mail" class=" form-align" id="mail" />
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-envelope"></i>
                                                 </div>
