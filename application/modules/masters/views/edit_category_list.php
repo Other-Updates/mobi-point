@@ -5,7 +5,9 @@
 <link href="<?php echo $theme_path ?>/css/select2.css" rel="stylesheet" />
 <script src="<?php echo $theme_path ?>/js/select2.min.js"></script>
 <style>
-    .input-group-addon .fa { width:10px !important; }
+    .input-group-addon .fa {
+        width: 10px !important;
+    }
 </style>
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
@@ -22,19 +24,19 @@
                                     $i = 0;
                                     foreach ($get_category as $val) {
                                         $i++
-                                        ?>
+                                ?>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group ">
                                                     <label class="col-sm-12 col-form-label">Type <span style="color:#F00; ">*</span></label>
                                                     <div class="col-sm-12">
-                                                        <select name="comments"  class="form-control required" id="comments" tabindex="1">
+                                                        <select name="comments" class="form-control required" id="comments" tabindex="1">
                                                             <option value="">Select</option>
-                                                            <option value="1"<?php echo ($val['comments'] == 1) ? 'selected="selected"' : ''; ?>>Sales</option>
-                                                            <option value="2"<?php echo ($val['comments'] == 2) ? 'selected="selected"' : ''; ?>>Purchase</option>
-                                                            <option value="3"<?php echo ($val['comments'] == 3) ? 'selected="selected"' : ''; ?>>Others</option>
+                                                            <option value="1" <?php echo ($val['comments'] == 1) ? 'selected="selected"' : ''; ?>>Sales</option>
+                                                            <option value="2" <?php echo ($val['comments'] == 2) ? 'selected="selected"' : ''; ?>>Purchase</option>
+                                                            <option value="3" <?php echo ($val['comments'] == 3) ? 'selected="selected"' : ''; ?>>Others</option>
                                                         </select>
-                                                        <span id="comments_err" class="val"  style="color:#F00; "></span>
+                                                        <span id="comments_err" class="val" style="color:#F00; "></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -43,25 +45,25 @@
                                                     <label class="col-sm-12 col-form-label">Category<span style="color:#F00; ">*</span></label>
                                                     <div class="col-sm-12">
                                                         <div class="input-group">
-                                                            <input type="text" name="category" class="form-control" id="category_edit" value="<?php echo $val['category']; ?>" tabindex="2"/>
+                                                            <input type="text" name="category" class="form-control" id="category_edit" value="<?php echo $val['category']; ?>" tabindex="2" />
                                                             <div class="input-group-addon">
                                                                 <i class="fa fa-fw fa-user"></i>
                                                             </div>
                                                         </div>
-                                                        <span id="category_err" class="val"  style="color:#F00; font-size: 14px;"></span>
-                                                        <span id="duplicatecategory" class="duplicatecategory"  style="color:#F00;font-size: 14px;"></span>
+                                                        <span id="category_err" class="val" style="color:#F00; font-size: 14px;"></span>
+                                                        <span id="duplicatecategory" class="duplicatecategory" style="color:#F00;font-size: 14px;"></span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="id" class="id form-control id_update" id="category_id" value="<?php echo $val['id']; ?>"  />
+                                            <input type="hidden" name="id" class="id form-control id_update" id="category_id" value="<?php echo $val['id']; ?>" />
                                         </div>
-                                        <?php
+                                <?php
                                     }
                                 }
                                 ?>
                                 <div class="frameset_table action-btn-align">
                                     <input type="submit" name="submit" class="btn btn-success btn-fw" value="<?php echo $language['update'] ?>" id="submit" tabindex="3">
-                                    <input type="reset" value="<?php echo $language['clear'] ?>" class="btn btn-danger btn-fw" id="reset" tabindex="4" >
+                                    <input type="reset" value="<?php echo $language['clear'] ?>" class="btn btn-danger btn-fw" id="reset" tabindex="4">
                                     <a href="<?php echo $this->config->item('base_url') . 'masters/manage_category/' ?>" class="btn btn-dark btn-fw">&nbsp;<?php echo $language['back'] ?></a>
                                 </div>
                             </form>
@@ -75,34 +77,29 @@
 <script>
     var language_json = <?php echo json_encode($language); ?>;
     var language = language_json;
-    $('#reset').on('click', function () {
+    $('#reset').on('click', function() {
         $('.val').html("");
         $('#duplicatecategory').html("");
     });
-    $("#category_edit").on('blur', function () {
+    $("#category_edit").on('blur', function() {
         var category_edit = $("#category_edit").val();
-        if (category_edit == "" || category_edit == null || category_edit.trim().length == 0)
-        {
+        if (category_edit == "" || category_edit == null || category_edit.trim().length == 0) {
             $("#category_err").html(language["required_field"]);
-        } else
-        {
+        } else {
             $("#category_err").html("");
         }
     });
 
-    $('#comments').on('blur', function ()
-    {
+    $('#comments').on('blur', function() {
         var comments = $('#comments').val();
-        if (comments == '' || comments == null || comments.trim().length == 0)
-        {
+        if (comments == '' || comments == null || comments.trim().length == 0) {
             $('#comments_err').html(language["required_field"]);
-        } else
-        {
+        } else {
             $('#comments_err').html(" ");
         }
     });
 
-    $('#category_edit').on('blur', function () {
+    $('#category_edit').on('blur', function() {
         var cat_name = $.trim($('#category_edit').val());
         var id = $('#category_id').val();
         var comments = $.trim($("#comments").val());
@@ -112,9 +109,12 @@
                 url: BASE_URL + "masters/manage_category/update_duplicate_category",
                 type: 'get',
                 async: false,
-                data: {value1: cat_name, value2: id, comments: comments},
-                success: function (result)
-                {
+                data: {
+                    value1: cat_name,
+                    value2: id,
+                    comments: comments
+                },
+                success: function(result) {
                     $('#duplicatecategory').html(result);
                 }
             });
@@ -122,7 +122,7 @@
             $('#duplicatecategory').html('');
         }
     });
-    $('#submit').on('click', function () {
+    $('#submit').on('click', function() {
         var cat_name = $.trim($('#category_edit').val());
         var id = $('#category_id').val();
         var comments = $('#comments').val();
@@ -132,9 +132,12 @@
                 url: BASE_URL + "masters/manage_category/update_duplicate_category",
                 type: 'get',
                 async: false,
-                data: {value1: cat_name, value2: id, comments: comments},
-                success: function (result)
-                {
+                data: {
+                    value1: cat_name,
+                    value2: id,
+                    comments: comments
+                },
+                success: function(result) {
                     $('#duplicatecategory').html(result);
                 }
             });
@@ -146,6 +149,7 @@
 
             $('#comments_err').html(language["required_field"]);
             i = 1;
+            console.log(3);
         } else {
 
             $('#comments_err').html(" ");
@@ -156,14 +160,14 @@
 
             $("#category_err").html(language["required_field"]);
             i = 1;
-        } else
-        {
+            console.log(2);
+        } else {
             $("#category_err").html("");
         }
         var m = $('#duplicatecategory').html();
-        if ((m.trim()).length > 0)
-        {
+        if ((m.trim()).length > 0) {
             i = 1;
+            console.log(1);
         }
         if (i == 1) {
             return false;

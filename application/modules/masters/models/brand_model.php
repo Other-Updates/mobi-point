@@ -10,7 +10,7 @@ class Brand_model extends CI_Model
     public $erp_category = 'erp_category as c';
     var $selectColumn = 'b.id,b.cat_id,c.categoryName as cat_name,b.brands,r.firm_name,b.firm_id,b.cat_id';
     var $column_order = array(null, 'c.categoryName', 'b.brands', 'b.hsn', 'b.gst', null); //set column field database for datatable orderable
-    var $column_search = array('r.firm_name', 'b.brands'); //set column field database for datatable searchable
+    var $column_search = array('c.categoryName', 'b.hsn', 'b.gst', 'b.brands'); //set column field database for datatable searchable
     var $order = array('b.cat_id' => 'DESC'); // default order
     function __construct()
     {

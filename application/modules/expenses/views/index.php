@@ -38,6 +38,26 @@
                     <form action="<?php echo $this->config->item('base_url'); ?>expenses/insert_expense" enctype="multipart/form-data" name="form" method="post">
                         <div class="row">
                             <div class="col-md-3">
+                                <div class="form-group" style="display: none;">
+                                    <label class="col-sm-12 col-form-label">Company <span style="color:#F00; ">*</span></label>
+                                    <div class="col-sm-12">
+                                        <select name="firm_id" class="form-control required" id="firm" tabindex="1">
+                                            <!-- <option value="">Select</option> -->
+                                            <?php
+                                            if (isset($firms) && !empty($firms)) {
+                                                foreach ($firms as $firm) {
+                                            ?>
+                                                    <option value="<?php echo $firm['firm_id']; ?>"> <?php echo $firm['firm_name']; ?> </option>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                        <input type="hidden" name="company_amount" id="firm_amt" value="0">
+                                        <span id="frim_name_err" class="val" style="color:#F00; "></span>
+                                    </div>
+                                </div>
+
 
                                 <div class="form-group">
                                     <label class="col-sm-12 col-form-label">Expense amount<span style="color:#F00; ">*</span></label>
@@ -292,17 +312,20 @@
 
     $('#submit').on('click', function() {
         var i = 0;
-        var firm = $("#firm").val();
-        if (firm == "" || firm == null || firm.trim().length == 0) {
-            $("#frim_name_err").text("This field is required");
-            i = 1;
-        } else {
-            $("#frim_name_err").text("");
-        }
+        // var firm = $("#firm").val();
+        // if (firm == "" || firm == null || firm.trim().length == 0) {
+        //     $("#frim_name_err").text("This field is required");
+        //     i = 1;
+
+        // } else {
+        //     $("#frim_name_err").text("");
+        // }
         var category = $("#ex_category").val();
         if (category == "" || category == null || category.trim().length == 0) {
             $("#cat_err").text("This field is required");
             i = 1;
+            // console.log('cat');
+
         } else {
             $("#cat_err").text("");
         }
@@ -310,6 +333,7 @@
         if (sub_category == "" || sub_category == null || sub_category.trim().length == 0) {
             $("#subcat_err").text("This field is required");
             i = 1;
+            // console.log('sub');
         } else {
             $("#subcat_err").text("");
         }
@@ -317,6 +341,7 @@
         if (ex_amt == "" || ex_amt == null || ex_amt.trim().length == 0) {
             $("#ex_amt_err").text("This field is required");
             i = 1;
+            // console.log('amt');
         } else {
             $("#ex_amt_err").text("");
         }
