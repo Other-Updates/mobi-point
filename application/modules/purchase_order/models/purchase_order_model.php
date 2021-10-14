@@ -20,7 +20,7 @@ class Purchase_order_model extends CI_Model
     var $category = 'erp_category c';
     var $selectcolumn = 'v.tin,v.store_name,v.state_id,v.name,v.mobil_number,v.email_id,v.address1,p.*,f.firm_name,c.CategoryName';
     var $column_order = array(null, 'p.po_no', 'v.store_name', 'p.total_qty', 'p.net_total', 'p.created_date', null);
-    var $column_search = array('f.firm_name', 'p.pr_no', 'p.pr_status', 'v.store_name', 'p.total_qty', 'p.delivery_qty', 'p.net_total', 'p.created_date', 'p.pr_status', 'p.delivery_status');
+    var $column_search = array('p.pr_no', 'p.po_no', 'p.pr_status', 'v.store_name', 'p.total_qty', 'p.delivery_qty', 'p.net_total', 'p.created_date', 'p.pr_status', 'p.delivery_status');
     var $order = array('p.id' => 'DESC'); // default order
     function __construct()
     {
@@ -419,6 +419,24 @@ class Purchase_order_model extends CI_Model
         $this->db->group_by('erp_po.id');
         // $this->db->order_by($this->erp_po . '.id', 'desc');
         $order = array('erp_po.id' => 'DESC');
+        $i = 0;
+
+        foreach ($this->column_search as $item) { // loop column
+            if ($_POST['search']['value']) { // if datatable send POST for search
+                if ($i === 0) { // first loop
+                    $like = "" . $item . " LIKE '%" . $_POST['search']['value'] . "%'";
+
+                    // $this->db->like($item, $_POST['search']['value']);
+                } else {
+
+                    //   $query = $this->db->or_like($item, $_POST['search']['value']);
+
+                    $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'";
+                }
+            }
+
+            $i++;
+        }
 
         if (isset($_POST['order']) && $column_order[$_POST['order']['0']['column']] != null) { // here order processing
             $this->db->order_by($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);

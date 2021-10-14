@@ -26,7 +26,7 @@
     }
 
     table tr td:nth-child(5) {
-        text-align: left !important;
+        text-align: right !important;
     }
 
     .aln-right tr td:nth-child(6) {
@@ -34,7 +34,7 @@
     }
 
     .aln-right tr td:nth-child(7) {
-        text-align: right !important;
+        text-align: center !important;
     }
 </style>
 <script>
