@@ -74,6 +74,9 @@ class Manage_category extends MX_Controller
         $data['language'] = $language = $this->language;
         $data["category_list"] = $this->category_model->get_all_category_list($client_id);
         $data["get_category"] = $this->category_model->get_category_by_id($id);
+        // echo '<pre>';
+        // print_r($data);
+        // exit;
         $this->template->write_view('content', 'masters/edit_category_list', $data);
         $this->template->render();
     }

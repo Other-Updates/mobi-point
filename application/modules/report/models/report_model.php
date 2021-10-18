@@ -1130,12 +1130,8 @@ class Report_model extends CI_Model
             if (!empty($serch_data['inv_id']) && $serch_data['inv_id'] != 'Select') {
                 $this->db->where_in($this->erp_invoice . '.id', implode(',', $serch_data['inv_id']));
             }
-            if (!empty($serch_data['cust_type']) && $serch_data['cust_type'] != 'Select') {
-                if ($serch_data['cust_type'] == 0) {
-                    $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
-                } else if ($serch_data['cust_type'] == 3) {
-                    $this->db->where($this->customer . '.tin IS NULL');
-                }
+            if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
+                $this->db->where('customer.id', $serch_data['customer']);
             }
             if (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
                 $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");
@@ -1198,14 +1194,8 @@ class Report_model extends CI_Model
             }
             $this->db->where_in('erp_invoice.firm_id', $frim_id);
         }
-        if (!empty($serch_data['cust_type']) && $serch_data['cust_type'] != 'Select') {
-            if ($serch_data['cust_type'] == 0) {
-                $this->db->where($this->customer . '.tin IS NULL');
-                //                $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
-            } else if ($serch_data['cust_type'] == 3) {
-                $this->db->where($this->customer . '.tin IS NOT NULL', null, false);
-                //                $this->db->where($this->customer . '.tin IS NULL');
-            }
+        if (!empty($serch_data['customer']) && $serch_data['customer'] != 'Select') {
+            $this->db->where('customer.id', $serch_data['customer']);
         }
         if (isset($serch_data["from_date"]) && $serch_data["from_date"] != "" && isset($serch_data["to_date"]) && $serch_data["to_date"] != "") {
             $this->db->where("DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') >='" . $serch_data["from_date"] . "' AND DATE_FORMAT(" . $this->erp_invoice . ".created_date,'%Y-%m-%d') <= '" . $serch_data["to_date"] . "'");

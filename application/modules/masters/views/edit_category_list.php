@@ -62,9 +62,9 @@
                                 }
                                 ?>
                                 <div class="frameset_table action-btn-align">
-                                    <input type="submit" name="submit" class="btn btn-success btn-fw" value="<?php echo $language['update'] ?>" id="submit" tabindex="3">
-                                    <input type="reset" value="<?php echo $language['clear'] ?>" class="btn btn-danger btn-fw" id="reset" tabindex="4">
-                                    <a href="<?php echo $this->config->item('base_url') . 'masters/manage_category/' ?>" class="btn btn-dark btn-fw">&nbsp;<?php echo $language['back'] ?></a>
+                                    <input type="submit" name="submit" class="btn btn-success btn-fw" value="Update" id="submit" tabindex="3">
+                                    <input type="reset" value=" Clear" class="btn btn-danger btn-fw" id="reset" tabindex="4">
+                                    <a href="<?php echo $this->config->item('base_url') . 'masters/manage_category/' ?>" class="btn btn-dark btn-fw">&nbsp;Back</a>
                                 </div>
                             </form>
                         </div>

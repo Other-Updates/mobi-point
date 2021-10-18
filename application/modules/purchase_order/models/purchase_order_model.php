@@ -383,7 +383,7 @@ class Purchase_order_model extends CI_Model
                 $this->db->where($this->erp_po . '.po_no', $serch_data['po_no']);
             }
             if (!empty($serch_data['supplier']) && $serch_data['supplier'] != 'Select') {
-                $this->db->where($this->vendor . '.store_name', $serch_data['supplier']);
+                $this->db->where('erp_po.supplier', $serch_data['supplier']);
             }
             if (!empty($serch_data['product']) && $serch_data['product'] != 'Select') {
                 $this->db->where($this->erp_po_details . '.product_id', $serch_data['product']);
@@ -409,7 +409,7 @@ class Purchase_order_model extends CI_Model
                 $this->db->where_in('erp_po.firm_id', $frim_id);
             }
         }
-        $this->db->select('v.id as vendor,v.tin,v.store_name,v.state_id,v.name,v.mobil_number,v.email_id,v.address1,erp_po.id,erp_po.po_no,erp_po.total_qty,erp_po.tax,erp_po.tax_label,'
+        $this->db->select('v.id ,v.tin,v.store_name,v.state_id,v.name,v.mobil_number,v.email_id,v.address1,erp_po.id,erp_po.po_no,erp_po.total_qty,erp_po.tax,erp_po.tax_label,'
             . 'erp_po.net_total,erp_po.delivery_schedule,erp_po.mode_of_payment,erp_po.remarks,erp_po.subtotal_qty,erp_po.estatus,erp_po.created_date');
         $this->db->select('erp_manage_firms.firm_name');
         $this->db->where('erp_po.estatus !=', 0);
@@ -462,9 +462,9 @@ class Purchase_order_model extends CI_Model
             return false;
         }
     }
-    function count_filtered_purchase_report()
+    function count_filtered_purchase_report($search_arr)
     {
-        $this->_get_purchase_report_datatables_query();
+        $this->_get_purchase_report_datatables_query($search_arr);
         $query = $this->db->get('erp_po');
         return $query->num_rows();
     }

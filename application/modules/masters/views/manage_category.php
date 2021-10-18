@@ -166,7 +166,7 @@ if (isset($category_list) && !empty($category_list)) {
                 }
             },
             "columnDefs": [{
-                "targets": [0, 1], //first column / numbering column
+                "targets": [0, 2], //first column / numbering column
                 "orderable": false, //set not orderable
             }, ],
         });

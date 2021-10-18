@@ -78,15 +78,15 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
             <div class="col-sm-2">
                 <div class="form-group">
-                    <label class="control-label">Customer Type</label>
+                    <label class="control-label">Customer Name</label>
                     <select id='cust_type' class="form-control">
-                        <option value="">Select</option>
+                        <option>Select</option>
                         <?php
                         if (isset($all_supplier) && !empty($all_supplier)) {
                             foreach ($all_supplier as $val) {
-                                print_r($val);
+
                         ?>
-                                <option value='<?= $val['id'] ?>'><?= $val['store_name'] ?></option>
+                                <option value='<?= $val['customer'] ?>'><?= $val['store_name'] ?></option>
                         <?php
                             }
                         }
@@ -239,6 +239,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
         $("#from_date").datepicker({
             format: 'dd-mm-yyyy',
             autoclose: true,
+            maxDate: 'startDate',
         }).on('changeDate', function(selected) {
             var startDate = new Date(selected.date.valueOf());
             $('#to_date').datepicker('setStartDate', startDate);
@@ -248,6 +249,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
         $("#to_date").datepicker({
             format: 'dd-mm-yyyy',
             autoclose: true,
+            maxDate: 'endDate',
         }).on('changeDate', function(selected) {
             var endDate = new Date(selected.date.valueOf());
             $('#from_date').datepicker('setEndDate', endDate);
@@ -370,7 +372,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 "type": "POST",
                 "data": function(data) {
                     // firm_id: $('#firm_id').val(),
-                    data.cust_type = $('#cust_type').val();
+                    data.customer = $('#cust_type').val();
                     data.from_date = $('#from_date').val();
                     data.to_date = $('#to_date').val();
                     data.gst = $('#gst_sales_report').val();

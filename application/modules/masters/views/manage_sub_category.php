@@ -26,7 +26,7 @@
                                     <tr>
                                         <th>S.NO</th>
                                         <th>Category</th>
-                                        <th><?php echo $language['sub_category'] ?></th>
+                                        <th>Sub Category</th>
                                         <th class="action-btn-align">Action</th>
                                     </tr>
                                 </thead>
@@ -218,7 +218,7 @@ if (isset($all_list) && !empty($all_list)) {
                 }
             },
             "columnDefs": [{
-                "targets": [0, 2], //first column / numbering column
+                "targets": [0, 3], //first column / numbering column
                 "orderable": false, //set not orderable
             }, ],
         });

@@ -75,6 +75,8 @@
                                                     <td><?php echo ucfirst($list['user_role']); ?></td>
                                                     <td class="action-btn-align">
                                                         <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'edit')) : ?><?php echo base_url() . 'masters/user_roles/user_permissions/' . $list['id']; ?><?php endif ?>" class="tooltips btn btn-default btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'edit')) : ?>alerts<?php endif ?>" title="User Permissions"><span class="fa fa-gear"></span></a>&nbsp;
+                                                        <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'delete')) : ?>#test3_<?php echo $val['id']; ?><?php endif ?>" data-toggle="modal" name="delete" class="tooltips btn btn-default btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'users', 'delete')) : ?>alerts<?php endif ?>" title="In-Active">
+                                                            <span class="fa fa-ban "></span></a>
                                                     </td>
                                                 </tr>
                                         <?php
@@ -201,7 +203,7 @@ if (isset($user_roles) && !empty($user_roles)) {
                     </div>
                     <div class="modal-body">
                         Do you want In-Active? &nbsp; <strong><?php echo $role['user_role']; ?></strong>
-                        <input type="hidden" value="<?php echo $role['id']; ?>" id="hidin" class="hidin" />
+                        <input type="hidden" value="<?php echo $role['id']; ?>" id="hidin" class="id" />
                     </div>
                     <div class="modal-footer action-btn-align">
                         <button class="btn btn-primary delete_yes yesin" id="yesin">Yes</button>
@@ -216,24 +218,42 @@ if (isset($user_roles) && !empty($user_roles)) {
 ?>
 
 <script type="text/javascript">
+    // $(document).ready(function() {
+    //     $('.delete_yes').on('click', function() {
+    //         for_loading('Loading Data Please Wait...');
+    //         var hidin = $(this).parent().parent().find('.hidin').val();
+    //         $.ajax({
+    //             url: BASE_URL + 'masters/user_roles/delete',
+    //             type: 'get',
+    //             data: {
+    //                 value1: hidin
+    //             },
+    //             success: function(result) {
+    //                 window.location.reload(BASE_URL + 'masters/user_roles');
+    //                 for_response('Deleted Successfully...');
+    //             }
+    //         });
+    //     });
+    //     $('.modal').css('display', 'none');
+    //     $('.fade').css('display', 'none');
+    // });
     $(document).ready(function() {
-        $('.delete_yes').on('click', function() {
-            for_loading('Loading Data Please Wait...');
-            var hidin = $(this).parent().parent().find('.hidin').val();
+        // $('#firm').select2();
+        $(".delete_yes").on("click", function() {
+            var hidin = $(this).parent().parent().find('.id').val();
             $.ajax({
-                url: BASE_URL + 'masters/user_roles/delete',
-                type: 'get',
+                url: BASE_URL + "masters/user_roles/delete_user",
+                type: 'POST',
                 data: {
                     value1: hidin
                 },
                 success: function(result) {
-                    window.location.reload(BASE_URL + 'masters/user_roles');
-                    for_response('Deleted Successfully...');
+                    window.location.reload(BASE_URL + "masters/user_roles/");
                 }
             });
         });
-        $('.modal').css('display', 'none');
-        $('.fade').css('display', 'none');
+        $('.modal').css("display", "none");
+        $('.fade').css("display", "none");
     });
 
     $('.up_fit').on('blur', function() {

@@ -108,7 +108,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         if (isset($all_supplier) && !empty($all_supplier)) {
                             foreach ($all_supplier as $val) {
                         ?>
-                                <option value='<?= $val['store_name'] ?>'><?= $val['store_name'] ?></option>
+                                <option value='<?= $val['id'] ?>'><?= $val['store_name'] ?></option>
                         <?php
                             }
                         }
@@ -454,62 +454,62 @@ $data['company_details'] = $this->admin_model->get_company_details();
         window.location.replace('<?php echo $this->config->item('base_url') . 'purchase_order/excel_report?search=' ?>' + arrStr);
     });
 
-    function datatable() {
-        var table;
-        //datatables
-        table = jQuery('#basicTable_call_back').DataTable({
-            "lengthMenu": [
-                [50, 100, 150, -1],
-                [50, 100, 150, "All"]
-            ],
-            "pageLength": 50,
-            "footerCallback": function(row, data, start, end, display) {
-                var api = this.api(),
-                    data;
-                // Remove the formatting to get integer data for summation
-                var intVal = function(i) {
-                    return typeof i === 'string' ?
-                        i.replace(/[\$,]/g, '') * 1 :
-                        typeof i === 'number' ?
-                        i : 0;
-                };
-                // Total over all pages
-                var cols = [3, 4];
-                symbol = " ";
-                var numFormat = $.fn.dataTable.render.number('\,', '.', 2, symbol).display;
-                for (x in cols) {
-                    total = api.column(cols[x]).data().reduce(function(a, b) {
-                        return intVal(a) + intVal(b);
-                    }, 0);
-                    // Total over this page
-                    pageTotal = api.column(cols[x], {
-                        page: 'current'
-                    }).data().reduce(function(a, b) {
-                        return intVal(a) + intVal(b);
-                    }, 0);
-                    // Update footer
-                    if (Math.floor(pageTotal) == pageTotal && $.isNumeric(pageTotal)) {
-                        pageTotal = pageTotal;
-                    } else {
-                        pageTotal = pageTotal.toFixed(2); /* float */
-                    }
-                    //  $(api.column(cols[x]).footer()).html(pageTotal);
-                    $(api.column(cols[x]).footer()).html(numFormat(parseFloat(pageTotal).toFixed(2)));
-                }
-            },
-            responsive: true,
-            columnDefs: [{
-                    responsivePriority: 1,
-                    targets: 0
-                },
-                {
-                    responsivePriority: 2,
-                    targets: -2
-                }
-            ]
-        });
-        new $.fn.dataTable.FixedHeader(table);
-    }
+    // function datatable() {
+    //     var table;
+    //     //datatables
+    //     table = jQuery('#basicTable_call_back').DataTable({
+    //         "lengthMenu": [
+    //             [50, 100, 150, -1],
+    //             [50, 100, 150, "All"]
+    //         ],
+    //         "pageLength": 50,
+    //         "footerCallback": function(row, data, start, end, display) {
+    //             var api = this.api(),
+    //                 data;
+    //             // Remove the formatting to get integer data for summation
+    //             var intVal = function(i) {
+    //                 return typeof i === 'string' ?
+    //                     i.replace(/[\$,]/g, '') * 1 :
+    //                     typeof i === 'number' ?
+    //                     i : 0;
+    //             };
+    //             // Total over all pages
+    //             var cols = [3, 4];
+    //             symbol = " ";
+    //             var numFormat = $.fn.dataTable.render.number('\,', '.', 2, symbol).display;
+    //             for (x in cols) {
+    //                 total = api.column(cols[x]).data().reduce(function(a, b) {
+    //                     return intVal(a) + intVal(b);
+    //                 }, 0);
+    //                 // Total over this page
+    //                 pageTotal = api.column(cols[x], {
+    //                     page: 'current'
+    //                 }).data().reduce(function(a, b) {
+    //                     return intVal(a) + intVal(b);
+    //                 }, 0);
+    //                 // Update footer
+    //                 if (Math.floor(pageTotal) == pageTotal && $.isNumeric(pageTotal)) {
+    //                     pageTotal = pageTotal;
+    //                 } else {
+    //                     pageTotal = pageTotal.toFixed(2); /* float */
+    //                 }
+    //                 //  $(api.column(cols[x]).footer()).html(pageTotal);
+    //                 $(api.column(cols[x]).footer()).html(numFormat(parseFloat(pageTotal).toFixed(2)));
+    //             }
+    //         },
+    //         responsive: true,
+    //         columnDefs: [{
+    //                 responsivePriority: 1,
+    //                 targets: 0
+    //             },
+    //             {
+    //                 responsivePriority: 2,
+    //                 targets: -2
+    //             }
+    //         ]
+    //     });
+    //     new $.fn.dataTable.FixedHeader(table);
+    // }
 </script>
 <script>
     $('.excel_btn1').on('click', function() {

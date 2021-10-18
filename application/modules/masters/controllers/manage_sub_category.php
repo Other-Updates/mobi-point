@@ -76,6 +76,9 @@ class Manage_sub_category extends MX_Controller
         $client_id = $this->user_auth->get_login_client_id();
         $data["get_category"] = $this->subcategory_model->get_subcategory_by_id($id);
         $data["category_list"] = $this->subcategory_model->get_all_category_list($client_id);
+        // echo '<pre>';
+        // print_r($data);
+        // exit;
         $this->template->write_view('content', 'masters/edit_subcategory_list', $data);
         $this->template->render();
     }

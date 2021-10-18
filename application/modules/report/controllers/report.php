@@ -380,7 +380,7 @@ class Report extends MX_Controller
     {
         $data['all_style'] = $this->report_model->get_all_invoice();
         // $data['all_supplier'] = $this->project_cost_model->get_all_customer_invoice();
-        $data['all_supplier'] = $this->project_cost_model->get_all_customer();
+        $data['all_supplier'] = $this->report_model->get_all_customer();
         //$data['quotation'] = $this->project_cost_model->get_invoice();
         $data["sales_man_list"] = $this->sales_man_model->get_sales_man();
         //$data['all_product'] = $this->report_model->get_all_product_invoice();
@@ -1271,7 +1271,7 @@ class Report extends MX_Controller
         $search_data['from_date'] = $search_data['from_date'];
         $search_data['to_date'] = $search_data['to_date'];
         // $search_arr['inv_id'] = $search_data['inv_id'];
-        $search_data['cust_type'] = $search_data['cust_type'];
+        $search_arr['customer'] = $search_data['customer'];
         // $search_data['product'] = $search_data['product'];
         $search_data['gst'] = $search_data['gst'];
         if (empty($search_arr)) {
@@ -1546,7 +1546,7 @@ class Report extends MX_Controller
         $search_data = $this->input->post();
         $search_arr = array();
         $search_arr['po_no'] = $search_data['po_no'];
-        $search_arr['sales_man'] = $search_data['sales_man'];
+        // $search_arr['sales_man'] = $search_data['sales_man'];
         $search_arr['product'] = $search_data['product'];
         $search_arr['supplier'] = $search_data['supplier'];
         $search_arr['from_date'] = $search_data['from_date'];
@@ -1577,7 +1577,7 @@ class Report extends MX_Controller
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->purchase_order_model->count_all_purchase_report(),
-            "recordsFiltered" => $this->purchase_order_model->count_filtered_purchase_report(),
+            "recordsFiltered" => $this->purchase_order_model->count_filtered_purchase_report($search_arr),
             "data" => $data,
         );
         echo json_encode($output);
