@@ -75,7 +75,7 @@
                                                     <td><?php echo ucfirst($list['user_role']); ?></td>
                                                     <td class="action-btn-align">
                                                         <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'edit')) : ?><?php echo base_url() . 'masters/user_roles/user_permissions/' . $list['id']; ?><?php endif ?>" class="tooltips btn btn-default btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'edit')) : ?>alerts<?php endif ?>" title="User Permissions"><span class="fa fa-gear"></span></a>&nbsp;
-                                                        <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'delete')) : ?>#test3_<?php echo $val['id']; ?><?php endif ?>" data-toggle="modal" name="delete" class="tooltips btn btn-default btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'users', 'delete')) : ?>alerts<?php endif ?>" title="In-Active">
+                                                        <a href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'delete')) : ?>#test3_<?php echo $list['id']; ?><?php endif ?>" data-toggle="modal" name="delete" class="tooltips btn btn-default btn-xs <?php if (!$this->user_auth->is_action_allowed('masters', 'users', 'delete')) : ?>alerts<?php endif ?>" title="In-Active">
                                                             <span class="fa fa-ban "></span></a>
                                                     </td>
                                                 </tr>
