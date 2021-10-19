@@ -485,7 +485,7 @@ class Sales extends MX_Controller
     }
     public function print_view($current_fields)
     {
-        $print_details = $this->project_cost_model->get_print_details($current_fields);
+        $datas['print_details'] = $print_details = $this->project_cost_model->get_print_details($current_fields);
         $id = $print_details['inv_id'];
         $inv_detail_ids = explode(',', $print_details['inv_detail_id']);
         $datas["quotation"] = $quotation = $this->project_cost_model->get_all_invoice_by_id($id);
@@ -2886,7 +2886,7 @@ class Sales extends MX_Controller
                 $insert_data['inv_detail_id'] = $inv_detail_id;
                 $insert_data['print_current_fields'] = $current_fields;
                 $insert_data['print_id'] = $post_data['print_id'];
-                // $insert_data[' print_type'] =  $print_type;
+                $insert_data['print_type'] =  $post_data['print_type'];
 
                 $print_data[] = $insert_data;
             }

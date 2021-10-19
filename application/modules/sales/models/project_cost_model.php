@@ -2346,7 +2346,7 @@ class Project_cost_model extends CI_Model
     }
     public function get_print_details($current_fields)
     {
-        $this->db->select('inv_id,group_concat(inv_detail_id) as inv_detail_id', false);
+        $this->db->select('inv_id,group_concat(inv_detail_id) as inv_detail_id,print_type', false);
         $this->db->where('print_current_fields', $current_fields);
         $this->db->group_by('inv_id');
         $query = $this->db->get($this->print_table)->row_array();
