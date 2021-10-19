@@ -150,6 +150,7 @@
                         $i = 1;
                         $cgst = 0;
                         $sgst = 0;
+
                         if (isset($quotation_details) && !empty($quotation_details)) {
                             foreach ($quotation_details as $vals) {
                                 $cgst1 = ($vals['tax'] / 100) * ($vals['per_cost'] * $vals['quantity']);
@@ -176,6 +177,7 @@
                                     }
                                 }
                                 $net_total = $val['net_total'];
+
                                 // if ($val['advance'] != '') {
                                 // $net_total = abs($val['net_total']) - abs($val['advance']);
                                 // }
@@ -206,11 +208,11 @@
                                         <?php echo number_format($vals['per_cost'], 2); ?>
                                     </td>
                                     <!--<td class="text_right">-->
-                                    <?php //echo number_format(($vals['quantity'] * $vals['per_cost']), 2) 
+                                    <?php //echo number_format(($vals['quantity'] * $vals['per_cost']), 2)
                                     ?>
                                     <!--</td>-->
                                     <!--                                    <td class="action-btn-align">
-                                    <?php //echo $vals['discount'] 
+                                    <?php //echo $vals['discount']
                                     ?>
                                     </td>-->
                                     <td class="action-btn-align">
@@ -254,7 +256,7 @@
                             <td colspan="3" class="hide_class" style="width:70px; text-align:right;"></td>
                             <td colspan="4" style="width:70px; text-align:right;" class="bor-tb0"></td>
                             <td colspan="3" style="text-align:right;" class="bor-tb0 bor-tr0">Advance Amount : </td>
-                            <td class="text_right bor-tb0"><?php //echo (!empty($val['advance'])) ? number_format($val['advance'], 2) : 0.00;    
+                            <td class="text_right bor-tb0"><?php //echo (!empty($val['advance'])) ? number_format($val['advance'], 2) : 0.00;
                                                             ?></td>
                         </tr>-->
                         <?php if ($val['tax_label'] != '') { ?>

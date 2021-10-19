@@ -291,7 +291,7 @@ if (!empty($customers)) {
                 <form action="javascript:" enctype="multipart/form-data" id="invoice_form" method="post">
                     <div style="text-align:center">
                         <button class="btn btn-defaultprint6 print_gst" data-type="gst"><span class="glyphicon glyphicon-print"> </span> GST Print</button>
-                        <button class="btn btn-defaultprint6 print_gst" data-type="no_gst"><span class="glyphicon glyphicon-print"></span> NO GST Print </button>
+                        <button class="btn btn-defaultprint6 print_nogst" data-type="no_gst"><span class="glyphicon glyphicon-print"></span> NO GST Print </button>
                     </div>
                     <input type="hidden" id="invoice_id" name="inv_id" value=<?php echo $val['id'] ?> />
                     <table class="table table-striped table-bordered responsive print_bgclr m-b-0" id="add_quotation" cellpadding="0" cellspacing="0">
@@ -554,6 +554,7 @@ if (isset($quotation_details) && !empty($quotation_details)) {
                     inv_id: $('#invoice_form').find('#invoice_id').val(),
                     print_id: $('#invoice_form').find('#invoice_id').val(),
                     inv_detail_id: inv_detail_id,
+                    print_type: print_type,
                 },
                 url: "<?php echo $this->config->item('base_url'); ?>" +
                     "sales/add_print_view/",

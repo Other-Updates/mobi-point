@@ -2886,6 +2886,8 @@ class Sales extends MX_Controller
                 $insert_data['inv_detail_id'] = $inv_detail_id;
                 $insert_data['print_current_fields'] = $current_fields;
                 $insert_data['print_id'] = $post_data['print_id'];
+                // $insert_data[' print_type'] =  $print_type;
+
                 $print_data[] = $insert_data;
             }
             $this->project_cost_model->add_print_view_details($print_data);
