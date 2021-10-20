@@ -695,7 +695,7 @@ class Product_model extends CI_Model
 
         if ($like) {
 
-            $where = "u.firm_id IN (" . $new . ") AND (" . $like . ")";
+            $where = "(" . $like . ")";
 
             $this->db->where($where);
         }

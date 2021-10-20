@@ -470,7 +470,7 @@ if (!empty($customers)) {
                         <label class="col-sm-4 control-label">Sales Man</label>
                         <div class="col-sm-8">
                             <select name='quotation[sales_man]' tabindex="4" class="form-control class_req" id="sales_man">
-                                <option>Select</option>
+                                <option value="">Select</option>
                                 <?php
                                 if (isset($sales_man) && !empty($sales_man)) {
                                     foreach ($sales_man as $val) {

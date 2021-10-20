@@ -193,6 +193,8 @@ if (isset($user_roles) && !empty($user_roles)) {
 <?php
 if (isset($user_roles) && !empty($user_roles)) {
     foreach ($user_roles as $role) {
+        // print_r($user_roles);
+        // exit;
 ?>
         <div id="test3_<?php echo $role['id']; ?>" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" align="center">
             <div class="modal-dialog">
@@ -241,12 +243,16 @@ if (isset($user_roles) && !empty($user_roles)) {
         // $('#firm').select2();
         $(".delete_yes").on("click", function() {
             var hidin = $(this).parent().parent().find('.id').val();
+            // console.log(hidin);
+
             $.ajax({
+
                 url: BASE_URL + "masters/user_roles/delete_user",
                 type: 'POST',
                 data: {
                     value1: hidin
                 },
+
                 success: function(result) {
                     window.location.reload(BASE_URL + "masters/user_roles/");
                 }

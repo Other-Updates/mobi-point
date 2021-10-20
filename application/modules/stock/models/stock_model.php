@@ -157,19 +157,6 @@ class Stock_model extends CI_Model
         $this->db->where_in('u.firm_id', $frim_id);
         $this->db->from($this->primaryTable);
         $i = 0;
-        //print_r($this->column_search);
-        foreach ($this->column_search as $item) {
-            // echo $_POST['search']['value'];
-            // loop column
-            if ($_POST['search']['value']) { // if datatable send POST for search
-                if ($i == 0) { // first loop
-                    $this->db->like($item, $_POST['search']['value']);
-                } else {
-                    $this->db->or_like($item, $_POST['search']['value']);
-                }
-            }
-            $i++;
-        }
         if ($search_data['category'] != '' || $search_data['category'] != 'Select' || $search_data['product'] != '') {
             if ($search_data['category'] != '') { // first loop
                 $this->db->where('u.category', $search_data['category']);
@@ -183,6 +170,24 @@ class Stock_model extends CI_Model
         if ($search_data['brand'] != '' && $search_data['brand'] != 'Select') {
             $this->db->where('b.id', $search_data['brand']);
         }
+        //print_r($this->column_search);
+        foreach ($this->column_search as $item) { // loop column
+            if ($_POST['search']['value']) { // if datatable send POST for search
+                if ($i === 0) { // first loop
+                    $like = "" . $item . " LIKE '%" . $_POST['search']['value'] . "%'";
+                    //$this->db->like($item, $_POST['search']['value']);
+                } else {
+                    //$query = $this->db->or_like($item, $_POST['search']['value']);
+                    $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'" . "";
+                }
+            }
+            $i++;
+        }
+        if ($like) {
+            $where = "(" . $like . " ) ";
+            $this->db->where($where);
+        }
+
         if (isset($_POST['order']) && $this->column_order[$_POST['order']['0']['column']] != null) { // here order processing
             $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else if (isset($this->order)) {

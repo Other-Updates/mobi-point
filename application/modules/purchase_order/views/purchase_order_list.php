@@ -79,20 +79,20 @@ $data['company_details'] = $this->admin_model->get_company_details();
 </div>
 <div class="mainpanel">
     <!--<div class="pageheader">
-<div class="media">
-<div class="pageicon pull-left">
-    <i class="fa fa-quote-right pageheader_icon iconquo"></i>
-</div>
-<div class="media-body">
-    <ul class="breadcrumb">
-        <li><a href="#"><i class="glyphicon glyphicon-home"></i></a></li>
-        <li>Home</li>
-    </ul>
-    <h4>Quotation List</h4>
-     <a href="<?php echo $this->config->item('base_url') . 'purchase_order/' ?>" class="btn btn-success right topgen adden"><span class="glyphicon glyphicon-plus"></span> Add Quotation</a>
-</div>
-</div>
-</div>-->
+                            <div class="media">
+                            <div class="pageicon pull-left">
+                                <i class="fa fa-quote-right pageheader_icon iconquo"></i>
+                            </div>
+                            <div class="media-body">
+                                <ul class="breadcrumb">
+                                    <li><a href="#"><i class="glyphicon glyphicon-home"></i></a></li>
+                                    <li>Home</li>
+                                </ul>
+                                <h4>Quotation List</h4>
+                                <a href="<?php echo $this->config->item('base_url') . 'purchase_order/' ?>" class="btn btn-success right topgen adden"><span class="glyphicon glyphicon-plus"></span> Add Quotation</a>
+                            </div>
+                            </div>
+                            </div>-->
     <div class="media mt--20">
         <h4>Purchase List
             <a href="<?php if ($this->user_auth->is_action_allowed('purchase', 'purchase_order', 'add')) : ?><?php echo $this->config->item('base_url') . 'purchase_order/' ?><?php endif ?>" class="btn btn-success right topgen <?php if (!$this->user_auth->is_action_allowed('purchase', 'purchase_order', 'add')) : ?>alerts<?php endif ?>"><span class="glyphicon glyphicon-plus"></span> New Purchase</a>

@@ -77,6 +77,10 @@
         margin: 104px 0 auto 0 !important;
     }
 </style>
+<?php
+$this->load->model('admin/admin_model');
+$data['company_details'] = $this->admin_model->get_company_details();
+?>
 <div class="print_header">
     <table width="100%">
         <tr>
@@ -85,13 +89,20 @@
             </td>
             <td width="85%">
                 <div class="print_header_tit">
-                    <h3> <?= $company_details[0]['firm_name'] ?></h3>
-                    <p></p>
-                    <p class="pf"> <?= $company_details[0]['address'] ?>,
+                    <h3><?= $data['company_details'][0]['company_name'] ?></h3>
+                    <p>
+                        <?= $data['company_details'][0]['address1'] ?>,
+                        <?= $data['company_details'][0]['address2'] ?>,
                     </p>
                     <p></p>
-                    <p class="pf"> Pin Code : <?= $company_details[0]['pincode'] ?></p>
+                    <p><?= $data['company_details'][0]['city'] ?>-
+                        <?= $data['company_details'][0]['pin'] ?>,
+                        <?= $data['company_details'][0]['state'] ?></p>
                     <p></p>
+                    <p>Ph:
+                        <?= $data['company_details'][0]['phone_no'] ?>, Email:
+                        <?= $data['company_details'][0]['email'] ?>
+                    </p>
                 </div>
             </td>
         </tr>
@@ -283,7 +294,7 @@
                         </tfoot>
                     </table>
                     <div class="hide_class action-btn-align">
-                        <a href="<?php echo $this->config->item('base_url') . 'report/purchase_report/' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
+                        <a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list/' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
                         <a class="btn btn-defaultprint6 print_btn"><span class="glyphicon glyphicon-print"></span> Print</a>
                         <?php if ($val['delivery_status'] == 'partially_delivered' || $val['delivery_status'] == 'pending') { ?>
                             <a type="submit" class="btn btn-success" id="save_delivary"><span class="glyphicon  glyphicon-check"></span> Delivered </a>

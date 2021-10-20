@@ -39,7 +39,7 @@ class User_roles extends MX_Controller
         $this->load->model('masters/user_model');
         // $data["agent"] = $this->user_model->get_user();
         $id = $this->input->POST('value1');
-        $this->user_model->delete_user($id);
+        $this->user_role_model->delete_user($id);
         redirect($this->config->item('base_url') . 'masters/users');
     }
     public function add()
