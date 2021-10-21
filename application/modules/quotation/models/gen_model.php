@@ -17,6 +17,7 @@ class Gen_model extends CI_Model
     private $erp_product = 'erp_product';
     private $erp_email_settings = 'erp_email_settings';
     private $erp_user = 'erp_user';
+    private $erp_invoice_print_details  = 'erp_invoice_print_details';
     var $joinTable1 = 'customer c';
     var $joinTable2 = 'erp_quotation_details qd';
     var $primaryTable = 'erp_quotation q';
@@ -690,6 +691,12 @@ class Gen_model extends CI_Model
         $this->db->select('prefix');
         $this->db->where('erp_manage_firms.firm_id', $id);
         return $this->db->get('erp_manage_firms')->result_array();
+    }
+    public function get_print_id($id)
+    {
+        $this->db->select('id');
+        $this->db->where(' erp_invoice_print_details.id', $id);
+        return $this->db->get('erp_invoice_print_details')->result_array();
     }
     public function get_reference_group_by_frim_id($id)
     {

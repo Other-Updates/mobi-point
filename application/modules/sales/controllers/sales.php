@@ -492,7 +492,7 @@ class Sales extends MX_Controller
         $datas["in_words"] = $this->convert_number($datas["quotation"][0]['net_total']);
         $datas["quotation_details"] = $quotation_details = $this->project_cost_model->get_all_invoice_details_by_id($id, $inv_detail_ids);
         $datas["category"] = $category = $this->categories_model->get_all_category();
-        $data['all_supplier'] = $this->project_cost_model->get_all_customer();
+        $datas['all_supplier'] = $this->project_cost_model->get_all_customer();
         $datas['company_details'] = $this->admin_model->get_company_details();
         $datas["brand"] = $brand = $this->brand_model->get_brand();
         $datas["user_info"] = $this->user_auth->get_from_session('user_info');
@@ -2877,20 +2877,25 @@ class Sales extends MX_Controller
     function add_print_view()
     {
         $post_data = $this->input->post();
+        // $id =
+        // $arr = $this->gen_model->get_print_id($id);
+
         if (!empty($post_data)) {
             $print_data = [];
             $current_fields = time();
+            $print_id = $this->project_cost_model->print_view_increment();
             foreach ($post_data['inv_detail_id'] as $inv_detail_id) {
                 $insert_data = array();
                 $insert_data['inv_id'] = $post_data['inv_id'];
                 $insert_data['inv_detail_id'] = $inv_detail_id;
                 $insert_data['print_current_fields'] = $current_fields;
-                $insert_data['print_id'] = $post_data['print_id'];
+                $insert_data['print_id'] =  $print_id;
                 $insert_data['print_type'] =  $post_data['print_type'];
 
                 $print_data[] = $insert_data;
             }
             $this->project_cost_model->add_print_view_details($print_data);
+            $this->project_cost_model->print_view_increment('Update');
             echo $current_fields;
             exit;
         }

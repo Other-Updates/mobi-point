@@ -465,8 +465,8 @@
                 gst1 = Number(gst.val() / 100) * Number(percost.val());
                 // cgst += Number(pertax.val() / 100) * taxless;
                 // sgst += Number(gst.val() / 100) * taxless;
-                cgst += (pertax1 * (Number(qty.val()) - Number(rq.val())))
-                sgst += (gst1 * (Number(qty.val()) - Number(rq.val())))
+                cgst += (pertax1 * (Number(qty.val()) - Number(rq.val())));
+                sgst += (gst1 * (Number(qty.val()) - Number(rq.val())));
                 // discount1 = Number(discount.val() / 100) * Number(percost.val());
                 var discount1 = 0;
                 sub_total1 = ((Number(qty.val()) - Number(rq.val())) * Number(percost.val()));
@@ -497,7 +497,7 @@
         var temp_round_off_minus = Number($('.round_off').val());
         var finals = final_amt - Number(temp_round_off_minus);
         finals = Math.abs(finals);
-        $('.final_amt').val(finals.toFixed(2));
+        $('.final_amt').val(final_sub_total.toFixed(2));
     }
     $(document).ready(function() {
         jQuery('.datepicker').datepicker();

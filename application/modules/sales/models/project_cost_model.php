@@ -2001,22 +2001,25 @@ class Project_cost_model extends CI_Model
     }
     public function get_all_customer()
     {
-        $customerIds = array();
-        $this->db->select('DISTINCT(customer)');
-        $invoice_query = $this->db->get('erp_invoice')->result_array();
-        $customerIds = array_map(function ($invoice_query) {
-            return $invoice_query['customer'];
-        }, $invoice_query);
-        $firms = $this->user_auth->get_user_firms();
-        $frim_id = array();
-        foreach ($firms as $value) {
-            $frim_id[] = $value['firm_id'];
-        }
-        $this->db->select('customer.store_name,customer.id');
-        if (!empty($customerIds))
-            $this->db->where_in('id', $customerIds);
-        $this->db->where($this->customer . '.status', 1);
-        $query = $this->db->get($this->customer)->result_array();
+        // $customerIds = array();
+        // $this->db->select('DISTINCT(customer)');
+        // $invoice_query = $this->db->get('erp_invoice')->result_array();
+        // $customerIds = array_map(function ($invoice_query) {
+        //     return $invoice_query['customer'];
+        // }, $invoice_query);
+        // $firms = $this->user_auth->get_user_firms();
+        // $frim_id = array();
+        // foreach ($firms as $value) {
+        //     $frim_id[] = $value['firm_id'];
+        // }
+        // $this->db->select('customer.store_name,customer.id');
+        // if (!empty($customerIds))
+        //     $this->db->where_in('id', $customerIds);
+        // $this->db->where($this->customer . '.status', 1);
+        // $query = $this->db->get($this->customer)->result_array();
+        // return $query;
+        $this->db->select('customer.name,customer.store_name,customer.mobil_number,customer.advance');
+        $query = $this->db->get('customer')->result_array();
         return $query;
     }
     public function get_product_cost_by_product($input)
@@ -2344,9 +2347,25 @@ class Project_cost_model extends CI_Model
 
         return false;
     }
+    public function print_view_increment($type = NULL)
+    {
+        if ($type == NULL) {
+            $this->db->select('value');
+            $this->db->where('type', 'print_view');
+            $query = $this->db->get('increment_table')->row_array();
+            return 'PRINT-' . $query['value'];
+        } else {
+            $this->db->select('value');
+            $this->db->where('type', 'print_view');
+            $query = $this->db->get('increment_table')->row_array();
+            $print_value = str_pad($query['value'] + 1, 2, 0, STR_PAD_LEFT);
+            $this->db->where('type', 'print_view');
+            $this->db->update('increment_table', array('value' => $print_value));
+        }
+    }
     public function get_print_details($current_fields)
     {
-        $this->db->select('inv_id,group_concat(inv_detail_id) as inv_detail_id,print_type', false);
+        $this->db->select('inv_id,group_concat(inv_detail_id) as inv_detail_id,print_type,print_id', false);
         $this->db->where('print_current_fields', $current_fields);
         $this->db->group_by('inv_id');
         $query = $this->db->get($this->print_table)->row_array();

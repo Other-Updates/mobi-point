@@ -1388,16 +1388,20 @@ class Report_model extends CI_Model
     }
     public function get_all_customers()
     {
-        $firms = $this->user_auth->get_user_firms();
-        $frim_id = array();
-        foreach ($firms as $value) {
-            $frim_id[] = $value['firm_id'];
-        }
+        // $firms = $this->user_auth->get_user_firms();
+        // $frim_id = array();
+        // foreach ($firms as $value) {
+        //     $frim_id[] = $value['firm_id'];
+        // }
         $this->db->select('id,store_name as customer_name');
         $this->db->where('customer.status', 1);
-        $this->db->where_in('customer.firm_id', $frim_id);
+        // $this->db->where_in('customer.firm_id', $frim_id);
         $query = $this->db->get('customer')->result_array();
-        return $query;
+
+        // echo "<pre>";
+        // print_r($query);
+        // exit;
+        // return $query;
     }
     public function get_all_products()
     {
@@ -1750,19 +1754,19 @@ class Report_model extends CI_Model
     }
     public function get_all_customer()
     {
-        $this->db->select('erp_invoice.customer');
+        // $this->db->select('erp_invoice.customer');
         $this->db->select('customer.name,customer.store_name,customer.mobil_number,customer.advance');
-        $firms = $this->user_auth->get_user_firms();
-        $frim_id = array();
-        foreach ($firms as $value) {
-            $frim_id[] = $value['firm_id'];
-        }
-        $this->db->where_in('erp_invoice.contract_customer', 0);
-        $this->db->where_in('erp_invoice.firm_id', $frim_id);
-        $this->db->order_by('erp_invoice.id', 'desc');
-        $this->db->join('customer', 'customer.id=erp_invoice.customer');
-        $this->db->group_by('erp_invoice.customer');
-        $query = $this->db->get('erp_invoice')->result_array();
+        // $firms = $this->user_auth->get_user_firms();
+        // $frim_id = array();
+        // foreach ($firms as $value) {
+        //     $frim_id[] = $value['firm_id'];
+        // }
+        // $this->db->where_in('erp_invoice.contract_customer', 0);
+        // $this->db->where_in('erp_invoice.firm_id', $frim_id);
+        // $this->db->order_by('erp_invoice.id', 'desc');
+        // $this->db->join('customer', 'customer.id=erp_invoice.customer');
+        // $this->db->group_by('erp_invoice.customer');
+        $query = $this->db->get('customer')->result_array();
         return $query;
     }
     public function outstanding_report($serch_data = NULL)
