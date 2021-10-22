@@ -532,6 +532,16 @@ class Sales_return extends MX_Controller
         // echo "<pre>";
         // print_r($data);
         // exit;
+        if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 4)) {
+            if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
+                array_multisort(array_column($data, 4), SORT_DESC, $data);
+            else
+                array_multisort(array_column($data, 4), SORT_ASC, $data);
+        }
+        /*Array split*/
+        if ($_POST['length'] != -1)
+            $data = array_slice($data, $_POST['start'], $_POST['length']);
+
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->sales_return_model->count_all(),

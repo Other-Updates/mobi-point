@@ -217,8 +217,8 @@ class Sales_return_model extends CI_Model
     function get_datatables($search_data)
     {
         $this->_get_datatables_query($search_data);
-        if ($_POST['length'] != -1)
-            $this->db->limit($_POST['length'], $_POST['start']);
+        // if ($_POST['length'] != -1)
+        //     $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get('erp_invoice')->result_array();
         $i = 0;
         foreach ($query as $val) {

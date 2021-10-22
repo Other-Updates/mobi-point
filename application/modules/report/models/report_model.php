@@ -573,8 +573,8 @@ class Report_model extends CI_Model
     {
         //$this->db->select($this->selectColumn);
         $this->_get_profit_datatables_query($search_data);
-        if ($_POST['length'] != -1)
-            $this->db->limit($_POST['length'], $_POST['start']);
+        // if ($_POST['length'] != -1)
+        //     $this->db->limit($_POST['length'], $_POST['start']);
         $firms = $this->user_auth->get_user_firms();
         $frim_id = array();
         foreach ($firms as $value) {

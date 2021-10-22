@@ -214,9 +214,9 @@ class Stock_model extends CI_Model
         $this->db->where('r.firm_name !=', '');
         $this->db->where('b.brands !=', '');
         $this->_get_datatables_query($search_data);
-        if ($_POST['length'] != -1) {
-            $this->db->limit($_POST['length'], $_POST['start']);
-        }
+        // if ($_POST['length'] != -1) {
+        //     $this->db->limit($_POST['length'], $_POST['start']);
+        // }
         if ($search_data['length'] != -1) {
             $this->db->limit($search_data['length'], $search_data['start']);
         }

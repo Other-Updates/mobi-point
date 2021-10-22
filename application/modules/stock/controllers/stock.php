@@ -249,6 +249,18 @@ class Stock extends MX_Controller
 
             $data[] = $row;
         }
+        if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 6)) {
+            if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
+                array_multisort(array_column($data, 6), SORT_DESC, $data);
+            else
+                array_multisort(array_column($data, 6), SORT_ASC, $data);
+        }
+        if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 10)) {
+            if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
+                array_multisort(array_column($data, 10), SORT_DESC, $data);
+            else
+                array_multisort(array_column($data, 10), SORT_ASC, $data);
+        }
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->stock_model->count_all(),

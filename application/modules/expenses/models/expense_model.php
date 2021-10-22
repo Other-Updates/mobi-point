@@ -448,8 +448,8 @@ class Expense_model extends CI_Model
             $this->db->order_by(key($order), $order[key($order)]);
         }
 
-        if ($_POST['length'] != -1)
-            $this->db->limit($_POST['length'], $_POST['start']);
+        // if ($_POST['length'] != -1)
+        //     $this->db->limit($_POST['length'], $_POST['start']);
 
 
         $query = $this->db->get($this->balance_sheet . ' AS tab_1');

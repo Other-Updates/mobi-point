@@ -304,6 +304,45 @@ class Expenses extends MX_Controller
         if ($com_bal) {
             $data = array_merge($com_bal, $data);
         }
+        if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 1)) {
+            if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
+                array_multisort(array_column($data, 1), SORT_DESC, $data);
+            else
+                array_multisort(array_column($data, 1), SORT_ASC, $data);
+        }
+        if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 2)) {
+            if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
+                array_multisort(array_column($data, 2), SORT_DESC, $data);
+            else
+                array_multisort(array_column($data, 2), SORT_ASC, $data);
+        }
+        if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 3)) {
+            if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
+                array_multisort(array_column($data, 3), SORT_DESC, $data);
+            else
+                array_multisort(array_column($data, 3), SORT_ASC, $data);
+        }
+        if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 4)) {
+            if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
+                array_multisort(array_column($data, 4), SORT_DESC, $data);
+            else
+                array_multisort(array_column($data, 4), SORT_ASC, $data);
+        }
+        if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 5)) {
+            if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
+                array_multisort(array_column($data, 5), SORT_DESC, $data);
+            else
+                array_multisort(array_column($data, 5), SORT_ASC, $data);
+        }
+        if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 6)) {
+            if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
+                array_multisort(array_column($data, 6), SORT_DESC, $data);
+            else
+                array_multisort(array_column($data, 6), SORT_ASC, $data);
+        }
+        /*Array split*/
+        if ($_POST['length'] != -1)
+            $data = array_slice($data, $_POST['start'], $_POST['length']);
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->expense_model->count_all_balance(),
