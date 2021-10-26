@@ -680,16 +680,12 @@ class Product_model extends CI_Model
             if ($_POST['search']['value']) { // if datatable send POST for search
                 if ($i === 0) { // first loop
                     $like = "" . $item . " LIKE '%" . $_POST['search']['value'] . "%'";
-
-                    // $this->db->like($item, $_POST['search']['value']);
+                    //$this->db->like($item, $_POST['search']['value']);
                 } else {
-
-                    //   $query = $this->db->or_like($item, $_POST['search']['value']);
-
-                    $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'";
+                    //$query = $this->db->or_like($item, $_POST['search']['value']);
+                    $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'" . "";
                 }
             }
-
             $i++;
         }
 

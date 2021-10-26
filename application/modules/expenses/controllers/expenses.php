@@ -298,7 +298,7 @@ class Expenses extends MX_Controller
                 $credit_amount = '0.00';
             }
             $row[] = number_format($credit_amount, 2);
-            $row[] = number_format($ass->balance ? $ass->balance : '0.00', 2);
+            $row[] = $ass->balance ? $ass->balance : '0.00';
             $data[] = $row;
         }
         if ($com_bal) {
@@ -310,12 +310,16 @@ class Expenses extends MX_Controller
             else
                 array_multisort(array_column($data, 1), SORT_ASC, $data);
         }
+
         if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 2)) {
             if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
                 array_multisort(array_column($data, 2), SORT_DESC, $data);
             else
                 array_multisort(array_column($data, 2), SORT_ASC, $data);
         }
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
         if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 3)) {
             if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
                 array_multisort(array_column($data, 3), SORT_DESC, $data);

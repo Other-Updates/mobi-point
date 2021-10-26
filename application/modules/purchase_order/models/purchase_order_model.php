@@ -420,22 +420,21 @@ class Purchase_order_model extends CI_Model
         // $this->db->order_by($this->erp_po . '.id', 'desc');
         $order = array('erp_po.id' => 'DESC');
         $i = 0;
-
         foreach ($this->column_search as $item) { // loop column
             if ($_POST['search']['value']) { // if datatable send POST for search
                 if ($i === 0) { // first loop
                     $like = "" . $item . " LIKE '%" . $_POST['search']['value'] . "%'";
-
-                    // $this->db->like($item, $_POST['search']['value']);
+                    //$this->db->like($item, $_POST['search']['value']);
                 } else {
-
-                    //   $query = $this->db->or_like($item, $_POST['search']['value']);
-
-                    $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'";
+                    //$query = $this->db->or_like($item, $_POST['search']['value']);
+                    $like .= " OR " . $item . " LIKE '%" . $_POST['search']['value'] . "%'" . "";
                 }
             }
-
             $i++;
+        }
+        if ($like) {
+            $where = "(" . $like . " ) ";
+            $this->db->where($where);
         }
 
         if (isset($_POST['order']) && $column_order[$_POST['order']['0']['column']] != null) { // here order processing

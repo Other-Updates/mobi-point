@@ -302,8 +302,8 @@ class Expense_model extends CI_Model
             $this->db->order_by(key($order), $order[key($order)]);
         }
 
-        if ($_POST['length'] != -1)
-            $this->db->limit($_POST['length'], $_POST['start']);
+        // if ($_POST['length'] != -1)
+        //     $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get($this->expense . ' AS tab_1');
         return $query->result();
     }
@@ -422,7 +422,7 @@ class Expense_model extends CI_Model
 
 
         $column_order = array(null, 'tab_4.comments', 'tab_1.mode', 'tab_1.created_at',  'tab_1.amount', 'tab_1.amount', 'tab_1.balance',);
-        $column_search = array('tab_1.id', 'tab_4.comments', 'tab_1.mode',  'tab_1.type', 'tab_1.mode', 'tab_2.opening_balance', 'tab_1.amount', 'tab_1.amount', 'tab_1.balance', 'tab_1.created_at');
+        $column_search = array('tab_1.id', 'tab_4.comments', 'tab_1.mode',  'tab_1.type', 'tab_1.mode', 'tab_2.opening_balance', 'tab_1.created_at', 'tab_1.amount', 'tab_1.amount', 'tab_1.balance',);
         $order = array('tab_1.id' => 'ASC');
         $i = 0;
         foreach ($column_search as $item) { // loop column

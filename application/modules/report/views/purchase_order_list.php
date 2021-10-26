@@ -178,6 +178,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         if (isset($po) && !empty($po)) {
                             $i = 1;
                             foreach ($po as $val) {
+                                // echo "<pre>";
+                                // print_r($val);
+                                // exit;
                         ?>
                                 <tr>
                                     <td class='first_td action-btn-align'><?= $i ?></td>

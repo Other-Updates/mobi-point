@@ -61,6 +61,7 @@ class Report extends MX_Controller
             'report/gst_report_ajaxList' => 'no_restriction',
             'report/invoice_gst_search_result' => 'no_restriction',
             'report/gst_report_pdf' => 'no_restriction',
+            'report/po_view' => 'no_restriction',
             'report/attendance_report' => 'no_restriction',
             'report/customer_excel_report' => 'no_restriction',
             'report/pr_excel_report' => 'no_restriction',
@@ -381,6 +382,9 @@ class Report extends MX_Controller
         $data['all_style'] = $this->report_model->get_all_invoice();
         // $data['all_supplier'] = $this->project_cost_model->get_all_customer_invoice();
         $data['all_supplier'] = $this->report_model->get_all_customer();
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
         //$data['quotation'] = $this->project_cost_model->get_invoice();
         $data["sales_man_list"] = $this->sales_man_model->get_sales_man();
         //$data['all_product'] = $this->report_model->get_all_product_invoice();
@@ -650,7 +654,7 @@ class Report extends MX_Controller
                 $price = (($invoice_total - $val['commission_rate']) - $p) / $p;
                 $profit_per = $price * 100;
                 //echo ($profit_per > 0 && !empty($p)) ? number_format($profit_per) . '%' : '0' . '%';
-                $total_cost_price = number_format((($invoice_total - $val['commission_rate']) - $p), 2, '.', ',');
+                $total_cost_price = ($invoice_total - $val['commission_rate']) - $p;
             ?>
                 <?php
             }
@@ -665,16 +669,18 @@ class Report extends MX_Controller
             $row[] = $val['commission_rate'];
             $row[] = number_format($p, 2);
             $row[] = ($profit_per > 0 && !empty($p)) ? number_format($profit_per) . '%' : '0' . '%';
-            $row[] = ($total_cost_price > 0 && !empty($p)) ? $total_cost_price : '0';
+            $row[] = ($total_cost_price > 0 && !empty($p)) ? number_format($total_cost_price, 2) : 0.00;
+            $row[] = ($total_cost_price > 0 && !empty($p)) ? $total_cost_price : 0;
+            $row[] = ($profit_per > 0 && !empty($p)) ? number_format($profit_per) . '' : '0' . '';
             $data[] = $row;
         }
         /*Array sorting */
-        if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 4)) {
-            if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
-                array_multisort(array_column($data, 4), SORT_DESC, $data);
-            else
-                array_multisort(array_column($data, 4), SORT_ASC, $data);
-        }
+        // if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 4)) {
+        //     if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
+        //         array_multisort(array_column($data, 4), SORT_DESC, $data);
+        //     else
+        //         array_multisort(array_column($data, 4), SORT_ASC, $data);
+        // }
         if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 6)) {
             if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
                 array_multisort(array_column($data, 6), SORT_DESC, $data);
@@ -683,16 +689,23 @@ class Report extends MX_Controller
         }
         if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 7)) {
             if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
-                array_multisort(array_column($data, 7), SORT_DESC, $data);
+                array_multisort(array_column($data, 10), SORT_DESC, $data);
             else
-                array_multisort(array_column($data, 7), SORT_ASC, $data);
+                array_multisort(array_column($data, 10), SORT_ASC, $data);
         }
+
         if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 8)) {
             if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
-                array_multisort(array_column($data, 8), SORT_DESC, $data);
+                array_multisort(array_column($data, 9), SORT_DESC, $data);
             else
-                array_multisort(array_column($data, 8), SORT_ASC, $data);
+                array_multisort(array_column($data, 9), SORT_ASC, $data);
         }
+        // if (!empty($_POST['order']['0']['column']) && ($_POST['order']['0']['column'] == 8)) {
+        //     if (!empty($_POST['order']['0']['dir']) && $_POST['order']['0']['dir'] == 'desc')
+        //         array_multisort(array_column($data, 8), SORT_DESC, $data);
+        //     else
+        //         array_multisort(array_column($data, 8), SORT_ASC, $data);
+        // }
         /*Array split*/
         if ($_POST['length'] != -1)
             $data = array_slice($data, $_POST['start'], $_POST['length']);
@@ -1030,6 +1043,20 @@ class Report extends MX_Controller
         $cust = $this->report_model->get_all_customer_report($json);
         $this->export_all_customer_csv($cust);
     }
+    public function po_view($id)
+    {
+        $datas["po"] = $po = $this->purchase_order_model->get_all_po_by_id($id);
+        $datas["po_details"] = $po_details = $this->purchase_order_model->get_all_po_details_by_id($id);
+        $datas["category"] = $category = $this->categories_model->get_all_category();
+        // $datas['company_details'] = $this->admin_model->get_company_details();
+        $datas["brand"] = $brand = $this->brand_model->get_brand();
+        $datas['company_details'] = $this->purchase_order_model->get_company_details_by_firm($id);
+        //        echo '<pre>';
+        //        print_r($datas["company_details"]);
+        //        exit;
+        $this->template->write_view('content', 'purchase_order_view', $datas);
+        $this->template->render();
+    }
     function export_all_customer_csv($query, $timezones = array())
     {
         // output headers so that the file is downloaded rather than displayed
@@ -1299,7 +1326,7 @@ class Report extends MX_Controller
         $search_data['from_date'] = $search_data['from_date'];
         $search_data['to_date'] = $search_data['to_date'];
         // $search_arr['inv_id'] = $search_data['inv_id'];
-        $search_arr['customer'] = $search_data['customer'];
+        $search_data['customer'] = $search_data['customer'];
         // $search_data['product'] = $search_data['product'];
         $search_data['gst'] = $search_data['gst'];
         if (empty($search_arr)) {
@@ -1588,7 +1615,7 @@ class Report extends MX_Controller
         $no = $_POST['start'];
         $paid = $bal = $inv = 0;
         foreach ($list as $val) {
-            $url = $this->config->item('base_url') . 'purchase_order/po_view/' . $val['id'];
+            $url = $this->config->item('base_url') . 'report/po_view/' . $val['id'];
             $view = '<a href="' . $url . '" data-toggle="tooltip" class="tooltips btn btn-default btn-xs" title="" data-original-title="View" ><span class="fa fa-eye"></span></a>';
             $no++;
             $row = array();
