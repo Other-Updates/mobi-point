@@ -264,7 +264,7 @@ class Stock extends MX_Controller
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->stock_model->count_all(),
-            "recordsFiltered" => $this->stock_model->count_filtered(),
+            "recordsFiltered" => $this->stock_model->count_filtered($search_arr),
             "data" => $data,
         );
         echo json_encode($output);

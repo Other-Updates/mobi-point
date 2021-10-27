@@ -371,11 +371,11 @@ if (!empty($customers)) {
                             <?php
                             $gst = number_format(($quotation[0]['cgst_price'] + $quotation[0]['sgst_price']), 2)
                             ?>
-                            <!-- <tr>
-                            <td align="right" colspan="4"><b>GST</b></td>
-                            <td align="center">12%</td>
-                            <td align="right"><?php echo $gst; ?></td>
-                        </tr> -->
+                            <tr style="display: none;">
+                                <td align="right" colspan="4"><b>GST</b></td>
+                                <td align="center">12%</td>
+                                <td align="right"><?php echo $gst; ?></td>
+                            </tr>
                             <?php if ($quotation[0]['tax'] && round($quotation[0]['tax']) != 0) { ?>
                                 <tr>
                                     <td align="right" colspan="4"><b><?php echo $quotation[0]['tax_label']; ?></b></td>

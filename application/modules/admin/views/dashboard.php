@@ -86,7 +86,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'purchase_order/purchase_order_list' ?>">Purchase order</a></div>
-                                <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i><?php echo 'total' ?> 12345687</div>
+                                <!-- <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i><?php echo 'total' ?> 12345687</div> -->
                             </div>
                             <div class="col-md-6">
                                 <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_1.png" /></div>
@@ -105,7 +105,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'purchase_return/' ?>">Purchase Return</a></div>
-                                <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                                <!-- <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div> -->
                             </div>
                             <div class="col-md-6">
                                 <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_5.png" /></div>
@@ -124,7 +124,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'stock/' ?>">Stock <br><br></a></div>
-                                <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                                <!-- <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div> -->
                             </div>
                             <div class="col-md-6">
                                 <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_4.png" /></div>
@@ -143,7 +143,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'sales/invoice_list' ?>">Sales Invoice</a></div>
-                                <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                                <!-- <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div> -->
                             </div>
                             <div class="col-md-6">
                                 <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_2.png" /></div>
@@ -162,7 +162,7 @@ $theme_path = $this->config->item('theme_locations') . $this->config->item('acti
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="cd-tit"><a href="<?php echo $this->config->item('base_url') . 'sales_return/' ?>">Sales Return</a></div>
-                                <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div>
+                                <!-- <div class="cd-value"><i class="fa fa-fw fa-rupee" aria-hidden="true"></i> 12345687</div> -->
                             </div>
                             <div class="col-md-6">
                                 <div class="cd-img"><img src="<?= $theme_path; ?>/images/icons/dash_6.png" /></div>

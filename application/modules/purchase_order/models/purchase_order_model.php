@@ -20,7 +20,7 @@ class Purchase_order_model extends CI_Model
     var $category = 'erp_category c';
     var $selectcolumn = 'v.tin,v.store_name,v.state_id,v.name,v.mobil_number,v.email_id,v.address1,p.*,f.firm_name,c.CategoryName';
     var $column_order = array(null, 'p.po_no', 'v.store_name', 'p.total_qty', 'p.net_total', 'p.created_date', null);
-    var $column_search = array('p.pr_no', 'p.po_no', 'p.pr_status', 'v.store_name', 'p.total_qty', 'p.delivery_qty', 'p.net_total', 'p.created_date', 'p.pr_status', 'p.delivery_status');
+    var $column_search = array('erp_po.pr_no', 'erp_po.po_no', 'erp_po.pr_status', 'v.store_name', 'erp_po.total_qty', 'erp_po.delivery_qty', 'erp_po.net_total', 'erp_po.created_date', 'erp_po.pr_status', 'erp_po.delivery_status');
     var $order = array('p.id' => 'DESC'); // default order
     function __construct()
     {

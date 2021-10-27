@@ -424,9 +424,9 @@ class Sales_return extends MX_Controller
         $search_arr = array();
         $filter = $this->session->userdata('product_name_wise');
         $search_arr['product_id'] = $filter['product_id'];
-        //$search_arr['brand'] = $search_data['brand'];
-        //$search_arr['product'] = $search_data['product'];
-        //$search_arr['category'] = $search_data['category'];
+        // $search_arr['brand'] = $search_data['brand'];
+        // $search_arr['product'] = $search_data['product'];
+        // $search_arr['category'] = $search_data['category'];
         if (empty($search_arr)) {
             $search_arr = array();
         }
@@ -519,7 +519,7 @@ class Sales_return extends MX_Controller
                     $row[] = str_replace("-", "", $rtn_amt);
                 } else {
                     $row[] = $val['delivery_qty'];
-                    $row[] = number_format($val['return'][0]['net_total'], 2);
+                    $row[] = $val['return'][0]['net_total'];
                     $row[] = '';
                     $row[] = '';
                 }
