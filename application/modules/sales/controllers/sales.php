@@ -2883,7 +2883,7 @@ class Sales extends MX_Controller
         if (!empty($post_data)) {
             $print_data = [];
             $current_fields = time();
-            $print_id = $this->project_cost_model->print_view_increment();
+            $print_id = $this->project_cost_model->print_view_increment('', $post_data['invoice_increment_id']);
             foreach ($post_data['inv_detail_id'] as $inv_detail_id) {
                 $insert_data = array();
                 $insert_data['inv_id'] = $post_data['inv_id'];

@@ -2347,14 +2347,13 @@ class Project_cost_model extends CI_Model
 
         return false;
     }
-    public function print_view_increment($type = NULL)
+    public function print_view_increment($type = NULL, $print_view_increment)
     {
         if ($type == NULL) {
             $this->db->select('value');
             $this->db->where('type', 'print_view');
             $query = $this->db->get('increment_table')->row_array();
-            // $query = $this->db->get('erp_invoice')->row_array();
-            return 'PRINT-' . $query['value'];
+            return  $print_view_increment . '- ' . $query['value'];
         } else {
             $this->db->select('value');
             $this->db->where('type', 'print_view');
