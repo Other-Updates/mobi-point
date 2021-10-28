@@ -2353,6 +2353,7 @@ class Project_cost_model extends CI_Model
             $this->db->select('value');
             $this->db->where('type', 'print_view');
             $query = $this->db->get('increment_table')->row_array();
+            // $query = $this->db->get('erp_invoice')->row_array();
             return 'PRINT-' . $query['value'];
         } else {
             $this->db->select('value');
