@@ -263,18 +263,18 @@
                                             <td class="action-btn-align">
                                                 <input type="text" tabindex="-1" name='per_cost[]' style="width:70px;" class="percost required " value="<?php echo $vals['per_cost'] ?>" readonly="readonly" />
                                             </td>
-                                            <!-- <td class="action-btn-align">
+                                            <td class="action-btn-align" style="display: none;">
                                                 <input type="hidden" tabindex="-1" name='discount[]' style="width:70px;" class="discount" value="<?php echo $vals['discount'] ?>" readonly="readonly" />
                                                 <input type="text" tabindex="-1" name='tax[]' style="width:70px;" class="pertax" value="<?php echo $vals['tax'] ?>" readonly="readonly" />
-                                            </td> -->
+                                            </td>
                                             <?php
                                             $gst_type = $po[0]['state_id'];
                                             if ($gst_type != '') {
                                                 if ($gst_type == 31) {
                                             ?>
-                                                    <!-- <td class="action-btn-align">
-                                                        <input type="text" name='gst[]' style="width:70px;" class="gst" value="<?php echo $vals['gst'] ?>" readonly="readonly" />
-                                                    </td> -->
+                                                    <td class="action-btn-align" style="display: none;">
+                                                        <input type="text" name='gst[]' style="display: none; style= width:70px;" class="gst" value="<?php echo $vals['gst'] ?>" readonly="readonly" />
+                                                    </td>
                                                 <?php } else { ?>
                                                     <td>
                                                         <input type="text" name='igst[]' style="width:70px;" class="igst" value="<?php echo $vals['igst']; ?>" readonly="readonly" />
@@ -455,6 +455,7 @@
                     gst = $(this).closest('tr').find('.igst');
                 }
             }
+            // var gst = $(this).closest('tr').find('.gst');
             // var subtotal = $(this).closest('tr').find('.subtotal');
             //  var discount = $(this).closest('tr').find('.discount');
             if (Number(qty.val()) != 0) {
