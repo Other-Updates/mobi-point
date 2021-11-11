@@ -648,7 +648,7 @@ if (!empty($customers)) {
                                                 </div>
 
                                                 <div class="col-md-5">
-                                                    <input type="text" tabindex="" name='quantity[]' style="width:50px;" class="qty required form-control" value="<?php echo $vals['quantity']; ?>" />
+                                                    <input type="text" tabindex="" name='quantity[]' style="width:50px;" readonly="readonly" class="qty required form-control" value="<?php echo $vals['quantity']; ?>" />
                                                 </div>
 
                                                 <input type="hidden" name="old_product_qty[]" value="<?php echo $vals['quantity']; ?>" />

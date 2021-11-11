@@ -191,7 +191,7 @@ if (!empty($customers)) {
                     <span class="error_msg ime_code_error"></span>
                 </td>
                 <td style="display:none;">
-                    <select id="cat_id" tabindex="-1" style="display:none;" class='cat_id static_style' name='categoty[]'>
+                    <select id="cat_id" tabindex="-1" style="display:none;" class='cat_id static_style' name='category[]'>
                         <option value="">Select</option>
                         <?php
                         if (isset($category) && !empty($category)) {
@@ -517,7 +517,7 @@ if (!empty($customers)) {
                                         <?php if (isset($vals['stock']) && !empty($vals['stock'])) { ?>
                                             <td>
                                                 <input type="hidden" name='available_quantity[]' style="width:70px;" class="code form-control colournamedup tabwid form-align " value="<?php echo $vals['stock'][0]['quantity'] ?>" readonly="readonly" />
-                                                <div class="col-xs-8"> <input <?php echo ($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles')  ? 'readonly' : ''; ?> type="text" tabindex="6" name='quantity[]' style="width:70px;margin-top: 2px;" class="qty required quantity" exist_qty="<?php echo round($vals['quantity']); ?>" value="<?php echo round($vals['quantity']); ?>" /></div>
+                                                <div class="col-xs-8"> <input <?php echo ($vals['categoryName'] == 'Fresh Mobiles' || $vals['categoryName'] == 'Used Mobiles')  ? 'readonly' : ''; ?> type="text" tabindex="6" name='quantity[]' readonly="readonly" style="width:70px;margin-top: 2px;" class="qty required quantity" exist_qty="<?php echo round($vals['quantity']); ?>" value="<?php echo round($vals['quantity']); ?>" /></div>
                                                 <input type="hidden" name='quantity_old[]' style="width:70px;" value="<?php echo $vals['quantity'] ?>" />
                                                 <div class="col-xs-4"> <span class="label label-success stock_qty" data-stock="<?php echo round($vals['quantity']); ?>"> <?php echo $vals['stock'][0]['quantity'] ?> </span></div>
                                                 <span class="error_msg error_msg_qty"></span>

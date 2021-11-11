@@ -1897,6 +1897,8 @@ class Sales extends MX_Controller
             foreach ($input['old_product_id'] as $key => $results) {
                 $qty = $input['old_product_qty'][$key];
                 $firm_id = $input['old_firm_id'][$key];
+                $product_details = $this->product_model->get_product_by_id($results);
+                $input['old_cat_id'][$key] = $product_details[0]['category_id'];
                 $cat_id = $input['old_cat_id'][$key];
                 $this->project_cost_model->remove_stocks_by_invdit($results, $qty, $firm_id, $cat_id);
             }
@@ -1920,6 +1922,8 @@ class Sales extends MX_Controller
                 $insert_arr = array();
                 foreach ($input['product_id'] as $key => $val) {
                     if ($val > 0) {
+                        $product_details = $this->product_model->get_product_by_id($input['product_id'][$key]);
+                        $input['category'][$key] = $product_details[0]['category_id'];
                         $insert['q_id'] = $input['quotation']['q_id'];
                         $insert['in_id'] = $input['pc_id'];
                         $insert['category'] = ($input['category'][$key] > 0) ? $input['category'][$key] : 0;
@@ -1978,7 +1982,6 @@ class Sales extends MX_Controller
                     //$this->project_cost_model->insert_invoice_details($insert_arr);
                 }
             }
-
             $receipt_id = $input['pc_id'];
             $receipt_num = $this->master_model->get_last_id('rp_code');
             $update_data = [

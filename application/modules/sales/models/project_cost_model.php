@@ -1153,11 +1153,6 @@ class Project_cost_model extends CI_Model
         // echo $this->db->last_query();
         //    exit;
         $ava_quantity = $available_stock[0]['quantity'] - $check_stock['quantity'];
-        // echo "<pre>";
-        // print_r($available_stock);
-        // print_r($check_stock);
-        // print_r($ava_quantity);
-        // exit;
         if ($ava_quantity < 0) {
             //Update Stock
             $quantity = $ava_quantity - $ava_quantity;
