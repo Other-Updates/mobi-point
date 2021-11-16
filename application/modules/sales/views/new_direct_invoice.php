@@ -398,7 +398,7 @@ if (!empty($customers)) {
                         </form>
                     </div>
                     <div class="modal-footer action-btn-align">
-                        <button type="button" class="edit btn btn-info1" id="update_customer">Update</button>
+                        <button type="button" class="edit btn btn-info1" id="update_customer">Save</button>
                         <button type="reset" class="btn btn-danger1 " id="model_discard" data-dismiss="modal">
                             Discard</button>
                     </div>
@@ -460,7 +460,7 @@ if (!empty($customers)) {
                         <div class="col-sm-8">
                             <input type="text" tabindex="2" name="customer[store_name]" id="customer_name" class='form-control form-align auto_customer' />
                             <span class="error_msg"></span>
-                            <input type="hidden" name="customer[id]" id="customer_id" class='id_customer  form-align' />
+                            <input type="hidden" name="customer[id]" id="customer_id" value="23" <?php $list['id']; ?> class='id_customer  form-align' />
                             <!--<input type="hidden"  name="quotation[product_id]" id="cust_id" class='id_customer' />-->
                             <div id="suggesstion-box" class="auto-asset-search "></div>
                         </div>
@@ -1112,17 +1112,17 @@ if (!empty($customers)) {
         var temp_credit_limit = $('#temp_credit_limit').val();
         var approved_by = $('#approved_by').val();
         var m = 0;
-        var gstinformat = new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');
-        var gstin_val = $.trim($('#tin').val());
-        if (gstinformat.test(gstin_val)) {
-            $('#gstin_err').text('').css('display', 'inline-block');
-            $('#gstin_err').text('');
-        } else if (gstin_val == '') {
-            $('#gstin_err').text('');
-        } else {
-            $('#gstin_err').text('Enter valid GSTIN').css('display', 'inline-block');
-            m++;
-        }
+        // var gstinformat = new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');
+        // var gstin_val = $.trim($('#tin').val());
+        // if (gstinformat.test(gstin_val)) {
+        //     $('#gstin_err').text('').css('display', 'inline-block');
+        //     $('#gstin_err').text('');
+        // } else if (gstin_val == '') {
+        //     $('#gstin_err').text('');
+        // } else {
+        //     $('#gstin_err').text('Enter valid GSTIN').css('display', 'inline-block');
+        //     m++;
+        // }
         /*$('.required').each(function () {
                 var tr = $('#app_table tr').length;
                 if (tr > 1)            {
@@ -1269,130 +1269,138 @@ if (!empty($customers)) {
                     } else {
                         $("#app_table input,select").attr("disabled", false);
                         cust_id = ui.item.id;
-                        $.ajax({
-                            type: 'POST',
-                            data: {
-                                cust_id: cust_id,
-                                firm_id: firm_id
-                            },
-                            url: "<?php echo $this->config->item('base_url'); ?>" +
-                                "quotation/get_customer/",
-                            success: function(data) {
-                                var result = JSON.parse(data);
-                                if (result != null && result.length > 0) {
-                                    $("#gst_type").val(result[0].state_id);
-                                    $("#customer_id").val(result[0].id);
-                                    $("#c_id").val(result[0].id);
-                                    $("#cus_type").val(result[0].customer_type);
-                                    $("#customer_name").val(result[0].store_name);
-                                    $("#customer_no").val(result[0].mobil_number);
-                                    $("#email_id").val(result[0].email_id);
-                                    $("#address1").val(result[0].address1);
-                                    $("#tin").val(result[0].tin);
-                                    $("#credit_limit").val(result[0].credit_limit);
-                                    $("#credit_days").val(result[0].credit_days);
-                                    $("#temp_credit_limit").val(result[0]
-                                        .temp_credit_limit);
-                                    $("#approved_by").val(result[0].approved_by);
-                                    $("#advance").val(result[0].advance);
-                                    $("#customer_details_label").html(
-                                        '<span class="label label-success" style="float:right">' +
-                                        result[0].balance + ' </span>' + result[
-                                            0].store_name + '<br>' + result[0]
-                                        .address1 + '<br> Email : ' + result[0]
-                                        .email_id + '<br> Mobile : ' + result[0]
-                                        .mobil_number);
-                                    //                                if (result[0].customer_type == 1 || result[0].customer_type == 3)
-                                    //                                    $("#bill1").attr('checked', 'checked');
-                                    //                                else if (result[0].customer_type == 2 || result[0].customer_type == 4)
-                                    //                                    $("#bill2").attr('checked', 'checked');
-                                    //                                else
-                                    //                                    $(".receiver").prop("checked", false);
-                                    if (result[0].customer_type == 1 || result[0]
-                                        .customer_type == 3)
-                                        $("#bill1").attr('checked', false);
-                                    else if (result[0].customer_type == 2 || result[
-                                            0].customer_type == 4)
-                                        $("#bill2").attr('checked', false);
-                                    else
-                                        $(".receiver").prop("checked", false);
-                                    $("#bill1").attr('checked', 'checked');
-                                    if ($('#gst_type').val() != '') {
-                                        if ($('#gst_type').val() == 31) {
-                                            // $('#add_quotation').find(
-                                            //     'tr td.sgst_td').show();
-                                            $('#add_quotation').find(
-                                                'tr td.igst_td').hide();
-                                        } else {
-                                            $('#add_quotation').find(
-                                                'tr td.igst_td').show();
-                                            $('#add_quotation').find(
-                                                'tr td.sgst_td').hide();
-                                        }
-                                    } else {
-                                        $('#add_quotation').find('tr td.igst_td')
-                                            .hide();
-                                    }
-                                } else {
-                                    alert("111");
-                                }
-                            }
-                        });
                     }
-                    var prod_array = new Array();
-                    $(".product_id").each(function() {
-                        prod_array.push($(this).val());
-                    });
-                    //if (!empty(prod_array)) {
-                    $.ajax({
-                        type: 'POST',
-                        data: {
-                            cust_id: cust_id,
-                            prod_array: prod_array
-                        },
-                        url: "<?php echo $this->config->item('base_url'); ?>" +
-                            "sales/get_product_cost/",
-                        success: function(data) {
-                            var result = JSON.parse(data);
-                            if (data != null && result.length > 0) {
-                                $('input#product_cost').each(function(i) {
-                                    if (i != 0) {
-                                        var product_id = '';
-                                        product_id = $(this).closest('tr')
-                                            .find('input#product_id').val();
-                                        var qty = '';
-                                        qty = $(this).closest('tr').find(
-                                            'input.qty').val();
-                                        if (qty == '') {
-                                            $(this).closest('tr').find(
-                                                    'input.selling_price')
-                                                .val(result[product_id]
-                                                    .selling_price);
-                                            $(this).closest('tr').find(
-                                                'input.subtotal').val(
-                                                '');
-                                            $(this).closest('tr').find(
-                                                'input.gross').val('');
-                                        } else {
-                                            $(this).closest('tr').find(
-                                                    'input.selling_price')
-                                                .val(result[product_id]
-                                                    .selling_price);
-                                            $(this).closest('tr').find(
-                                                '.qty').trigger('keyup');
-                                            //                                            var price = result[product_id].selling_price * qty;
-                                            //                                            $(this).closest('tr').find('input.selling_price').val(price);
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    });
+                    load_customers(cust_id);
                     //}
                 }
             });
         });
     });
+
+    function load_customers(cust_id = '') {
+        cust_id = (cust_id != '') ? cust_id : $('#customer_id').val();
+        var firm_id = $('#firm').val();
+
+        $.ajax({
+            type: 'POST',
+            data: {
+                cust_id: cust_id,
+                firm_id: firm_id
+            },
+            url: "<?php echo $this->config->item('base_url'); ?>" +
+                "quotation/get_customer/",
+            success: function(data) {
+                var result = JSON.parse(data);
+                if (result != null && result.length > 0) {
+                    $("#gst_type").val(result[0].state_id);
+                    $("#customer_id").val(result[0].id);
+                    $("#c_id").val(result[0].id);
+                    $("#cus_type").val(result[0].customer_type);
+                    $("#customer_name").val(result[0].store_name);
+                    $("#customer_no").val(result[0].mobil_number);
+                    $("#email_id").val(result[0].email_id);
+                    $("#address1").val(result[0].address1);
+                    $("#tin").val(result[0].tin);
+                    $("#credit_limit").val(result[0].credit_limit);
+                    $("#credit_days").val(result[0].credit_days);
+                    $("#temp_credit_limit").val(result[0]
+                        .temp_credit_limit);
+                    $("#approved_by").val(result[0].approved_by);
+                    $("#advance").val(result[0].advance);
+                    $("#customer_details_label").html(
+                        '<span class="label label-success" style="float:right">' +
+                        result[0].balance + ' </span>' + result[
+                            0].store_name + '<br>' + result[0]
+                        .address1 + '<br> Email : ' + result[0]
+                        .email_id + '<br> Mobile : ' + result[0]
+                        .mobil_number);
+                    //                                if (result[0].customer_type == 1 || result[0].customer_type == 3)
+                    //                                    $("#bill1").attr('checked', 'checked');
+                    //                                else if (result[0].customer_type == 2 || result[0].customer_type == 4)
+                    //                                    $("#bill2").attr('checked', 'checked');
+                    //                                else
+                    //                                    $(".receiver").prop("checked", false);
+                    if (result[0].customer_type == 1 || result[0]
+                        .customer_type == 3)
+                        $("#bill1").attr('checked', false);
+                    else if (result[0].customer_type == 2 || result[
+                            0].customer_type == 4)
+                        $("#bill2").attr('checked', false);
+                    else
+                        $(".receiver").prop("checked", false);
+                    $("#bill1").attr('checked', 'checked');
+                    if ($('#gst_type').val() != '') {
+                        if ($('#gst_type').val() == 31) {
+                            // $('#add_quotation').find(
+                            //     'tr td.sgst_td').show();
+                            $('#add_quotation').find(
+                                'tr td.igst_td').hide();
+                        } else {
+                            $('#add_quotation').find(
+                                'tr td.igst_td').show();
+                            $('#add_quotation').find(
+                                'tr td.sgst_td').hide();
+                        }
+                    } else {
+                        $('#add_quotation').find('tr td.igst_td')
+                            .hide();
+                    }
+                } else {
+                    alert("111");
+                }
+            }
+        });
+        var prod_array = new Array();
+        $(".product_id").each(function() {
+            prod_array.push($(this).val());
+        });
+        //if (!empty(prod_array)) {
+        $.ajax({
+            type: 'POST',
+            data: {
+                cust_id: cust_id,
+                prod_array: prod_array
+            },
+            url: "<?php echo $this->config->item('base_url'); ?>" +
+                "sales/get_product_cost/",
+            success: function(data) {
+                var result = JSON.parse(data);
+                if (data != null && result.length > 0) {
+                    $('input#product_cost').each(function(i) {
+                        if (i != 0) {
+                            var product_id = '';
+                            product_id = $(this).closest('tr')
+                                .find('input#product_id').val();
+                            var qty = '';
+                            qty = $(this).closest('tr').find(
+                                'input.qty').val();
+                            if (qty == '') {
+                                $(this).closest('tr').find(
+                                        'input.selling_price')
+                                    .val(result[product_id]
+                                        .selling_price);
+                                $(this).closest('tr').find(
+                                    'input.subtotal').val(
+                                    '');
+                                $(this).closest('tr').find(
+                                    'input.gross').val('');
+                            } else {
+                                $(this).closest('tr').find(
+                                        'input.selling_price')
+                                    .val(result[product_id]
+                                        .selling_price);
+                                $(this).closest('tr').find(
+                                    '.qty').trigger('keyup');
+                                //                                            var price = result[product_id].selling_price * qty;
+                                //                                            $(this).closest('tr').find('input.selling_price').val(price);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+    }
     $('#add_group').click(function() {
         var tableBody = $(".static").find('tr').clone();
         $(tableBody).closest('tr').find('.model_no,.percost,.qty').addClass('required');
@@ -1785,6 +1793,7 @@ if (!empty($customers)) {
                                 // $(this).closest('tr').find('.profit').val();
                                 fin_total = fin_total + ((percost - costing_price) * qty);
                             });
+
                             $('.profit_total').val(fin_total);
                             // if (result[0].sales_price != '' && result[0].cost_price != '') {
                             //     this_val.closest('tr').find('.profit').val(result[0].sales_price_without_gst - result[0].cost_price_without_gst);
@@ -2136,6 +2145,7 @@ if (!empty($customers)) {
             $('.cat_id,.model_no,.model_no_extra').val('');
             $('.model_no').attr('readonly', 'readonly');
         }
+        load_customers();
     }
     $(document).on('change', '.ime_code_id', function() {
         var ime_id_val = $(this).val();

@@ -345,7 +345,7 @@
                                 <label class="col-sm-4 control-label">1. Delivery Schedule</label>
                                 <div class="col-sm-8">
                                     <div>
-                                        <input type="text" class="form-control datepicker class_req borderra0 terms" name="po[delivery_schedule]" value="<?php echo date('d-m-y') ?>" placeholder="d-m-Y">
+                                        <input type="text" class="form-control datepicker class_req borderra0 terms" name="po[delivery_schedule]" value="<?php echo date('d-m-Y') ?>" placeholder="d-m-Y">
                                         <span id="colorpoerror" style="color:#F00;"></span>
                                     </div>
                                 </div>

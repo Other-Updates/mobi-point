@@ -2013,7 +2013,7 @@ class Project_cost_model extends CI_Model
         // $this->db->where($this->customer . '.status', 1);
         // $query = $this->db->get($this->customer)->result_array();
         // return $query;
-        $this->db->select('customer.name,customer.store_name,customer.mobil_number,customer.advance');
+        $this->db->select('customer.name,customer.store_name,customer.mobil_number,customer.advance,customer.id');
         $query = $this->db->get('customer')->result_array();
         return $query;
     }

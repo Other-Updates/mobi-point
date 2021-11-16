@@ -142,13 +142,17 @@ $data['company_details'] = $this->admin_model->get_company_details();
                     <div class="form-group">
                         <label class="control-label">Customer Name</label>
                         <select id='cust_type' class="form-control">
-                            <option>Select</option>
+                            <option value=''>Select</option>
                             <?php
                             if (isset($all_supplier) && !empty($all_supplier)) {
                                 foreach ($all_supplier as $val) {
 
                             ?>
-                                    <option value='<?= $val['customer'] ?>'><?= $val['store_name'] ?></option>
+                                    <option value='<?= $val['customer'] ?>' <?php
+                                                                            if ($val['id'] == 23) {
+                                                                                echo "selected";
+                                                                            }
+                                                                            ?>><?= $val['store_name'] ?></option>
                             <?php
                                 }
                             }

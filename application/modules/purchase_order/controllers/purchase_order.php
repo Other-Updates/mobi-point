@@ -1388,7 +1388,7 @@ class Purchase_order extends MX_Controller
             $row[] = $ass['total_qty'];
             //$row[] = $ass['delivery_qty'];
             $row[] = number_format($ass['net_total'], 2);
-            $row[] = ($ass['delivery_schedule'] != '1970-01-01') ? date('d-M-Y', strtotime($ass['delivery_schedule'])) : '-';
+            $row[] = ($ass['delivery_schedule'] != '1970-01-01') ? date('d-m-Y', strtotime($ass['delivery_schedule'])) : '-';
             $pr_status = $delivery_status = '';
             if ($ass['pr_status'] == 'waiting') {
                 $pr_status = '<span class=" badge  bg-red">Waiting</span>';
