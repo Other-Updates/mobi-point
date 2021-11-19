@@ -647,7 +647,7 @@ if (!empty($customers)) {
                                 <input type="hidden" name="quotation[transport]" value="<?php echo $quotation[0]['transport']; ?>" class="transport text_right" tabindex="-1" style="width:70px;" />
                             </tr>
                             <td></td>
-                            <td colspan="6" class="net_tag" style="text-align:right;font-weight:bold;">Net Total</td>
+                            <td colspan="5" class="net_tag" style="text-align:right;font-weight:bold;">Net Total</td>
                             <td><input type="text" tabindex="-1" name="quotation[net_total]" readonly="readonly" class="final_amt text_right" style="width:70px;" value="<?php echo $quotation[0]['net_total']; ?>" /></td>
                             <td></td>
                             <tr>
