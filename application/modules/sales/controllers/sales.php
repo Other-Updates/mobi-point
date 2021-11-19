@@ -2649,7 +2649,7 @@ class Sales extends MX_Controller
                     $row[] = round($ass['delivery_qty']);
                     $row[] = number_format($ass['inv_amount'], 2);
                     $row[] = $ass['invoice'][0]['profit_total'];
-                    $row[] = ($ass['created_date'] != '') ? date('d-M-Y', strtotime($ass['created_date'])) : '-';
+                    $row[] = ($ass['created_date'] != '') ? date('d-m-Y', strtotime($ass['created_date'])) : '-';
                     //$row[] = $inv_status;
                     // $row[] = $delivery_status;
                     //$row[] = $payment_status;

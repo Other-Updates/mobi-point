@@ -279,7 +279,7 @@ if (!empty($customers)) {
                             <div><b>Mobile :</b> <?php echo ($val['mobil_number']) ? $val['mobil_number'] : '-'; ?></div>
                         </td>
                         <td width="50%" align="right" style="vertical-align:top; border-left: 0;"><b>Invoice No :</b> <?php echo '' . $val['inv_id']; ?><br />
-                            <!--Reference No :  <?php echo $val['q_no']; ?>--> <b>Date :</b> <?php echo ($val['created_date'] != '1970-01-01') ? date('d-M-Y', strtotime($val['created_date'])) : ''; ?><br />
+                            <!--Reference No :  <?php echo $val['q_no']; ?>--> <b>Date :</b> <?php echo ($val['created_date'] != '1970-01-01') ? date('d-m-Y', strtotime($val['created_date'])) : ''; ?><br />
                             <!--Sales Man : <?php
                                             $sales_man = (!empty($val['sales_man_name']) ? $val['sales_man_name'] : '-');
                                             echo $sales_man;

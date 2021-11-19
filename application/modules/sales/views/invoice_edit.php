@@ -340,7 +340,7 @@ if (!empty($customers)) {
                             <td width="25%">
                                 <span class="tdhead"> Date :</span>
                             </td>
-                            <td width="25%"><input type="text" tabindex="5" class="form-control required datepicker" name="quotation[created_date]" style="width:200px; display: inline" value="<?php echo $val['created_date']; ?> " />
+                            <td width="25%"><input type="text" tabindex="5" class="form-control required datepicker" name="quotation[created_date]" style="width:200px; display: inline" value="<?php echo date('d-m-Y', strtotime($val['created_date'])); ?> " />
                                 <span class="error_msg"></span>
                             </td>
                             <td width="25%" class="first_td"><span class="tdhead">GSTIN NO :</span></td>
