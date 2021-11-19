@@ -538,11 +538,12 @@
                 final_qty = final_qty + (Number(qty.val()) - Number(rq.val()));
                 final_sub_total = final_sub_total + sub_total;
             }
+            $('.add_cgst').val(cgst.toFixed(2));
+            $('.add_sgst').val(sgst.toFixed(2));
+            $('.total_qty').val(final_qty);
+            $('.final_sub_total').val(final_sub_total.toFixed(2));
         });
-        $('.add_cgst').val(cgst.toFixed(2));
-        $('.add_sgst').val(sgst.toFixed(2));
-        $('.total_qty').val(final_qty);
-        $('.final_sub_total').val(final_sub_total.toFixed(2));
+
         //$('.temp_sub_total').val(temp_sub_total);
         //other item total
         total_item = 0;
