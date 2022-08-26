@@ -13,7 +13,7 @@
     $this->load->model('project_cost/project_cost_model');
     $this->load->model('purchase_order/purchase_order_model');
     $this->load->model('expenses/expense_model');
-    $data["admin"] = $this->admin_model->get_admin();
+    //$data["admin"] = $this->admin_model->get_admin();
     ?>
     <title>
         <?= $this->config->item('site_title'); ?> |
@@ -124,7 +124,7 @@ if (!empty($data['todays_purchases']) && count($data['todays_purchases']) > 0) {
 </style>
 <?php
 $collapse_menu = '';
-if ($cur_class == 'report' || $cur_class == 'purchase_order' || $cur_class == 'sales')
+if ($cur_class == 'report' || $cur_class == 'purchase_order' || $cur_class == 'sales' ||  $cur_class == 'purchase_return' ||  $cur_class == 'stock' ||  $cur_class == 'sales_return')
     $collapse_menu = 'sidebar-collapse';
 ?>
 
@@ -216,13 +216,13 @@ if ($cur_class == 'report' || $cur_class == 'purchase_order' || $cur_class == 's
                                         <div class="btn-group btn-group-option">
                                             <?php
                                             $this->load->model('api/notification_model');
-                                            $notification = $this->notification_model->all_notification();
+                                            //$notification = $this->notification_model->all_notification();
                                             ?>
                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                                 <i class="fa fa-bell"></i>
-                                                <span class="label label-primary pull-xs-right label-pad noti-align noti-position <?php echo (count($notification) != 0) ? 'notify_count' : ''; ?>">
+                                                <!--<span class="label label-primary pull-xs-right label-pad noti-align noti-position <?php echo (count($notification) != 0) ? 'notify_count' : ''; ?>">-->
                                                     <?php
-                                                    echo (($notification['total_count']) != 0) ? $notification['total_count'] : '';
+                                                    //echo (($notification['total_count']) != 0) ? $notification['total_count'] : '';
                                                     ?></span>
                                                 <!-- <span class="noti-icon-badge"></span>-->
                                             </button>
