@@ -69,7 +69,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
     <div class="col-md-12 grid-margin stretch-card" id="loader_area" style="display:none;">
         <div class="circle-loader"></div>
     </div>
-    <div class="col-md-12 grid-margin stretch-card hide_class" id="myDIVSHOW">
+    <div class="col-md-12 grid-margin stretch-card hide_class panel-body mt--40" id="myDIVSHOW">
         <div class="card">
             <div class="card-body">
                 <form id="form-filter" class="form-horizontal">
@@ -103,9 +103,11 @@ $data['company_details'] = $this->admin_model->get_company_details();
                             <span class="date_err" style="color:#F00;font-size: 12px "></span>
                         </div>
                         <div class="col col-md-2">
-                            <label class="control-label col-md-12 mnone">&nbsp;</label>
-                            <a id='search' class="btn btn-success  mtop4" title="Search">SUBMIT<span class=" icon-magnifier"></span></a>&nbsp;
-                            <a class="btn btn-danger mtop4" id='clear' title="Clear">CLEAR<span></span></a>
+                            <label class="mnone">&nbsp;</label>
+                            <div>
+                            <a id='search' class="btn btn-success " title="Search">SUBMIT<span class=" icon-magnifier"></span></a>&nbsp;
+                            <a class="btn btn-danger" id='clear' title="Clear">CLEAR<span></span></a>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">

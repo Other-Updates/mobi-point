@@ -23,6 +23,9 @@
         margin-top: 7px !important;
     }
     .input-group-addon .fa { width:10px !important; }
+    .remark {
+        width: 100% !important;
+    }
 </style>
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card" >
@@ -30,11 +33,11 @@
             <div class="card-body">
                 <h4 class="card-title">New Expense Form
                 </h4>
-                <div class="tab-content tab-content-solid">
+                <div class="tab-content tab-content-solid panel-body mt--40">
                     <form action="<?php echo $this->config->item('base_url'); ?>expenses/insert_expense" enctype="multipart/form-data" name="form" method="post">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <label class="col-sm-12 col-form-label">Company <span style="color:#F00; ">*</span></label>
                                     <div class="col-sm-12">
                                         <select name="firm_id" class="form-control required" id="firm" tabindex="1">
@@ -53,7 +56,7 @@
                                         <span id="frim_name_err" class="val"  style="color:#F00; "></span>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <label class="col-sm-12 col-form-label">Expense amount<span style="color:#F00; ">*</span></label>
                                     <div class="col-sm-12">
                                         <div class="input-group">
@@ -67,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <label class="col-sm-12 col-form-label">Expense Category<span style="color:#F00; ">*</span></label>
                                     <div class="col-sm-12">
                                         <select name="cat_id"  class="form-control required" id="ex_category" tabindex="2">
@@ -110,7 +113,7 @@
 
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group ">
+                                <div class="form-group row">
                                     <label class="col-sm-12 col-form-label">Expense Sub Category<span style="color:#F00;">*</span></label>
                                     <div class="col-sm-12">
                                         <select name="sub_cat_id"  class="form-control required" id="ex_subcat" tabindex="3">
@@ -152,7 +155,7 @@
 
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <label class="col-sm-12 col-form-label">Entry Date<span style="color:#F00; ">*</span></label>
                                     <div class="col-sm-12">
                                         <div class="input-group">
@@ -164,7 +167,7 @@
                                         <span id="entrydate_err" class="val"  style="color:#F00; "></span>
                                     </div>
                                 </div>
-                                <div class="form-group ">
+                                <div class="form-group row">
                                     <label class="col-sm-12 col-form-label">Remarks</label>
                                     <div class="col-sm-12">
                                         <input name="remarks" type="text" class="form-control remark" value="" />
@@ -173,7 +176,7 @@
                             </div>
                         </div>
 
-                        <div class="frameset_table action-btn-align">
+                        <div class="frameset_table text-right">
                             <input type="submit" name="submit" class="btn btn-success btn-fw" value="Save" id="submit" tabindex="8">
                             <input type="reset" value="Clear" class=" btn btn-danger btn-fw" id="reset" >
                             <td><a href="<?php echo $this->config->item('base_url') . 'expenses/expenses_list' ?>" class="btn btn-dark btn-fw">&nbsp;Back</a>
