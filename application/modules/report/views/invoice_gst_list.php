@@ -152,25 +152,25 @@ $data['company_details'] = $this->admin_model->get_company_details();
     <div class="contentpanel">
         <div class="panel-body mt-top5">
             <div class="result_div">
+                        <input type="hidden" id="current_values" value="" />
+                        <input type="hidden" id="total_values" value="" />
                 <table id="basicTable_call_back" class="table table-striped table-bordered responsive no-footer dtr-inline totlqua-cntr cgst2-right
                        sgst2-right subtotal1-right invamountgst-right customergstn-cntr">
                     <thead>
-                        <input type="hidden" id="current_values" value="" />
-                        <input type="hidden" id="total_values" value="" />
                         <tr>
-                            <td class="action-btn-align">S.No</td>
-                            <td class="action-btn-align">Invoice ID</td>
+                            <th class="action-btn-align">S.No</th>
+                            <th class="action-btn-align">Invoice ID</th>
                             <!-- <td class="action-btn-align">Firm Name</td> -->
-                            <td class="action-btn-align">Firm GSTIN</td>
-                            <td class="action-btn-align">Customer Name</td>
-                            <td class="action-btn-align">Customer GSTIN</td>
-                            <td class="action-btn-align">Total QTY</td>
-                            <td class="action-btn-align">CGST</td>
-                            <td class="action-btn-align">SGST</td>
-                            <td class="action-btn-align">Sub Total</td>
-                            <td class="action-btn-align">Inv Amt</td>
+                            <th class="action-btn-align">Firm GSTIN</th>
+                            <th class="action-btn-align">Customer Name</th>
+                            <th class="action-btn-align">Customer GSTIN</th>
+                            <th class="action-btn-align">Total QTY</th>
+                            <th class="action-btn-align">CGST</th>
+                            <th class="action-btn-align">SGST</th>
+                            <th class="action-btn-align">Sub Total</th>
+                            <th class="action-btn-align">Inv Amt</th>
                             <!--<td class="action-btn-align">Paid Amount</td>-->
-                            <td class="action-btn-align">Inv Date</td>
+                            <th class="action-btn-align">Inv Date</th>
                             <!--                            <td class="action-btn-align">Paid Date</td>
                         <td class="action-btn-align">Credit Days</td>
                         <td class="action-btn-align">Due Date</td>

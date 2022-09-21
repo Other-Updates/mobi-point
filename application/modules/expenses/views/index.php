@@ -128,8 +128,8 @@
                                             }
                                             ?>
                                         </select>
+                                        <span id="subcat_err" class="val" style="color:#F00; "></span>
                                     </div>
-                                    <span id="subcat_err" class="val" style="color:#F00; "></span>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-form-label ">Expense Mode<span style="color:#F00;">*</span></label>

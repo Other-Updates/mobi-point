@@ -56,261 +56,264 @@
 
                         <form action="<?php echo $this->config->item('base_url'); ?>masters/sales_man/insert_sales_man" enctype="multipart/form-data" name="form" method="post">
 
-                            <table class="table table-striped responsive no-footer dtr-inline">
+                            <div class="row">
 
-                                <tr>
+                                <div class="col-md-6">
 
-                                    <td width="12%">Shop Name</td>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Shop Name <span style="color:#F00; font-style:oblique;">*</span></label>
+                                        <div class="col-sm-8">
+                                            <select name="firm_id" class="form-control form-align" id="firm">
 
-                                    <td width="18%">
+                                                <?php
+                                                echo count($firms);
 
-                                        <select name="firm_id" class="form-control form-align" id="firm">
+                                                if (count($firms) > 1)
+                                                    echo '<option value="">Select</option>';
 
-                                            <?php
-                                            echo count($firms);
+                                                if (isset($firms) && !empty($firms)) {
 
-                                            if (count($firms) > 1)
-                                                echo '<option value="">Select</option>';
+                                                    foreach ($firms as $key => $firm) {
+                                                        $select = '';
+                                                        if ($key == 0) {
+                                                            $select = "selected";
+                                                        }
+                                                ?>
 
-                                            if (isset($firms) && !empty($firms)) {
+                                                        <option <?php echo $select; ?> value="<?php echo $firm['firm_id']; ?>"> <?php echo $firm['firm_name']; ?> </option>
 
-                                                foreach ($firms as $key => $firm) {
-                                                    $select = '';
-                                                    if ($key == 0) {
-                                                        $select = "selected";
+                                                <?php
                                                     }
-                                            ?>
-
-                                                    <option <?php echo $select; ?> value="<?php echo $firm['firm_id']; ?>"> <?php echo $firm['firm_name']; ?> </option>
-
-                                            <?php
                                                 }
-                                            }
-                                            ?>
+                                                ?>
 
-                                        </select>
+                                                </select>
+                                            <span id="firmerr" class="val" style="color:#F00; font-style:oblique;"></span>
+                                        </div>
+                                    </div>
 
-                                        <span id="firm_err" class="val" style="color:#F00; font-style:oblique;"></span>
 
-                                    </td>
 
-                                    <td>Name<span style="color:#F00; font-style:oblique;">*</span></td>
+                                    <div class="form-group">
 
-                                    <td>
+                                        <label class="col-sm-4 control-label">Address<span style="color:#F00; font-style:oblique;">*</span></label>
 
-                                        <div class="input-group">
+                                        <div class="col-sm-8">
 
-                                            <input type="text" name="sales_man_name" class="name form-control form-align" id="sales_man_name" maxlength="15" />
+                                                <textarea name="address1" id="address" class="form-control form-align"></textarea>
 
-                                            <div class="input-group-addon">
+                                                <span id="cuserror3" class="val" style="color:#F00; font-style:oblique;"></span>
 
-                                                <i class="fa fa-phone"></i>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+
+                                        <label class="col-sm-4 control-label">Bank Branch<span style="color:#F00; font-style:oblique;">*</span></label>
+
+                                        <div class="col-sm-8">
+
+                                            <div class="input-group">
+
+                                                <input type="text" name="branch" class="form-control form-align" id="branch" maxlength="40" />
+
+                                                <div class="input-group-addon">
+
+                                                    <i class="fa fa-bank"></i>
+
+                                                </div>
+
+                                                </div>
+
+                                                <span id="cuserror10" class="val" style="color:#F00; font-style:oblique;"></span>
 
                                             </div>
 
-                                        </div>
+                                    </div>
 
-                                        <span id="contact_personerr" class="val" style="color:#F00; font-style:oblique;"></span>
 
-                                    </td>
 
-                                    <td>Email Id<span style="color:#F00; font-style:oblique;">*</span></td>
+                                    <div class="form-group">
 
-                                    <td>
+                                        <label class="col-sm-4 control-label">Target Rate / Year<span style="color:#F00; font-style:oblique;">*</span></label>
 
-                                        <div class="input-group">
+                                        <div class="col-sm-8">
 
-                                            <input type="text" name="mail" class="mail form-control email_dup form-align" id="mail" />
+                                            <div class="input-group">
 
-                                            <div class="input-group-addon">
+                                                <input type="number" name="target_rate" class="store form-control form-align" id="target_rate" />
 
-                                                <i class="fa fa-envelope"></i>
+                                                <div class="input-group-addon">
 
-                                            </div>
+                                                    <i class="fa fa-bank"></i>
 
-                                        </div>
+                                                </div>
 
-                                        <span id="cuserror5" class="val" style="color:#F00; font-style:oblique;"></span>
+                                                </div>
 
-                                        <span id="duplica" class="val" style="color:#F00; font-style:oblique;"></span>
-
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td>Address<span style="color:#F00; font-style:oblique;">*</span></td>
-
-                                    <td>
-
-                                        <textarea name="address1" id="address" class="form-control form-align"></textarea>
-
-                                        <span id="cuserror3" class="val" style="color:#F00; font-style:oblique;"></span>
-
-                                    </td>
-
-                                    <td>Mobile Number <span style="color:#F00; font-style:oblique;">*</span></td>
-
-                                    <td>
-
-                                        <div class="input-group">
-
-                                            <input type="text" name="number" class="number form-control form-align" id="number" maxlength="10" />
-
-                                            <div class="input-group-addon">
-
-                                                <i class="fa fa-phone"></i>
+                                                <span id="cuserror14" class="val" style="color:#F00; font-style:oblique;"></span>
 
                                             </div>
 
-                                        </div>
+                                    </div>
 
-                                        <span id="cuserror4" class="val" style="color:#F00; font-style:oblique;"></span>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">IFSC Code</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
 
-                                    </td>
+                                                <input type="text" name="ifsc" class="form-control form-align" id="ifsc" maxlength="12" />
 
-                                    <td>Bank Name<span style="color:#F00; font-style:oblique;">*</span></td>
+                                                <div class="input-group-addon">
 
-                                    <td>
+                                                    <i class="fa fa-fax"></i>
 
-                                        <div class="input-group">
-
-                                            <input type="text" name="bank" class="form-control form-align" id="bank" maxlength="40" />
-
-                                            <div class="input-group-addon">
-
-                                                <i class="fa fa-bank"></i>
+                                                </div>
 
                                             </div>
 
+                                            <span id="ifsc1" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
+                                    </div>
 
-                                        <span id="cuserror6" class="val" style="color:#F00; font-style:oblique;"></span>
 
-                                    </td>
 
-                                </tr>
+                                </div>
 
-                                <tr>
+                                <div class="col-md-6">
 
-                                    <td>Bank Branch<span style="color:#F00; font-style:oblique;">*</span></td>
 
-                                    <td>
 
-                                        <div class="input-group">
+                                    <div class="form-group">
 
-                                            <input type="text" name="branch" class="form-control form-align" id="branch" maxlength="40" />
+                                        <label class="col-sm-4 control-label">Name<span style="color:#F00; font-style:oblique;">*</span></label>
 
-                                            <div class="input-group-addon">
+                                        <div class="col-sm-8">
 
-                                                <i class="fa fa-bank"></i>
+                                            <div class="input-group">
+
+                                                <input type="text" name="sales_man_name" class="name form-control form-align" id="sales_man_name" maxlength="15" />
+
+                                                <div class="input-group-addon">
+
+                                                    <i class="fa fa-user"></i>
+
+                                                </div>
 
                                             </div>
 
+                                            <span id="contact_personerr" class="val" style="color:#F00; font-style:oblique;"></span>
+
                                         </div>
 
-                                        <span id="cuserror10" class="val" style="color:#F00; font-style:oblique;"></span>
+                                    </div>
 
-                                    </td>
 
-                                    <td>Account No<span style="color:#F00; font-style:oblique;">*</span></td>
 
-                                    <td>
+                                    <div class="form-group">
 
-                                        <div class="input-group">
+                                        <label class="col-sm-4 control-label">Mobile Number<span style="color:#F00; font-style:oblique;">*</span></label>
 
-                                            <input type="text" name="acnum" class="form-control form-align" id="acnum" maxlength="20" />
+                                        <div class="col-sm-8">
 
-                                            <div class="input-group-addon">
+                                            <div class="input-group">
 
-                                                <i class="fa fa-user"></i>
+                                                <input type="text" name="number" class="number form-control form-align" id="number" maxlength="10" />
+
+                                                <div class="input-group-addon">
+
+                                                    <i class="fa fa-phone"></i>
+
+                                                </div>
 
                                             </div>
 
+                                            <span id="cuserror4" class="val" style="color:#F00; font-style:oblique;"></span>
+
                                         </div>
 
-                                        <span id="cuserror11" class="val" style="color:#F00; font-style:oblique;"></span>
+                                    </div>
 
-                                    </td>
 
-                                    <td>IFSC Code<span style="color:#F00; font-style:oblique;">*</span></td>
 
-                                    <td>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Account No <span style="color:#F00; font-style:oblique;"></span></label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
 
-                                        <div class="input-group">
+                                                <input type="text" name="acnum" class="form-control form-align" id="acnum" maxlength="20" />
 
-                                            <input type="text" name="ifsc" class="form-control form-align" id="ifsc" maxlength="12" />
+                                                <div class="input-group-addon">
 
-                                            <div class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
 
-                                                <i class="fa fa-fax"></i>
+                                                </div>
 
                                             </div>
 
+                                            <span id="cuserror11" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
-
-                                        <span id="ifsc1" class="val" style="color:#F00; font-style:oblique;"></span>
-
-
-
-                                    </td>
-
-                                </tr>
-
-                                <tr>
+                                    </div>
 
 
 
-                                    <td>Target Rate / Year<span style="color:#F00; font-style:oblique;">*</span></td>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Email Id</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
 
-                                    <td>
+                                                <input type="text" name="mail" class="mail form-control email_dup form-align" id="mail" />
 
-                                        <div class="input-group">
+                                                <div class="input-group-addon">
 
-                                            <input type="number" name="target_rate" class="store form-control form-align" id="target_rate" />
+                                                    <i class="fa fa-envelope"></i>
 
-                                            <div class="input-group-addon">
-
-                                                <i class="fa fa-bank"></i>
+                                                </div>
 
                                             </div>
 
+                                            <span id="cuserror5" class="val" style="color:#F00; font-style:oblique;"></span>
+
+                                            <span id="duplica" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Bank Name<span style="color:#F00; font-style:oblique;"></span></label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
 
-                                        <span id="cuserror14" class="val" style="color:#F00; font-style:oblique;"></span>
+                                                <input type="text" name="bank" class="form-control form-align" id="bank" maxlength="40" />
 
-                                    </td>
+                                                <div class="input-group-addon">
 
-                                </tr>
+                                                    <i class="fa fa-bank"></i>
 
-                            </table>
+                                                </div>
+
+                                            </div>
+
+                                            <span id="cuserror6" class="val" style="color:#F00; font-style:oblique;"></span>
+                                        </div>
+                                    </div>
 
 
+
+                                    
+
+
+
+                                </div>
+
+                            </div>
 
 
 
                             <div class="frameset_table action-btn-align">
-
-                                <table>
-
-                                    <tr>
-
-                                        <td width="570">&nbsp;</td>
-
-                                        <td><input type="submit" name="submit" class="btn btn-success" value="Save" id="submit" /></td>
-
-                                        <td>&nbsp;</td>
-
-                                        <td><input type="reset" value="Clear" class=" btn btn-danger1" id="reset" /></td>
-                                        <td>&nbsp;</td>
-
-                                        <td><a href="<?php echo $this->config->item('base_url') . 'masters/sales_man' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a></td>
-
-                                    </tr>
-
-                                </table>
-
+                                <input type="submit" name="submit" class="btn btn-success" value="Save" id="submit" />
+                                <input type="reset" value="Clear" class=" btn btn-danger1" id="reset" />
+                                <a href="<?php echo $this->config->item('base_url') . 'masters/sales_man' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
                             </div>
 
                         </form>

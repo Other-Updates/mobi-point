@@ -185,17 +185,10 @@ $data['company_details'] = $this->admin_model->get_company_details();
         <!--<a href="<?php echo $this->config->item('base_url') . 'purchase_order/' ?>" class="btn btn-success right topgen"><span class="glyphicon glyphicon-plus"></span> Add Purchase Order</a>-->
 
         </h4>
-
+        
     </div>
-
-    <div class="contentpanel">
-
-
-
-        <div id='result_div' class="panel-body mt-top5 pb0">
-
-
-
+    <div class="panel-body mt--40">
+        <div class="row search_table_hide search-area">
             <form name="product_name_wise_search" id="product_namewise_search" method="post" action="<?php echo $this->config->item('base_url'); ?>sales_return/index">
 
 
@@ -206,9 +199,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                         <br>
 
-                        <div class="form-group">
-
-                            <div class="col-sm-3"></div>
+                        <div>
 
                             <div class="col-sm-4" style="position:relative;">
 
@@ -229,10 +220,13 @@ $data['company_details'] = $this->admin_model->get_company_details();
                                 }
 
                                 ?>
+                                <div class="form-group text-left">
+                                    <label class="control-label">Product Name</label>
+                                    <input type="text" placeholder="Enter Product Name" id="product_name_src" name="filter[product_name_src]" value="<?php echo $value; ?>" title="Enter product name" class="form-align form-control mt-0" ><div id="suggesstion-box_ins" class="auto-asset-search hide_class"></div>
+                                </div>
 
 
-
-                                <input type="text" placeholder="Enter Product Name" id="product_name_src" name="filter[product_name_src]" value="<?php echo $value; ?>" title="Enter product name" class="form-align form-control" ><div id="suggesstion-box_ins" class="auto-asset-search hide_class"></div>
+                                
 
 
 
@@ -245,10 +239,14 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
 
 
-
-                                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary">
-
-                                <input type="button" name="reset" id="product_name_wise_reset" value="Reset" class="btn btn-success">
+                                <div class="form-group text-left">
+                                    <label class="control-label">&nbsp;</label>
+                                    <div>
+                                    <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary">
+                                    <input type="button" name="reset" id="product_name_wise_reset" value="Reset" class="btn btn-success">
+                                    </div>
+                                </div>
+                                
 
 
 
@@ -273,9 +271,11 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
 
             </form>
+        </div>
+    </div>
 
-
-
+    <div class="contentpanel">
+        <div id='result_div' class="panel-body mt-top5 pb0">
             <div class="tabpad">
 
                 <table id="basicTable_call_back" class="table table-striped table-bordered responsive dataTable no-footer dtr-inline totalqua-cntr returnqua-cntr presentqua-cntr totalamt-right" cellspacing="0" width="100%">

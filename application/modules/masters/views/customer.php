@@ -121,6 +121,22 @@ if (!empty($all_street)) {
                                             <span id="duplica" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
                                     </div>
+                                    
+                                </div>
+                                <div class="col-md-4">
+                                    <!--    <div class="form-group">
+                                            <label class="col-sm-4 control-label">Anniversary Date</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <input type="text"  name="anniversary"  class="datepicker form-align" id="anniversary" />
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                                <span id="anniversary1" class="val"  style="color:#F00; font-style:oblique;"></span>
+                                            </div>
+                                        </div>
+                                    -->
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">Mobile Number <span style="color:#F00; font-style:oblique;">*</span></label>
                                         <div class="col-sm-8">
@@ -146,21 +162,18 @@ if (!empty($all_street)) {
                                             <span id="dob1" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <!--    <div class="form-group">
-                                            <label class="col-sm-4 control-label">Anniversary Date</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <input type="text"  name="anniversary"  class="datepicker form-align" id="anniversary" />
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">City</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <input type="text" name="city" class="form-align" id="city" />
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-map-marker"></i>
                                                 </div>
-                                                <span id="anniversary1" class="val"  style="color:#F00; font-style:oblique;"></span>
                                             </div>
+                                            <span id="cuserror8" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
-                                    -->
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">State</label>
                                         <div class="col-sm-8">
@@ -183,50 +196,8 @@ if (!empty($all_street)) {
                                             </select><span id="cuserror" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">City</label>
-                                        <div class="col-sm-8">
-                                            <div class="input-group">
-                                                <input type="text" name="city" class="form-align" id="city" />
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-map-marker"></i>
-                                                </div>
-                                            </div>
-                                            <span id="cuserror8" class="val" style="color:#F00; font-style:oblique;"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Address1 <span style="color:#F00; font-style:oblique;">*</span></label>
-                                        <div class="col-sm-8">
-                                            <textarea name="address1" id="address" class="form-control form-align"></textarea>
-                                            <span id="cuserror3" class="val" style="color:#F00; font-style:oblique;"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Address2</label>
-                                        <div class="col-sm-8">
-                                            <textarea name="address2" id="address2" class="form-control form-align"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Customer Type <span style="color:#F00; font-style:oblique;">*</span></label>
-                                        <div class="col-sm-8">
-                                            <select name="customer_type" id="customer_type" class="customer_type form-control form-align">
-                                                <option value="">Select Type</option>
-                                                <option value="1">Regular</option>
-                                                <option value="2">Non - Regular</option>
-                                                <!--<option value="1">T1</option>
-                                                <option value="2">T2</option>
-                                                <option value="3">T3</option>
-                                                <option value="4">T4</option>
-                                                <option value="5">T5</option>
-                                                <option value="6">T6</option>
-                                                <option value="7">H1</option>
-                                                <option value="8">H2</option>-->
-                                            </select>
-                                            <span id="cus_type" class="val" style="color:#F00; font-style:oblique;"></span>
-                                        </div>
-                                    </div>
+                                    
+                                    
                                 </div>
                                 <div class="col-md-4">
                                     <!-- <div class="form-group">
@@ -326,6 +297,38 @@ if (!empty($all_street)) {
                                             <span id="cuserror15" class="val"  style="color:#F00; font-style:oblique;"></span>
                                         </div>
                                     </div>-->
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Address1 <span style="color:#F00; font-style:oblique;">*</span></label>
+                                        <div class="col-sm-8">
+                                            <textarea name="address1" id="address" class="form-control form-align"></textarea>
+                                            <span id="cuserror3" class="val" style="color:#F00; font-style:oblique;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Address2</label>
+                                        <div class="col-sm-8">
+                                            <textarea name="address2" id="address2" class="form-control form-align"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Customer Type <span style="color:#F00; font-style:oblique;">*</span></label>
+                                        <div class="col-sm-8">
+                                            <select name="customer_type" id="customer_type" class="customer_type form-control form-align">
+                                                <option value="">Select Type</option>
+                                                <option value="1">Regular</option>
+                                                <option value="2">Non - Regular</option>
+                                                <!--<option value="1">T1</option>
+                                                <option value="2">T2</option>
+                                                <option value="3">T3</option>
+                                                <option value="4">T4</option>
+                                                <option value="5">T5</option>
+                                                <option value="6">T6</option>
+                                                <option value="7">H1</option>
+                                                <option value="8">H2</option>-->
+                                            </select>
+                                            <span id="cus_type" class="val" style="color:#F00; font-style:oblique;"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="clearfix"></div>

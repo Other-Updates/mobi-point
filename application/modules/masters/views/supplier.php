@@ -101,6 +101,10 @@
                                             <span id="superror4" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
                                     </div>
+                                    
+                                    
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">Contact Person</label>
                                         <div class="col-sm-8">
@@ -114,19 +118,30 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">City <span style="color:#F00; font-style:oblique;">*</span></label>
+                                        <label class="col-sm-4 control-label">Email Address</label>
                                         <div class="col-sm-8">
                                             <div class="input-group">
-                                                <input type="text" name="city" class=" form-align" id="city" maxlength="25" />
+                                                <input type="text" name="mail" class="  form-align" id="mail" />
                                                 <div class="input-group-addon">
-                                                    <i class="fa fa-map-marker"></i>
+                                                    <i class="fa fa-envelope"></i>
                                                 </div>
                                             </div>
-                                            <span id="superror10" class="val" style="color:#F00; font-style:oblique;"></span>
+                                            <span id="superror5" class="val" style="color:#F00; font-style:oblique;"></span>
+                                            <span id="duplica" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">GSTIN <span style="color:#F00; font-style:oblique;"></span></label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <input type="text" name="tin" class="number  form-align" id="tin" maxlength="15" />
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                            <span id="superror12" class="val" style="color:#F00; font-style:oblique;"></span>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">State</label>
                                         <div class="col-sm-8">
@@ -149,44 +164,7 @@
                                             </select><span id="superror" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Email Address</label>
-                                        <div class="col-sm-8">
-                                            <div class="input-group">
-                                                <input type="text" name="mail" class="  form-align" id="mail" />
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-envelope"></i>
-                                                </div>
-                                            </div>
-                                            <span id="superror5" class="val" style="color:#F00; font-style:oblique;"></span>
-                                            <span id="duplica" class="val" style="color:#F00; font-style:oblique;"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Address Line1 <span style="color:#F00; font-style:oblique;">*</span></label>
-                                        <div class="col-sm-8">
-                                            <textarea name="address1" id="address1" class="form-control form-align"></textarea>
-                                            <span id="superror3" class="val" style="color:#F00; font-style:oblique;"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Address Line2</label>
-                                        <div class="col-sm-8">
-                                            <textarea name="address2" id="address2" class="form-control form-align"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Pin Code <span style="color:#F00; font-style:oblique;"></span></label>
-                                        <div class="col-sm-8">
-                                            <div class="input-group">
-                                                <input type="text" class=" form-align" name="pin" id="pincode" />
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-map-marker"></i>
-                                                </div>
-                                            </div>
-                                            <span id="superror7" class="val" style="color:#F00; font-style:oblique;"></span>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="col-md-4">
                                     <!-- <div class="form-group">
@@ -242,17 +220,43 @@
                                          </div>
                                      </div>-->
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">GSTIN <span style="color:#F00; font-style:oblique;"></span></label>
+                                        <label class="col-sm-4 control-label">Address Line1 <span style="color:#F00; font-style:oblique;">*</span></label>
                                         <div class="col-sm-8">
-                                            <div class="input-group">
-                                                <input type="text" name="tin" class="number  form-align" id="tin" maxlength="15" />
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-cog"></i>
-                                                </div>
-                                            </div>
-                                            <span id="superror12" class="val" style="color:#F00; font-style:oblique;"></span>
+                                            <textarea name="address1" id="address1" class="form-control form-align"></textarea>
+                                            <span id="superror3" class="val" style="color:#F00; font-style:oblique;"></span>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Address Line2</label>
+                                        <div class="col-sm-8">
+                                            <textarea name="address2" id="address2" class="form-control form-align"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">City <span style="color:#F00; font-style:oblique;">*</span></label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <input type="text" name="city" class=" form-align" id="city" maxlength="25" />
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-map-marker"></i>
+                                                </div>
+                                            </div>
+                                            <span id="superror10" class="val" style="color:#F00; font-style:oblique;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Pin Code <span style="color:#F00; font-style:oblique;"></span></label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <input type="text" class=" form-align" name="pin" id="pincode" />
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-map-marker"></i>
+                                                </div>
+                                            </div>
+                                            <span id="superror7" class="val" style="color:#F00; font-style:oblique;"></span>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="clearfix"></div>
@@ -326,16 +330,9 @@
                                 </div>
                             </div>
                             <div class="frameset_table action-btn-align">
-                                <table>
-                                    <tr>
-                                        <td width="570">&nbsp;</td>
-                                        <td><input type="submit" value="Save" class="submit btn btn-success  savebtn" id="submit" /></td>
-                                        <td>&nbsp;</td>
-                                        <td><input type="reset" value="Clear" class=" btn btn-danger1 " id="reset" /></td>
-                                        <td>&nbsp;</td>
-                                        <td><a href="<?php echo $this->config->item('base_url') . 'masters/suppliers/' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a></td>
-                                    </tr>
-                                </table>
+                                <input type="submit" value="Save" class="submit btn btn-success  savebtn" id="submit" />
+                                <input type="reset" value="Clear" class=" btn btn-danger1 " id="reset" />
+                                <a href="<?php echo $this->config->item('base_url') . 'masters/suppliers/' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
                             </div>
                         </form>
                     </div>

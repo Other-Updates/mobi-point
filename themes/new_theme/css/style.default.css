@@ -6457,7 +6457,7 @@ input, button, select, textarea {
 
     border-radius: 0px;
 
-    padding: 4px;
+    padding: 6px;
 
     border: 1px solid #ccc;
 
@@ -6618,15 +6618,11 @@ table.table-bordered.dataTable tr:nth-child(even) {
 }
 
 .tabs-nav li.active a, .tabs-nav li a:hover, .tabs-nav li a:focus {
-
     color: #ffffff;
-
     border-bottom: 2px solid white;
-
-    background: #494e53;
-
-    border-radius: 0px;
-
+    background: #4c77b2;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 .tabs-nav li a {
@@ -9488,4 +9484,32 @@ animation: blink 1s steps(2, start) infinite;
 }
 .m-t-0 {
     margin-top: 0;
+}
+#ui-datepicker-div{
+    min-width: 266px;
+}
+span.val, span.reset, .error_msg{
+    position: absolute;
+    font-style:unset !important;
+    font-size: 12px;
+}
+.select2-container.form-control{
+    border: none;
+}
+
+.search-area .form-control{
+  height: 34px;
+  margin-top: 4px;
+}
+.input-group-addon {
+    padding: 8.5px 12px;
+}
+select.form-control{
+    height: 34px;   
+}
+input.form-control.form-align {
+    height: 34px;
+}
+input.form-control {
+    height: 34px;
 }

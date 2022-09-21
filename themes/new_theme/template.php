@@ -296,7 +296,7 @@ if ($cur_class == 'report' || $cur_class == 'purchase_order' || $cur_class == 's
                             <?php if ($this->user_auth->is_section_allowed('notification', 'today_notification')) { ?>
                                 <div class="pull-right">
                                     <div class="btn-group btn-group-option">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <button type="button" class="btn btn-pink dropdown-toggle" data-toggle="dropdown">
                                             &nbsp;<i class="fa fa-inr"></i>&nbsp;
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-lg pb0 purple-notify table-notify" role="menu">

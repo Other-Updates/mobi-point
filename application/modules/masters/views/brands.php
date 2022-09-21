@@ -130,7 +130,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">HSN NUMBER<span style="color:#F00; font-style:oblique;">*</span></label>
@@ -146,7 +145,6 @@
                                         </div>
                                     </div>
                                 </div>
-                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">GST<span style="color:#F00; font-style:oblique;">*</span></label>
@@ -162,11 +160,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="frameset_table action-btn-align">
-                        <input type="submit" value="Save" class="submit btn btn-success" id="submit" />
-                        <input type="reset" value="Clear" class=" btn btn-danger1" id="cancel" />
-                        <a href="<?php echo $this->config->item('base_url') . 'masters/brands' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
+                        <div class="frameset_table action-btn-align">
+                            <input type="submit" value="Save" class="submit btn btn-success" id="submit" />
+                            <input type="reset" value="Clear" class=" btn btn-danger1" id="cancel" />
+                            <a href="<?php echo $this->config->item('base_url') . 'masters/brands' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
+                        </div>
                     </div>
                     </form>
                 </div>

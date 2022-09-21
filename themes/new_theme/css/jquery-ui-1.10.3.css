@@ -250,12 +250,6 @@ button.ui-button::-moz-focus-inner {
 .ui-datepicker .ui-datepicker-next {
 	right: 2px;
 }
-.ui-datepicker .ui-datepicker-prev-hover {
-	left: 1px;
-}
-.ui-datepicker .ui-datepicker-next-hover {
-	right: 1px;
-}
 .ui-datepicker .ui-datepicker-prev span,
 .ui-datepicker .ui-datepicker-next span {
 	display: block;
@@ -872,7 +866,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
 	border: 1px solid #f9dd34;
-	background: #ffef8f url(images/ui-bg_highlight-soft_25_ffef8f_1x100.png) 50% top repeat-x;
+	background: #ffef8f url(images/ui-bg_highlight-soft_25_ffef8f_1x100.png) 50% top repeat-x !important;
 	color: #363636;
 }
 .ui-state-highlight a,

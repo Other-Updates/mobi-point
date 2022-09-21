@@ -502,7 +502,7 @@ if (!empty($customers)) {
                     ?>
                         <input type="hidden" tabindex="-1" name="quotation[q_no]" class="code form-control colournamedup  form-align" readonly="readonly" value="" id="grn_no">
                     <?php } ?>
-                    <div class="customer_details_invoice"><label id="customer_details_label"></label></div>
+                    <div class="customer_details_invoice dnone"><label id="customer_details_label"></label></div>
                     <div class="form-group dnone">
                         <label class="col-sm-4 control-label">Customer Email ID</label>
                         <div class="col-sm-8">
@@ -518,16 +518,6 @@ if (!empty($customers)) {
                             <textarea name="customer[address1]" tabindex="-1" id="address1" class="form-control form-align" style="display: none; "></textarea>
                             <span class="error_msg"></span>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <input type="hidden" name="sales_id" class="code form-control colournamedup  form-align" value="" id="sales_id">
-                    <input type="hidden" name="invoice_id" class="code form-control colournamedup  form-align" value="" id="invoice_id">
-                    <div class="form-group col-sm-4" style="display:none">
-                        <label>GST</label>&emsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" id="unchecked" class="gst-invoice" value="1" name="quotation[bill_category]" checked /><br>
-                        <label>NO GST</label>&nbsp;
-                        <input type="radio" id="checked" class="gst-invoice" value="2" name="quotation[bill_category]" />
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">GSTIN NO </label>
@@ -553,6 +543,17 @@ if (!empty($customers)) {
                             <span class="error_msg"></span>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="hidden" name="sales_id" class="code form-control colournamedup  form-align" value="" id="sales_id">
+                    <input type="hidden" name="invoice_id" class="code form-control colournamedup  form-align" value="" id="invoice_id">
+                    <div class="form-group col-sm-4" style="display:none">
+                        <label>GST</label>&emsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" id="unchecked" class="gst-invoice" value="1" name="quotation[bill_category]" checked /><br>
+                        <label>NO GST</label>&nbsp;
+                        <input type="radio" id="checked" class="gst-invoice" value="2" name="quotation[bill_category]" />
+                    </div>
+                    
                     <div class="form-group">
                         <label class="col-sm-4 control-label">IMEI Detection <span style="color:#F00; font-style:oblique;"></span></label>
                         <div class="col-sm-8">
