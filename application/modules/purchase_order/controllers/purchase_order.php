@@ -64,7 +64,7 @@ class Purchase_order extends MX_Controller
         if (isset($_GET['notification']))
             $this->notification_model->update_notification(array('status' => 1), $_GET['notification']);
     }
-    public function index($type)
+    public function index($type='')
     {
         $input = $this->input->post();
         if (!empty($input)) {
@@ -90,7 +90,7 @@ class Purchase_order extends MX_Controller
             if ($input['po']['pr_status'] == 'approved') {
                 $input['po']['po_id'] = $insert_id;
                 $input['po']['supplier'] = $input['supplier']['id'];
-                $insert_pr_id = $this->purchase_return_model->insert_pr($input['po']);
+                $this->purchase_return_model->insert_pr($input['po']);
                 // unset($input['po']['po_id']);
                 // unset($input['po']['supplier']);
             }
@@ -152,7 +152,7 @@ class Purchase_order extends MX_Controller
                         $insert['discount'] = $input['discount'][$key];
                         $insert['transport'] = $input['transport'][$key];
                         $insert['sub_total'] = $input['sub_total'][$key];
-                        $insert['created_date'] = date('Y-m-d H:i');
+                        $insert['created_date'] = date("Y-m-d");
                         $insert_arr[] = $insert;
                         $update_prod_data = array();
                         $update_prod_data['cost_price'] = $input['per_cost'][$key];
@@ -163,7 +163,7 @@ class Purchase_order extends MX_Controller
                             $stock_arr = array();
                             $po_id['po_id'] = $input['po']['pr_no'];
                             $stock_arr[] = $po_id;
-                            // $this->stock_details($insert, $po_id);
+                             $this->stock_details($insert, $po_id);
                         }
                     }
                     $this->purchase_order_model->insert_po_details($insert_arr);
@@ -644,7 +644,7 @@ class Purchase_order extends MX_Controller
         $this->template->write_view('content', 'purchase_order/purchase_order_list', $datas);
         $this->template->render();
     }
-    public function get_customer($id)
+    public function get_customer($id='')
     {
         $atten_inputs = $this->input->post();
         $data = $this->purchase_order_model->get_customer($atten_inputs);

@@ -860,13 +860,15 @@
 
                         i = 1;
 
-                    } else if (ifsc != "" && !ifscformat.test(ifsc)) {
+                    }
+                    //  else if (ifsc != "" && !ifscformat.test(ifsc)) {
 
-                        $("#ifsc1").text('Enter Valid IFSC Code');
+                    //     $("#ifsc1").text('Enter Valid IFSC Code');
 
-                        i = 1;
+                    //     i = 1;
 
-                    } else
+                    // } 
+                    else
 
                     {
 
@@ -914,23 +916,25 @@
 
                     }
 
-                    var ifsc = $("#ifsc").val();
+                    // var ifsc = $("#ifsc").val();
 
-                    if (ifsc == "" || ifsc == null || ifsc.trim().length == 0)
+                    // if (ifsc == "" || ifsc == null || ifsc.trim().length == 0)
 
-                    {
+                    // {
 
-                        $("#ifsc1").html("Required Field");
+                    //     $("#ifsc1").html("Required Field");
 
-                        i = 1;
+                    //     console.log('errer');
 
-                    } else
+                    //     i = 1;
 
-                    {
+                    // } else
 
-                        $("#ifsc1").html("");
+                    // {
 
-                    }
+                    //     $("#ifsc1").html("");
+
+                    // }
 
 
 

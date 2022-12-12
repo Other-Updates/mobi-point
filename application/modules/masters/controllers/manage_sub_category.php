@@ -29,9 +29,10 @@ class Manage_sub_category extends MX_Controller {
         $key = array('S.No', 'expsub_category_details', 'expsub_category_list', 'add_new', 'company', 'type', 'category', 'sub_category', 'add_category', 'enter_sub_category', 'status', 'success', 'action', 'edit', 'inactive_subcategory', 'inactive_subcategory_confirmation', 'filtered_from', 'no_data_available', 'showing', 'show', 'entries', 'previous', 'next', 'search', 'to', 'of', 'total', 'required_field', 'expsub_category_already_exists', 'update_expsub_cat', 'submit', 'cancel', 'update', 'clear', 'back', 'enter_details', 'select', 'filtered_from', 'no_data_available', 'showing', 'show', 'entries', 'previous', 'next', 'search', 'total', 'in_active', 'inactive_company_confirmation', 'yes', 'no', 'ok', 'success', 'deleted', 'delete', 'updated', 'expsub_cat_updated', 'expsub_cat_not_updated', 'expsub_cat_added', 'expsub_cat_not_added', 'expsub_cat_delete_success');
         $code = array('s_no', 'expsub_category_details', 'expsub_category_list', 'add_new', 'company', 'type', 'category', 'sub_category', 'add_category', 'enter_sub_category', 'status', 'success', 'action', 'edit', 'inactive_subcategory', 'inactive_subcategory_confirmation', 'filtered_from', 'no_data_available', 'showing', 'show', 'entries', 'previous', 'next', 'search', 'to', 'of', 'total', 'required_field', 'expsub_category_already_exists', 'update_expsub_cat', 'submit', 'cancel', 'update', 'clear', 'back', 'enter_details', 'select', 'filtered_from', 'no_data_available', 'showing', 'show', 'entries', 'previous', 'next', 'search', 'total', 'in_active', 'inactive_company_confirmation', 'yes', 'no', 'ok', 'success', 'deleted', 'delete', 'updated', 'expsub_cat_updated', 'expsub_cat_not_updated', 'expsub_cat_added', 'expsub_cat_not_added', 'expsub_cat_delete_success');
         $this->load->helper('language');
-        $language = $this->language = get_words($code, $key);
+        // $language = $this->language = get_words($code, $key);
+        $language = $this->language = '';
         $language_data['language'] = $language;
-        $this->template->write_view('session_msg', 'masters/session_msg', $language_data);
+        // $this->template->write_view('session_msg', 'masters/session_msg', $language_data);
     }
 
     public function index() {

@@ -70,7 +70,7 @@ class Sales extends MX_Controller
             'sales/check_ime_qty' => 'no_restriction',
             'sales/get_ime_code_from_productqty' => 'no_restriction',
             'sales/get_customer_by_firm' => 'no_restriction',
-            ''
+            'sales/print_view'=>'no_restriction',
         );
         if (!$this->user_auth->is_permission_allowed($access_arr, $main_module)) {
             redirect($this->config->item('base_url'));
@@ -2574,7 +2574,7 @@ class Sales extends MX_Controller
             $row = array();
             $row[] = $no;
             $row[] = $ass['shop_name'];
-            $row[] = $ass['store_name'];
+            // $row[] = $ass['store_name'];
             //  $row[] = number_format($ass['net_total'], 2);
             if ($ass['invoice_status'] == 'waiting') {
                 $inv_status = '<span class=" badge  bg-red">Waiting</span>';

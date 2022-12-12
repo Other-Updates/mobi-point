@@ -154,6 +154,7 @@ class Purchase_return extends MX_Controller
     public function update_po($id)
     {
         $input = $this->input->post();
+        //  print_r($input);exit;
         if (!empty($input)) {
             //            echo "<pre>";
             //            print_r($this->input->post());
@@ -175,13 +176,18 @@ class Purchase_return extends MX_Controller
                 $discount = $input['discount'][$key];
                 $transport = $input['transport'][$key];
                 $created_date = date('Y-m-d H:i');
-                // $po_details = $this->purchase_return_model->get_po_details($purchase_order_id);
+                //  $po_details = $this->purchase_return_model->get_po_details($purchase_order_id);
+                 
                 $po_details = $this->purchase_return_model->get_po_details_based_on_prdcat($purchase_order_id, $categoty, $brand);
                 $already_delivery_qty = $po_details[0]['delivery_quantity'];
-                $return_qty = $input['return_quantity'][$erp_pr_details_id][0];
+                
+                
+                $return_qty = $input['return_quantity'][0];
+                
                 $data = array();
                 // Erp Product Details Update
                 $data['delivery_quantity'] = $already_delivery_qty - $return_qty;
+                
                 $this->purchase_return_model->update_po_details($purchase_order_id, $categoty, $brand, $data);
                 // Erp Product Update..
                 $po = $this->purchase_return_model->get_po($purchase_order_id);
@@ -211,8 +217,10 @@ class Purchase_return extends MX_Controller
                 $data['delivery_qty'] = $already_delivery_pr_qty - $return_qty;
                 //$data['total_qty'] = $already_total_pr_qty - $return_qty;
                 $data['net_total'] = $input['po']['net_total'];
+            
                 $data['subtotal_qty'] = $input['po']['subtotal_qty'];
                 $this->purchase_return_model->update_erp_pr($erp_pr_id, $data);
+                
                 // Erp Pr_details Update
                 //  $this->purchase_return_model->delete_pr_details_based_on_pr_detailsid($erp_pr_details_id);
                 $pr_details = $this->purchase_return_model->get_pr_details($erp_pr_details_id);
@@ -227,9 +235,9 @@ class Purchase_return extends MX_Controller
                 $data['return_quantity'] = $already_return_qty + $return_qty;
                 $data['delivery_qty'] = $alrdy_delivery_qty - $return_qty;
                 $data['sub_total'] = $input['sub_total'][$key];
-                //                echo '<pre>';
-                //                print_r($data);
-                //                exit;
+                            //    echo '<pre>';
+                            //    print_r($data);
+                            //    exit;
                 $this->purchase_return_model->update_pr_details($erp_pr_details_id, $data);
             }
         }

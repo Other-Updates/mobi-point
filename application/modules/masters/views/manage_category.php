@@ -22,12 +22,13 @@
                         <a class="nav-link active" id="tab-6-1" data-toggle="tab" href="#category-details" role="tab" aria-controls="home-6-1" aria-selected="true"><i class="mdi mdi-table-large"></i>Expense Category List</a>
                     </li>
                     <li class="nav-item">
-                        <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>#addcategory<?php endif ?>" role="tab" aria-controls="profile-6-2" aria-selected="false" class="nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i><?php echo $language['add_new'] ?></a>
+                        <!-- <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>#addcategory<?php endif ?>" role="tab" aria-controls="profile-6-2" aria-selected="false" class="active nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i><?php echo $language['add_new'] ?></a> -->
+                        <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>#addcategory<?php endif ?>" role="tab" aria-controls="profile-6-2" aria-selected="false" class="active nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'user_roles', 'add')) : ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i>Add Expense Category</a>
                     </li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content tab-content-solid">
-                    <div role="tabpanel" aria-labelledby="tab-6-1" class="tab-pane fade show active" id="category-details">
+                    <div role="tabpanel" aria-labelledby="tab-6-1" class="tab-pane  show active" id="category-details">
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
@@ -115,9 +116,12 @@
                                 </div>
                             </div>
                             <div class="frameset_table action-btn-align">
-                                <input type="submit" value="<?php echo $language['submit'] ?>" class="submit btn btn-success btn-fw " id="submit">
+                                <!-- <input type="submit" value="<?php echo $language['submit'] ?>" class="submit btn btn-success btn-fw " id="submit">
                                 <input type="reset" value="<?php echo $language['clear'] ?>" class="btn  btn-danger btn-fw" id="cancel">
-                                <a href="<?php echo $this->config->item('base_url') . 'masters/manage_category' ?>" class="btn btn-dark btn-fw"><span class="glyphicon"></span>&nbsp;<?php echo $language['back'] ?></a>
+                                <a href="<?php echo $this->config->item('base_url') . 'masters/manage_category' ?>" class="btn btn-dark btn-fw"><span class="glyphicon"></span>&nbsp;<?php echo $language['back'] ?></a> -->
+                                <input type="submit" value="Submit" class="submit btn btn-success btn-fw " id="submit">
+                                <input type="reset" value="Clear" class="btn  btn-danger btn-fw" id="cancel">
+                                <a href="<?php echo $this->config->item('base_url') . 'masters/manage_category' ?>" class="btn btn-dark btn-fw"><span class="glyphicon"></span>&nbsp;Back</a>
                             </div>
                         </form>
                     </div>

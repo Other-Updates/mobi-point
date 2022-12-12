@@ -922,7 +922,7 @@ class Purchase_order_model extends CI_Model {
 
             $query[$i]['ime_code_details'] = $ime_details;
 
-            $ime_code = '';
+            $ime_code = array();
             foreach ($ime_details as $code) {
                 $ime_code[] = $code['ime_code'];
             }

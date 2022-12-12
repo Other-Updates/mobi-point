@@ -117,7 +117,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 <div class="form-group">
                     <label class="control-label">Product</label>
                     <select id='product' class="form-control multi_select">
-                        <!-- <option>Select</option> -->
+                        <option value="">Select</option>
                         <?php
                         if (isset($product) && !empty($product)) {
                             foreach ($product as $val) {

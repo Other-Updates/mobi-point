@@ -184,17 +184,18 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                                 $get_pr_details = $this->purchase_return_model->getpr_details_based_on_pr($val['id']);
 
-//                                echo '<pre>';
+                            //    echo '<pre>';
 
-//                                print_r($get_pr_details);
+                            //    print_r($get_pr_details);
 
-//                                exit;
+                            //    exit;
 
                                 // exit;
 
                                 foreach ($get_pr_details as $key => $vals) {
 
                                     // $subtotal = $vals['sub_total'];
+                                    $quantity_tst=$vals['quantity'];
 
                                     $deliver_qty = $vals['delivery_qty'];
 
@@ -204,7 +205,8 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                                     $cgst = $vals['gst'];
 
-                                    $net_total = $deliver_qty * $per_cost + (($deliver_qty * $per_cost) * $gst / 100) + (($deliver_qty * $per_cost) * $cgst / 100) - $vals['discount'] + $vals['transport'];
+                                    $net_total=$quantity_tst * $per_cost;
+                                    // $net_total = $quantity_tst * $per_cost + (($deliver_qty * $per_cost) * $gst / 100) + (($deliver_qty * $per_cost) * $cgst / 100) - $vals['discount'] + $vals['transport'];
 
 
 
@@ -212,11 +214,11 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                                 }
 
-//                                echo '<pre>';
+                            //    echo '<pre>';
 
-//                                print_r($over_all_net_total);
+                            //    print_r($over_all_net_total);
 
-//                                exit;
+                            //    exit;
 
                                 ?>
 
@@ -274,11 +276,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                                     <td class="text_right"><?= $over_all_net_total; ?></td>
 
-                                    <!--<td class="text_right"><?= $val['net_total']; ?></td>-->
-
-
-
-
+                                    <!-- <td class="text_right"><?= $val['net_total']; ?></td> -->
 
                                     <td class='action-btn-align'><?= ($val['delivery_schedule'] != '1970-01-01') ? date('d-M-Y', strtotime($val['delivery_schedule'])) : ''; ?></td>
 

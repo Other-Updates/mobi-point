@@ -21,10 +21,12 @@
                 <h4 class="card-title">Expense Sub Category Details</h4>
                 <ul class="nav nav-tabs tab-solid  tab-solid-primary" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active"  id="tab-6-1"  href="#sub_category-details" aria-controls="home-6-1" role="tab" data-toggle="tab" aria-selected="true"><i class="mdi mdi-table-large"></i>Expense SubCategory List</a>
+                        <a class="nav-link active load_active"  id="tab-6-1"  href="#sub_category-details" aria-controls="home-6-1" role="tab" data-toggle="tab" aria-selected="true"><i class="mdi mdi-table-large"></i>Expense SubCategory List</a>
                     </li>
                     <li  class="nav-item">
-                        <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_sub_category', 'add')): ?>#sub_category<?php endif ?>" aria-controls="profile-6-2" role="tab" aria-selected="false" class="nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_sub_category ', 'add')): ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i><?php echo $language['add_new'] ?></a>
+                        <!-- <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_sub_category', 'add')): ?>#sub_category<?php endif ?>" aria-controls="profile-6-2" role="tab" aria-selected="false" class="active nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_sub_category ', 'add')): ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i><?php echo $language['add_new'] ?></a> -->
+                        <a id="tab-6-2" data-toggle="tab" href="<?php if ($this->user_auth->is_action_allowed('masters', 'manage_sub_category', 'add')): ?>#sub_category<?php endif ?>" aria-controls="profile-6-2" role="tab" aria-selected="false" class="active nav-link <?php if (!$this->user_auth->is_action_allowed('masters', 'manage_sub_category ', 'add')): ?>alerts<?php endif ?>"><i class="mdi mdi-account-plus"></i>Add Expense Subcategory</a>
+
                     </li>
                 </ul>
                 <div class="tab-content tab-content-solid">
@@ -121,9 +123,13 @@
                                 </div>
                             </div>
                             <div class="frameset_table action-btn-align">
-                                <input type="submit" value="<?php echo $language['submit'] ?>" class="submit btn btn-success btn-fw" id="submit" >
+                                <!-- <input type="submit" value="<?php echo $language['submit'] ?>" class="submit btn btn-success btn-fw" id="submit" >
                                 <input type="reset" value="<?php echo $language['clear'] ?>" class=" btn btn-danger btn-fw" id="cancel" >
-                                <a href="<?php echo $this->config->item('base_url') . 'masters/manage_sub_category' ?>" class="btn btn-dark btn-fw"><span class="glyphicon"></span>&nbsp;<?php echo $language['back'] ?></a>
+                                <a href="<?php echo $this->config->item('base_url') . 'masters/manage_sub_category' ?>" class="btn btn-dark btn-fw"><span class="glyphicon"></span>&nbsp;<?php echo $language['back'] ?></a> -->
+
+                                <input type="submit" value="Submit" class="submit btn btn-success btn-fw" id="submit" >
+                                <input type="reset" value="Clear" class=" btn btn-danger btn-fw" id="cancel" >
+                                <a href="<?php echo $this->config->item('base_url') . 'masters/manage_sub_category' ?>" class="btn btn-dark btn-fw"><span class="glyphicon"></span>&nbsp;Back</a>
                             </div>
                         </form>
                     </div>
@@ -166,6 +172,7 @@ if (isset($all_list) && !empty($all_list)) {
     var language_json = <?php echo json_encode($language); ?>;
     var language = language_json;
     $(document).ready(function () {
+        $('.load_active').trigger('click');
         $(".delete_yes").on("click", function () {
             var hidin = $(this).parent().parent().find('.id').val();
             $.ajax({

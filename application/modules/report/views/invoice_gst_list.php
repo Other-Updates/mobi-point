@@ -231,13 +231,13 @@ $data['company_details'] = $this->admin_model->get_company_details();
 </div>
 <div id="export_excel"></div>
 <script>
-    //    $('.print_btn').click(function () {
-    //        window.print();
-    //    });
-    $('.print_btn').click(function() {
-        var url = '<?php echo base_url(); ?>report/gst_report_pdf/';
-        window.open(url, '_blank');
-    });
+       $('.print_btn').click(function () {
+           window.print();
+       });
+    // $('.print_btn').click(function() {
+    //     var url = '<?php echo base_url(); ?>report/gst_report_pdf/';
+    //     window.open(url, '_blank');
+    // });
     $('#clear').live('click', function() {
         window.location.reload();
     });

@@ -31,17 +31,18 @@ class Manage_category extends MX_Controller
         $key = array('S.No', 'exp_category_details', 'exp_category_list', 'add_new', 'company', 'type', 'category', 'add_category', 'enter_category', 'status', 'success', 'action', 'edit', 'inactive_category', 'inactive_category_confirmation', 'filtered_from', 'no_data_available', 'showing', 'show', 'entries', 'previous', 'next', 'search', 'to', 'of', 'total', 'required_field', 'category_already_exists', 'update_exp_cat', 'submit', 'cancel', 'update', 'clear', 'back', 'enter_details', 'select', 'filtered_from', 'no_data_available', 'showing', 'show', 'entries', 'previous', 'next', 'search', 'total', 'in_active', 'inactive_company_confirmation', 'yes', 'no', 'ok', 'success', 'deleted', 'delete', 'updated', 'exp_cat_updated', 'exp_cat_not_updated', 'exp_cat_added', 'exp_cat_not_added', 'exp_cat_delete_success');
         $code = array('s_no', 'exp_category_details', 'exp_category_list', 'add_new', 'company', 'type', 'category', 'add_category', 'enter_category', 'status', 'success', 'action', 'edit', 'inactive_category', 'inactive_category_confirmation', 'filtered_from', 'no_data_available', 'showing', 'show', 'entries', 'previous', 'next', 'search', 'to', 'of', 'total', 'required_field', 'category_already_exists', 'update_exp_cat', 'submit', 'cancel', 'update', 'clear', 'back', 'enter_details', 'select', 'filtered_from', 'no_data_available', 'showing', 'show', 'entries', 'previous', 'next', 'search', 'total', 'in_active', 'inactive_company_confirmation', 'yes', 'no', 'ok', 'success', 'deleted', 'delete', 'updated', 'exp_cat_updated', 'exp_cat_not_updated', 'exp_cat_added', 'exp_cat_not_added', 'exp_cat_delete_success');
         $this->load->helper('language');
-        $language = $this->language = get_words($code, $key);
+        // $language = $this->language = get_words($code, $key);
+        $language = $this->language = '';
         $language_data['language'] = $language;
-        $this->template->write_view('session_msg', 'masters/session_msg', $language_data);
+        // $this->template->write_view('session_msg', 'masters/session_msg', $language_data);
     }
 
     public function index()
     {
         $data = array();
         $data['language'] = $language = $this->language;
-        //$client_id = $this->user_auth->get_login_client_id();
-        $data['category_list'] = $this->category_model->get_all_category_list();
+        $client_id = $this->user_auth->get_login_client_id();
+        $data['category_list'] = $this->category_model->get_all_category_list($client_id);
         $this->template->write_view('content', 'masters/manage_category', $data);
         $this->template->render();
     }

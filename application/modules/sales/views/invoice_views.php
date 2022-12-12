@@ -638,5 +638,5 @@ if (isset($quotation_details) && !empty($quotation_details)) {
                 }
             });
     }
-    });
+
 </script>
