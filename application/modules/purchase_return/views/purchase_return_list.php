@@ -14,7 +14,7 @@
 
     .btn-xs {
 
-        border-radius: 0px;
+        border-radius: 4px;
 
     }
 
@@ -38,10 +38,7 @@
 
     }
 
-    .btn-info { background-color:#ffffff;border-color: #000000;color:#a1a3a5;    padding: 2px 2px 2px 2px !important;}
-
-    .btn-info:hover { background-color:#ff4081;border:1px solid #ff4081 !important;color:#ffffff; }
-
+    td .btn-info { min-width: fit-content; padding: 0 5px !important;}
 
 
 </style>
@@ -160,7 +157,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
 
 
-                            <td class="hide_class action-btn-align">Action</td>
+                            <td class="hide_class action-btn-align">Action &nbsp;&nbsp;&nbsp;</td>
 
                         </tr>
 
@@ -290,7 +287,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                                     <td class='hide_class  action-btn-align'>
 
-                                        <a href="<?php if ($this->user_auth->is_action_allowed('purchase', 'purchase_return', 'edit')): ?><?php echo $this->config->item('base_url') . 'purchase_return/po_edit/' . $val['id'] ?><?php endif ?>" data-toggle="tooltip" class="tooltips btn btn-info btn-xs <?php if (!$this->user_auth->is_action_allowed('purchase', 'purchase_return', 'edit')): ?>alerts<?php endif ?>" title="" data-original-title="Edit"><span>Make Return</span></a>
+                                        <a href="<?php if ($this->user_auth->is_action_allowed('purchase', 'purchase_return', 'edit')): ?><?php echo $this->config->item('base_url') . 'purchase_return/po_edit/' . $val['id'] ?><?php endif ?>" data-toggle="tooltip" class="tooltips btn btn-info btn-xs <?php if (!$this->user_auth->is_action_allowed('purchase', 'purchase_return', 'edit')): ?>alerts<?php endif ?>" title="" data-original-title="Edit"><span>Return</span></a>
 
                                         <?php
 

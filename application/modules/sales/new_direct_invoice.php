@@ -1394,7 +1394,7 @@ if (!empty($customers)) {
 
                 <input type="hidden" id='to_date' class="form-control datepicker borderra0 terms" name="quotation[notification_date]" placeholder="dd-mm-yyyy">
 
-                <input type="text" tabindex="29" class="form-control class_req borderra0 terms" name="quotation[mode_of_payment]" />
+                <input type="text" tabindex="29" class="form-control class_req borderra0 terms mb-10" name="quotation[mode_of_payment]" />
 
                 <input type="hidden" class="form-control class_req borderra0 terms" name="quotation[validity]" />
 

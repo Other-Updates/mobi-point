@@ -17,6 +17,9 @@
     .bg-yellow {
         background-color: orange !important;
     }
+    tr td:nth-child(5){
+        text-align:center
+    }
 </style>
 <?php
 $this->load->model('admin/admin_model');
@@ -54,9 +57,9 @@ $data['company_details'] = $this->admin_model->get_company_details();
         <h4>Stock List</h4>
     </div>
     <div class="panel-body pnone">
-        <div class="row search_table_hide mb-0">
+        <div class="row search_table_hide">
             <div class="col-md-2">
-                <div class="form-group">
+                <div class="form-group mb-0">
                     <label class="col-sm-4 control-label">
                         Shop</label>
                     <div class="col-sm-8">
@@ -79,7 +82,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="form-group">
+                <div class="form-group mb-0">
                     <label class="col-sm-4 control-label">Category</label>
                     <div class="col-sm-8">
                         <select id='category' class="form-control">
@@ -98,7 +101,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="form-group">
+                <div class="form-group mb-0">
                     <label class="col-sm-4 control-label">Product</label>
                     <div class="col-sm-8 wid100-div">
                         <select id='product' name="product[]" class="form-control multi_select wid100" multiple="multiple">
@@ -117,7 +120,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                 </div>
             </div>
             <div class="col-sm-2">
-                <div class="form-group">
+                <div class="form-group mb-0">
                     <label class="col-sm-4 control-label">Model</label>
                     <div class="col-sm-8">
                         <select id='brand' class="form-control">
@@ -161,7 +164,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         <td width='15%'></td>
                         <td width='15%'></td>
                         <td width='5%'></td>
-                        <td width='10%' class="total-bg action-btn-align"></td>
+                        <td width='10%' class="total-bg action-btn-align text-center"></td>
                         <td width='10%'></td>
                     </tr>
                 </tfoot>

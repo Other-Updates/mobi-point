@@ -1052,7 +1052,7 @@ class Sales_return extends MX_Controller {
 
             }
 
-            $action_url = '<a href="' . $url1 . '" data-toggle="tooltip" class="tooltips btn btn-info btn-xs ' . $alert1 . '" title="" data-original-title="Edit"><span>Make Return</span></a>';
+            $action_url = '<a href="' . $url1 . '" data-toggle="tooltip" class="tooltips btn btn-info btn-xs ' . $alert1 . '" title="" data-original-title="Edit"><span>Return</span></a>';
 
 
 

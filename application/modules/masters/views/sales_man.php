@@ -8,13 +8,8 @@
     .input-group-addon .fa {
         width: 10px !important;
     }
-
-    table tr td:nth-child(4) {
-        text-align: center;
-    }
-
-    table tr td:nth-child(5) {
-        text-align: center;
+    th{
+        white-space: nowrap;
     }
 </style>
 

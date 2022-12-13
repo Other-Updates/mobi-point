@@ -14,7 +14,7 @@
 
 
 
-        border-radius: 0px;
+        border-radius: 4px;
 
     }
 
@@ -38,9 +38,7 @@
 
     }
 
-    .btn-info { background-color:#ffffff;border-color: #000000;color:#a1a3a5;    padding: 2px 2px 2px 2px !important;}
-
-    .btn-info:hover { background-color:#ff4081;border:1px solid #ff4081 !important;color:#ffffff; }
+    td .btn-info { min-width: fit-content; padding: 0 5px !important;}
 
 
 
@@ -197,8 +195,6 @@ $data['company_details'] = $this->admin_model->get_company_details();
 
                     <div class="filter-area-field">
 
-                        <br>
-
                         <div>
 
                             <div class="col-sm-4" style="position:relative;">
@@ -222,7 +218,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                                 ?>
                                 <div class="form-group text-left">
                                     <label class="control-label">Product Name</label>
-                                    <input type="text" placeholder="Enter Product Name" id="product_name_src" name="filter[product_name_src]" value="<?php echo $value; ?>" title="Enter product name" class="form-align form-control mt-0" ><div id="suggesstion-box_ins" class="auto-asset-search hide_class"></div>
+                                    <input type="text" placeholder="Enter Product Name" id="product_name_src" name="filter[product_name_src]" value="<?php echo $value; ?>" title="Enter product name" class="form-align form-control m-0" ><div id="suggesstion-box_ins" class="auto-asset-search hide_class"></div>
                                 </div>
 
 

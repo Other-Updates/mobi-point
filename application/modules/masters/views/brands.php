@@ -160,11 +160,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="frameset_table action-btn-align">
-                            <input type="submit" value="Save" class="submit btn btn-success" id="submit" />
-                            <input type="reset" value="Clear" class=" btn btn-danger1" id="cancel" />
-                            <a href="<?php echo $this->config->item('base_url') . 'masters/brands' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
-                        </div>
+                    </div>
+                    <div class="frameset_table action-btn-align">
+                        <input type="submit" value="Save" class="submit btn btn-success" id="submit" />
+                        <input type="reset" value="Clear" class=" btn btn-danger1" id="cancel" />
+                        <a href="<?php echo $this->config->item('base_url') . 'masters/brands' ?>" class="btn btn-defaultback"><span class="glyphicon"></span> Back </a>
                     </div>
                     </form>
                 </div>
@@ -193,16 +193,15 @@
                     </div>
 
                 </div>
+                <div class="panel-body action-btn-align">
+                    <button type="button" class="btn btn-primary add_bluk_import"><i class="icon-plus-circle2 position-left"></i> Import Models</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="panel-body action-btn-align">
 
-    <button type="button" class="btn btn-primary add_bluk_import"><i class="icon-plus-circle2 position-left"></i> Import Models</button>
-
-</div>
 
 
 <div id="myModal" class="modal fade">

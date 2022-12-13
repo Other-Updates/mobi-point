@@ -12,7 +12,7 @@
 
     .select2-container { border:0px #fff solid; }
 	table tr td:nth-child(4) {text-align:center;}
-	table tr td:nth-child(5) {text-align:center;}
+	table tr td:nth-child(7) {text-align:center;}
 
 </style>
 
@@ -141,7 +141,7 @@
 
                                         <div class="col-sm-8">
 
-                                            <input type="password" name="pass" class="form-control form-align" maxlength="20" id="pass" />
+                                            <input type="password" name="pass" class="form-control form-align" maxlength="20" id="pass" autocomplete="off" />
 
                                             <span id="cuserror11" class="val"  style="color:#F00; font-style:oblique;"></span>
 
@@ -390,7 +390,7 @@ if (isset($agent) && !empty($agent)) {
 
                                                 <td><?php echo $val['mobile_no']; ?></td>
 
-                                                <td><?php echo $val['email_id']; ?></td>
+                                                <td class="text-left"><?php echo $val['email_id']; ?></td>
 
                                                 <td><?php echo $val['user_role']; ?></td>
 
@@ -696,7 +696,7 @@ if (isset($agent) && !empty($agent)) {
 
         var acnum = $("#pass").val();
 
-        if (this.value.length > 8) {
+        if (this.value.length < 8) {
 
             $("#cuserror11").text('You have entered less than 8 characters for password');
 

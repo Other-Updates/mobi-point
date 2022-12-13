@@ -433,7 +433,7 @@ if (!empty($customers)) {
                     <div class="form-group">
                         <label class="col-sm-4 control-label first_td1">Bill Type<span style="color:#F00; font-style:oblique;">*</span></label>
                         <div class="col-sm-8">
-                            <input type="radio" tabindex="3" class="receiver" value="cash" name="po[po_type]" checked /> Cash Purchase &nbsp;
+                            <input type="radio" tabindex="3" class="receiver" value="cash" name="po[po_type]" checked /> Cash Purchase <br>
                             <input type="radio" tabindex="3" class="receiver" value="credit" name="po[po_type]" /> Credit Purchase<br>
                             <span id="type1" class="error_msg"></span>
                         </div>

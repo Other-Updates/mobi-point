@@ -9513,3 +9513,23 @@ input.form-control.form-align {
 input.form-control {
     height: 34px;
 }
+td .btn-xs {
+    width: 25px !important;
+    height: 25px !important;
+    line-height: 26px !important;
+    padding: 0 !important;
+}
+.btn-pink{
+    background: #ff90b6;
+}
+.modal.fade.in{
+    background: #0000007b;
+}
+.m-0{
+    margin: 0 !important;
+  }
+  .mtop4 {
+
+	margin-top:2px;
+
+}
