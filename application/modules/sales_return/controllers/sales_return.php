@@ -962,6 +962,8 @@ class Sales_return extends MX_Controller {
 
             $rtn_amt = 0;
 
+            $return_amount_array=array();
+            $return_total_amount='';
             if (isset($quotation_details) && !empty($quotation_details)) {
 
                 foreach ($quotation_details as $vals) {
@@ -994,11 +996,12 @@ class Sales_return extends MX_Controller {
 
                     $net_value += $vals['return_quantity'] * $vals['per_cost'];
 
+                   
+                    $return_total_amount+=$vals['return'][0]['return_qty'] * $vals['per_cost'];
+
                 }
 
             }
-
-
 
 
 
@@ -1104,12 +1107,17 @@ class Sales_return extends MX_Controller {
 
                 if($val['taxable_price'] != '0.00'){
                     
-                    $val['return'][1]['net_total'] = $val['return'][1]['net_total'] + $cst_amount;
+                    // $val['return'][1]['net_total'] = $val['return'][1]['net_total'] + $cst_amount;
+                    $val['return'][1]['net_total'] = $val['return'][1]['net_total'];
+
                 }
-                    
+             
                 $rtn_amt = number_format($val['return'][1]['net_total'], 2);
 
-                $row[] = str_replace("-", "", $rtn_amt);
+                $return_total_amount1=number_format($return_total_amount, 2);
+                $row[] = str_replace("-", "", $return_total_amount1);
+
+               
 
             } else {
 

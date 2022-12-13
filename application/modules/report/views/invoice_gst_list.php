@@ -418,7 +418,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         i : 0;
                 };
                 // Total over all pages
-                var cols = [6, 7, 8, 9, 10];
+                var cols = [5, 6, 7, 8, 9];
                 for (x in cols) {
                     total = api.column(cols[x]).data().reduce(function(a, b) {
                         return intVal(a) + intVal(b);

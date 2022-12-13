@@ -64,8 +64,9 @@ class Purchase_order extends MX_Controller
         if (isset($_GET['notification']))
             $this->notification_model->update_notification(array('status' => 1), $_GET['notification']);
     }
-    public function index($type='')
+    public function index($type= NULL)
     {
+        
         $input = $this->input->post();
         if (!empty($input)) {
             // echo "<pre>";            print_r($input);exit;
@@ -644,7 +645,7 @@ class Purchase_order extends MX_Controller
         $this->template->write_view('content', 'purchase_order/purchase_order_list', $datas);
         $this->template->render();
     }
-    public function get_customer($id='')
+    public function get_customer($id=NULL)
     {
         $atten_inputs = $this->input->post();
         $data = $this->purchase_order_model->get_customer($atten_inputs);

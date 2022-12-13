@@ -238,7 +238,7 @@ $data['company_details'] = $this->admin_model->get_company_details();
                         i : 0;
                 };
                 // Total over all pages
-                var cols = [5];
+                var cols = [4];
                 symbol = " ";
                 var numFormat = $.fn.dataTable.render.number('\,', '.', 2, symbol).display;
                 for (x in cols) {
